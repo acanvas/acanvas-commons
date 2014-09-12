@@ -1,0 +1,7 @@
+name: dart_commons
+version: 0.1.0
+description: rockdot commons is a port of as3commons
+dependencies:
+  logging: any
+  stagexl:
+    git : https://github.com/bp74/StageXL.git
