@@ -22,7 +22,7 @@ part of dart_commons;
 class DartEventBus extends EventDispatcher implements IEventBus {
 
   static final DartEventBus _singleton = new DartEventBus._internal();
-  RockdotLogger LOGGER;
+  Logger LOGGER;
 
   factory DartEventBus() {
     return _singleton;
@@ -31,7 +31,7 @@ class DartEventBus extends EventDispatcher implements IEventBus {
 
   DartEventBus._internal() {
     // initialization logic here
-    LOGGER = new RockdotLogger("DartEventBus");
+    LOGGER = new Logger("DartEventBus");
   }
 
 

@@ -6,8 +6,8 @@ import 'dart:async';
 
 /* Rockdot Commons depend on StageXL, especially its Event system */
 import 'package:stagexl/stagexl.dart';
-/* required by RockdotLogger */
-import 'package:logging/logging.dart';
+/* required by Logger */
+import 'package:logging/logging.dart' as logging;
 
 
 //async
@@ -42,7 +42,7 @@ part 'src/lang/i_disposable.dart';
 part 'src/lang/i_cloneable.dart';
 part 'src/lang/i_ordered.dart';
 //logging
-part 'src/logging/rockdot_logger.dart';
+part 'src/logging/logger.dart';
 //mirror
 part 'src/mirror/retain.dart';
 
