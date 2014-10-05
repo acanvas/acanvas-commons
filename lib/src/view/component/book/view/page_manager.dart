@@ -252,7 +252,7 @@
 				}
 				return this.removeChildAt(index);
 			}else{
-			//	throw new BookError(BookError.CHILD_NOT_PAGE);
+				throw new BookError(BookError.CHILD_NOT_PAGE);
 			}
 		}
 		/**

@@ -3,7 +3,7 @@ part of dart_commons;
 
 
 class Button extends SpriteComponent {
-  String _label;
+  String _labelText;
 
   Button() : super() {
 
@@ -26,20 +26,38 @@ class Button extends SpriteComponent {
 
     if (value == true) {
       addEventListener(MouseEvent.MOUSE_UP, onClick);
+      addEventListener(MouseEvent.MOUSE_DOWN, _onMouseDown);
       addEventListener(MouseEvent.ROLL_OVER, onRollOver);
       addEventListener(MouseEvent.ROLL_OUT, onRollOut);
       onRollOut();
     } else {
       removeEventListener(MouseEvent.MOUSE_UP, onClick);
+      removeEventListener(MouseEvent.MOUSE_DOWN, _onMouseDown);
       removeEventListener(MouseEvent.ROLL_OVER, onRollOver);
       removeEventListener(MouseEvent.ROLL_OUT, onRollOut);
       onRollOver();
     }
   }
   void setLabel(String label) {
-    _label = label;
+    _labelText = label;
+  }
+  void _onMouseDown([MouseEvent event = null]) {
+    DisplayObject child;
+    for (int i = 0; i < numChildren; i++) {
+      child = getChildAt(i);
+      if (child is IPaperButtonComponent) {
+        (child as IPaperButtonComponent).downAction(event);
+      }
+    }
   }
   void onClick([MouseEvent event = null]) {
+    DisplayObject child;
+    for (int i = 0; i < numChildren; i++) {
+      child = getChildAt(i);
+      if (child is IPaperButtonComponent) {
+        (child as IPaperButtonComponent).upAction(event);
+      }
+    }
     if (_submitCallback != null) {
       Function.apply(_submitCallback, _submitCallbackParams);
     }

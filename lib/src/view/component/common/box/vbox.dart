@@ -64,19 +64,25 @@
 				DisplayObject child;
 				DisplayObject prevChild;
 				child = getChildAt(0);
-				num h = /*child is ISpriteComponent ? (child as ISpriteComponent).heightAsSet :*/ child.height;
-				child.y = _inverted ? - h : 0;
-				for (int i = 1;i < n;i++) {
-					child = getChildAt(i);
-					prevChild = getChildAt(i - 1);
+				
+				child.y = _inverted ? - (/*child is ISpriteComponent ? (child as ISpriteComponent).heightAsSet :*/ child.height) : 0;
+
+        num ch;
+        num ph;
+        
+        for (int i = 1;i < n;i++) {
+          child = getChildAt(i);
+          ch = /*child is ISpriteComponent ? (child as ISpriteComponent).heightAsSet :*/ child.height;
+          
+          prevChild = getChildAt(i - 1);
+          ph = /*prevChild is ISpriteComponent ? (prevChild as ISpriteComponent).heightAsSet :*/ prevChild.height;
+          
 					if (_inverted) {
-						h = /*child is ISpriteComponent ? (child as ISpriteComponent).heightAsSet :*/ child.height;
-						if (_pixelSnapping) child.y = (prevChild.y - h - _padding).round();
-						else child.y = prevChild.y + h - _padding;
+						if (_pixelSnapping) child.y = (prevChild.y - ch - _padding).round();
+						else child.y = prevChild.y + ch - _padding;
 					} else {
-						h = /*prevChild is ISpriteComponent ? (prevChild as ISpriteComponent).heightAsSet :*/ prevChild.height;
-						if (_pixelSnapping) child.y = (prevChild.y + h + _padding).round();
-						else child.y = prevChild.y + h + _padding;
+						if (_pixelSnapping) child.y = (prevChild.y + ph + _padding).round();
+						else child.y = prevChild.y + ph + _padding;
 					}
 				}
 			}

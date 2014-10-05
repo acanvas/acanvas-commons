@@ -418,7 +418,9 @@ class ComponentList extends ComponentScrollable {
   void _onCellMouseUp(MouseEvent event) {
     if (!_cellMoved && _mouseDownCell != null) {
       _mouseDownCell.select();
-      _submitCallback.call(_mouseDownCell);
+      if(_submitCallback != null) {
+        _submitCallback.call(_mouseDownCell);
+      }
     }
     _mouseDownCell = null;
   }

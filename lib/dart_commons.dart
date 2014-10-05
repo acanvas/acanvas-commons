@@ -4,6 +4,8 @@ library dart_commons;
 import 'dart:mirrors';
 import 'dart:async';
 import 'dart:math';
+import 'dart:html' as html;
+import 'dart:js' as js;
 
 /* Rockdot Commons depend on StageXL, especially its Event system */
 import 'package:stagexl/stagexl.dart';
@@ -53,6 +55,7 @@ part 'src/mirror/retain.dart';
 //util
 part 'src/util/context_tool.dart';
 part 'src/util/device_detector.dart';
+part 'src/util/font_tool.dart';
 part 'src/util/graphics_util.dart';
 part 'src/util/numeric_stepper.dart';
 
@@ -68,7 +71,6 @@ part 'src/view/component/flick_image.dart';
 part 'src/view/component/form/calendar/calendar.dart';
 part 'src/view/component/form/calendar/day_button.dart';
 part 'src/view/component/form/calendar/next_prev_button.dart';
-
 
 part 'src/view/component/common/box/accordeon/accordion.dart';
 part 'src/view/component/common/box/accordeon/accordion_cell.dart';
@@ -133,4 +135,18 @@ part 'src/view/component/book/view/page_manager.dart';
 //view:video
 part 'src/view/component/video/video_controls.dart';
 part 'src/view/component/video/video_player.dart';
+//view:paper
+part 'src/view/paper/common/i_paper_button_component.dart';
+part 'src/view/paper/common/paper_color.dart';
+part 'src/view/paper/common/paper_list_cell.dart';
+part 'src/view/paper/common/paper_ripple.dart';
+part 'src/view/paper/common/paper_shadow.dart';
+part 'src/view/paper/common/paper_text.dart';
+part 'src/view/paper/common/icon/paper_icon_set.dart';
+part 'src/view/paper/common/icon/paper_icon.dart';
+part 'src/view/paper/common/icon/svg_display_object.dart';
+part 'src/view/paper/paper_button.dart';
+part 'src/view/paper/paper_button_round.dart';
+part 'src/view/paper/paper_dialog.dart';
+part 'src/view/paper/paper_menu.dart';
 

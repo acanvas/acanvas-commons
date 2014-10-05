@@ -97,20 +97,31 @@
 
 			if (numChildren > 0) {
 				int n = numChildren;
+				
 				DisplayObject child;
 				DisplayObject prevChild;
+				
 				child = getChildAt(0);
-				child.x = _inverted ? -child.width : 0;
+				child.x = _inverted ? - (child is ISpriteComponent ? (child as ISpriteComponent).widthAsSet : child.width) : 0;
+
+				num cw;
+				num pw;
+				
 				for (int i = 1;i < n;i++) {
 					child = getChildAt(i);
+					cw = child is ISpriteComponent ? (child as ISpriteComponent).widthAsSet : child.width;
+					
 					prevChild = getChildAt(i - 1);
+					pw = prevChild is ISpriteComponent ? (prevChild as ISpriteComponent).widthAsSet : prevChild.width;
+					
 					if (_inverted) {
-						if (_pixelSnapping) child.x = (prevChild.x - child.width - _padding).round();
-						else child.x = prevChild.x - child.width - _padding;
+						if (_pixelSnapping) child.x = (prevChild.x - cw - _padding).round();
+						else child.x = prevChild.x - cw - _padding;
 					} else {
-						if (_pixelSnapping) child.x = (prevChild.x + prevChild.width + _padding).round();
-						else child.x = prevChild.x + prevChild.width + _padding;
+						if (_pixelSnapping) child.x = (prevChild.x + pw + _padding).round();
+						else child.x = prevChild.x + pw + _padding;
 					}
+					
 				}
 			}
 		}
