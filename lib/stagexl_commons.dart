@@ -3,7 +3,7 @@ library stagexl_commons;
 @MirrorsUsed( metaTargets: const[Retain])
 import 'dart:mirrors';
 
-import 'dart:async' show Timer, Duration, Completer;
+import 'dart:async' show Timer, Duration, Completer, StreamSubscription;
 import 'dart:math';
 import 'dart:html' as html;
 import 'dart:js' as js;
