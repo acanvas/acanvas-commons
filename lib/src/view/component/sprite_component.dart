@@ -145,7 +145,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
     DisplayObject child;
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
-      if (child is ISpriteComponent && !(child as ISpriteComponent).ignoreSetEnabled) {
+      if (child is SpriteComponent && !(child as SpriteComponent).ignoreSetEnabled) {
         (child as ISpriteComponent).enabled = _enabled;
       }
     }

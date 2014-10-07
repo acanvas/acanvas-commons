@@ -14,6 +14,10 @@ class SvgDisplayObject extends DisplayObject {
     imageElement.src = url;
     imageElement.onLoad.listen((c) {
       html.Url.revokeObjectUrl(url);
+      //rerender workaround: http://stackoverflow.com/questions/25905041/ios8-uiwebview-svg-embaded-html-not-show
+      imageElement.style.display = "none";
+      var temp = imageElement.offsetHeight;
+      imageElement.style.display = "block";
       _renderTexture = new RenderTexture.fromImage(imageElement, 1.0);
       _renderTextureQuad = _renderTexture.quad;
     });

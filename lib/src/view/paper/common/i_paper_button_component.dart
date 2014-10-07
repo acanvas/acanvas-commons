@@ -2,7 +2,7 @@ part of dart_commons;
 
 abstract class IPaperButtonComponent {
 
-  downAction(MouseEvent e);
+  downAction(Event e);
   upAction(MouseEvent e);
   
 }

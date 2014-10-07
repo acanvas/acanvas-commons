@@ -1,0 +1,50 @@
+html, body {
+   width: 100%;
+   height: 100%;
+   margin: 0px;
+   border: 0;
+   overflow: hidden; /*  Disable scrollbars */
+   display: block;  /* No floating content on sides */
+}
+
+#stage {
+   position: absolute; 
+   left: 0px; 
+   top: 0px;
+   z-index: 0;
+}
+
+#issues {
+   position: absolute; 
+   left: 20px; 
+   top: 660px;
+	
+}
+
+* { -webkit-tap-highlight-color:rgba(0,0,0,0); }
+
+/* stage-full-window */
+body.stage-full-window { margin: 0; padding: 0; overflow: hidden; }
+canvas.stage-full-window { width: 100%; height: 100%; position:fixed; }
+
+/* stage-full-screen */
+/* https://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html#:fullscreen-pseudo-class */
+canvas.stage-full-screen:-webkit-full-screen {
+  position:fixed; top:0; right:0; bottom:0; left:0; margin:0;
+  box-sizing:border-box; width:100%; height:100%; object-fit:contain;
+}
+
+canvas.stage-full-screen:-moz-full-screen {
+  position:fixed; top:0; right:0; bottom:0; left:0; margin:0;
+  box-sizing:border-box; width:100%; height:100%; object-fit:contain;
+}
+
+canvas.stage-full-screen:fullscreen {
+  position:fixed; top:0; right:0; bottom:0; left:0; margin:0;
+  box-sizing:border-box; width:100%; height:100%; object-fit:contain;
+}
+
+canvas {
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
+}

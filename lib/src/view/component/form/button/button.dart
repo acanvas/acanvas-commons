@@ -11,7 +11,7 @@ class Button extends SpriteComponent {
     useHandCursor = true;
     mouseChildren = false;
     enabled = true;
-    ignoreSetEnabled = true;
+    //ignoreSetEnabled = true;
   }
 
 

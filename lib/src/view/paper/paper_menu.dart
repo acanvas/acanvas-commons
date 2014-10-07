@@ -6,13 +6,13 @@ class PaperMenu extends ComponentList {
   num color;
 
   PaperMenu(List data, {this.color: PaperColor.GREY_DARK}) : super(Orientation.VERTICAL, PaperListCell, DefaultScrollbar, true) {
-    touchEnabled = true;
+    snapToPage = true;
+    touchEnabled = false;
     doubleClickEnabled = false;
-    keyboardEnabled = true;
+    keyboardEnabled = false;
     doubleClickToZoom = false;
-    touchEnabled = true;
-    bounce = true;//bounce if touchscreen
-    mouseWheelEnabled = true;
+    bounce = false;//bounce if touchscreen
+    mouseWheelEnabled = false;
     //list.hideScrollbarsOnIdle = true;
     setData(data);
     setSize(180, PaperListCell.CELL_HEIGHT * data.length);

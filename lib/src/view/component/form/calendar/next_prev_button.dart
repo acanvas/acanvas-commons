@@ -17,7 +17,7 @@ class NextPrevButton extends Button {
     Shape bg = new Shape();
     bg.graphics.rect(0, 0, w, h);
     bg.graphics.fillColor(0x66000000);
-    if (RockdotConstants.WEBGL) {
+    if (ContextTool.WEBGL) {
       bg.applyCache(0, 0, w, h);
     }
     addChild(bg);

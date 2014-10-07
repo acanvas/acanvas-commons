@@ -12,11 +12,11 @@ class PaperButton extends Button {
 
   static const int LABEL_MAX_WIDTH = 400;
 
-  UITextField _label;
+  PaperText _label;
   int _color;
 
   PaperButton(String text, {num width: 120, num height: 32, 
-                            int fontSize: 14, String fontName: "Roboto, Helvetica, Arial", int fontColor : 0,
+                            int fontSize: 14, String fontName: PaperText.DEFAULT_FONT, int fontColor : 0,
                             int preset: PRESET_WHITE,
                             bool shadow : true}) : super() {
     int fontColorPreset;
@@ -55,14 +55,13 @@ class PaperButton extends Button {
     PaperRipple paperRipple = new PaperRipple(color: fontColorPreset);
     addChild(paperRipple);
 
-    TextFormat tf = new TextFormat(fontName, fontSize, fontColorPreset);
-    _label = new UITextField(text, tf);
+    _label = new PaperText(text, size: fontSize, color: fontColorPreset, fontName: fontName);
     _label.width = LABEL_MAX_WIDTH;
     addChild(_label);
 
 
     setSize(width, height);
-    enabled = true;
+    //enabled = true;
   }
 
 

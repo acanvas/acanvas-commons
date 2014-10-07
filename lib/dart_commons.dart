@@ -2,7 +2,8 @@ library dart_commons;
 
 @MirrorsUsed( metaTargets: const[Retain])
 import 'dart:mirrors';
-import 'dart:async';
+
+import 'dart:async' show Timer, Duration, Completer;
 import 'dart:math';
 import 'dart:html' as html;
 import 'dart:js' as js;
@@ -112,6 +113,7 @@ part 'src/view/textfield/ui_text_field.dart';
 part 'src/view/textfield/ui_text_field_input.dart';
 //view:book
 part 'src/view/component/book/book_view.dart';
+part 'src/view/component/book/book_sample_assets.dart';
 part 'src/view/component/book/containers/super_view_stack.dart';
 part 'src/view/component/book/drawing/drawing_tool.dart';
 part 'src/view/component/book/drawing/line_style.dart';
@@ -133,8 +135,8 @@ part 'src/view/component/book/view/gradients.dart';
 part 'src/view/component/book/view/page.dart';
 part 'src/view/component/book/view/page_manager.dart';
 //view:video
-part 'src/view/component/video/video_controls.dart';
-part 'src/view/component/video/video_player.dart';
+//part 'src/view/component/video/video_controls.dart';
+//part 'src/view/component/video/video_player.dart';
 //view:paper
 part 'src/view/paper/common/i_paper_button_component.dart';
 part 'src/view/paper/common/paper_color.dart';

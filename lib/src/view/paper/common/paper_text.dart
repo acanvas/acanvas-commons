@@ -1,8 +1,10 @@
 part of dart_commons;
 
 class PaperText extends UITextField {
-  PaperText(String text, [int size = 14, int color = PaperColor.BLACK]) : super(text, new TextFormat("Roboto, Helvetica, Arial", size, color), true) {
-    format.leading = -2;
+  static const DEFAULT_FONT = "Roboto, Helvetica, Arial";
+  
+  PaperText(String text, {int size : 14, int color : PaperColor.BLACK, String fontName : DEFAULT_FONT}) : super(text, new TextFormat(fontName, size, color), true) {
+    //format.leading = -2;
   }
 
   

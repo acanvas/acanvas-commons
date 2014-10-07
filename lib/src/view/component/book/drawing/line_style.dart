@@ -98,7 +98,7 @@
 		 * 
 		 * @see		http://livedocs.adobe.com/flex/2/langref/flash/display/Graphics.html#lineStyle()
 		 */
-		  void LineStyle([num thickness=1, int color=0, num alpha=1.0, bool pixelHinting=false, String scaleMode="normal", String caps=null, String joints=null, num miterLimit=3]) {
+		  LineStyle([num thickness=1, int color=0, num alpha=1.0, bool pixelHinting=false, String scaleMode="normal", String caps=null, String joints=null, num miterLimit=3]) {
 			
 			this.thickness = thickness;
 			this.color = color;

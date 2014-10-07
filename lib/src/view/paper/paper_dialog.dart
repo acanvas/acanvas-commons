@@ -10,11 +10,11 @@ class PaperDialog extends SpriteComponent {
   VBox _vbox;
   HBox _hbox;
 
-  PaperDialog(String title, {num fontColor : PaperColor.BLACK, this.bgColor: PaperColor.WHITE}) : super() {
-    _bg = new Shape();
-    addChild(_bg);
+  PaperDialog(String title, {num fontColor : PaperColor.BLACK, this.bgColor: PaperColor.WHITE, String fontName : PaperText.DEFAULT_FONT}) : super() {
     
-    _title = new PaperText(title, 22, fontColor);
+    addChild( new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false) );
+
+    _title = new PaperText(title, size: 22, color: fontColor, fontName: fontName);
     addChild(_title);
     
     _vbox = new VBox(20, true);
@@ -23,6 +23,7 @@ class PaperDialog extends SpriteComponent {
 
     _hbox = new HBox(0, true);
     addChild(_hbox);
+    
     
   }
   
@@ -49,14 +50,8 @@ class PaperDialog extends SpriteComponent {
     _hbox.x = widthAsSet - _hbox.width - 20;
     _hbox.y = heightAsSet - _hbox.height - 30;
     
-    _bg.graphics.clear();
-    _bg.graphics.rect(0, 0, widthAsSet, heightAsSet);
-    _bg.graphics.fillColor( bgColor );
-    if(ContextTool.WEBGL){
-      _bg.applyCache(0, 0, widthAsSet, heightAsSet);
-    }
 
-    filters = [ new DropShadowFilter(5, 90,PaperColor.GREY_SHADOW, 10, 10) ];
+    //filters = [ new DropShadowFilter(5, 90,PaperColor.GREY_SHADOW, 10, 10) ];
   }
 
 }

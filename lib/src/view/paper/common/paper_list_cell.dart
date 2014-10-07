@@ -18,7 +18,7 @@ class PaperListCell extends Cell {
 		   PaperRipple	ripple = new PaperRipple(color: fontColor);
        addChild(ripple);
 
-       _title = new PaperText("empty", 14, fontColor);
+       _title = new PaperText("empty", size: 14, color: fontColor);
 			addChild(_title);
 			
 			heightAsSet = CELL_HEIGHT;
