@@ -1,7 +1,7 @@
 /*
  * defines  annotation
  */
-part of dart_commons;
+part of stagexl_commons;
 
 const Retain retain = const Retain();
 class Retain {

@@ -1,4 +1,4 @@
-part of dart_commons;
+part of stagexl_commons;
 
 class ComponentFlickImage extends SpriteComponent {
   static const String LEFT = "LEFT";

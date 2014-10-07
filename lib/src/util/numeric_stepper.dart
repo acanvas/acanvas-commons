@@ -1,4 +1,4 @@
-part of dart_commons;
+part of stagexl_commons;
 	/**
 	 * @author Simon Schmid (contact(at)sschmid.com)
 	 */

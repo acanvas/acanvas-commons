@@ -1,4 +1,4 @@
- part of dart_commons;
+ part of stagexl_commons;
 
 	/**
 	 * @author Nils Doehring (nilsdoehring@gmail.com)

@@ -1,4 +1,4 @@
-part of dart_commons;
+part of stagexl_commons;
 
 	 class NoEffect extends BasicEffect {
 	 NoEffect():super() {

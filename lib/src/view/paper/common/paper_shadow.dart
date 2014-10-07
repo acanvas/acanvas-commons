@@ -1,4 +1,4 @@
-part of dart_commons;
+part of stagexl_commons;
 
 class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   static const int RECTANGLE = 1;

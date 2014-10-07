@@ -1,4 +1,4 @@
-library dart_commons;
+library stagexl_commons;
 
 @MirrorsUsed( metaTargets: const[Retain])
 import 'dart:mirrors';

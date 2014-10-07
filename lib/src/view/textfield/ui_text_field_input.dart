@@ -1,4 +1,4 @@
-part of dart_commons;
+part of stagexl_commons;
 
 	/**
 	 * Copyright (2009 as c), Jung von Matt/Neckar

@@ -1,5 +1,5 @@
 import 'dart:html' as html;
-import 'package:dart_commons/dart_commons.dart';
+import 'package:stagexl_commons/stagexl_commons.dart';
 import 'package:stagexl/stagexl.dart';
 
 Stage stage;

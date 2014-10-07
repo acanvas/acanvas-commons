@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- part of dart_commons;
+ part of stagexl_commons;
 
 	/**
 	 * Static helper methods for working with the <code>IOrdered</code> abstract class.

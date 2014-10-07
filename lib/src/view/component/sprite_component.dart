@@ -1,4 +1,4 @@
-part of dart_commons;
+part of stagexl_commons;
 
 class SpriteComponent extends Sprite implements ISpriteComponent {
   num _widthAsSet = 0;

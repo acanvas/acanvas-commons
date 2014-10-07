@@ -1,4 +1,4 @@
-part of dart_commons;
+part of stagexl_commons;
 
 class PaperText extends UITextField {
   static const DEFAULT_FONT = "Roboto, Helvetica, Arial";
