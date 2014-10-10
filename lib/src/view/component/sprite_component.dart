@@ -9,6 +9,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
   bool _ignoreSetTouchEnabled = false;
   bool _ignoreCallDestroy = false;
   bool _ignoreCallSetSize = true;
+  bool _resizeTextChildren = true;
 
   //TODO logger
   Logger log;
@@ -37,10 +38,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
     if (w != _widthAsSet || h != _heightAsSet) {
       if (w > 0) _widthAsSet = w;
       if (h > 0) _heightAsSet = h;
-      if (!(this is IManagedSpriteComponent) || (this is IManagedSpriteComponent && (this as IManagedSpriteComponent).getInitialized())) {
-        // if IView, only render if already initialized
-        redraw();
-      }
+      
 
       DisplayObject child;
       for (int i = 0; i < numChildren; i++) {
@@ -48,7 +46,12 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
         if (child is ISpriteComponent && !(child as ISpriteComponent).ignoreCallSetSize) {
           (child as ISpriteComponent).setSize(w, h);
         }
-        // if (child is TextField) TextField(child).width = w - 10;
+        if (child is TextField && resizeTextChildren) (child as TextField).width = w - 10;
+      }
+
+      if (!(this is IManagedSpriteComponent) || (this is IManagedSpriteComponent && (this as IManagedSpriteComponent).getInitialized())) {
+        // if IView, only render if already initialized
+        redraw();
       }
     }
 
@@ -196,5 +199,13 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
   @override
   void set ignoreSetTouchEnabled(bool enabled) {
     _ignoreSetTouchEnabled = enabled;
+  }
+
+  @override
+  bool get resizeTextChildren => _resizeTextChildren;
+
+  @override
+  void set resizeTextChildren(bool enabled) {
+    _resizeTextChildren = enabled;
   }
 }

@@ -143,6 +143,7 @@ part 'src/view/paper/common/paper_color.dart';
 part 'src/view/paper/common/paper_list_cell.dart';
 part 'src/view/paper/common/paper_ripple.dart';
 part 'src/view/paper/common/paper_shadow.dart';
+part 'src/view/paper/common/paper_input.dart';
 part 'src/view/paper/common/paper_text.dart';
 part 'src/view/paper/common/icon/paper_icon_set.dart';
 part 'src/view/paper/common/icon/paper_icon.dart';

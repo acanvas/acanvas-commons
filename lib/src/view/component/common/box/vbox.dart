@@ -15,13 +15,8 @@
 
 		@override 
 		  void setSize(int w,int h) {
-			DisplayObject child;
-			for (int i = 0; i < numChildren; i++) {
-				child = getChildAt(i);
-				if (child is TextField) (child as TextField).width = w;
-			}
-			_heightAsSet = h;
-			super.setSize(w, 0);//sets only width of children
+  			_heightAsSet = h;
+	   		super.setSize(w, 0);//sets only width of children
 		}
 		
 		
@@ -42,12 +37,12 @@
 			int n = numChildren;
 			num totalHeight = 0;
 			for (int i = 0;i < n;i++) {
-				if(getChildAt(i) is ISpriteComponent){
+				/*if(getChildAt(i) is ISpriteComponent){
 					totalHeight += (getChildAt(i) as ISpriteComponent ).heightAsSet;
 				}
-				else{
+				else{*/
 					totalHeight += getChildAt(i).height;
-				}
+				//}
 			}
 
 			return (_size - totalHeight) / (numChildren - 1);
@@ -65,15 +60,12 @@
 				DisplayObject prevChild;
 				child = getChildAt(0);
 				
-				child.y = _inverted ? - (/*child is ISpriteComponent ? (child as ISpriteComponent).heightAsSet :*/ child.height) : 0;
-
         num ch;
         num ph;
         
         for (int i = 1;i < n;i++) {
           child = getChildAt(i);
           ch = /*child is ISpriteComponent ? (child as ISpriteComponent).heightAsSet :*/ child.height;
-          
           prevChild = getChildAt(i - 1);
           ph = /*prevChild is ISpriteComponent ? (prevChild as ISpriteComponent).heightAsSet :*/ prevChild.height;
           

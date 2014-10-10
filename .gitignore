@@ -1,6 +1,6 @@
 build
 packages
-lib/dart_commons
+dart_commons
 pubspec.lock
 .DS_Store
 .settings

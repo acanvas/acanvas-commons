@@ -6,6 +6,11 @@ StageXL Commons consist of
 * Port of [Flexbook](http://www.rubenswieringa.com/code/as3/flex/Book/), see web/stagexl_book.html for a sneak peek.
 * Port of [AS3 Commons](http://www.as3commons.org/) projects to Dart/StageXL.
 
+#### Google Material Design
+In order to demonstrate the flexibility of UI components, a ull port of Polymer's Paper elements is underway.
+What's there so far:
+* [Button, Card, Dialog, Fab, Icon, Ripple](http://rockdot.sounddesignz.com/stagexl-commons/paper_buttons.html) ([Original](https://www.polymer-project.org/components/paper-ripple/demo.html)) 
+* [Input](http://rockdot.sounddesignz.com/stagexl-commons/paper_input.html) ([Original](https://www.polymer-project.org/components/paper-input/demo.html)) 
 
 #### Async
 A library that aims to make working with asynchronous processes easier. 

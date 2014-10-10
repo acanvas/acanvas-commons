@@ -31,6 +31,9 @@ abstract class ISpriteComponent extends EventDispatcher {
   bool get ignoreCallDestroy;
   void set ignoreCallDestroy(bool enabled);
 
+  bool get resizeTextChildren;
+  void set resizeTextChildren(bool enabled);
+
   /* IDisplayObject*/
   num get alpha;
   void set alpha(num w);

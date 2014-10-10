@@ -43,14 +43,14 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
           ..graphics.circle(0, 0, waveRadius.round())
           ..graphics.fillColor(color)
           ..alpha = initialOpacity
-          ..scaleX = 0.1
-          ..scaleY = 0.1
           ..x = touchX
           ..y = touchY;
    
     if(ContextTool.WEBGL){
       inner.applyCache(-waveRadius.round(), -waveRadius.round(), waveRadius.round()*2, waveRadius.round()*2);
     }
+    inner.scaleX = 0.1;
+    inner.scaleY = 0.1;
     
     addChild(inner);
     
