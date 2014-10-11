@@ -1,19 +1,24 @@
- part of stagexl_commons;
+part of stagexl_commons;
 
-	/**
+/**
 	 * @author Nils Doehring (nilsdoehring@gmail.com)
 	 */
-	 class RadioButton extends ToggleButton {
-	 RadioButton(): super()  {
-		}
+class RadioButton extends Button {
+  bool _isToggled = false;
+  RadioButton() : super() {
+  }
 
-		@override 
-		void onClick([MouseEvent event = null]) {
-			dispatchEvent(new ToggleButtonEvent(ToggleButtonEvent.TOGGLE));
-		}
+  @override
+  void onClick([MouseEvent event = null]) {
+    dispatchEvent(new ToggleButtonEvent(ToggleButtonEvent.TOGGLE));
+    super.onClick(event);
+  }
 
-		@override 
-		  void set isToggled(bool value) {
-			_isToggled = value;
-		}
-	}
+  void set isToggled(bool value) {
+    _isToggled = value;
+  }
+
+  bool get isToggled {
+    return _isToggled;
+  }
+}

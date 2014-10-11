@@ -6,7 +6,7 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   
   num waveMaxRadius = 150;
   num initialOpacity = 0.25;
-  num opacityDecayVelocity = 0.5;
+  num velocity = 0.5;
   bool recenteringTouch = false;
   
   num color;
@@ -14,7 +14,7 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   
   Sprite holder;
 
-  PaperRipple({this.color : 0xFF000000, this.type : RECTANGLE}):super() {
+  PaperRipple({this.color : 0xFF000000, this.type : RECTANGLE, this.velocity: 0.5 }):super() {
     ignoreCallSetSize = false;
         
     addEventListener(MouseEvent.MOUSE_DOWN, downAction);
@@ -34,8 +34,8 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   }
 
   downAction(MouseEvent e) {
-    var touchX = e.localX;// - rect.left;
-    var touchY = e.localY;// - rect.top;
+    var touchX = e.localX > widthAsSet ? widthAsSet : e.localX;// - rect.left;
+    var touchY = e.localY > heightAsSet ? heightAsSet : e.localY;// - rect.top;
     
     num waveRadius = distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(widthAsSet, heightAsSet)) / 1.2;
     
@@ -54,7 +54,7 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
     
     addChild(inner);
     
-    Tween tw = new Tween(inner, opacityDecayVelocity, TransitionFunction.easeOutElastic)
+    Tween tw = new Tween(inner, velocity, TransitionFunction.easeOutElastic)
     ..animate.scaleX.to(1.2)
     ..animate.scaleY.to(1.2);
     
@@ -74,7 +74,7 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
      DisplayObject dobj = getChildAt(i);
 
       stage.juggler.removeTweens(dobj);
-      stage.juggler.tween(dobj, opacityDecayVelocity)
+      stage.juggler.tween(dobj, velocity)
       ..animate.alpha.to(0)
       ..animate.scaleX.to(1.0)
       ..animate.scaleY.to(1.0)

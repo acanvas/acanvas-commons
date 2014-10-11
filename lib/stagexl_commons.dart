@@ -150,6 +150,8 @@ part 'src/view/paper/common/icon/paper_icon.dart';
 part 'src/view/paper/common/icon/svg_display_object.dart';
 part 'src/view/paper/paper_button.dart';
 part 'src/view/paper/paper_button_round.dart';
+part 'src/view/paper/paper_checkbox.dart';
+part 'src/view/paper/paper_radio_button.dart';
 part 'src/view/paper/paper_dialog.dart';
 part 'src/view/paper/paper_menu.dart';
 
