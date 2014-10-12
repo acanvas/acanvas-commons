@@ -28,7 +28,7 @@ void start() {
    */
   HBox hbox1 = new HBox(20);
 
-  PaperButton button1 = new PaperButton(ContextTool.MOBILE ? "MOBILE" : "SUBMIT", preset: PaperButton.PRESET_WHITE);
+  PaperButton button1 = new PaperButton("SUBMIT", preset: PaperButton.PRESET_WHITE);
   hbox1.addChild(button1);
 
   PaperButton button2 = new PaperButton("CANCEL", preset: PaperButton.PRESET_GREY);
@@ -65,16 +65,16 @@ void start() {
    */
   HBox hbox3 = new HBox(20);
   
-  PaperButtonRound iconButton1 = new PaperButtonRound(PaperIcon.black(PaperIconSet.menu), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK);
+  PaperFab iconButton1 = new PaperFab(PaperIcon.black(PaperIconSet.menu), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK);
   hbox3.addChild(iconButton1);
   
-  PaperButtonRound iconButton2 = new PaperButtonRound(PaperIcon.black(PaperIconSet.more_vert), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK);
+  PaperFab iconButton2 = new PaperFab(PaperIcon.black(PaperIconSet.more_vert), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK);
   hbox3.addChild(iconButton2);
   
-  PaperButtonRound iconButton3 = new PaperButtonRound(PaperIcon.black(PaperIconSet.delete), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.RED);
+  PaperFab iconButton3 = new PaperFab(PaperIcon.black(PaperIconSet.delete), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.RED);
   hbox3.addChild(iconButton3);
   
-  PaperButtonRound iconButton4 = new PaperButtonRound(PaperIcon.black(PaperIconSet.account_box), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLUE);
+  PaperFab iconButton4 = new PaperFab(PaperIcon.black(PaperIconSet.account_box), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLUE);
   hbox3.addChild(iconButton4);
   
   vbox.addChild(hbox3);
@@ -85,13 +85,13 @@ void start() {
    */
   HBox hbox4 = new HBox(20);
   
-  PaperButtonRound roundButton1 = new PaperButtonRound(PaperIcon.white(PaperIconSet.add), bgColor: PaperColor.RED);
+  PaperFab roundButton1 = new PaperFab(PaperIcon.white(PaperIconSet.add), bgColor: PaperColor.RED);
   hbox4.addChild(roundButton1);
   
-  PaperButtonRound roundButton2 = new PaperButtonRound(PaperIcon.white(PaperIconSet.mail), bgColor: PaperColor.BLUE);
+  PaperFab roundButton2 = new PaperFab(PaperIcon.white(PaperIconSet.mail), bgColor: PaperColor.BLUE);
   hbox4.addChild(roundButton2);
 
-  PaperButtonRound roundButton3 = new PaperButtonRound(PaperIcon.white(PaperIconSet.create), bgColor: PaperColor.GREEN);
+  PaperFab roundButton3 = new PaperFab(PaperIcon.white(PaperIconSet.create), bgColor: PaperColor.GREEN);
   hbox4.addChild(roundButton3);
   
   vbox.addChild(hbox4);

@@ -7,11 +7,11 @@ StageXL Commons consist of
 * Port of [AS3 Commons](http://www.as3commons.org/) projects to Dart/StageXL.
 
 #### Google Material Design
-In order to demonstrate the flexibility of UI components, a ull port of Polymer's Paper elements is underway.
+In order to demonstrate the flexibility of UI components, a full port of Polymer's Paper elements is underway.
 What's there so far:
 * [Button, Card, Dialog, Fab, Icon, Ripple](http://rockdot.sounddesignz.com/stagexl-commons/paper_buttons.html) ([Original](https://www.polymer-project.org/components/paper-ripple/demo.html)) 
+* [Radio, Checkbox, Toggle, Toast](http://rockdot.sounddesignz.com/stagexl-commons/paper_radio.html) ([Original Radio](https://www.polymer-project.org/components/paper-radio-button/demo.html)), ([Original Checkbox](https://www.polymer-project.org/components/paper-checkbox/demo.html)), ([Original Toggle](https://www.polymer-project.org/components/paper-toggle-button/demo.html)), ([Original Toast](https://www.polymer-project.org/components/paper-toast/demo.html)  
 * [Input](http://rockdot.sounddesignz.com/stagexl-commons/paper_input.html) ([Original](https://www.polymer-project.org/components/paper-input/demo.html)) 
-* [Radio, Checkbox](http://rockdot.sounddesignz.com/stagexl-commons/paper_radio.html) ([Original](https://www.polymer-project.org/components/paper-radio-button/demo.html)) 
 
 #### Async
 A library that aims to make working with asynchronous processes easier. 

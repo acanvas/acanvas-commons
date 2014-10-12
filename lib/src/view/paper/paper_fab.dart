@@ -1,14 +1,14 @@
 part of stagexl_commons;
 
 
-class PaperButtonRound extends Button {
+class PaperFab extends Button {
 
   bool hover = false;
   SvgDisplayObject icon;
   PaperShadow _shadow;
   PaperRipple _ripple;
 
-  PaperButtonRound(this.icon, {num radius: 30, num bgColor: PaperColor.BLUE, num rippleColor: null}) : super() {
+  PaperFab(this.icon, {num radius: 30, num bgColor: PaperColor.BLUE, num rippleColor: null}) : super() {
     if(rippleColor != null){
       hover = true;
     }

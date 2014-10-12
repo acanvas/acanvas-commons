@@ -6,6 +6,9 @@ class GraphicsUtil {
     if(sprite == null){
       sprite = new Sprite();
     }
+    else{
+      sprite.graphics.clear();
+    }
     
     if(round){
       x = x.round();
