@@ -152,9 +152,11 @@ part 'src/view/paper/paper_button.dart';
 part 'src/view/paper/paper_checkbox.dart';
 part 'src/view/paper/paper_dialog.dart';
 part 'src/view/paper/paper_fab.dart';
+part 'src/view/paper/paper_icon_button.dart';
 part 'src/view/paper/paper_input.dart';
 part 'src/view/paper/paper_menu.dart';
 part 'src/view/paper/paper_radio_button.dart';
+part 'src/view/paper/paper_tabs.dart';
 part 'src/view/paper/paper_toast.dart';
 part 'src/view/paper/paper_toggle_button.dart';
 

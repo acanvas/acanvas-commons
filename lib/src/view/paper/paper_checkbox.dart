@@ -48,7 +48,7 @@ class PaperCheckbox extends ToggleButton {
     _icon.graphics.strokeColor(activeColor, 3);
     _icon.graphics.closePath();
     if (ContextTool.WEBGL) {
-      _icon.applyCache(-6, -13, 16, 13);
+      _icon.applyCache(-8, -17, 26, 20);
     }
     addChild(_icon);
     _icon.visible = false;

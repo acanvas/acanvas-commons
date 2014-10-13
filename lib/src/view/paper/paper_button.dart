@@ -16,9 +16,9 @@ class PaperButton extends Button {
   int _color;
 
   PaperButton(String text, {num width: 120, num height: 32, 
-                            int fontSize: 14, String fontName: PaperText.DEFAULT_FONT, int fontColor : 0,
+                            int fontSize: 14, String fontName: PaperText.DEFAULT_FONT, int fontColor : -1,
                             int preset: PRESET_WHITE,
-                            bool shadow : true}) : super() {
+                            bool shadow : true, bool background : true}) : super() {
     int fontColorPreset;
     switch (preset) {
       case PRESET_WHITE:
@@ -43,12 +43,12 @@ class PaperButton extends Button {
         break;
     }
     
-    if(fontColor != 0){
+    if(fontColor != -1){
       fontColorPreset = fontColor;
     }
 
-    if(shadow){
-      PaperShadow paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: _color);
+    if(background){
+      PaperShadow paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: _color, shadowEnabled : shadow);
       addChild(paperShadow);
     }
     

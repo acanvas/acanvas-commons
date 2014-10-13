@@ -71,6 +71,32 @@ class GraphicsUtil {
     
     return sprite;
   }
+
+  static Sprite line(num x, num y, {int color : 0xFF000000, num strength : 1, Sprite sprite : null, bool round : false}){
+    if(sprite == null){
+      sprite = new Sprite();
+    }
+    else{
+      sprite.graphics.clear();
+    }
+    
+    if(round){
+      x = x.round();
+      y = y.round();
+    }
+    
+    sprite.graphics.beginPath();
+    sprite.graphics.moveTo(0, 0);
+    sprite.graphics.lineTo(x, y);
+    sprite.graphics.strokeColor(color, strength);
+    sprite.graphics.closePath();
+    
+    if(ContextTool.WEBGL){
+      sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() :  y.ceil());
+    }
+    
+    return sprite;
+  }
   
 
   static GraphicsGradient linearGraphicsGradient(List colors, List alphas, List ratios, Matrix matrix) {

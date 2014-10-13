@@ -128,8 +128,8 @@ void start() {
 
   PaperDialog dialog = new PaperDialog("Permission");
   dialog.addContent(new PaperText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."));
-  dialog.addButton( new PaperButton("DECLINE", preset: PaperButton.PRESET_RED, fontColor: PaperColor.GREY_DARK, width: 90, shadow : false) );
-  dialog.addButton( new PaperButton("ACCEPT", preset: PaperButton.PRESET_BLUE, fontColor: PaperColor.BLUE, width: 90, shadow : false) );
+  dialog.addButton( new PaperButton("DECLINE", preset: PaperButton.PRESET_RED, fontColor: PaperColor.GREY_DARK, width: 90, background : false) );
+  dialog.addButton( new PaperButton("ACCEPT", preset: PaperButton.PRESET_BLUE, fontColor: PaperColor.BLUE, width: 90, background : false) );
   dialog.setSize(300, 240);
   hbox6.addChild(dialog); 
 

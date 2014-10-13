@@ -13,16 +13,22 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   num bgColor;
   num type;
   bool respondToClick = true;
+  bool shadowEnabled = true;
 
   Timer timer;
 
   DropShadowFilter _shadow;
   Transition trans;
 
-  PaperShadow({this.type : RECTANGLE, this.bgColor: 0xFFFFFFFF, this.shadowColor: PaperColor.GREY_SHADOW, this.respondToClick: true}):super() {
+  PaperShadow({this.type : RECTANGLE, this.bgColor: 0xFFFFFFFF, this.shadowEnabled : true, this.shadowColor: PaperColor.GREY_SHADOW, this.respondToClick: true}):super() {
     ignoreCallSetSize = false;
-    _shadow = new DropShadowFilter(initialDistance, 90, shadowColor, initialBlur, initialBlur);
-    filters = [_shadow];
+    if(shadowEnabled){
+      _shadow = new DropShadowFilter(initialDistance, 90, shadowColor, initialBlur, initialBlur);
+      filters = [_shadow];
+    }
+    else{
+      respondToClick = false;
+    }
 
   }
   

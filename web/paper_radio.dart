@@ -8,7 +8,7 @@ PaperToast _toast;
 
 
 void main() {
-  stage = new Stage(html.querySelector('#stage'), webGL: false, color: 0xFFf9f9f9);
+  stage = new Stage(html.querySelector('#stage'), webGL: true, color: 0xFFf9f9f9);
   stage.scaleMode = StageScaleMode.NO_SCALE;
   stage.align = StageAlign.TOP_LEFT;
   ContextTool.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
@@ -19,10 +19,21 @@ void main() {
 }
 void start() {
   
+  
+  PaperTabs tab = new PaperTabs(highlightColor : PaperColor.BLUE, bgColor: PaperColor.BLACK);
+  tab.addToTL(new PaperIconButton(PaperIcon.white(PaperIconSet.menu), rippleColor: PaperColor.WHITE));
+  tab.addToTL(new PaperText("Title", size: 24, color: PaperColor.WHITE));
+  tab.addToTR(new PaperIconButton(PaperIcon.white(PaperIconSet.add_shopping_cart), rippleColor: PaperColor.WHITE));
+  tab.addTab(new PaperButton("ITEM ONE", preset: PaperButton.PRESET_WHITE, shadow: false));
+  tab.addTab(new PaperButton("ITEM TWO", preset: PaperButton.PRESET_WHITE, shadow: false));
+  tab.addTab(new PaperButton("ITEM THREE", preset: PaperButton.PRESET_WHITE, shadow: false));
+  stage.addChild(tab);
+  tab.setSize(stage.stageWidth, 100);
+  
   /* Vertical Container */
   VBox vbox = new VBox(10);
   vbox.x = 10;
-  vbox.y = 10;
+  vbox.y = 100;
   
   /* 
    * Radio Button Group
