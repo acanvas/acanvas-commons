@@ -1,5 +1,6 @@
 part of stagexl_commons;
 
+@retain
 class HLeftSwipeTransition extends BasicEffect {
   HLeftSwipeTransition() : super() {
     _applyRecursively = false;

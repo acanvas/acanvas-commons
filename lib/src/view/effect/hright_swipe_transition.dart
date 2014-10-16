@@ -3,6 +3,7 @@
 	/**
 	 * @author Nils Doehring (nilsdoehring(gmail as at).com)
 	 */
+   @retain
 	 class HRightSwipeTransition extends BasicEffect {
 	 HRightSwipeTransition() : super() {
 			_applyRecursively = false;
