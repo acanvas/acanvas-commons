@@ -18,7 +18,6 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
     }
   }
 
-
   @override
   bool getInitialized() => _initialized;
 
@@ -32,12 +31,15 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
 
   @override
   void addChild(DisplayObject child) {
+    super.addChild(child);
+    if (widthAsSet > 0 && heightAsSet > 0 && child is ISpriteComponent && !(child as ISpriteComponent).ignoreCallSetSize) {
+      (child as ISpriteComponent).setSize(widthAsSet, heightAsSet);
+    }
     if (child is IManagedSpriteComponent) {
       if (this._initialized) {
         (child as IManagedSpriteComponent).init(_data);
       }
     }
-    return super.addChild(child);
   }
 
   @override

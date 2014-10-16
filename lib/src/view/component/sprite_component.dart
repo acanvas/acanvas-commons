@@ -50,7 +50,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
       }
 
       if (!(this is IManagedSpriteComponent) || (this is IManagedSpriteComponent && (this as IManagedSpriteComponent).getInitialized())) {
-        // if IView, only render if already initialized
+        // if IManagedSpriteComponent, only render if already initialized
         redraw();
       }
     }

@@ -10,9 +10,9 @@ class PaperTabs extends SpriteComponent {
   Sprite _bg;
   Sprite _slideBar;
 
-  HBox _tlBox;
-  HBox _trBox;
-  HBox _tabBox;
+  HBox leftBox;
+  HBox rightBox;
+  HBox tabBox;
   
   int _activeButtonIndex = 0;
 
@@ -20,34 +20,33 @@ class PaperTabs extends SpriteComponent {
     _bg = new Sprite();
     addChild(_bg);
 
-    _tlBox = new HBox(20, true);
-    _tlBox.ignoreCallSetSize = true;
-    addChild(_tlBox);
+    leftBox = new HBox(20, true);
+    leftBox.ignoreCallSetSize = true;
+    addChild(leftBox);
 
-    _trBox = new HBox(20, true);
-    _trBox.ignoreCallSetSize = true;
-    addChild(_trBox);
+    rightBox = new HBox(20, true);
+    rightBox.ignoreCallSetSize = true;
+    addChild(rightBox);
 
-    _tabBox = new HBox(0, true);
-    addChild(_tabBox);
+    tabBox = new HBox(0, true);
+    addChild(tabBox);
     
     _slideBar = new Sprite();
     addChild(_slideBar);
-    
   }
   
   void addToTL(InteractiveObject spr){
-    _tlBox.addChild(spr);
+    leftBox.addChild(spr);
   }
 
   void addToTR(InteractiveObject spr){
-    _trBox.addChild(spr);
+    rightBox.addChild(spr);
   }
 
   void addTab(Button btn){
-    _tabBox.addChild(btn);
+    tabBox.addChild(btn);
     btn.submitCallback = _onTabClick;
-    btn.submitCallbackParams = [btn, _tabBox.numChildren];
+    btn.submitCallbackParams = [btn, tabBox.numChildren];
   }
 
   void _onTabClick(Button btn, int index){
@@ -62,28 +61,32 @@ class PaperTabs extends SpriteComponent {
     
     GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, sprite: _bg, color : bgColor);
 
-    _tlBox.x = 20;
-    _tlBox.y = 20;
+    leftBox.x = 20;
+    leftBox.y = 20;
 
-    _trBox.x = widthAsSet - _trBox.width - 20;
-    _trBox.y = 20;
+    rightBox.x = widthAsSet - rightBox.width - 20;
+    rightBox.y = 20;
 
-    _tabBox.x = 0;
-    if(_tlBox.numChildren == 0 && _trBox.numChildren == 0){
-      //needed?
-    }
-    _tabBox.y = heightAsSet - _tabBox.height;
-   
-    if(distributeTabs){
-      for(int i = 0; i<_tabBox.numChildren;i++){
-        Button btn = _tabBox.getChildAt(i);
-        btn.setSize((widthAsSet/_tabBox.numChildren).round(), 0);
+    tabBox.x = 0;
+
+    if(tabBox.numChildren > 0){
+      tabBox.y = heightAsSet - tabBox.height;
+     
+      if(distributeTabs){
+        for(int i = 0; i<tabBox.numChildren;i++){
+          Button btn = tabBox.getChildAt(i);
+          btn.setSize((widthAsSet/tabBox.numChildren).round(), 0);
+        }
+        tabBox.update();
       }
-      _tabBox.update();
-    }
 
-    GraphicsUtil.line((_tabBox.getChildAt(_activeButtonIndex) as Button).widthAsSet, 0, strength: 2, sprite: _slideBar, color : highlightColor);
-    _slideBar.y = heightAsSet - 2;
+      GraphicsUtil.line((tabBox.getChildAt(_activeButtonIndex) as Button).widthAsSet, 0, strength: 2, sprite: _slideBar, color : highlightColor);
+      
+      _slideBar.visible = false;
+    }
+    else{
+      _slideBar.y = heightAsSet - 2;
+    }
   }
 
 }

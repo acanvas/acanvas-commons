@@ -5,6 +5,7 @@ class PaperText extends UITextField {
   
   PaperText(String text, {int size : 14, int color : PaperColor.BLACK, String fontName : DEFAULT_FONT}) : super(text, new TextFormat(fontName, size, color), true) {
     //format.leading = -2;
+    width = 320;
   }
 
   

@@ -36,13 +36,15 @@
 		  num _calcPadding() {
 			int n = numChildren;
 			num totalHeight = 0;
+			DisplayObject dobj;
 			for (int i = 0;i < n;i++) {
-				/*if(getChildAt(i) is ISpriteComponent){
-					totalHeight += (getChildAt(i) as ISpriteComponent ).heightAsSet;
+			  dobj = getChildAt(i);
+				if(dobj is ISpriteComponent){
+					totalHeight += (dobj as ISpriteComponent ).heightAsSet == 0 ? dobj.height: (dobj as ISpriteComponent ).heightAsSet ;
 				}
-				else{*/
-					totalHeight += getChildAt(i).height;
-				//}
+				else{
+					totalHeight += dobj.height;
+				}
 			}
 
 			return (_size - totalHeight) / (numChildren - 1);
@@ -65,9 +67,9 @@
         
         for (int i = 1;i < n;i++) {
           child = getChildAt(i);
-          ch = /*child is ISpriteComponent ? (child as ISpriteComponent).heightAsSet :*/ child.height;
+          ch = child is ISpriteComponent && (child as ISpriteComponent).heightAsSet != 0 ? (child as ISpriteComponent).heightAsSet : child.height;
           prevChild = getChildAt(i - 1);
-          ph = /*prevChild is ISpriteComponent ? (prevChild as ISpriteComponent).heightAsSet :*/ prevChild.height;
+          ph = prevChild is ISpriteComponent && (prevChild as ISpriteComponent).heightAsSet != 0 ? (prevChild as ISpriteComponent).heightAsSet : prevChild.height;
           
 					if (_inverted) {
 						if (_pixelSnapping) child.y = (prevChild.y - ch - _padding).round();

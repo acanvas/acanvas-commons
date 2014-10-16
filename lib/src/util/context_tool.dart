@@ -15,6 +15,10 @@ class ContextTool {
       return _singleton;
   }
   
+  static bool get FIREFOX {
+    return html.window.navigator.userAgent.toLowerCase().contains(new RegExp('firefox'));
+  }
+
   static bool get MOBILE {
     return html.window.navigator.userAgent.contains(new RegExp('Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini'));
   }
