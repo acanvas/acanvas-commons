@@ -1,9 +1,5 @@
 part of stagexl_commons;
 
-
-
-
-
 /**
 	 * @author nilsdoehring
 	 */
@@ -63,14 +59,14 @@ class BasicEffect implements IEffect {
   Bitmap _registerBitmapSprite(ISpriteComponent target) {
 
     Sprite spr = target as Sprite;
-    
+
     _applyRecursively = false;
 
     spr.alpha = 1;
     Rectangle rect = spr.getBounds(_stage);
 
-    BitmapData output = new BitmapData(rect.width + 20, rect.height + 20, true, 0x00000000);
-    Matrix mat = spr.transformationMatrix != null ? spr.transformationMatrix : new Matrix(0,0,0,0,0,0);
+    BitmapData output = new BitmapData((rect.width + 20).ceil(), (rect.height + 20).ceil(), true, 0x00000000);
+    Matrix mat = spr.transformationMatrix != null ? spr.transformationMatrix : new Matrix(0, 0, 0, 0, 0, 0);
     _sprite.x = mat.tx;
     _sprite.y = mat.ty;
 
@@ -95,7 +91,7 @@ class BasicEffect implements IEffect {
     tween.animate.alpha.to(1.0); // target value = 0.0
     tween.onComplete = () => callback(callback);
     _stage.juggler.add(tween);
-    
+
   }
   void runOutEffect(ISpriteComponent target, num duration, Function callback) {
     //target.visible = true;
@@ -106,10 +102,10 @@ class BasicEffect implements IEffect {
     tween.onComplete = () => callback(callback);
     _stage.juggler.add(tween);
   }
-  
+
   void cancel([ISpriteComponent target = null]) {
     if (target == null) return;
-    
+
     _stage.juggler.removeTweens(target as DisplayObject);
 
     DisplayObject child;
@@ -144,7 +140,8 @@ class BasicEffect implements IEffect {
       if (_sprite.parent != null) {
         _sprite.parent.removeChild(_sprite);
       }
-      _sprite = null;
+      _sprite.removeChildren();
+      // _sprite = null;
     }
   }
 }

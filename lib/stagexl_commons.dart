@@ -108,6 +108,10 @@ part 'src/view/component/form/component_with_data_proxy.dart';
 part 'src/view/effect/i_effect.dart';
 part 'src/view/effect/no_effect.dart';
 part 'src/view/effect/basic_effect.dart';
+part 'src/view/effect/center_zoom_transition.dart';
+//part 'src/view/effect/hflip_transition.dart';
+part 'src/view/effect/hleft_swipe_transition.dart';
+part 'src/view/effect/hright_swipe_transition.dart';
 //view:textfield
 part 'src/view/textfield/ui_text_field.dart';
 part 'src/view/textfield/ui_text_field_input.dart';

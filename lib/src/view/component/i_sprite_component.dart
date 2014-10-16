@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-abstract class ISpriteComponent extends EventDispatcher {
+abstract class ISpriteComponent extends EventDispatcher{
 
   void setSize(num w, num h);
 
@@ -18,6 +18,8 @@ abstract class ISpriteComponent extends EventDispatcher {
 
   bool get enabled;
   void set enabled(bool enabled);
+
+  void set visible(bool visible);
 
   bool get ignoreSetEnabled;
   void set ignoreSetEnabled(bool enabled);
