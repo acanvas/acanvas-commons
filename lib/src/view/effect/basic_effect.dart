@@ -3,7 +3,7 @@ part of stagexl_commons;
 /**
 	 * @author nilsdoehring
 	 */
-@retain
+
 class BasicEffect implements IEffect {
 
   String _type;
@@ -58,20 +58,18 @@ class BasicEffect implements IEffect {
   }
   Bitmap _registerBitmapSprite(ISpriteComponent target) {
 
-    Sprite spr = target as Sprite;
-
     _applyRecursively = false;
 
-    spr.alpha = 1;
-    Rectangle rect = spr.getBounds(_stage);
+    target.alpha = 1;
+    Rectangle rect = target.getBounds(_stage);
 
     BitmapData output = new BitmapData((rect.width + 20).ceil(), (rect.height + 20).ceil(), true, 0x00000000);
-    Matrix mat = spr.transformationMatrix != null ? spr.transformationMatrix : new Matrix(0, 0, 0, 0, 0, 0);
+    Matrix mat = target.transformationMatrix != null ? target.transformationMatrix : new Matrix(0, 0, 0, 0, 0, 0);
     _sprite.x = mat.tx;
     _sprite.y = mat.ty;
 
     mat.setTo(mat.a, mat.b, mat.c, mat.d, 0, 0);
-    output.draw(target as DisplayObject, mat);
+    output.draw(target, mat);
 
     Bitmap outputBmp = new Bitmap(output);
     outputBmp.applyCache(0, 0, output.width, output.height);
@@ -87,9 +85,9 @@ class BasicEffect implements IEffect {
   void runInEffect(ISpriteComponent target, num duration, Function callback) {
     target.alpha = 0;
 
-    var tween = new Tween(target as DisplayObject, duration, TransitionFunction.easeInCubic);
+    var tween = new Tween(target, duration, TransitionFunction.easeInCubic);
     tween.animate.alpha.to(1.0); // target value = 0.0
-    tween.onComplete = () => callback(callback);
+    tween.onComplete = () => callback.call();
     _stage.juggler.add(tween);
 
   }
@@ -97,20 +95,20 @@ class BasicEffect implements IEffect {
     //target.visible = true;
     target.alpha = 1;
 
-    var tween = new Tween(target as DisplayObject, duration, TransitionFunction.easeInCubic);
+    var tween = new Tween(target, duration, TransitionFunction.easeInCubic);
     tween.animate.alpha.to(0); // target value = 0.0
-    tween.onComplete = () => callback(callback);
+    tween.onComplete = () => callback.call();
     _stage.juggler.add(tween);
   }
 
   void cancel([ISpriteComponent target = null]) {
     if (target == null) return;
 
-    _stage.juggler.removeTweens(target as DisplayObject);
+    _stage.juggler.removeTweens(target);
 
     DisplayObject child;
-    for (int i = 0; i < (target as DisplayObjectContainer).numChildren; i++) {
-      child = (target as DisplayObjectContainer).getChildAt(i);
+    for (int i = 0; i < (target).numChildren; i++) {
+      child = (target).getChildAt(i);
       if (child is ISpriteComponent) {
         cancel(child as ISpriteComponent);
       }
@@ -133,6 +131,8 @@ class BasicEffect implements IEffect {
     if (callback != null) {
       callback.call(null);
     }
+    
+    destroy();
   }
   void destroy() {
     if (_sprite != null && useSprite()) {
@@ -146,6 +146,3 @@ class BasicEffect implements IEffect {
   }
 }
 
-_callback(Function callback) {
-  callback.call();
-}

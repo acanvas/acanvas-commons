@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-abstract class ISpriteComponent extends EventDispatcher{
+abstract class ISpriteComponent extends EventDispatcher implements Sprite{
 
   void setSize(num w, num h);
 
@@ -36,9 +36,4 @@ abstract class ISpriteComponent extends EventDispatcher{
   bool get resizeTextChildren;
   void set resizeTextChildren(bool enabled);
 
-  /* IDisplayObject*/
-  num get alpha;
-  void set alpha(num w);
-
-  Stage get stage;
 }

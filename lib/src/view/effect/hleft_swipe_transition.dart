@@ -1,7 +1,7 @@
 part of stagexl_commons;
 
-@retain
 class HLeftSwipeTransition extends BasicEffect {
+ 
   HLeftSwipeTransition() : super() {
     _applyRecursively = false;
   }
@@ -10,6 +10,7 @@ class HLeftSwipeTransition extends BasicEffect {
   void runInEffect(ISpriteComponent t, num duration, Function callback) {
     SpriteComponent target = t as SpriteComponent;
     num iTargetXOriginal = target.x;
+    //if mask
     target.parent.mask = new Mask.rectangle(target.x, target.y, target.widthAsSet, target.heightAsSet);
     target.x = target.stage.stageWidth;
     target.alpha = 1;
@@ -26,7 +27,7 @@ class HLeftSwipeTransition extends BasicEffect {
     SpriteComponent target = t as SpriteComponent;
     target.parent.mask = new Mask.rectangle(target.x, target.y, target.widthAsSet, target.heightAsSet);
     target.stage.juggler.tween(target, duration, TransitionFunction.easeOutQuartic)
-        ..animate.x.to(-target.stage.stageWidth)
+        ..animate.x.to(-target.width)
         ..onComplete = () {
           callback.call();
           target.parent.mask = null;
