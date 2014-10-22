@@ -165,9 +165,11 @@ class ClassUtils {
     List a = (args == null) ? [] : args;
 
     ClassMirror c = reflectClass(clazz);
+    /*
     print(c.simpleName);
     print(clazz);
     print(clazz.toString());
+    */
     InstanceMirror im = c.newInstance(new Symbol(''), a);
     result = im.reflectee;
 

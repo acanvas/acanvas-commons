@@ -16,9 +16,8 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
 
   PaperRipple({this.color : 0xFF000000, this.type : RECTANGLE, this.velocity: 0.5 }):super() {
     ignoreCallSetSize = false;
-        
-    addEventListener(MouseEvent.MOUSE_DOWN, downAction);
-    addEventListener(MouseEvent.MOUSE_UP, upAction);
+    //addEventListener(MouseEvent.MOUSE_DOWN, downAction);
+    //addEventListener(MouseEvent.MOUSE_UP, upAction);
   }
   
   @override
@@ -33,9 +32,12 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
     }
   }
 
-  downAction(MouseEvent e) {
-    var touchX = e.localX > widthAsSet ? widthAsSet : e.localX;// - rect.left;
-    var touchY = e.localY > heightAsSet ? heightAsSet : e.localY;// - rect.top;
+  downAction(Event e) {
+    num localX = e is MouseEvent ? (e as MouseEvent).localX : (e as TouchEvent).localX;
+    num localY = e is MouseEvent ? (e as MouseEvent).localY : (e as TouchEvent).localY;
+    
+    var touchX = localX > widthAsSet ? widthAsSet : localX;// - rect.left;
+    var touchY = localY > heightAsSet ? heightAsSet : localY;// - rect.top;
     
     num waveRadius = distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(widthAsSet, heightAsSet)) / 1.2;
     

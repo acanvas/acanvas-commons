@@ -3,7 +3,7 @@ part of stagexl_commons;
 class PaperIcon {
   
   static final String  greySVG = """
-      <svg xmlns="http://www.w3.org/2000/svg">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
         <filter id="matrix-grey">
           <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 .5 
                                                                   0 1 0 0 .5 
@@ -16,7 +16,7 @@ class PaperIcon {
       </svg>""";
 
   static final String  redSVG = """
-      <svg xmlns="http://www.w3.org/2000/svg">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
         <filter id="matrix-red">
           <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0.8235 
                                                                   0 1 0 0 0.2470
@@ -29,9 +29,9 @@ class PaperIcon {
       </svg>""";
 
   static final String  invertedSVG = """
-      <svg xmlns="http://www.w3.org/2000/svg">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
         <filter id="matrix-invert">
-          <feColorMatrix in="SourceGraphic" type="matrix" values="-1 0 0 0 1 
+          <feColorMatrix type="matrix" values="-1 0 0 0 1 
                                                                   0 -1 0 0 1 
                                                                   0 0 -1 0 1
                                                                   0 0 0 1 0"/>
@@ -42,7 +42,7 @@ class PaperIcon {
       </svg>""";
 
   static final String  normalSVG = """
-      <svg xmlns="http://www.w3.org/2000/svg">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
         #R#
       </svg>""";
   

@@ -105,7 +105,6 @@ class PaperInput extends SpriteComponent {
     }
 
     super.redraw();
-    print("$this: $height");
   }
 
   /* User clicks into TextField */
@@ -121,7 +120,7 @@ class PaperInput extends SpriteComponent {
     }
 
     /* Animate cursor box */
-    if (_cursorBox.alpha == 0) {
+    if (stage.focus != _inputTextField) {
       _cursorBox.scaleX = 1;
       _cursorBox.x = 80;
       _cursorBox.alpha = 1;

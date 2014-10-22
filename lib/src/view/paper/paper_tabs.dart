@@ -82,10 +82,10 @@ class PaperTabs extends SpriteComponent {
 
       GraphicsUtil.line((tabBox.getChildAt(_activeButtonIndex) as Button).widthAsSet, 0, strength: 2, sprite: _slideBar, color : highlightColor);
       
-      _slideBar.visible = false;
+      _slideBar.y = heightAsSet - 2;
     }
     else{
-      _slideBar.y = heightAsSet - 2;
+      _slideBar.visible = false;
     }
   }
 

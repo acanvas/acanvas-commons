@@ -20,7 +20,19 @@ class ContextTool {
   }
 
   static bool get MOBILE {
-    return html.window.navigator.userAgent.contains(new RegExp('Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini'));
+    return html.window.navigator.userAgent.contains(new RegExp('Android|OPiOS|CriOS|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini'));
+  }
+
+  static bool get CHROME_IOS {
+    return html.window.navigator.userAgent.contains(new RegExp('CriOS'));
+  }
+
+  static bool get OPERA_IOS {
+    return html.window.navigator.userAgent.contains(new RegExp('OPiOS'));
+  }
+
+  static bool get TOUCH {
+    return MOBILE && Multitouch.supportsTouchEvents;
   }
 
   static bool get WEBGL {

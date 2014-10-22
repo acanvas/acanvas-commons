@@ -105,6 +105,7 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
     dispatchEvent(new ManagedSpriteComponentEvent(ManagedSpriteComponentEvent.DESTROY_START));
     // Will destroy all IComponent children
     super.destroy();
+    _initialized = false;
   }
 
   void _autoDestroy(ManagedSpriteComponentEvent event) {

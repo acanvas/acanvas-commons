@@ -25,23 +25,39 @@ class Button extends SpriteComponent {
     mouseChildren = false;
 
     if (value == true) {
-      addEventListener(MouseEvent.MOUSE_UP, onClick);
-      addEventListener(MouseEvent.MOUSE_DOWN, _onMouseDown);
-      addEventListener(MouseEvent.ROLL_OVER, onRollOver);
-      addEventListener(MouseEvent.ROLL_OUT, onRollOut);
+      if (ContextTool.TOUCH) {
+        addEventListener(TouchEvent.TOUCH_END, onClick);
+        addEventListener(TouchEvent.TOUCH_BEGIN, _onMouseDown);
+        addEventListener(TouchEvent.TOUCH_ROLL_OVER, onRollOver);
+        addEventListener(TouchEvent.TOUCH_ROLL_OUT, onRollOut);
+      }
+      else{
+        addEventListener(MouseEvent.MOUSE_UP, onClick);
+        addEventListener(MouseEvent.MOUSE_DOWN, _onMouseDown);
+        addEventListener(MouseEvent.ROLL_OVER, onRollOver);
+        addEventListener(MouseEvent.ROLL_OUT, onRollOut);
+      }
       onRollOut();
     } else {
-      removeEventListener(MouseEvent.MOUSE_UP, onClick);
-      removeEventListener(MouseEvent.MOUSE_DOWN, _onMouseDown);
-      removeEventListener(MouseEvent.ROLL_OVER, onRollOver);
-      removeEventListener(MouseEvent.ROLL_OUT, onRollOut);
+      if (ContextTool.TOUCH) {
+        removeEventListener(TouchEvent.TOUCH_END, onClick);
+        removeEventListener(TouchEvent.TOUCH_BEGIN, _onMouseDown);
+        removeEventListener(TouchEvent.TOUCH_ROLL_OVER, onRollOver);
+        removeEventListener(TouchEvent.TOUCH_ROLL_OUT, onRollOut);
+      }
+      else{
+        removeEventListener(MouseEvent.MOUSE_UP, onClick);
+        removeEventListener(MouseEvent.MOUSE_DOWN, _onMouseDown);
+        removeEventListener(MouseEvent.ROLL_OVER, onRollOver);
+        removeEventListener(MouseEvent.ROLL_OUT, onRollOut);
+      }
       onRollOver();
     }
   }
   void setLabel(String label) {
     _labelText = label;
   }
-  void _onMouseDown([MouseEvent event = null]) {
+  void _onMouseDown([Event event = null]) {
     DisplayObject child;
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
@@ -50,7 +66,7 @@ class Button extends SpriteComponent {
       }
     }
   }
-  void onClick([MouseEvent event = null]) {
+  void onClick([Event event = null]) {
     DisplayObject child;
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
@@ -65,10 +81,10 @@ class Button extends SpriteComponent {
       _submitEvent.dispatch();
     }
   }
-  void onRollOver([MouseEvent event = null]) {
+  void onRollOver([Event event = null]) {
     // Override this method
   }
-  void onRollOut([MouseEvent event = null]) {
+  void onRollOut([Event event = null]) {
     // Override this method
   }
 
