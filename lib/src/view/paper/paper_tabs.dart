@@ -49,6 +49,10 @@ class PaperTabs extends SpriteComponent {
     btn.submitCallbackParams = [btn, tabBox.numChildren];
   }
 
+  void activateTabById(int id){
+    _onTabClick(tabBox.getChildAt(id) as Button, id);
+  }
+
   void _onTabClick(Button btn, int index){
     _activeButtonIndex = index;
     stage.juggler.tween(_slideBar, .3, TransitionFunction.easeOutCubic).animate

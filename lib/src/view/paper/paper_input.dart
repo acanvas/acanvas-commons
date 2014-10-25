@@ -79,7 +79,13 @@ class PaperInput extends SpriteComponent {
     addChild(_activeLine);
     _activeLine.alpha = 0;
 
-    addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
+    if(ContextTool.TOUCH){
+      addEventListener(TouchEvent.TOUCH_BEGIN, mouseDownAction);
+    }
+    else{
+      addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
+    }
+    
     addEventListener(TextEvent.TEXT_INPUT, textInputAction);
     addEventListener(KeyboardEvent.KEY_UP, keyUpAction);
   }
@@ -108,7 +114,7 @@ class PaperInput extends SpriteComponent {
   }
 
   /* User clicks into TextField */
-  void mouseDownAction(MouseEvent event) {
+  void mouseDownAction(Event event) {
     /* Animate active line */
     if (_activeLine.alpha == 0) {
       _activeLine.scaleX = 0.01;
@@ -240,7 +246,7 @@ class PaperInput extends SpriteComponent {
     line.graphics.strokeColor(color, strength);
     line.graphics.closePath();
     if (ContextTool.WEBGL) {
-      line.applyCache(0, 0, widthAsSet, strength);
+      line.applyCache(0, 0, widthAsSet.ceil(), strength.ceil());
     }
   }
 
@@ -249,7 +255,7 @@ class PaperInput extends SpriteComponent {
     box.graphics.rect(0, 0, 20, _inputTextField.textHeight);
     box.graphics.fillColor(color);
     if (ContextTool.WEBGL) {
-      box.applyCache(0, 0, 20, _inputTextField.textHeight);
+      box.applyCache(0, 0, 20, _inputTextField.textHeight.ceil());
     }
   }
 
