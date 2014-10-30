@@ -28,7 +28,6 @@ class HBox extends SpriteComponent {
   @override
   DisplayObject addChild(DisplayObject child) {
     super.addChild(child);
-    //update();
     return child;
   }
 

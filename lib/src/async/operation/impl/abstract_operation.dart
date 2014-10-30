@@ -153,7 +153,7 @@ part of stagexl_commons;
 				return false;
 			}
 
-			if (error) {
+			if (error != null) {
 				this.error = error;
 			}
 			    dispatchEvent(OperationEvent.createErrorEvent(this));

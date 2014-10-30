@@ -6,7 +6,7 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   
   num waveMaxRadius = 150;
   num initialOpacity = 0.25;
-  num velocity = 0.5;
+  num velocity = 2;
   bool recenteringTouch = false;
   
   num color;
@@ -16,8 +16,9 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
 
   PaperRipple({this.color : 0xFF000000, this.type : RECTANGLE, this.velocity: 0.5 }):super() {
     ignoreCallSetSize = false;
-    //addEventListener(MouseEvent.MOUSE_DOWN, downAction);
-    //addEventListener(MouseEvent.MOUSE_UP, upAction);
+    if(ContextTool.TOUCH){
+      velocity = 1;
+    }
   }
   
   @override
