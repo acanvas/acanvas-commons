@@ -15,7 +15,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
   Logger log;
 
   //events
-  RockdotEvent _submitEvent;
+  XLSignal _submitEvent;
   Function _submitCallback;
   List _submitCallbackParams;
 
@@ -161,7 +161,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
   }
 
 
-  void set submitEvent(RockdotEvent submitEvent) {
+  void set submitEvent(XLSignal submitEvent) {
     _submitEvent = submitEvent;
   }
 

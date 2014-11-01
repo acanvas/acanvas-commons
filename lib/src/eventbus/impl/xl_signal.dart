@@ -1,14 +1,14 @@
 part of stagexl_commons;
 
-class RockdotEvent extends Event{
+class XLSignal extends Event{
   var _callback;
   var _data;
-  final DartEventBus eventBus = new DartEventBus();
+  final XLEventBus eventBus = new XLEventBus();
   
-  RockdotEvent(String type, [this._data = null, this._callback = null]) : super(type);
+  XLSignal(String type, [this._data = null, this._callback = null]) : super(type);
   
   void dispatch(){
-    eventBus.dispatchEvent(new RockdotEvent(type, _data, _callback));
+    eventBus.dispatchEvent(new XLSignal(type, _data, _callback));
   }
   void listen(){
     eventBus.addEventListener(type , _callback);

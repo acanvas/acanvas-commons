@@ -19,17 +19,17 @@ part of stagexl_commons;
 /**
 	 * Simplified EventBus for Dart
 	 */
-class DartEventBus extends EventDispatcher implements IEventBus {
+class XLEventBus extends EventDispatcher implements IEventBus {
 
-  static final DartEventBus _singleton = new DartEventBus._internal();
+  static final XLEventBus _singleton = new XLEventBus._internal();
   Logger LOGGER;
 
-  factory DartEventBus() {
+  factory XLEventBus() {
     return _singleton;
   }
 
 
-  DartEventBus._internal() {
+  XLEventBus._internal() {
     // initialization logic here
     LOGGER = new Logger("DartEventBus");
   }
