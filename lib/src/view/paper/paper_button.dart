@@ -13,49 +13,53 @@ class PaperButton extends Button {
   static const int LABEL_MAX_WIDTH = 400;
 
   PaperText _label;
-  int _color;
+  int _bgColor;
 
   PaperButton(String text, {num width: 120, num height: 32, 
-                            int fontSize: 14, String fontName: PaperText.DEFAULT_FONT, int fontColor : -1,
+                            int bgColor: -1, int fontColor : -1, String fontName: PaperText.DEFAULT_FONT, int fontSize: 14,
                             int preset: PRESET_WHITE,
                             bool shadow : true, bool background : true}) : super() {
-    int fontColorPreset;
+    int _fontAndRippleColor;
     switch (preset) {
       case PRESET_WHITE:
-        _color = PaperColor.WHITE;
-        fontColorPreset = 0xFF646464;
+        _bgColor = PaperColor.WHITE;
+        _fontAndRippleColor = 0xFF646464;
         break;
       case PRESET_GREY:
-        _color = PaperColor.GREY;
-        fontColorPreset = 0xFF646464;
+        _bgColor = PaperColor.GREY;
+        _fontAndRippleColor = 0xFF646464;
         break;
       case PRESET_BLUE:
-        _color = PaperColor.BLUE;
-        fontColorPreset = 0xFFFFFFFF;
+        _bgColor = PaperColor.BLUE;
+        _fontAndRippleColor = 0xFFFFFFFF;
         break;
       case PRESET_GREEN:
-        _color = PaperColor.GREEN;
-        fontColorPreset = 0xFFFFFFFF;
+        _bgColor = PaperColor.GREEN;
+        _fontAndRippleColor = 0xFFFFFFFF;
         break;
       case PRESET_RED:
-        _color = PaperColor.RED;
-        fontColorPreset = 0xFFFFFFFF;
+        _bgColor = PaperColor.RED;
+        _fontAndRippleColor = 0xFFFFFFFF;
         break;
     }
     
+    if(bgColor != -1){
+      _bgColor = bgColor;
+    }
+
     if(fontColor != -1){
-      fontColorPreset = fontColor;
+      _fontAndRippleColor = fontColor;
     }
 
     if(background){
-      PaperShadow paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: _color, shadowEnabled : shadow);
+      PaperShadow paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: _bgColor, shadowEnabled : shadow);
       addChild(paperShadow);
     }
     
-    PaperRipple paperRipple = new PaperRipple(color: fontColorPreset);
+    PaperRipple paperRipple = new PaperRipple(color: _fontAndRippleColor);
     addChild(paperRipple);
 
-    _label = new PaperText(text, size: fontSize, color: fontColorPreset, fontName: fontName);
+    _label = new PaperText(text, size: fontSize, color: _fontAndRippleColor, fontName: fontName);
     _label.width = LABEL_MAX_WIDTH;
     addChild(_label);
 

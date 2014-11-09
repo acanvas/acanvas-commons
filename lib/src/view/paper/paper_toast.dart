@@ -11,11 +11,13 @@ class PaperToast extends SpriteComponent {
   int position;
   Stage holder;
 
-  PaperToast(String title, this.holder, {this.position: BL, int bgColor: PaperColor.WHITE, int fontColor: PaperColor.BLACK, String fontName: PaperText.DEFAULT_FONT, this.hideAfterSeconds: 3}) : super() {
-
+  PaperToast(String title, this.holder, {this.position: BL, 
+      int bgColor: PaperColor.WHITE, int fontColor: PaperColor.BLACK, String fontName: PaperText.DEFAULT_FONT, int fontSize: 18,
+      this.hideAfterSeconds: 3}) : super() {
+    
     addChild(new PaperShadow(type: PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
 
-    _title = new PaperText(title, size: 18, color: fontColor, fontName: fontName);
+    _title = new PaperText(title, size: fontSize, color: fontColor, fontName: fontName);
     addChild(_title);
 
     _progress = new PaperProgress(0, 100, 300, bgColor: bgColor, barColor: fontColor);
