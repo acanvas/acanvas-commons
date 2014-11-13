@@ -10,10 +10,9 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
   bool _destroyed = false;
 
   ManagedSpriteComponent([String id = ""]) {
-    if(id == ""){
+    if (id == "") {
       name = reflect(this).type.qualifiedName.toString();
-    }
-    else{
+    } else {
       name = id;
     }
   }
@@ -49,6 +48,15 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
   }
 
   void didInit() {
+    DisplayObject child;
+    for (int i = 0; i < numChildren; i++) {
+      child = getChildAt(i);
+      if (child is IManagedSpriteComponent) {
+        if (!(child as IManagedSpriteComponent).getInitialized()) {
+          (child as IManagedSpriteComponent).init(_data);
+        }
+      }
+    }
     _initialized = true;
     _destroyed = false;
     redraw();

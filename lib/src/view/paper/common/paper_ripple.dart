@@ -4,13 +4,13 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   static const int RECTANGLE = 1;
   static const int CIRCLE = 2;
   
-  num waveMaxRadius = 150;
-  num initialOpacity = 0.25;
-  num velocity = 2;
-  bool recenteringTouch = false;
+  num _waveMaxRadius = 150;
+  num _initialOpacity = 0.25;
+  bool _recenteringTouch = false;
   
   num color;
   num type;
+  num velocity = 1.5;
   
   Sprite holder;
 
@@ -37,15 +37,15 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
     num localX = e is MouseEvent ? (e as MouseEvent).localX : (e as TouchEvent).localX;
     num localY = e is MouseEvent ? (e as MouseEvent).localY : (e as TouchEvent).localY;
     
-    var touchX = localX > widthAsSet ? widthAsSet : localX;// - rect.left;
-    var touchY = localY > heightAsSet ? heightAsSet : localY;// - rect.top;
+    num touchX = localX > widthAsSet ? widthAsSet : localX;// - rect.left;
+    num touchY = localY > heightAsSet ? heightAsSet : localY;// - rect.top;
     
     num waveRadius = distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(widthAsSet, heightAsSet)) / 1.2;
     
     Shape inner = new Shape()
           ..graphics.circle(0, 0, waveRadius.round())
           ..graphics.fillColor(color)
-          ..alpha = initialOpacity
+          ..alpha = _initialOpacity
           ..x = touchX
           ..y = touchY;
    
@@ -61,7 +61,7 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
     ..animate.scaleX.to(1.2)
     ..animate.scaleY.to(1.2);
     
-    if (recenteringTouch == true) {
+    if (_recenteringTouch == true) {
       tw.animate.x.to(width / 2);
       tw.animate.y.to(height / 2);
     }
@@ -73,7 +73,6 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   upAction(Event e) {
 
     for (int i = 0; i < numChildren; i++) {
-      // Declare the next wave that has mouse down to be mouse'ed up.
      DisplayObject dobj = getChildAt(i);
 
       stage.juggler.removeTweens(dobj);
@@ -82,12 +81,9 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
       ..animate.scaleX.to(1.0)
       ..animate.scaleY.to(1.0)
       ..onComplete = () { 
-          if(dobj != null && contains(dobj)) removeChild(dobj); 
-          dobj = null;
+        disposeChild(dobj); 
       };
-     
     }
-
   }
   
   num dist(Point p1, Point p2) {

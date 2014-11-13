@@ -114,7 +114,7 @@ class PaperInput extends SpriteComponent {
   }
 
   /* User clicks into TextField */
-  void mouseDownAction(Event event) {
+  void mouseDownAction([Event event = null]) {
     /* Animate active line */
     if (_activeLine.alpha == 0) {
       _activeLine.scaleX = 0.01;
@@ -182,10 +182,19 @@ class PaperInput extends SpriteComponent {
     }
   }
 
+  void keyDownAction(int keyCode){
+    _inputTextField.keyDownAction(keyCode);
+  }
+
+  void inputAction(String text){
+    _inputTextField.textInputAction(text);
+    textInputAction();
+  }
+  
   /**
    * Manages behaviour of Labels
    */
-  void textInputAction(TextEvent event) {
+  void textInputAction([TextEvent event = null]) {
     if (_inputTextField.text != "") {
       if (floating) {
         /* Float the Label above the Input Field */
@@ -212,7 +221,7 @@ class PaperInput extends SpriteComponent {
   /**
    * Manages behaviour of Labels
    */
-  void keyUpAction(KeyboardEvent event) {
+  void keyUpAction([KeyboardEvent event = null]) {
     if (_inputTextField.text == "") {
       if (floating) {
         if (_currentlyFloating) {

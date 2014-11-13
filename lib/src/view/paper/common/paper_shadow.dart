@@ -4,32 +4,29 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   static const int RECTANGLE = 1;
   static const int CIRCLE = 2;
   
-  int initialBlur = 10;
-  int activeBlur = 9;
-  int initialDistance = 0;
-  int activeDistance = 8;
-
-  num shadowColor;
-  num bgColor;
-  num type;
-  bool respondToClick = true;
-  bool shadowEnabled = true;
-
-  Timer timer;
-
+  int _initialBlur = 10;
+  int _activeBlur = 9;
+  int _initialDistance = 0;
+  int _activeDistance = 8;
+  Timer _timer;
   DropShadowFilter _shadow;
-  Transition trans;
+  Transition _trans;
+
+  num type;
+  num bgColor;
+  bool shadowEnabled;
+  num shadowColor;
+  bool respondToClick;
 
   PaperShadow({this.type : RECTANGLE, this.bgColor: 0xFFFFFFFF, this.shadowEnabled : true, this.shadowColor: PaperColor.GREY_SHADOW, this.respondToClick: true}):super() {
     ignoreCallSetSize = false;
     if(shadowEnabled){
-      _shadow = new DropShadowFilter(initialDistance, 90 * PI/180, shadowColor, initialBlur, initialBlur);
+      _shadow = new DropShadowFilter(_initialDistance, 90 * PI/180, shadowColor, _initialBlur, _initialBlur);
       filters = [_shadow];
     }
     else{
       respondToClick = false;
     }
-
   }
   
   @override
@@ -48,44 +45,42 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   }
 
   
-  downAction(MouseEvent e) {
+  downAction(Event e) {
     if(!respondToClick) return;
     
-    if (timer != null) {
-      timer.cancel();
+    if (_timer != null) {
+      _timer.cancel();
     }
 
-    timer = new Timer(new Duration(milliseconds: 30), () {
+    _timer = new Timer(new Duration(milliseconds: 30), () {
       
-      trans = new Transition(initialDistance, activeDistance, .1)..onUpdate = (num val) {
+      _trans = new Transition(_initialDistance, _activeDistance, .1)..onUpdate = (num val) {
             _shadow.distance = val;
             cacheThis();
           };
 
-      stage.juggler.add(trans);
-      timer = null;
-
+      stage.juggler.add(_trans);
+      _timer = null;
     });
-
   }
 
 
   upAction(Event e) {
     if(!respondToClick) return;
     
-    if (timer != null) {
-      timer.cancel();
+    if (_timer != null) {
+      _timer.cancel();
       return;
     }
 
-    stage.juggler.remove(trans);
+    stage.juggler.remove(_trans);
 
-    trans = new Transition(activeDistance, initialDistance, .4)..onUpdate = (num val) {
+    _trans = new Transition(_activeDistance, _initialDistance, .4)..onUpdate = (num val) {
           _shadow.distance = val;
           cacheThis();
         };
 
-    stage.juggler.add(trans);
+    stage.juggler.add(_trans);
   }
 
   void cacheThis() {

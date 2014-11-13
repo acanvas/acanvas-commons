@@ -90,6 +90,9 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
     while (numChildren > 0) {
       disposeChild(getChildAt(numChildren - 1));
     }
+    if (parent != null) {
+            parent.removeChild(this);
+          }
   }
 
   void disposeChild([DisplayObject dobj = null]) {

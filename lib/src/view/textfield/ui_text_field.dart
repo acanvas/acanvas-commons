@@ -29,7 +29,7 @@ part of stagexl_commons;
 		 */
 	 UITextField(String value,TextFormat format,[bool html=true]) : super(){
 
-	   defaultTextFormat = format;
+	   defaultTextFormat = format != null ? format : new TextFormat("Helvetica, Arial", 12, 0x000000);
 
 			// Standardwerte für dynamische Textfelder setzen
 			displayAsPassword = false;

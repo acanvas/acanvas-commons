@@ -16,241 +16,230 @@
 part of stagexl_commons;
 
 
-	/**
+/**
 	 * Dispatched when the current <code>AbstractOperation</code> has completed its functionality successfully.
 	 * @eventType org.as3commons.async.operation.OperationEvent#COMPLETE OperationEvent.COMPLETE
 	 */
-	// [Event(name="operationComplete", type="org.as3commons.async.operation.event.OperationEvent")]
-	/**
+// [Event(name="operationComplete", type="org.as3commons.async.operation.event.OperationEvent")]
+/**
 	 * Dispatched when the current <code>AbstractOperation</code> encountered an error.
 	 * @eventType org.as3commons.async.operation.OperationEvent#ERROR OperationEvent.ERROR
 	 */
-	// [Event(name="operationError", type="org.as3commons.async.operation.event.OperationEvent")]
-	/**
+// [Event(name="operationError", type="org.as3commons.async.operation.event.OperationEvent")]
+/**
 	 * Dispatched when the current <code>AbstractOperation</code> timed out.
 	 * @eventType org.as3commons.async.operation.OperationEvent#TIMEOUT OperationEvent.TIMEOUT
 	 */
-	// [Event(name="operationTimeout", type="org.as3commons.async.operation.event.OperationEvent")]
-	/**
+// [Event(name="operationTimeout", type="org.as3commons.async.operation.event.OperationEvent")]
+/**
 	 * Abstract base class for <code>IOperation</code> implementations.
 	 * @author Christophe Herreman
 	 */
-	 class AbstractOperation extends EventDispatcher implements IOperation {
+class AbstractOperation extends EventDispatcher implements IOperation {
 
-		// --------------------------------------------------------------------
-		//
-		// Constructor
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Constructor
+  //
+  // --------------------------------------------------------------------
 
-		/**
+  /**
 		 * Creates a new <code>AbstractOperation</code>.
 		 *
 		 * @param timeoutInMilliseconds
 		 * @param autoStartTimeout
 		 */
-	 AbstractOperation([int timeoutInMilliseconds=0,bool autoStartTimeout=true]) {
+  AbstractOperation([int timeoutInMilliseconds = 0, bool autoStartTimeout = true]) {
 
-			m_timeout = timeoutInMilliseconds;
-			m_autoStartTimeout = autoStartTimeout;
-		}
+    m_timeout = timeoutInMilliseconds;
+    m_autoStartTimeout = autoStartTimeout;
+  }
 
-		// ----------------------------
-		// error
-		// ----------------------------
+  // ----------------------------
+  // error
+  // ----------------------------
 
-		 dynamic _error;
+  dynamic _error;
 
-		// --------------------------------------------------------------------
-		//
-		// Public Properties
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Public Properties
+  //
+  // --------------------------------------------------------------------
 
-		// ----------------------------
-		// result
-		// ----------------------------
+  // ----------------------------
+  // result
+  // ----------------------------
 
-		 dynamic _result;
+  dynamic _result;
 
-		// --------------------------------------------------------------------
-		//
-		// Private Variables
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Private Variables
+  //
+  // --------------------------------------------------------------------
 
-		 bool m_autoStartTimeout = true;
+  bool m_autoStartTimeout = true;
 
-		/** Whether or not this operation timed out. */
-		 bool m_timedOut = false;
+  /** Whether or not this operation timed out. */
+  bool m_timedOut = false;
 
-		// ----------------------------
-		// timeout
-		// ----------------------------
+  // ----------------------------
+  // timeout
+  // ----------------------------
 
-		 int m_timeout = 0;
+  int m_timeout = 0;
 
-		/** Identifier for the timeout so we can cancel it. */
-		 int m_timeoutId;
+  /** Identifier for the timeout so we can cancel it. */
+  int m_timeoutId;
 
-		// --------------------------------------------------------------------
-		//
-		// Implementation: IOperation: Methods
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Implementation: IOperation: Methods
+  //
+  // --------------------------------------------------------------------
 
-		/**
+  /**
 		 * @inheritDoc
-		 */ void addCompleteListener(Function listener,[bool useCapture=false,int priority=0,bool useWeakReference=false])
-		 {
-			addEventListener(OperationEvent.COMPLETE, listener/*, useCapture, priority, useWeakReference*/);
-		}
+		 */ void addCompleteListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+    addEventListener(OperationEvent.COMPLETE, listener/*, useCapture, priority, useWeakReference*/);
+  }
 
-		/**
+  /**
 		 * @inheritDoc
-		 */ void addErrorListener(Function listener,[bool useCapture=false,int priority=0,bool useWeakReference=false])
-		 {
-			addEventListener(OperationEvent.ERROR, listener /*, useCapture, priority, useWeakReference*/);
-		}
+		 */ void addErrorListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+    addEventListener(OperationEvent.ERROR, listener /*, useCapture, priority, useWeakReference*/);
+  }
 
-		/**
+  /**
 		 * @inheritDoc
-		 */ void addTimeoutListener(Function listener,[bool useCapture=false,int priority=0,bool useWeakReference=false])
-		 {
-			addEventListener(OperationEvent.TIMEOUT, listener /*, useCapture, priority, useWeakReference*/);
-		}
+		 */ void addTimeoutListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+    addEventListener(OperationEvent.TIMEOUT, listener /*, useCapture, priority, useWeakReference*/);
+  }
 
-		// --------------------------------------------------------------------
-		//
-		// Public Methods
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Public Methods
+  //
+  // --------------------------------------------------------------------
 
-		/**
+  /**
 		 * Convenience method for dispatching a <code>OperationEvent.COMPLETE</code> event.
 		 *
 		 * @return true if the event was dispatched; false if not
-		 */ bool dispatchCompleteEvent([dynamic result=null])
-		 {
-			if (m_timedOut) {
-				return false;
-			}
+		 */ bool dispatchCompleteEvent([dynamic result = null]) {
+    if (m_timedOut) {
+      return false;
+    }
 
-			if (result != null) {
-				this.result = result;
-			}
-			dispatchEvent(OperationEvent.createCompleteEvent(this));
-			return true;
-		}
+    if (result != null) {
+      this.result = result;
+    }
+    dispatchEvent(OperationEvent.createCompleteEvent(this));
+    return true;
+  }
 
-		/**
+  /**
 		 * Convenience method for dispatching a <code>OperationEvent.ERROR</code> event.
 		 *
 		 * @return true if the event was dispatched; false if not
-		 */ bool dispatchErrorEvent([dynamic error=null])
-		 {
-			if (m_timedOut) {
-				return false;
-			}
+		 */ bool dispatchErrorEvent([dynamic error = null]) {
+    if (m_timedOut) {
+      return false;
+    }
 
-			if (error != null) {
-				this.error = error;
-			}
-			    dispatchEvent(OperationEvent.createErrorEvent(this));
-			return true; 
-		}
+    if (error != null) {
+      this.error = error;
+    }
+    dispatchEvent(OperationEvent.createErrorEvent(this));
+    return true;
+  }
 
-		/**
+  /**
 		 * Convenience method for dispatching a <code>OperationEvent.TIMEOUT</code> event.
 		 *
 		 * @return true if the event was dispatched; false if not
-		 */ bool dispatchTimeoutEvent()
-		 {
-			    dispatchEvent(OperationEvent.createTimeoutEvent(this));
-			return true; 
-		}
+		 */ bool dispatchTimeoutEvent() {
+    dispatchEvent(OperationEvent.createTimeoutEvent(this));
+    return true;
+  }
 
-		// ----------------------------
-		// error
-		// ----------------------------
+  // ----------------------------
+  // error
+  // ----------------------------
 
-		/**
+  /**
 		 * @inheritDoc
-		 */ 
-		dynamic get error {
-			return _error;
-		}
+		 */
+  dynamic get error {
+    return _error;
+  }
 
-		/**
+  /**
 		 * Sets the error of this operation
 		 *
 		 * @param value the error of this operation
-		 */ 
-		void set error(dynamic value) {
-			if (value != error) {
-				_error = value;
-			}
-		}
+		 */
+  void set error(dynamic value) {
+    if (value != error) {
+      _error = value;
+    }
+  }
 
-		/**
+  /**
 		 * @inheritDoc
-		 */ void removeCompleteListener(Function listener,[bool useCapture=false])
-		 {
-			removeEventListener(OperationEvent.COMPLETE, listener);
-		}
+		 */ void removeCompleteListener(Function listener, [bool useCapture = false]) {
+    removeEventListener(OperationEvent.COMPLETE, listener);
+  }
 
-		/**
+  /**
 		 * @inheritDoc
-		 */ void removeErrorListener(Function listener,[bool useCapture=false])
-		 {
-			removeEventListener(OperationEvent.ERROR, listener);
-		}
+		 */ void removeErrorListener(Function listener, [bool useCapture = false]) {
+    removeEventListener(OperationEvent.ERROR, listener);
+  }
 
-		/**
+  /**
 		 * @inheritDoc
-		 */ void removeTimeoutListener(Function listener,[bool useCapture=false])
-		 {
-			removeEventListener(OperationEvent.TIMEOUT, listener);
-		}
+		 */ void removeTimeoutListener(Function listener, [bool useCapture = false]) {
+    removeEventListener(OperationEvent.TIMEOUT, listener);
+  }
 
-		// --------------------------------------------------------------------
-		//
-		// Implementation: IOperation: Properties
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Implementation: IOperation: Properties
+  //
+  // --------------------------------------------------------------------
 
-		// ----------------------------
-		// result
-		// ----------------------------
+  // ----------------------------
+  // result
+  // ----------------------------
 
-		/**
+  /**
 		 * @inheritDoc
-		 */ 
-		dynamic get result {
-			return _result;
-		}
+		 */
+  dynamic get result {
+    return _result;
+  }
 
-		/**
+  /**
 		 * Sets the result of this operation.
 		 *
 		 * @param value the result of this operation
-		 */ 
-		void set result(dynamic value) {
-			if (value != result) {
-				_result = value;
-			}
-		}
+		 */
+  void set result(dynamic value) {
+    if (value != result) {
+      _result = value;
+    }
+  }
 
 
-		// --------------------------------------------------------------------
-		//
-		// Protected Methods
-		//
-		// -------------------------------------------------------------------- 
-		void completeHandler(OperationEvent event)
-		 {
-		} void errorHandler(OperationEvent event)
-		 {
-		}
-			}
-
+  // --------------------------------------------------------------------
+  //
+  // Protected Methods
+  //
+  // --------------------------------------------------------------------
+  void completeHandler(OperationEvent event) {
+  }
+  void errorHandler(OperationEvent event) {
+  }
+}
