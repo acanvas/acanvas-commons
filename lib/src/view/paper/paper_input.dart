@@ -7,20 +7,21 @@ class PaperInput extends SpriteComponent {
   int textColor;
   int fontSize;
   bool floating;
+  bool keyboard;
   String required;
 
   /* The color to be used by active indicators (line, box, floating label) */
   int _highlightColor;
-  
+
   /* TextFields */
-  UITextFieldInput  _inputTextField;
-  UITextField       _defaultTextField;
-  UITextField       _requiredTextField;
-  
+  UITextFieldInput _inputTextField;
+  UITextField _defaultTextField;
+  UITextField _requiredTextField;
+
   /* Warning Icons for mandatory fields */
   SvgDisplayObject _requiredIconInactive;
   SvgDisplayObject _requiredIconActive;
-  
+
   /* Lines, Box */
   Shape _activeLine;
   Shape _inactiveLine;
@@ -29,20 +30,18 @@ class PaperInput extends SpriteComponent {
   /* bool to indicate if label is currently floating */
   bool _currentlyFloating = false;
 
-  PaperInput(String text, {this.fontSize: 14, this.textColor: PaperColor.BLACK, String fontName: DEFAULT_FONT, 
-                            bool multiline: false, int rows: 1, this.floating: false,
-                            this.required : ""}) : super() {
+  PaperInput(String text, {this.fontSize: 14, this.textColor: PaperColor.BLACK, String fontName: DEFAULT_FONT, bool multiline: false, int rows: 1, this.floating: false, this.required: "", this.keyboard: false}) : super() {
     ignoreCallSetSize = false;
 
     _defaultTextField = new UITextField(text, new TextFormat(fontName, fontSize, PaperColor.GREY_DARK));
     addChild(_defaultTextField);
-    
+
     /* if Mandatory Textfield */
-    if(required != ""){
+    if (required != "") {
       /* Add TextField below line explaining why it's mandatory */
       _requiredTextField = new UITextField(required, new TextFormat(fontName, fontSize - 2, PaperColor.GREY_DARK));
       addChild(_requiredTextField);
-    
+
       /* Add Warning Icons: inactive=grey, active=red */
       _requiredIconInactive = PaperIcon.grey(PaperIconSet.warning);
       _requiredIconInactive.scaleX = .8;
@@ -54,11 +53,10 @@ class PaperInput extends SpriteComponent {
       _requiredIconActive.scaleY = .8;
       addChild(_requiredIconActive);
       _requiredIconActive.alpha = 0;
-      
+
       /* set highlight color for other items to red */
       _highlightColor = PaperColor.RED;
-    }
-    else{
+    } else {
       /* set highlight color for other items to blue */
       _highlightColor = PaperColor.BLUE;
     }
@@ -79,17 +77,16 @@ class PaperInput extends SpriteComponent {
     addChild(_activeLine);
     _activeLine.alpha = 0;
 
-    if(ContextTool.TOUCH){
+    if (ContextTool.TOUCH) {
       addEventListener(TouchEvent.TOUCH_BEGIN, mouseDownAction);
-    }
-    else{
+    } else {
       addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
     }
-    
+
     addEventListener(TextEvent.TEXT_INPUT, textInputAction);
     addEventListener(KeyboardEvent.KEY_UP, keyUpAction);
   }
-  
+
 
   /*
    * Redraws and adjusts lines and textfield widths
@@ -103,9 +100,9 @@ class PaperInput extends SpriteComponent {
 
     _inactiveLine.y = _inputTextField.textHeight + 5;
     _activeLine.y = _inputTextField.textHeight + 5;
-    
-    if(required != ""){
-      _requiredTextField.y= _inactiveLine.y + 5; 
+
+    if (required != "") {
+      _requiredTextField.y = _inactiveLine.y + 5;
       _requiredIconActive.x = _requiredIconInactive.x = widthAsSet - 24;
       _requiredIconActive.y = _requiredIconInactive.y = _requiredTextField.y;
     }
@@ -138,22 +135,29 @@ class PaperInput extends SpriteComponent {
       tw.onComplete = () => _cursorBox.alpha = 0;
       stage.juggler.add(tw);
     }
-    
+
     /* If the label is currently floating, color it blue or red again */
-    if(_currentlyFloating){
+    if (_currentlyFloating) {
       _defaultTextField.color = _highlightColor;
     }
-    
+
     /* If this textfield is mandatory, make explanatory text red */
-    if(required != ""){
+    if (required != "") {
       _requiredTextField.color = PaperColor.RED;
       stage.juggler.tween(_requiredIconActive, .1).animate..alpha.to(1);
     }
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
     stage.focus = _inputTextField;
-    /* Add a listener to Stage to manage intention to Focus out */
-    stage.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+
+   if (keyboard) {
+      _createKeyboard();
+    }
+   else{
+     /* Add a listener to Stage to manage intention to Focus out */
+     stage.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+   }
+
   }
 
   /**
@@ -163,34 +167,38 @@ class PaperInput extends SpriteComponent {
     if (event.target == _inputTextField) {
       return;
     }
-    if(event.target is !UITextFieldInput){
+    if (event.target is! UITextFieldInput) {
       stage.focus = null;
     }
     stage.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     /* Make active blue line invisible */
     stage.juggler.tween(_activeLine, .1).animate..alpha.to(0);
-   
+
     /* Make floating label grey again */
-    if(_currentlyFloating){
+    if (_currentlyFloating) {
       _defaultTextField.color = PaperColor.GREY_DARK;
     }
 
     /* Make explanatory text grey again */
-    if(required != ""){
+    if (required != "") {
       _requiredTextField.color = PaperColor.GREY_DARK;
       stage.juggler.tween(_requiredIconActive, .1).animate..alpha.to(0);
     }
+    
+    if(keyboard){
+      _destroyKeyboard();
+    }
   }
 
-  void keyDownAction(int keyCode){
+  void keyDownAction(int keyCode) {
     _inputTextField.keyDownAction(keyCode);
   }
 
-  void inputAction(String text){
+  void inputAction(String text) {
     _inputTextField.textInputAction(text);
     textInputAction();
   }
-  
+
   /**
    * Manages behaviour of Labels
    */
@@ -201,12 +209,12 @@ class PaperInput extends SpriteComponent {
         if (!_currentlyFloating) {
           _currentlyFloating = true;
           Transition tr = new Transition(0, 1, .2)
-            ..onUpdate = (num val) {
+              ..onUpdate = (num val) {
                 _defaultTextField.y = val * -(fontSize + 3);
                 _defaultTextField.scaleX = 1 - val / 4;
                 _defaultTextField.scaleY = 1 - val / 4;
               }
-            ..onComplete = () {
+              ..onComplete = () {
                 _defaultTextField.color = _highlightColor;
               };
           stage.juggler.add(tr);
@@ -228,12 +236,12 @@ class PaperInput extends SpriteComponent {
           /* Animate the Label back to original position */
           _currentlyFloating = false;
           Transition tr = new Transition(1, 0, .2)
-             ..onUpdate = (num val) {
-                  _defaultTextField.y = val * -(fontSize + 3);
-                  _defaultTextField.scaleX = 1 - val / 4;
-                  _defaultTextField.scaleY = 1 - val / 4;
+              ..onUpdate = (num val) {
+                _defaultTextField.y = val * -(fontSize + 3);
+                _defaultTextField.scaleX = 1 - val / 4;
+                _defaultTextField.scaleY = 1 - val / 4;
               }
-            ..onComplete = () {
+              ..onComplete = () {
                 _defaultTextField.color = PaperColor.GREY_DARK;
               };
           stage.juggler.add(tr);
@@ -266,6 +274,26 @@ class PaperInput extends SpriteComponent {
     if (ContextTool.WEBGL) {
       box.applyCache(0, 0, 20, _inputTextField.textHeight.ceil());
     }
+  }
+  
+  SoftKeyboard _softKeyboard;
+  void _createKeyboard() {
+    Layout layout = new Qwerty();
+    _softKeyboard = new SoftKeyboard([layout]);
+    _softKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
+      inputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
+    });
+    _softKeyboard.addEventListener(KeyEvent.KEY_UP, (KeyEvent e) {
+      keyDownAction(e.charCode);
+    });
+    parent.parent.addChild(_softKeyboard);
+
+    _softKeyboard.setSize((parent.parent as SpriteComponent).widthAsSet, 400);
+    _softKeyboard.y = (parent.parent as SpriteComponent).heightAsSet - _softKeyboard.heightAsSet;
+  }
+  
+  void _destroyKeyboard(){
+    disposeChild(_softKeyboard);
   }
 
 

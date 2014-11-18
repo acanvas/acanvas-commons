@@ -165,3 +165,27 @@ part 'src/view/paper/paper_tabs.dart';
 part 'src/view/paper/paper_toast.dart';
 part 'src/view/paper/paper_toggle_button.dart';
 
+//softkeyboard
+part 'src/softkeyboard/char_code.dart';
+part 'src/softkeyboard/key.dart';
+part 'src/softkeyboard/key_event.dart';
+part 'src/softkeyboard/key_row.dart';
+part 'src/softkeyboard/label.dart';
+part 'src/softkeyboard/callout.dart';
+part 'src/softkeyboard/layouts/azerty.dart';
+part 'src/softkeyboard/layouts/azerty_fr.dart';
+part 'src/softkeyboard/layouts/azerty_switch.dart';
+part 'src/softkeyboard/layouts/azerty_switch_fr.dart';
+part 'src/softkeyboard/layouts/email_numbers_symbols_switch.dart';
+part 'src/softkeyboard/layouts/email_switch.dart';
+part 'src/softkeyboard/layouts/layout.dart';
+part 'src/softkeyboard/layouts/numbers_symbols.dart';
+part 'src/softkeyboard/layouts/numbers_symbols_switch.dart';
+part 'src/softkeyboard/layouts/num_pad.dart';
+part 'src/softkeyboard/layouts/num_pad_operators.dart';
+part 'src/softkeyboard/layouts/qwerty.dart';
+part 'src/softkeyboard/layouts/qwerty_fr.dart';
+part 'src/softkeyboard/layouts/qwerty_switch.dart';
+part 'src/softkeyboard/layouts/qwerty_switch_fr.dart';
+part 'src/softkeyboard/soft_keyboard.dart';
+

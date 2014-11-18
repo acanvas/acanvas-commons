@@ -22,13 +22,6 @@ class ComponentPager extends ComponentWithDataProxy {
 
   bool disableClick = false;
 
-
-  ClassMirror _listItemClass;
-  ClassMirror get listItemClass => _listItemClass;
-  void set listItemClass(ClassMirror listItemClass) {
-    _listItemClass = listItemClass;
-  }
-
   int _listItemWidth = 0;
   int get listItemWidth => _listItemWidth;
   void set listItemWidth(int listItemWidth) {
@@ -80,7 +73,7 @@ class ComponentPager extends ComponentWithDataProxy {
 
     super.enabled = value;
   }
-  void setData(dynamic data) {
+  void setData(List data) {
 
     disableClick = false;
     this.data = data;
@@ -91,15 +84,15 @@ class ComponentPager extends ComponentWithDataProxy {
     }
 
     Multitouch.inputMode = MultitouchInputMode.GESTURE;
-   // holder.addEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
+    // holder.addEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
   }
   void _unregisterGestures() {
     if (!Multitouch.supportsGestureEvents || holder == null) {
       return;
     }
 
-		Multitouch.inputMode = null;
-   // holder.removeEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
+    Multitouch.inputMode = null;
+    // holder.removeEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
   }
 
   /*
@@ -114,8 +107,8 @@ class ComponentPager extends ComponentWithDataProxy {
     }
   }*/
 
-  void setFilterVOAndLoad(Object vo) {
-    _proxy.dataFilterVO = vo;
+  void setFilterVOAndLoad(IXLVO vo) {
+    _proxy.dataRetrieveCommandVO = vo;
     resetAndLoad();
   }
   void resetAndLoad() {
@@ -156,25 +149,23 @@ class ComponentPager extends ComponentWithDataProxy {
     _proxy.requestChunk(setData, _getChunkIndex(chunksPlaced), chunkSize);
   }
   void _updateControls() {
-    //TODO this is a cloning trick not working in Dart :(
-
+    //clone chunk count list
     List<int> chunks = [];
     chunksPlaced.forEach((int c) => chunks.add(c));
 
-    if(chunks.length == 0)
-    {
+    if (chunks.length == 0) {
       return;
     }
 
     //yes, calling pop twice is correct
-    
-    dynamic checkNum = chunks.removeLast();
-    if(chunks.length> 1){
+
+    int checkNum = chunks.removeLast();
+    if (chunks.length > 1) {
       checkNum = chunks.removeLast();
     }
     hasPrev = 0;
 
-    if (checkNum is int && chunks.length > 1) {
+    if (chunks.length > 0) {
       hasPrev = _proxy.hasChunk(_getChunkIndex(chunks), chunkSize);
     }
     hasNext = _proxy.hasChunk(_getChunkIndex(chunksPlaced), chunkSize) > 0;

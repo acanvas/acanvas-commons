@@ -9,8 +9,8 @@ part of stagexl_commons;
 		void set dataCache(List dataCache);
 		List get dataCache;
 
-		void set dataFilterVO(IXLVO dataFilterVO);
-		IXLVO get dataFilterVO;
+		void set dataRetrieveCommandVO(IXLVO dataRetrieveCommandVO);
+		IXLVO get dataRetrieveCommandVO;
 		
 		void set dataTotalSize(int dataTotalSize);
 		int get dataTotalSize;
