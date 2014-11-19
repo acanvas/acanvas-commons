@@ -163,7 +163,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
     _ignoreCallDestroy = enabled;
   }
 
-
+  XLSignal get submitEvent => _submitEvent;
   void set submitEvent(XLSignal submitEvent) {
     _submitEvent = submitEvent;
   }

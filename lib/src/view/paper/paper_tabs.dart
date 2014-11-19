@@ -49,8 +49,12 @@ class PaperTabs extends SpriteComponent {
     btn.submitCallbackParams = [btn, tabBox.numChildren];
   }
 
-  void activateTabById(int id){
-    _onTabClick(tabBox.getChildAt(id) as Button, id);
+  void activateTabByUrl(String url){
+    for(int i=0;i<tabBox.numChildren;i++){
+      if((tabBox.getChildAt(i) as Button).submitEvent.data == url){
+        _onTabClick(tabBox.getChildAt(i) as Button, i);
+      }
+    }
   }
 
   void _onTabClick(Button btn, int index){
@@ -86,6 +90,7 @@ class PaperTabs extends SpriteComponent {
 
       GraphicsUtil.line((tabBox.getChildAt(_activeButtonIndex) as Button).widthAsSet, 0, strength: 2, sprite: _slideBar, color : highlightColor);
       
+      _slideBar.x = tabBox.getChildAt(_activeButtonIndex).x;
       _slideBar.y = heightAsSet - 2;
     }
     else{
