@@ -1,11 +1,7 @@
 part of stagexl_commons;
 
-
-
-/**
-	 * Copyright 2009 Jung von Matt/Neckar
-	 */
 class ComponentImageLoader extends SpriteComponent {
+  Sprite _holder;
   Bitmap _img;
   String _href;
 
@@ -18,6 +14,9 @@ class ComponentImageLoader extends SpriteComponent {
       onComplete();
       return;
     }
+    
+    _holder = new Sprite();
+    addChild(_holder);
 
     BitmapData.load(_href, new BitmapDataLoadOptions(corsEnabled: true)).then(onComplete).catchError(onIoError);
 
@@ -48,9 +47,9 @@ class ComponentImageLoader extends SpriteComponent {
     _img.y = (_heightAsSet - _img.height) / 2;
 
 
-    Mask mask = new Mask.rectangle(_img.x.abs() / scale, 0, _widthAsSet / scale, _heightAsSet / scale);
-    _img.mask = mask;
-    addChild(_img);
+    Mask mask = new Mask.rectangle(0, 0, _widthAsSet, _heightAsSet);
+    _holder.mask = mask;
+    _holder.addChild(_img);
 
     dispatchEvent(new Event(Event.COMPLETE, false));
   }

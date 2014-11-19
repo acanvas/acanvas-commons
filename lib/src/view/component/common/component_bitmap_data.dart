@@ -1,13 +1,5 @@
 part of stagexl_commons;
 
-
-
-
-/**
-	 * Copyright (2010 as c), Jung von Matt/Neckar
-	 * All rights reserved.
-	 */
-
 class ComponentBitmapData extends SpriteComponent {
   Rectangle _innerRect;
   BitmapData _bitmapDataSource;

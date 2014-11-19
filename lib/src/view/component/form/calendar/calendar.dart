@@ -1,14 +1,5 @@
 part of stagexl_commons;
 
-
-
-/**
-	 * Copyright (2012 as c), Jung von Matt/Neckar
-	 * All rights reserved.
-	 *
-	 * @author danielhuebschmann
-	 * @since 16.01.2012 18:10:16
-	 */
 class Calendar extends SpriteComponent {
 
   num _firstDay = 0; //1=Sunday, 0=Monday

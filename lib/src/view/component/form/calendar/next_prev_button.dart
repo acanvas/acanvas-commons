@@ -1,13 +1,5 @@
 part of stagexl_commons;
 
-
-/**
-	 * Copyright (2012 as c), Jung von Matt/Neckar
-	 * All rights reserved.
-	 *
-	 * @author danielhuebschmann
-	 * @since 16.01.2012 19:02:44
-	 */
 class NextPrevButton extends Button {
 
   UITextField _labelTF;
