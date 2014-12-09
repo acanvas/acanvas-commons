@@ -71,7 +71,7 @@ class PaperButton extends Button {
 
   @override void redraw() {
 
-    if (widthAsSet > 30) {
+    if (widthAsSet > 0) {
       _label.x = (widthAsSet / 2 - _label.textWidth / 2).round() - 3;
     } else {
       widthAsSet = _label.textWidth + 4 * SPACER;
