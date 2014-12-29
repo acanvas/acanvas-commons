@@ -5,9 +5,9 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   static const int CIRCLE = 2;
   
   int _initialBlur = 10;
-  int _activeBlur = 9;
-  int _initialDistance = 0;
-  int _activeDistance = 8;
+  int _activeBlur = 16;
+  int _initialDistance = 2;
+  int _activeDistance = 6;
   Timer _timer;
   DropShadowFilter _shadow;
   Transition _trans;
@@ -45,7 +45,7 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   }
 
   
-  downAction(Event e) {
+  downAction([Event e = null]) {
     if(!respondToClick) return;
     
     if (_timer != null) {
@@ -54,18 +54,18 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
 
     _timer = new Timer(new Duration(milliseconds: 30), () {
       
-      _trans = new Transition(_initialDistance, _activeDistance, .1)..onUpdate = (num val) {
+      _trans = new Transition(_initialDistance, _activeDistance, .15)..onUpdate = (num val) {
             _shadow.distance = val;
             cacheThis();
           };
 
-      stage.juggler.add(_trans);
+      ContextTool.STAGE.juggler.add(_trans);
       _timer = null;
     });
   }
 
 
-  upAction(Event e) {
+  upAction([Event e = null]) {
     if(!respondToClick) return;
     
     if (_timer != null) {
@@ -73,19 +73,19 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
       return;
     }
 
-    stage.juggler.remove(_trans);
+    ContextTool.STAGE.juggler.remove(_trans);
 
-    _trans = new Transition(_activeDistance, _initialDistance, .4)..onUpdate = (num val) {
+    _trans = new Transition(_activeDistance, _initialDistance, .15)..onUpdate = (num val) {
           _shadow.distance = val;
           cacheThis();
         };
 
-    stage.juggler.add(_trans);
+    ContextTool.STAGE.juggler.add(_trans);
   }
 
   void cacheThis() {
     if (ContextTool.WEBGL) {
-      applyCache(-30, -1, (widthAsSet + 60).round(), (heightAsSet + 30).round());
+      applyCache(-30, -5, (widthAsSet + 60).round(), (heightAsSet + 34).round());
     }
   }
 }

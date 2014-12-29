@@ -7,7 +7,20 @@ class ComponentBitmapData extends SpriteComponent {
   Bitmap _targetBitmap;
   ComponentBitmapData(BitmapData bitmapData, [Rectangle innerRect = null]) : super() {
     _bitmapDataSource = bitmapData;
+    addChild( new Bitmap(_bitmapDataSource) );
     _innerRect = innerRect;
+  }
+  
+  void scaleToWidth(num w) {
+    num scale;
+    scale = w / _bitmapDataSource.width;
+    scaleX = scaleY = scale;
+  }
+
+  void scaleToHeight(num h) {
+    num scale;
+    scale = h / _bitmapDataSource.height;
+    scaleX = scaleY = scale;
   }
 
   @override
@@ -19,6 +32,9 @@ class ComponentBitmapData extends SpriteComponent {
       scale = _widthAsSet / _bitmapDataSource.width;
     }
     
+    scaleX = scaleY = scale;
+    
+    /*
     int targetWidth = (_bitmapDataSource.width*scale).ceil(); 
     int targetHeight = (_bitmapDataSource.height*scale).ceil(); 
 
@@ -34,7 +50,7 @@ class ComponentBitmapData extends SpriteComponent {
     }
     _targetBitmap = new Bitmap(_bitmapDataTarget);
     addChild(_targetBitmap);
-
+    */
     super.redraw();
   }
 

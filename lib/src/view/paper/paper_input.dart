@@ -117,13 +117,13 @@ class PaperInput extends SpriteComponent {
       _activeLine.scaleX = 0.01;
       _activeLine.alpha = 1;
       _activeLine.x = widthAsSet / 2;
-      stage.juggler.tween(_activeLine, .2).animate
+      ContextTool.STAGE.juggler.tween(_activeLine, .2).animate
           ..x.to(0)
           ..scaleX.to(1);
     }
 
     /* Animate cursor box */
-    if (stage.focus != _inputTextField) {
+    if (ContextTool.STAGE.focus != _inputTextField) {
       _cursorBox.scaleX = 1;
       _cursorBox.x = 80;
       _cursorBox.alpha = 1;
@@ -133,7 +133,7 @@ class PaperInput extends SpriteComponent {
           ..x.to(0)
           ..scaleX.to(0.2);
       tw.onComplete = () => _cursorBox.alpha = 0;
-      stage.juggler.add(tw);
+      ContextTool.STAGE.juggler.add(tw);
     }
 
     /* If the label is currently floating, color it blue or red again */
@@ -144,18 +144,18 @@ class PaperInput extends SpriteComponent {
     /* If this textfield is mandatory, make explanatory text red */
     if (required != "") {
       _requiredTextField.color = PaperColor.RED;
-      stage.juggler.tween(_requiredIconActive, .1).animate..alpha.to(1);
+      ContextTool.STAGE.juggler.tween(_requiredIconActive, .1).animate..alpha.to(1);
     }
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
-    stage.focus = _inputTextField;
+    ContextTool.STAGE.focus = _inputTextField;
 
    if (keyboard) {
       _createKeyboard();
     }
    else{
      /* Add a listener to Stage to manage intention to Focus out */
-     stage.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+     ContextTool.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
    }
 
   }
@@ -168,11 +168,11 @@ class PaperInput extends SpriteComponent {
       return;
     }
     if (event.target is! UITextFieldInput) {
-      stage.focus = null;
+      ContextTool.STAGE.focus = null;
     }
-    stage.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+    ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     /* Make active blue line invisible */
-    stage.juggler.tween(_activeLine, .1).animate..alpha.to(0);
+    ContextTool.STAGE.juggler.tween(_activeLine, .1).animate..alpha.to(0);
 
     /* Make floating label grey again */
     if (_currentlyFloating) {
@@ -182,7 +182,7 @@ class PaperInput extends SpriteComponent {
     /* Make explanatory text grey again */
     if (required != "") {
       _requiredTextField.color = PaperColor.GREY_DARK;
-      stage.juggler.tween(_requiredIconActive, .1).animate..alpha.to(0);
+      ContextTool.STAGE.juggler.tween(_requiredIconActive, .1).animate..alpha.to(0);
     }
     
     if(keyboard){
@@ -217,7 +217,7 @@ class PaperInput extends SpriteComponent {
               ..onComplete = () {
                 _defaultTextField.color = _highlightColor;
               };
-          stage.juggler.add(tr);
+          ContextTool.STAGE.juggler.add(tr);
         }
       } else {
         _defaultTextField.alpha = 0;
@@ -244,7 +244,7 @@ class PaperInput extends SpriteComponent {
               ..onComplete = () {
                 _defaultTextField.color = PaperColor.GREY_DARK;
               };
-          stage.juggler.add(tr);
+          ContextTool.STAGE.juggler.add(tr);
         }
       } else {
         _defaultTextField.alpha = 1;

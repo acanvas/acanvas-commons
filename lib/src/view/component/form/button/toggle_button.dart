@@ -9,9 +9,9 @@ class ToggleButton extends Button {
   }
 
   @override
-  void onClick([MouseEvent event = null]) {
+  void upAction([MouseEvent event = null]) {
     isToggled = !_isToggled;
-    super.onClick(event);
+    super.upAction(event);
   }
 
   bool get isToggled {

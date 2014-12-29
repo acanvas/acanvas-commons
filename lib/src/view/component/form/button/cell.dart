@@ -31,7 +31,7 @@ class Cell extends Button {
       _isSelected = true;
       redraw();
       submitCallbackParams = [this];
-      onClick();
+      upAction();
     }
   }
 

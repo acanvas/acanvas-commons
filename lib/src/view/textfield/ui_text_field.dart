@@ -31,6 +31,15 @@ class UITextField extends TextField {
     text = value;
 
   }
+  
+  void keyDownAction(int keyCode) {
+    dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN, false, keyCode, KeyLocation.STANDARD, false, false, false));
+   }
+
+   void textInputAction(String text) {
+     dispatchEvent(new TextEvent(TextEvent.TEXT_INPUT, false, text));
+   }
+  
   int get color {
     return (defaultTextFormat.color);
   }

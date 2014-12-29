@@ -33,9 +33,10 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
     }
   }
 
-  downAction(Event e) {
-    num localX = e is MouseEvent ? (e as MouseEvent).localX : (e as TouchEvent).localX;
-    num localY = e is MouseEvent ? (e as MouseEvent).localY : (e as TouchEvent).localY;
+  @override
+  downAction([Event e = null]) {
+    num localX = e == null ? widthAsSet/2 : e is MouseEvent ? e.localX : (e as TouchEvent).localX;
+    num localY = e == null ? heightAsSet/2 : e is MouseEvent ? e.localY : (e as TouchEvent).localY;
     
     num touchX = localX > widthAsSet ? widthAsSet : localX;// - rect.left;
     num touchY = localY > heightAsSet ? heightAsSet : localY;// - rect.top;
@@ -66,17 +67,18 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
       tw.animate.y.to(height / 2);
     }
     
-    stage.juggler.add(tw);
+    ContextTool.STAGE.juggler.add(tw);
 
   }
 
-  upAction(Event e) {
+  @override
+  upAction([Event e = null]) {
 
     for (int i = 0; i < numChildren; i++) {
      DisplayObject dobj = getChildAt(i);
 
-      stage.juggler.removeTweens(dobj);
-      stage.juggler.tween(dobj, velocity)
+      ContextTool.STAGE.juggler.removeTweens(dobj);
+      ContextTool.STAGE.juggler.tween(dobj, velocity)
       ..animate.alpha.to(0)
       ..animate.scaleX.to(1.0)
       ..animate.scaleY.to(1.0)

@@ -83,6 +83,7 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
   @override
   void appear([num duration = 0.5]) {
     //_log.debug("appear: " + duration + " seconds");
+    super.appear(duration);
     dispatchEvent(new ManagedSpriteComponentEvent(ManagedSpriteComponentEvent.APPEAR_START));
   }
 
@@ -96,6 +97,7 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
   @override
   void disappear([num duration = 0.5, bool autoDestroy = false]) {
     // _log.debug("disappear: " + duration + " seconds. Autodestroy: " + autoDestroy);
+    super.disappear(duration);
     if (autoDestroy) addEventListener(ManagedSpriteComponentEvent.DISAPPEAR_COMPLETE, _autoDestroy);
     dispatchEvent(new ManagedSpriteComponentEvent(ManagedSpriteComponentEvent.DISAPPEAR_START));
   }

@@ -18,7 +18,7 @@ class FontTool {
 
   static void loadFonts(Function callback) {
     var completer = new Completer();
-    var googleFontFamilies = ['Roboto'];
+    var googleFontFamilies = _singleton._fonts;
 
     js.JsObject webFont = js.context["WebFont"];
     js.JsObject webFontConfig = new js.JsObject.jsify({

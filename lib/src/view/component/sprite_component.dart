@@ -38,7 +38,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
     if (w != _widthAsSet || h != _heightAsSet) {
       if (w > 0) _widthAsSet = w;
       if (h > 0) _heightAsSet = h;
-      
+
 
       DisplayObject child;
       for (int i = 0; i < numChildren; i++) {
@@ -91,8 +91,8 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
       disposeChild(getChildAt(numChildren - 1));
     }
     if (parent != null) {
-            parent.removeChild(this);
-          }
+      parent.removeChild(this);
+    }
   }
 
   void disposeChild([DisplayObject dobj = null]) {
@@ -100,17 +100,17 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
 
       if (dobj is ISpriteComponent && !(dobj as ISpriteComponent).ignoreCallDestroy && dobj != this) {
         (dobj as ISpriteComponent).destroy();
-       // dobj = null;
-       // return;
+        // dobj = null;
+        // return;
       }
       if (dobj.parent != null) {
         dobj.parent.removeChild(dobj);
       }
       if (dobj is Bitmap) {
-        dobj.bitmapData.clear();
+        //dobj.bitmapData.clear();
       }
       if (dobj is BitmapData) {
-        (dobj as BitmapData).clear();
+        //(dobj as BitmapData).clear();
       }
       if (dobj is Shape) {
         dobj.graphics.clear();
@@ -142,10 +142,10 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
 
   @override
   void set enabled(bool enabled) {
-    if(_enabled == enabled){
+    if (_enabled == enabled) {
       return;
     }
-    
+
     _enabled = enabled;
 
     DisplayObject child;
@@ -182,7 +182,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
 
   @override
   void set ignoreCallSetSize(bool enabled) {
-   _ignoreCallSetSize = enabled;
+    _ignoreCallSetSize = enabled;
   }
 
   @override
@@ -190,7 +190,7 @@ class SpriteComponent extends Sprite implements ISpriteComponent {
 
   @override
   void set ignoreSetEnabled(bool enabled) {
-    _ignoreSetEnabled  = enabled;
+    _ignoreSetEnabled = enabled;
   }
 
   @override

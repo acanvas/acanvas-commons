@@ -35,21 +35,23 @@ class ComponentList extends ComponentScrollable {
 
   @override
   void redraw() {
-    int i;
+    int i = 0;
     int n = cellContainer.numChildren;
     Cell cell;
-    
+
     for (i = 0; i < n; i++) {
       cell = (cellContainer.getChildAt(i) as Cell);
       cell.setSize(widthAsSet, heightAsSet);
     }
-    
+
     super.redraw();
     _updateCells();
   }
 
   void setData(List dta) {
     data = dta;
+    cellContainer.destroy();
+    addChildAt(cellContainer, 0);
     init();
   }
 
@@ -58,7 +60,8 @@ class ComponentList extends ComponentScrollable {
       return;
     }
     _initialized = true;
-
+    _scrollPos = 0;
+    _oldVScrollbarValue = 0;
     _totalViewSize = 0;
     _cellSelectedLookup = new Map();
     _cellsLoaded = 0;
@@ -126,9 +129,15 @@ class ComponentList extends ComponentScrollable {
 
   @override
   void destroy() {
-
     stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
     stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
+
+    touchEnabled = false;
+    bounce = false;
+    mouseWheelEnabled = false;
+    keyboardEnabled = false;
+    doubleClickEnabled = false;
+    doubleClickToZoom = false;
 
     super.destroy();
   }
@@ -418,7 +427,7 @@ class ComponentList extends ComponentScrollable {
   void _onCellMouseUp(MouseEvent event) {
     if (!_cellMoved && _mouseDownCell != null) {
       _mouseDownCell.select();
-      if(_submitCallback != null) {
+      if (_submitCallback != null) {
         _submitCallback.call(_mouseDownCell);
       }
     }

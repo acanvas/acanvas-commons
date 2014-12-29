@@ -59,7 +59,7 @@ class PaperTabs extends SpriteComponent {
 
   void _onTabClick(Button btn, int index){
     _activeButtonIndex = index;
-    stage.juggler.tween(_slideBar, .3, TransitionFunction.easeOutCubic).animate
+    ContextTool.STAGE.juggler.tween(_slideBar, .3, TransitionFunction.easeOutCubic).animate
       ..x.to(btn.x);
     _slideBar.width = btn.widthAsSet;
   }

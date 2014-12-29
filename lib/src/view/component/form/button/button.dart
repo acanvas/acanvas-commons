@@ -26,28 +26,28 @@ class Button extends SpriteComponent {
 
     if (value == true) {
       if (ContextTool.TOUCH) {
-        addEventListener(TouchEvent.TOUCH_END, onClick);
-        addEventListener(TouchEvent.TOUCH_BEGIN, _onMouseDown);
+        addEventListener(TouchEvent.TOUCH_END, upAction);
+        addEventListener(TouchEvent.TOUCH_BEGIN, downAction);
         addEventListener(TouchEvent.TOUCH_ROLL_OVER, onRollOver);
         addEventListener(TouchEvent.TOUCH_ROLL_OUT, onRollOut);
       }
       else{
-        addEventListener(MouseEvent.MOUSE_UP, onClick);
-        addEventListener(MouseEvent.MOUSE_DOWN, _onMouseDown);
+        addEventListener(MouseEvent.MOUSE_UP, upAction);
+        addEventListener(MouseEvent.MOUSE_DOWN, downAction);
         addEventListener(MouseEvent.ROLL_OVER, onRollOver);
         addEventListener(MouseEvent.ROLL_OUT, onRollOut);
       }
       onRollOut();
     } else {
       if (ContextTool.TOUCH) {
-        removeEventListener(TouchEvent.TOUCH_END, onClick);
-        removeEventListener(TouchEvent.TOUCH_BEGIN, _onMouseDown);
+        removeEventListener(TouchEvent.TOUCH_END, upAction);
+        removeEventListener(TouchEvent.TOUCH_BEGIN, downAction);
         removeEventListener(TouchEvent.TOUCH_ROLL_OVER, onRollOver);
         removeEventListener(TouchEvent.TOUCH_ROLL_OUT, onRollOut);
       }
       else{
-        removeEventListener(MouseEvent.MOUSE_UP, onClick);
-        removeEventListener(MouseEvent.MOUSE_DOWN, _onMouseDown);
+        removeEventListener(MouseEvent.MOUSE_UP, upAction);
+        removeEventListener(MouseEvent.MOUSE_DOWN, downAction);
         removeEventListener(MouseEvent.ROLL_OVER, onRollOver);
         removeEventListener(MouseEvent.ROLL_OUT, onRollOut);
       }
@@ -57,7 +57,7 @@ class Button extends SpriteComponent {
   void setLabel(String label) {
     _labelText = label;
   }
-  void _onMouseDown([Event event = null]) {
+  void downAction([Event event = null]) {
     DisplayObject child;
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
@@ -66,7 +66,7 @@ class Button extends SpriteComponent {
       }
     }
   }
-  void onClick([Event event = null]) {
+  void upAction([Event event = null]) {
     DisplayObject child;
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);

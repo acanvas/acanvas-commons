@@ -83,13 +83,13 @@ class PaperCheckbox extends ToggleButton {
       _icon.scaleX = _icon.scaleY = .3;
       _icon.visible = true;
 
-      stage.juggler.tween(_box, .15).animate
+      ContextTool.STAGE.juggler.tween(_box, .15).animate
         ..alpha.to(0)
         ..rotation.to(.8)
         ..scaleX.to(.3)
         ..scaleY.to(.3);
       
-      stage.juggler.tween(_icon, .1)
+      ContextTool.STAGE.juggler.tween(_icon, .1)
         ..animate.scaleX.to(1)
         ..animate.scaleY.to(1)
         ..delay = .1;
@@ -106,9 +106,9 @@ class PaperCheckbox extends ToggleButton {
       tw.onComplete = () { 
         _icon.visible = false;
         };
-      stage.juggler.add(tw);
+      ContextTool.STAGE.juggler.add(tw);
 
-      stage.juggler.tween(_box, .1)
+      ContextTool.STAGE.juggler.tween(_box, .1)
               ..animate.alpha.to(1)
               ..animate.rotation.to(0)
               ..animate.scaleX.to(1)

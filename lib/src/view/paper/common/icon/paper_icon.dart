@@ -28,6 +28,19 @@ class PaperIcon {
         </g>
       </svg>""";
 
+  static final String  greenSVG = """
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+        <filter id="matrix-red">
+          <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0.0588 
+                                                                  0 1 0 0 0.6156
+                                                                  0 0 1 0 0.3450
+                                                                  0 0 0 1 0"/>
+        </filter>
+        <g filter="url(#matrix-red)">        
+          #R#
+        </g>
+      </svg>""";
+
   static final String  invertedSVG = """
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
         <filter id="matrix-invert">
@@ -60,6 +73,10 @@ class PaperIcon {
   }
   static SvgDisplayObject red(String rawSVG){
     String svg = redSVG.replaceFirst(new RegExp(r'#R#'), rawSVG);
+    return new SvgDisplayObject(svg);
+  }
+  static SvgDisplayObject green(String rawSVG){
+    String svg = greenSVG.replaceFirst(new RegExp(r'#R#'), rawSVG);
     return new SvgDisplayObject(svg);
   }
   
