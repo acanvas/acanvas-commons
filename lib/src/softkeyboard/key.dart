@@ -268,7 +268,7 @@ class Key extends ManagedSpriteComponent {
       addChild(_icon);
     }
     addChild(_label);
-    //if (addChild as variants)(_variantsContainer);
+    //if (variants != null) addChild(_variantsContainer);
 
     // Now that everything is ready, listen to touch events
     if(ContextTool.TOUCH){
@@ -338,9 +338,7 @@ class Key extends ManagedSpriteComponent {
 
 //			if (_skin) {
 
-
-    _skin.width = widthAsSet;
-    _skin.height = heightAsSet;
+    GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, color: PaperColor.BLUE, sprite: _skin);
 //			} else {
 //				setSizeInternal(44, 52, false);
 //				_skin.width = 44;
@@ -349,13 +347,13 @@ class Key extends ManagedSpriteComponent {
 
     //_label.validate();
     _label.width = _label.textWidth;
-    _label.x = _skin.width / 2 - _label.width / 2;
-    _label.y = _skin.height / 2 - _label.height / 2;
+    _label.x = widthAsSet / 2 - _label.width / 2;
+    _label.y = heightAsSet / 2 - _label.height / 2;
 
     // If an icon has been defined, center it.
     if (_icon != null) {
-      _icon.x = width / 2 - _icon.width / 2;
-      _icon.y = height / 2 - _icon.height / 2;
+      _icon.x = widthAsSet / 2 - _icon.width / 2;
+      _icon.y = heightAsSet / 2 - _icon.height / 2;
     }
 
   }
@@ -395,17 +393,11 @@ class Key extends ManagedSpriteComponent {
   }
 
   /** @ */
-  void _onTouch(Event e) {
-
-    num localX;
-    num localY;
-    if(e is TouchEvent){
-      localX = e.stageX;
-      localY = e.stageY;
-    } else if(e is MouseEvent){
-      localX = e.stageX;
-      localY = e.stageY;
-    }
+  void _onTouch(InputEvent e) {
+    e.stopImmediatePropagation();
+    
+    num localX = e.stageX;
+    num localY = e.stageY;
     
     // Check if the event is a MOUSE_OUT (which, in Starling, is a TouchEvent with no touch
     // object attached)
@@ -419,7 +411,6 @@ class Key extends ManagedSpriteComponent {
 
     // Positions of the original touch and variants touch (if any)
     Point touchPosInOriginalKeySpace = new Point(localX, localY);
-    Point touchPosInAltKeySpace;
 
     if (e.type == TouchEvent.TOUCH_BEGIN || e.type == MouseEvent.MOUSE_DOWN) {
       changeState(DOWN_STATE);
@@ -462,10 +453,7 @@ class Key extends ManagedSpriteComponent {
         // Loop through all alternate keys to see if we are above one
         for (Key altKey in variants) {
 
-          //TODO hack
-          touchPosInAltKeySpace = transformationMatrixTo(altKey).transformPoint(touchPosInOriginalKeySpace);
-
-          if (altKey.hitTestPoint(touchPosInAltKeySpace.x, touchPosInAltKeySpace.y, false)) {
+          if (altKey.hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, false)) {
             altKey.changeState(DOWN_STATE);
           } else {
             altKey.changeState(UP_STATE);
@@ -487,9 +475,7 @@ class Key extends ManagedSpriteComponent {
         // the case, trigger event for that variant key
         for (Key altK in variants) {
 
-          touchPosInAltKeySpace = transformationMatrixTo(altK).transformPoint(touchPosInOriginalKeySpace);
-
-          if (altK.hitTestPoint(touchPosInAltKeySpace.x, touchPosInAltKeySpace.y, false)) {
+          if (altK.hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, false)) {
             _triggerEvent(altK, KeyEvent.KEY_UP);
             altK.changeState(UP_STATE);
             break;
@@ -502,7 +488,7 @@ class Key extends ManagedSpriteComponent {
       }
 
       // Abort if the release is outside the original key
-     if (!hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, false)) {
+     if (!hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, true)) {
        return;
      }
 

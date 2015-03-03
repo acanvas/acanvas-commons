@@ -11,18 +11,18 @@ class Cell extends Button {
     _id = idd;
   }
   
-  Object _data;
+  dynamic _data;
   bool _isSelected = false;
   bool _isMultiselection = false;
   
   Cell() : super() {
   }
 
-  Object get data {
+  dynamic get data {
     return _data;
   }
 
-  void set data(Object data) {
+  void set data(dynamic data) {
     _data = data;
   }
 

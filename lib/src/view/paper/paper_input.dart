@@ -150,13 +150,12 @@ class PaperInput extends SpriteComponent {
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
     ContextTool.STAGE.focus = _inputTextField;
 
-   if (keyboard) {
+   if (keyboard && _softKeyboard == null) {
       _createKeyboard();
     }
-   else{
-     /* Add a listener to Stage to manage intention to Focus out */
-     ContextTool.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
-   }
+
+   /* Add a listener to Stage to manage intention to Focus out */
+   ContextTool.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
 
   }
 
@@ -190,11 +189,12 @@ class PaperInput extends SpriteComponent {
     }
   }
 
-  void keyDownAction(int keyCode) {
+  void softKeyboardDownAction(int keyCode) {
     _inputTextField.keyDownAction(keyCode);
+    keyUpAction();
   }
 
-  void inputAction(String text) {
+  void softKeyboardInputAction(String text) {
     _inputTextField.textInputAction(text);
     textInputAction();
   }
@@ -281,19 +281,27 @@ class PaperInput extends SpriteComponent {
     Layout layout = new Qwerty();
     _softKeyboard = new SoftKeyboard([layout]);
     _softKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
-      inputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
+      softKeyboardInputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
     });
     _softKeyboard.addEventListener(KeyEvent.KEY_UP, (KeyEvent e) {
-      keyDownAction(e.charCode);
+      softKeyboardDownAction(e.charCode);
     });
-    parent.parent.addChild(_softKeyboard);
-
-    _softKeyboard.setSize((parent.parent as SpriteComponent).widthAsSet, 400);
-    _softKeyboard.y = (parent.parent as SpriteComponent).heightAsSet - _softKeyboard.heightAsSet;
+   
+    ContextTool.STAGE.addChild(_softKeyboard);
+    ContextTool.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
+    _resizeKeyboard();
+    _softKeyboard.init();
+  }
+  
+  void _resizeKeyboard([Event e = null]){
+    _softKeyboard.setSize(ContextTool.STAGE.stageWidth, min(ContextTool.STAGE.stageHeight/2, 400));
+    _softKeyboard.y = ContextTool.STAGE.stageHeight - _softKeyboard.heightAsSet;
   }
   
   void _destroyKeyboard(){
+    ContextTool.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
     disposeChild(_softKeyboard);
+    _softKeyboard = null;
   }
 
 

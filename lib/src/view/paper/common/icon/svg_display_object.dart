@@ -22,7 +22,7 @@ class SvgDisplayObject extends DisplayObject {
     var imageElement = new html.ImageElement();
     imageElement.src = svg;
     imageElement.onLoad.listen((c) {
-      _renderTexture = new RenderTexture.fromImage(imageElement, 1.0);
+      _renderTexture = new RenderTexture.fromImageElement(imageElement, 1.0);
       _renderTextureQuad = _renderTexture.quad;
     });
   }

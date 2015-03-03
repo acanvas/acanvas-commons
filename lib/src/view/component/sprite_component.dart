@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-class SpriteComponent extends Sprite implements ISpriteComponent {
+class SpriteComponent extends Sprite3D implements ISpriteComponent {
   num _widthAsSet = 0;
   num _heightAsSet = 0;
 

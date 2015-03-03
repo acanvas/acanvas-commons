@@ -397,7 +397,7 @@ class SoftKeyboard extends ManagedSpriteComponent {
     for (int k = 0; k < rowCount; k++) {
       KeyRow r = (keyboard.getChildAt(k) as KeyRow);
       r.x = ((width - 2 * padding) - r.width) / 2 + padding;
-      r.y = ((key.height + currentLayout.verticalGap * vUnit) * k) + padding;
+      r.y = ((key.heightAsSet + currentLayout.verticalGap * vUnit) * k) + padding;
     }
 
     // Size background (if any is present)

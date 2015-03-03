@@ -8,6 +8,7 @@ class PaperCheckbox extends ToggleButton {
   int RADIUS = 30;
   int BOXWIDTH = 20;
 
+  int boxColor;
   int activeColor;
   String label;
   
@@ -16,7 +17,7 @@ class PaperCheckbox extends ToggleButton {
   Shape _box;
   PaperText _paperLabel;
 
-  PaperCheckbox({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : ""}) : super() {
+  PaperCheckbox({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : "", this.boxColor : PaperColor.BLACK}) : super() {
     ignoreCallSetSize = false;
     
     PaperRipple ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity : .2);
@@ -34,7 +35,7 @@ class PaperCheckbox extends ToggleButton {
 
     _box = new Shape();
     _box.graphics.rect(-BOXWIDTH/2, -BOXWIDTH/2, BOXWIDTH, BOXWIDTH);
-    _box.graphics.strokeColor(PaperColor.BLACK, 2);
+    _box.graphics.strokeColor(boxColor, 2);
     if (ContextTool.WEBGL) {
       _box.applyCache(-(BOXWIDTH/2).round(), -(BOXWIDTH/2).round(), BOXWIDTH, BOXWIDTH);
     }

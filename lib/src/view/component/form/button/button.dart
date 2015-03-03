@@ -7,7 +7,7 @@ class Button extends SpriteComponent {
 
   Button() : super() {
 
-    buttonMode = true;
+    //buttonMode = true;
     useHandCursor = true;
     mouseChildren = false;
     enabled = true;

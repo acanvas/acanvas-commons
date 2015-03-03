@@ -28,8 +28,14 @@ class ComponentBitmapData extends SpriteComponent {
     num scale;
     if (_bitmapDataSource.width > _bitmapDataSource.height) {
       scale = _heightAsSet / _bitmapDataSource.height;
+      if(_bitmapDataSource.width * scale < _widthAsSet){
+        scale = _widthAsSet / _bitmapDataSource.width;
+      }
     } else {
       scale = _widthAsSet / _bitmapDataSource.width;
+      if(_bitmapDataSource.height * scale < _heightAsSet){
+        scale = _heightAsSet / _bitmapDataSource.height;
+      }
     }
     
     scaleX = scaleY = scale;

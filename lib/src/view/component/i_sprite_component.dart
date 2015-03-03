@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-abstract class ISpriteComponent extends EventDispatcher implements Sprite{
+abstract class ISpriteComponent extends EventDispatcher implements Sprite3D{
 
   void setSize(num w, num h);
 
