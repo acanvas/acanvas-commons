@@ -13,7 +13,6 @@ import 'package:stagexl/stagexl.dart';
 /* required by Logger */
 import 'package:logging/logging.dart' as logging;
 
-
 //async
 part 'src/async/operation/impl/abstract_operation.dart';
 part 'src/async/operation/impl/load_urloperation.dart';
