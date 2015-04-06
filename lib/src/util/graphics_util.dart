@@ -66,7 +66,7 @@ class GraphicsUtil {
     sprite.graphics.fillColor(color);
     
     if(ContextTool.WEBGL && (x + r).round() > 0){
-      sprite.applyCache(x - r, y - r, (2*r).round(), (2*r).round());
+      sprite.applyCache((x - r).round(), (y - r).round(), (2*r).round(), (2*r).round());
     }
     
     return sprite;
