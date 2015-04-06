@@ -166,7 +166,7 @@ class PaperInput extends SpriteComponent {
     if (event.target == _inputTextField || event.target == this) {
       return;
     }
-    if (event.target is! UITextFieldInput) {
+    if (event.target is! UITextFieldInput || event.target is! PaperInput) {
       ContextTool.STAGE.focus = null;
     }
     ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
