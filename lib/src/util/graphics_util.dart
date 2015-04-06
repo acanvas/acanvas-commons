@@ -92,7 +92,7 @@ class GraphicsUtil {
     sprite.graphics.closePath();
     
     if(ContextTool.WEBGL){
-      sprite.applyCache(x.round(), y.round(), x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() :  y.ceil());
+      sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() :  y.ceil());
     }
     
     return sprite;
