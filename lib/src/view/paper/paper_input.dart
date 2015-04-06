@@ -153,7 +153,7 @@ class PaperInput extends SpriteComponent {
    if (keyboard && _softKeyboard == null) {
       _createKeyboard();
     }
-
+   
    /* Add a listener to Stage to manage intention to Focus out */
    ContextTool.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
 
@@ -163,7 +163,7 @@ class PaperInput extends SpriteComponent {
    * Manages focusOut
    */
   void stageMouseDownAction(MouseEvent event) {
-    if (event.target == _inputTextField) {
+    if (event.target == _inputTextField || event.target == this) {
       return;
     }
     if (event.target is! UITextFieldInput) {
