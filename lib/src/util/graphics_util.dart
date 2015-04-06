@@ -21,7 +21,7 @@ class GraphicsUtil {
     sprite.graphics.fillColor(color);
     
     if(ContextTool.WEBGL && (x + w).round() > 0 && (y + h).round() > 0){
-      sprite.applyCache(x, y, (x + w).round(), (y + h).round());
+      sprite.applyCache(x.round(), y.round(), (x + w).round(), (y + h).round());
     }
     
     return sprite;
@@ -45,7 +45,7 @@ class GraphicsUtil {
     sprite.graphics.fillColor(color);
     
     if(ContextTool.WEBGL && (x + w).round() > 0 && (y + h).round() > 0){
-      sprite.applyCache(x, y, (x + w).round(), (y + h).round());
+      sprite.applyCache(x.round(), y.round(), (x + w).round(), (y + h).round());
     }
     
     return sprite;
@@ -92,7 +92,7 @@ class GraphicsUtil {
     sprite.graphics.closePath();
     
     if(ContextTool.WEBGL){
-      sprite.applyCache(x, y, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() :  y.ceil());
+      sprite.applyCache(x.round(), y.round(), x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() :  y.ceil());
     }
     
     return sprite;
