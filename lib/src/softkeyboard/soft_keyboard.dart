@@ -310,7 +310,8 @@ class SoftKeyboard extends ManagedSpriteComponent {
 
       // If a layout to switch to has been defined on the key, use it first. If not, go to
       // next layout by default.
-      Layout currentLayout = layouts[layoutIndex];
+      //Layout currentLayout = layouts[layoutIndex];
+
       if (key.switchToLayoutType != null) {
         layoutIndex = _getLayoutIndex(key.switchToLayoutType);
       } else {

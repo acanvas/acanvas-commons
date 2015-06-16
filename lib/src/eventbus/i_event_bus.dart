@@ -18,32 +18,19 @@ abstract class IEventBus implements EventDispatcher {
 
 
   @override
-  StreamSubscription<Event> addEventListener(String eventType, void eventListener(event), {bool useCapture: false, int priority: 0}) {
-    // TODO: implement addEventListener
-  }
+  StreamSubscription<Event> addEventListener(String eventType, void eventListener(event), {bool useCapture: false, int priority: 0});
 
   @override
-  void dispatchEvent(Event event) {
-    // TODO: implement dispatchEvent
-  }
+  void dispatchEvent(Event event);
+  @override
+  bool hasEventListener(String eventType, { bool useCapture: false });
 
   @override
-  bool hasEventListener(String eventType) {
-    // TODO: implement hasEventListener
-  }
+  EventStream<Event> on(String eventType);
 
   @override
-  EventStream<Event> on(String eventType) {
-    // TODO: implement on
-  }
+  void removeEventListener(String eventType, void eventListener(event), {bool useCapture: false});
 
   @override
-  void removeEventListener(String eventType, void eventListener(event), {bool useCapture: false}) {
-    // TODO: implement removeEventListener
-  }
-
-  @override
-  void removeEventListeners(String eventType) {
-    // TODO: implement removeEventListeners
-  }
+  void removeEventListeners(String eventType);
 }

@@ -6,7 +6,6 @@ class ComponentFlickImage extends SpriteComponent {
   static const String RIGHT = "RIGHT";
 
   Sprite _holder;
-  Shape _mask;
   List _data;
   int _currentIndex = 0;
   bool tweening = false;
@@ -38,10 +37,10 @@ class ComponentFlickImage extends SpriteComponent {
             data.x = (child.x - data.width).toInt();
             _holder.addChildAt(data, 0);
             
-            stage.juggler.tween(data, 1)
+            stage.juggler.addTween(data, 1)
             ..animate.x.to(0);
             
-            stage.juggler.tween(child, 1)
+            stage.juggler.addTween(child, 1)
             ..animate.x.to(child.width.toInt())
             ..onComplete = () => Function.apply(_onTweenComplete, [child]);
             
@@ -62,10 +61,10 @@ class ComponentFlickImage extends SpriteComponent {
             data.x = (child.x + child.width).toInt();
             _holder.addChildAt(data, 0);
             
-            stage.juggler.tween(data, 1)
+            stage.juggler.addTween(data, 1)
             ..animate.x.to(0);
             
-            stage.juggler.tween(child, 1)
+            stage.juggler.addTween(child, 1)
             ..animate.x.to(- child.width.toInt())
             ..onComplete = () => Function.apply(_onTweenComplete, [child]);
 
@@ -134,7 +133,7 @@ class ComponentFlickImage extends SpriteComponent {
 
        void _fadeChildren(Sprite data, int alph) {
          for(int i=0;i<data.numChildren;i++){
-             stage.juggler.tween( data.getChildAt(i), .3 )
+             stage.juggler.addTween( data.getChildAt(i), .3 )
                ..animate.alpha.to(alph)
                ..delay = (i+alph)*.3;
            }

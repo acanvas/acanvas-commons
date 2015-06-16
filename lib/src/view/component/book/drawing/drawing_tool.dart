@@ -191,7 +191,7 @@
 //					lineStyle.applyTo(graphics);
 					graphics.lineTo(next.x, next.y);
 					// stop if end of dash is equal to end of line:
-					if (next.equals(point2)) break;
+					if (next==(point2)) break;
 					// draw space:
 					traveled = (traveled + lineStyle.space >= distance) ? distance : traveled + lineStyle.space;
 					next = Point.interpolate(point1, point2, 1-(traveled/distance));

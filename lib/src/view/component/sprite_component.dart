@@ -27,8 +27,8 @@ class SpriteComponent extends Sprite3D implements ISpriteComponent {
   void addChild(DisplayObject child) {
     super.addChild(child);
     if (child is ISpriteComponent) {
-      if (!(child as ISpriteComponent).ignoreSetEnabled && this.enabled) {
-        (child as ISpriteComponent).enabled = true;
+      if (!child.ignoreSetEnabled && this.enabled) {
+        child.enabled = true;
       }
     }
   }
@@ -43,10 +43,10 @@ class SpriteComponent extends Sprite3D implements ISpriteComponent {
       DisplayObject child;
       for (int i = 0; i < numChildren; i++) {
         child = getChildAt(i);
-        if (child is ISpriteComponent && !(child as ISpriteComponent).ignoreCallSetSize) {
-          (child as ISpriteComponent).setSize(w, h);
+        if (child is ISpriteComponent && !child.ignoreCallSetSize) {
+          child.setSize(w, h);
         }
-        if (child is TextField && resizeTextChildren) (child as TextField).width = w - 10;
+        if (child is TextField && resizeTextChildren) child.width = w - 10;
       }
 
       if (!(this is IManagedSpriteComponent) || (this is IManagedSpriteComponent && (this as IManagedSpriteComponent).getInitialized())) {
@@ -69,7 +69,7 @@ class SpriteComponent extends Sprite3D implements ISpriteComponent {
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
       if (child is ISpriteComponent) {
-        (child as ISpriteComponent).appear(duration);
+        child.appear(duration);
       }
     }
   }
@@ -80,7 +80,7 @@ class SpriteComponent extends Sprite3D implements ISpriteComponent {
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
       if (child is ISpriteComponent) {
-        (child as ISpriteComponent).disappear(duration, autoDestroy);
+        child.disappear(duration, autoDestroy);
       }
     }
   }
@@ -98,8 +98,8 @@ class SpriteComponent extends Sprite3D implements ISpriteComponent {
   void disposeChild([DisplayObject dobj = null]) {
     if (dobj != null) {
 
-      if (dobj is ISpriteComponent && !(dobj as ISpriteComponent).ignoreCallDestroy && dobj != this) {
-        (dobj as ISpriteComponent).destroy();
+      if (dobj is ISpriteComponent && !dobj.ignoreCallDestroy && dobj != this) {
+        dobj.destroy();
         // dobj = null;
         // return;
       }
@@ -151,8 +151,8 @@ class SpriteComponent extends Sprite3D implements ISpriteComponent {
     DisplayObject child;
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
-      if (child is SpriteComponent && !(child as SpriteComponent).ignoreSetEnabled) {
-        (child as ISpriteComponent).enabled = _enabled;
+      if (child is SpriteComponent && !child.ignoreSetEnabled) {
+        child.enabled = _enabled;
       }
     }
   }

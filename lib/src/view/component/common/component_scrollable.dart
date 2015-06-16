@@ -12,6 +12,8 @@ class ComponentScrollable extends SpriteComponent {
   Type _scrollbarClass;
   Scrollbar _hScrollbar;
   Scrollbar _vScrollbar;
+  bool _maskEnabled = true;
+  void set maskEnabled(bool e) {_maskEnabled = e;}
   bool _bounce = false;
   bool _touchEnabled = false;
   bool _keyboardEnabled = false;
@@ -73,7 +75,7 @@ class ComponentScrollable extends SpriteComponent {
       _hScrollbar.addEventListener(SliderEvent.INTERACTION_END, _onScrollbarInteractionEnd, useCapture: false, priority: 0);
       _hScrollbar.addEventListener(SliderEvent.CHANGE_START, _onScrollbarChangeStart, useCapture: false, priority: 0);
       _hScrollbar.addEventListener(SliderEvent.CHANGE_END, _onScrollbarChangeEnd, useCapture: false, priority: 0);
-      addChild(_hScrollbar);
+      super.addChildAt(_hScrollbar, 0);
     } else {
       _hScrollbar.maxValue = _view.width - widthAsSet;
       print("[ScrollView] WARNING: ScrollbarH already created.");
@@ -91,7 +93,7 @@ class ComponentScrollable extends SpriteComponent {
       _vScrollbar.addEventListener(SliderEvent.INTERACTION_END, _onScrollbarInteractionEnd, useCapture: false, priority: 0);
       _vScrollbar.addEventListener(SliderEvent.CHANGE_START, _onScrollbarChangeStart, useCapture: false, priority: 0);
       _vScrollbar.addEventListener(SliderEvent.CHANGE_END, _onScrollbarChangeEnd, useCapture: false, priority: 0);
-      addChild(_vScrollbar);
+      super.addChildAt(_vScrollbar, 1);
     } else {
       _vScrollbar.maxValue = _view.height - heightAsSet;
       print("[ScrollView] WARNING: ScrollbarV already created.");
@@ -136,8 +138,8 @@ class ComponentScrollable extends SpriteComponent {
     if (!_changing) {
       _changing = true;
       if (_hideScrollbarsOnIdle) {
-        if (_hScrollbar.enabled) stage.juggler.tween(_hScrollbar, 0.2)..animate.alpha.to(1);
-        if (_vScrollbar.enabled) stage.juggler.tween(_vScrollbar, 0.2)..animate.alpha.to(1);
+        if (_hScrollbar.enabled) stage.juggler.addTween(_hScrollbar, 0.2)..animate.alpha.to(1);
+        if (_vScrollbar.enabled) stage.juggler.addTween(_vScrollbar, 0.2)..animate.alpha.to(1);
       }
       dispatchEvent(new ScrollViewEvent(ScrollViewEvent.CHANGE_START));
     }
@@ -147,19 +149,22 @@ class ComponentScrollable extends SpriteComponent {
     if (_changing) {
       _changing = false;
       if (_hideScrollbarsOnIdle) {
-        if (_hScrollbar.enabled) stage.juggler.tween(_hScrollbar, 0.2)..animate.alpha.to(0);
-        if (_vScrollbar.enabled) stage.juggler.tween(_vScrollbar, 0.2)..animate.alpha.to(0);
+        if (_hScrollbar.enabled) stage.juggler.addTween(_hScrollbar, 0.2)..animate.alpha.to(0);
+        if (_vScrollbar.enabled) stage.juggler.addTween(_vScrollbar, 0.2)..animate.alpha.to(0);
       }
       dispatchEvent(new ScrollViewEvent(ScrollViewEvent.CHANGE_END));
     }
   }
 
   void updateScrollbars() {
-    _hScrollbar.enabled = _view.width > widthAsSet;
-    _hScrollbar.maxValue = _view.width - widthAsSet;
+    num w = _view.widthAsSet != 0 ? _view.widthAsSet : _view.width;
+    num h = _view.heightAsSet != 0 ? _view.heightAsSet : _view.height;
 
-    _vScrollbar.enabled = _view.height > heightAsSet;
-    _vScrollbar.maxValue = _view.height - heightAsSet;
+    _hScrollbar.enabled = w > widthAsSet;
+    _hScrollbar.maxValue = w - widthAsSet;
+
+    _vScrollbar.enabled = h > heightAsSet;
+    _vScrollbar.maxValue = h - heightAsSet;
     _updateThumbs();
   }
 
@@ -180,7 +185,7 @@ class ComponentScrollable extends SpriteComponent {
       _view.doubleClickEnabled = _doubleClickToZoom;
       touchEnabled = _touchEnabled;
       doubleClickToZoom = _doubleClickToZoom;
-      addChildAt(_view, 0);
+      super.addChildAt(_view, 0);
       if (enabled) {
         updateScrollbars();
       }
@@ -324,8 +329,8 @@ class ComponentScrollable extends SpriteComponent {
     _hScrollbar.y = heightAsSet - _hScrollbar.height;
     _vScrollbar.x = widthAsSet - _vScrollbar.width;
     
-    if(_view != null){
-      _view.mask = new Mask.rectangle(0, 0, widthAsSet, heightAsSet);
+    if(_maskEnabled == true && _view != null){
+      _view.mask = new Mask.rectangle(0, 0, widthAsSet, heightAsSet)..relativeToParent = true;
     }
           
     updateScrollbars();
@@ -372,7 +377,7 @@ class ComponentScrollable extends SpriteComponent {
     _normalizedValueV = (yPos - heightAsSet / (2 * scale)) / ((_view.height / _view.scaleY) - heightAsSet / scale);
 
 
-    stage.juggler.tween(_view, 0.3)
+    stage.juggler.addTween(_view, 0.3)
         ..animate.scaleX.to(scale)
         ..animate.scaleY.to(scale)
         ..onUpdate = (() => _keepPos)
@@ -466,10 +471,10 @@ class ComponentScrollable extends SpriteComponent {
   void set hideScrollbarsOnIdle(bool value) {
     _hideScrollbarsOnIdle = value;
     if (_hScrollbar.enabled) {
-      stage.juggler.tween(_hScrollbar, 0.2)..animate.alpha.to(_hideScrollbarsOnIdle ? 0 : 1);
+      stage.juggler.addTween(_hScrollbar, 0.2)..animate.alpha.to(_hideScrollbarsOnIdle ? 0 : 1);
     }
     if (_vScrollbar.enabled) {
-      stage.juggler.tween(_vScrollbar, 0.2)..animate.alpha.to(_hideScrollbarsOnIdle ? 0 : 1);
+      stage.juggler.addTween(_vScrollbar, 0.2)..animate.alpha.to(_hideScrollbarsOnIdle ? 0 : 1);
     }
   }
 }

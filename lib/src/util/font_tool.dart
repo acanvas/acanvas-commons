@@ -13,7 +13,7 @@ class FontTool {
   }
   
   static void addFont(String font) {
-    _singleton._fonts.add(font);
+    _singleton._fonts.add(font /* + ":300"*/);
   }
 
   static void loadFonts(Function callback) {

@@ -67,7 +67,7 @@ class PaperRadioButton extends RadioButton {
     if(isToggled){
       _icon.scaleX = _icon.scaleY = .1;
       _icon.visible = true;
-      ContextTool.STAGE.juggler.tween(_icon, .1).animate
+      ContextTool.STAGE.juggler.addTween(_icon, .1).animate
         ..scaleX.to(1)
         ..scaleY.to(1);
       if(_paperLabel != null){

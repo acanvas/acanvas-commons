@@ -94,7 +94,7 @@ class GraphicsUtil {
     if(ContextTool.WEBGL){
       sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() :  y.ceil());
     }
-    
+
     return sprite;
   }
   

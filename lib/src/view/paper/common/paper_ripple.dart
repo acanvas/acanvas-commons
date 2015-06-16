@@ -6,8 +6,8 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   
   num _waveMaxRadius = 150;
   num _initialOpacity = 0.25;
-  bool _recenteringTouch = false;
-  
+  void set opacity(num o) {_initialOpacity = o;}
+
   num color;
   num type;
   num velocity = 1.5;
@@ -34,39 +34,34 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   }
 
   @override
-  downAction([Event e = null]) {
-    num localX = e == null ? widthAsSet/2 : e is MouseEvent ? e.localX : (e as TouchEvent).localX;
-    num localY = e == null ? heightAsSet/2 : e is MouseEvent ? e.localY : (e as TouchEvent).localY;
+  downAction([InputEvent e = null]) {
+    num localX = e == null ? widthAsSet/2 : e.localX;
+    num localY = e == null ? heightAsSet/2 : e.localY;
     
     num touchX = localX > widthAsSet ? widthAsSet : localX;// - rect.left;
     num touchY = localY > heightAsSet ? heightAsSet : localY;// - rect.top;
     
-    num waveRadius = distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(widthAsSet, heightAsSet)) / 1.2;
+    int waveRadius = (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(widthAsSet, heightAsSet)) / 1.2).round();
     
     Shape inner = new Shape()
-          ..graphics.circle(0, 0, waveRadius.round())
+          ..graphics.circle(0, 0, waveRadius)
           ..graphics.fillColor(color)
           ..alpha = _initialOpacity
           ..x = touchX
           ..y = touchY;
    
     if(ContextTool.WEBGL){
-      inner.applyCache(-waveRadius.round(), -waveRadius.round(), waveRadius.round()*2, waveRadius.round()*2);
+      inner.applyCache(-waveRadius, -waveRadius, waveRadius*2, waveRadius*2);
     }
     inner.scaleX = 0.1;
     inner.scaleY = 0.1;
     
     addChild(inner);
     
-    Tween tw = new Tween(inner, velocity, TransitionFunction.easeOutElastic)
+    Tween tw = new Tween(inner, velocity, Transition.easeOutElastic)
     ..animate.scaleX.to(1.2)
     ..animate.scaleY.to(1.2);
-    
-    if (_recenteringTouch == true) {
-      tw.animate.x.to(width / 2);
-      tw.animate.y.to(height / 2);
-    }
-    
+
     ContextTool.STAGE.juggler.add(tw);
 
   }
@@ -78,7 +73,7 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
      DisplayObject dobj = getChildAt(i);
 
       ContextTool.STAGE.juggler.removeTweens(dobj);
-      ContextTool.STAGE.juggler.tween(dobj, velocity)
+      ContextTool.STAGE.juggler.addTween(dobj, velocity)
       ..animate.alpha.to(0)
       ..animate.scaleX.to(1.0)
       ..animate.scaleY.to(1.0)

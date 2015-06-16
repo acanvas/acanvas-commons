@@ -93,21 +93,21 @@ class PaperToggleButton extends ToggleButton {
       _icon.scaleX = _icon.scaleY = .1;
       _icon.visible = true;
       _activeLine.visible = true;
-      ContextTool.STAGE.juggler.tween(_icon, .1).animate
+      ContextTool.STAGE.juggler.addTween(_icon, .1).animate
         ..scaleX.to(1)
         ..scaleY.to(1);
-      ContextTool.STAGE.juggler.tween(_holder, .1).animate
+      ContextTool.STAGE.juggler.addTween(_holder, .1).animate
         ..x.to(labelOffset + 48);
-      ContextTool.STAGE.juggler.tween(_ripple, .1).animate
+      ContextTool.STAGE.juggler.addTween(_ripple, .1).animate
         ..x.to(labelOffset + 48);
       if(_paperLabel != null){
         _paperLabel.color = activeColor;
       }
     }
     else{
-      ContextTool.STAGE.juggler.tween(_holder, .1).animate
+      ContextTool.STAGE.juggler.addTween(_holder, .1).animate
         ..x.to(labelOffset);
-      ContextTool.STAGE.juggler.tween(_ripple, .1).animate
+      ContextTool.STAGE.juggler.addTween(_ripple, .1).animate
         ..x.to(labelOffset);
       Tween tw = new Tween(_icon, .2);
       tw.animate

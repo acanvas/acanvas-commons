@@ -43,12 +43,12 @@ class PaperInput extends SpriteComponent {
       addChild(_requiredTextField);
 
       /* Add Warning Icons: inactive=grey, active=red */
-      _requiredIconInactive = PaperIcon.grey(PaperIconSet.warning);
+      _requiredIconInactive = PaperIcon.color(PaperIconSet.warning, PaperColor.GREY_DARK);
       _requiredIconInactive.scaleX = .8;
       _requiredIconInactive.scaleY = .8;
       addChild(_requiredIconInactive);
 
-      _requiredIconActive = PaperIcon.red(PaperIconSet.warning);
+      _requiredIconActive = PaperIcon.color(PaperIconSet.warning, PaperColor.RED);
       _requiredIconActive.scaleX = .8;
       _requiredIconActive.scaleY = .8;
       addChild(_requiredIconActive);
@@ -111,13 +111,13 @@ class PaperInput extends SpriteComponent {
   }
 
   /* User clicks into TextField */
-  void mouseDownAction([Event event = null]) {
+  void mouseDownAction([InputEvent event = null]) {
     /* Animate active line */
     if (_activeLine.alpha == 0) {
       _activeLine.scaleX = 0.01;
       _activeLine.alpha = 1;
       _activeLine.x = widthAsSet / 2;
-      ContextTool.STAGE.juggler.tween(_activeLine, .2).animate
+      ContextTool.STAGE.juggler.addTween(_activeLine, .2).animate
           ..x.to(0)
           ..scaleX.to(1);
     }
@@ -144,7 +144,7 @@ class PaperInput extends SpriteComponent {
     /* If this textfield is mandatory, make explanatory text red */
     if (required != "") {
       _requiredTextField.color = PaperColor.RED;
-      ContextTool.STAGE.juggler.tween(_requiredIconActive, .1).animate..alpha.to(1);
+      ContextTool.STAGE.juggler.addTween(_requiredIconActive, .1).animate..alpha.to(1);
     }
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
@@ -171,7 +171,7 @@ class PaperInput extends SpriteComponent {
     }
     ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     /* Make active blue line invisible */
-    ContextTool.STAGE.juggler.tween(_activeLine, .1).animate..alpha.to(0);
+    ContextTool.STAGE.juggler.addTween(_activeLine, .1).animate..alpha.to(0);
 
     /* Make floating label grey again */
     if (_currentlyFloating) {
@@ -181,7 +181,7 @@ class PaperInput extends SpriteComponent {
     /* Make explanatory text grey again */
     if (required != "") {
       _requiredTextField.color = PaperColor.GREY_DARK;
-      ContextTool.STAGE.juggler.tween(_requiredIconActive, .1).animate..alpha.to(0);
+      ContextTool.STAGE.juggler.addTween(_requiredIconActive, .1).animate..alpha.to(0);
     }
     
     if(keyboard){
@@ -208,7 +208,7 @@ class PaperInput extends SpriteComponent {
         /* Float the Label above the Input Field */
         if (!_currentlyFloating) {
           _currentlyFloating = true;
-          Transition tr = new Transition(0, 1, .2)
+          Translation tr = new Translation(0, 1, .2)
               ..onUpdate = (num val) {
                 _defaultTextField.y = val * -(fontSize + 3);
                 _defaultTextField.scaleX = 1 - val / 4;
@@ -235,7 +235,7 @@ class PaperInput extends SpriteComponent {
         if (_currentlyFloating) {
           /* Animate the Label back to original position */
           _currentlyFloating = false;
-          Transition tr = new Transition(1, 0, .2)
+          Translation tr = new Translation(1, 0, .2)
               ..onUpdate = (num val) {
                 _defaultTextField.y = val * -(fontSize + 3);
                 _defaultTextField.scaleX = 1 - val / 4;

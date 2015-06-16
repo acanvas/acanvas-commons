@@ -358,7 +358,7 @@ class Scrollbar extends Slider {
   }
 
   void _scrollTransition(num val) {
-    Transition t = new Transition(value, val, _pageScrollDuration, TransitionFunction.easeOutExponential)
+    Translation t = new Translation(value, val, _pageScrollDuration, Transition.easeOutExponential)
         ..onUpdate = _onPageScrollUpdate
         ..onComplete = _onTweenComplete;
     stage.juggler.add(t);

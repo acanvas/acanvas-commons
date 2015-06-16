@@ -221,9 +221,9 @@
 				Point b1 = (round) ? SuperPoint.round(this.b) : this.b;
 				Point a2 = (round) ? SuperPoint.round(castLine.a) : castLine.a;
 				Point b2 = (round) ? SuperPoint.round(castLine.b) : castLine.b;
-				return ((a1.equals(a2) && b1.equals(b2)) || (a1.equals(b2) && b1.equals(a2)));
+				return ((a1 == (a2) && b1 == (b2)) || (a1 == (b2) && b1 == (a2)));
 			}else{
-				return super.equals(line);
+				return super == (line);
 			}
 		}
 		

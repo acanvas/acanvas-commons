@@ -10,9 +10,7 @@
 			this.index = index;
 		}
 
-		
-		@override 
-		  Event clone() {
+		 Event clone() {
 			return new RadioGroupEvent(type, index, bubbles);
 		}
 	}

@@ -420,7 +420,6 @@ part of stagexl_commons;
 		  void swapChildren(DisplayObject child1,DisplayObject child2) {
 			super.swapChildren(child1, child2);
 			List children = [];
-			Page page;
 			if (child1 is Page) children.add(child1);
 			if (child2 is Page) children.add(child2);
 			for (int i=0; i<children.length; i++){
@@ -474,7 +473,7 @@ part of stagexl_commons;
 			// stop if a page corner is flipping back into position
 			if ((this._status == BookEvent.PAGEFLIP_ENDING || this._status == BookEvent.HOVER_ENDING) && !this.autoFlipActive && !this.lastFlipSucceeded){
 				// switch back to flipping mode if the same page corner was picked up:
-				if (this.lastFlippedCorner.equals(this.getCurrentCorner()) && this.sideFlipActive == this.isPageSideHit()){
+				if (this.lastFlippedCorner == (this.getCurrentCorner()) && this.sideFlipActive == this.isPageSideHit()){
 					this.stage.addEventListener(MouseEvent.MOUSE_UP, this.endPageFlip);
 					String newStatus = (this.hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED;
 					this.setStatus(newStatus, true, oldPage);
@@ -592,7 +591,7 @@ part of stagexl_commons;
 			this.renderShape.graphics.clear();
 			
 			// check if the pageflip has ended:
-			if (this.pageCorner.equals(this.pageCornerTarget) && (this._status == BookEvent.PAGEFLIP_ENDING || this._status == BookEvent.HOVER_ENDING)){
+			if (this.pageCorner == (this.pageCornerTarget) && (this._status == BookEvent.PAGEFLIP_ENDING || this._status == BookEvent.HOVER_ENDING)){
 				this.finishPageFlip();
 				return;
 			}
@@ -1066,11 +1065,11 @@ part of stagexl_commons;
 			
 			// determine rotation correction:
 			num rotate;
-			if (this.lastFlippedCorner.equals(new Point(1,0)) || this.lastFlippedCorner.equals(new Point(0,1))){
+			if (this.lastFlippedCorner == (new Point(1,0)) || this.lastFlippedCorner == (new Point(0,1))){
 				// if the upper right or lower left corner is being flipped and the Page isn't torn out of its Book, correct the angle with 45 degrees:
 				rotate = (!this.tearActive) ? Gradients.ROTATE_HALF : Gradients.ROTATE_FULL;
 			}
-			if (this.lastFlippedCorner.equals(new Point(0,0)) || this.lastFlippedCorner.equals(new Point(1,1))){
+			if (this.lastFlippedCorner == (new Point(0,0)) || this.lastFlippedCorner == (new Point(1,1))){
 				// if the upper left or lower right corner is being flipped and the Page isn't torn out of its Book, correct the angle with minus 45 degrees:
 				rotate = (!this.tearActive) ? Gradients.ROTATE_FULL : Gradients.ROTATE_HALF;
 			}
@@ -1159,7 +1158,7 @@ part of stagexl_commons;
 				// set position:
 				this.pageCornerTarget = new Point(x, y);
 				// return true if pageCornerTarget has reached the opposite corner of where it started:
-				if (this.pageCornerTarget.equals(this.pageCorner) &&
+				if (this.pageCornerTarget == (this.pageCorner) &&
 					((this.tearActive && y == opposite.y) ||
 					(!this.tearActive && x == opposite.x))){
 					return true;
@@ -1410,7 +1409,7 @@ part of stagexl_commons;
 		 * @
 		 */
 		  int get autoFlipSpeed {
-			return (widthAsSet / ((this.autoFlipDuration/1000) * this.stage.frameRate)).round();
+			return (widthAsSet / ((this.autoFlipDuration/1000) * 20)).round();
 		}
 		
 		

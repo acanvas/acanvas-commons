@@ -62,50 +62,11 @@ class ComponentPager extends ComponentWithDataProxy {
     _updateControls();
   }
 
-
-  @override
-  void set enabled(bool value) {
-    if (value == true) {
-      _registerGestures();
-    } else {
-      _unregisterGestures();
-    }
-
-    super.enabled = value;
-  }
   void setData(List data) {
 
     disableClick = false;
     this.data = data;
   }
-  void _registerGestures() {
-    if (!Multitouch.supportsGestureEvents || holder == null) {
-      return;
-    }
-
-    Multitouch.inputMode = MultitouchInputMode.GESTURE;
-    // holder.addEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
-  }
-  void _unregisterGestures() {
-    if (!Multitouch.supportsGestureEvents || holder == null) {
-      return;
-    }
-
-    Multitouch.inputMode = null;
-    // holder.removeEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
-  }
-
-  /*
-  void onSwipe(TransformGestureEvent e) {
-    if (e.offsetX == 1) {
-//				User swiped towards right
-      onClickPrev();
-    }
-    if (e.offsetX == -1) {
-//				User swiped towards left
-      onClickNext();
-    }
-  }*/
 
   void setFilterVOAndLoad(IXLVO vo) {
     _proxy.dataRetrieveCommandVO = vo;
@@ -190,9 +151,4 @@ class ComponentPager extends ComponentWithDataProxy {
     }
     return idx;
   }
-
-
-
-
-
 }

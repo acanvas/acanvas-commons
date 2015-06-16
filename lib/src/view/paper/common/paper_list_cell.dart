@@ -20,9 +20,8 @@ class PaperListCell extends Cell {
 
        _title = new PaperText("empty", size: 14, color: fontColor);
 			addChild(_title);
-			
-			heightAsSet = CELL_HEIGHT;
-			widthAsSet = w;
+
+			 setSize(w, CELL_HEIGHT);
 		}
 
 
@@ -30,7 +29,7 @@ class PaperListCell extends Cell {
 		void set data(Object newdata) {
 			if (newdata != data) {
 				super.data = newdata;
-				if (data != null) {
+				if (data != null && data is Map) {
 					_title.text = (data as Map)["label"];
 					redraw();
 				}

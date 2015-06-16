@@ -56,7 +56,7 @@ class ComponentList extends ComponentScrollable {
   }
 
   void init() {
-    if (widthAsSet == 10 || heightAsSet == 10) {
+    if (widthAsSet <= 10 || heightAsSet <= 10) {
       return;
     }
     _initialized = true;
@@ -79,7 +79,6 @@ class ComponentList extends ComponentScrollable {
       cellContainer.addChild(cell);
 
       _cellSelectedLookup[0] = false;
-      Scrollbar scroller = (_bOrientationHorizontal ? _hScrollbar : _vScrollbar);
 
       _cellSize = (_bOrientationHorizontal ? cell.widthAsSet : cell.heightAsSet) + _padding;
       _totalViewSize = (numDataEntries * _cellSize - _padding).round();

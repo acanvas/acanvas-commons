@@ -38,7 +38,7 @@ class VBox extends HBox {
     for (int i = 0; i < n; i++) {
       dobj = getChildAt(i);
       if (dobj is ISpriteComponent) {
-        totalHeight += (dobj as ISpriteComponent).heightAsSet == 0 ? dobj.height : (dobj as ISpriteComponent).heightAsSet;
+        totalHeight += dobj.heightAsSet == 0 ? dobj.height : dobj.heightAsSet;
       } else {
         totalHeight += dobj.height;
       }
@@ -63,9 +63,9 @@ class VBox extends HBox {
 
       for (int i = 1; i < n; i++) {
         child = getChildAt(i);
-        ch = child is ISpriteComponent && (child as ISpriteComponent).heightAsSet != 0 ? (child as ISpriteComponent).heightAsSet : child.height;
+        ch = child is ISpriteComponent && child.heightAsSet != 0 ? child.heightAsSet : child.height;
         prevChild = getChildAt(i - 1);
-        ph = prevChild is ISpriteComponent && (prevChild as ISpriteComponent).heightAsSet != 0 ? (prevChild as ISpriteComponent).heightAsSet : prevChild.height;
+        ph = prevChild is ISpriteComponent && prevChild.heightAsSet != 0 ? prevChild.heightAsSet : prevChild.height;
 
         if (_inverted) {
           if (_pixelSnapping) child.y = (prevChild.y - ch - _padding).round(); else child.y = prevChild.y + ch - _padding;

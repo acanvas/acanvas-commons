@@ -55,7 +55,7 @@
 			if (rect is SuperRectangle){
 				return rect;
 			}
-			SuperRectangle newRect = new SuperRectangle(rect.x, rect.y, rect.width, rect.height);
+			SuperRectangle newRect = new SuperRectangle(rect.left, rect.top, rect.width, rect.height);
 //			if (rect is RoundedRectangle){
 //				newRect.cornerRadius = RoundedRectangle(rect).cornerRadius;
 //			}
@@ -155,8 +155,8 @@
 		 */
 		  Point get middle {
 			Point point = new Point(0,0);
-			point.x = this.x + this.width/2;
-			point.y = this.y + this.height/2;
+			point.x = this.left + this.width/2;
+			point.y = this.top + this.height/2;
 			return point;
 		}
 

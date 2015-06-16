@@ -57,7 +57,7 @@ class DefaultScrollbar extends Scrollbar {
 			super.enabled = value;
 			if (_enabled) {
 			  if(stage != null){
-				  stage.juggler.tween(this, 0.2)..animate.alpha.to(1);
+				  stage.juggler.addTween(this, 0.2)..animate.alpha.to(1);
 			  }
 			  else{
 			    this.alpha = 1;
@@ -65,7 +65,7 @@ class DefaultScrollbar extends Scrollbar {
 			}
 			else {
 			  if(stage != null){
-  			  stage.juggler.tween(this, 0.2)..animate.alpha.to(0);
+  			  stage.juggler.addTween(this, 0.2)..animate.alpha.to(0);
   		  }
   		  else{
   		    this.alpha = 0;

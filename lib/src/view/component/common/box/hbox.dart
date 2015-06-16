@@ -88,7 +88,7 @@ class HBox extends SpriteComponent {
     for (int i = 0; i < n; i++) {
       dobj = getChildAt(i);
       if (dobj is ISpriteComponent) {
-        totalWidth += (dobj as ISpriteComponent).widthAsSet == 0 ? dobj.width : (dobj as ISpriteComponent).widthAsSet;
+        totalWidth += dobj.widthAsSet == 0 ? dobj.width : dobj.widthAsSet;
       } else {
         totalWidth += dobj.width;
       }
@@ -108,17 +108,17 @@ class HBox extends SpriteComponent {
       DisplayObject prevChild;
 
       child = getChildAt(0);
-      child.x = _inverted ? -(child is ISpriteComponent ? (child as ISpriteComponent).widthAsSet : child.width) : 0;
+      child.x = _inverted ? -(child is ISpriteComponent ? child.widthAsSet : child.width) : 0;
 
       num cw;
       num pw;
 
       for (int i = 1; i < n; i++) {
         child = getChildAt(i);
-        cw = child is ISpriteComponent && (child as ISpriteComponent).widthAsSet != 0 ? (child as ISpriteComponent).widthAsSet : child.width;
+        cw = child is ISpriteComponent && child.widthAsSet != 0 ? child.widthAsSet : child.width;
 
         prevChild = getChildAt(i - 1);
-        pw = prevChild is ISpriteComponent && (prevChild as ISpriteComponent).widthAsSet != 0 ? (prevChild as ISpriteComponent).widthAsSet : prevChild.width;
+        pw = prevChild is ISpriteComponent && prevChild.widthAsSet != 0 ? prevChild.widthAsSet : prevChild.width;
 
         if (_inverted) {
           if (_pixelSnapping) child.x = (prevChild.x - cw - _padding).round(); else child.x = prevChild.x - cw - _padding;

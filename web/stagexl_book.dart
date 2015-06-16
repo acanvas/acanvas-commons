@@ -3,6 +3,7 @@ import 'package:stagexl_commons/stagexl_commons.dart';
 import 'package:stagexl/stagexl.dart';
 
 Stage stage;
+BookView book;
 
 void main() {
   stage = new Stage(html.querySelector('#stage'), webGL: false, color: 0xFFf9f9f9);
@@ -14,7 +15,7 @@ void main() {
 }
 void start() {
   
-  BookView book = new BookView("book");
+  book = new BookView("book");
   book.setSize(900, 600);
   book.x = 20;
   book.y = 20;
@@ -39,6 +40,11 @@ void start() {
   }
 
   book.init();
-  book.nextPage();  
+  book.addEventListener(ManagedSpriteComponentEvent.INIT_COMPLETE, onBookInit);
 
+}
+
+void onBookInit(event) {
+  book.removeEventListener(ManagedSpriteComponentEvent.INIT_COMPLETE, onBookInit);
+  book.nextPage();
 }

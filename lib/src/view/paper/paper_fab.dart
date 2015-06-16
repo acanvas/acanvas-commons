@@ -12,8 +12,6 @@ class PaperFab extends Button {
 
   PaperFab(this.icon, {num radius: 30, num bgColor: PaperColor.BLUE, int shadowColor: PaperColor.GREY_SHADOW, num rippleColor: null, this.hasShadow : true}) : super() {
     hover = true;
-    if(rippleColor != null){
-    }
 
     _shadow = new PaperShadow(type: PaperShadow.CIRCLE, bgColor: bgColor, shadowColor: shadowColor);
     addChild(_shadow);
@@ -27,6 +25,8 @@ class PaperFab extends Button {
     enabled = true;
   }
 
+  void set opacity(num o) {_ripple.opacity = o;}
+
 
   @override void redraw() {
     super.redraw();
@@ -37,7 +37,7 @@ class PaperFab extends Button {
 
   void onRollOver([MouseEvent event = null]) {
     if(stage == null || !hover) return;
-    ContextTool.STAGE.juggler.tween(icon, .1).animate
+    ContextTool.STAGE.juggler.addTween(icon, .1).animate
      ..x.to((widthAsSet / 2 - 12).round() - 2.4)
      ..y.to((heightAsSet / 2 - 12).round() - 2.4)
      ..scaleX.to(1.2)
@@ -46,7 +46,7 @@ class PaperFab extends Button {
   }
   void onRollOut([MouseEvent event = null]) {
     if(stage == null || !hover) return;
-    ContextTool.STAGE.juggler.tween(icon, .1).animate
+    ContextTool.STAGE.juggler.addTween(icon, .1).animate
         ..x.to((widthAsSet / 2 - 12).round())
         ..y.to((heightAsSet / 2 - 12).round())
      ..scaleX.to(1)

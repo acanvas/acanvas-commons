@@ -27,18 +27,18 @@ class PaperToast extends SpriteComponent {
     holder.addChild(this);
     setSize(300, 50);
 
-    ContextTool.STAGE.juggler.tween(this, .3, TransitionFunction.easeOutBounce)..animate.y.to(ContextTool.STAGE.stageHeight - this.height - 20);
+    ContextTool.STAGE.juggler.addTween(this, .3, Transition.easeOutBounce)..animate.y.to(ContextTool.STAGE.stageHeight - this.height - 20);
 
     if (hideAfterSeconds > 0) {
 
       hide();
 
-      ContextTool.STAGE.juggler.transition(0, 100, hideAfterSeconds, TransitionFunction.linear, (num val) => _progress.value = val);
+      ContextTool.STAGE.juggler.addTranslation(0, 100, hideAfterSeconds, Transition.linear, (num val) => _progress.value = val);
     }
   }
 
   void hide() {
-    ContextTool.STAGE.juggler.tween(this, .3, TransitionFunction.easeOutBounce)
+    ContextTool.STAGE.juggler.addTween(this, .3, Transition.easeOutBounce)
         ..animate.y.to(ContextTool.STAGE.stageHeight)
         ..delay = hideAfterSeconds
         ..onComplete = () => this.destroy();

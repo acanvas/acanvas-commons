@@ -256,7 +256,7 @@
 			nb=ppts.length;
 			mc.graphics.moveTo(ppts[nb-1].x,ppts[nb-1].y);
 			while (--nb>=0)mc.graphics.lineTo(ppts[nb].x,ppts[nb].y);
-			mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp0,new Matrix.fromIdentity()));
+			mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp0.renderTextureQuad,new Matrix.fromIdentity()));
 
 			// draw the flipped part
 			if (cpts==null)return;
@@ -264,7 +264,7 @@
 			nb=cpts.length;
 			mc.graphics.moveTo(cpts[nb-1].x,cpts[nb-1].y);
 			while (--nb>=0)mc.graphics.lineTo(cpts[nb].x,cpts[nb].y);
-			mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp1,ocf["matrix"]));
+			mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp1.renderTextureQuad,ocf["matrix"]));
 
 		}
 

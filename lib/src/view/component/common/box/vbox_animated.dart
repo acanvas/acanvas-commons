@@ -39,9 +39,9 @@
 				targetY = _inverted ? targetY = -child.height : 0;
 				if (child.alpha == 0) {
 					child.y = targetY;
-					stage.juggler.tween(child, _duration).animate.alpha.to(1.0);
+					stage.juggler.addTween(child, _duration).animate.alpha.to(1.0);
 				} else {
-					stage.juggler.tween(child, _duration).animate
+					stage.juggler.addTween(child, _duration).animate
 					..y.to(targetY)
 					..alpha.to(1.0);
 				}
@@ -58,9 +58,9 @@
 					}
 					if (child.alpha == 0) {
 						child.y = targetY;
-						stage.juggler.tween(child, _duration).animate.alpha.to(1.0);
+						stage.juggler.addTween(child, _duration).animate.alpha.to(1.0);
 					} else {
-						stage.juggler.tween(child, _duration).animate
+						stage.juggler.addTween(child, _duration).animate
     				..y.to(targetY)
     				..alpha.to(1.0);
 					}

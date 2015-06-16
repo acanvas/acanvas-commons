@@ -34,7 +34,7 @@ class DayButton extends Button {
   @override void onRollOver([MouseEvent event = null]) {
     if (stage != null) {
       //stage.juggler.removeTweens(_bgOver);
-      stage.juggler.tween(_bgOver, 0.3)..animate.alpha.to(1);
+      stage.juggler.addTween(_bgOver, 0.3)..animate.alpha.to(1);
       _labelTF.textColor = 0xFF000000;
     } else if (_bgOver != null) {
       _bgOver.alpha = 1;
@@ -43,7 +43,7 @@ class DayButton extends Button {
 
   @override void onRollOut([MouseEvent event = null]) {
     if (stage != null) {
-      stage.juggler.tween(_bgOver, 0.3 )..animate.alpha.to(0);
+      stage.juggler.addTween(_bgOver, 0.3 )..animate.alpha.to(0);
       _labelTF.textColor = 0xFFFFFFFF;
     } else if (_bgOver != null) {
       _bgOver.alpha = 0;

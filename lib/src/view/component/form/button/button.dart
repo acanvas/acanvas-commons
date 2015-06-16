@@ -1,19 +1,13 @@
 part of stagexl_commons;
 
-
-
 class Button extends SpriteComponent {
   String _labelText;
 
   Button() : super() {
-
-    //buttonMode = true;
     useHandCursor = true;
     mouseChildren = false;
     enabled = true;
-    //ignoreSetEnabled = true;
   }
-
 
   @override
   void set enabled(bool value) {
@@ -57,7 +51,7 @@ class Button extends SpriteComponent {
   void setLabel(String label) {
     _labelText = label;
   }
-  void downAction([Event event = null]) {
+  void downAction([InputEvent event = null]) {
     DisplayObject child;
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
@@ -66,7 +60,7 @@ class Button extends SpriteComponent {
       }
     }
   }
-  void upAction([Event event = null]) {
+  void upAction([InputEvent event = null]) {
     DisplayObject child;
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
@@ -81,10 +75,10 @@ class Button extends SpriteComponent {
       _submitEvent.dispatch();
     }
   }
-  void onRollOver([Event event = null]) {
+  void onRollOver([InputEvent event = null]) {
     // Override this method
   }
-  void onRollOut([Event event = null]) {
+  void onRollOut([InputEvent event = null]) {
     // Override this method
   }
 

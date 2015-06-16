@@ -33,6 +33,7 @@ class UITextField extends TextField {
   }
   
   void keyDownAction(int keyCode) {
+    print(keyCode);
     dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN, false, keyCode, KeyLocation.STANDARD, false, false, false));
    }
 

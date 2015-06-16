@@ -56,6 +56,7 @@ class BasicEffect implements IEffect {
     _applyRecursively = false;
     _useSprite = false;
   }
+
   Bitmap _registerBitmapSprite(ISpriteComponent target) {
 
     _applyRecursively = false;
@@ -63,7 +64,7 @@ class BasicEffect implements IEffect {
     target.alpha = 1;
     Rectangle rect = target.getBounds(_stage);
 
-    BitmapData output = new BitmapData((rect.width + 20).ceil(), (rect.height + 20).ceil(), true, 0x00000000);
+    BitmapData output = new BitmapData((rect.width + 20).ceil(), (rect.height + 20).ceil(), 0x00000000);
     Matrix mat = target.transformationMatrix != null ? target.transformationMatrix : new Matrix(0, 0, 0, 0, 0, 0);
     _sprite.x = mat.tx;
     _sprite.y = mat.ty;
@@ -85,7 +86,7 @@ class BasicEffect implements IEffect {
   void runInEffect(ISpriteComponent target, num duration, Function callback) {
     target.alpha = 0;
 
-    var tween = new Tween(target, duration, TransitionFunction.easeInCubic);
+    var tween = new Tween(target, duration, Transition.easeInCubic);
     tween.animate.alpha.to(1.0); // target value = 0.0
     tween.onComplete = () => callback.call();
     _stage.juggler.add(tween);
@@ -95,7 +96,7 @@ class BasicEffect implements IEffect {
     //target.visible = true;
     target.alpha = 1;
 
-    var tween = new Tween(target, duration, TransitionFunction.easeInCubic);
+    var tween = new Tween(target, duration, Transition.easeInCubic);
     tween.animate.alpha.to(0); // target value = 0.0
     tween.onComplete = () => callback.call();
     _stage.juggler.add(tween);
@@ -110,7 +111,7 @@ class BasicEffect implements IEffect {
     for (int i = 0; i < (target).numChildren; i++) {
       child = (target).getChildAt(i);
       if (child is ISpriteComponent) {
-        cancel(child as ISpriteComponent);
+        cancel(child);
       }
     }
   }

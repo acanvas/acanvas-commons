@@ -31,12 +31,12 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
   @override
   void addChild(DisplayObject child) {
     super.addChild(child);
-    if (widthAsSet > 0 && heightAsSet > 0 && child is ISpriteComponent && !(child as ISpriteComponent).ignoreCallSetSize) {
-      (child as ISpriteComponent).setSize(widthAsSet, heightAsSet);
+    if (widthAsSet > 0 && heightAsSet > 0 && child is ISpriteComponent && !child.ignoreCallSetSize) {
+      child.setSize(widthAsSet, heightAsSet);
     }
     if (child is IManagedSpriteComponent) {
       if (this._initialized) {
-        (child as IManagedSpriteComponent).init(_data);
+        child.init(_data);
       }
     }
   }
@@ -52,8 +52,8 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
     for (int i = 0; i < numChildren; i++) {
       child = getChildAt(i);
       if (child is IManagedSpriteComponent) {
-        if (!(child as IManagedSpriteComponent).getInitialized()) {
-          (child as IManagedSpriteComponent).init(_data);
+        if (!child.getInitialized()) {
+          child.init(_data);
         }
       }
     }

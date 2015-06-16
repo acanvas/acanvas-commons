@@ -133,7 +133,7 @@
 			num mScaleX = super.width / _width;
 			num mScaleY = super.height / _height;
 			
-			BitmapData bmd = new BitmapData(_width.round(), _height.round(), true, 0x00ffffff);
+			BitmapData bmd = new BitmapData(_width.round(), _height.round(), 0x00ffffff);
 			Matrix matrix = new Matrix.fromIdentity();
 			matrix.scale(mScaleX, mScaleY);
 			bmd.draw(this, matrix);

@@ -14,8 +14,9 @@ class PaperButton extends Button {
 
   PaperText _label;
   int _bgColor;
+  PaperShadow _paperShadow;
 
-  PaperButton(String text, {num width: 120, num height: 32, 
+  PaperButton(String text, {num width: 120, num height: PaperDimensions.HEIGHT_BUTTON,
                             int bgColor: -1, int fontColor : -1, String fontName: PaperText.DEFAULT_FONT, int fontSize: 14,
                             int preset: PRESET_WHITE,
                             bool shadow : true, bool background : true}) : super() {
@@ -52,8 +53,8 @@ class PaperButton extends Button {
     }
 
     if(background){
-      PaperShadow paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: _bgColor, shadowEnabled : shadow);
-      addChild(paperShadow);
+      _paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: _bgColor, shadowEnabled : shadow);
+      addChild(_paperShadow);
     }
     
     PaperRipple paperRipple = new PaperRipple(color: _fontAndRippleColor);
@@ -82,6 +83,19 @@ class PaperButton extends Button {
     _label.y = (heightAsSet / 2 - _label.textHeight / 2).round();
 
     super.redraw();
+  }
+
+  @override
+  void onRollOver([InputEvent event = null]) {
+    if(_paperShadow != null){
+      _paperShadow.downAction();
+    }
+  }
+  @override
+  void onRollOut([InputEvent event = null]) {
+    if(_paperShadow != null){
+      _paperShadow.upAction();
+    }
   }
 
   @override void setLabel(String label) {

@@ -10,8 +10,6 @@ class PaperTabs extends SpriteComponent {
   Sprite _bg;
   Sprite _slideBar;
 
-  HBox leftBox;
-  HBox rightBox;
   HBox tabBox;
   
   int _activeButtonIndex = 0;
@@ -20,14 +18,6 @@ class PaperTabs extends SpriteComponent {
     _bg = new Sprite();
     addChild(_bg);
 
-    leftBox = new HBox(20, true);
-    leftBox.ignoreCallSetSize = true;
-    addChild(leftBox);
-
-    rightBox = new HBox(20, true);
-    rightBox.ignoreCallSetSize = true;
-    addChild(rightBox);
-
     tabBox = new HBox(0, true);
     addChild(tabBox);
     
@@ -35,14 +25,6 @@ class PaperTabs extends SpriteComponent {
     addChild(_slideBar);
   }
   
-  void addToTL(InteractiveObject spr){
-    leftBox.addChild(spr);
-  }
-
-  void addToTR(InteractiveObject spr){
-    rightBox.addChild(spr);
-  }
-
   void addTab(Button btn){
     tabBox.addChild(btn);
     btn.submitCallback = _onTabClick;
@@ -59,7 +41,7 @@ class PaperTabs extends SpriteComponent {
 
   void _onTabClick(Button btn, int index){
     _activeButtonIndex = index;
-    ContextTool.STAGE.juggler.tween(_slideBar, .3, TransitionFunction.easeOutCubic).animate
+    ContextTool.STAGE.juggler.addTween(_slideBar, .3, Transition.easeOutCubic).animate
       ..x.to(btn.x);
     _slideBar.width = btn.widthAsSet;
   }
@@ -68,12 +50,6 @@ class PaperTabs extends SpriteComponent {
     super.redraw();
     
     GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, sprite: _bg, color : bgColor);
-
-    leftBox.x = 20;
-    leftBox.y = 20;
-
-    rightBox.x = widthAsSet - rightBox.width - 20;
-    rightBox.y = 20;
 
     tabBox.x = 0;
 

@@ -18,7 +18,9 @@ class ComponentImageLoader extends SpriteComponent {
     _holder = new Sprite();
     addChild(_holder);
 
-    BitmapData.load(_href, new BitmapDataLoadOptions(corsEnabled: true)).then(onComplete).catchError(onIoError);
+    var opts = new BitmapDataLoadOptions();
+    opts.corsEnabled = true;
+    BitmapData.load(_href, opts).then(onComplete).catchError(onIoError);
 
   }
 

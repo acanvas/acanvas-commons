@@ -153,7 +153,7 @@
 			
 			// create a Shape for the fade to be drawn on and make sure it gets sized on the right time:
 			this.drawFade(child as Sprite);
-//			child.addEventListener(FlexEvent.CREATION_COMPLETE, this.childCreationComplete);
+			child.addEventListener(Event.ADDED_TO_STAGE, this.childCreationComplete);
 			
 			// execute some additional tasks if this is during runtime:
 			if (this._childrenCreated){
@@ -179,9 +179,9 @@
 		 * 
 		 * @
 		 */
-//		  void childCreationComplete(FlexEvent event) {
-//			this.resizeFade(event.target as Sprite);
-//		}
+		  void childCreationComplete(Event event) {
+			this.resizeFade(event.target as Sprite);
+		}
 		
 		/**
 		 * Returns the child display object instance that exists at the specified index.
@@ -251,8 +251,8 @@
 		 */
 		  void unregisterChildAt(int index) {
 			DisplayObject child = this.getChildAt(index);
-			
-//			child.removeEventListener(FlexEvent.CREATION_COMPLETE, this.childCreationComplete);
+
+			child.removeEventListener(Event.ADDED_TO_STAGE, this.childCreationComplete);
 			
 			if (this._childrenCreated){
 				if (index < this.selectedIndex) this._selectedIndex--;

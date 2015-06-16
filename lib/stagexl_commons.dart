@@ -3,7 +3,7 @@ library stagexl_commons;
 @MirrorsUsed( metaTargets: const[Retain])
 import 'dart:mirrors';
 
-import 'dart:async' show Timer, Duration, Completer, StreamSubscription;
+import 'dart:async' show Timer, Duration, Completer, StreamSubscription, Zone;
 import 'dart:math';
 import 'dart:html' as html;
 import 'dart:js' as js;
@@ -77,8 +77,10 @@ part 'src/view/component/common/box/accordeon/accordion.dart';
 part 'src/view/component/common/box/accordeon/accordion_cell.dart';
 part 'src/view/component/common/box/hbox.dart';
 part 'src/view/component/common/box/hbox_animated.dart';
+part 'src/view/component/common/box/hbox_scrollable.dart';
 part 'src/view/component/common/box/vbox.dart';
 part 'src/view/component/common/box/vbox_animated.dart';
+part 'src/view/component/common/box/vbox_scrollable.dart';
 
 part 'src/view/component/common/component_bitmap_data.dart';
 part 'src/view/component/common/component_image_loader.dart';
@@ -152,9 +154,11 @@ part 'src/view/paper/common/paper_text.dart';
 part 'src/view/paper/common/icon/paper_icon_set.dart';
 part 'src/view/paper/common/icon/paper_icon.dart';
 part 'src/view/paper/common/icon/svg_display_object.dart';
+part 'src/view/paper/paper_app_bar.dart';
 part 'src/view/paper/paper_button.dart';
 part 'src/view/paper/paper_checkbox.dart';
 part 'src/view/paper/paper_dialog.dart';
+part 'src/view/paper/paper_dimensions.dart';
 part 'src/view/paper/paper_fab.dart';
 part 'src/view/paper/paper_icon_button.dart';
 part 'src/view/paper/paper_input.dart';

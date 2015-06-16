@@ -11,7 +11,7 @@ class Logger implements logging.Logger {
   noSuchMethod(Invocation invocation) => reflect(_delegate).delegate(invocation);
 
   @override
-  void log(logging.Level logLevel, String message, [Object error, StackTrace stackTrace]) {
+  void log(logging.Level logLevel, String message, [Object error, StackTrace stackTrace, Zone zone]) {
 
     message = name + ": " + message;
 
@@ -20,9 +20,8 @@ class Logger implements logging.Logger {
       for (int i = 0; i < list.length; i++) {
         //message.split("{"+i.toString()+"}").join(list.elementAt(i).toString());
         String str = list.elementAt(i).toString();
-        String istr = i.toString();
-        
-        message = message.replaceFirst(new RegExp('\\{'+i.toString()+'\\}'), str);
+
+        message = message.replaceFirst(new RegExp('\\{${i.toString()}\\}'), str);
       }
     }
 

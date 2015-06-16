@@ -383,7 +383,7 @@
 			area1.right	= area[0].x + this._page.book.widthAsSet/2;
 			
 			// calculate strength of the gradients:
-			num strength0 = 1 - (area[1].x - area0.x) / this._page.book.widthAsSet;
+			num strength0 = 1 - (area[1].x - area0.left) / this._page.book.widthAsSet;
 			num strength1 = max(0, (area[1].x - area[0].x) / (this._page.book.widthAsSet/2));
 			
 			// create the model for the gradients:

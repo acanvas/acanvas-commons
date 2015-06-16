@@ -32,7 +32,7 @@ class ContextTool {
   }
 
   static bool get TOUCH {
-    return false;//MOBILE && Multitouch.supportsTouchEvents;
+    return html.TouchEvent.supported;
   }
 
   static bool get WEBGL {

@@ -263,14 +263,18 @@
 					if (rect.isOnSide(point1["point"]) == rect.isOnSide(point2["point"])){
 						switch (rect.isOnSide(point1["point"])){
 							case SuperRectangle.NONE : return true;
-							case SuperRectangle.TOP : 
+							case SuperRectangle.TOP :
 								if (point2["point"].x < point1["point"].x) return true;
-							case SuperRectangle.RIGHT : 
+								break;
+							case SuperRectangle.RIGHT :
 								if (point2["point"].y < point1["point"].y) return true;
-							case SuperRectangle.BOTTOM : 
+								break;
+							case SuperRectangle.BOTTOM :
 								if (point2["point"].x > point1["point"].x) return true;
-							case SuperRectangle.LEFT : 
+								break;
+							case SuperRectangle.LEFT :
 								if (point2["point"].y > point1["point"].y) return true;
+								break;
 						}
 					}
 				}

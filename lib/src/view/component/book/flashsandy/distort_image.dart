@@ -211,7 +211,7 @@
 				graphics.moveTo( x0, y0 );
 				graphics.lineTo( x1, y1 );
 				graphics.lineTo( x2, y2 );
-				graphics.fillPattern(new GraphicsPattern.noRepeat(bmd, _tMat /*smoothing*/));
+				graphics.fillPattern(new GraphicsPattern.noRepeat(bmd.renderTextureQuad, _tMat /*smoothing*/));
 			}
 		}
 		

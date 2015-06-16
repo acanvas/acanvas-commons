@@ -4,8 +4,13 @@ part of stagexl_commons;
 class PaperMenu extends ComponentList {
 
   num color;
+  Type cellClass;
+  bool shadow = false;
 
-  PaperMenu(List data, {this.color: PaperColor.GREY_DARK}) : super(Orientation.VERTICAL, PaperListCell, DefaultScrollbar, true) {
+  PaperMenu(List data, {this.color: PaperColor.GREY_DARK, this.cellClass: PaperListCell, this.shadow : true}) : super(Orientation.VERTICAL, PaperListCell, DefaultScrollbar, true) {
+    _cellClass = cellClass;
+
+
     snapToPage = true;
     touchEnabled = false;
     doubleClickEnabled = false;
@@ -36,8 +41,9 @@ class PaperMenu extends ComponentList {
   }
 
   @override void redraw() {
-
-    filters = [ new DropShadowFilter(5, 90,PaperColor.GREY_SHADOW, 10, 10) ];
+    if(shadow == true){
+      filters = [ new DropShadowFilter(5, 90 * PI/180 ,PaperColor.GREY_SHADOW, 10, 10) ];
+    }
     super.redraw();
   }
 

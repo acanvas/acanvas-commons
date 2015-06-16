@@ -1,83 +1,50 @@
 part of stagexl_commons;
 
 class PaperIcon {
-  
-  static final String  greySVG = """
+
+  static SvgDisplayObject color(String rawSvg, int color) {
+    double r = ((color >> 16) & 0xFF) / 255;
+    double g = ((color >> 8) & 0xFF) / 255;
+    double b = ((color >> 0) & 0xFF) / 255;
+    //double a = ((color >> 24) & 0xFF) / 255;
+
+    String svg = """
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
         <filter id="matrix-grey">
-          <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 .5 
-                                                                  0 1 0 0 .5 
-                                                                  0 0 1 0 .5
+          <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 ${r}
+                                                                  0 1 0 0 ${g}
+                                                                  0 0 1 0 ${b}
                                                                   0 0 0 1 0"/>
         </filter>
-        <g filter="url(#matrix-grey)">        
-          #R#
+        <g filter="url(#matrix-grey)">
+          ${rawSvg}
         </g>
       </svg>""";
 
-  static final String  redSVG = """
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-        <filter id="matrix-red">
-          <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0.8235 
-                                                                  0 1 0 0 0.2470
-                                                                  0 0 1 0 0.1921
-                                                                  0 0 0 1 0"/>
-        </filter>
-        <g filter="url(#matrix-red)">        
-          #R#
-        </g>
-      </svg>""";
+    return new SvgDisplayObject(svg);
+  }
 
-  static final String  greenSVG = """
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-        <filter id="matrix-red">
-          <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0.0588 
-                                                                  0 1 0 0 0.6156
-                                                                  0 0 1 0 0.3450
-                                                                  0 0 0 1 0"/>
-        </filter>
-        <g filter="url(#matrix-red)">        
-          #R#
-        </g>
-      </svg>""";
-
-  static final String  invertedSVG = """
+  static SvgDisplayObject inverted(String rawSvg) {
+    String svg = """
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
         <filter id="matrix-invert">
-          <feColorMatrix type="matrix" values="-1 0 0 0 1 
-                                                                  0 -1 0 0 1 
+          <feColorMatrix type="matrix" values="-1 0 0 0 1
+                                                                  0 -1 0 0 1
                                                                   0 0 -1 0 1
                                                                   0 0 0 1 0"/>
         </filter>
-        <g filter="url(#matrix-invert)">        
-          #R#
+        <g filter="url(#matrix-invert)">
+          ${rawSvg}
         </g>
       </svg>""";
 
-  static final String  normalSVG = """
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-        #R#
-      </svg>""";
-  
-  static SvgDisplayObject black(String rawSVG){
-    String svg = normalSVG.replaceFirst(new RegExp(r'#R#'), rawSVG);
     return new SvgDisplayObject(svg);
   }
-  static SvgDisplayObject white(String rawSVG){
-    String svg = invertedSVG.replaceFirst(new RegExp(r'#R#'), rawSVG);
-    return new SvgDisplayObject(svg);
+
+  static SvgDisplayObject black(String rawSvg){
+    return color(rawSvg, PaperColor.BLACK);
   }
-  static SvgDisplayObject grey(String rawSVG){
-    String svg = greySVG.replaceFirst(new RegExp(r'#R#'), rawSVG);
-    return new SvgDisplayObject(svg);
+  static SvgDisplayObject white(String rawSvg){
+    return inverted(rawSvg);
   }
-  static SvgDisplayObject red(String rawSVG){
-    String svg = redSVG.replaceFirst(new RegExp(r'#R#'), rawSVG);
-    return new SvgDisplayObject(svg);
-  }
-  static SvgDisplayObject green(String rawSVG){
-    String svg = greenSVG.replaceFirst(new RegExp(r'#R#'), rawSVG);
-    return new SvgDisplayObject(svg);
-  }
-  
 }

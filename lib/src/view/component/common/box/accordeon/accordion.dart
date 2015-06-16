@@ -56,7 +56,7 @@
 		@override 
 		  DisplayObject addChild(DisplayObject child) {
 			if(child is Button){
-				(child as Button).submitCallback = _onCellSelected;
+				child.submitCallback = _onCellSelected;
 			}
 //			child.addEventListener(CellEvent.SELECTED, _onCellSelected, false, 0, true);
 //			child.addEventListener(CellEvent.DESELECTED, _onCellDeselected, false, 0, true);
