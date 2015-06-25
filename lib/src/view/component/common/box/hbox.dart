@@ -6,22 +6,34 @@ part of stagexl_commons;
 	 * @author Nils Doehring (nilsdoehring@gmail.com)
 	 */
 class HBox extends SpriteComponent {
+  bool _center = false;
   num _padding = 0;
   int _size = 0;
   bool _pixelSnapping;
   bool _inverted;
-  HBox([int padding = 10, bool pixelSnapping = true, bool inverted = false]) {
+  HBox([int padding = 10, bool pixelSnapping = true, bool inverted = false, bool center = false]) {
     _padding = padding;
     _pixelSnapping = pixelSnapping;
     _inverted = inverted;
+    _center = center;
     _ignoreCallSetSize = false;
   }
 
   
-  @override
-  void redraw() {
+  @override redraw(){
     super.redraw();
     update();
+    if(_center == true){
+      children.forEach((child){
+
+        if(child is ISpriteComponent){
+          child.x = (widthAsSet/2 - (child.widthAsSet != 0 ? child.widthAsSet : child.width)/2).round();
+        }
+        else{
+          child.x = (widthAsSet/2 - child.width/2).round();
+        }
+      });
+    }
   }
 
   

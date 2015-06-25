@@ -6,7 +6,6 @@ class PaperAppBar extends SpriteComponent {
   int highlightColor;
   bool extended = false;
 
-  Sprite _bg;
   Sprite _headline;
 
   HBox leftBox;
@@ -15,9 +14,6 @@ class PaperAppBar extends SpriteComponent {
   
   PaperAppBar({this.highlightColor : PaperColor.WHITE, this.bgColor: PaperColor.BLACK, this.extended : false}) : super() {
     ignoreCallSetSize = false;
-
-    _bg = new Sprite();
-    addChild(_bg);
 
     leftBox = new HBox(20, true);
     leftBox.ignoreCallSetSize = true;
@@ -84,7 +80,7 @@ class PaperAppBar extends SpriteComponent {
       tabs.y = heightAsSet - tabs.height;
     }
 
-    GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, sprite: _bg, color : bgColor);
+    GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, sprite: this, color : bgColor);
   }
 
 }

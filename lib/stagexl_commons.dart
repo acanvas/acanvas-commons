@@ -1,7 +1,6 @@
 library stagexl_commons;
 
-@MirrorsUsed( metaTargets: const[Retain])
-import 'dart:mirrors';
+import 'dart:mirrors' show reflectClass, reflect;
 
 import 'dart:async' show Timer, Duration, Completer, StreamSubscription, Zone;
 import 'dart:math';
@@ -75,6 +74,7 @@ part 'src/view/component/form/calendar/next_prev_button.dart';
 
 part 'src/view/component/common/box/accordeon/accordion.dart';
 part 'src/view/component/common/box/accordeon/accordion_cell.dart';
+part 'src/view/component/common/box/reflow.dart';
 part 'src/view/component/common/box/hbox.dart';
 part 'src/view/component/common/box/hbox_animated.dart';
 part 'src/view/component/common/box/hbox_scrollable.dart';
@@ -167,6 +167,7 @@ part 'src/view/paper/paper_radio_button.dart';
 part 'src/view/paper/paper_tabs.dart';
 part 'src/view/paper/paper_toast.dart';
 part 'src/view/paper/paper_toggle_button.dart';
+part 'src/view/paper/paper_wrap.dart';
 
 //softkeyboard
 part 'src/softkeyboard/char_code.dart';

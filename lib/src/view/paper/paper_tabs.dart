@@ -74,4 +74,8 @@ class PaperTabs extends SpriteComponent {
     }
   }
 
+  ///addresses a sizing bug with Graphics tool
+  num get width => super.width - 2;
+  num get widthAsSet => super.widthAsSet - 2;
+
 }

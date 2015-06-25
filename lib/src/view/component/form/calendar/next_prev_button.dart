@@ -9,9 +9,6 @@ class NextPrevButton extends Button {
     Shape bg = new Shape();
     bg.graphics.rect(0, 0, w, h);
     bg.graphics.fillColor(0x66000000);
-    if (ContextTool.WEBGL) {
-      bg.applyCache(0, 0, w, h);
-    }
     addChild(bg);
 
     TextFormat fm = new TextFormat("Arial", 18, 0xFFFFFF);

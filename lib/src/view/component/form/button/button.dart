@@ -86,9 +86,6 @@ class Button extends SpriteComponent {
     bg.graphics.clear();
     bg.graphics.rect(0, 0, w, h);
     bg.graphics.fillColor(color);
-    if (ContextTool.WEBGL) {
-      bg.applyCache(0, 0, w, h);
-    }
     if(bg.parent == null){
       addChildAt(bg, 0);
     }

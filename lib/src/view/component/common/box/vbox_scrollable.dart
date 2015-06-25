@@ -5,27 +5,27 @@ part of stagexl_commons;
  */
 class VBoxScrollable extends ComponentScrollable {
   VBox _vbox;
-  Sprite _background;
 
-  VBoxScrollable([int padding = 10, bool pixelSnapping = true, bool inverted = false]) {
+  VBoxScrollable([int padding = 10, bool pixelSnapping = true, bool inverted = false, bool center = false]) {
     ignoreCallSetSize = false;
 
-    _vbox = new VBox(padding, pixelSnapping, inverted);
-    superConstructor(Orientation.VERTICAL, _vbox, DefaultScrollbar);
+    _vbox = new VBox(padding, pixelSnapping, inverted, center);
+    superConstructor(Orientation.VERTICAL, _vbox, new DefaultScrollbar());
 
-    _background = new Sprite();
-    super.addChildAt(_background,0);
-
-    //swapChildren(_vbox, _background);
-
-    hideScrollbarsOnIdle = false;
+    snapToPage = false;
+    touchEnabled = false;
+    doubleClickEnabled = false;
+    keyboardEnabled = false;
+    doubleClickToZoom = false;
+    bounce = false;
     mouseWheelEnabled = true;
+    hideScrollbarsOnIdle = false;
   }
 
   @override
   void redraw() {
     super.redraw();
-    GraphicsUtil.rectangle(0, 0, widthAsSet, _vbox.height, color: 0x00000000, sprite: _background);
+    GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, color: 0x00000000, sprite: this);
   }
 
   @override

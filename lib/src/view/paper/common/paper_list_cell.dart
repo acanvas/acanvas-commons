@@ -4,25 +4,25 @@ part of stagexl_commons;
 	/**
 	 * @author Nils Doehring (nilsdoehring@gmail.com)
 	 */
-	 @retain
 class PaperListCell extends Cell {
-		 static const num CELL_HEIGHT = 48;
-		 PaperText _title;
-		 Shape _bg;
+		 PaperText title;
+		 int fontColor;
 	 
-		 PaperListCell(int w, [int fontColor = PaperColor.GREY_DARK]) :super(){
+		 PaperListCell(int w, [this.fontColor = PaperColor.GREY_DARK]) :super(){
 
-		   _bg = new Shape();
-		   addChild(_bg);
-		   
 		   PaperRipple	ripple = new PaperRipple(color: fontColor);
        addChild(ripple);
 
-       _title = new PaperText("empty", size: 14, color: fontColor);
-			addChild(_title);
+       title = new PaperText("empty", size: 14, color: fontColor);
+			addChild(title);
 
-			 setSize(w, CELL_HEIGHT);
+			 setSize(w, PaperDimensions.HEIGHT_MENU_CELL);
 		}
+
+
+		@override
+		Cell clone(num width, [int fontClr])
+		 		=> new PaperListCell(width, fontClr);
 
 
 		@override 
@@ -30,7 +30,7 @@ class PaperListCell extends Cell {
 			if (newdata != data) {
 				super.data = newdata;
 				if (data != null && data is Map) {
-					_title.text = (data as Map)["label"];
+					title.text = (data as Map)["label"];
 					redraw();
 				}
 			}
@@ -38,22 +38,19 @@ class PaperListCell extends Cell {
     
 		@override
 		void setSize(num w, num h){
-		  super.setSize(w, CELL_HEIGHT);
+		  super.setSize(w, PaperDimensions.HEIGHT_MENU_CELL);
 		}
 
 		@override void redraw()
 		 {
-			_title.width = widthAsSet - 10;
-			_title.x = 10;
-			_title.y = (heightAsSet/2 - _title.textHeight/2).round();
-			
-			_bg.graphics.clear();
-			_bg.graphics.rect(0, 0, widthAsSet, heightAsSet);
-			_bg.graphics.fillColor(PaperColor.WHITE);
-			if(ContextTool.WEBGL){
-			  _bg.applyCache(0, 0, widthAsSet, heightAsSet);
-			}
-			
+			title.width = widthAsSet - 10;
+			title.x = 10;
+			title.y = (heightAsSet/2 - title.textHeight/2).round();
+
+			graphics.clear();
+			graphics.rect(0, 0, widthAsSet, heightAsSet);
+			graphics.fillColor(PaperColor.WHITE);
+
 			super.redraw();
 		}
 

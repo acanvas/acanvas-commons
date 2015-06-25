@@ -7,17 +7,23 @@ class HBoxScrollable extends ComponentScrollable {
   HBox _hbox;
   Sprite _background;
 
-  HBoxScrollable([int padding = 10, bool pixelSnapping = true, bool inverted = false]) {
+  HBoxScrollable([int padding = 10, bool pixelSnapping = true, bool inverted = false, bool center = false]) {
     ignoreCallSetSize = false;
 
-    _hbox = new HBox(padding, pixelSnapping, inverted);
-    superConstructor(Orientation.HORIZONTAL, _hbox, DefaultScrollbar);
+    _hbox = new HBox(padding, pixelSnapping, inverted, center);
+    superConstructor(Orientation.HORIZONTAL, _hbox, new DefaultScrollbar());
 
     _background = new Sprite();
     addChild(_background);
 
-    hideScrollbarsOnIdle = true;
+    snapToPage = false;
+    touchEnabled = false;
+    doubleClickEnabled = false;
+    keyboardEnabled = false;
+    doubleClickToZoom = false;
+    bounce = false;
     mouseWheelEnabled = true;
+    hideScrollbarsOnIdle = true;
   }
 
   @override

@@ -28,9 +28,6 @@ class PaperCheckbox extends ToggleButton {
     _bg = new Shape();
     _bg.graphics.rect(0, 0, RADIUS*2, RADIUS*2);
     _bg.graphics.fillColor(0x00555555);
-    if (ContextTool.WEBGL) {
-      _bg.applyCache(0, 0, RADIUS*2, RADIUS*2);
-    }
     addChild(_bg);
 
     _box = new Shape();

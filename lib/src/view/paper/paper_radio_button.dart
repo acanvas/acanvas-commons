@@ -35,9 +35,6 @@ class PaperRadioButton extends RadioButton {
     _icon = new Shape();
     _icon.graphics.circle(0, 0, 10);
     _icon.graphics.fillColor(activeColor);
-    if (ContextTool.WEBGL) {
-      _icon.applyCache(-10, -10, 20, 20);
-    }
     addChild(_icon);
     _icon.visible = false;
 

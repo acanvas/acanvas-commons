@@ -135,7 +135,6 @@ class Slider extends SpriteComponent {
 
   void _onThumbMouseDown(MouseEvent event) {
     interactionStart();
-    print("_background.y: ${background.y}, _background.x: ${background.x}, _thumbSize: $_thumbSize");
     _mouseOffset = (_ori ? stage.mouseX : stage.mouseY) - (_ori ? thumb.x : thumb.y);// - _thumbSize * 0.5;
   }
 
@@ -250,6 +249,9 @@ class Slider extends SpriteComponent {
 
   @override
   void set enabled(bool value) {
+    if(enabled == value) return;
+
+    ContextTool.JUGGLER.removeTweens(this);
 
     if (value == true) {
       background.addEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown, useCapture: false, priority: 0);

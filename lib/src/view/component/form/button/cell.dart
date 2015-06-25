@@ -18,6 +18,9 @@ class Cell extends Button {
   Cell() : super() {
   }
 
+  Cell clone(num width)
+    => new Cell();
+
   dynamic get data {
     return _data;
   }

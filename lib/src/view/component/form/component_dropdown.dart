@@ -67,7 +67,7 @@ class ComponentDropdown extends SpriteComponent {
 
       _sprRollout.visible = true;
       _strRolloutState = ROLLOUT_OPEN;
-      stage.juggler.addTween(_sprRollout, 0.5)..animate.y.to(heightAsSet);
+      ContextTool.JUGGLER.addTween(_sprRollout, 0.5)..animate.y.to(heightAsSet);
       if (_onToggleCallback != null) {
         _onToggleCallback.call(_strRolloutState);
       }
@@ -81,7 +81,7 @@ class ComponentDropdown extends SpriteComponent {
         btnRolloutToggle.y = -1;
       }
       _strRolloutState = ROLLOUT_CLOSE;
-      stage.juggler.addTween(_sprRollout, 0)
+      ContextTool.JUGGLER.addTween(_sprRollout, 0)
           ..animate.y.to(-_sprRollout.height)
           ..onComplete = _onCloseRolloutComplete;
     }

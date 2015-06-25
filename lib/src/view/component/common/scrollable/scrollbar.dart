@@ -20,6 +20,9 @@ class Scrollbar extends Slider {
     _pageScrollDuration = pageScrollDuration;
   }
 
+  Scrollbar clone(String orientation, num max, num size, [num pageScrollDuration = 0.7])
+    => new Scrollbar(orientation, max, size, pageScrollDuration);
+
   void prepare() {
     _pageStepper = new NumericStepper(0, 0, 1, false);
 
@@ -81,7 +84,7 @@ class Scrollbar extends Slider {
         changeEnd();
       } else {
         _isTweening = true;
-        stage.juggler.delayCall(() {
+        ContextTool.STAGE.delayCall(() {
           this.value = val;
           _onTweenComplete();
         }, _pageScrollDuration);
@@ -104,7 +107,7 @@ class Scrollbar extends Slider {
         changeEnd();
       } else {
         _isTweening = true;
-        stage.juggler.delayCall(() {
+        ContextTool.JUGGLER.delayCall(() {
           this.value = val;
           _onTweenComplete();
         }, _pageScrollDuration);
@@ -125,7 +128,7 @@ class Scrollbar extends Slider {
         changeEnd();
       } else {
         _isTweening = true;
-        stage.juggler.delayCall(() {
+        ContextTool.JUGGLER.delayCall(() {
           this.value = val;
           _onTweenComplete();
         }, _pageScrollDuration);
@@ -273,22 +276,25 @@ class Scrollbar extends Slider {
 
   @override
   void set value(num newValue) {
+
     if (newValue < _min) newValue = _bounce ? _min + (newValue - _min) * 0.5 : _min; else if (newValue > _max) newValue = _bounce ? _max + (newValue - _max) * 0.5 : _max;
     if (!_continuous && newValue != null) newValue = (newValue).round();
 
     if (newValue != _value) {
       num delta = _value-newValue;
-      
+
       if(delta<0){
         delta = _value - max(delta, -300);
       }
       else{
         delta = _value - min(delta, 300);
-        
+
       }
-      
-      _value = delta; 
-      
+
+      _value = delta;
+      print("value: $_value");
+      print("max: $_max");
+
       redraw();
       dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE, _value));
     }
@@ -361,7 +367,7 @@ class Scrollbar extends Slider {
     Translation t = new Translation(value, val, _pageScrollDuration, Transition.easeOutExponential)
         ..onUpdate = _onPageScrollUpdate
         ..onComplete = _onTweenComplete;
-    stage.juggler.add(t);
+    ContextTool.JUGGLER.add(t);
   }
   void _onPageScrollUpdate(num val) {
     value = val;

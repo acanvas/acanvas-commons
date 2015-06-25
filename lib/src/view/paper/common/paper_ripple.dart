@@ -8,7 +8,7 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   num _initialOpacity = 0.25;
   void set opacity(num o) {_initialOpacity = o;}
 
-  num color;
+  int color;
   num type;
   num velocity = 1.5;
   
@@ -51,7 +51,7 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
           ..y = touchY;
    
     if(ContextTool.WEBGL){
-      inner.applyCache(-waveRadius, -waveRadius, waveRadius*2, waveRadius*2);
+      //inner.applyCache(-waveRadius, -waveRadius, waveRadius*2, waveRadius*2);
     }
     inner.scaleX = 0.1;
     inner.scaleY = 0.1;

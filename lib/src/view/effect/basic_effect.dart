@@ -73,7 +73,7 @@ class BasicEffect implements IEffect {
     output.draw(target, mat);
 
     Bitmap outputBmp = new Bitmap(output);
-    outputBmp.applyCache(0, 0, output.width, output.height);
+    //outputBmp.applyCache(0, 0, output.width, output.height);
     target.alpha = 0;
 
     _sprite.addChild(outputBmp);
@@ -89,7 +89,7 @@ class BasicEffect implements IEffect {
     var tween = new Tween(target, duration, Transition.easeInCubic);
     tween.animate.alpha.to(1.0); // target value = 0.0
     tween.onComplete = () => callback.call();
-    _stage.juggler.add(tween);
+    ContextTool.JUGGLER.add(tween);
 
   }
   void runOutEffect(ISpriteComponent target, num duration, Function callback) {
@@ -99,13 +99,13 @@ class BasicEffect implements IEffect {
     var tween = new Tween(target, duration, Transition.easeInCubic);
     tween.animate.alpha.to(0); // target value = 0.0
     tween.onComplete = () => callback.call();
-    _stage.juggler.add(tween);
+    ContextTool.JUGGLER.add(tween);
   }
 
   void cancel([ISpriteComponent target = null]) {
     if (target == null) return;
 
-    _stage.juggler.removeTweens(target);
+    ContextTool.JUGGLER.removeTweens(target);
 
     DisplayObject child;
     for (int i = 0; i < (target).numChildren; i++) {
@@ -116,7 +116,7 @@ class BasicEffect implements IEffect {
     }
   }
   void onComplete([Bitmap target = null, ISpriteComponent page = null, Function callback = null]) {
-    _stage.juggler.removeTweens(target);
+    ContextTool.JUGGLER.removeTweens(target);
 
     if (target != null) {
       if (target.parent != null) {
@@ -137,7 +137,7 @@ class BasicEffect implements IEffect {
   }
   void destroy() {
     if (_sprite != null && useSprite()) {
-      _stage.juggler.removeTweens(_sprite);
+      ContextTool.JUGGLER.removeTweens(_sprite);
       if (_sprite.parent != null) {
         _sprite.parent.removeChild(_sprite);
       }

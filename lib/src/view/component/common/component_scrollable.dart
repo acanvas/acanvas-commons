@@ -9,7 +9,7 @@ class ComponentScrollable extends SpriteComponent {
   int scrollStep = 10;
   //
   SpriteComponent _view;
-  Type _scrollbarClass;
+  Scrollbar _scrollbar;
   Scrollbar _hScrollbar;
   Scrollbar _vScrollbar;
   bool _maskEnabled = true;
@@ -40,13 +40,16 @@ class ComponentScrollable extends SpriteComponent {
   bool _interactionV = false;
   bool _changingV = false;
   bool _bOrientationHorizontal = false;
+
+  bool _queryActualChildWidth;
+  bool _queryActualChildHeight;
   ComponentScrollable(/*String orientation, SpriteComponent view, Type scrollbarClass*/) {
   }
   
-  void superConstructor(String orientation, SpriteComponent spriteComponent, Type scrollbarClass) {
+  void superConstructor(String orientation, SpriteComponent spriteComponent, Scrollbar scrollbar, {bool queryActualChildWidth: true, bool queryActualChildHeight: true}) {
 
     _orientation = orientation;
-    _scrollbarClass = scrollbarClass;
+    _scrollbar = scrollbar;
 
     if (_orientation == Orientation.HORIZONTAL) {
       _bOrientationHorizontal = true;
@@ -54,10 +57,13 @@ class ComponentScrollable extends SpriteComponent {
       _bOrientationHorizontal = false;
     }
 
+    _queryActualChildWidth = queryActualChildWidth;
+    _queryActualChildHeight = queryActualChildHeight;
+
     _addScrollbars();
 
     this.view = spriteComponent;
-    keyboardEnabled = true;
+    keyboardEnabled = false;
     
   }
 
@@ -65,8 +71,7 @@ class ComponentScrollable extends SpriteComponent {
     // H
     if (_hScrollbar == null) {
 
-      InstanceMirror im = reflectClass(_scrollbarClass).newInstance(const Symbol(''), [Orientation.HORIZONTAL, 0, widthAsSet]);
-      _hScrollbar = im.reflectee;
+      _hScrollbar = _scrollbar.clone(Orientation.HORIZONTAL, 0, widthAsSet);
       _hScrollbar.ignoreCallSetSize = false;
       _hScrollbar.y = heightAsSet.round();
       _hScrollbar.addEventListener(SliderEvent.VALUE_CHANGE, _onHScrollbarChange, useCapture: false, priority: 0);
@@ -83,8 +88,7 @@ class ComponentScrollable extends SpriteComponent {
 
     // V
     if (_vScrollbar == null) {
-      InstanceMirror im = reflectClass(_scrollbarClass).newInstance(const Symbol(''), [Orientation.VERTICAL, 0, heightAsSet]);
-      _vScrollbar = im.reflectee;
+      _vScrollbar = _scrollbar.clone(Orientation.VERTICAL, 0, heightAsSet);
       _vScrollbar.ignoreCallSetSize = false;
       _vScrollbar.x = widthAsSet.round();
       _vScrollbar.addEventListener(SliderEvent.VALUE_CHANGE, _onVScrollbarChange, useCapture: false, priority: 0);
@@ -138,8 +142,8 @@ class ComponentScrollable extends SpriteComponent {
     if (!_changing) {
       _changing = true;
       if (_hideScrollbarsOnIdle) {
-        if (_hScrollbar.enabled) stage.juggler.addTween(_hScrollbar, 0.2)..animate.alpha.to(1);
-        if (_vScrollbar.enabled) stage.juggler.addTween(_vScrollbar, 0.2)..animate.alpha.to(1);
+        if (_hScrollbar.enabled) ContextTool.JUGGLER.addTween(_hScrollbar, 0.2)..animate.alpha.to(1);
+        if (_vScrollbar.enabled) ContextTool.JUGGLER.addTween(_vScrollbar, 0.2)..animate.alpha.to(1);
       }
       dispatchEvent(new ScrollViewEvent(ScrollViewEvent.CHANGE_START));
     }
@@ -149,16 +153,16 @@ class ComponentScrollable extends SpriteComponent {
     if (_changing) {
       _changing = false;
       if (_hideScrollbarsOnIdle) {
-        if (_hScrollbar.enabled) stage.juggler.addTween(_hScrollbar, 0.2)..animate.alpha.to(0);
-        if (_vScrollbar.enabled) stage.juggler.addTween(_vScrollbar, 0.2)..animate.alpha.to(0);
+        if (_hScrollbar.enabled) ContextTool.JUGGLER.addTween(_hScrollbar, 0.2)..animate.alpha.to(0);
+        if (_vScrollbar.enabled) ContextTool.JUGGLER.addTween(_vScrollbar, 0.2)..animate.alpha.to(0);
       }
       dispatchEvent(new ScrollViewEvent(ScrollViewEvent.CHANGE_END));
     }
   }
 
   void updateScrollbars() {
-    num w = _view.widthAsSet != 0 ? _view.widthAsSet : _view.width;
-    num h = _view.heightAsSet != 0 ? _view.heightAsSet : _view.height;
+    num w = _queryActualChildWidth || _view.widthAsSet == 0 ? _view.width : _view.widthAsSet;
+    num h = _queryActualChildHeight || _view.heightAsSet == 0 ? _view.height :  _view.heightAsSet;
 
     _hScrollbar.enabled = w > widthAsSet;
     _hScrollbar.maxValue = w - widthAsSet;
@@ -169,8 +173,10 @@ class ComponentScrollable extends SpriteComponent {
   }
 
   void _updateThumbs() {
-    _hScrollbar.pages = _view.width / widthAsSet;
-    _vScrollbar.pages = _view.height / heightAsSet;
+    num w = _queryActualChildWidth || _view.widthAsSet == 0 ? _view.width : _view.widthAsSet;
+    num h = _queryActualChildHeight || _view.heightAsSet == 0 ? _view.height :  _view.heightAsSet;
+    _hScrollbar.pages = w / widthAsSet;
+    _vScrollbar.pages = h / heightAsSet;
   }
 
   SpriteComponent get view {
@@ -377,7 +383,7 @@ class ComponentScrollable extends SpriteComponent {
     _normalizedValueV = (yPos - heightAsSet / (2 * scale)) / ((_view.height / _view.scaleY) - heightAsSet / scale);
 
 
-    stage.juggler.addTween(_view, 0.3)
+    ContextTool.JUGGLER.addTween(_view, 0.3)
         ..animate.scaleX.to(scale)
         ..animate.scaleY.to(scale)
         ..onUpdate = (() => _keepPos)
@@ -471,10 +477,10 @@ class ComponentScrollable extends SpriteComponent {
   void set hideScrollbarsOnIdle(bool value) {
     _hideScrollbarsOnIdle = value;
     if (_hScrollbar.enabled) {
-      stage.juggler.addTween(_hScrollbar, 0.2)..animate.alpha.to(_hideScrollbarsOnIdle ? 0 : 1);
+      ContextTool.JUGGLER.addTween(_hScrollbar, 0.2)..animate.alpha.to(_hideScrollbarsOnIdle ? 0 : 1);
     }
     if (_vScrollbar.enabled) {
-      stage.juggler.addTween(_vScrollbar, 0.2)..animate.alpha.to(_hideScrollbarsOnIdle ? 0 : 1);
+      ContextTool.JUGGLER.addTween(_vScrollbar, 0.2)..animate.alpha.to(_hideScrollbarsOnIdle ? 0 : 1);
     }
   }
 }

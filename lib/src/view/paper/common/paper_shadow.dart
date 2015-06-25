@@ -4,31 +4,28 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   static const int RECTANGLE = 1;
   static const int CIRCLE = 2;
 
-  static int QUALITY = ContextTool.MOBILE ? 5 : 5;
+  static int QUALITY = ContextTool.MOBILE ? 1 : 1;
 
-  int _initialBlur = 10;
-  int _initialDistance = 2;
-  int _activeDistance = 6;
-  Timer _timer;
+  int _initialBlur = 8;
+  int _initialDistance = 1;
+  int _activeDistance = 4;
   DropShadowFilter _shadow;
   Translation _trans;
 
-  num type;
-  num bgColor;
+  int type;
+  int bgColor;
   bool shadowEnabled;
-  num shadowColor;
+  int shadowColor;
   bool respondToClick;
-  SpriteComponent _bg;
+  int elevation;
+  Sprite target;
 
-  PaperShadow({this.type : RECTANGLE, this.bgColor: 0xFFFFFFFF, this.shadowEnabled : true, this.shadowColor: PaperColor.GREY_SHADOW, this.respondToClick: true}):super() {
+  PaperShadow({this.type : RECTANGLE, this.bgColor: 0xFFFFFFFF, this.shadowEnabled : true, this.shadowColor: PaperColor.GREY_SHADOW, this.respondToClick: true, this.elevation: 1, this.target}):super() {
     ignoreCallSetSize = false;
 
-    _bg = new SpriteComponent();
-    addChild(_bg);
-
-    if(shadowEnabled){
-      _shadow = new DropShadowFilter(_initialDistance, 90 * PI/180, shadowColor, _initialBlur, _initialBlur, QUALITY);
-      filters = [_shadow];
+    if(elevation > 0 && shadowEnabled){
+      _shadow = new DropShadowFilter(_initialDistance, PI/2, shadowColor, _initialBlur, _initialBlur, QUALITY);
+      target != null ? target.filters = [_shadow] : filters = [_shadow];
     }
     else{
       respondToClick = false;
@@ -39,10 +36,10 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   void redraw(){
     switch(type){
       case RECTANGLE:
-        GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, color: bgColor, sprite: _bg);
+        GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, round : true, color: bgColor, sprite: target != null ? target : this);
         break;
       case CIRCLE:
-        GraphicsUtil.circle(widthAsSet/2, widthAsSet/2, widthAsSet/2, color: bgColor, sprite: _bg);
+        GraphicsUtil.circle(widthAsSet/2, widthAsSet/2, widthAsSet/2, round : true, color: bgColor, sprite: target != null ? target : this);
         break;
     }
   }
@@ -51,31 +48,24 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   downAction([Event e = null]) {
     if(!respondToClick) return;
     
-    if (_timer != null) {
-      _timer.cancel();
+    if (_trans != null) {
+      ContextTool.STAGE.juggler.remove(_trans);
     }
 
-    _timer = new Timer(new Duration(milliseconds: 30), () {
-      
-      _trans = new Translation(_initialDistance, _activeDistance, .15)..onUpdate = (num val) {
-            _shadow.distance = val;
-          };
+    _trans = new Translation(_initialDistance, _activeDistance, .15)  ..onUpdate = (num val) {
+        _shadow.distance = val;
+      };
 
-      ContextTool.STAGE.juggler.add(_trans);
-      _timer = null;
-    });
+    ContextTool.STAGE.juggler.add(_trans);
   }
 
 
   upAction([Event e = null]) {
     if(!respondToClick) return;
-    
-    if (_timer != null) {
-      _timer.cancel();
-      return;
-    }
 
-    ContextTool.STAGE.juggler.remove(_trans);
+    if (_trans != null) {
+      ContextTool.STAGE.juggler.remove(_trans);
+    }
 
     _trans = new Translation(_activeDistance, _initialDistance, .15)..onUpdate = (num val) {
           _shadow.distance = val;

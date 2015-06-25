@@ -48,5 +48,8 @@ class ContextTool {
   static void set STAGE(Stage stage) {
     _singleton._stage = stage;
   }
+  static Juggler get JUGGLER {
+    return _singleton._stage.juggler;
+  }
 
 }

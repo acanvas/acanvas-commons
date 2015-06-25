@@ -10,7 +10,7 @@ class RadioButton extends Button {
 
   @override
   void upAction([MouseEvent event = null]) {
-    dispatchEvent(new ToggleButtonEvent(ToggleButtonEvent.TOGGLE));
+    dispatchEvent(new ToggleButtonEvent(ToggleButtonEvent.TOGGLE, true));
     super.upAction(event);
   }
 

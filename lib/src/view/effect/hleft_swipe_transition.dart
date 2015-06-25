@@ -15,7 +15,7 @@ class HLeftSwipeTransition extends BasicEffect {
     target.x = target.stage.stageWidth;
     target.alpha = 1;
 
-    target.stage.juggler.addTween(target, duration, Transition.easeOutQuartic)
+    ContextTool.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
         ..animate.x.to(iTargetXOriginal)
         ..onComplete = () {
           callback.call();
@@ -26,7 +26,7 @@ class HLeftSwipeTransition extends BasicEffect {
   void runOutEffect(ISpriteComponent t, num duration, Function callback) {
     SpriteComponent target = t as SpriteComponent;
     target.parent.mask = new Mask.rectangle(target.x, target.y, target.widthAsSet, target.heightAsSet);
-    target.stage.juggler.addTween(target, duration, Transition.easeOutQuartic)
+    ContextTool.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
         ..animate.x.to(-target.width)
         ..onComplete = () {
           callback.call();

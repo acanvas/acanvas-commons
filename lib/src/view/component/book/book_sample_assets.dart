@@ -1,7 +1,6 @@
 part of stagexl_commons;
 
 
-@retain
 class BookSampleAssets {
 
   static const int NUM_PAGES = 12;

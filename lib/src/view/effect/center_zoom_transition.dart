@@ -15,7 +15,7 @@
       target.x = target.stage.stageWidth / 2;
       target.y = target.stage.stageHeight / 2;
       
-      target.stage.juggler.addTween(target, duration, Transition.easeOutQuartic)
+      ContextTool.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
           ..animate.scaleX.to(1)
           ..animate.scaleY.to(1)
           ..animate.alpha.to(1)
@@ -24,7 +24,7 @@
     
     @override 
       void runOutEffect(ISpriteComponent target,num duration,Function callback) {
-      target.stage.juggler.addTween(target, duration, Transition.easeOutQuartic)
+      ContextTool.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
         ..animate.scaleX.to(.8)
         ..animate.scaleY.to(.8)
         ..animate.alpha.to(0)

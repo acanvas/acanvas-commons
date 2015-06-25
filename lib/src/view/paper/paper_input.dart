@@ -8,6 +8,7 @@ class PaperInput extends SpriteComponent {
   int fontSize;
   bool floating;
   bool keyboard;
+  bool password;
   String required;
 
   /* The color to be used by active indicators (line, box, floating label) */
@@ -30,7 +31,7 @@ class PaperInput extends SpriteComponent {
   /* bool to indicate if label is currently floating */
   bool _currentlyFloating = false;
 
-  PaperInput(String text, {this.fontSize: 14, this.textColor: PaperColor.BLACK, String fontName: DEFAULT_FONT, bool multiline: false, int rows: 1, this.floating: false, this.required: "", this.keyboard: false}) : super() {
+  PaperInput(String text, {this.fontSize: 14, this.textColor: PaperColor.BLACK, String fontName: DEFAULT_FONT, bool multiline: false, int rows: 1, this.floating: false, this.required: "", this.keyboard: false, this.password: false}) : super() {
     ignoreCallSetSize = false;
 
     _defaultTextField = new UITextField(text, new TextFormat(fontName, fontSize, PaperColor.GREY_DARK));
@@ -66,6 +67,7 @@ class PaperInput extends SpriteComponent {
     _cursorBox.alpha = 0;
 
     _inputTextField = new UITextFieldInput("", new TextFormat(fontName, fontSize, textColor));
+    _inputTextField.displayAsPassword = password;
     _inputTextField.multiline = multiline;
     _inputTextField.height = (rows * (fontSize + 1)).round();
     addChild(_inputTextField);
@@ -271,9 +273,6 @@ class PaperInput extends SpriteComponent {
     box.graphics.clear();
     box.graphics.rect(0, 0, 20, _inputTextField.textHeight);
     box.graphics.fillColor(color);
-    if (ContextTool.WEBGL) {
-      box.applyCache(0, 0, 20, _inputTextField.textHeight.ceil());
-    }
   }
   
   SoftKeyboard _softKeyboard;
@@ -304,5 +303,7 @@ class PaperInput extends SpriteComponent {
     _softKeyboard = null;
   }
 
-
+  ///addresses a sizing bug with Graphics tool
+  num get width => super.width - 2;
+  num get widthAsSet => super.widthAsSet - 2;
 }

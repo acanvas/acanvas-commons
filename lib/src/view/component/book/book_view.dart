@@ -1328,7 +1328,7 @@ part of stagexl_commons;
 		 */
 		  void setLastFlippedTime() {
 			if (this.flipOnClick && !this.autoFlipActive){
-				this.lastFlippedTime = /*getTimer()*/ (stage.juggler.elapsedTime*1000).round();
+				this.lastFlippedTime = /*getTimer()*/ (ContextTool.STAGE.elapsedTime*1000).round();
 			}
 		}
 		
@@ -1394,7 +1394,7 @@ part of stagexl_commons;
 		 */
 		  bool get flipOnRelease {
 			if (this.flipOnClick && !this.autoFlipActive){
-				return (/*getTimer()*/ (stage.juggler.elapsedTime*1000) - this.lastFlippedTime <= BookView.CLICK_INTERVAL);
+				return (/*getTimer()*/ (ContextTool.STAGE.elapsedTime*1000) - this.lastFlippedTime <= BookView.CLICK_INTERVAL);
 			}else{
 				return false;
 			}

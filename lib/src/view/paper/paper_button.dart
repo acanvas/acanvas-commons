@@ -15,11 +15,15 @@ class PaperButton extends Button {
   PaperText _label;
   int _bgColor;
   PaperShadow _paperShadow;
+  SvgDisplayObject icon;
+
+  num _originalYLabel;
 
   PaperButton(String text, {num width: 120, num height: PaperDimensions.HEIGHT_BUTTON,
-                            int bgColor: -1, int fontColor : -1, String fontName: PaperText.DEFAULT_FONT, int fontSize: 14,
-                            int preset: PRESET_WHITE,
-                            bool shadow : true, bool background : true}) : super() {
+  int bgColor: -1, int fontColor : -1, String fontName: PaperText.DEFAULT_FONT, int fontSize: 14,
+  int preset: PRESET_WHITE,
+  bool shadow : true, bool background : true, bool ripple: true,
+  this.icon}) : super() {
     int _fontAndRippleColor;
     switch (preset) {
       case PRESET_WHITE:
@@ -43,22 +47,28 @@ class PaperButton extends Button {
         _fontAndRippleColor = 0xFFFFFFFF;
         break;
     }
-    
-    if(bgColor != -1){
+
+    if (bgColor != -1) {
       _bgColor = bgColor;
     }
 
-    if(fontColor != -1){
+    if (fontColor != -1) {
       _fontAndRippleColor = fontColor;
     }
 
-    if(background){
-      _paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: _bgColor, shadowEnabled : shadow);
+    if (background) {
+      _paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: _bgColor, shadowEnabled : shadow/*, target: this*/);
       addChild(_paperShadow);
     }
-    
-    PaperRipple paperRipple = new PaperRipple(color: _fontAndRippleColor);
-    addChild(paperRipple);
+
+    if (ripple) {
+      PaperRipple paperRipple = new PaperRipple(color: _fontAndRippleColor);
+      addChild(paperRipple);
+    }
+
+    if (icon != null) {
+      addChild(icon);
+    }
 
     _label = new PaperText(text, size: fontSize, color: _fontAndRippleColor, fontName: fontName);
     _label.width = LABEL_MAX_WIDTH;
@@ -82,19 +92,45 @@ class PaperButton extends Button {
     _label.width = widthAsSet - SPACER;
     _label.y = (heightAsSet / 2 - _label.textHeight / 2).round();
 
+    if (icon != null) {
+      icon.x = _label.x - icon.width / 2 - 12;
+      _label.x += (14 + icon.width);
+      icon.y = _label.y - 4;
+    }
+
+    _originalYLabel = _label.y;
+
     super.redraw();
   }
 
   @override
   void onRollOver([InputEvent event = null]) {
-    if(_paperShadow != null){
+    if (_paperShadow != null) {
       _paperShadow.downAction();
+      var j = ContextTool.STAGE.juggler;
+
+      j.removeTweens(_paperShadow);
+      j.removeTweens(_label);
+      j.addTween(_paperShadow, .15)
+      ..animate.y.to(-1);
+      j.addTween(_label, .15)
+      ..animate.y.to(_originalYLabel-1);
     }
   }
+
   @override
   void onRollOut([InputEvent event = null]) {
-    if(_paperShadow != null){
+    if (_paperShadow != null) {
       _paperShadow.upAction();
+      var j = ContextTool.STAGE.juggler;
+
+      j.removeTweens(_paperShadow);
+      j.removeTweens(_label);
+
+      j.addTween(_paperShadow, .15)
+        ..animate.y.to(0);
+      j.addTween(_label, .15)
+        ..animate.y.to(_originalYLabel);
     }
   }
 

@@ -4,30 +4,34 @@ part of stagexl_commons;
 class PaperMenu extends ComponentList {
 
   num color;
-  Type cellClass;
   bool shadow = false;
-
-  PaperMenu(List data, {this.color: PaperColor.GREY_DARK, this.cellClass: PaperListCell, this.shadow : true}) : super(Orientation.VERTICAL, PaperListCell, DefaultScrollbar, true) {
-    _cellClass = cellClass;
+  PaperListCell _cellFactory;
 
 
-    snapToPage = true;
+  PaperMenu(List data, {this.color: PaperColor.GREY_DARK, PaperListCell cell, this.shadow : true}) : super(Orientation.VERTICAL, cell, new DefaultScrollbar(), true) {
+    _cellFactory = cell;
+
+    snapToPage = false;
     touchEnabled = false;
     doubleClickEnabled = false;
     keyboardEnabled = false;
     doubleClickToZoom = false;
-    bounce = false;//bounce if touchscreen
-    mouseWheelEnabled = false;
-    //list.hideScrollbarsOnIdle = true;
+    bounce = false;
+    mouseWheelEnabled = true;
+    hideScrollbarsOnIdle = false;
     setData(data);
-    setSize(180, PaperListCell.CELL_HEIGHT * data.length);
+
+    PaperShadow _paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: PaperColor.WHITE, shadowEnabled : shadow);
+    addChildAt(_paperShadow, 0);
+
+    setSize(PaperDimensions.WIDTH_MENU, PaperDimensions.HEIGHT_MENU_CELL * data.length);
   }
 
   @override
   Cell _getCell([bool pop = false]) {
     Cell cell;
     if (_reusableCellPool.length == 0) {
-      cell = reflectClass(_cellClass).newInstance(new Symbol(""), [widthAsSet, color]).reflectee;
+      cell = _cellFactory.clone(widthAsSet, color);
       //cell.setSize(widthAsSet, heightAsSet);
       cell.mouseChildren = false;
       cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown, useCapture: false, priority: 0);
@@ -38,13 +42,6 @@ class PaperMenu extends ComponentList {
     cell = pop ? _reusableCellPool.removeLast() : _reusableCellPool.removeAt(0);
     //cell.setSize(widthAsSet, heightAsSet);
     return cell;
-  }
-
-  @override void redraw() {
-    if(shadow == true){
-      filters = [ new DropShadowFilter(5, 90 * PI/180 ,PaperColor.GREY_SHADOW, 10, 10) ];
-    }
-    super.redraw();
   }
 
 }

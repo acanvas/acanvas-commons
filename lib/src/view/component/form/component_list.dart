@@ -6,7 +6,7 @@ part of stagexl_commons;
 	 */
 class ComponentList extends ComponentScrollable {
   //
-  Type _cellClass;
+  Cell _cellFactory;
   bool _constantCellSize = false;
   num _cellSize = 0;
   int _bufferSize = 20;
@@ -26,11 +26,11 @@ class ComponentList extends ComponentScrollable {
   num _originX = 0;
   num _originY = 0;
 
-  ComponentList(String orientation, Type cellClass, Type scrollbarClass, bool constantCellSize) {
-    _cellClass = cellClass;
+  ComponentList(String orientation, Cell cell, Scrollbar scrollbar, bool constantCellSize) {
+    _cellFactory = cell;
     _reusableCellPool = [];
     _constantCellSize = constantCellSize;
-    superConstructor(orientation, new SpriteComponent(), scrollbarClass);
+    superConstructor(orientation, new SpriteComponent(), scrollbar);
   }
 
   @override
@@ -390,7 +390,7 @@ class ComponentList extends ComponentScrollable {
   Cell _getCell([bool pop = false]) {
     Cell cell;
     if (_reusableCellPool.length == 0) {
-      cell = reflectClass(_cellClass).newInstance(new Symbol(""), [widthAsSet]).reflectee;
+      cell = _cellFactory.clone(widthAsSet);
       //cell.setSize(widthAsSet, heightAsSet);
       cell.mouseChildren = false;
       cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown, useCapture: false, priority: 0);

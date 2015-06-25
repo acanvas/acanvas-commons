@@ -10,16 +10,18 @@ class PaperProgress extends Slider {
   Sprite _progress;
   
   PaperProgress(num min, num max, num size, {this.barColor : PaperColor.BLACK, int bgColor: PaperColor.WHITE}) : super(Orientation.HORIZONTAL, min, max, size, false) {
-    background = GraphicsUtil.rectangle(0, 0, size, 2, color: bgColor, sprite: background);
-    addChild(background);
-    
+    GraphicsUtil.rectangle(0, 0, size, 2, color: bgColor, sprite: this);
+
     _progress = new Sprite();
+    GraphicsUtil.rectangle(0, 0, 10, 2, color: barColor, sprite: _progress);
+    _progress.alpha = 0;
     addChild(_progress);
   }
 
   @override
   void set value(num value) {
     super.value = value;
-    GraphicsUtil.rectangle(0, 0, thumb.x, 2, color: barColor, sprite: _progress);
+    _progress.width = thumb.x;
+    _progress.alpha = 1;
   }
 }
