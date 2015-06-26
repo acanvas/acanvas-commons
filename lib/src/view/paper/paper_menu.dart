@@ -9,7 +9,7 @@ class PaperMenu extends ComponentList {
 
 
   PaperMenu(List data, {this.color: PaperColor.GREY_DARK, PaperListCell cell, this.shadow : true}) : super(Orientation.VERTICAL, cell, new DefaultScrollbar(), true) {
-    _cellFactory = cell;
+    _cellFactory = cell != null ? cell : new PaperListCell(10);
 
     snapToPage = false;
     touchEnabled = false;

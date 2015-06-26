@@ -30,7 +30,7 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 		 * @param switchKeyLayout The class to instantiate when the <code>SWITCH_LAYOUT</code> key is
 		 * pressed.
 		 */
-		  void AzertySwitch(Layout switchKeyType) {
+		   AzertySwitch(Layout switchKeyType) {
 				/** The label to use on <code>SWITCH_LAYOUT</code> keys pointing to this layout. */
   		 _switchKeyLabel = 'ABC';
 				

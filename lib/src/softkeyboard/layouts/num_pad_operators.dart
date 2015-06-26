@@ -26,7 +26,7 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 		/** 
 		 * Creates a new NumPadOperators object.
 		 */
-		  void NumPadOperators() {
+		   NumPadOperators() {
 				/** The label to use on <code>SWITCH_LAYOUT</code> keys pointing to this layout. */
   		 _switchKeyLabel = '123';
 			

@@ -8,7 +8,7 @@ class Logger implements logging.Logger {
 
   Logger(String name) : _delegate = new logging.Logger(name);
 
-  noSuchMethod(Invocation invocation) => reflect(_delegate).delegate(invocation);
+  //noSuchMethod(Invocation invocation) => reflect(_delegate).delegate(invocation);
 
   @override
   void log(logging.Level logLevel, String message, [Object error, StackTrace stackTrace, Zone zone]) {

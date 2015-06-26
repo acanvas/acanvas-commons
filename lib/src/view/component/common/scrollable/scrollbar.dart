@@ -292,8 +292,6 @@ class Scrollbar extends Slider {
       }
 
       _value = delta;
-      print("value: $_value");
-      print("max: $_max");
 
       redraw();
       dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE, _value));

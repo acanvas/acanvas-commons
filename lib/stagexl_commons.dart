@@ -1,7 +1,5 @@
 library stagexl_commons;
 
-import 'dart:mirrors' show reflectClass, reflect;
-
 import 'dart:async' show Timer, Duration, Completer, StreamSubscription, Zone;
 import 'dart:math';
 import 'dart:html' as html;
@@ -42,7 +40,7 @@ part 'src/eventbus/impl/xl_signal.dart';
 //lang
 part 'src/lang/assert.dart';
 part 'src/lang/util/ordered_utils.dart';
-part 'src/lang/class_utils.dart';
+//part 'src/lang/class_utils.dart';
 part 'src/lang/illegal_argument_error.dart';
 part 'src/lang/string_utils.dart';
 part 'src/lang/i_disposable.dart';

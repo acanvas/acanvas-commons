@@ -48,7 +48,6 @@ class Assert {
 		 * @param abstractType an abstract Type definition
 		 * @param message the error message to use if the assertion fails
 		 * @throws org.as3commons.lang.IllegalArgumentError if the assertion fails
-		 */
   static void notAbstract(Object instance, Type abstractClass, [String message = ""]) {
     Type instanceName = reflect(instance).runtimeType;
     //String abstractName = getQualifiedClassName(abstractClass);
@@ -60,6 +59,7 @@ class Assert {
       throw new IllegalArgumentError(message);
     }
   }
+		 */
 
   /**
 		 * Assert that an object is <code>null</code>.
@@ -83,7 +83,6 @@ class Assert {
 		 * @param object the object to check
 		 * @param message the error message to use if the assertion fails
 		 * @throws org.as3commons.lang.IllegalArgumentError if the object is not an instance of the given type
-		 */
   static void instanceOf(dynamic object, Type type, [String message = ""]) {
     if(reflect(object).runtimeType == type) {
       if (message == null || message.length == 0) {
@@ -92,11 +91,11 @@ class Assert {
       throw new IllegalArgumentError(message);
     }
   }
+		 */
 
 
   /**
 		 * Asserts that a Type is a subType of another class.
-		 */
   static void subclassOf(Type clazz, Type parentClass, [String message = ""]) {
 
     if(ClassUtils.isSubclassOf(clazz, parentClass)) {
@@ -107,10 +106,10 @@ class Assert {
     }
 
   }
+		 */
 
   /**
 		 * Assert that an object implements a certain abstract class.
-		 */
   static void implementationOf(dynamic object, Type interfaze, [String message = ""]) {
     if(ClassUtils.isImplementationOf(reflect(object).runtimeType, interfaze)) {
       if (message == null || message.length == 0) {
@@ -119,6 +118,7 @@ class Assert {
       throw new IllegalArgumentError(message);
     }
   }
+		 */
 
   /**
 		 * Assert a boolean expression to be true. If false, an IllegalStateError is thrown.
@@ -153,7 +153,6 @@ class Assert {
 
   /**
 		 * Assert that the given Map contains only keys of the given type.
-		 */
   static void dictionaryKeysOfType(Map dictionary, Type type, [String message = ""]) {
     for (Object key in dictionary) {
       if (reflect(key).runtimeType != type) {
@@ -164,6 +163,7 @@ class Assert {
       }
     }
   }
+		 */
 
   /**
 		 * Assert that the array contains the passed in item.
@@ -183,7 +183,6 @@ class Assert {
 		 * @param array the array to check
 		 * @param type the type of the array items
 		 * @param message the error message to use if the assertion fails
-		 */
   static void arrayItemsOfType(List array, Type type, [String message = ""]) {
     for (dynamic item in array) {
       if (reflect(item).runtimeType != type) {
@@ -194,4 +193,5 @@ class Assert {
       }
     }
   }
+		 */
 }

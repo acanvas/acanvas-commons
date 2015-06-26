@@ -20,7 +20,7 @@ class SpriteComponent extends Sprite3D implements ISpriteComponent {
   List _submitCallbackParams;
 
   SpriteComponent() {
-    this.log = new Logger(reflect(this).type.qualifiedName.toString());
+    this.log = new Logger("SpriteComponent.randomID ${ new Random()..nextInt(1000000)}");
   }
 
   @override

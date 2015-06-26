@@ -1,5 +1,5 @@
 name: stagexl_commons
-version: 0.2.0
+version: 0.3.0
 description: StageXL Commons consist of a port of as3commons and highly customizable View Components
 dependencies:
   logging: any

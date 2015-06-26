@@ -33,7 +33,7 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 		 * @param switchKeyLayout The class to use with the <code>SWITCH_KEY</code> defined by this
 		 * layout.
 		 */
-		  void EmailnumsSymbolsSwitch(Layout switchKeyType) {
+		   EmailnumsSymbolsSwitch(Layout switchKeyType) {
 				/** The label to use on <code>SWITCH_LAYOUT</code> keys pointing to this layout. */
   		 _switchKeyLabel = r'123 &+$';
 			

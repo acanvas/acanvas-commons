@@ -11,10 +11,11 @@ class ManagedSpriteComponent extends SpriteComponent implements IManagedSpriteCo
 
   ManagedSpriteComponent([String id = ""]) {
     if (id == "") {
-      name = reflect(this).type.qualifiedName.toString();
+      name = "ManagedSpriteComponent.randomID ${ new Random()..nextInt(1000000)}";
     } else {
       name = id;
     }
+    this.log = new Logger(name);
   }
 
   @override
