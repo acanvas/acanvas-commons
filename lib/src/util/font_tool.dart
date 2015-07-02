@@ -30,6 +30,10 @@ class FontTool {
       "inactive": () => completer.completeError("Error loading fonts"),
     });
 
+    if(webFont == null){
+      callback.call();
+      return;
+    }
     webFont.callMethod("load", [webFontConfig]);
     completer.future.then((_) => callback.call());
   }

@@ -13,13 +13,13 @@ class VBoxScrollable extends ComponentScrollable {
     superConstructor(Orientation.VERTICAL, _vbox, new DefaultScrollbar());
 
     snapToPage = false;
-    touchEnabled = false;
     doubleClickEnabled = false;
     keyboardEnabled = false;
     doubleClickToZoom = false;
-    bounce = false;
-    mouseWheelEnabled = true;
-    hideScrollbarsOnIdle = false;
+    bounce = ContextTool.MOBILE ? true : false;
+    mouseWheelEnabled = ContextTool.MOBILE ? false : true;
+    touchEnabled = ContextTool.MOBILE ? true : false;
+    hideScrollbarsOnIdle = true;
   }
 
   @override

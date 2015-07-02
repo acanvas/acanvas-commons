@@ -128,8 +128,14 @@ class ComponentList extends ComponentScrollable {
 
   @override
   void destroy() {
-    stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
-    stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
+    if(ContextTool.TOUCH){
+      stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
+      stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
+    }
+    else{
+      stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
+      stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+    }
 
     touchEnabled = false;
     bounce = false;
@@ -393,8 +399,16 @@ class ComponentList extends ComponentScrollable {
       cell = _cellFactory.clone(widthAsSet);
       //cell.setSize(widthAsSet, heightAsSet);
       cell.mouseChildren = false;
-      cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown, useCapture: false, priority: 0);
-      cell.addEventListener(MouseEvent.MOUSE_UP, _onCellMouseUp, useCapture: false, priority: 0);
+
+      if(ContextTool.TOUCH){
+        cell.addEventListener(TouchEvent.TOUCH_BEGIN, _onCellMouseDown, useCapture: false, priority: 0);
+        cell.addEventListener(TouchEvent.TOUCH_END, _onCellMouseUp, useCapture: false, priority: 0);
+      }
+      else{
+        cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown, useCapture: false, priority: 0);
+        cell.addEventListener(MouseEvent.MOUSE_UP, _onCellMouseUp, useCapture: false, priority: 0);
+      }
+
       cell.submitCallback = _onCellSelected;
       return cell;
     }
@@ -404,7 +418,7 @@ class ComponentList extends ComponentScrollable {
   }
 
 
-  void _onCellMouseDown(MouseEvent event) {
+  void _onCellMouseDown(InputEvent event) {
     _cellMoved = false;
 
     _originX = stage.mouseX;
@@ -423,7 +437,7 @@ class ComponentList extends ComponentScrollable {
   }
 
 
-  void _onCellMouseUp(MouseEvent event) {
+  void _onCellMouseUp(InputEvent event) {
     if (!_cellMoved && _mouseDownCell != null) {
       _mouseDownCell.select();
       if (_submitCallback != null) {
@@ -457,7 +471,7 @@ class ComponentList extends ComponentScrollable {
 
 
   @override
-  void _onViewMouseDown(MouseEvent event) {
+  void _onViewMouseDown(InputEvent event) {
     _touching = true;
     if (_hScrollbar.enabled) {
       _hScrollbar.interactionStart(false, false);
@@ -473,13 +487,19 @@ class ComponentList extends ComponentScrollable {
       _mouseOffsetY = stage.mouseY;
     }
 
-    stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false, priority: 0);
-    stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
+    if(ContextTool.TOUCH){
+      stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false, priority: 0);
+      stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
+    }
+    else{
+      stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false, priority: 0);
+      stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
+    }
   }
 
 
   @override
-  void _onStageMouseMove(MouseEvent event) {
+  void _onStageMouseMove(InputEvent event) {
     super._onStageMouseMove(event);
 
     if ((_originX - stage.mouseX).abs() > 3 || (_originY - stage.mouseY).abs() > 3) {

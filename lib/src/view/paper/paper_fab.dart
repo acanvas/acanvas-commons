@@ -33,7 +33,7 @@ class PaperFab extends Button {
     icon.y = (heightAsSet / 2 - 12).round();
   }
 
-  void onRollOver([MouseEvent event = null]) {
+  void onRollOver([InputEvent event = null]) {
     if(stage == null || !hover) return;
     ContextTool.STAGE.juggler.addTween(icon, .1).animate
      ..x.to((widthAsSet / 2 - 12).round() - 2.4)
@@ -42,7 +42,7 @@ class PaperFab extends Button {
      ..scaleY.to(1.2);
     _shadow.downAction();
   }
-  void onRollOut([MouseEvent event = null]) {
+  void onRollOut([InputEvent event = null]) {
     if(stage == null || !hover) return;
     ContextTool.STAGE.juggler.addTween(icon, .1).animate
         ..x.to((widthAsSet / 2 - 12).round())

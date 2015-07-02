@@ -63,8 +63,14 @@ class Slider extends SpriteComponent {
       clearMomentum();
 
       if (addMouseListeners == true) {
-        stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
-        stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+        if(ContextTool.TOUCH){
+          stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
+          stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
+        }
+        else{
+          stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
+          stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+        }
       }
 
       if (_momentumEnabled && !preventMomentum) addEventListener(Event.ENTER_FRAME, _calcMomentum);
@@ -78,8 +84,14 @@ class Slider extends SpriteComponent {
   void interactionEnd() {
     if (_interaction) {
       _interaction = false;
-      stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
-      stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+      if(ContextTool.TOUCH){
+        stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
+        stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
+      }
+      else{
+        stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
+        stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+      }
 
       dispatchEvent(new SliderEvent(SliderEvent.INTERACTION_END, _value));
 
@@ -125,7 +137,7 @@ class Slider extends SpriteComponent {
   }
 
 
-  void _onBackgroundMouseDown(MouseEvent event) {
+  void _onBackgroundMouseDown(InputEvent event) {
     interactionStart(true);
     num pos = (_ori ? mouseX : mouseY) - _thumbSize * 0.5 - (_ori ? background.x : background.y);
     value = convertPositionToValue(pos);
@@ -133,20 +145,20 @@ class Slider extends SpriteComponent {
   }
 
 
-  void _onThumbMouseDown(MouseEvent event) {
+  void _onThumbMouseDown(InputEvent event) {
     interactionStart();
     _mouseOffset = (_ori ? stage.mouseX : stage.mouseY) - (_ori ? thumb.x : thumb.y);// - _thumbSize * 0.5;
   }
 
 
-  void _onStageMouseMove(MouseEvent event) {
+  void _onStageMouseMove(InputEvent event) {
     num mousePos = (_ori ? stage.mouseX : stage.mouseY);// - _thumbSize * 0.5;
     value = convertPositionToValue(mousePos - _mouseOffset);
     // event.updateAfterEvent();
   }
 
 
-  void _onStageMouseUp(MouseEvent event) {
+  void _onStageMouseUp(InputEvent event) {
     interactionEnd();
   }
 
@@ -254,11 +266,23 @@ class Slider extends SpriteComponent {
     ContextTool.JUGGLER.removeTweens(this);
 
     if (value == true) {
-      background.addEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown, useCapture: false, priority: 0);
-      thumb.addEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown, useCapture: false, priority: 0);
+      if(ContextTool.TOUCH){
+        background.addEventListener(TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown, useCapture: false, priority: 0);
+        thumb.addEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown, useCapture: false, priority: 0);
+      }
+      else{
+        background.addEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown, useCapture: false, priority: 0);
+        thumb.addEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown, useCapture: false, priority: 0);
+      }
     } else {
-      background.removeEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown);
-      thumb.removeEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown);
+      if(ContextTool.TOUCH){
+        background.removeEventListener(TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown);
+        thumb.removeEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown);
+      }
+      else{
+        background.removeEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown);
+        thumb.removeEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown);
+      }
     }
 
     super.enabled = mouseChildren = value;

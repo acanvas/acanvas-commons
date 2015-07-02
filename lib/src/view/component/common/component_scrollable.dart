@@ -102,6 +102,8 @@ class ComponentScrollable extends SpriteComponent {
       _vScrollbar.maxValue = _view.height - heightAsSet;
       print("[ScrollView] WARNING: ScrollbarV already created.");
     }
+
+    _scrollbar.destroy();
   }
 
   void _onScrollbarInteractionStart(SliderEvent event) {
@@ -364,7 +366,12 @@ class ComponentScrollable extends SpriteComponent {
 
   void set doubleClickToZoom(bool value) {
     _doubleClickToZoom = _view.doubleClickEnabled = value;
-    if (_doubleClickToZoom) _view.addEventListener(MouseEvent.DOUBLE_CLICK, _onViewDoubleClick, useCapture: false, priority: 0); else _view.removeEventListener(MouseEvent.DOUBLE_CLICK, _onViewDoubleClick);
+    if (_doubleClickToZoom) {
+      _view.addEventListener(MouseEvent.DOUBLE_CLICK, _onViewDoubleClick, useCapture: false, priority: 0);
+    }
+    else{
+      _view.removeEventListener(MouseEvent.DOUBLE_CLICK, _onViewDoubleClick);
+    }
   }
 
   void _onViewDoubleClick(MouseEvent event) {
@@ -427,27 +434,53 @@ class ComponentScrollable extends SpriteComponent {
 
     _hScrollbar.momentumEnabled = _touchEnabled;
     _vScrollbar.momentumEnabled = _touchEnabled;
-    if (_touchEnabled) _view.addEventListener(MouseEvent.MOUSE_DOWN, _onViewMouseDown, useCapture: false, priority: 0); 
-    else _view.removeEventListener(MouseEvent.MOUSE_DOWN, _onViewMouseDown);
+    if (_touchEnabled) {
+      if(ContextTool.TOUCH){
+        _view.addEventListener(TouchEvent.TOUCH_BEGIN, _onViewMouseDown, useCapture: false, priority: 0);
+      }
+      else{
+        _view.addEventListener(MouseEvent.MOUSE_DOWN, _onViewMouseDown, useCapture: false, priority: 0);
+      }
+    }
+    else {
+      if(ContextTool.TOUCH){
+        _view.removeEventListener(TouchEvent.TOUCH_BEGIN, _onViewMouseDown);
+      }
+      else{
+        _view.removeEventListener(MouseEvent.MOUSE_DOWN, _onViewMouseDown);
+      }
+    }
   }
 
-  void _onViewMouseDown(MouseEvent event) {
+  void _onViewMouseDown(InputEvent event) {
     _touching = true;
     if (_hScrollbar.enabled) _hScrollbar.interactionStart(false, false);
     if (_vScrollbar.enabled) _vScrollbar.interactionStart(false, false);
     _mouseOffsetX = stage.mouseX - _view.x;
     _mouseOffsetY = stage.mouseY - _view.y;
-    stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false, priority: 0);
-    stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
+    if(ContextTool.TOUCH){
+      stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false, priority: 0);
+      stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
+    }
+    else{
+      stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false, priority: 0);
+      stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
+    }
   }
 
-  void _onStageMouseUp(MouseEvent event) {
+  void _onStageMouseUp(InputEvent event) {
     _touching = false;
     if (_hScrollbar.enabled) _hScrollbar.interactionEnd();
     if (_vScrollbar.enabled) _vScrollbar.interactionEnd();
     if (stage != null) {
-      stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
-      stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
+      if(ContextTool.TOUCH){
+        stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
+        stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
+      }
+      else{
+        stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+        stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
+      }
     }
   }
 
@@ -456,7 +489,7 @@ class ComponentScrollable extends SpriteComponent {
     _vScrollbar.clearMomentum();
   }
 
-  void _onStageMouseMove(MouseEvent event) {
+  void _onStageMouseMove(InputEvent event) {
     if (_hScrollbar.enabled) _hScrollbar.value = _mouseOffsetX - stage.mouseX;
     if (_vScrollbar.enabled) _vScrollbar.value = _mouseOffsetY - stage.mouseY;
     // event.updateAfterEvent();

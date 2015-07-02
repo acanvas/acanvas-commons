@@ -12,13 +12,13 @@ class PaperMenu extends ComponentList {
     _cellFactory = cell != null ? cell : new PaperListCell(10);
 
     snapToPage = false;
-    touchEnabled = false;
     doubleClickEnabled = false;
     keyboardEnabled = false;
     doubleClickToZoom = false;
-    bounce = false;
-    mouseWheelEnabled = true;
-    hideScrollbarsOnIdle = false;
+    bounce = ContextTool.MOBILE ? true : false;
+    mouseWheelEnabled = ContextTool.MOBILE ? false : true;
+    touchEnabled = ContextTool.MOBILE ? true : false;
+    hideScrollbarsOnIdle = true;
     setData(data);
 
     PaperShadow _paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: PaperColor.WHITE, shadowEnabled : shadow);
@@ -34,8 +34,14 @@ class PaperMenu extends ComponentList {
       cell = _cellFactory.clone(widthAsSet, color);
       //cell.setSize(widthAsSet, heightAsSet);
       cell.mouseChildren = false;
-      cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown, useCapture: false, priority: 0);
-      cell.addEventListener(MouseEvent.MOUSE_UP, _onCellMouseUp, useCapture: false, priority: 0);
+      if(ContextTool.TOUCH){
+        cell.addEventListener(TouchEvent.TOUCH_BEGIN, _onCellMouseDown, useCapture: false, priority: 0);
+        cell.addEventListener(TouchEvent.TOUCH_END, _onCellMouseUp, useCapture: false, priority: 0);
+      }
+      else{
+        cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown, useCapture: false, priority: 0);
+        cell.addEventListener(MouseEvent.MOUSE_UP, _onCellMouseUp, useCapture: false, priority: 0);
+      }
       cell.submitCallback = _onCellSelected;
       return cell;
     }

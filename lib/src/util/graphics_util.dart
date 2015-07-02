@@ -2,11 +2,11 @@ part of stagexl_commons;
 
 class GraphicsUtil {
 
-  static Sprite rectangle(num x, num y, num w, num h, {int color : 0xFF000000, Sprite sprite : null, bool round : false}){
+  static Sprite rectangle(num x, num y, num w, num h, {int color : 0xFF000000, Sprite sprite : null, bool round : false, bool clear : true}){
     if(sprite == null){
       sprite = new Sprite();
     }
-    else{
+    else if (clear == true){
       sprite.graphics.clear();
     }
 
@@ -17,8 +17,10 @@ class GraphicsUtil {
       h = h.round();
     }
 
+    sprite.graphics.beginPath();
     sprite.graphics.rect(x, y, w, h);
     sprite.graphics.fillColor(color);
+    sprite.graphics.closePath();
 
     if(ContextTool.WEBGL && w.round() > 0 && h.round() > 0){
       //sprite.applyCache(x.round(), y.round(), w.round(), h.round());
@@ -27,9 +29,12 @@ class GraphicsUtil {
     return sprite;
   }
 
-  static Sprite rectRound(num x, num y, num w, num h, num ew, num eh, {int color : 0xFF000000, Sprite sprite : null, bool round : false}){
+  static Sprite rectRound(num x, num y, num w, num h, num ew, num eh, {int color : 0xFF000000, Sprite sprite : null, bool round : false, bool clear : true}){
     if(sprite == null){
       sprite = new Sprite();
+    }
+    else if (clear == true){
+      sprite.graphics.clear();
     }
 
     if(round){
@@ -51,9 +56,12 @@ class GraphicsUtil {
     return sprite;
   }
 
-  static Sprite circle(num x, num y, num r, {int color : 0xFF000000, Sprite sprite : null, bool round : false}){
+  static Sprite circle(num x, num y, num r, {int color : 0xFF000000, Sprite sprite : null, bool round : false, bool clear : true}){
     if(sprite == null){
       sprite = new Sprite();
+    }
+    else if (clear == true){
+      sprite.graphics.clear();
     }
 
     if(round){
@@ -92,7 +100,7 @@ class GraphicsUtil {
     sprite.graphics.closePath();
 
     if(ContextTool.WEBGL){
-      //sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() :  y.ceil());
+      sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() :  y.ceil());
     }
 
     return sprite;

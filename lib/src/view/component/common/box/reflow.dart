@@ -17,9 +17,14 @@ class Reflow extends ComponentScrollable {
     _vbox = new VBox(padding, pixelSnapping);
     superConstructor(Orientation.VERTICAL, _vbox, new DefaultScrollbar(), queryActualChildWidth: queryActualChildWidth, queryActualChildHeight: queryActualChildHeight);
 
-    hideScrollbarsOnIdle = false;
-    mouseWheelEnabled = true;
+    snapToPage = false;
+    doubleClickEnabled = false;
     keyboardEnabled = false;
+    doubleClickToZoom = false;
+    bounce = ContextTool.MOBILE ? true : false;
+    mouseWheelEnabled = ContextTool.MOBILE ? false : true;
+    touchEnabled = ContextTool.MOBILE ? true : false;
+    hideScrollbarsOnIdle = false;
   }
 
   @override

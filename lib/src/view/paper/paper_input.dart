@@ -157,21 +157,29 @@ class PaperInput extends SpriteComponent {
     }
    
    /* Add a listener to Stage to manage intention to Focus out */
-   ContextTool.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+    if (ContextTool.TOUCH) {
+      ContextTool.STAGE.addEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
+    } else {
+      ContextTool.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+    }
 
   }
 
   /**
    * Manages focusOut
    */
-  void stageMouseDownAction(MouseEvent event) {
+  void stageMouseDownAction(InputEvent event) {
     if (event.target == _inputTextField || event.target == this) {
       return;
     }
     if (event.target is! UITextFieldInput && event.target is! PaperInput) {
       ContextTool.STAGE.focus = null;
     }
-    ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+    if (ContextTool.TOUCH) {
+      ContextTool.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
+    } else {
+      ContextTool.STAGE.removeEventListener(wMouseEvent.MOUSE_DOWN, stageMouseDownAction);
+    }
     /* Make active blue line invisible */
     ContextTool.STAGE.juggler.addTween(_activeLine, .1).animate..alpha.to(0);
 

@@ -16,13 +16,14 @@ class PaperButton extends Button {
   int _bgColor;
   PaperShadow _paperShadow;
   SvgDisplayObject icon;
+  bool shadow;
 
   num _originalYLabel;
 
   PaperButton(String text, {num width: 120, num height: PaperDimensions.HEIGHT_BUTTON,
   int bgColor: -1, int fontColor : -1, String fontName: PaperText.DEFAULT_FONT, int fontSize: 14,
   int preset: PRESET_WHITE,
-  bool shadow : true, bool background : true, bool ripple: true,
+  this.shadow : true, bool background : true, bool ripple: true,
   this.icon}) : super() {
     int _fontAndRippleColor;
     switch (preset) {
@@ -101,37 +102,6 @@ class PaperButton extends Button {
     _originalYLabel = _label.y;
 
     super.redraw();
-  }
-
-  @override
-  void onRollOver([InputEvent event = null]) {
-    if (_paperShadow != null) {
-      _paperShadow.downAction();
-      var j = ContextTool.STAGE.juggler;
-
-      j.removeTweens(_paperShadow);
-      j.removeTweens(_label);
-      j.addTween(_paperShadow, .15)
-      ..animate.y.to(-1);
-      j.addTween(_label, .15)
-      ..animate.y.to(_originalYLabel-1);
-    }
-  }
-
-  @override
-  void onRollOut([InputEvent event = null]) {
-    if (_paperShadow != null) {
-      _paperShadow.upAction();
-      var j = ContextTool.STAGE.juggler;
-
-      j.removeTweens(_paperShadow);
-      j.removeTweens(_label);
-
-      j.addTween(_paperShadow, .15)
-        ..animate.y.to(0);
-      j.addTween(_label, .15)
-        ..animate.y.to(_originalYLabel);
-    }
   }
 
   @override void setLabel(String label) {

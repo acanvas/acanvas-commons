@@ -47,8 +47,14 @@ class Scrollbar extends Slider {
     if (_interaction) {
       _interaction = false;
       if (stage != null) {
-        stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
-        stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+        if(ContextTool.TOUCH){
+          stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false);
+          stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false);
+        }
+        else{
+          stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false);
+          stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false);
+        }
       }
 
       dispatchEvent(new SliderEvent(SliderEvent.INTERACTION_END, _value));
@@ -84,7 +90,7 @@ class Scrollbar extends Slider {
         changeEnd();
       } else {
         _isTweening = true;
-        ContextTool.STAGE.delayCall(() {
+        ContextTool.JUGGLER.delayCall(() {
           this.value = val;
           _onTweenComplete();
         }, _pageScrollDuration);
@@ -179,7 +185,7 @@ class Scrollbar extends Slider {
 
 
   @override
-  void _onThumbMouseDown(MouseEvent event) {
+  void _onThumbMouseDown(InputEvent event) {
     killPageTween();
     super._onThumbMouseDown(event);
   }
@@ -194,15 +200,20 @@ class Scrollbar extends Slider {
 
 
   @override
-  void _onBackgroundMouseDown(MouseEvent event) {
+  void _onBackgroundMouseDown(InputEvent event) {
     interactionStart(true, false);
-    stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+    if(ContextTool.TOUCH){
+      stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
+    }
+    else{
+      stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+    }
     _startPageScrollTimer();
   }
 
 
   @override
-  void _onStageMouseUp(MouseEvent event) {
+  void _onStageMouseUp(InputEvent event) {
     _stopPageScrollTimer();
     interactionEnd();
   }
@@ -220,7 +231,8 @@ class Scrollbar extends Slider {
       // Stop momentum
       value += _momentum;
       clearMomentum();
-      if (_value < _min) value = _min; else if (_value > _max) value = _max;
+      if (_value < _min) value = _min;
+      else if (_value > _max) value = _max;
       momentumEnd();
     } else {
       // Apply momentum
@@ -277,10 +289,21 @@ class Scrollbar extends Slider {
   @override
   void set value(num newValue) {
 
-    if (newValue < _min) newValue = _bounce ? _min + (newValue - _min) * 0.5 : _min; else if (newValue > _max) newValue = _bounce ? _max + (newValue - _max) * 0.5 : _max;
+    if (newValue < _min){
+      newValue = _bounce ? _min + (newValue - _min) * 0.5 : _min;
+    }
+    else if (newValue > _max) {
+      newValue = _bounce ? _max + (newValue - _max) * 0.5 : _max;
+    }
     if (!_continuous && newValue != null) newValue = (newValue).round();
 
     if (newValue != _value) {
+
+      if(_bounce){
+        _value = newValue;
+      }
+
+      else{
       num delta = _value-newValue;
 
       if(delta<0){
@@ -292,6 +315,9 @@ class Scrollbar extends Slider {
       }
 
       _value = delta;
+
+      }
+
 
       redraw();
       dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE, _value));
