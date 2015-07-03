@@ -59,7 +59,7 @@ class PaperAppBar extends SpriteComponent {
     super.redraw();
 
     leftBox.x = 10;
-    leftBox.y = (PaperDimensions.HEIGHT_APP_BAR/2 - (leftBox.height - 8)/2).round();
+    leftBox.y = (PaperDimensions.HEIGHT_APP_BAR/2 - (leftBox.height - 0)/2).round();
 
     if(_headline != null){
       if(extended == true){
@@ -68,12 +68,12 @@ class PaperAppBar extends SpriteComponent {
       }
       else{
         _headline.x = leftBox.x + leftBox.width + 20;
-        _headline.y = (PaperDimensions.HEIGHT_APP_BAR/2 - _headline.height/2).round();
+        _headline.y = (PaperDimensions.HEIGHT_APP_BAR/2 - _headline.height/2 + 0).round();
       }
     }
 
     rightBox.x = widthAsSet - rightBox.width - 20;
-    rightBox.y = (PaperDimensions.HEIGHT_APP_BAR/2 - (rightBox.height - 8)/2).round();
+    rightBox.y = (PaperDimensions.HEIGHT_APP_BAR/2 - (rightBox.height - 0)/2).round();
 
     if(tabs != null && tabs.numChildren > 0){
       tabs.x = 0;

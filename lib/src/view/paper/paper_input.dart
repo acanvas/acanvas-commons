@@ -178,7 +178,7 @@ class PaperInput extends SpriteComponent {
     if (ContextTool.TOUCH) {
       ContextTool.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
     } else {
-      ContextTool.STAGE.removeEventListener(wMouseEvent.MOUSE_DOWN, stageMouseDownAction);
+      ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
     /* Make active blue line invisible */
     ContextTool.STAGE.juggler.addTween(_activeLine, .1).animate..alpha.to(0);

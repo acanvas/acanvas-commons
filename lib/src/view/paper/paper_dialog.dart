@@ -47,8 +47,8 @@ class PaperDialog extends SpriteComponent {
     _vbox.y = _title.y + _title.textHeight + 22;
     _vbox.setSize(widthAsSet - 40, 0);
 
-    _hbox.x = widthAsSet - _hbox.width - 20;
-    _hbox.y = heightAsSet - _hbox.height - 30;
+    _hbox.x = (widthAsSet - _hbox.width - 20).round();
+    _hbox.y = (heightAsSet - _hbox.height - 30).round();
     
 
     //filters = [ new DropShadowFilter(5, 90,PaperColor.GREY_SHADOW, 10, 10) ];

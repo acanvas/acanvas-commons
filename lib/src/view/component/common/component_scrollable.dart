@@ -177,8 +177,12 @@ class ComponentScrollable extends SpriteComponent {
   void _updateThumbs() {
     num w = _queryActualChildWidth || _view.widthAsSet == 0 ? _view.width : _view.widthAsSet;
     num h = _queryActualChildHeight || _view.heightAsSet == 0 ? _view.height :  _view.heightAsSet;
-    _hScrollbar.pages = w / widthAsSet;
-    _vScrollbar.pages = h / heightAsSet;
+    if(widthAsSet > 0){
+      _hScrollbar.pages = w / widthAsSet;
+    }
+    if(heightAsSet > 0){
+      _vScrollbar.pages = h / heightAsSet;
+    }
   }
 
   SpriteComponent get view {

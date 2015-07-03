@@ -26,9 +26,9 @@ class PaperTabs extends SpriteComponent {
   }
   
   void addTab(Button btn){
-    tabBox.addChild(btn);
     btn.submitCallback = _onTabClick;
     btn.submitCallbackParams = [btn, tabBox.numChildren];
+    tabBox.addChild(btn);
   }
 
   void activateTabByUrl(String url){
@@ -59,7 +59,7 @@ class PaperTabs extends SpriteComponent {
       if(distributeTabs){
         for(int i = 0; i<tabBox.numChildren;i++){
           Button btn = tabBox.getChildAt(i);
-          btn.setSize((widthAsSet/tabBox.numChildren).round(), 0);
+          btn.setSize((widthAsSet/tabBox.numChildren).ceil(), 0);
         }
         tabBox.update();
       }

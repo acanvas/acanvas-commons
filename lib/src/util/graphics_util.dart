@@ -70,8 +70,10 @@ class GraphicsUtil {
       r = r.round();
     }
 
+    sprite.graphics.beginPath();
     sprite.graphics.circle(x, y, r);
     sprite.graphics.fillColor(color);
+    sprite.graphics.closePath();
 
     if(ContextTool.WEBGL && (x + r).round() > 0){
       //sprite.applyCache((x - r).round(), (y - r).round(), (2*r).round(), (2*r).round());

@@ -41,9 +41,9 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
         break;
       case CIRCLE:
         if(shadow){
-          GraphicsUtil.circle(widthAsSet/2, widthAsSet/2-1, widthAsSet/2,   round : true, color: 0x11000000, sprite: target != null ? target : this, clear : true);
-          GraphicsUtil.circle(widthAsSet/2-1, widthAsSet/2, widthAsSet/2+1, round : true, color: 0x22000000, sprite: target != null ? target : this, clear : false);
-          GraphicsUtil.circle(widthAsSet/2, widthAsSet/2, widthAsSet/2+2,   round : true, color: 0x33000000, sprite: target != null ? target : this, clear : false);
+          //GraphicsUtil.circle(widthAsSet/2, widthAsSet/2-1, widthAsSet/2,   round : true, color: 0x11000000, sprite: target != null ? target : this, clear : true);
+          //GraphicsUtil.circle(widthAsSet/2-1, widthAsSet/2, widthAsSet/2+1, round : true, color: 0x22000000, sprite: target != null ? target : this, clear : false);
+          GraphicsUtil.circle(widthAsSet/2, widthAsSet/2+1, widthAsSet/2+1,   round : true, color: 0x33000000, sprite: target != null ? target : this, clear : false);
         }
         GraphicsUtil.circle(widthAsSet/2, widthAsSet/2, widthAsSet/2,       round : true, color: bgColor, sprite: target != null ? target : this, clear : !shadow);
         break;
@@ -52,7 +52,7 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
 
   @override
   downAction([Event e = null]) {
-    if(!respondToClick || !shadowEnabled || _shadow!=null && _shadow.distance == _activeDistance) return;
+    if(!respondToClick || !shadowEnabled || (_shadow!=null && _shadow.distance == _activeDistance) || !ContextTool.WEBGL) return;
 
     _prepareShadowAnimation();
 
@@ -68,7 +68,7 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
 
   @override
   upAction([Event e = null]) {
-    if(!respondToClick || !shadowEnabled || _shadow!=null && _shadow.distance == _initialDistance) return;
+    if(!respondToClick || !shadowEnabled || (_shadow!=null && _shadow.distance == _initialDistance) || !ContextTool.WEBGL) return;
 
     _prepareShadowAnimation();
 

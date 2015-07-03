@@ -18,8 +18,6 @@ class PaperButton extends Button {
   SvgDisplayObject icon;
   bool shadow;
 
-  num _originalYLabel;
-
   PaperButton(String text, {num width: 120, num height: PaperDimensions.HEIGHT_BUTTON,
   int bgColor: -1, int fontColor : -1, String fontName: PaperText.DEFAULT_FONT, int fontSize: 14,
   int preset: PRESET_WHITE,
@@ -94,12 +92,10 @@ class PaperButton extends Button {
     _label.y = (heightAsSet / 2 - _label.textHeight / 2).round();
 
     if (icon != null) {
-      icon.x = _label.x - icon.width / 2 - 12;
-      _label.x += (14 + icon.width);
+      icon.x = (_label.x - icon.width / 2 - 12).round();
+      _label.x += (14 + icon.width).round();
       icon.y = _label.y - 4;
     }
-
-    _originalYLabel = _label.y;
 
     super.redraw();
   }

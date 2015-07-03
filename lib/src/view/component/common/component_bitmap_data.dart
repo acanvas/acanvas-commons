@@ -35,7 +35,9 @@ class ComponentBitmapData extends SpriteComponent {
     }
     
     scaleX = scaleY = scale;
-    
+    x = (widthAsSet/2 - width/2).round();
+    y = (heightAsSet/2 - height/2).round();
+
     super.redraw();
   }
 
