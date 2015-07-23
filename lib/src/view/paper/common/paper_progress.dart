@@ -9,7 +9,13 @@ class PaperProgress extends Slider {
   int barColor;
   Sprite _progress;
   
-  PaperProgress(num min, num max, num size, {this.barColor : PaperColor.BLACK, int bgColor: PaperColor.WHITE}) : super(Orientation.HORIZONTAL, min, max, size, false) {
+  PaperProgress(num min, num max, num size, {this.barColor : PaperColor.BLACK, int bgColor: PaperColor.WHITE}) : super() {
+    horizontalScrollBehavior = true;
+    valueMin = min;
+    valueMax = max;
+    spanSize = size;
+    momentumEnabled = false;
+
     GraphicsUtil.rectangle(0, 0, size, 2, color: bgColor, sprite: this);
 
     _progress = new Sprite();

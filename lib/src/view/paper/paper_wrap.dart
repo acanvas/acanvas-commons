@@ -1,23 +1,30 @@
 part of stagexl_commons;
 
 
-class PaperWrap extends SpriteComponent {
+class PaperWrap extends BoxSprite {
 
   num bgColor;
   PaperText _title;
-  VBoxScrollable _vbox;
+  Flow _vbox;
 
   PaperWrap(UITextField title, {num fontColor : PaperColor.BLACK, this.bgColor: PaperColor.WHITE, String fontName : PaperText.DEFAULT_FONT, int fontSize: 22, int padding : 20, bool center : false}) : super() {
-    ignoreCallSetSize = true;
+    inheritSpan = false;
 
     super.addChild( new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false) );
 
     _title = title;
     super.addChild(_title);
     
-    _vbox = new VBoxScrollable(padding, true, false, center);
-    _vbox.ignoreCallSetSize = true;
+    _vbox = new Flow()
+              ..spacing = padding
+              ..snapToPixels = true
+              ..inverted = false
+              ..flowOrientation = FlowOrientation.VERTICAL
+              ..alignH = AlignH.CENTER
+              ..inheritSpan = false;
     super.addChild(_vbox);
+
+    new ScrollifySprite(_vbox, new DefaultScrollbar(), new DefaultScrollbar());
   }
 
   @override
@@ -25,16 +32,16 @@ class PaperWrap extends SpriteComponent {
     _vbox.addChild(child);
   }
 
-  @override void redraw() {
-    super.redraw();
+  @override void refresh() {
+    super.refresh();
     
     _title.x = 20;
     _title.y = 20;
-    _title.width = widthAsSet - 40;
+    _title.width = spanWidth - 40;
     
     _vbox.x = 20;
     _vbox.y = _title.y + _title.textHeight + 22;
-    _vbox.setSize(widthAsSet - 40, heightAsSet - _vbox.y - 20);
+    _vbox.span(spanWidth - 40, spanHeight - _vbox.y - 20);
 
   }
 

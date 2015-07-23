@@ -1,12 +1,17 @@
 part of stagexl_commons;
 
 class XLSignal extends Event{
-  var _callback;
-  var _data;
   final XLEventBus eventBus = new XLEventBus();
-  
+
+  dynamic _data;
+  dynamic get data => _data;
+  set data(dynamic data) { _data = data; }
+
+  var _callback;
+  get completeCallBack => _callback;
+
   XLSignal(String type, [this._data = null, this._callback = null]) : super(type);
-  
+
   void dispatch(){
     eventBus.dispatchEvent(new XLSignal(type, _data, _callback));
   }
@@ -16,7 +21,4 @@ class XLSignal extends Event{
   void unlisten(){
     eventBus.removeEventListener(type , _callback);
   }
-
-  get data => _data;
-  get completeCallBack => _callback;
  }

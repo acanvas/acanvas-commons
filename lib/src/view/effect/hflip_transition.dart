@@ -7,13 +7,13 @@
 		}
 		
 		@override 
-		  void runInEffect(ISpriteComponent target,num duration,Function callback) {
+		  void runInEffect(BoxSprite target,num duration,Function callback) {
 			target.rotationY = 179;
 			target.alpha = 1;
 			TweenLite.to(target, duration, {rotationY:0, ease:Quart.easeOut, onComplete:callback.call});
 		}
 		@override 
-		  void runOutEffect(ISpriteComponent target,num duration,Function callback) {
+		  void runOutEffect(BoxSprite target,num duration,Function callback) {
 			target.alpha = 1;
 			TweenLite.to(target, duration, {rotationY:-179, ease:Quart.easeIn, onComplete:callback.call});
 		}

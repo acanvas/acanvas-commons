@@ -20,29 +20,29 @@ class PaperFab extends Button {
 
     addChild(icon);
 
-    setSize(radius * 2, radius * 2);
+    span(radius * 2, radius * 2);
   }
 
   void set opacity(num o) {_ripple.opacity = o;}
 
 
-  @override void redraw() {
-    super.redraw();
+  @override void refresh() {
+    super.refresh();
 
     icon.pivotX = 12;
     icon.pivotY = 12;
-    icon.x = (widthAsSet / 2).round();
-    icon.y = (heightAsSet / 2).round();
+    icon.x = (spanWidth / 2).round();
+    icon.y = (spanHeight / 2).round();
   }
 
-  void onRollOver([InputEvent event = null]) {
+  void rollOverAction([InputEvent event = null]) {
     if(stage == null || !hover) return;
     ContextTool.STAGE.juggler.addTween(icon, .1).animate
      ..scaleX.to(1.2)
      ..scaleY.to(1.2);
    // _shadow.downAction();
   }
-  void onRollOut([InputEvent event = null]) {
+  void rollOutAction([InputEvent event = null]) {
     if(stage == null || !hover) return;
     ContextTool.STAGE.juggler.addTween(icon, .1).animate
      ..scaleX.to(1)

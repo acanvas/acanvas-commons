@@ -4,7 +4,7 @@ part of stagexl_commons;
 /**
 	 * @author Nils Doehring (nilsdoehring@gmail.com)
 	 */
-class PaperCheckbox extends ToggleButton {
+class PaperCheckbox extends Button {
   int RADIUS = 30;
   int BOXWIDTH = 20;
 
@@ -18,12 +18,13 @@ class PaperCheckbox extends ToggleButton {
   PaperText _paperLabel;
 
   PaperCheckbox({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : "", this.boxColor : PaperColor.BLACK}) : super() {
-    ignoreCallSetSize = false;
+    toggleable = true;
+    inheritSpan = true;
     
     PaperRipple ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity : .2);
-    ripple.ignoreCallSetSize = true;
+    ripple.inheritSpan = false;
     addChild(ripple);
-    ripple.setSize(RADIUS * 2, RADIUS * 2);
+    ripple.span(RADIUS * 2, RADIUS * 2);
 
     _bg = new Shape();
     _bg.graphics.rect(0, 0, RADIUS*2, RADIUS*2);
@@ -60,7 +61,7 @@ class PaperCheckbox extends ToggleButton {
     
   }
 
-  @override void redraw() {
+  @override void refresh() {
     _icon.x = 29;
     _icon.y = 37;
     _box.x = _box.y = 30;
@@ -69,15 +70,15 @@ class PaperCheckbox extends ToggleButton {
       _paperLabel.x = 60;
       _paperLabel.y = 20;
     }
-    super.redraw();
+    super.refresh();
   }
 
   @override
-  void set isToggled(bool value) {
-    if(value == isToggled) return;
-    super.isToggled = value;
+  void set toggled(bool value) {
+    if(value == toggled) return;
+    super.toggled = value;
     
-    if(isToggled){
+    if(toggled){
       _icon.scaleX = _icon.scaleY = .3;
       _icon.visible = true;
 

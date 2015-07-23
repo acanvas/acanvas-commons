@@ -1,58 +1,56 @@
 part of stagexl_commons;
 
 
-	/**
-	 * @author Nils Doehring (nilsdoehring@gmail.com)
-	 */
-class PaperListCell extends Cell {
-		 PaperText title;
-		 int fontColor;
-	 
-		 PaperListCell(int w, [this.fontColor = PaperColor.GREY_DARK]) :super(){
+/**
+ * @author Nils Doehring (nilsdoehring@gmail.com)
+ */
+class PaperListCell extends SelectableButton {
+  PaperText title;
+  int fontColor;
 
-		   PaperRipple	ripple = new PaperRipple(color: fontColor);
-       addChild(ripple);
+  PaperListCell([this.fontColor = PaperColor.GREY_DARK]) :super() {
 
-       title = new PaperText("empty", size: 14, color: fontColor);
-			addChild(title);
+    toggleable = false;
 
-			 setSize(w, PaperDimensions.HEIGHT_MENU_CELL);
-		}
+    PaperRipple ripple = new PaperRipple(color: fontColor);
+    addChild(ripple);
 
-
-		@override
-		Cell clone(num width, [int fontClr])
-		 		=> new PaperListCell(width, fontClr);
+    title = new PaperText("empty", size: 14, color: fontColor);
+    addChild(title);
+  }
 
 
-		@override 
-		void set data(Object newdata) {
-			if (newdata != data) {
-				super.data = newdata;
-				if (data != null && data is Map) {
-					title.text = (data as Map)["label"];
-					redraw();
-				}
-			}
-		}
-    
-		@override
-		void setSize(num w, num h){
-		  super.setSize(w, PaperDimensions.HEIGHT_MENU_CELL);
-		}
+  @override
+  SelectableButton clone() => new PaperListCell(fontColor);
 
-		@override void redraw()
-		 {
-			title.width = widthAsSet - 10;
-			title.x = 10;
-			title.y = (heightAsSet/2 - title.textHeight/2).round();
 
-			graphics.clear();
-			graphics.rect(0, 0, widthAsSet, heightAsSet);
-			graphics.fillColor(PaperColor.WHITE);
+  @override
+  void set data(Object newdata) {
+    if (newdata != data) {
+      super.data = newdata;
+      if (data != null && data is Map) {
+        title.text = (data as Map)["label"];
+        refresh();
+      }
+    }
+  }
 
-			super.redraw();
-		}
+  @override
+  void span(num w, num h, {bool refresh: true}) {
+    super.span(w, PaperDimensions.HEIGHT_MENU_CELL, refresh: refresh);
+  }
 
-	}
+  @override void refresh() {
+    title.width = spanWidth - 10;
+    title.x = 10;
+    title.y = (spanHeight / 2 - title.textHeight / 2).round();
+
+    graphics.clear();
+    graphics.rect(0, 0, spanWidth, spanHeight);
+    graphics.fillColor(PaperColor.WHITE);
+
+    super.refresh();
+  }
+
+}
 

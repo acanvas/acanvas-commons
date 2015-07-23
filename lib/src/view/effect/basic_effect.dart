@@ -57,7 +57,7 @@ class BasicEffect implements IEffect {
     _useSprite = false;
   }
 
-  Bitmap _registerBitmapSprite(ISpriteComponent target) {
+  Bitmap _registerBitmapSprite(BoxSprite target) {
 
     _applyRecursively = false;
 
@@ -83,7 +83,7 @@ class BasicEffect implements IEffect {
 
 
   //These two are the only methods you'll need to override @see BitmapAlphaEffect.
-  void runInEffect(ISpriteComponent target, num duration, Function callback) {
+  void runInEffect(BoxSprite target, num duration, Function callback) {
     target.alpha = 0;
 
     var tween = new Tween(target, duration, Transition.easeInCubic);
@@ -92,7 +92,7 @@ class BasicEffect implements IEffect {
     ContextTool.JUGGLER.add(tween);
 
   }
-  void runOutEffect(ISpriteComponent target, num duration, Function callback) {
+  void runOutEffect(BoxSprite target, num duration, Function callback) {
     //target.visible = true;
     target.alpha = 1;
 
@@ -102,7 +102,7 @@ class BasicEffect implements IEffect {
     ContextTool.JUGGLER.add(tween);
   }
 
-  void cancel([ISpriteComponent target = null]) {
+  void cancel([BoxSprite target = null]) {
     if (target == null) return;
 
     ContextTool.JUGGLER.removeTweens(target);
@@ -110,12 +110,12 @@ class BasicEffect implements IEffect {
     DisplayObject child;
     for (int i = 0; i < (target).numChildren; i++) {
       child = (target).getChildAt(i);
-      if (child is ISpriteComponent) {
+      if (child is BoxSprite) {
         cancel(child);
       }
     }
   }
-  void onComplete([Bitmap target = null, ISpriteComponent page = null, Function callback = null]) {
+  void onComplete([Bitmap target = null, BoxSprite page = null, Function callback = null]) {
     ContextTool.JUGGLER.removeTweens(target);
 
     if (target != null) {
@@ -133,9 +133,9 @@ class BasicEffect implements IEffect {
       callback.call(null);
     }
     
-    destroy();
+    dispose();
   }
-  void destroy() {
+  void dispose() {
     if (_sprite != null && useSprite()) {
       ContextTool.JUGGLER.removeTweens(_sprite);
       if (_sprite.parent != null) {

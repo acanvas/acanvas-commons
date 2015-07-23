@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
+class PaperShadow extends BoxSprite implements IPaperButtonComponent{
   static const int RECTANGLE = 1;
   static const int CIRCLE = 2;
 
@@ -21,11 +21,11 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
   Sprite target;
 
   PaperShadow({this.type : RECTANGLE, this.bgColor: 0xFFFFFFFF, this.shadowEnabled : true, this.shadowColor: PaperColor.GREY_SHADOW, this.respondToClick: true, this.elevation: 1, this.target}):super() {
-    ignoreCallSetSize = false;
+    inheritSpan = true;
   }
 
   @override
-  void redraw(){
+  void refresh(){
     _drawShapes(shadowEnabled);
   }
 
@@ -33,19 +33,19 @@ class PaperShadow extends SpriteComponent implements IPaperButtonComponent{
     switch(type){
       case RECTANGLE:
         if(shadow){
-          GraphicsUtil.rectangle(0, -1, widthAsSet, heightAsSet,      round : true, color: 0x11000000, sprite: target != null ? target : this, clear : true);
-          GraphicsUtil.rectangle(-1, 0, widthAsSet+2, heightAsSet+1,  round : true, color: 0x22000000, sprite: target != null ? target : this, clear : false);
-          GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet+2,     round : true, color: 0x33000000, sprite: target != null ? target : this, clear : false);
+          GraphicsUtil.rectangle(0, -1, spanWidth, spanHeight,      round : true, color: 0x11000000, sprite: target != null ? target : this, clear : true);
+          GraphicsUtil.rectangle(-1, 0, spanWidth+2, spanHeight+1,  round : true, color: 0x22000000, sprite: target != null ? target : this, clear : false);
+          GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight+2,     round : true, color: 0x33000000, sprite: target != null ? target : this, clear : false);
         }
-        GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet,         round : true, color: bgColor, sprite: target != null ? target : this, clear : !shadow);
+        GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight,         round : true, color: bgColor, sprite: target != null ? target : this, clear : !shadow);
         break;
       case CIRCLE:
         if(shadow){
-          //GraphicsUtil.circle(widthAsSet/2, widthAsSet/2-1, widthAsSet/2,   round : true, color: 0x11000000, sprite: target != null ? target : this, clear : true);
-          //GraphicsUtil.circle(widthAsSet/2-1, widthAsSet/2, widthAsSet/2+1, round : true, color: 0x22000000, sprite: target != null ? target : this, clear : false);
-          GraphicsUtil.circle(widthAsSet/2, widthAsSet/2+1, widthAsSet/2+1,   round : true, color: 0x33000000, sprite: target != null ? target : this, clear : false);
+          //GraphicsUtil.circle(spanWidth/2, spanWidth/2-1, spanWidth/2,   round : true, color: 0x11000000, sprite: target != null ? target : this, clear : true);
+          //GraphicsUtil.circle(spanWidth/2-1, spanWidth/2, spanWidth/2+1, round : true, color: 0x22000000, sprite: target != null ? target : this, clear : false);
+          GraphicsUtil.circle(spanWidth/2, spanWidth/2+1, spanWidth/2+1,   round : true, color: 0x33000000, sprite: target != null ? target : this, clear : false);
         }
-        GraphicsUtil.circle(widthAsSet/2, widthAsSet/2, widthAsSet/2,       round : true, color: bgColor, sprite: target != null ? target : this, clear : !shadow);
+        GraphicsUtil.circle(spanWidth/2, spanWidth/2, spanWidth/2,       round : true, color: bgColor, sprite: target != null ? target : this, clear : !shadow);
         break;
     }
   }

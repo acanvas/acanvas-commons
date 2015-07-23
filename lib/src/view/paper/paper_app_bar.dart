@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-class PaperAppBar extends SpriteComponent {
+class PaperAppBar extends BoxSprite {
 
   int bgColor;
   int highlightColor;
@@ -8,19 +8,23 @@ class PaperAppBar extends SpriteComponent {
 
   Sprite _headline;
 
-  HBox leftBox;
-  HBox rightBox;
+  Flow leftBox;
+  Flow rightBox;
   PaperTabs tabs;
   
   PaperAppBar({this.highlightColor : PaperColor.WHITE, this.bgColor: PaperColor.BLACK, this.extended : false}) : super() {
-    ignoreCallSetSize = false;
+    inheritSpan = true;
 
-    leftBox = new HBox(20, true);
-    leftBox.ignoreCallSetSize = true;
+    leftBox = new Flow()
+      ..spacing = 20
+      ..snapToPixels = true
+      ..inheritSpan = false;
     addChild(leftBox);
 
-    rightBox = new HBox(20, true);
-    rightBox.ignoreCallSetSize = true;
+    rightBox = new Flow()
+      ..spacing = 20
+      ..snapToPixels = true
+      ..inheritSpan = false;
     addChild(rightBox);
 
   }
@@ -43,20 +47,20 @@ class PaperAppBar extends SpriteComponent {
     addChild(tabs);
   }
 
-  @override void setSize(int w, int h) {
+  @override void span(num w, num h, {bool refresh: true}) {
     h = PaperDimensions.HEIGHT_APP_BAR;
     if(extended == true){
       h += PaperDimensions.HEIGHT_APP_BAR_EXTENDED_AREA;
     }
     if(tabs != null){
-      tabs.setSize(w, PaperDimensions.HEIGHT_BUTTON);
-      h += tabs.heightAsSet;
+      tabs.span(w, PaperDimensions.HEIGHT_BUTTON);
+      h += tabs.spanHeight;
     }
-    super.setSize(w, h);
+    super.span(w, h, refresh: refresh);
   }
 
-  @override void redraw() {
-    super.redraw();
+  @override void refresh() {
+    super.refresh();
 
     leftBox.x = 10;
     leftBox.y = (PaperDimensions.HEIGHT_APP_BAR/2 - (leftBox.height - 0)/2).round();
@@ -72,15 +76,15 @@ class PaperAppBar extends SpriteComponent {
       }
     }
 
-    rightBox.x = widthAsSet - rightBox.width - 20;
+    rightBox.x = spanWidth - rightBox.width - 20;
     rightBox.y = (PaperDimensions.HEIGHT_APP_BAR/2 - (rightBox.height - 0)/2).round();
 
     if(tabs != null && tabs.numChildren > 0){
       tabs.x = 0;
-      tabs.y = heightAsSet - tabs.height;
+      tabs.y = spanHeight - tabs.height;
     }
 
-    GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, sprite: this, color : bgColor);
+    GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color : bgColor);
   }
 
 }

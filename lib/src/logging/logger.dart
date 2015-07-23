@@ -2,8 +2,6 @@ part of stagexl_commons;
 
 
 class Logger implements logging.Logger {
-
-
   final logging.Logger _delegate;
 
   Logger(String name) : _delegate = new logging.Logger(name);
@@ -17,13 +15,13 @@ class Logger implements logging.Logger {
     message = name + ": " + message;
 
     if (error is List) {
-      List list = error;
-      for (int i = 0; i < list.length; i++) {
-        //message.split("{"+i.toString()+"}").join(list.elementAt(i).toString());
-        String str = list.elementAt(i).toString();
-
+      int i;
+      error.forEach((element){
+        String str = element.toString();
+        i++;
         message = message.replaceFirst(new RegExp('\\{${i.toString()}\\}'), str);
-      }
+
+      });
     }
 
     _delegate.log(logLevel, message);

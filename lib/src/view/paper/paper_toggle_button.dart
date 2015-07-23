@@ -4,7 +4,7 @@ part of stagexl_commons;
 /**
 	 * @author Nils Doehring (nilsdoehring@gmail.com)
 	 */
-class PaperToggleButton extends ToggleButton {
+class PaperToggleButton extends Button {
   int RADIUS = 30;
 
   int activeColor;
@@ -18,17 +18,18 @@ class PaperToggleButton extends ToggleButton {
   PaperText _paperLabel;
 
   PaperRipple _ripple;
-  SpriteComponent _holder;
+  BoxSprite _holder;
 
   PaperToggleButton({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : "", this.labelOffset : 150}) : super() {
-    ignoreCallSetSize = false;
+    toggleable = true;
+    inheritSpan = true;
     
-    _holder = new SpriteComponent();
+    _holder = new BoxSprite();
         
     _ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity : .2);
-    _ripple.ignoreCallSetSize = true;
+    _ripple.inheritSpan = false;
     addChild(_ripple);
-    _ripple.setSize(RADIUS * 2, RADIUS * 2);
+    _ripple.span(RADIUS * 2, RADIUS * 2);
 
     _inactiveLine = new Shape();
     addChild(_inactiveLine);
@@ -65,7 +66,7 @@ class PaperToggleButton extends ToggleButton {
     enabled = true;
   }
 
-  @override void redraw() {
+  @override void refresh() {
     _inactiveLine.x = _activeLine.x = labelOffset + 38; 
     _inactiveLine.y = _activeLine.y = 30; 
     
@@ -78,15 +79,15 @@ class PaperToggleButton extends ToggleButton {
       _paperLabel.x = 20;
       _paperLabel.y = 20;
     }
-    super.redraw();
+    super.refresh();
   }
 
   @override
-  void set isToggled(bool value) {
-    if(value == isToggled) return;
-    super.isToggled = value;
+  void set toggled(bool value) {
+    if(value == toggled) return;
+    super.toggled = value;
     
-    if(isToggled){
+    if(toggled){
       _icon.scaleX = _icon.scaleY = .1;
       _icon.visible = true;
       _activeLine.visible = true;

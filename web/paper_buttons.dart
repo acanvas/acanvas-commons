@@ -7,9 +7,14 @@ Sprite _container;
 
 
 void main() {
-  stage = new Stage(html.querySelector('#stage'), webGL: true, color: 0xFFf9f9f9);
-  stage.scaleMode = StageScaleMode.NO_SCALE;
-  stage.align = StageAlign.TOP_LEFT;
+  var opts = new StageOptions();
+  opts.renderEngine = RenderEngine.Canvas2D;
+  opts.backgroundColor = 0xFFf9f9f9;
+  opts.stageScaleMode = StageScaleMode.NO_SCALE;
+  opts.stageAlign = StageAlign.TOP_LEFT;
+
+  stage = new Stage(html.querySelector('#stage'), options: opts);
+  ContextTool.STAGE = stage;
   ContextTool.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
   new RenderLoop()..addStage(stage);
 
@@ -19,14 +24,18 @@ void main() {
 void start() {
   
   /* Vertical Container */
-  VBox vbox = new VBox(40);
-  vbox.x = 10;
-  vbox.y = 10;
+  Flow vbox = new Flow()
+    ..flowOrientation = FlowOrientation.VERTICAL
+    ..spacing = 10
+    ..x = 10
+    ..y = 10
+    ..autoRefresh = false;
   
   /* 
    * 1st row: standard square buttons with preset colors 
    */
-  HBox hbox1 = new HBox(20);
+  Flow hbox1 = new Flow()
+    ..spacing = 20;
 
   PaperButton button1 = new PaperButton("SUBMIT", preset: PaperButton.PRESET_WHITE);
   hbox1.addChild(button1);
@@ -46,7 +55,8 @@ void start() {
   /* 
    * 2nd row: standard square Paper buttons with Paper Ripple custom color override 
    */
-  HBox hbox2 = new HBox(20);
+  Flow hbox2 = new Flow()
+    ..spacing = 20;
   
   PaperButton plusOneButton1 = new PaperButton("+1", width: 60, preset: PaperButton.PRESET_GREY, fontSize: 16);
   hbox2.addChild(plusOneButton1);
@@ -63,18 +73,19 @@ void start() {
   /* 
    * 3rd row: transparent round Paper buttons with Core Icons and Paper Ripples
    */
-  HBox hbox3 = new HBox(20);
+  Flow hbox3 = new Flow()
+    ..spacing = 20;
   
-  PaperFab iconButton1 = new PaperFab(PaperIcon.black(PaperIconSet.menu), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK);
+  PaperFab iconButton1 = new PaperFab(PaperIcon.black(PaperIconSet.menu), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK, shadow: false);
   hbox3.addChild(iconButton1);
   
-  PaperFab iconButton2 = new PaperFab(PaperIcon.black(PaperIconSet.more_vert), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK);
+  PaperFab iconButton2 = new PaperFab(PaperIcon.black(PaperIconSet.more_vert), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK, shadow: false);
   hbox3.addChild(iconButton2);
   
-  PaperFab iconButton3 = new PaperFab(PaperIcon.black(PaperIconSet.delete), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.RED);
+  PaperFab iconButton3 = new PaperFab(PaperIcon.black(PaperIconSet.delete), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.RED, shadow: false);
   hbox3.addChild(iconButton3);
   
-  PaperFab iconButton4 = new PaperFab(PaperIcon.black(PaperIconSet.account_box), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLUE);
+  PaperFab iconButton4 = new PaperFab(PaperIcon.black(PaperIconSet.account_box), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLUE, shadow: false);
   hbox3.addChild(iconButton4);
   
   vbox.addChild(hbox3);
@@ -83,7 +94,8 @@ void start() {
   /* 
    * 4th row: standard Paper Fabs with Core Icons and Paper Ripples
    */
-  HBox hbox4 = new HBox(20);
+  Flow hbox4 = new Flow()
+    ..spacing = 20;
   
   PaperFab roundButton1 = new PaperFab(PaperIcon.white(PaperIconSet.add), bgColor: PaperColor.RED);
   hbox4.addChild(roundButton1);
@@ -100,56 +112,63 @@ void start() {
   /* 
    * 5th row: Paper Menus with Paper Items and Paper Ripples
    */
-  HBox hbox5 = new HBox(20);
+  Flow hbox5 = new Flow()
+    ..spacing = 20;
 
   List testList = [];
-  for(int i = 0; i < 4; i++){
+  for(int i = 0; i < 40; i++){
     Map vo = {};
     vo['label'] = "Menu item #$i";
     vo['url'] = "";
     testList.add(vo);
-  } 
-  
-  PaperMenu list1 = new PaperMenu( testList, color: PaperColor.GREY_DARK);
-  //list.submitCallback = _onCellCommit;
-  hbox5.addChild(list1); 
+  }
 
-  PaperMenu list2 = new PaperMenu( testList, color: PaperColor.BLUE);
+  PaperMenu list1 = new PaperMenu( testList, cell: new PaperListCell(PaperColor.GREY_DARK), shadow: false);
   //list.submitCallback = _onCellCommit;
-  hbox5.addChild(list2); 
-  
+  list1.touchable = true;
+  hbox5.addChild(list1);
+  list1.span(400, 400);
+
+  PaperMenu list2 = new PaperMenu( testList, cell: new PaperListCell(PaperColor.BLUE), shadow: true);
+  //list.submitCallback = _onCellCommit;
+  hbox5.addChild(list2);
+  list2.span(400, 400);
+
   vbox.addChild(hbox5);
 
-  
-  /* 
+
+  /*
    * 6th row: Paper Dialog with Paper Text and Paper Buttons; also, Custom Cards
    */
-  HBox hbox6 = new HBox(20);
+  Flow hbox6 = new Flow()
+    ..spacing = 20;
 
   PaperDialog dialog = new PaperDialog("Permission");
   dialog.addContent(new PaperText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."));
   dialog.addButton( new PaperButton("DECLINE", preset: PaperButton.PRESET_RED, fontColor: PaperColor.GREY_DARK, width: 90, background : false) );
   dialog.addButton( new PaperButton("ACCEPT", preset: PaperButton.PRESET_BLUE, fontColor: PaperColor.BLUE, width: 90, background : false) );
-  dialog.setSize(300, 240);
+  dialog.span(300, 240);
   hbox6.addChild(dialog); 
 
   Button card = new Button();
   card.addChild( new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: PaperColor.WHITE, respondToClick: false) );
   card.addChild( new PaperRipple(color: PaperColor.GREY_DARK) );
-  card.setSize(300, 240);
+  card.span(300, 240);
   hbox6.addChild(card); 
 
   Button image = new Button();
   image.addChild( new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: PaperColor.WHITE, respondToClick: false) );
-  image.addChild( new ComponentImageLoader("http://lorempixel.com/300/240/nature/", 300, 240) );
+  image.addChild( new ImageSprite()
+                        ..span(300, 240, refresh: false)
+                        ..href = "http://lorempixel.com/300/240/nature/"
+  );
   image.addChild( new PaperRipple(color: PaperColor.WHITE) );
-  image.setSize(300, 240);
+  image.span(300, 240);
   hbox6.addChild(image); 
   
   
-  vbox.addChild(hbox6); 
-  
-  
+  vbox.addChild(hbox6);
+  vbox.refresh();
   stage.addChild(vbox);
   
 

@@ -6,9 +6,13 @@ Stage stage;
 BookView book;
 
 void main() {
-  stage = new Stage(html.querySelector('#stage'), webGL: false, color: 0xFFf9f9f9);
-  stage.scaleMode = StageScaleMode.NO_SCALE;
-  stage.align = StageAlign.TOP_LEFT;
+  var opts = new StageOptions();
+  opts.renderEngine = RenderEngine.Canvas2D;
+  opts.backgroundColor = 0xFFf9f9f9;
+  opts.stageScaleMode = StageScaleMode.NO_SCALE;
+  opts.stageAlign = StageAlign.TOP_LEFT;
+
+  stage = new Stage(html.querySelector('#stage'), options: opts);
   ContextTool.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
   new RenderLoop()..addStage(stage);
   BookSampleAssets.load(start);
@@ -16,7 +20,7 @@ void main() {
 void start() {
   
   book = new BookView("book");
-  book.setSize(900, 600);
+  book.span(900, 600);
   book.x = 20;
   book.y = 20;
   book.openAt = 0;
@@ -40,11 +44,11 @@ void start() {
   }
 
   book.init();
-  book.addEventListener(ManagedSpriteComponentEvent.INIT_COMPLETE, onBookInit);
+  book.addEventListener(LifecycleEvent.INIT_COMPLETE, onBookInit);
 
 }
 
 void onBookInit(event) {
-  book.removeEventListener(ManagedSpriteComponentEvent.INIT_COMPLETE, onBookInit);
+  book.removeEventListener(LifecycleEvent.INIT_COMPLETE, onBookInit);
   book.nextPage();
 }

@@ -19,8 +19,8 @@ abstract class IEffect {
   void set sprite(Sprite spr);
   Sprite get sprite;
   bool useSprite();
-  void runInEffect(ISpriteComponent target, num duration, Function callback);
-  void runOutEffect(ISpriteComponent target, num duration, Function callback);
-  void cancel([ISpriteComponent target = null]);
-  void destroy();
+  void runInEffect(BoxSprite target, num duration, Function callback);
+  void runOutEffect(BoxSprite target, num duration, Function callback);
+  void cancel([BoxSprite target = null]);
+  void dispose();
 }

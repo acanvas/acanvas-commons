@@ -8,9 +8,13 @@ PaperToast _toast;
 
 
 void main() {
-  stage = new Stage(html.querySelector('#stage'), webGL: true, color: 0xFFf9f9f9);
-  stage.scaleMode = StageScaleMode.NO_SCALE;
-  stage.align = StageAlign.TOP_LEFT;
+  var opts = new StageOptions();
+  opts.renderEngine = RenderEngine.Canvas2D;
+  opts.backgroundColor = 0xFFf9f9f9;
+  opts.stageScaleMode = StageScaleMode.NO_SCALE;
+  opts.stageAlign = StageAlign.TOP_LEFT;
+
+  stage = new Stage(html.querySelector('#stage'), options: opts);
   ContextTool.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
   new RenderLoop()..addStage(stage);
 
@@ -18,27 +22,31 @@ void main() {
   FontTool.loadFonts(start);
 }
 void start() {
-  
-  
+
   PaperTabs tab = new PaperTabs(highlightColor : PaperColor.BLUE, bgColor: PaperColor.BLACK);
-  tab.addToTL(new PaperIconButton(PaperIcon.white(PaperIconSet.menu), rippleColor: PaperColor.WHITE));
-  tab.addToTL(new PaperText("Title", size: 24, color: PaperColor.WHITE));
-  tab.addToTR(new PaperIconButton(PaperIcon.white(PaperIconSet.add_shopping_cart), rippleColor: PaperColor.WHITE));
   tab.addTab(new PaperButton("ITEM ONE", preset: PaperButton.PRESET_WHITE, shadow: false));
   tab.addTab(new PaperButton("ITEM TWO", preset: PaperButton.PRESET_WHITE, shadow: false));
   tab.addTab(new PaperButton("ITEM THREE", preset: PaperButton.PRESET_WHITE, shadow: false));
-  stage.addChild(tab);
-  tab.setSize(stage.stageWidth, 100);
+
+  PaperAppBar bar = new PaperAppBar(highlightColor : PaperColor.BLUE, bgColor: PaperColor.BLACK);
+  bar.addToTL(new PaperIconButton(PaperIcon.white(PaperIconSet.menu), rippleColor: PaperColor.WHITE));
+  bar.addToTL(new PaperText("Title", size: 24, color: PaperColor.WHITE));
+  bar.addToTR(new PaperIconButton(PaperIcon.white(PaperIconSet.add_shopping_cart), rippleColor: PaperColor.WHITE));
+  bar.addPaperTabs(tab);
+
+  stage.addChild(bar);
+  tab.span(stage.stageWidth, 100);
   
   /* Vertical Container */
-  VBox vbox = new VBox(10);
+  Flow vbox = new Flow()
+    ..spacing = 10;
   vbox.x = 10;
   vbox.y = 100;
   
   /* 
    * Radio Button Group
    */
-  RadioGroupV radioGroupV = new RadioGroupV(5);
+  RadioGroup radioGroupV = new RadioGroup(flowOrientation: FlowOrientation.VERTICAL, spacing: 5.0);
   radioGroupV.addChild(new PaperRadioButton(label : "Red pill", activeColor : PaperColor.RED));
   radioGroupV.addChild(new PaperRadioButton(label : "or"));
   radioGroupV.addChild(new PaperRadioButton(label : "Blue pill?", activeColor : PaperColor.BLUE));
@@ -58,7 +66,7 @@ void start() {
   vbox.addChild(toggle2);
   
   stage.addChild(vbox);
-  vbox.setSize(320, 400);
+  vbox.span(320, 400);
   
 
 }

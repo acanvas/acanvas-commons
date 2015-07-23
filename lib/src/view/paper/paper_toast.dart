@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-class PaperToast extends SpriteComponent {
+class PaperToast extends BoxSprite {
 
   static const int BL = 1;
   static const int BR = 2;
@@ -25,7 +25,7 @@ class PaperToast extends SpriteComponent {
     _progress.value = 0;
 
     holder.addChild(this);
-    setSize(300, 50);
+    span(300, 50);
 
     ContextTool.STAGE.juggler.addTween(this, .3, Transition.easeOutBounce)..animate.y.to(ContextTool.STAGE.stageHeight - this.height - 20);
 
@@ -41,17 +41,17 @@ class PaperToast extends SpriteComponent {
     ContextTool.STAGE.juggler.addTween(this, .3, Transition.easeOutBounce)
         ..animate.y.to(ContextTool.STAGE.stageHeight)
         ..delay = hideAfterSeconds
-        ..onComplete = () => this.destroy();
+        ..onComplete = () => this.dispose();
   }
 
-  @override void redraw() {
-    super.redraw();
+  @override void refresh() {
+    super.refresh();
 
     _title.x = 20;
-    _title.y = (heightAsSet / 2 - _title.textHeight / 2).round();
-    _title.width = widthAsSet - 40;
+    _title.y = (spanHeight / 2 - _title.textHeight / 2).round();
+    _title.width = spanWidth - 40;
 
-    _progress.y = heightAsSet - _progress.height;
+    _progress.y = spanHeight - _progress.height;
 
     switch (position) {
       case BL:
@@ -59,7 +59,7 @@ class PaperToast extends SpriteComponent {
         y = holder.stageHeight;
         break;
       case BR:
-        x = holder.stageWidth - widthAsSet - 20;
+        x = holder.stageWidth - spanWidth - 20;
         y = holder.stageHeight;
         break;
     }

@@ -6,12 +6,12 @@ part of stagexl_commons;
 			_applyRecursively = false;
 		}
 		
-		@override void runInEffect(ISpriteComponent target,double duration,Function callback)
+		@override void runInEffect(BoxSprite target,double duration,Function callback)
 		 {
 			target.alpha = 1;
 			callback.call();
 		}
-		@override void runOutEffect(ISpriteComponent target,double duration,Function callback)
+		@override void runOutEffect(BoxSprite target,double duration,Function callback)
 		 {
 			callback.call();
 		}

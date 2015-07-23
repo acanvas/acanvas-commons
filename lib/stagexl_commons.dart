@@ -55,55 +55,106 @@ part 'src/util/context_tool.dart';
 part 'src/util/device_detector.dart';
 part 'src/util/font_tool.dart';
 part 'src/util/graphics_util.dart';
+part 'src/util/key_code.dart';
 part 'src/util/numeric_stepper.dart';
 
-//view:basics
-part 'src/view/component/i_sprite_component.dart';
-part 'src/view/component/sprite_component.dart';
-part 'src/view/component/i_managed_sprite_component.dart';
-part 'src/view/component/managed_sprite_component.dart';
-part 'src/view/component/managed_sprite_component_event.dart';
-//view:components
-part 'src/view/component/flick_image.dart';
+//view base: box, behave, lifecycle
+part 'src/view/base/m_box.dart';
+part 'src/view/base/m_behave.dart';
+part 'src/view/base/m_lifecycle.dart';
+part 'src/view/base/lifecycle_event.dart';
+part 'src/view/base/impl/box_sprite.dart';
+part 'src/view/base/impl/behave_sprite.dart';
+part 'src/view/base/impl/lifecycle_sprite.dart';
+part 'src/view/base/impl/image_sprite.dart';
 
-part 'src/view/component/form/calendar/calendar.dart';
-part 'src/view/component/form/calendar/day_button.dart';
-part 'src/view/component/form/calendar/next_prev_button.dart';
+part 'src/view/calendar/calendar.dart';
+part 'src/view/calendar/day_button.dart';
+part 'src/view/calendar/next_prev_button.dart';
 
-part 'src/view/component/common/box/accordeon/accordion.dart';
-part 'src/view/component/common/box/accordeon/accordion_cell.dart';
-part 'src/view/component/common/box/reflow.dart';
-part 'src/view/component/common/box/hbox.dart';
-part 'src/view/component/common/box/hbox_animated.dart';
-part 'src/view/component/common/box/hbox_scrollable.dart';
-part 'src/view/component/common/box/vbox.dart';
-part 'src/view/component/common/box/vbox_animated.dart';
-part 'src/view/component/common/box/vbox_scrollable.dart';
+part 'src/view/flow/m_flow.dart';
+part 'src/view/flow/m_duration.dart';
+part 'src/view/flow/impl/flow.dart';
+part 'src/view/flow/impl/accordeon.dart';
 
-part 'src/view/component/common/component_bitmap_data.dart';
-part 'src/view/component/common/component_image_loader.dart';
-part 'src/view/component/common/component_scrollable.dart';
-part 'src/view/component/common/keyboard.dart';
-part 'src/view/component/common/scrollable/event/scroll_view_event.dart';
-part 'src/view/component/common/scrollable/event/slider_event.dart';
-part 'src/view/component/common/scrollable/orientation.dart';
-part 'src/view/component/common/scrollable/default_scrollbar.dart';
-part 'src/view/component/common/scrollable/scrollbar.dart';
-part 'src/view/component/common/scrollable/slider.dart';
+part 'src/view/interact/button/m_button.dart';
+part 'src/view/interact/button/m_selectable.dart';
+part 'src/view/interact/button/radio_group_event.dart';
+part 'src/view/interact/button/impl/button.dart';
+part 'src/view/interact/button/impl/selectable_button.dart';
+part 'src/view/interact/button/impl/radio_group.dart';
 
-part 'src/view/component/form/button/cell.dart';
-part 'src/view/component/form/button/button.dart';
-part 'src/view/component/form/button/radio_button.dart';
-part 'src/view/component/form/button/radio_group_event.dart';
-part 'src/view/component/form/button/radio_group_h.dart';
-part 'src/view/component/form/button/radio_group_v.dart';
-part 'src/view/component/form/button/toggle_button.dart';
-part 'src/view/component/form/button/toggle_button_event.dart';
+part 'src/view/interact/list/m_list.dart';
+part 'src/view/interact/list/m_pager.dart';
+part 'src/view/interact/list/impl/list_sprite.dart';
+part 'src/view/interact/list/impl/pager_sprite.dart';
+part 'src/view/interact/list/impl/dropdown.dart';
 
-part 'src/view/component/form/component_dropdown.dart';
-part 'src/view/component/form/component_list.dart';
-part 'src/view/component/form/component_pager.dart';
-part 'src/view/component/form/component_with_data_proxy.dart';
+part 'src/view/interact/scroll/m_paged_scroll.dart';
+part 'src/view/interact/scroll/m_scroll.dart';
+part 'src/view/interact/scroll/scrollify_event.dart';
+part 'src/view/interact/scroll/impl/scrollbar.dart';
+part 'src/view/interact/scroll/impl/default_scrollbar.dart';
+part 'src/view/interact/scroll/impl/scrollify_sprite.dart';
+
+part 'src/view/interact/slider/m_slider.dart';
+part 'src/view/interact/slider/slider_event.dart';
+part 'src/view/interact/slider/impl/slider.dart';
+
+//view/keyboard
+part 'src/view/keyboard/char_code.dart';
+part 'src/view/keyboard/key.dart';
+part 'src/view/keyboard/key_event.dart';
+part 'src/view/keyboard/key_row.dart';
+part 'src/view/keyboard/label.dart';
+part 'src/view/keyboard/callout.dart';
+part 'src/view/keyboard/layouts/azerty.dart';
+part 'src/view/keyboard/layouts/azerty_fr.dart';
+part 'src/view/keyboard/layouts/azerty_switch.dart';
+part 'src/view/keyboard/layouts/azerty_switch_fr.dart';
+part 'src/view/keyboard/layouts/email_numbers_symbols_switch.dart';
+part 'src/view/keyboard/layouts/email_switch.dart';
+part 'src/view/keyboard/layouts/layout.dart';
+part 'src/view/keyboard/layouts/numbers_symbols.dart';
+part 'src/view/keyboard/layouts/numbers_symbols_switch.dart';
+part 'src/view/keyboard/layouts/num_pad.dart';
+part 'src/view/keyboard/layouts/num_pad_operators.dart';
+part 'src/view/keyboard/layouts/qwerty.dart';
+part 'src/view/keyboard/layouts/qwerty_fr.dart';
+part 'src/view/keyboard/layouts/qwerty_switch.dart';
+part 'src/view/keyboard/layouts/qwerty_switch_fr.dart';
+part 'src/view/keyboard/soft_keyboard.dart';
+
+//view:experimental
+part 'src/view/experimental/flick_image.dart';
+//view:book
+part 'src/view/experimental/book/book_view.dart';
+part 'src/view/experimental/book/book_sample_assets.dart';
+part 'src/view/experimental/book/containers/super_view_stack.dart';
+part 'src/view/experimental/book/drawing/drawing_tool.dart';
+part 'src/view/experimental/book/drawing/line_style.dart';
+part 'src/view/experimental/book/flashsandy/distort_image.dart';
+part 'src/view/experimental/book/foxaweb/page_flip.dart';
+part 'src/view/experimental/book/geom/geom.dart';
+part 'src/view/experimental/book/geom/infinite_line.dart';
+part 'src/view/experimental/book/geom/line.dart';
+part 'src/view/experimental/book/geom/super_point.dart';
+part 'src/view/experimental/book/geom/super_rectangle.dart';
+part 'src/view/experimental/book/index_changed_event.dart';
+part 'src/view/experimental/book/managers/state_manager.dart';
+part 'src/view/experimental/book/utils/array_tool.dart';
+part 'src/view/experimental/book/utils/child_tool.dart';
+part 'src/view/experimental/book/utils/math_tool.dart';
+part 'src/view/experimental/book/view/book_error.dart';
+part 'src/view/experimental/book/view/book_event.dart';
+part 'src/view/experimental/book/view/gradients.dart';
+part 'src/view/experimental/book/view/page.dart';
+part 'src/view/experimental/book/view/page_manager.dart';
+//view:video
+//part 'src/view/component/video/video_controls.dart';
+//part 'src/view/component/video/video_player.dart';
+
+
 //view:effect
 part 'src/view/effect/i_effect.dart';
 part 'src/view/effect/no_effect.dart';
@@ -115,32 +166,6 @@ part 'src/view/effect/hright_swipe_transition.dart';
 //view:textfield
 part 'src/view/textfield/ui_text_field.dart';
 part 'src/view/textfield/ui_text_field_input.dart';
-//view:book
-part 'src/view/component/book/book_view.dart';
-part 'src/view/component/book/book_sample_assets.dart';
-part 'src/view/component/book/containers/super_view_stack.dart';
-part 'src/view/component/book/drawing/drawing_tool.dart';
-part 'src/view/component/book/drawing/line_style.dart';
-part 'src/view/component/book/flashsandy/distort_image.dart';
-part 'src/view/component/book/foxaweb/page_flip.dart';
-part 'src/view/component/book/geom/geom.dart';
-part 'src/view/component/book/geom/infinite_line.dart';
-part 'src/view/component/book/geom/line.dart';
-part 'src/view/component/book/geom/super_point.dart';
-part 'src/view/component/book/geom/super_rectangle.dart';
-part 'src/view/component/book/index_changed_event.dart';
-part 'src/view/component/book/managers/state_manager.dart';
-part 'src/view/component/book/utils/array_tool.dart';
-part 'src/view/component/book/utils/child_tool.dart';
-part 'src/view/component/book/utils/math_tool.dart';
-part 'src/view/component/book/view/book_error.dart';
-part 'src/view/component/book/view/book_event.dart';
-part 'src/view/component/book/view/gradients.dart';
-part 'src/view/component/book/view/page.dart';
-part 'src/view/component/book/view/page_manager.dart';
-//view:video
-//part 'src/view/component/video/video_controls.dart';
-//part 'src/view/component/video/video_player.dart';
 //view:paper
 part 'src/view/paper/common/i_paper_button_component.dart';
 part 'src/view/paper/common/paper_color.dart';
@@ -167,27 +192,4 @@ part 'src/view/paper/paper_toast.dart';
 part 'src/view/paper/paper_toggle_button.dart';
 part 'src/view/paper/paper_wrap.dart';
 
-//softkeyboard
-part 'src/softkeyboard/char_code.dart';
-part 'src/softkeyboard/key.dart';
-part 'src/softkeyboard/key_event.dart';
-part 'src/softkeyboard/key_row.dart';
-part 'src/softkeyboard/label.dart';
-part 'src/softkeyboard/callout.dart';
-part 'src/softkeyboard/layouts/azerty.dart';
-part 'src/softkeyboard/layouts/azerty_fr.dart';
-part 'src/softkeyboard/layouts/azerty_switch.dart';
-part 'src/softkeyboard/layouts/azerty_switch_fr.dart';
-part 'src/softkeyboard/layouts/email_numbers_symbols_switch.dart';
-part 'src/softkeyboard/layouts/email_switch.dart';
-part 'src/softkeyboard/layouts/layout.dart';
-part 'src/softkeyboard/layouts/numbers_symbols.dart';
-part 'src/softkeyboard/layouts/numbers_symbols_switch.dart';
-part 'src/softkeyboard/layouts/num_pad.dart';
-part 'src/softkeyboard/layouts/num_pad_operators.dart';
-part 'src/softkeyboard/layouts/qwerty.dart';
-part 'src/softkeyboard/layouts/qwerty_fr.dart';
-part 'src/softkeyboard/layouts/qwerty_switch.dart';
-part 'src/softkeyboard/layouts/qwerty_switch_fr.dart';
-part 'src/softkeyboard/soft_keyboard.dart';
 

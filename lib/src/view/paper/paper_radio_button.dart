@@ -4,7 +4,7 @@ part of stagexl_commons;
 /**
 	 * @author Nils Doehring (nilsdoehring@gmail.com)
 	 */
-class PaperRadioButton extends RadioButton {
+class PaperRadioButton extends SelectableButton {
   int RADIUS = 30;
 
   int activeColor;
@@ -15,12 +15,12 @@ class PaperRadioButton extends RadioButton {
   PaperText _paperLabel;
 
   PaperRadioButton({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : ""}) : super() {
-    ignoreCallSetSize = false;
+    inheritSpan = true;
         
     PaperRipple ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity : .2);
-    ripple.ignoreCallSetSize = true;
+    ripple.inheritSpan = false;
     addChild(ripple);
-    ripple.setSize(RADIUS * 2, RADIUS * 2);
+    ripple.span(RADIUS * 2, RADIUS * 2);
 
     _bg = new Shape();
     _bg.graphics.circle(30, 30, 8);
@@ -47,21 +47,21 @@ class PaperRadioButton extends RadioButton {
     
   }
 
-  @override void redraw() {
+  @override void refresh() {
     _icon.x = _icon.y = 30;
     if(_paperLabel != null){
       _paperLabel.x = 60;
       _paperLabel.y = 20;
     }
-    super.redraw();
+    super.refresh();
   }
 
   @override
-  void set isToggled(bool value) {
-    if(value == isToggled) return;
-    super.isToggled = value;
+  void set toggled(bool value) {
+    if(value == toggled) return;
+    super.toggled = value;
     
-    if(isToggled){
+    if(toggled){
       _icon.scaleX = _icon.scaleY = .1;
       _icon.visible = true;
       ContextTool.STAGE.juggler.addTween(_icon, .1).animate

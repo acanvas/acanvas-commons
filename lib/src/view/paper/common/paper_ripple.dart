@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
+class PaperRipple extends BoxSprite implements IPaperButtonComponent{
   static const int RECTANGLE = 1;
   static const int CIRCLE = 2;
   
@@ -15,33 +15,33 @@ class PaperRipple extends SpriteComponent implements IPaperButtonComponent{
   Sprite holder;
 
   PaperRipple({this.color : 0xFF000000, this.type : RECTANGLE, this.velocity: 0.5 }):super() {
-    ignoreCallSetSize = false;
+    inheritSpan = true;
     if(ContextTool.TOUCH){
       velocity = 1;
     }
   }
   
   @override
-  void redraw(){
+  void refresh(){
     switch(type){
       case CIRCLE:
-        mask = new Mask.circle(widthAsSet/2, widthAsSet/2, widthAsSet/2);
+        mask = new Mask.circle(spanWidth/2, spanWidth/2, spanWidth/2);
         break;
       case RECTANGLE:
-        mask = new Mask.rectangle(0, 0, widthAsSet, heightAsSet);
+        mask = new Mask.rectangle(0, 0, spanWidth, spanHeight);
         break;
     }
   }
 
   @override
   downAction([InputEvent e = null]) {
-    num localX = e == null ? widthAsSet/2 : e.localX;
-    num localY = e == null ? heightAsSet/2 : e.localY;
+    num localX = e == null ? spanWidth/2 : e.localX;
+    num localY = e == null ? spanHeight/2 : e.localY;
     
-    num touchX = localX > widthAsSet ? widthAsSet : localX;// - rect.left;
-    num touchY = localY > heightAsSet ? heightAsSet : localY;// - rect.top;
+    num touchX = localX > spanWidth ? spanWidth : localX;// - rect.left;
+    num touchY = localY > spanHeight ? spanHeight : localY;// - rect.top;
     
-    int waveRadius = (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(widthAsSet, heightAsSet)) / 1.2).round();
+    int waveRadius = (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(spanWidth, spanHeight)) / 1.2).round();
     
     Shape inner = new Shape()
           ..graphics.circle(0, 0, waveRadius)

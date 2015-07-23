@@ -25,6 +25,6 @@ part of stagexl_commons;
 		
 		void requestChunk(Function callBack,[int chunkIndex=-1,int chunkSize=-1]);
 		
-		void _onData(OperationEvent event);
+		void onData(OperationEvent event);
 	}
 

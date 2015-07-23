@@ -1,7 +1,7 @@
 part of stagexl_commons;
 
 
-class PaperTabs extends SpriteComponent {
+class PaperTabs extends BoxSprite {
 
   int bgColor;
   int highlightColor;
@@ -10,7 +10,7 @@ class PaperTabs extends SpriteComponent {
   Sprite _bg;
   Sprite _slideBar;
 
-  HBox tabBox;
+  Flow tabBox;
   
   int _activeButtonIndex = 0;
 
@@ -18,7 +18,10 @@ class PaperTabs extends SpriteComponent {
     _bg = new Sprite();
     addChild(_bg);
 
-    tabBox = new HBox(0, true);
+    tabBox = new Flow()
+      ..spacing = 0
+      ..snapToPixels = true
+      ..flowOrientation = FlowOrientation.HORIZONTAL;
     addChild(tabBox);
     
     _slideBar = new Sprite();
@@ -43,31 +46,31 @@ class PaperTabs extends SpriteComponent {
     _activeButtonIndex = index;
     ContextTool.STAGE.juggler.addTween(_slideBar, .3, Transition.easeOutCubic).animate
       ..x.to(btn.x);
-    _slideBar.width = btn.widthAsSet;
+    _slideBar.width = btn.spanWidth;
   }
 
-  @override void redraw() {
-    super.redraw();
+  @override void refresh() {
+    super.refresh();
     
-    GraphicsUtil.rectangle(0, 0, widthAsSet, heightAsSet, sprite: _bg, color : bgColor);
+    GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: _bg, color : bgColor);
 
     tabBox.x = 0;
 
     if(tabBox.numChildren > 0){
-      tabBox.y = heightAsSet - tabBox.height;
+      tabBox.y = spanHeight - tabBox.height;
      
       if(distributeTabs){
         for(int i = 0; i<tabBox.numChildren;i++){
           Button btn = tabBox.getChildAt(i);
-          btn.setSize((widthAsSet/tabBox.numChildren).ceil(), 0);
+          btn.span((spanWidth/tabBox.numChildren).ceil(), 0);
         }
-        tabBox.update();
+        tabBox.refresh();
       }
 
-      GraphicsUtil.line((tabBox.getChildAt(_activeButtonIndex) as Button).widthAsSet, 0, strength: 2, sprite: _slideBar, color : highlightColor);
+      GraphicsUtil.line((tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0, strength: 2, sprite: _slideBar, color : highlightColor);
       
       _slideBar.x = tabBox.getChildAt(_activeButtonIndex).x;
-      _slideBar.y = heightAsSet - 1;
+      _slideBar.y = spanHeight - 1;
     }
     else{
       _slideBar.visible = false;
@@ -76,6 +79,6 @@ class PaperTabs extends SpriteComponent {
 
   ///addresses a sizing bug with Graphics tool
   num get width => super.width - 2;
-  num get widthAsSet => super.widthAsSet - 2;
+  num get spanWidth => super.spanWidth - 2;
 
 }

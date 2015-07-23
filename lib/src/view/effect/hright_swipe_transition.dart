@@ -11,9 +11,9 @@ class HRightSwipeTransition extends BasicEffect {
   }
 
   @override
-  void runInEffect(ISpriteComponent t, num duration, Function callback) {
-    SpriteComponent target = t as SpriteComponent;
-    target.parent.mask = new Mask.rectangle(target.x, target.y, target.widthAsSet, target.heightAsSet);
+  void runInEffect(BoxSprite t, num duration, Function callback) {
+    BoxSprite target = t as BoxSprite;
+    target.parent.mask = new Mask.rectangle(target.x, target.y, target.spanWidth, target.spanHeight);
     num iTargetXOriginal = target.x;
     target.x = -target.stage.stageWidth;
     target.alpha = 1;
@@ -26,9 +26,9 @@ class HRightSwipeTransition extends BasicEffect {
         };
   }
   @override
-  void runOutEffect(ISpriteComponent t, num duration, Function callback) {
-    SpriteComponent target = t as SpriteComponent;
-    target.parent.mask = new Mask.rectangle(target.x, target.y, target.widthAsSet, target.heightAsSet);
+  void runOutEffect(BoxSprite t, num duration, Function callback) {
+    BoxSprite target = t as BoxSprite;
+    target.parent.mask = new Mask.rectangle(target.x, target.y, target.spanWidth, target.spanHeight);
     ContextTool.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
         ..animate.x.to(target.stage.stageWidth)
         ..onComplete = () {

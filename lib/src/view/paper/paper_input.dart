@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-class PaperInput extends SpriteComponent {
+class PaperInput extends BoxSprite {
   static const DEFAULT_FONT = "Roboto, Helvetica, Arial";
 
   /* Parameters */
@@ -32,7 +32,7 @@ class PaperInput extends SpriteComponent {
   bool _currentlyFloating = false;
 
   PaperInput(String text, {this.fontSize: 14, this.textColor: PaperColor.BLACK, String fontName: DEFAULT_FONT, bool multiline: false, int rows: 1, this.floating: false, this.required: "", this.keyboard: false, this.password: false}) : super() {
-    ignoreCallSetSize = false;
+    inheritSpan = true;
 
     _defaultTextField = new UITextField(text, new TextFormat(fontName, fontSize, PaperColor.GREY_DARK));
     addChild(_defaultTextField);
@@ -93,8 +93,8 @@ class PaperInput extends SpriteComponent {
   /*
    * Redraws and adjusts lines and textfield widths
    */
-  @override redraw() {
-    _inputTextField.width = widthAsSet;
+  @override refresh() {
+    _inputTextField.width = spanWidth;
 
     _drawLine(_inactiveLine, textColor, 0.2);
     _drawLine(_activeLine, _highlightColor, 2);
@@ -105,11 +105,11 @@ class PaperInput extends SpriteComponent {
 
     if (required != "") {
       _requiredTextField.y = _inactiveLine.y + 5;
-      _requiredIconActive.x = _requiredIconInactive.x = widthAsSet - 24;
+      _requiredIconActive.x = _requiredIconInactive.x = spanWidth - 24;
       _requiredIconActive.y = _requiredIconInactive.y = _requiredTextField.y;
     }
 
-    super.redraw();
+    super.refresh();
   }
 
   /* User clicks into TextField */
@@ -118,7 +118,7 @@ class PaperInput extends SpriteComponent {
     if (_activeLine.alpha == 0) {
       _activeLine.scaleX = 0.01;
       _activeLine.alpha = 1;
-      _activeLine.x = widthAsSet / 2;
+      _activeLine.x = spanWidth / 2;
       ContextTool.STAGE.juggler.addTween(_activeLine, .2).animate
           ..x.to(0)
           ..scaleX.to(1);
@@ -195,7 +195,7 @@ class PaperInput extends SpriteComponent {
     }
     
     if(keyboard){
-      _destroyKeyboard();
+      _disposeKeyboard();
     }
   }
 
@@ -269,11 +269,11 @@ class PaperInput extends SpriteComponent {
     line.graphics.clear();
     line.graphics.beginPath();
     line.graphics.moveTo(0, 0);
-    line.graphics.lineTo(widthAsSet, 0);
+    line.graphics.lineTo(spanWidth, 0);
     line.graphics.strokeColor(color, strength);
     line.graphics.closePath();
     if (ContextTool.WEBGL) {
-      line.applyCache(0, 0, widthAsSet.ceil(), strength.ceil());
+      line.applyCache(0, 0, spanWidth.ceil(), strength.ceil());
     }
   }
 
@@ -301,11 +301,11 @@ class PaperInput extends SpriteComponent {
   }
   
   void _resizeKeyboard([Event e = null]){
-    _softKeyboard.setSize(ContextTool.STAGE.stageWidth, min(ContextTool.STAGE.stageHeight/2, 400));
-    _softKeyboard.y = ContextTool.STAGE.stageHeight - _softKeyboard.heightAsSet;
+    _softKeyboard.span(ContextTool.STAGE.stageWidth, min(ContextTool.STAGE.stageHeight/2, 400));
+    _softKeyboard.y = ContextTool.STAGE.stageHeight - _softKeyboard.spanHeight;
   }
   
-  void _destroyKeyboard(){
+  void _disposeKeyboard(){
     ContextTool.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
     disposeChild(_softKeyboard);
     _softKeyboard = null;
@@ -313,5 +313,5 @@ class PaperInput extends SpriteComponent {
 
   ///addresses a sizing bug with Graphics tool
   num get width => super.width - 2;
-  num get widthAsSet => super.widthAsSet - 2;
+  num get spanWidth => super.spanWidth - 2;
 }

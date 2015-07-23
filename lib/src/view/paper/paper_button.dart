@@ -74,22 +74,22 @@ class PaperButton extends Button {
     addChild(_label);
 
 
-    setSize(width, height);
+    span(width, height);
     //enabled = true;
   }
 
 
-  @override void redraw() {
+  @override void refresh() {
 
-    if (widthAsSet > 0) {
-      _label.x = (widthAsSet / 2 - _label.textWidth / 2).round() - 3;
+    if (spanWidth > 0) {
+      _label.x = (spanWidth / 2 - _label.textWidth / 2).round() - 3;
     } else {
-      widthAsSet = _label.textWidth + 4 * SPACER;
-      _label.x = (widthAsSet / 2 - _label.textWidth / 2).round() - 3;
+      spanWidth = _label.textWidth + 4 * SPACER;
+      _label.x = (spanWidth / 2 - _label.textWidth / 2).round() - 3;
     }
 
-    _label.width = widthAsSet - SPACER;
-    _label.y = (heightAsSet / 2 - _label.textHeight / 2).round();
+    _label.width = spanWidth - SPACER;
+    _label.y = (spanHeight / 2 - _label.textHeight / 2).round();
 
     if (icon != null) {
       icon.x = (_label.x - icon.width / 2 - 12).round();
@@ -97,13 +97,13 @@ class PaperButton extends Button {
       icon.y = _label.y - 4;
     }
 
-    super.redraw();
+    super.refresh();
   }
 
-  @override void setLabel(String label) {
-    super.setLabel(label);
-    _label.text = label;
-    redraw();
+  @override void set labelText (String labelText) {
+    super.labelText = labelText;
+    _label.text = labelText;
+    refresh();
   }
 
 }
