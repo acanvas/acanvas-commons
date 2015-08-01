@@ -350,6 +350,7 @@ class ListSprite extends ScrollifySprite with MList {
       cell = _cellFactory.clone();
       cell.span(spanWidth, spanHeight);
       cell.mouseChildren = false;
+      cell.autoSelect = false;
       if(touchable){
         cell.disable();
       }
@@ -417,12 +418,11 @@ class ListSprite extends ScrollifySprite with MList {
     for (int i = 0; i < n; i++) {
       cell = (view.getChildAt(i) as SelectableButton);
       if (cell.id != exception) {
-        print("selected ${cell.id}");
+        //print("selected ${cell.id}");
         cell.deselect();
       }
       else{
-        print("exception ${cell.id}");
-
+        //print("exception ${cell.id}");
       }
     }
 

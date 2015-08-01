@@ -2,21 +2,20 @@ part of stagexl_commons;
 
 
 /**
-	 * @author Nils Doehring (nilsdoehring@gmail.com)
-	 */
+ * @author Nils Doehring (nilsdoehring@gmail.com)
+ */
 class PaperRadioButton extends SelectableButton {
   int RADIUS = 30;
 
   int activeColor;
   String label;
-  
+
   Shape _icon;
   Shape _bg;
   PaperText _paperLabel;
 
   PaperRadioButton({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : ""}) : super() {
-    inheritSpan = true;
-        
+
     PaperRipple ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity : .2);
     ripple.inheritSpan = false;
     addChild(ripple);
@@ -38,50 +37,44 @@ class PaperRadioButton extends SelectableButton {
     addChild(_icon);
     _icon.visible = false;
 
-    if(label != ""){
+    if (label != "") {
       _paperLabel = new PaperText(label, size : 16);
       addChild(_paperLabel);
     }
 
     enabled = true;
-    
+
   }
 
   @override void refresh() {
     _icon.x = _icon.y = 30;
-    if(_paperLabel != null){
+    if (_paperLabel != null) {
       _paperLabel.x = 60;
       _paperLabel.y = 20;
     }
     super.refresh();
   }
 
-  @override
-  void set toggled(bool value) {
-    if(value == toggled) return;
-    super.toggled = value;
-    
-    if(toggled){
-      _icon.scaleX = _icon.scaleY = .1;
-      _icon.visible = true;
-      ContextTool.STAGE.juggler.addTween(_icon, .1).animate
-        ..scaleX.to(1)
-        ..scaleY.to(1);
-      if(_paperLabel != null){
-        _paperLabel.color = activeColor;
-      }
+  void selectAction() {
+    _icon.scaleX = _icon.scaleY = .1;
+    _icon.visible = true;
+    ContextTool.STAGE.juggler.addTween(_icon, .1).animate
+      ..scaleX.to(1)
+      ..scaleY.to(1);
+    if (_paperLabel != null) {
+      _paperLabel.color = activeColor;
     }
-    else{
-      Tween tw = new Tween(_icon, .2);
-      tw.animate
+  }
+
+  void deselectAction() {
+    Tween tw = new Tween(_icon, .2);
+    tw.animate
       ..scaleX.to(.1)
       ..scaleY.to(.1);
-      tw.onComplete = () => _icon.visible = false;
-      ContextTool.STAGE.juggler.add(tw);
-      if(_paperLabel != null){
-        _paperLabel.color = PaperColor.BLACK;
-      }
+    tw.onComplete = () => _icon.visible = false;
+    ContextTool.STAGE.juggler.add(tw);
+    if (_paperLabel != null) {
+      _paperLabel.color = PaperColor.BLACK;
     }
-    
   }
 }

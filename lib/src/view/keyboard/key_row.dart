@@ -22,7 +22,7 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 	 * 
 	 * @see cc.cote.feathers.softkeyboard.Key
 	 */
-	 class KeyRow extends LifecycleSprite
+	 class KeyRow extends BoxSprite
 	{
 		/** A vector of all <code>Key</code> objects in the <code>KeyRow</code>. */
 		 List<Key> keys;
@@ -39,7 +39,8 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 		 * @param gap Gap to leave between keys (in arbitraty units).
 		 */
 	 KeyRow(List<Key> keys,num gap): super() {
-			
+		 inheritSpan = true;
+
 			this.keys = keys;
 			this._gap = gap;
 			
@@ -49,7 +50,6 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 				relativeWidth += key.relativeWidth;
 			}
 			relativeWidth += (length - 1) * _gap;
-			onInitComplete();
 		}
 		
 		/** num of keys in the key row. */

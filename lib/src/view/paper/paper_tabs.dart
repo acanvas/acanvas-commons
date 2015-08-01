@@ -20,7 +20,6 @@ class PaperTabs extends BoxSprite {
 
     tabBox = new Flow()
       ..spacing = 0
-      ..snapToPixels = true
       ..flowOrientation = FlowOrientation.HORIZONTAL;
     addChild(tabBox);
     
@@ -50,15 +49,14 @@ class PaperTabs extends BoxSprite {
   }
 
   @override void refresh() {
-    super.refresh();
-    
+
     GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: _bg, color : bgColor);
 
     tabBox.x = 0;
 
     if(tabBox.numChildren > 0){
       tabBox.y = spanHeight - tabBox.height;
-     
+
       if(distributeTabs){
         for(int i = 0; i<tabBox.numChildren;i++){
           Button btn = tabBox.getChildAt(i);
@@ -68,13 +66,14 @@ class PaperTabs extends BoxSprite {
       }
 
       GraphicsUtil.line((tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0, strength: 2, sprite: _slideBar, color : highlightColor);
-      
+
       _slideBar.x = tabBox.getChildAt(_activeButtonIndex).x;
       _slideBar.y = spanHeight - 1;
     }
     else{
       _slideBar.visible = false;
     }
+    super.refresh();
   }
 
   ///addresses a sizing bug with Graphics tool

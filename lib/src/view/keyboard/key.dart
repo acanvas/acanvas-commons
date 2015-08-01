@@ -55,7 +55,7 @@ part of stagexl_commons;
 	 * @see cc.cote.feathers.softkeyboard.layouts
 	 * @see cc.cote.feathers.softkeyboard.keycollections
 	 */
-class Key extends LifecycleSprite {
+class Key extends BoxSprite {
   //feathers
   List nameList = [];
   static final String UPPERCASE = 'Uppercase';
@@ -183,7 +183,8 @@ class Key extends LifecycleSprite {
 		 * @param switchToType A layout (specified by its class) to switch to when the key is 
 		 * released. Only works with <code>Softhtml.KeyCode.SWITCH_LAYOUT</code> keys.
 		 */
-  Key(int charCode, [List<Key> variants = null, String type = 'characterKey', String label = null, num relativeWidth = 1, num relativeHeight = 1, Layout switchToLayoutType = null]):super("Key_${charCode.toString()}") {
+  Key(int charCode, [List<Key> variants = null, String type = 'characterKey', String label = null, num relativeWidth = 1, num relativeHeight = 1, Layout switchToLayoutType = null]):super() {
+    name = "Key_${charCode.toString()}";
 
     inheritSpan = true;
     // Keep parameters locally
@@ -239,12 +240,6 @@ class Key extends LifecycleSprite {
     // If the key is the special SPACER type, hide it
     if (_charCode == CharCode.SPACER) visible = false;
 
-  }
-
-  @override
-  void init({Map params: null}){
-    super.init(params: params);
-
     // This is for desktop usage and easier debugging
     useHandCursor = true;
 
@@ -283,8 +278,6 @@ class Key extends LifecycleSprite {
     }
     
     addEventListener(Event.REMOVED_FROM_STAGE, _onRemovedFromStage);
-
-    onInitComplete();
   }
 
   void _onRemovedFromStage(Event e) {
@@ -341,13 +334,13 @@ class Key extends LifecycleSprite {
 
     //_label.validate();
     _label.width = _label.textWidth;
-    _label.x = spanWidth / 2 - _label.width / 2;
-    _label.y = spanHeight / 2 - _label.height / 2;
+    _label.x = (spanWidth / 2 - _label.width / 2).round();
+    _label.y = (spanHeight / 2 - _label.height / 2).round();
 
     // If an icon has been defined, center it.
     if (_icon != null) {
-      _icon.x = spanWidth / 2 - _icon.width / 2;
-      _icon.y = spanHeight / 2 - _icon.height / 2;
+      _icon.x = (spanWidth / 2 - _icon.width / 2).round();
+      _icon.y = (spanHeight / 2 - _icon.height / 2).round();
     }
 
   }

@@ -6,6 +6,7 @@ part of stagexl_commons;
 class Flow extends BoxSprite with MFlow {
 
   Flow(/*{FlowOrientation flow : FlowOrientation.HORIZONTAL, double spacing: 0.0, bool distribute: false, bool snapToPixels: true, bool inverted: false, bool animate: false, bool reflow: false, AlignV alignV : AlignV.TOP}*/) {
+    autoRefresh = true;
   }
 
   @override
@@ -35,7 +36,7 @@ class Flow extends BoxSprite with MFlow {
     children.forEach((child){
 
       //get width and height values of child
-      if(child is MBox && !(child is MFlow)){
+      if(child is MBox /*&& !(child is MFlow)*/){
         _childWidth = child.spanWidth;
         _childHeight = child.spanHeight;
       }
@@ -43,7 +44,6 @@ class Flow extends BoxSprite with MFlow {
         _childWidth = child.width;
         _childHeight = child.height;
       }
-
 
       //get values of previous child
       _prevChildWidth = _prevChild == null ? 0 : _prevChild is MBox ? (_prevChild as MBox).spanWidth : _prevChild.width;
@@ -57,7 +57,7 @@ class Flow extends BoxSprite with MFlow {
         else _childXNew = _prevChildX - _childWidth - spacing;
 
         //row space is full
-        if((reflow && _childXNew < padding) || flowOrientation == FlowOrientation.VERTICAL){
+        if((spanWidth>0 && reflow && _childXNew < padding) || flowOrientation == FlowOrientation.VERTICAL){
           _childXNew = spanWidth - padding - _childWidth;
           if(_prevChild != null) _newLine = true;
         }
@@ -69,7 +69,7 @@ class Flow extends BoxSprite with MFlow {
         else _childXNew = _prevChildX + _prevChildWidth + spacing;
 
         //row space is full
-        if((reflow && _childXNew + _childWidth + spacing > spanWidth) || flowOrientation == FlowOrientation.VERTICAL){
+        if((spanWidth>0 && reflow && _childXNew + _childWidth + spacing > spanWidth) || flowOrientation == FlowOrientation.VERTICAL){
           _childXNew = padding;
           if(_prevChild != null) _newLine = true;
         }
@@ -104,9 +104,6 @@ class Flow extends BoxSprite with MFlow {
           break;
       }
 
-      if(flowOrientation == FlowOrientation.VERTICAL){
-        print("r: $_rowHeight t: $_totalHeight y: $_childYNew");
-      }
 
       //set x, y, animate
       if(animate){
@@ -120,8 +117,18 @@ class Flow extends BoxSprite with MFlow {
         child.y = _childYNew;
       }
 
+      if(flowOrientation == FlowOrientation.VERTICAL){
+        //GraphicsUtil.rectangle(0, 0, _childWidth, _childHeight, color: 0x88FF0000, sprite: child);
+      }
+
       _prevChild = child;
+
     });
+
+    super.refresh();
+
+    num _spacer = (flowOrientation == FlowOrientation.HORIZONTAL && reflow == true) ? spacing : 0;
+    span(width, _childYNew + _spacer + _childHeight + padding, refresh: false);
 
   }
 
@@ -131,8 +138,9 @@ class Flow extends BoxSprite with MFlow {
       child.alpha = 0;
     }
     super.addChildAt(child, index);
+
     if(autoRefresh){
-      refresh();
+     // refresh();
     }
   }
 

@@ -33,16 +33,16 @@ class PaperWrap extends BoxSprite {
   }
 
   @override void refresh() {
-    super.refresh();
-    
+
     _title.x = 20;
     _title.y = 20;
     _title.width = spanWidth - 40;
-    
+
     _vbox.x = 20;
     _vbox.y = _title.y + _title.textHeight + 22;
     _vbox.span(spanWidth - 40, spanHeight - _vbox.y - 20);
 
+    super.refresh();
   }
 
 }

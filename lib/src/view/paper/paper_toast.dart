@@ -45,7 +45,6 @@ class PaperToast extends BoxSprite {
   }
 
   @override void refresh() {
-    super.refresh();
 
     _title.x = 20;
     _title.y = (spanHeight / 2 - _title.textHeight / 2).round();
@@ -63,5 +62,6 @@ class PaperToast extends BoxSprite {
         y = holder.stageHeight;
         break;
     }
+    super.refresh();
   }
 }

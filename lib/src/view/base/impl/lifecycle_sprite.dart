@@ -36,6 +36,12 @@ class LifecycleSprite extends BehaveSprite with MLifecycle{
 
   void onInitComplete(){
     initialized = true;
+    children.where((c) => c is MLifecycle && c.inheritInit && !c.initialized).forEach( (child){
+      if(child.inheritSpan){
+        child.span(spanWidth, spanHeight, refresh: false);
+      }
+      child.init();
+    });
     refresh();
     dispatchEvent(new LifecycleEvent(LifecycleEvent.INIT_COMPLETE));
   }
@@ -59,7 +65,6 @@ class LifecycleSprite extends BehaveSprite with MLifecycle{
 
   @override
   void refresh() {
-    throw new StateError("You cannot invoke XLSprite.refresh() directly. Override it.");
   }
 
   @override
@@ -86,8 +91,13 @@ class LifecycleSprite extends BehaveSprite with MLifecycle{
   @override
   void addChild(DisplayObject child) {
     super.addChild(child);
-    if (child is MLifecycle && (child as MLifecycle).inheritInit && initialized) {
-      (child as MLifecycle).init();
+    if (child is MLifecycle && !(child as MLifecycle).initialized && (child as MLifecycle).inheritInit && initialized) {
+      if(spanWidth > 0 && spanHeight > 0){
+        if((child as MBox).inheritSpan){
+          (child as MBox).span(spanWidth, spanHeight, refresh: false);
+        }
+        (child as MLifecycle).init();
+      }
     }
   }
 

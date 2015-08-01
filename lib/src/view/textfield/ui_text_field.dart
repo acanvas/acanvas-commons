@@ -59,12 +59,11 @@ class UITextField extends TextField {
   }
 
   @override
-  double get width {
+  num get width {
     return textWidth;
   }
   @override
-  double get height {
+  num get height {
     return textHeight;
   }
-
 }

@@ -49,11 +49,12 @@ class PaperDialog extends BoxSprite {
     
     _vbox.x = 20;
     _vbox.y = _title.y + _title.textHeight + 22;
-    _vbox.span(spanWidth - 40, 0);
+    _vbox.span(spanWidth - 40, 0); //also sets width of TextField children
 
+    _hbox.refresh();
     _hbox.x = (spanWidth - _hbox.width - 20).round();
     _hbox.y = (spanHeight - _hbox.height - 30).round();
-    
+
 
     //filters = [ new DropShadowFilter(5, 90,PaperColor.GREY_SHADOW, 10, 10) ];
   }

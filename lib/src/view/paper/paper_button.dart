@@ -73,9 +73,7 @@ class PaperButton extends Button {
     _label.width = LABEL_MAX_WIDTH;
     addChild(_label);
 
-
     span(width, height);
-    //enabled = true;
   }
 
 

@@ -6,6 +6,20 @@ class Button extends BehaveSprite with MButton {
     useHandCursor = true;
     mouseChildren = false;
     enabled = true;
+    autoRefresh = true;
+    autoSpan = true;
+  }
+
+  @override
+  void refresh() {
+    //adjust inherited span size to actual size
+    span(width, height, refresh: false);
+    if(this is MFlow){
+      print("${this}: ${spanWidth}x${spanHeight}  ${width}x${height}");
+      children.forEach((c){
+        print("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
+      });
+    }
   }
 
   @override
@@ -61,13 +75,6 @@ class Button extends BehaveSprite with MButton {
     children.where((c) => (c is MButton && c.inheritUpAction) || c is IPaperButtonComponent).forEach( (child){
       child.upAction(event);
     });
-    if(toggleable){
-      toggled = !toggled;
-      submitCallbackParams = [toggled];
-      if(submitEvent != null){
-        submitEvent.data = toggled;
-      }
-    }
     if(submit){
       this.submit();
     }

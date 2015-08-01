@@ -2,40 +2,38 @@ part of stagexl_commons;
 
 
 /**
-	 * @author Nils Doehring (nilsdoehring@gmail.com)
-	 */
-class PaperCheckbox extends Button {
+ * @author Nils Doehring (nilsdoehring@gmail.com)
+ */
+class PaperCheckbox extends SelectableButton {
   int RADIUS = 30;
   int BOXWIDTH = 20;
 
   int boxColor;
   int activeColor;
   String label;
-  
+
   Shape _icon;
   Shape _bg;
   Shape _box;
   PaperText _paperLabel;
 
   PaperCheckbox({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : "", this.boxColor : PaperColor.BLACK}) : super() {
-    toggleable = true;
-    inheritSpan = true;
-    
+
     PaperRipple ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity : .2);
     ripple.inheritSpan = false;
     addChild(ripple);
     ripple.span(RADIUS * 2, RADIUS * 2);
 
     _bg = new Shape();
-    _bg.graphics.rect(0, 0, RADIUS*2, RADIUS*2);
+    _bg.graphics.rect(0, 0, RADIUS * 2, RADIUS * 2);
     _bg.graphics.fillColor(0x00555555);
     addChild(_bg);
 
     _box = new Shape();
-    _box.graphics.rect(-BOXWIDTH/2, -BOXWIDTH/2, BOXWIDTH, BOXWIDTH);
+    _box.graphics.rect(-BOXWIDTH / 2, -BOXWIDTH / 2, BOXWIDTH, BOXWIDTH);
     _box.graphics.strokeColor(boxColor, 2);
     if (ContextTool.WEBGL) {
-      _box.applyCache(-(BOXWIDTH/2).round(), -(BOXWIDTH/2).round(), BOXWIDTH, BOXWIDTH);
+      _box.applyCache(-(BOXWIDTH / 2).round(), -(BOXWIDTH / 2).round(), BOXWIDTH, BOXWIDTH);
     }
     addChild(_box);
 
@@ -52,72 +50,64 @@ class PaperCheckbox extends Button {
     addChild(_icon);
     _icon.visible = false;
 
-    if(label != ""){
+    if (label != "") {
       _paperLabel = new PaperText(label, size : 16);
       addChild(_paperLabel);
     }
 
-    enabled = true;
-    
   }
 
   @override void refresh() {
     _icon.x = 29;
     _icon.y = 37;
     _box.x = _box.y = 30;
-    
-    if(_paperLabel != null){
+
+    if (_paperLabel != null) {
       _paperLabel.x = 60;
       _paperLabel.y = 20;
     }
     super.refresh();
   }
 
-  @override
-  void set toggled(bool value) {
-    if(value == toggled) return;
-    super.toggled = value;
-    
-    if(toggled){
-      _icon.scaleX = _icon.scaleY = .3;
-      _icon.visible = true;
+  @override void selectAction() {
+    _icon.scaleX = _icon.scaleY = .3;
+    _icon.visible = true;
 
-      ContextTool.STAGE.juggler.addTween(_box, .15).animate
-        ..alpha.to(0)
-        ..rotation.to(.8)
-        ..scaleX.to(.3)
-        ..scaleY.to(.3);
-      
-      ContextTool.STAGE.juggler.addTween(_icon, .1)
-        ..animate.scaleX.to(1)
-        ..animate.scaleY.to(1)
-        ..delay = .1;
-      
-      if(_paperLabel != null){
-        _paperLabel.color = activeColor;
-      }
-    }
-    else{
-      Tween tw = new Tween(_icon, .2);
-      tw.animate
+    ContextTool.STAGE.juggler.addTween(_box, .15).animate
+      ..alpha.to(0)
+      ..rotation.to(.8)
       ..scaleX.to(.3)
       ..scaleY.to(.3);
-      tw.onComplete = () { 
-        _icon.visible = false;
-        };
-      ContextTool.STAGE.juggler.add(tw);
 
-      ContextTool.STAGE.juggler.addTween(_box, .1)
-              ..animate.alpha.to(1)
-              ..animate.rotation.to(0)
-              ..animate.scaleX.to(1)
-              ..animate.scaleY.to(1)
-              ..delay = .15;
-      
-      if(_paperLabel != null){
-        _paperLabel.color = PaperColor.BLACK;
-      }
+    ContextTool.STAGE.juggler.addTween(_icon, .1)
+      ..animate.scaleX.to(1)
+      ..animate.scaleY.to(1)
+      ..delay = .1;
+
+    if (_paperLabel != null) {
+      _paperLabel.color = activeColor;
     }
-    
+  }
+
+  @override void deselectAction() {
+    Tween tw = new Tween(_icon, .2);
+    tw.animate
+      ..scaleX.to(.3)
+      ..scaleY.to(.3);
+    tw.onComplete = () {
+      _icon.visible = false;
+    };
+    ContextTool.STAGE.juggler.add(tw);
+
+    ContextTool.STAGE.juggler.addTween(_box, .1)
+      ..animate.alpha.to(1)
+      ..animate.rotation.to(0)
+      ..animate.scaleX.to(1)
+      ..animate.scaleY.to(1)
+      ..delay = .15;
+
+    if (_paperLabel != null) {
+      _paperLabel.color = PaperColor.BLACK;
+    }
   }
 }

@@ -7,14 +7,6 @@ abstract class MButton {
   }
   String get labelText => _labelText;
 
-  bool _toggleable = false;
-  void set toggleable (bool toggleable) => _toggleable = toggleable;
-  bool get toggleable => _toggleable;
-  
-  bool _toggled = false;
-  void set toggled (bool toggled) => _toggled = toggled;
-  bool get toggled => _toggled;
-  
   bool _inheritDownAction = false;
   void set inheritDownAction (bool inheritDownAction) => _inheritDownAction = inheritDownAction;
   bool get inheritDownAction => _inheritDownAction;

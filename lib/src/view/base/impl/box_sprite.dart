@@ -32,14 +32,26 @@ class BoxSprite extends Sprite3D with MBox {
 
   @override
   void refresh() {
-    //nothing to do here, but in sub classes
+    //adjust inherited span size to actual size
+    if(autoSpan){
+      span(width, height, refresh: false);
+    }
+    if(this is MFlow){
+      print("${this}: ${spanWidth}x${spanHeight}  ${width}x${height}");
+      children.forEach((c){
+        print("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
+      });
+    }
   }
 
   @override
   void dispose() {
-    children.forEach( (child){
-      disposeChild(child);
-    });
+
+    //children.forEach doesn't work here, as dispose influences children<List>
+    for(int i=0;i<numChildren;i++){
+      disposeChild(getChildAt(i));
+    }
+
     if (parent != null) {
       parent.removeChild(this);
     }
@@ -72,8 +84,13 @@ class BoxSprite extends Sprite3D with MBox {
   @override
   void addChildAt(DisplayObject child, int index) {
     super.addChildAt(child, index);
-    if (child is MBox && (child as MBox).inheritSpan) {
+    if (spanWidth > 0 && spanHeight > 0 && child is MBox && (child as MBox).inheritSpan) {
       (child as MBox).span(spanWidth, spanHeight);
+    }
+
+    //todo think of a better way to ensure refresh() globally
+    if(child is MBox && (child as MBox).autoRefresh){
+      (child as MBox).refresh();
     }
   }
 

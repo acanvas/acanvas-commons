@@ -14,7 +14,27 @@ abstract class MSelectable {
   bool get multiSelectable =>  _multiSelectable;
   void set multiSelectable(bool multiSelectable) { _multiSelectable = multiSelectable; }
 
-  void select();
+  bool _autoSelect = false;
+  bool get autoSelect =>  _autoSelect;
+  void set autoSelect(bool autoSelect) { _autoSelect = autoSelect; }
+
+  bool _selected = false;
+  bool get selected =>  _selected;
+  void set selected(bool selected) {
+    if (_selected != selected) {
+      if (selected) {
+        select();
+      }
+      else {
+        deselect();
+      }
+      _selected = selected;
+    }
+  }
+
+  void select({bool submit : false});
+  void selectAction(){}
   void deselect();
+  void deselectAction(){}
 
 }

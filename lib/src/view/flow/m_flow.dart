@@ -34,10 +34,6 @@ abstract class MFlow  {
   bool _animate = false;
   void set animate (bool animate) => _animate = animate;
   bool get animate => _animate;
-  
-  bool _autoRefresh = true;
-  void set autoRefresh (bool autoRefresh) => _autoRefresh = autoRefresh;
-  bool get autoRefresh => _autoRefresh;
 
   void refresh();
 

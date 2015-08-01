@@ -34,9 +34,8 @@ void start() {
   /*
    * Standard Input Field with Label
    */
-  PaperInput input1 = new PaperInput("Type something");
+  PaperInput input1 = new PaperInput("Type something", keyboard: true);
   vbox.addChild(input1);
-
   /*
    * Standard Input Field with Floating Label
    */
@@ -55,9 +54,6 @@ void start() {
   PaperInput input4 = new PaperInput("Type something (floating)", required : "This input requires a value.", floating : true);
   vbox.addChild(input4);
 
-
   stage.addChild(vbox);
   vbox.span(stage.stageWidth - 20, stage.stageHeight - 20, refresh: true);
-
-
 }

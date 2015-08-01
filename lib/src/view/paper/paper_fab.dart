@@ -27,12 +27,13 @@ class PaperFab extends Button {
 
 
   @override void refresh() {
-    super.refresh();
 
     icon.pivotX = 12;
     icon.pivotY = 12;
     icon.x = (spanWidth / 2).round();
     icon.y = (spanHeight / 2).round();
+
+    super.refresh();
   }
 
   void rollOverAction([InputEvent event = null]) {

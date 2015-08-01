@@ -4,7 +4,6 @@ import 'package:stagexl/stagexl.dart';
 
 Stage stage;
 Sprite _container;
-PaperToast _toast;
 
 
 void main() {
@@ -15,6 +14,7 @@ void main() {
   opts.stageAlign = StageAlign.TOP_LEFT;
 
   stage = new Stage(html.querySelector('#stage'), options: opts);
+  ContextTool.STAGE = stage;
   ContextTool.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
   new RenderLoop()..addStage(stage);
 
@@ -28,31 +28,35 @@ void start() {
   tab.addTab(new PaperButton("ITEM TWO", preset: PaperButton.PRESET_WHITE, shadow: false));
   tab.addTab(new PaperButton("ITEM THREE", preset: PaperButton.PRESET_WHITE, shadow: false));
 
-  PaperAppBar bar = new PaperAppBar(highlightColor : PaperColor.BLUE, bgColor: PaperColor.BLACK);
+  PaperAppBar bar = new PaperAppBar(highlightColor : PaperColor.WHITE, bgColor: PaperColor.BLUE);
   bar.addToTL(new PaperIconButton(PaperIcon.white(PaperIconSet.menu), rippleColor: PaperColor.WHITE));
   bar.addToTL(new PaperText("Title", size: 24, color: PaperColor.WHITE));
   bar.addToTR(new PaperIconButton(PaperIcon.white(PaperIconSet.add_shopping_cart), rippleColor: PaperColor.WHITE));
   bar.addPaperTabs(tab);
 
   stage.addChild(bar);
-  tab.span(stage.stageWidth, 100);
+  bar.span(stage.stageWidth, 100);
   
   /* Vertical Container */
   Flow vbox = new Flow()
-    ..spacing = 10;
-  vbox.x = 10;
-  vbox.y = 100;
+    ..flowOrientation = FlowOrientation.VERTICAL
+    ..spacing = 0
+    ..x = 10
+    ..y = 110
+    ..autoRefresh = false;
   
   /* 
    * Radio Button Group
    */
-  RadioGroup radioGroupV = new RadioGroup(flowOrientation: FlowOrientation.VERTICAL, spacing: 5.0);
+  RadioGroup radioGroupV = new RadioGroup(flowOrientation: FlowOrientation.HORIZONTAL, spacing: 5.0)
+  ..autoRefresh = false;
   radioGroupV.addChild(new PaperRadioButton(label : "Red pill", activeColor : PaperColor.RED));
   radioGroupV.addChild(new PaperRadioButton(label : "or"));
   radioGroupV.addChild(new PaperRadioButton(label : "Blue pill?", activeColor : PaperColor.BLUE));
   radioGroupV.addEventListener(RadioGroupEvent.BUTTON_SELECTED, _onSelected);
   vbox.addChild(radioGroupV);
-  
+  radioGroupV.refresh();
+
   PaperCheckbox check1 = new PaperCheckbox(label : "Checkbox with blue label", activeColor: PaperColor.BLUE);
   vbox.addChild(check1);
 
@@ -64,10 +68,10 @@ void start() {
 
   PaperToggleButton toggle2 = new PaperToggleButton(label : "Bluetooth", activeColor : PaperColor.BLUE, rippleColor : PaperColor.BLUE);
   vbox.addChild(toggle2);
-  
+
   stage.addChild(vbox);
-  vbox.span(320, 400);
-  
+
+  vbox.refresh();
 
 }
 

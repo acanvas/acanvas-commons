@@ -16,15 +16,11 @@ class PaperAppBar extends BoxSprite {
     inheritSpan = true;
 
     leftBox = new Flow()
-      ..spacing = 20
-      ..snapToPixels = true
-      ..inheritSpan = false;
+      ..spacing = 20;
     addChild(leftBox);
 
     rightBox = new Flow()
-      ..spacing = 20
-      ..snapToPixels = true
-      ..inheritSpan = false;
+      ..spacing = 20;
     addChild(rightBox);
 
   }
@@ -60,7 +56,8 @@ class PaperAppBar extends BoxSprite {
   }
 
   @override void refresh() {
-    super.refresh();
+    leftBox.refresh();
+    rightBox.refresh();
 
     leftBox.x = 10;
     leftBox.y = (PaperDimensions.HEIGHT_APP_BAR/2 - (leftBox.height - 0)/2).round();
@@ -85,6 +82,7 @@ class PaperAppBar extends BoxSprite {
     }
 
     GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color : bgColor);
+    super.refresh();
   }
 
 }

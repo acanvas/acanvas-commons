@@ -2,12 +2,10 @@ part of stagexl_commons;
 
 class BehaveSprite extends BoxSprite with MBehave {
 
-  BehaveSprite() : super();
-
-  @override
-  void refresh() {
-    //nothing to do here, but in sub classes
+  BehaveSprite() : super(){
+    submitCallbackParams = [this];
   }
+
 
   @override
   void enable() {

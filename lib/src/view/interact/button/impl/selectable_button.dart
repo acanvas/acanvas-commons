@@ -7,24 +7,35 @@ part of stagexl_commons;
 class SelectableButton extends Button with MSelectable {
 
   SelectableButton() : super() {
-    toggleable = true;
-    submitCallbackParams = [this];
+    autoSelect = true;
   }
 
   SelectableButton clone() => new SelectableButton();
 
-  void select() {
-    if (!toggled) {
-      toggled = true;
-      downAction();
-      submit();
+  @override void downAction([InputEvent event = null]) {
+    super.downAction(event);
+
+  }
+
+  @override void upAction([InputEvent event = null, bool submit = true]) {
+    super.upAction(event, submit);
+    if(autoSelect){
+      selected = !selected; //will trigger de/select()
     }
   }
 
-  void deselect() {
-    if (toggled) {
-      toggled = false;
-      upAction(null, false);
+  @override void select({bool submit : false}) {
+    if (!selected) {
+      selectAction();
+      if(submit){
+        this.submit();
+      }
+    }
+  }
+
+  @override void deselect() {
+    if (selected) {
+      deselectAction();
     }
   }
 

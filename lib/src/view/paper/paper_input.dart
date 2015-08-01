@@ -34,6 +34,11 @@ class PaperInput extends BoxSprite {
   PaperInput(String text, {this.fontSize: 14, this.textColor: PaperColor.BLACK, String fontName: DEFAULT_FONT, bool multiline: false, int rows: 1, this.floating: false, this.required: "", this.keyboard: false, this.password: false}) : super() {
     inheritSpan = true;
 
+    //force onscreen keyboard on mobile devices
+    if(ContextTool.MOBILE){
+      keyboard = true;
+    }
+
     _defaultTextField = new UITextField(text, new TextFormat(fontName, fontSize, PaperColor.GREY_DARK));
     addChild(_defaultTextField);
 
@@ -110,6 +115,7 @@ class PaperInput extends BoxSprite {
     }
 
     super.refresh();
+    spanHeight = height;
   }
 
   /* User clicks into TextField */
@@ -297,7 +303,6 @@ class PaperInput extends BoxSprite {
     ContextTool.STAGE.addChild(_softKeyboard);
     ContextTool.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
     _resizeKeyboard();
-    _softKeyboard.init();
   }
   
   void _resizeKeyboard([Event e = null]){

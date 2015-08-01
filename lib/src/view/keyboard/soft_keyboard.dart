@@ -105,7 +105,7 @@ part of stagexl_commons;
 	 * 				background skin ?
 	 * 
 	 */
-class SoftKeyboard extends LifecycleSprite {
+class SoftKeyboard extends BoxSprite {
 
   /** Version of this SoftKeyboard library */
   static const String VERSION = '1.0a rev8';
@@ -152,11 +152,6 @@ class SoftKeyboard extends LifecycleSprite {
     if (width > 0) this.spanWidth = width;
     if (height > 0) this.spanHeight = height;
 
-  }
-
-  /** @ */
-  void init({Map params: null}){
-    super.init(params: params);
     // Build all configurations from the specified layouts
     for (Layout layout in _layouts) {
       _configurations.add(_buildConfiguration(layout));
@@ -170,8 +165,6 @@ class SoftKeyboard extends LifecycleSprite {
     // Add background skin (if any has been specified)
     if (backgroundSkin != null) addChildAt(backgroundSkin, 0);
 
-    //	super.initialize();
-    onInitComplete();
 
   }
 
@@ -269,6 +262,7 @@ class SoftKeyboard extends LifecycleSprite {
   Sprite _buildConfiguration(Layout layout) {
 
     LifecycleSprite keyboard = new LifecycleSprite();
+    keyboard.inheritSpan = true;
 
     // Check if rows have been defined properly in the layout
     if (layout.rows == null || !(layout.rows is List<List<Key>>) || layout.rows.length < 1) {
@@ -383,7 +377,7 @@ class SoftKeyboard extends LifecycleSprite {
 
         key.span(key.relativeWidth * hUnit,  key.relativeHeight * vUnit);
 
-        key.x = xPos;
+        key.x = xPos.round();
         xPos += key.spanWidth + currentLayout.horizontalGap * hUnit;
 
       }
@@ -393,8 +387,8 @@ class SoftKeyboard extends LifecycleSprite {
     // Key rows are centered in a second stage because they do not all have the same width.
     for (int k = 0; k < rowCount; k++) {
       KeyRow r = (keyboard.getChildAt(k) as KeyRow);
-      r.x = ((width - 2 * padding) - r.width) / 2 + padding;
-      r.y = ((key.spanHeight + currentLayout.verticalGap * vUnit) * k) + padding;
+      r.x = (((width - 2 * padding) - r.width) / 2 + padding).round();
+      r.y = (((key.spanHeight + currentLayout.verticalGap * vUnit) * k) + padding).round();
     }
 
     // Size background (if any is present)
