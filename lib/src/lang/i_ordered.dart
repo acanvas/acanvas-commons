@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- part of stagexl_commons;
+part of stagexl_commons;
 
-	/**
-	 * Interface that can be implemented by objects that should be orderable, for example in a Collection.
-	 * <p>The actual order can be interpreted as prioritization, with the first object (with the lowest order value) having the highest priority.</p>
-	 * @author Christophe Herreman
-	 */
-	 abstract class IOrdered {
+/**
+ * Interface that can be implemented by objects that should be orderable, for example in a Collection.
+ * <p>The actual order can be interpreted as prioritization, with the first object (with the lowest order value) having the highest priority.</p>
+ * @author Christophe Herreman
+ */
+abstract class IOrdered {
 
-		/**
-		 * Return the order value of this object, with a higher value meaning greater in terms of sorting.
-		 * <p>Normally starting with 0 or 1. Same order values will result in arbitrary positions for the affected objects.</p>
-		 * <p>Higher value can be interpreted as lower priority, consequently the first object has highest priority.</p>
-		 * <p>Note that order values below 0 are reserved for framework purposes. Application-specified values should always be 0 or greater, with only framework components (internal or third-party) supposed to use lower values.</p>
-		 */
-		 int get order;
+  /**
+   * Return the order value of this object, with a higher value meaning greater in terms of sorting.
+   * <p>Normally starting with 0 or 1. Same order values will result in arbitrary positions for the affected objects.</p>
+   * <p>Higher value can be interpreted as lower priority, consequently the first object has highest priority.</p>
+   * <p>Note that order values below 0 are reserved for framework purposes. Application-specified values should always be 0 or greater, with only framework components (internal or third-party) supposed to use lower values.</p>
+   */
+  int get order;
 
-		/**
-		 * @
-		 */
-		 void set order(int value);
+  /**
+   * @
+   */
+  void set order(int value);
 
-	}
+}
 

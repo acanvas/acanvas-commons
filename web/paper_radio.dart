@@ -38,13 +38,10 @@ void start() {
   bar.span(stage.stageWidth, 100);
   
   /* Vertical Container */
-  Flow vbox = new Flow()
-    ..flowOrientation = FlowOrientation.VERTICAL
-    ..spacing = 0
+  Wrap vbox = new Wrap(spacing: 0)
     ..x = 10
-    ..y = 110
-    ..autoRefresh = false;
-  
+    ..y = 110;
+
   /* 
    * Radio Button Group
    */
@@ -71,7 +68,7 @@ void start() {
 
   stage.addChild(vbox);
 
-  vbox.refresh();
+  vbox.span(stage.stageWidth-20, stage.stageHeight - 120);
 
 }
 

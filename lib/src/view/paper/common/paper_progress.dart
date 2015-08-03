@@ -2,13 +2,13 @@ part of stagexl_commons;
 
 
 /**
-	 * @author Nils Doehring (nilsdoehring@gmail.com)
-	 */
+ * @author Nils Doehring (nilsdoehring@gmail.com)
+ */
 class PaperProgress extends Slider {
-  
+
   int barColor;
   Sprite _progress;
-  
+
   PaperProgress(num min, num max, num size, {this.barColor : PaperColor.BLACK, int bgColor: PaperColor.WHITE}) : super() {
     horizontalScrollBehavior = true;
     valueMin = min;

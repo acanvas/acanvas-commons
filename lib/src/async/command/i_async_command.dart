@@ -15,14 +15,14 @@
  */
 part of stagexl_commons;
 
-	/**
-	 * Describes an asynchronous command. In contrast to a synchronous command, an asynchronous command is not done
-	 * executing directly after a call to the <code>execute()</code> method. Instead, a caller should register to the <code>OperationEvent.COMPLETE</code> or
-	 * <code>OperationEvent.ERROR</code> event before calling <code>execute()</code> and handle the events.
-	 * @author Christophe Herreman
-	 */
+/**
+ * Describes an asynchronous command. In contrast to a synchronous command, an asynchronous command is not done
+ * executing directly after a call to the <code>execute()</code> method. Instead, a caller should register to the <code>OperationEvent.COMPLETE</code> or
+ * <code>OperationEvent.ERROR</code> event before calling <code>execute()</code> and handle the events.
+ * @author Christophe Herreman
+ */
 
 abstract class IAsyncCommand implements ICommand, IOperation {
 
-	}
+}
 

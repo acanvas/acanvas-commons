@@ -19,15 +19,17 @@ class SelectableButton extends Button with MSelectable {
 
   @override void upAction([InputEvent event = null, bool submit = true]) {
     super.upAction(event, submit);
-    if(autoSelect){
-      selected = !selected; //will trigger de/select()
+    if (autoSelect) {
+      selected = !selected;
+      //will trigger de/select()
     }
   }
 
   @override void select({bool submit : false}) {
     if (!selected) {
       selectAction();
-      if(submit){
+      _selected = true;
+      if (submit) {
         this.submit();
       }
     }
@@ -36,6 +38,7 @@ class SelectableButton extends Button with MSelectable {
   @override void deselect() {
     if (selected) {
       deselectAction();
+      _selected = false;
     }
   }
 

@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- part of stagexl_commons;
-	
-	/**
-	 * Interface to be implemented by all classes that want to provide cloning functionality.
-	 *
-	 * @author Christophe Herreman
-	 */
-	 abstract class ICloneable {
-		
-		/**
-		 * Clones this object. Implementations should decide on a per class basis wether a deep or a shallow clone
-		 * will be done.
-		 *
-		 * @return a new object which is a clone of this object
-		 */
-		 dynamic clone();
-	
-	}
+part of stagexl_commons;
+
+/**
+ * Interface to be implemented by all classes that want to provide cloning functionality.
+ *
+ * @author Christophe Herreman
+ */
+abstract class ICloneable {
+
+  /**
+   * Clones this object. Implementations should decide on a per class basis wether a deep or a shallow clone
+   * will be done.
+   *
+   * @return a new object which is a clone of this object
+   */
+  dynamic clone();
+
+}
 

@@ -31,27 +31,30 @@ class UITextField extends TextField {
     text = value;
 
   }
-  
+
   void keyDownAction(int keyCode) {
     //print(keyCode);
     dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN, false, keyCode, KeyLocation.STANDARD, false, false, false));
-   }
+  }
 
-   void textInputAction(String text) {
-     dispatchEvent(new TextEvent(TextEvent.TEXT_INPUT, false, text));
-   }
-  
+  void textInputAction(String text) {
+    dispatchEvent(new TextEvent(TextEvent.TEXT_INPUT, false, text));
+  }
+
   int get color {
     return (defaultTextFormat.color);
   }
+
   void set color(int value) {
     TextFormat format = defaultTextFormat;
     format.color = value;
     defaultTextFormat = (format);
   }
+
   bool get underline {
     return defaultTextFormat.underline;
   }
+
   void set underline(bool value) {
     TextFormat format = defaultTextFormat;
     format.underline = value;
@@ -62,6 +65,7 @@ class UITextField extends TextField {
   num get width {
     return textWidth;
   }
+
   @override
   num get height {
     return textHeight;

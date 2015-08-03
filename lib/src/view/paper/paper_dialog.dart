@@ -11,12 +11,12 @@ class PaperDialog extends BoxSprite {
   Flow _hbox;
 
   PaperDialog(String title, {num fontColor : PaperColor.BLACK, this.bgColor: PaperColor.WHITE, String fontName : PaperText.DEFAULT_FONT}) : super() {
-    
-    addChild( new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false) );
+
+    addChild(new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
 
     _title = new PaperText(title, size: 22, color: fontColor, fontName: fontName);
     addChild(_title);
-    
+
     _vbox = new Flow()
       ..spacing = 20
       ..snapToPixels = true
@@ -27,26 +27,26 @@ class PaperDialog extends BoxSprite {
       ..spacing = 20
       ..snapToPixels = true;
     addChild(_hbox);
-    
-    
+
+
   }
-  
-  void addContent(InteractiveObject spr){
+
+  void addContent(InteractiveObject spr) {
     _vbox.addChild(spr);
   }
 
-  void addButton(Button btn){
+  void addButton(Button btn) {
     _hbox.addChild(btn);
   }
 
 
   @override void refresh() {
     super.refresh();
-    
+
     _title.x = 20;
     _title.y = 20;
     _title.width = spanWidth - 40;
-    
+
     _vbox.x = 20;
     _vbox.y = _title.y + _title.textHeight + 22;
     _vbox.span(spanWidth - 40, 0); //also sets width of TextField children

@@ -34,7 +34,8 @@ class DayButton extends Button {
   @override void rollOverAction([InputEvent event = null]) {
     if (stage != null) {
       //ContextTool.STAGE.removeTweens(_bgOver);
-      ContextTool.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(1);
+      ContextTool.JUGGLER.addTween(_bgOver, 0.3)
+        ..animate.alpha.to(1);
       _labelTF.textColor = 0xFF000000;
     } else if (_bgOver != null) {
       _bgOver.alpha = 1;
@@ -43,7 +44,8 @@ class DayButton extends Button {
 
   @override void rollOutAction([InputEvent event = null]) {
     if (stage != null) {
-      ContextTool.JUGGLER.addTween(_bgOver, 0.3 )..animate.alpha.to(0);
+      ContextTool.JUGGLER.addTween(_bgOver, 0.3)
+        ..animate.alpha.to(0);
       _labelTF.textColor = 0xFFFFFFFF;
     } else if (_bgOver != null) {
       _bgOver.alpha = 0;

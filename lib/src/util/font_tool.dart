@@ -5,13 +5,14 @@ class FontTool {
   /* internals */
   List _fonts = [];
   static final FontTool _singleton = new FontTool._internal();
+
   FontTool._internal() {
   }
 
   factory FontTool() {
     return _singleton;
   }
-  
+
   static void addFont(String font) {
     _singleton._fonts.add(font /* + ":300"*/);
   }
@@ -30,7 +31,7 @@ class FontTool {
       "inactive": () => completer.completeError("Error loading fonts"),
     });
 
-    if(webFont == null){
+    if (webFont == null) {
       callback.call();
       return;
     }

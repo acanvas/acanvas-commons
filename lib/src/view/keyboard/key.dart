@@ -17,44 +17,43 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 part of stagexl_commons;
 
 
-
 /**
-	 * Dispatched when a key is pressed down.
-	 * 
-	 * @eventType cc.cote.feathers.softkeyboard.KeyEvent.KEY_DOWN
-	 */
+ * Dispatched when a key is pressed down.
+ *
+ * @eventType cc.cote.feathers.softkeyboard.KeyEvent.KEY_DOWN
+ */
 // [Event(name="cc.cote.feathers.softkeyboard.KeyEvent.keyDown",type="cc.cote.feathers.softkeyboard.KeyEvent")]
 
 /**
-	 * Dispatched when a the key is released. The release position must be above the key that was 
-	 * initially pressed down otherwise the event is not fired. This allows the user to cancel the 
-	 * <code>keyUp</code> event.
-	 * 
-	 * @eventType cc.cote.feathers.softkeyboard.KeyEvent.KEY_UP
-	 */
+ * Dispatched when a the key is released. The release position must be above the key that was
+ * initially pressed down otherwise the event is not fired. This allows the user to cancel the
+ * <code>keyUp</code> event.
+ *
+ * @eventType cc.cote.feathers.softkeyboard.KeyEvent.KEY_UP
+ */
 // [Event(name="cc.cote.feathers.softkeyboard.KeyEvent.keyUp",type="cc.cote.feathers.softkeyboard.KeyEvent")]
 
 /**
-	 * Dispatched when the variants for a key should be displayed.
-	 * 
-	 * @eventType cc.cote.feathers.softkeyboard.KeyEvent.SHOW_VARIANTS
-	 */
+ * Dispatched when the variants for a key should be displayed.
+ *
+ * @eventType cc.cote.feathers.softkeyboard.KeyEvent.SHOW_VARIANTS
+ */
 // [Event(name="cc.cote.feathers.softkeyboard.KeyEvent.showVariants",type="cc.cote.feathers.softkeyboard.KeyEvent")]
 
 /**
-	 * The <code>Key</code> class creates individual soft-keyboard keys to use in keyboard 
-	 * <code>Layouts</code> and key collections. 
-	 * 
-	 * <p>Both the key and its label have several tokens in their <code>nameList</code> property to 
-	 * facilitate skinning of individual keys. First, they have a <code>charCodeXX</code> token 
-	 * where <code>XX</code> is the character code. Second, their label's text is also a token in 
-	 * their <code>nameList</code>. Finally, when appropriate, they will have the 
-	 * <code>hasVariant</code> token in their <code>nameList</code> to identify keys with 
-	 * variants.</p>
-	 * 
-	 * @see cc.cote.feathers.softkeyboard.layouts
-	 * @see cc.cote.feathers.softkeyboard.keycollections
-	 */
+ * The <code>Key</code> class creates individual soft-keyboard keys to use in keyboard
+ * <code>Layouts</code> and key collections.
+ *
+ * <p>Both the key and its label have several tokens in their <code>nameList</code> property to
+ * facilitate skinning of individual keys. First, they have a <code>charCodeXX</code> token
+ * where <code>XX</code> is the character code. Second, their label's text is also a token in
+ * their <code>nameList</code>. Finally, when appropriate, they will have the
+ * <code>hasVariant</code> token in their <code>nameList</code> to identify keys with
+ * variants.</p>
+ *
+ * @see cc.cote.feathers.softkeyboard.layouts
+ * @see cc.cote.feathers.softkeyboard.keycollections
+ */
 class Key extends BoxSprite {
   //feathers
   List nameList = [];
@@ -62,9 +61,9 @@ class Key extends BoxSprite {
   static final String LOWERCASE = 'Lowercase';
 
   /**
-		 * Constant associated with the text representation of the label's name as used in the 
-		 * label's nameList property (for theming purposes). 
-		 */
+   * Constant associated with the text representation of the label's name as used in the
+   * label's nameList property (for theming purposes).
+   */
   static final String SOFTKEYBOARD_KEY_LABEL = 'softkeyboard-key-label';
 
   /** Constant associated with the text representation of the key up state */
@@ -103,21 +102,21 @@ class Key extends BoxSprite {
   /** An identifier for lock keys. */
   static final String LOCK_KEY = 'lockKey';
 
-  /**  
-		 * A layout (specified by its class) to switch to when the key is released. It is mostly 
-		 * used with the <code>SWITCH_LAYOUT</code> key but also works with other keys.
-		 */
+  /**
+   * A layout (specified by its class) to switch to when the key is released. It is mostly
+   * used with the <code>SWITCH_LAYOUT</code> key but also works with other keys.
+   */
   Layout switchToLayoutType;
 
-  /** 
-		 * The number of milliseconds to wait after a key has been pressed before displaying the 
-		 * variants (if any are available).
-		 */
+  /**
+   * The number of milliseconds to wait after a key has been pressed before displaying the
+   * variants (if any are available).
+   */
   int keyVariantsDelay = 150;
 
-  /** 
-		 * The key's icon (if any). Icons are usually reserved for 'special' keys such as: dynamic CAPS_LOCK, ENTER, TAB, etc.
-		 */
+  /**
+   * The key's icon (if any). Icons are usually reserved for 'special' keys such as: dynamic CAPS_LOCK, ENTER, TAB, etc.
+   */
   DisplayObject icon;
 
   /** The key's icon while in 'selected' state. */
@@ -166,23 +165,23 @@ class Key extends BoxSprite {
   Sprite _variantsContainer;
 
   /**
-		 * Creates a new instance of the Key object.
-		 * 
-		 * @param charCode Character-code to assign to the key.
-		 * @param variants A vector of <code>Keys</code> to use as variations of the main key. The 
-		 * key variants are displayed when the user keeps its finger for a little while on a key. 
-		 * For example, variants of the 'e' key could be 'é', 'è', 'ë', etc.
-		 * @param type The type of key (CHARACTER_KEY, SYSTEM_KEY, etc.).
-		 * @param label The textual label to display on the key.
-		 * @param relativeWidth A ratio of the normal key width used to relatively enlarge or make a 
-		 * key smaller. For example, if you wanted a key to be twice as wide as usual, you would 
-		 * specify a relative width of 2.
-		 * @param relativeHeight A ratio of the normal key height used to enlarge or make a key 
-		 * smaller. For example, if you wanted a key to be twice as high as usual, you would specify 
-		 * a relative height of 2.
-		 * @param switchToType A layout (specified by its class) to switch to when the key is 
-		 * released. Only works with <code>Softhtml.KeyCode.SWITCH_LAYOUT</code> keys.
-		 */
+   * Creates a new instance of the Key object.
+   *
+   * @param charCode Character-code to assign to the key.
+   * @param variants A vector of <code>Keys</code> to use as variations of the main key. The
+   * key variants are displayed when the user keeps its finger for a little while on a key.
+   * For example, variants of the 'e' key could be 'é', 'è', 'ë', etc.
+   * @param type The type of key (CHARACTER_KEY, SYSTEM_KEY, etc.).
+   * @param label The textual label to display on the key.
+   * @param relativeWidth A ratio of the normal key width used to relatively enlarge or make a
+   * key smaller. For example, if you wanted a key to be twice as wide as usual, you would
+   * specify a relative width of 2.
+   * @param relativeHeight A ratio of the normal key height used to enlarge or make a key
+   * smaller. For example, if you wanted a key to be twice as high as usual, you would specify
+   * a relative height of 2.
+   * @param switchToType A layout (specified by its class) to switch to when the key is
+   * released. Only works with <code>Softhtml.KeyCode.SWITCH_LAYOUT</code> keys.
+   */
   Key(int charCode, [List<Key> variants = null, String type = 'characterKey', String label = null, num relativeWidth = 1, num relativeHeight = 1, Layout switchToLayoutType = null]):super() {
     name = "Key_${charCode.toString()}";
 
@@ -197,7 +196,8 @@ class Key extends BoxSprite {
 
     // Flag each variant as such (if any)
     if (variants != null || variants == true) {
-      for (Key k in variants) k.isVariant = true;
+      for (Key k in variants)
+        k.isVariant = true;
     }
 
     // Create the label and name it so it can be specifically styled through a theme
@@ -222,7 +222,7 @@ class Key extends BoxSprite {
       _label.nameList.add(character);
       nameList.add(character);
     } else if (isPrintable != null || isPrintable == true) {
-        _character = new String.fromCharCode(_charCode);
+      _character = new String.fromCharCode(_charCode);
     }
 
 
@@ -266,17 +266,17 @@ class Key extends BoxSprite {
     //if (variants != null) addChild(_variantsContainer);
 
     // Now that everything is ready, listen to touch events
-    if(ContextTool.TOUCH){
+    if (ContextTool.TOUCH) {
       addEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       addEventListener(TouchEvent.TOUCH_END, _onTouch);
       addEventListener(TouchEvent.TOUCH_MOVE, _onTouch);
     }
-    else{
+    else {
       addEventListener(MouseEvent.MOUSE_DOWN, _onTouch);
       addEventListener(MouseEvent.MOUSE_UP, _onTouch);
       addEventListener(MouseEvent.MOUSE_MOVE, _onTouch);
     }
-    
+
     addEventListener(Event.REMOVED_FROM_STAGE, _onRemovedFromStage);
   }
 
@@ -305,12 +305,12 @@ class Key extends BoxSprite {
 				 */
     }
 
-    if(ContextTool.TOUCH){
+    if (ContextTool.TOUCH) {
       removeEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       removeEventListener(TouchEvent.TOUCH_END, _onTouch);
       removeEventListener(TouchEvent.TOUCH_MOVE, _onTouch);
     }
-    else{
+    else {
       removeEventListener(MouseEvent.MOUSE_DOWN, _onTouch);
       removeEventListener(MouseEvent.MOUSE_UP, _onTouch);
       removeEventListener(MouseEvent.MOUSE_MOVE, _onTouch);
@@ -346,11 +346,11 @@ class Key extends BoxSprite {
   }
 
   /**
-		 * Changes the key's current state (which in turn will likely change its skin).
-		 * 
-		 * @param state The state to change to. Allowed states are defined in the 
-		 * <code>AVAILABLE_STATES</code> constant array.
-		 */
+   * Changes the key's current state (which in turn will likely change its skin).
+   *
+   * @param state The state to change to. Allowed states are defined in the
+   * <code>AVAILABLE_STATES</code> constant array.
+   */
   void changeState(String state) {
 
     // If the state is invalid or not being changed, abort!
@@ -382,10 +382,10 @@ class Key extends BoxSprite {
   /** @ */
   void _onTouch(InputEvent e) {
     e.stopImmediatePropagation();
-    
+
     num localX = e.stageX;
     num localY = e.stageY;
-    
+
     // Check if the event is a MOUSE_OUT (which, in Starling, is a TouchEvent with no touch
     // object attached)
     /*
@@ -412,13 +412,15 @@ class Key extends BoxSprite {
         _variantsTimer = new Timer(new Duration(milliseconds: keyVariantsDelay), _onShowAlternates);
       }
 
-    } /*else if (touch.phase == TouchPhase.HOVER) {
+    }
+    /*else if (touch.phase == TouchPhase.HOVER) {
 				
 				// For mouse input only
 				changeState(HOVER_STATE);
 				
-			} */ 
-      else if (_state == DOWN_STATE && (e.type == TouchEvent.TOUCH_MOVE || e.type == MouseEvent.MOUSE_MOVE)) { // Moving while pressing
+			} */
+    else if (_state == DOWN_STATE && (e.type == TouchEvent.TOUCH_MOVE || e.type == MouseEvent.MOUSE_MOVE)) {
+      // Moving while pressing
 
       // Check if the user is staying over the original key when moving or not.
       if (hitTestPoint(touchPosInOriginalKeySpace.y, touchPosInOriginalKeySpace.y, false)) {
@@ -475,18 +477,18 @@ class Key extends BoxSprite {
       }
 
       // Abort if the release is outside the original key
-     if (!hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, true)) {
-       return;
-     }
+      if (!hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, true)) {
+        return;
+      }
 
       // Trigger event
       changeState(UP_STATE);
       _triggerEvent(this, KeyEvent.KEY_UP);
-      
-      if(isPrintable){
+
+      if (isPrintable) {
         _triggerEvent(this, KeyEvent.KEY_UP_PRINTABLE);
       }
-      if(isVisible || _charCode == CharCode.SPACE){
+      if (isVisible || _charCode == CharCode.SPACE) {
         _triggerEvent(this, KeyEvent.KEY_UP_VISIBLE);
       }
 
@@ -523,12 +525,12 @@ class Key extends BoxSprite {
   }
 
   /**
-		 * Changes the case of the character, label and variants of the key. This only affects keys 
-		 * whose <code>isVisible</code> property return <code>true</code>.
-		 * 
-		 * @param keyCase Desired case: <code>TypographicCase.UPPERCASE</code> or 
-		 * <code>TypographicCase.LOWERCASE</code>.
-		 */
+   * Changes the case of the character, label and variants of the key. This only affects keys
+   * whose <code>isVisible</code> property return <code>true</code>.
+   *
+   * @param keyCase Desired case: <code>TypographicCase.UPPERCASE</code> or
+   * <code>TypographicCase.LOWERCASE</code>.
+   */
   void changeCase(String keyCase) {
 
     if (keyCase == UPPERCASE) {
@@ -540,9 +542,9 @@ class Key extends BoxSprite {
   }
 
   /**
-		 * Uppercases the character, label and variants of the key. This only affects keys whose 
-		 * <code>isVisible</code> property return <code>true</code>.
-		 */
+   * Uppercases the character, label and variants of the key. This only affects keys whose
+   * <code>isVisible</code> property return <code>true</code>.
+   */
   void uppercase() {
 
     if (isVisible == true) {
@@ -560,9 +562,9 @@ class Key extends BoxSprite {
   }
 
   /**
-		 * Lowercases the character, label and variants of the key. This only affects keys whose 
-		 * <code>isVisible</code> property return <code>true</code>.
-		 */
+   * Lowercases the character, label and variants of the key. This only affects keys whose
+   * <code>isVisible</code> property return <code>true</code>.
+   */
   void lowercase() {
 
     if (isVisible == true) {
@@ -618,27 +620,27 @@ class Key extends BoxSprite {
     return _charCode;
   }
 
-  /** 
-		 * Indicates if the key is associated with a printable character. Printable characters 
-		 * include all letters, numbers and symbols as well as the ENTER, SPACE and TAB keys.
-		 */
+  /**
+   * Indicates if the key is associated with a printable character. Printable characters
+   * include all letters, numbers and symbols as well as the ENTER, SPACE and TAB keys.
+   */
   bool get isPrintable {
     return (type == CHARACTER_KEY || type == NUMERIC_KEYPAD_KEY || _charCode == CharCode.ENTER || _charCode == CharCode.TAB);
   }
 
-  /** 
-		 * Indicates if the key is associated with a visible character. Visible characters include 
-		 * all letters, numbers and symbols.
-		 */
+  /**
+   * Indicates if the key is associated with a visible character. Visible characters include
+   * all letters, numbers and symbols.
+   */
   bool get isVisible {
     return ((type == CHARACTER_KEY || type == NUMERIC_KEYPAD_KEY) && !(_charCode == CharCode.ENTER || _charCode == CharCode.TAB || _charCode == CharCode.SPACE));
   }
 
   /**
-		 * Indicates if the key is 'selected'. The selected state is currently only used for the
-		 * <code>CAPS_LOCK</code> key. When the <code>CAPS_LOCK</code> is engaged, a different icon
-		 * is shown.
-		 */
+   * Indicates if the key is 'selected'. The selected state is currently only used for the
+   * <code>CAPS_LOCK</code> key. When the <code>CAPS_LOCK</code> is engaged, a different icon
+   * is shown.
+   */
   bool get isSelected {
     return _isSelected;
   }
@@ -663,9 +665,9 @@ class Key extends BoxSprite {
   }
 
   /**
-		 * Indicates if the key is 'special'. A 'special' key is any key that is not a regular 
-		 * alpha-numeric character or the space character key.
-		 */
+   * Indicates if the key is 'special'. A 'special' key is any key that is not a regular
+   * alpha-numeric character or the space character key.
+   */
   bool get isSpecial {
     return (type != CHARACTER_KEY);
   }

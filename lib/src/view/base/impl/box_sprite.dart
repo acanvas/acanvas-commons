@@ -6,22 +6,22 @@ class BoxSprite extends Sprite3D with MBox {
   Logger log;
 
   BoxSprite() {
-    this.log = new Logger("$this (BoxSprite.${ new Random()..nextInt(1000000)})");
+    this.log = new Logger("$this (BoxSprite.${ new Random()
+      ..nextInt(1000000)})");
   }
 
 
-
   @override
-  void span(spanWidth, spanHeight, {bool refresh: true}){
+  void span(spanWidth, spanHeight, {bool refresh: true}) {
     if (this.spanWidth != spanWidth || this.spanHeight != spanHeight) {
       if (spanWidth > 0) this.spanWidth = spanWidth;
       if (spanHeight > 0) this.spanHeight = spanHeight;
 
-      children.where((c) => c is MBox && c.inheritSpan).forEach( (child){
-        child.span(spanWidth, spanHeight, refresh: refresh);
+      children.where((c) => c is MBox && c.inheritSpan).forEach((child) {
+        child.span(spanWidth - 2*padding, spanHeight - 2*padding, refresh: refresh);
       });
-      children.where((c) => c is TextField).forEach( (child){
-        child.width = spanWidth;
+      children.where((c) => c is TextField).forEach((child) {
+        child.width = spanWidth - 2*padding;
       });
 
       if (refresh) {
@@ -33,12 +33,12 @@ class BoxSprite extends Sprite3D with MBox {
   @override
   void refresh() {
     //adjust inherited span size to actual size
-    if(autoSpan){
+    if (autoSpan) {
       span(width, height, refresh: false);
     }
-    if(this is MFlow){
+    if (this is MFlow) {
       print("${this}: ${spanWidth}x${spanHeight}  ${width}x${height}");
-      children.forEach((c){
+      children.forEach((c) {
         print("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
       });
     }
@@ -48,7 +48,7 @@ class BoxSprite extends Sprite3D with MBox {
   void dispose() {
 
     //children.forEach doesn't work here, as dispose influences children<List>
-    for(int i=0;i<numChildren;i++){
+    for (int i = 0;i < numChildren;i++) {
       disposeChild(getChildAt(i));
     }
 
@@ -85,11 +85,11 @@ class BoxSprite extends Sprite3D with MBox {
   void addChildAt(DisplayObject child, int index) {
     super.addChildAt(child, index);
     if (spanWidth > 0 && spanHeight > 0 && child is MBox && (child as MBox).inheritSpan) {
-      (child as MBox).span(spanWidth, spanHeight);
+      (child as MBox).span(spanWidth - 2*padding, spanHeight - 2*padding, refresh: false);
     }
 
     //todo think of a better way to ensure refresh() globally
-    if(child is MBox && (child as MBox).autoRefresh){
+    if (child is MBox && (child as MBox).autoRefresh) {
       (child as MBox).refresh();
     }
   }

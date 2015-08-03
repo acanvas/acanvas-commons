@@ -1,31 +1,34 @@
 part of stagexl_commons;
 
-class PaperRipple extends BoxSprite implements IPaperButtonComponent{
+class PaperRipple extends BoxSprite implements IPaperButtonComponent {
   static const int RECTANGLE = 1;
   static const int CIRCLE = 2;
-  
+
   num _waveMaxRadius = 150;
   num _initialOpacity = 0.25;
-  void set opacity(num o) {_initialOpacity = o;}
+
+  void set opacity(num o) {
+    _initialOpacity = o;
+  }
 
   int color;
   num type;
   num velocity = 1.5;
-  
+
   Sprite holder;
 
   PaperRipple({this.color : 0xFF000000, this.type : RECTANGLE, this.velocity: 0.5 }):super() {
     inheritSpan = true;
-    if(ContextTool.TOUCH){
+    if (ContextTool.TOUCH) {
       velocity = 1;
     }
   }
-  
+
   @override
-  void refresh(){
-    switch(type){
+  void refresh() {
+    switch (type) {
       case CIRCLE:
-        mask = new Mask.circle(spanWidth/2, spanWidth/2, spanWidth/2);
+        mask = new Mask.circle(spanWidth / 2, spanWidth / 2, spanWidth / 2);
         break;
       case RECTANGLE:
         mask = new Mask.rectangle(0, 0, spanWidth, spanHeight);
@@ -35,32 +38,32 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent{
 
   @override
   downAction([InputEvent e = null]) {
-    num localX = e == null ? spanWidth/2 : e.localX;
-    num localY = e == null ? spanHeight/2 : e.localY;
-    
+    num localX = e == null ? spanWidth / 2 : e.localX;
+    num localY = e == null ? spanHeight / 2 : e.localY;
+
     num touchX = localX > spanWidth ? spanWidth : localX;// - rect.left;
     num touchY = localY > spanHeight ? spanHeight : localY;// - rect.top;
-    
+
     int waveRadius = (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(spanWidth, spanHeight)) / 1.2).round();
-    
+
     Shape inner = new Shape()
-          ..graphics.circle(0, 0, waveRadius)
-          ..graphics.fillColor(color)
-          ..alpha = _initialOpacity
-          ..x = touchX
-          ..y = touchY;
-   
-    if(ContextTool.WEBGL){
+      ..graphics.circle(0, 0, waveRadius)
+      ..graphics.fillColor(color)
+      ..alpha = _initialOpacity
+      ..x = touchX
+      ..y = touchY;
+
+    if (ContextTool.WEBGL) {
       //inner.applyCache(-waveRadius, -waveRadius, waveRadius*2, waveRadius*2);
     }
     inner.scaleX = 0.1;
     inner.scaleY = 0.1;
-    
+
     addChild(inner);
-    
+
     Tween tw = new Tween(inner, velocity, Transition.easeOutElastic)
-    ..animate.scaleX.to(1.2)
-    ..animate.scaleY.to(1.2);
+      ..animate.scaleX.to(1.2)
+      ..animate.scaleY.to(1.2);
 
     ContextTool.STAGE.juggler.add(tw);
 
@@ -70,19 +73,19 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent{
   upAction([Event e = null]) {
 
     for (int i = 0; i < numChildren; i++) {
-     DisplayObject dobj = getChildAt(i);
+      DisplayObject dobj = getChildAt(i);
 
       ContextTool.STAGE.juggler.removeTweens(dobj);
       ContextTool.STAGE.juggler.addTween(dobj, velocity)
-      ..animate.alpha.to(0)
-      ..animate.scaleX.to(1.0)
-      ..animate.scaleY.to(1.0)
-      ..onComplete = () { 
-        disposeChild(dobj); 
+        ..animate.alpha.to(0)
+        ..animate.scaleX.to(1.0)
+        ..animate.scaleY.to(1.0)
+        ..onComplete = () {
+        disposeChild(dobj);
       };
     }
   }
-  
+
   num dist(Point p1, Point p2) {
     return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
   }

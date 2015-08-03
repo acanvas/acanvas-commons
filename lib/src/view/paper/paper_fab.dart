@@ -23,7 +23,9 @@ class PaperFab extends Button {
     span(radius * 2, radius * 2);
   }
 
-  void set opacity(num o) {_ripple.opacity = o;}
+  void set opacity(num o) {
+    _ripple.opacity = o;
+  }
 
 
   @override void refresh() {
@@ -37,18 +39,19 @@ class PaperFab extends Button {
   }
 
   void rollOverAction([InputEvent event = null]) {
-    if(stage == null || !hover) return;
+    if (stage == null || !hover) return;
     ContextTool.STAGE.juggler.addTween(icon, .1).animate
-     ..scaleX.to(1.2)
-     ..scaleY.to(1.2);
-   // _shadow.downAction();
+      ..scaleX.to(1.2)
+      ..scaleY.to(1.2);
+    // _shadow.downAction();
   }
+
   void rollOutAction([InputEvent event = null]) {
-    if(stage == null || !hover) return;
+    if (stage == null || !hover) return;
     ContextTool.STAGE.juggler.addTween(icon, .1).animate
-     ..scaleX.to(1)
-     ..scaleY.to(1);
-   //  _shadow.upAction();
+      ..scaleX.to(1)
+      ..scaleY.to(1);
+    //  _shadow.upAction();
   }
 
 

@@ -35,7 +35,7 @@ class PaperInput extends BoxSprite {
     inheritSpan = true;
 
     //force onscreen keyboard on mobile devices
-    if(ContextTool.MOBILE){
+    if (ContextTool.MOBILE) {
       keyboard = true;
     }
 
@@ -126,8 +126,8 @@ class PaperInput extends BoxSprite {
       _activeLine.alpha = 1;
       _activeLine.x = spanWidth / 2;
       ContextTool.STAGE.juggler.addTween(_activeLine, .2).animate
-          ..x.to(0)
-          ..scaleX.to(1);
+        ..x.to(0)
+        ..scaleX.to(1);
     }
 
     /* Animate cursor box */
@@ -138,8 +138,8 @@ class PaperInput extends BoxSprite {
 
       Tween tw = new Tween(_cursorBox, .1);
       tw.animate
-          ..x.to(0)
-          ..scaleX.to(0.2);
+        ..x.to(0)
+        ..scaleX.to(0.2);
       tw.onComplete = () => _cursorBox.alpha = 0;
       ContextTool.STAGE.juggler.add(tw);
     }
@@ -152,17 +152,18 @@ class PaperInput extends BoxSprite {
     /* If this textfield is mandatory, make explanatory text red */
     if (required != "") {
       _requiredTextField.color = PaperColor.RED;
-      ContextTool.STAGE.juggler.addTween(_requiredIconActive, .1).animate..alpha.to(1);
+      ContextTool.STAGE.juggler.addTween(_requiredIconActive, .1).animate
+        ..alpha.to(1);
     }
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
     ContextTool.STAGE.focus = _inputTextField;
 
-   if (keyboard && _softKeyboard == null) {
+    if (keyboard && _softKeyboard == null) {
       _createKeyboard();
     }
-   
-   /* Add a listener to Stage to manage intention to Focus out */
+
+    /* Add a listener to Stage to manage intention to Focus out */
     if (ContextTool.TOUCH) {
       ContextTool.STAGE.addEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
     } else {
@@ -187,7 +188,8 @@ class PaperInput extends BoxSprite {
       ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
     /* Make active blue line invisible */
-    ContextTool.STAGE.juggler.addTween(_activeLine, .1).animate..alpha.to(0);
+    ContextTool.STAGE.juggler.addTween(_activeLine, .1).animate
+      ..alpha.to(0);
 
     /* Make floating label grey again */
     if (_currentlyFloating) {
@@ -197,10 +199,11 @@ class PaperInput extends BoxSprite {
     /* Make explanatory text grey again */
     if (required != "") {
       _requiredTextField.color = PaperColor.GREY_DARK;
-      ContextTool.STAGE.juggler.addTween(_requiredIconActive, .1).animate..alpha.to(0);
+      ContextTool.STAGE.juggler.addTween(_requiredIconActive, .1).animate
+        ..alpha.to(0);
     }
-    
-    if(keyboard){
+
+    if (keyboard) {
       _disposeKeyboard();
     }
   }
@@ -225,14 +228,14 @@ class PaperInput extends BoxSprite {
         if (!_currentlyFloating) {
           _currentlyFloating = true;
           Translation tr = new Translation(0, 1, .2)
-              ..onUpdate = (num val) {
-                _defaultTextField.y = val * -(fontSize + 3);
-                _defaultTextField.scaleX = 1 - val / 4;
-                _defaultTextField.scaleY = 1 - val / 4;
-              }
-              ..onComplete = () {
-                _defaultTextField.color = _highlightColor;
-              };
+            ..onUpdate = (num val) {
+            _defaultTextField.y = val * -(fontSize + 3);
+            _defaultTextField.scaleX = 1 - val / 4;
+            _defaultTextField.scaleY = 1 - val / 4;
+          }
+            ..onComplete = () {
+            _defaultTextField.color = _highlightColor;
+          };
           ContextTool.STAGE.juggler.add(tr);
         }
       } else {
@@ -252,14 +255,14 @@ class PaperInput extends BoxSprite {
           /* Animate the Label back to original position */
           _currentlyFloating = false;
           Translation tr = new Translation(1, 0, .2)
-              ..onUpdate = (num val) {
-                _defaultTextField.y = val * -(fontSize + 3);
-                _defaultTextField.scaleX = 1 - val / 4;
-                _defaultTextField.scaleY = 1 - val / 4;
-              }
-              ..onComplete = () {
-                _defaultTextField.color = PaperColor.GREY_DARK;
-              };
+            ..onUpdate = (num val) {
+            _defaultTextField.y = val * -(fontSize + 3);
+            _defaultTextField.scaleX = 1 - val / 4;
+            _defaultTextField.scaleY = 1 - val / 4;
+          }
+            ..onComplete = () {
+            _defaultTextField.color = PaperColor.GREY_DARK;
+          };
           ContextTool.STAGE.juggler.add(tr);
         }
       } else {
@@ -288,8 +291,9 @@ class PaperInput extends BoxSprite {
     box.graphics.rect(0, 0, 20, _inputTextField.textHeight);
     box.graphics.fillColor(color);
   }
-  
+
   SoftKeyboard _softKeyboard;
+
   void _createKeyboard() {
     Layout layout = new Qwerty();
     _softKeyboard = new SoftKeyboard([layout]);
@@ -299,18 +303,18 @@ class PaperInput extends BoxSprite {
     _softKeyboard.addEventListener(KeyEvent.KEY_UP, (KeyEvent e) {
       softKeyboardDownAction(e.charCode);
     });
-   
+
     ContextTool.STAGE.addChild(_softKeyboard);
     ContextTool.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
     _resizeKeyboard();
   }
-  
-  void _resizeKeyboard([Event e = null]){
-    _softKeyboard.span(ContextTool.STAGE.stageWidth, min(ContextTool.STAGE.stageHeight/2, 400));
+
+  void _resizeKeyboard([Event e = null]) {
+    _softKeyboard.span(ContextTool.STAGE.stageWidth, min(ContextTool.STAGE.stageHeight / 2, 400));
     _softKeyboard.y = ContextTool.STAGE.stageHeight - _softKeyboard.spanHeight;
   }
-  
-  void _disposeKeyboard(){
+
+  void _disposeKeyboard() {
     ContextTool.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
     disposeChild(_softKeyboard);
     _softKeyboard = null;
@@ -318,5 +322,6 @@ class PaperInput extends BoxSprite {
 
   ///addresses a sizing bug with Graphics tool
   num get width => super.width - 2;
+
   num get spanWidth => super.spanWidth - 2;
 }

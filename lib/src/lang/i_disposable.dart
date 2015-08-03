@@ -13,34 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- part of stagexl_commons;
+part of stagexl_commons;
 
-	/**
-	 * This describes an object that is able to release any resources it might hold a reference to.
-	 * @author Roland Zwaga
-	 */
-	 abstract class IDisposable {
+/**
+ * This describes an object that is able to release any resources it might hold a reference to.
+ * @author Roland Zwaga
+ */
+abstract class IDisposable {
 
-		// --------------------------------------------------------------------
-		//
-		// Properties
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Properties
+  //
+  // --------------------------------------------------------------------
 
-		/**
-		 * Returns <code>true</code> if the <code>dispose()</code> has already been invoked before.
-		 */
-		 bool get isDisposed;
+  /**
+   * Returns <code>true</code> if the <code>dispose()</code> has already been invoked before.
+   */
+  bool get isDisposed;
 
-		// --------------------------------------------------------------------
-		//
-		// Methods
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Methods
+  //
+  // --------------------------------------------------------------------
 
-		/**
-		 * Release any resources that the current object might hold a reference to.
-		 */
-		 void dispose();
-	}
+  /**
+   * Release any resources that the current object might hold a reference to.
+   */
+  void dispose();
+}
 

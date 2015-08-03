@@ -2,7 +2,7 @@ part of stagexl_commons;
 
 class BehaveSprite extends BoxSprite with MBehave {
 
-  BehaveSprite() : super(){
+  BehaveSprite() : super() {
     submitCallbackParams = [this];
   }
 
@@ -10,14 +10,14 @@ class BehaveSprite extends BoxSprite with MBehave {
   @override
   void enable() {
     super.enable();
-    children.where((c) => c is MBehave && c.inheritEnabled).forEach( (child){
+    children.where((c) => c is MBehave && c.inheritEnabled).forEach((child) {
       child.enable();
     });
   }
 
   @override
-  void disable(){
-    children.where((c) => c is MBehave && c.inheritEnabled).forEach( (child){
+  void disable() {
+    children.where((c) => c is MBehave && c.inheritEnabled).forEach((child) {
       child.disable();
     });
     super.disable();
@@ -33,10 +33,10 @@ class BehaveSprite extends BoxSprite with MBehave {
   void addChild(DisplayObject child) {
     super.addChild(child);
     if (child is MBehave && (child as MBehave).inheritEnabled) {
-      if(this.enabled){
+      if (this.enabled) {
         (child as MBehave).enable();
       }
-      else{
+      else {
         (child as MBehave).disable();
       }
     }

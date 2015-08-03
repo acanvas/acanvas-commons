@@ -2,7 +2,9 @@ part of stagexl_commons;
 
 class Calendar extends BoxSprite {
 
-  num _firstDay = 0; //1=Sunday, 0=Monday
+  num _firstDay = 0;
+
+  //1=Sunday, 0=Monday
   List monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
   List dayButtons = [];
   int dayButtonGap = 1;
@@ -14,6 +16,7 @@ class Calendar extends BoxSprite {
   num _month;
   num _year;
   num _day;
+
   Calendar() : super() {
 
     dayButtonHolder = new Sprite();
@@ -26,12 +29,12 @@ class Calendar extends BoxSprite {
   }
 
   /**
-		 * Override this method for new ui.
-		 * All day-Buttons should be.added into the dayButtons-List (user your own buttons if needed)
-		 * Create and position all other buttons you need, for example prevMonth, nextMonth, prevYear, nextYear and use appropriate functions
-		 * Use _dateLabel to show active month and year, for example "Januar 2012"
-		 * 
-		 */
+   * Override this method for new ui.
+   * All day-Buttons should be.added into the dayButtons-List (user your own buttons if needed)
+   * Create and position all other buttons you need, for example prevMonth, nextMonth, prevYear, nextYear and use appropriate functions
+   * Use _dateLabel to show active month and year, for example "Januar 2012"
+   *
+   */
   void addItems() {
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 7; j++) {
@@ -101,7 +104,6 @@ class Calendar extends BoxSprite {
   }
 
 
-
   ///////////////////////////////////
   //  methods
   ///////////////////////////////////
@@ -134,14 +136,14 @@ class Calendar extends BoxSprite {
   }
 
 
-
   ///////////////////////////////////
   // event handlers
   ///////////////////////////////////
 
   void onPrevYearButtonClick(MouseEvent event) {
     _year--;
-    _day = /*Math.*/min(_day, getLastDayOfMonth(_month, _year));
+    _day = /*Math.*/
+    min(_day, getLastDayOfMonth(_month, _year));
     setYearMonthDay(_year, _month, _day);
 
   }
@@ -152,7 +154,8 @@ class Calendar extends BoxSprite {
       _month = 12;
       _year--;
     }
-    _day = /*Math.*/min(_day, getLastDayOfMonth(_month, _year));
+    _day = /*Math.*/
+    min(_day, getLastDayOfMonth(_month, _year));
     setYearMonthDay(_year, _month, _day);
   }
 
@@ -162,13 +165,15 @@ class Calendar extends BoxSprite {
       _month = 1;
       _year++;
     }
-    _day = /*Math.*/min(_day, getLastDayOfMonth(_month, _year));
+    _day = /*Math.*/
+    min(_day, getLastDayOfMonth(_month, _year));
     setYearMonthDay(_year, _month, _day);
   }
 
   void onNextYearButtonClick(MouseEvent event) {
     _year++;
-    _day = /*Math.*/min(_day, getLastDayOfMonth(_month, _year));
+    _day = /*Math.*/
+    min(_day, getLastDayOfMonth(_month, _year));
     setYearMonthDay(_year, _month, _day);
   }
 
@@ -176,7 +181,6 @@ class Calendar extends BoxSprite {
     _day = (event.target as DayButton).tag;
     setYearMonthDay(_year, _month, _day);
   }
-
 
 
   ///////////////////////////////////

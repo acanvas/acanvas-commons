@@ -17,8 +17,8 @@ part of stagexl_commons;
 
 
 /**
-	 * Simplified EventBus for Dart
-	 */
+ * Simplified EventBus for Dart
+ */
 class XLEventBus extends EventDispatcher implements IEventBus {
 
   static final XLEventBus _singleton = new XLEventBus._internal();

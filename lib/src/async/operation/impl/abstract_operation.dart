@@ -17,24 +17,24 @@ part of stagexl_commons;
 
 
 /**
-	 * Dispatched when the current <code>AbstractOperation</code> has completed its functionality successfully.
-	 * @eventType org.as3commons.async.operation.OperationEvent#COMPLETE OperationEvent.COMPLETE
-	 */
+ * Dispatched when the current <code>AbstractOperation</code> has completed its functionality successfully.
+ * @eventType org.as3commons.async.operation.OperationEvent#COMPLETE OperationEvent.COMPLETE
+ */
 // [Event(name="operationComplete", type="org.as3commons.async.operation.event.OperationEvent")]
 /**
-	 * Dispatched when the current <code>AbstractOperation</code> encountered an error.
-	 * @eventType org.as3commons.async.operation.OperationEvent#ERROR OperationEvent.ERROR
-	 */
+ * Dispatched when the current <code>AbstractOperation</code> encountered an error.
+ * @eventType org.as3commons.async.operation.OperationEvent#ERROR OperationEvent.ERROR
+ */
 // [Event(name="operationError", type="org.as3commons.async.operation.event.OperationEvent")]
 /**
-	 * Dispatched when the current <code>AbstractOperation</code> timed out.
-	 * @eventType org.as3commons.async.operation.OperationEvent#TIMEOUT OperationEvent.TIMEOUT
-	 */
+ * Dispatched when the current <code>AbstractOperation</code> timed out.
+ * @eventType org.as3commons.async.operation.OperationEvent#TIMEOUT OperationEvent.TIMEOUT
+ */
 // [Event(name="operationTimeout", type="org.as3commons.async.operation.event.OperationEvent")]
 /**
-	 * Abstract base class for <code>IOperation</code> implementations.
-	 * @author Christophe Herreman
-	 */
+ * Abstract base class for <code>IOperation</code> implementations.
+ * @author Christophe Herreman
+ */
 class AbstractOperation extends EventDispatcher implements IOperation {
 
   // --------------------------------------------------------------------
@@ -44,11 +44,11 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   // --------------------------------------------------------------------
 
   /**
-		 * Creates a new <code>AbstractOperation</code>.
-		 *
-		 * @param timeoutInMilliseconds
-		 * @param autoStartTimeout
-		 */
+   * Creates a new <code>AbstractOperation</code>.
+   *
+   * @param timeoutInMilliseconds
+   * @param autoStartTimeout
+   */
   AbstractOperation([int timeoutInMilliseconds = 0, bool autoStartTimeout = true]) {
 
     m_timeout = timeoutInMilliseconds;
@@ -100,20 +100,23 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   // --------------------------------------------------------------------
 
   /**
-		 * @inheritDoc
-		 */ void addCompleteListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+   * @inheritDoc
+   */
+  void addCompleteListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
     addEventListener(OperationEvent.COMPLETE, listener/*, useCapture, priority, useWeakReference*/);
   }
 
   /**
-		 * @inheritDoc
-		 */ void addErrorListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+   * @inheritDoc
+   */
+  void addErrorListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
     addEventListener(OperationEvent.ERROR, listener /*, useCapture, priority, useWeakReference*/);
   }
 
   /**
-		 * @inheritDoc
-		 */ void addTimeoutListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+   * @inheritDoc
+   */
+  void addTimeoutListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
     addEventListener(OperationEvent.TIMEOUT, listener /*, useCapture, priority, useWeakReference*/);
   }
 
@@ -124,10 +127,11 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   // --------------------------------------------------------------------
 
   /**
-		 * Convenience method for dispatching a <code>OperationEvent.COMPLETE</code> event.
-		 *
-		 * @return true if the event was dispatched; false if not
-		 */ bool dispatchCompleteEvent([dynamic result = null]) {
+   * Convenience method for dispatching a <code>OperationEvent.COMPLETE</code> event.
+   *
+   * @return true if the event was dispatched; false if not
+   */
+  bool dispatchCompleteEvent([dynamic result = null]) {
     if (m_timedOut) {
       return false;
     }
@@ -140,10 +144,11 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   }
 
   /**
-		 * Convenience method for dispatching a <code>OperationEvent.ERROR</code> event.
-		 *
-		 * @return true if the event was dispatched; false if not
-		 */ bool dispatchErrorEvent([dynamic error = null]) {
+   * Convenience method for dispatching a <code>OperationEvent.ERROR</code> event.
+   *
+   * @return true if the event was dispatched; false if not
+   */
+  bool dispatchErrorEvent([dynamic error = null]) {
     if (m_timedOut) {
       return false;
     }
@@ -156,10 +161,11 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   }
 
   /**
-		 * Convenience method for dispatching a <code>OperationEvent.TIMEOUT</code> event.
-		 *
-		 * @return true if the event was dispatched; false if not
-		 */ bool dispatchTimeoutEvent() {
+   * Convenience method for dispatching a <code>OperationEvent.TIMEOUT</code> event.
+   *
+   * @return true if the event was dispatched; false if not
+   */
+  bool dispatchTimeoutEvent() {
     dispatchEvent(OperationEvent.createTimeoutEvent(this));
     return true;
   }
@@ -169,17 +175,17 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   // ----------------------------
 
   /**
-		 * @inheritDoc
-		 */
+   * @inheritDoc
+   */
   dynamic get error {
     return _error;
   }
 
   /**
-		 * Sets the error of this operation
-		 *
-		 * @param value the error of this operation
-		 */
+   * Sets the error of this operation
+   *
+   * @param value the error of this operation
+   */
   void set error(dynamic value) {
     if (value != error) {
       _error = value;
@@ -187,20 +193,23 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   }
 
   /**
-		 * @inheritDoc
-		 */ void removeCompleteListener(Function listener, [bool useCapture = false]) {
+   * @inheritDoc
+   */
+  void removeCompleteListener(Function listener, [bool useCapture = false]) {
     removeEventListener(OperationEvent.COMPLETE, listener);
   }
 
   /**
-		 * @inheritDoc
-		 */ void removeErrorListener(Function listener, [bool useCapture = false]) {
+   * @inheritDoc
+   */
+  void removeErrorListener(Function listener, [bool useCapture = false]) {
     removeEventListener(OperationEvent.ERROR, listener);
   }
 
   /**
-		 * @inheritDoc
-		 */ void removeTimeoutListener(Function listener, [bool useCapture = false]) {
+   * @inheritDoc
+   */
+  void removeTimeoutListener(Function listener, [bool useCapture = false]) {
     removeEventListener(OperationEvent.TIMEOUT, listener);
   }
 
@@ -215,17 +224,17 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   // ----------------------------
 
   /**
-		 * @inheritDoc
-		 */
+   * @inheritDoc
+   */
   dynamic get result {
     return _result;
   }
 
   /**
-		 * Sets the result of this operation.
-		 *
-		 * @param value the result of this operation
-		 */
+   * Sets the result of this operation.
+   *
+   * @param value the result of this operation
+   */
   void set result(dynamic value) {
     if (value != result) {
       _result = value;
@@ -240,6 +249,7 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   // --------------------------------------------------------------------
   void completeHandler(OperationEvent event) {
   }
+
   void errorHandler(OperationEvent event) {
   }
 }

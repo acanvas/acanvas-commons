@@ -4,6 +4,7 @@ class VideoPlayer extends BoxSprite {
   Pyro _video;
   VideoControls _videoControls;
   Type _videoControlsType;
+
   VideoPlayer(int w, int h, Type videoControlsType) : super() {
     _width = w;
     _height = h;

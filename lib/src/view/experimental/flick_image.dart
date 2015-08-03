@@ -31,112 +31,112 @@ class ComponentFlickImage extends BoxSprite {
 
   void _placeItem(Sprite data, String position) {
     Sprite child;
-        switch(position){
-          case LEFT :
-            child = _holder.getChildAt(0);
-            data.x = (child.x - data.width).toInt();
-            _holder.addChildAt(data, 0);
-            
-            ContextTool.JUGGLER.addTween(data, 1)
-            ..animate.x.to(0);
-            
-            ContextTool.JUGGLER.addTween(child, 1)
-            ..animate.x.to(child.width.toInt())
-            ..onComplete = () => Function.apply(_onTweenComplete, [child]);
-            
-            if(fadeChildren) {
-              for(int i=0;i<data.numChildren;i++){
-                 data.getChildAt(i).alpha = 0;
-              }
-              _fadeChildren(data, 1);
-              _fadeChildren(child, 0);
-            }
-            tweening = true;
-          break;
-          case MIDDLE :
-            _holder.addChildAt(data, 0);
-          break;
-          case RIGHT :
-            child = _holder.getChildAt(0);
-            data.x = (child.x + child.width).toInt();
-            _holder.addChildAt(data, 0);
-            
-            ContextTool.JUGGLER.addTween(data, 1)
-            ..animate.x.to(0);
-            
-            ContextTool.JUGGLER.addTween(child, 1)
-            ..animate.x.to(- child.width.toInt())
-            ..onComplete = () => Function.apply(_onTweenComplete, [child]);
+    switch (position) {
+      case LEFT :
+        child = _holder.getChildAt(0);
+        data.x = (child.x - data.width).toInt();
+        _holder.addChildAt(data, 0);
 
-            if(fadeChildren) {
-              for(int i=0;i<data.numChildren;i++){
-                data.getChildAt(i).alpha = 0;
-              }
-              _fadeChildren(data, 1);
-              _fadeChildren(child, 0);
-            }
+        ContextTool.JUGGLER.addTween(data, 1)
+          ..animate.x.to(0);
 
-            tweening = true;
-          break;
+        ContextTool.JUGGLER.addTween(child, 1)
+          ..animate.x.to(child.width.toInt())
+          ..onComplete = () => Function.apply(_onTweenComplete, [child]);
+
+        if (fadeChildren) {
+          for (int i = 0;i < data.numChildren;i++) {
+            data.getChildAt(i).alpha = 0;
+          }
+          _fadeChildren(data, 1);
+          _fadeChildren(child, 0);
         }
-      }
+        tweening = true;
+        break;
+      case MIDDLE :
+        _holder.addChildAt(data, 0);
+        break;
+      case RIGHT :
+        child = _holder.getChildAt(0);
+        data.x = (child.x + child.width).toInt();
+        _holder.addChildAt(data, 0);
 
-      void _onTweenComplete(DisplayObject child){
-        _holder.removeChild(child);
-        tweening = false;
-      }
+        ContextTool.JUGGLER.addTween(data, 1)
+          ..animate.x.to(0);
 
+        ContextTool.JUGGLER.addTween(child, 1)
+          ..animate.x.to(-child.width.toInt())
+          ..onComplete = () => Function.apply(_onTweenComplete, [child]);
 
-      void next([Timer timer = null]) {
-        if(tweening == true){
-          return;
+        if (fadeChildren) {
+          for (int i = 0;i < data.numChildren;i++) {
+            data.getChildAt(i).alpha = 0;
+          }
+          _fadeChildren(data, 1);
+          _fadeChildren(child, 0);
         }
 
-        if(++_currentIndex == _data.length){
-          _currentIndex = 0;
-        }
+        tweening = true;
+        break;
+    }
+  }
 
-        _placeItem(_data[_currentIndex], RIGHT);
-      }
-
-
-      void prev() {
-        if(tweening == true){
-          return;
-        }
-        if(--_currentIndex == -1){
-          _currentIndex = _data.length - 1;
-        }
-
-        _placeItem(_data[_currentIndex], LEFT);
-      }
+  void _onTweenComplete(DisplayObject child) {
+    _holder.removeChild(child);
+    tweening = false;
+  }
 
 
-      void gotoPage(int page){
-        if(page == _currentIndex){
-          return;
-        }
+  void next([Timer timer = null]) {
+    if (tweening == true) {
+      return;
+    }
 
-        if(page < 0 || page > _data.length){
-          page = 0;
-        }
+    if (++_currentIndex == _data.length) {
+      _currentIndex = 0;
+    }
 
-        _currentIndex = page;
-        _placeItem(_data[_currentIndex], LEFT);
-      }
+    _placeItem(_data[_currentIndex], RIGHT);
+  }
 
-       @override
-      void dispose(){
-         _flickTimer.cancel();
-        super.dispose();
-      }
 
-       void _fadeChildren(Sprite data, int alph) {
-         for(int i=0;i<data.numChildren;i++){
-             ContextTool.JUGGLER.addTween( data.getChildAt(i), .3 )
-               ..animate.alpha.to(alph)
-               ..delay = (i+alph)*.3;
-           }
-       }
+  void prev() {
+    if (tweening == true) {
+      return;
+    }
+    if (--_currentIndex == -1) {
+      _currentIndex = _data.length - 1;
+    }
+
+    _placeItem(_data[_currentIndex], LEFT);
+  }
+
+
+  void gotoPage(int page) {
+    if (page == _currentIndex) {
+      return;
+    }
+
+    if (page < 0 || page > _data.length) {
+      page = 0;
+    }
+
+    _currentIndex = page;
+    _placeItem(_data[_currentIndex], LEFT);
+  }
+
+  @override
+  void dispose() {
+    _flickTimer.cancel();
+    super.dispose();
+  }
+
+  void _fadeChildren(Sprite data, int alph) {
+    for (int i = 0;i < data.numChildren;i++) {
+      ContextTool.JUGGLER.addTween(data.getChildAt(i), .3)
+        ..animate.alpha.to(alph)
+        ..delay = (i + alph) * .3;
+    }
+  }
 }
 

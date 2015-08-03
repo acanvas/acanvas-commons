@@ -13,7 +13,7 @@ class Scrollbar extends Slider with MPagedScroll {
     _pageStepper = new NumericStepper(0, 0, 1, false);
   }
 
-  void span(spanWidth, spanHeight, {bool refresh: true}){
+  void span(spanWidth, spanHeight, {bool refresh: true}) {
     valueMax = direction == ScrollDirection.HORIZONTAL ? spanWidth : spanHeight;
     super.span(spanWidth, spanHeight, refresh: refresh);
   }
@@ -25,7 +25,7 @@ class Scrollbar extends Slider with MPagedScroll {
   }
 
   @override
-  void disable(){
+  void disable() {
     visible = false;
     super.disable();
   }
@@ -59,22 +59,22 @@ class Scrollbar extends Slider with MPagedScroll {
 
       if (momentumEnabled) {
         removeEventListener(Event.ENTER_FRAME, _calcMomentum);
-        
+
         if (snapToPages) {
           if (!tweening) snapToCurrentPage();
-        } 
+        }
         else if (bounce) {
           if (!checkOuterFrame() && !tweening) notifyMomentumStart();
-        } 
+        }
         else notifyMomentumStart();
-      } 
+      }
       else {
         if (snapToPages) {
           if (!tweening) snapToCurrentPage();
-        } 
+        }
         else if (bounce) {
           if (!checkOuterFrame() && !tweening) notifyMomentumStart();
-        } 
+        }
         else if (!tweening) {
           notifyChangeEnd();
         }
@@ -234,8 +234,6 @@ class Scrollbar extends Slider with MPagedScroll {
   }
 
 
-
-
   bool checkOuterFrame() {
     if (value < valueMin) {
       scrollToPage(0);
@@ -307,6 +305,12 @@ class Scrollbar extends Slider with MPagedScroll {
     int thumbSize;
     maxPos = (spanSize - _thumbSize).floor();
     //pos = ((value - valueMin) / ((valueMax - valueMin) == 0 ? 1 : (valueMax - valueMin)) * maxPos).round();
+    //value = value == 0 ? value +1 : value;
+
+    if(valueMax - valueMin ==  0){
+      throw new StateError("bo");
+    }
+
     pos = ((value - valueMin) / (valueMax - valueMin) * maxPos).round();
     //print("MAXPOS $maxPos THUMBSIZE $_thumbSize ORIPOS $pos");
     if (pos < 0) {
@@ -335,14 +339,14 @@ class Scrollbar extends Slider with MPagedScroll {
     super.valueMax = max(0, (maxi).round());
     pageScrollDistance = valueMax / (pageCount < 2 ? 1 : pageCount - 1);
   }
-  
+
   //----- TIMER - used for page snapping
 
   void _startPageScrollTimer() {
     _pageScroll();
     _runTimer(pageScrollIntervalFirst);
   }
-  
+
   void _runTimer(int delay) {
     if (_timer != null) {
       _timer.cancel();
@@ -363,7 +367,7 @@ class Scrollbar extends Slider with MPagedScroll {
       if ((horizontalScrollBehavior ? thumb.x : thumb.y) > (horizontalScrollBehavior ? mouseX : mouseY)) pageUp(); else if ((horizontalScrollBehavior ? thumb.x : thumb.y) + _thumbSize < (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
     }
   }
- 
+
   void _stopPageScrollTimer() {
     if (_timer != null) {
       _timer.cancel();

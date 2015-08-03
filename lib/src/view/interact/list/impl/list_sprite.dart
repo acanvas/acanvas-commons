@@ -2,8 +2,8 @@ part of stagexl_commons;
 
 
 /**
-	 * @author Nils Doehring (nilsdoehring@gmail.com)
-	 */
+ * @author Nils Doehring (nilsdoehring@gmail.com)
+ */
 class ListSprite extends ScrollifySprite with MList {
   //
 
@@ -26,7 +26,7 @@ class ListSprite extends ScrollifySprite with MList {
   num _originY = 0;
 
 
-  ListSprite(List data, SelectableButton cell, Scrollbar hScrollbar, Scrollbar vScrollbar) : super( new BoxSprite(), hScrollbar, vScrollbar ) {
+  ListSprite(List data, SelectableButton cell, Scrollbar hScrollbar, Scrollbar vScrollbar) : super(new BoxSprite(), hScrollbar, vScrollbar) {
     this.data = data;
     _cellFactory = cell;
     _cellSize = _cellFactory.spanHeight;
@@ -34,23 +34,22 @@ class ListSprite extends ScrollifySprite with MList {
 
   @override
   void span(spanWidth, spanHeight, {bool refresh: true}) {
-    super.span(spanWidth, spanHeight,refresh: refresh);
-    _cellFactory.span(spanWidth, spanHeight,refresh: false);
+    super.span(spanWidth, spanHeight, refresh: refresh);
+    _cellFactory.span(spanWidth, spanHeight, refresh: false);
     init();
   }
 
   @override
   void refresh() {
     super.refresh();
-    updateScrollbars();
     _updateCells();
   }
 
   @override
-  void set touchable (bool touchable) {
+  void set touchable(bool touchable) {
     super.touchable = touchable;
-    if(touchable){
-      view.children.forEach((child){
+    if (touchable) {
+      view.children.forEach((child) {
         child.disable();
       });
     }
@@ -118,7 +117,7 @@ class ListSprite extends ScrollifySprite with MList {
       _totalCellSize -= spacing;
     }
     refresh();
-    if ((_horizontalFlow ? _hScrollbar : _vScrollbar).enabled){
+    if ((_horizontalFlow ? _hScrollbar : _vScrollbar).enabled) {
       (_horizontalFlow ? _hScrollbar : _vScrollbar).value = -_scrollPos;
     }
   }
@@ -194,6 +193,9 @@ class ListSprite extends ScrollifySprite with MList {
       _vScrollbar.enabled = _totalCellSize > spanHeight;
       _vScrollbar.valueMax = max(0, _totalCellSize - spanHeight);
     }
+    if(_hScrollbar.enabled || _vScrollbar.enabled){
+      mouseWheelEnabled = true;
+    }
     _updateThumbs();
   }
 
@@ -212,20 +214,20 @@ class ListSprite extends ScrollifySprite with MList {
 
   void _onHScrollbarChange(SliderEvent event) {
     if (_horizontalFlow) _onListScrollbarChange(event);
-    else _onHScrollbarChange(event);
+    //else _onHScrollbarChange(event);
   }
 
 
   void _onVScrollbarChange(SliderEvent event) {
     if (_horizontalFlow == false) _onListScrollbarChange(event);
-    else _onVScrollbarChange(event);
+    //else _onVScrollbarChange(event);
   }
 
 
   void _onListScrollbarChange(SliderEvent event) {
-      _scrollPos = _oldVScrollbarValue - event.value;
-      _oldVScrollbarValue = event.value;
-      _updateCells();
+    _scrollPos = _oldVScrollbarValue - event.value;
+    _oldVScrollbarValue = event.value;
+    _updateCells();
   }
 
 
@@ -351,22 +353,22 @@ class ListSprite extends ScrollifySprite with MList {
       cell.span(spanWidth, spanHeight);
       cell.mouseChildren = false;
       cell.autoSelect = false;
-      if(touchable){
-        cell.disable();
+      if (touchable) {
+        cell.enabled = false;
       }
 
-      if(ContextTool.TOUCH){
+      if (ContextTool.TOUCH) {
         cell.addEventListener(TouchEvent.TOUCH_BEGIN, _onCellMouseDown, useCapture: false, priority: 0);
         cell.addEventListener(TouchEvent.TOUCH_END, _onCellMouseUp, useCapture: false, priority: 0);
       }
-      else{
+      else {
         cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown, useCapture: false, priority: 0);
         cell.addEventListener(MouseEvent.MOUSE_UP, _onCellMouseUp, useCapture: false, priority: 0);
       }
 
       cell.submitCallback = _onCellSelected;
     }
-    else{
+    else {
       cell = pop ? _cellPool.removeLast() : _cellPool.removeAt(0);
       cell.span(spanWidth, spanHeight);
     }
@@ -408,7 +410,7 @@ class ListSprite extends ScrollifySprite with MList {
     cell.inheritDispose = false;
     if (cell.parent != null) cell.parent.removeChild(cell);
     _cellPool.add(cell);
-    _selectedCells[cell.id] = cell.toggled;
+    _selectedCells[cell.id] = cell.selected;
   }
 
 
@@ -421,7 +423,7 @@ class ListSprite extends ScrollifySprite with MList {
         //print("selected ${cell.id}");
         cell.deselect();
       }
-      else{
+      else {
         //print("exception ${cell.id}");
       }
     }
@@ -450,11 +452,11 @@ class ListSprite extends ScrollifySprite with MList {
       _mouseOffsetY = stage.mouseY;
     }
 
-    if(ContextTool.TOUCH){
+    if (ContextTool.TOUCH) {
       stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false, priority: 0);
       stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
     }
-    else{
+    else {
       stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false, priority: 0);
       stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
     }

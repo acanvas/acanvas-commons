@@ -1,7 +1,7 @@
 part of stagexl_commons;
 
 class PaperIconSet {
-  
+
   static const String accessibility = '<path d="M12,2c1.1,0,2,0.9,2,2s-0.9,2-2,2s-2-0.9-2-2S10.9,2,12,2z M21,9h-6v13h-2v-6h-2v6H9V9H3V7h18V9z"/>';
   static const String account_balance = '<path d="M4,10v7h3v-7H4z M10,10v7h3v-7H10z M2,22h19v-3H2V22z M16,10v7h3v-7H16z M11.5,1L2,6v2h19V6L11.5,1z"/>';
   static const String account_box = '<path d="M3,5l0,14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5c0-1.1-0.9-2-2-2H5C3.9,3,3,3.9,3,5z M15,9c0,1.7-1.3,3-3,3c-1.7,0-3-1.3-3-3c0-1.7,1.3-3,3-3C13.7,6,15,7.3,15,9z M6,17c0-2,4-3.1,6-3.1s6,1.1,6,3.1v1H6V17z"/>';
@@ -268,5 +268,5 @@ class PaperIconSet {
   static const String wallet_travel = '<path d="M20,6h-3V4l-2-2H9L7,4v2H4C2.9,6,2,6.9,2,8v11c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V8C22,6.9,21.1,6,20,6z M9,4h6v2H9V4z M20,19H4v-2h16V19z M20,14H4V8h3v4h2V8h6v4h2V8h3V14z"/>';
   static const String warning = '<path d="M1,21h22L12,2L1,21z M13,18h-2v-2h2V18z M13,14h-2v-4h2V14z"/>';
   static const String work = '<path d="M20,6h-4V4l-2-2h-4L8,4v2H4C2.9,6,2,6.9,2,8l0,11c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V8C22,6.9,21.1,6,20,6z M14,6h-4V4h4V6z"/>';
-  
+
 }

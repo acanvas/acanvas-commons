@@ -2,17 +2,22 @@ part of stagexl_commons;
 
 class ImageSprite extends BoxSprite {
   Shape _background;
-  
+
   BitmapData _bitmapData;
-  void set bitmapData(BitmapData bitmapData){
+
+  void set bitmapData(BitmapData bitmapData) {
     _bitmapData = bitmapData;
-    addChild( new Bitmap(_bitmapData) );
+    addChild(new Bitmap(_bitmapData));
     refresh();
   }
-  void setBitmapData(BitmapData bitmapData) { this.bitmapData = bitmapData; }
+
+  void setBitmapData(BitmapData bitmapData) {
+    this.bitmapData = bitmapData;
+  }
 
   String _href;
-  void set href(String href){
+
+  void set href(String href) {
     _href = href;
     var opts = new BitmapDataLoadOptions();
     opts.corsEnabled = true;
@@ -43,25 +48,25 @@ class ImageSprite extends BoxSprite {
     _background.graphics.rect(0, 0, spanWidth, spanHeight);
     _background.graphics.fillColor(0xffff2222);
 
-    if(spanWidth == 0 || spanHeight == 0){
+    if (spanWidth == 0 || spanHeight == 0) {
       return;
     }
 
     num scale;
     if (_bitmapData.width > _bitmapData.height) {
       scale = spanHeight / _bitmapData.height;
-      if(_bitmapData.width * scale < spanWidth){
+      if (_bitmapData.width * scale < spanWidth) {
         scale = spanWidth / _bitmapData.width;
       }
     } else {
       scale = spanWidth / _bitmapData.width;
-      if(_bitmapData.height * scale < spanHeight){
+      if (_bitmapData.height * scale < spanHeight) {
         scale = spanHeight / _bitmapData.height;
       }
     }
 
     mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
-              ..relativeToParent = true;
+      ..relativeToParent = true;
 
     super.refresh();
   }

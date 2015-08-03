@@ -1,7 +1,7 @@
 part of stagexl_commons;
 
 
-class ComponentDropdown extends BehaveSprite{
+class ComponentDropdown extends BehaveSprite {
   static const String ROLLOUT_OPEN = "OPEN";
   static const String ROLLOUT_CLOSE = "CLOSE";
 
@@ -12,6 +12,7 @@ class ComponentDropdown extends BehaveSprite{
 
   String _strRolloutState;
   Function _onToggleCallback;
+
   ComponentDropdown() : super() {
 
     _sprRollout = new BoxSprite();
@@ -65,7 +66,8 @@ class ComponentDropdown extends BehaveSprite{
 
       _sprRollout.visible = true;
       _strRolloutState = ROLLOUT_OPEN;
-      ContextTool.JUGGLER.addTween(_sprRollout, 0.5)..animate.y.to(spanHeight);
+      ContextTool.JUGGLER.addTween(_sprRollout, 0.5)
+        ..animate.y.to(spanHeight);
       if (_onToggleCallback != null) {
         _onToggleCallback.call(_strRolloutState);
       }
@@ -80,8 +82,8 @@ class ComponentDropdown extends BehaveSprite{
       }
       _strRolloutState = ROLLOUT_CLOSE;
       ContextTool.JUGGLER.addTween(_sprRollout, 0)
-          ..animate.y.to(-_sprRollout.height)
-          ..onComplete = _onCloseRolloutComplete;
+        ..animate.y.to(-_sprRollout.height)
+        ..onComplete = _onCloseRolloutComplete;
     }
   }
 

@@ -1,107 +1,111 @@
 part of stagexl_commons;
-	/**
-	 * @author Simon Schmid (contact(at)sschmid.com)
-	 */
-	 class NumericStepper {
-		num _min ;
-		num _max ;
-		num _step ;
-		bool _loop ;
-		num _curStep ;
+/**
+ * @author Simon Schmid (contact(at)sschmid.com)
+ */
+class NumericStepper {
+  num _min;
 
-		NumericStepper(num min , num max , [num step  = 1, bool loop  = true]) {
-			_min = min;
-			_max = max;
-			_step = step;
-			_loop = loop;
-			_curStep = min;
-		}
+  num _max;
 
+  num _step;
 
-		num get value  {
-			return _curStep;
-		}
+  bool _loop;
 
+  num _curStep;
 
-		num get step  {
-			return _step;
-		}
+  NumericStepper(num min, num max, [num step = 1, bool loop = true]) {
+    _min = min;
+    _max = max;
+    _step = step;
+    _loop = loop;
+    _curStep = min;
+  }
 
 
-		void set step(num step ) {
-			_step = step;
-		}
+  num get value {
+    return _curStep;
+  }
 
 
-		num jumpTo(num i )  {
-			return _update(i, false);
-		}
+  num get step {
+    return _step;
+  }
 
 
-		num jumpToFirst()  {
-			_curStep = _min;
-			return _curStep;
-		}
+  void set step(num step) {
+    _step = step;
+  }
 
 
-		num jumpToLast()  {
-			_curStep = _max;
-			return _curStep;
-		}
+  num jumpTo(num i) {
+    return _update(i, false);
+  }
 
 
-		num forward()  {
-			return _update(_curStep + _step, _loop);
-		}
+  num jumpToFirst() {
+    _curStep = _min;
+    return _curStep;
+  }
 
 
-		num back()  {
-			return _update(_curStep - _step, _loop);
-		}
+  num jumpToLast() {
+    _curStep = _max;
+    return _curStep;
+  }
 
 
-		num _update(num i , bool loop )  {
-			if (i != _curStep) {
-				if (i < _min) {
-					if (loop) _curStep = _max;
-					else _curStep = _min;
-				} else if (i > _max) {
-					if (loop) _curStep = _min;
-					else _curStep = _max;
-				} else {
-					_curStep = i;
-				}
-			}
-			return _curStep;
-		}
+  num forward() {
+    return _update(_curStep + _step, _loop);
+  }
 
 
-		num get minimum {
-			return _min;
-		}
+  num back() {
+    return _update(_curStep - _step, _loop);
+  }
 
 
-		void set minimum(num min ) {
-			_min = min;
-		}
+  num _update(num i, bool loop) {
+    if (i != _curStep) {
+      if (i < _min) {
+        if (loop) _curStep = _max;
+        else _curStep = _min;
+      } else if (i > _max) {
+        if (loop) _curStep = _min;
+        else _curStep = _max;
+      } else {
+        _curStep = i;
+      }
+    }
+    return _curStep;
+  }
 
 
-		num get maximum  {
-			return _max;
-		}
+  num get minimum {
+    return _min;
+  }
 
 
-		void set maximum(num max ) {
-			_max = max;
-		}
+  void set minimum(num min) {
+    _min = min;
+  }
 
 
-		bool get loop  {
-			return _loop;
-		}
+  num get maximum {
+    return _max;
+  }
 
 
-		void set loop(bool loop ) {
-			_loop = loop;
-		}
-	}
+  void set maximum(num max) {
+    _max = max;
+  }
+
+
+  bool get loop {
+    return _loop;
+  }
+
+
+  void set loop(bool loop) {
+    _loop = loop;
+  }
+}

@@ -98,7 +98,7 @@ class PaperButton extends Button {
     super.refresh();
   }
 
-  @override void set labelText (String labelText) {
+  @override void set labelText(String labelText) {
     super.labelText = labelText;
     _label.text = labelText;
     refresh();

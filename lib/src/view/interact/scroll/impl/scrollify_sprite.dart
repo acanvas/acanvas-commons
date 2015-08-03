@@ -2,13 +2,15 @@ part of stagexl_commons;
 
 
 /**
-	 * @author Nils Doehring (nilsdoehring@gmail.com)
-	 */
+ * @author Nils Doehring (nilsdoehring@gmail.com)
+ */
 class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
   //Sprites
   Sprite _view;
+
   Sprite get view => _view;
+
   Scrollbar _hScrollbar;
   Scrollbar _vScrollbar;
 
@@ -30,11 +32,12 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
   bool _changingH = false;
   bool _interactionV = false;
   bool _changingV = false;
+  Sprite _mouseWheelListenerBackground;
 
   ScrollifySprite(Sprite view, Scrollbar hScrollbar, Scrollbar vScrollbar) {
 
     _view = view;
-    if(_view.parent == null){
+    if (_view.parent == null) {
       addChild(_view);
     }
     _hScrollbar = hScrollbar;
@@ -48,29 +51,40 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     _hScrollbar.y = spanHeight - _hScrollbar.height;
     _vScrollbar.x = spanWidth - _vScrollbar.width;
 
-    if(maskEnabled){
-      _view.mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)..relativeToParent = true;
+    if (maskEnabled) {
+      _view.mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
+        ..relativeToParent = true;
     }
 
+    super.refresh();
+
     updateScrollbars();
+
+    GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, color: 0x00FF0000, sprite: view.parent);
+  }
+
+  @override dispose(){
+    view.parent.removeChild(_mouseWheelListenerBackground);
+    _mouseWheelListenerBackground.graphics.clear();
+    _mouseWheelListenerBackground = null;
+    super.dispose();
   }
 
   /// ---------- SCROLL BARS
 
   void _addScrollbars() {
     // H
-    //_hScrollbar = _scrollbar.clone(Orientation.HORIZONTAL, 0, spanWidth);
     _hScrollbar.inheritSpan = true;
+    _hScrollbar.horizontalScrollBehavior = true;
     _hScrollbar.mouseWheelSensitivity = 10;
     _hScrollbar.addEventListener(SliderEvent.VALUE_CHANGE, _onHScrollbarChange, useCapture: false, priority: 0);
     _hScrollbar.addEventListener(SliderEvent.INTERACTION_START, _onScrollbarInteractionStart, useCapture: false, priority: 0);
     _hScrollbar.addEventListener(SliderEvent.INTERACTION_END, _onScrollbarInteractionEnd, useCapture: false, priority: 0);
     _hScrollbar.addEventListener(SliderEvent.CHANGE_START, _onScrollbarChangeStart, useCapture: false, priority: 0);
     _hScrollbar.addEventListener(SliderEvent.CHANGE_END, _onScrollbarChangeEnd, useCapture: false, priority: 0);
-    _view.parent.addChild(_hScrollbar);
+    _view.parent.addChildAt(_hScrollbar, _view.parent.numChildren);
 
     //V
-    //_vScrollbar = _scrollbar.clone(Orientation.VERTICAL, 0, spanHeight);
     _vScrollbar.inheritSpan = true;
     _vScrollbar.mouseWheelSensitivity = 10;
     _vScrollbar.addEventListener(SliderEvent.VALUE_CHANGE, _onVScrollbarChange, useCapture: false, priority: 0);
@@ -78,7 +92,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     _vScrollbar.addEventListener(SliderEvent.INTERACTION_END, _onScrollbarInteractionEnd, useCapture: false, priority: 0);
     _vScrollbar.addEventListener(SliderEvent.CHANGE_START, _onScrollbarChangeStart, useCapture: false, priority: 0);
     _vScrollbar.addEventListener(SliderEvent.CHANGE_END, _onScrollbarChangeEnd, useCapture: false, priority: 0);
-    _view.parent.addChild(_vScrollbar);
+    _view.parent.addChildAt(_vScrollbar, _view.parent.numChildren);
 
   }
 
@@ -120,8 +134,10 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     if (!_changing) {
       _changing = true;
       if (autoHideScrollbars) {
-        if (_hScrollbar.enabled) ContextTool.JUGGLER.addTween(_hScrollbar, 0.1)..animate.alpha.to(1);
-        if (_vScrollbar.enabled) ContextTool.JUGGLER.addTween(_vScrollbar, 0.1)..animate.alpha.to(1);
+        if (_hScrollbar.enabled) ContextTool.JUGGLER.addTween(_hScrollbar, 0.1)
+          ..animate.alpha.to(1);
+        if (_vScrollbar.enabled) ContextTool.JUGGLER.addTween(_vScrollbar, 0.1)
+          ..animate.alpha.to(1);
       }
       dispatchEvent(new ScrollifyEvent(ScrollifyEvent.CHANGE_START));
     }
@@ -131,8 +147,10 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     if (_changing) {
       _changing = false;
       if (autoHideScrollbars) {
-        if (_hScrollbar.enabled) ContextTool.JUGGLER.addTween(_hScrollbar, 0.8)..animate.alpha.to(0);
-        if (_vScrollbar.enabled) ContextTool.JUGGLER.addTween(_vScrollbar, 0.8)..animate.alpha.to(0);
+        if (_hScrollbar.enabled) ContextTool.JUGGLER.addTween(_hScrollbar, 0.8)
+          ..animate.alpha.to(0);
+        if (_vScrollbar.enabled) ContextTool.JUGGLER.addTween(_vScrollbar, 0.8)
+          ..animate.alpha.to(0);
       }
       dispatchEvent(new ScrollifyEvent(ScrollifyEvent.CHANGE_END));
     }
@@ -140,7 +158,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
   void updateScrollbars() {
     num w = useNativeWidth || !(_view is MBox) ? _view.width : (_view as MBox).spanWidth;
-    num h = useNativeHeight || !(_view is MBox) ? _view.height :  (_view as MBox).spanHeight;
+    num h = useNativeHeight || !(_view is MBox) ? _view.height : (_view as MBox).spanHeight;
 
     _hScrollbar.enabled = w > spanWidth;
     _hScrollbar.valueMax = w - spanWidth;
@@ -148,19 +166,20 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     _vScrollbar.enabled = h > spanHeight;
     _vScrollbar.valueMax = h - spanHeight;
 
-    _hScrollbar.refresh();
-    _vScrollbar.refresh();
+    if(_hScrollbar.enabled || _vScrollbar.enabled){
+      mouseWheelEnabled = true;
+    }
 
     _updateThumbs();
   }
 
   void _updateThumbs() {
     num w = useNativeWidth || !(_view is MBox) ? _view.width : (_view as MBox).spanWidth;
-    num h = useNativeHeight || !(_view is MBox) ? _view.height :  (_view as MBox).spanHeight;
-    if(spanWidth > 0){
+    num h = useNativeHeight || !(_view is MBox) ? _view.height : (_view as MBox).spanHeight;
+    if (spanWidth > 0) {
       _hScrollbar.pageCount = w / spanWidth;
     }
-    if(spanHeight > 0){
+    if (spanHeight > 0) {
       _vScrollbar.pageCount = h / spanHeight;
     }
   }
@@ -170,7 +189,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
   @override
   void set keyboardEnabled(bool value) {
-    if(keyboardEnabled == value) return;
+    if (keyboardEnabled == value) return;
     super.keyboardEnabled = value;
     if (keyboardEnabled) {
       addEventListener(KeyboardEvent.KEY_DOWN, _onKeyDown, useCapture: false, priority: 0);
@@ -253,12 +272,14 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
 
   /// ---------- MOUSE WHEEL
-
-  @override
-  void set mouseWheelEnabled(bool value) {
-    _mouseWheelEnabled = value;
-    if (_mouseWheelEnabled) addEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel, useCapture: false, priority: 0); else removeEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel);
+  @override void set mouseWheelEnabled(bool value) {
+  if(_mouseWheelEnabled == value){
+    return;
   }
+    _mouseWheelEnabled = value;
+  if (_mouseWheelEnabled) _view.parent.addEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel, useCapture: false, priority: 0);
+  else _view.parent.removeEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel);
+}
 
   void _onMouseWheel(MouseEvent event) {
     clearMomentum();
@@ -267,6 +288,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     } else {
       if (_vScrollbar.enabled) _vScrollbar._onMouseWheel(event); else if (_hScrollbar.enabled) _hScrollbar._onMouseWheel(event);
     }
+    event.stopImmediatePropagation();
   }
 
   void _onHScrollbarChange(SliderEvent event) {
@@ -284,7 +306,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
   @override
   void set snapToPages(bool value) {
-    if (value != snapToPages) snapToPages = _hScrollbar.snapToPages = _vScrollbar.snapToPages = value;
+    if (value != snapToPages) super.snapToPages = _hScrollbar.snapToPages = _vScrollbar.snapToPages = value;
   }
 
   @override
@@ -293,7 +315,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     if (_doubleClickToZoom) {
       _view.addEventListener(MouseEvent.DOUBLE_CLICK, _onViewDoubleClick, useCapture: false, priority: 0);
     }
-    else{
+    else {
       _view.removeEventListener(MouseEvent.DOUBLE_CLICK, _onViewDoubleClick);
     }
   }
@@ -315,10 +337,10 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
 
     ContextTool.JUGGLER.addTween(_view, 0.3)
-        ..animate.scaleX.to(scale)
-        ..animate.scaleY.to(scale)
-        ..onUpdate = (() => _keepPos)
-        ..onComplete = (() => _onZoomConplete);
+      ..animate.scaleX.to(scale)
+      ..animate.scaleY.to(scale)
+      ..onUpdate = (() => _keepPos)
+      ..onComplete = (() => _onZoomConplete);
 
 
     interactionEnd();
@@ -348,18 +370,18 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     _hScrollbar.momentumEnabled = touchable;
     _vScrollbar.momentumEnabled = touchable;
     if (touchable) {
-      if(ContextTool.TOUCH){
+      if (ContextTool.TOUCH) {
         _view.addEventListener(TouchEvent.TOUCH_BEGIN, _onViewMouseDown, useCapture: false, priority: 0);
       }
-      else{
+      else {
         _view.addEventListener(MouseEvent.MOUSE_DOWN, _onViewMouseDown, useCapture: false, priority: 0);
       }
     }
     else {
-      if(ContextTool.TOUCH){
+      if (ContextTool.TOUCH) {
         _view.removeEventListener(TouchEvent.TOUCH_BEGIN, _onViewMouseDown);
       }
-      else{
+      else {
         _view.removeEventListener(MouseEvent.MOUSE_DOWN, _onViewMouseDown);
       }
     }
@@ -372,11 +394,11 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     if (_vScrollbar.enabled) _vScrollbar.interactionStart(false, false);
     _mouseOffsetX = stage.mouseX - _view.x;
     _mouseOffsetY = stage.mouseY - _view.y;
-    if(ContextTool.TOUCH){
+    if (ContextTool.TOUCH) {
       stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false, priority: 0);
       stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
     }
-    else{
+    else {
       stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false, priority: 0);
       stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
     }
@@ -388,11 +410,11 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     if (_hScrollbar.enabled) _hScrollbar.interactionEnd();
     if (_vScrollbar.enabled) _vScrollbar.interactionEnd();
     if (stage != null) {
-      if(ContextTool.TOUCH){
+      if (ContextTool.TOUCH) {
         stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
         stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
       }
-      else{
+      else {
         stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
         stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
       }
@@ -415,10 +437,12 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
   void set autoHideScrollbars(bool value) {
     super.autoHideScrollbars = value;
     if (_hScrollbar.enabled) {
-      ContextTool.JUGGLER.addTween(_hScrollbar, 0.2)..animate.alpha.to(autoHideScrollbars ? 0 : 1);
+      ContextTool.JUGGLER.addTween(_hScrollbar, 0.2)
+        ..animate.alpha.to(autoHideScrollbars ? 0 : 1);
     }
     if (_vScrollbar.enabled) {
-      ContextTool.JUGGLER.addTween(_vScrollbar, 0.2)..animate.alpha.to(autoHideScrollbars ? 0 : 1);
+      ContextTool.JUGGLER.addTween(_vScrollbar, 0.2)
+        ..animate.alpha.to(autoHideScrollbars ? 0 : 1);
     }
   }
 }

@@ -17,17 +17,17 @@ part of stagexl_commons;
 
 
 /**
-	 * An <code>IOperation</code> implementation that can load arbitrary data from a specified URL.
-	 * @author Roland Zwaga
-	 */
+ * An <code>IOperation</code> implementation that can load arbitrary data from a specified URL.
+ * @author Roland Zwaga
+ */
 class LoadURLOperation extends AbstractProgressOperation {
 
   /**
-		 * Creates a new <code>LoadURLOperation</code> instance.
-		 * @param url The specified URL from which the data will be loaded.
-		 * @param dataFormat Optional argument that specifies the data format of the expected data. Use the <code>flash.net.URLLoaderDataFormat</code> enumeration for this.
-		 * @see flash.net.URLLoaderDataFormat
-		 */
+   * Creates a new <code>LoadURLOperation</code> instance.
+   * @param url The specified URL from which the data will be loaded.
+   * @param dataFormat Optional argument that specifies the data format of the expected data. Use the <code>flash.net.URLLoaderDataFormat</code> enumeration for this.
+   * @see flash.net.URLLoaderDataFormat
+   */
   LoadURLOperation(String name, String url, [String dataFormat = null]) : super() {
     (dataFormat != null) ? dataFormat : dataFormat = URLLoaderDataFormat.TEXT_FILE;
     createLoader(name, url, dataFormat);
@@ -35,8 +35,8 @@ class LoadURLOperation extends AbstractProgressOperation {
 
 
   /**
-		 * Internal <code>URLLoader</code> instance that is used to do the actual loading of the data.
-		 */
+   * Internal <code>URLLoader</code> instance that is used to do the actual loading of the data.
+   */
   ResourceManager resourceManager;
 
   String _url;
@@ -76,9 +76,9 @@ class LoadURLOperation extends AbstractProgressOperation {
   }
 
   /**
-		 * Handles the <code>Event.COMPLETE</code> event of the internally created <code>URLLoader</code>.
-		 * @param event The specified <code>Event.COMPLETE</code> event.
-		 */
+   * Handles the <code>Event.COMPLETE</code> event of the internally created <code>URLLoader</code>.
+   * @param event The specified <code>Event.COMPLETE</code> event.
+   */
   void urlLoaderCompleteHandler(ResourceManager res) {
 
     switch (_dataFormat) {

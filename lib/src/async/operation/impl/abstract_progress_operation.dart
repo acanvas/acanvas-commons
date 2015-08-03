@@ -15,123 +15,123 @@
  */
 part of stagexl_commons;
 
-	/**
-	 * Dispatched when the current <code>AbstractOperation</code> has new progress information to report.
-	 * @eventType org.as3commons.async.operation.OperationEvent#PROGRESS OperationEvent.PROGRESS
-	 */
-	// [Event(name="operationProgress", type="org.as3commons.async.operation.event.OperationEvent")]
-	/**
-	 * Abstract base class for <code>IProgressOperation</code> implementations.
-	 * @author Roland Zwaga
-	 */
-	 class AbstractProgressOperation extends AbstractOperation implements IProgressOperation {
+/**
+ * Dispatched when the current <code>AbstractOperation</code> has new progress information to report.
+ * @eventType org.as3commons.async.operation.OperationEvent#PROGRESS OperationEvent.PROGRESS
+ */
+// [Event(name="operationProgress", type="org.as3commons.async.operation.event.OperationEvent")]
+/**
+ * Abstract base class for <code>IProgressOperation</code> implementations.
+ * @author Roland Zwaga
+ */
+class AbstractProgressOperation extends AbstractOperation implements IProgressOperation {
 
-		// --------------------------------------------------------------------
-		//
-		// Constructor
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Constructor
+  //
+  // --------------------------------------------------------------------
 
-		/**
-		 * Creates a new <code>AbstractProgressOperation</code> instance.
-		 */
-	 AbstractProgressOperation([int timeoutInMilliseconds=0,bool autoStartTimeout=true]):super(timeoutInMilliseconds, autoStartTimeout) {
-		progress = 0;
-		}
+  /**
+   * Creates a new <code>AbstractProgressOperation</code> instance.
+   */
+  AbstractProgressOperation([int timeoutInMilliseconds=0, bool autoStartTimeout=true]):super(timeoutInMilliseconds, autoStartTimeout) {
+    progress = 0;
+  }
 
-		// --------------------------------------------------------------------
-		//
-		// Implementation: IProgressOperation: Properties
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Implementation: IProgressOperation: Properties
+  //
+  // --------------------------------------------------------------------
 
-		/**
-		 * @inheritDoc
-		 */ 
-		int get progress {
-			return _progress;
-		}
+  /**
+   * @inheritDoc
+   */
+  int get progress {
+    return _progress;
+  }
 
-		/**
-		 * @inheritDoc
-		 */ 
-		int get total {
-			return _total;
-		}
+  /**
+   * @inheritDoc
+   */
+  int get total {
+    return _total;
+  }
 
-		// --------------------------------------------------------------------
-		//
-		// Implementation: IProgressOperation: Methods
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Implementation: IProgressOperation: Methods
+  //
+  // --------------------------------------------------------------------
 
-		/**
-		 * @inheritDoc
-		 */ void addProgressListener(Function listener,[bool useCapture=false,int priority=0,bool useWeakReference=false])
-		 {
-			addEventListener(OperationEvent.PROGRESS, listener, useCapture:useCapture, priority:priority);
-		}
+  /**
+   * @inheritDoc
+   */
+  void addProgressListener(Function listener, [bool useCapture=false, int priority=0, bool useWeakReference=false]) {
+    addEventListener(OperationEvent.PROGRESS, listener, useCapture:useCapture, priority:priority);
+  }
 
-		/**
-		 * @inheritDoc
-		 */ void removeProgressListener(Function listener,[bool useCapture=false])
-		 {
-			removeEventListener(OperationEvent.PROGRESS, listener, useCapture:useCapture);
-		}
+  /**
+   * @inheritDoc
+   */
+  void removeProgressListener(Function listener, [bool useCapture=false]) {
+    removeEventListener(OperationEvent.PROGRESS, listener, useCapture:useCapture);
+  }
 
-		// --------------------------------------------------------------------
-		//
-		// Properties
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Properties
+  //
+  // --------------------------------------------------------------------
 
-		// ----------------------------
-		// progress
-		// ----------------------------
+  // ----------------------------
+  // progress
+  // ----------------------------
 
-		 int _progress;
+  int _progress;
 
-		/**
-		 * Sets the progress of this operation.
-		 *
-		 * @param value the progress of this operation
-		 */ 
-		void set progress(dynamic value) {
-			if (value != progress) {
-				_progress = value;
-			}
-		}
+  /**
+   * Sets the progress of this operation.
+   *
+   * @param value the progress of this operation
+   */
+  void set progress(dynamic value) {
+    if (value != progress) {
+      _progress = value;
+    }
+  }
 
-		// ----------------------------
-		// total
-		// ----------------------------
+  // ----------------------------
+  // total
+  // ----------------------------
 
-		 int _total = 0;
+  int _total = 0;
 
-		/**
-		 * Sets the total amount of progress this operation should make before being done.
-		 *
-		 * @param value the total amount of progress this operation should make before being done
-		 */ 
-		void set total(dynamic value) {
-			if (value != total) {
-				_total = value;
-			}
-		}
+  /**
+   * Sets the total amount of progress this operation should make before being done.
+   *
+   * @param value the total amount of progress this operation should make before being done
+   */
+  void set total(dynamic value) {
+    if (value != total) {
+      _total = value;
+    }
+  }
 
-		// --------------------------------------------------------------------
-		//
-		// Protected Methods
-		//
-		// --------------------------------------------------------------------
+  // --------------------------------------------------------------------
+  //
+  // Protected Methods
+  //
+  // --------------------------------------------------------------------
 
-		/**
-		 * Convenience method for dispatching a <code>OperationEvent.PROGRESS</code> event.
-		 * @return true if the event was dispatched; false if not
-		 */ void dispatchProgressEvent()
-		 {
-			dispatchEvent(OperationEvent.createProgressEvent(this));
-		}
+  /**
+   * Convenience method for dispatching a <code>OperationEvent.PROGRESS</code> event.
+   * @return true if the event was dispatched; false if not
+   */
+  void dispatchProgressEvent() {
+    dispatchEvent(OperationEvent.createProgressEvent(this));
+  }
 
-	}
+}
 

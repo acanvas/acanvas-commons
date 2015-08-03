@@ -9,12 +9,13 @@ part of stagexl_commons;
  *    - hold-dragging thumb (or background, as thumb will move to hold position immediately)
  */
 
-class Slider extends BehaveSprite with MSlider{
+class Slider extends BehaveSprite with MSlider {
   Sprite _background;
   Sprite _thumb;
   num _thumbSize = 0;
 
   Slider() : super() {
+    mouseWheelEnabled = ContextTool.MOBILE ? false : true;
   }
 
   //-------- SCROLL THUMB
@@ -22,10 +23,11 @@ class Slider extends BehaveSprite with MSlider{
   Sprite get background {
     return _background;
   }
+
   void set background(Sprite background) {
     if (background != _background) {
       _background = background;
-      if(background.parent == null){
+      if (background.parent == null) {
         addChild(background);
       }
     }
@@ -34,11 +36,12 @@ class Slider extends BehaveSprite with MSlider{
   Sprite get thumb {
     return _thumb;
   }
+
   void set thumb(Sprite thumb) {
     if (thumb != _thumb) {
       _thumb = thumb;
       _thumbSize = horizontalScrollBehavior ? _thumb.width : _thumb.height;
-      if(thumb.parent == null){
+      if (thumb.parent == null) {
         addChild(thumb);
       }
       _updateThumbPosition();
@@ -48,7 +51,7 @@ class Slider extends BehaveSprite with MSlider{
   //----- refresh everything
 
   @override
-  void span(spanWidth, spanHeight, {bool refresh: true}){
+  void span(spanWidth, spanHeight, {bool refresh: true}) {
     Assert.notNull(background, "You need to set a background Sprite.");
     Assert.notNull(thumb, "You need to set a thumb Sprite.");
     spanSize = horizontalScrollBehavior ? spanWidth : spanHeight;
@@ -76,14 +79,14 @@ class Slider extends BehaveSprite with MSlider{
   }
 
   @override
-  void disable(){
+  void disable() {
     ContextTool.JUGGLER.removeTweens(this);
 
-    if(ContextTool.TOUCH){
+    if (ContextTool.TOUCH) {
       background.removeEventListener(TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown);
       thumb.removeEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown);
     }
-    else{
+    else {
       background.removeEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown);
       thumb.removeEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown);
     }
@@ -93,12 +96,12 @@ class Slider extends BehaveSprite with MSlider{
   void _onBackgroundMouseDown(InputEvent event) {
     num posX = mouseX - _thumbSize * 0.5 - background.x;
     num posY = mouseY - _thumbSize * 0.5 - background.y;
-    if(horizontalScrollBehavior){
-      value = _convertPositionToValue( posX );
+    if (horizontalScrollBehavior) {
+      value = _convertPositionToValue(posX);
       mouseOffset = stage.mouseX - posX;
     }
-    else{
-      value = _convertPositionToValue( posY );
+    else {
+      value = _convertPositionToValue(posY);
       mouseOffset = stage.mouseY - posY;
     }
     interactionStart(true);
@@ -118,11 +121,11 @@ class Slider extends BehaveSprite with MSlider{
       clearMomentum();
 
       if (addMouseListeners == true) {
-        if(ContextTool.TOUCH){
+        if (ContextTool.TOUCH) {
           stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
           stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
         }
-        else{
+        else {
           stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
           stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
         }
@@ -140,11 +143,11 @@ class Slider extends BehaveSprite with MSlider{
   void interactionEnd() {
     if (interaction) {
       interaction = false;
-      if(ContextTool.TOUCH){
+      if (ContextTool.TOUCH) {
         stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
         stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
       }
-      else{
+      else {
         stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
         stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
       }
@@ -172,7 +175,7 @@ class Slider extends BehaveSprite with MSlider{
     interactionEnd();
   }
 
-  
+
   //----- NOTIFIERS FOR EXTERNAL BEHAVIOUR
 
   void notifyMomentumStart() {
@@ -219,7 +222,7 @@ class Slider extends BehaveSprite with MSlider{
   void _updateThumbPosition() {
     num bgp = (horizontalScrollBehavior ? background.x : background.y);
     num pos = 0;
-    if(valueMax != 0){
+    if (valueMax != 0) {
       pos = ((value - valueMin) * ((spanSize - _thumbSize) / valueMax) + bgp).round();
     }
     horizontalScrollBehavior ? thumb.x = pos : thumb.y = pos;

@@ -1,12 +1,12 @@
 part of stagexl_commons;
 
-class PaperDimensions{
-  static const int MARGIN_HORIZONTAL  = 8;
-  static const int PADDING_HORIZONTAL  = 8;
+class PaperDimensions {
+  static const int MARGIN_HORIZONTAL = 8;
+  static const int PADDING_HORIZONTAL = 8;
 
-  static const int HEIGHT_BUTTON  = 36;
-  static const int HEIGHT_BUTTON_TOUCH_TARGET  = 48;
-  static const int WIDTH_BUTTON_MINIMAL  = 64;
+  static const int HEIGHT_BUTTON = 36;
+  static const int HEIGHT_BUTTON_TOUCH_TARGET = 48;
+  static const int WIDTH_BUTTON_MINIMAL = 64;
 
   static const int HEIGHT_MENU_CELL = 48;
   static const int WIDTH_MENU = 180;

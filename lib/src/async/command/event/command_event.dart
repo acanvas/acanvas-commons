@@ -16,37 +16,37 @@
 part of stagexl_commons;
 
 
-	/**
-	 *
-	 * @author Christophe Herreman
-	 */
-	 class CommandEvent extends Event {
+/**
+ *
+ * @author Christophe Herreman
+ */
+class CommandEvent extends Event {
 
-		/**
-		 * Defines the value of the type property of a <code>CommandEvent.EXECUTE</code> event object.
-	   * @eventType String
-			   */
-		 static const String EXECUTE = "executeCommand";
+  /**
+   * Defines the value of the type property of a <code>CommandEvent.EXECUTE</code> event object.
+   * @eventType String
+   */
+  static const String EXECUTE = "executeCommand";
 
-		 ICommand _command;
+  ICommand _command;
 
-		/**
-		 * Creates a new <code>CompositeCommandEvent</code> instance.
-		 */
-	 CommandEvent(String type,ICommand command,[bool bubbles=false,bool cancelable=false]):super(type, bubbles) {
-			_command = command;
-		} 
-		ICommand get command {
-			return _command;
-		}
+  /**
+   * Creates a new <code>CompositeCommandEvent</code> instance.
+   */
+  CommandEvent(String type, ICommand command, [bool bubbles=false, bool cancelable=false]):super(type, bubbles) {
+    _command = command;
+  }
 
-		/**
-		 * Returns an exact copy of the current <code>CommandEvent</code> instance.
-		 */
-		Event clone()
-		 {
-			return new CommandEvent(type, command, bubbles);
-		}
+  ICommand get command {
+    return _command;
+  }
 
-	}
+  /**
+   * Returns an exact copy of the current <code>CommandEvent</code> instance.
+   */
+  Event clone() {
+    return new CommandEvent(type, command, bubbles);
+  }
+
+}
 

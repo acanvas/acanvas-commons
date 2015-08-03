@@ -1,9 +1,9 @@
 part of stagexl_commons;
 
 /**
-	 * @author nilsdoehring
-	 */
-class PagerSprite extends BoxSprite with MList, MPager {
+ * @author nilsdoehring
+ */
+class PagerSprite extends BehaveSprite with MList, MPager {
 
   Sprite holder;
   Button btnPrev;
@@ -26,6 +26,7 @@ class PagerSprite extends BoxSprite with MList, MPager {
     _proxy.dataRetrieveCommandVO = vo;
     resetAndLoad();
   }
+
   void resetAndLoad() {
     disableClick = true;
     loaded = false;
@@ -53,6 +54,7 @@ class PagerSprite extends BoxSprite with MList, MPager {
 
     _proxy.requestChunk(setData, _getChunkIndex(chunksPlaced), chunkSize);
   }
+
   void onClickPrev() {
     if (hasPrev < 1) {
       return;
@@ -70,6 +72,7 @@ class PagerSprite extends BoxSprite with MList, MPager {
     btnNext.enabled = true;
     _proxy.requestChunk(setData, _getChunkIndex(chunksPlaced), chunkSize);
   }
+
   void _updateControls() {
 
     if (chunksPlaced.length == 0) {
@@ -106,6 +109,7 @@ class PagerSprite extends BoxSprite with MList, MPager {
 
 //			uiService.unlock();
   }
+
   int _getChunkIndex(List chunks) {
     int idx = 0;
     for (int num in chunks) {

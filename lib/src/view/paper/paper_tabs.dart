@@ -11,7 +11,7 @@ class PaperTabs extends BoxSprite {
   Sprite _slideBar;
 
   Flow tabBox;
-  
+
   int _activeButtonIndex = 0;
 
   PaperTabs({this.highlightColor : PaperColor.WHITE, this.bgColor: PaperColor.BLACK, this.distributeTabs : true}) : super() {
@@ -22,26 +22,26 @@ class PaperTabs extends BoxSprite {
       ..spacing = 0
       ..flowOrientation = FlowOrientation.HORIZONTAL;
     addChild(tabBox);
-    
+
     _slideBar = new Sprite();
     addChild(_slideBar);
   }
-  
-  void addTab(Button btn){
+
+  void addTab(Button btn) {
     btn.submitCallback = _onTabClick;
     btn.submitCallbackParams = [btn, tabBox.numChildren];
     tabBox.addChild(btn);
   }
 
-  void activateTabByUrl(String url){
-    for(int i=0;i<tabBox.numChildren;i++){
-      if((tabBox.getChildAt(i) as Button).submitEvent.data == url){
+  void activateTabByUrl(String url) {
+    for (int i = 0;i < tabBox.numChildren;i++) {
+      if ((tabBox.getChildAt(i) as Button).submitEvent.data == url) {
         _onTabClick(tabBox.getChildAt(i) as Button, i);
       }
     }
   }
 
-  void _onTabClick(Button btn, int index){
+  void _onTabClick(Button btn, int index) {
     _activeButtonIndex = index;
     ContextTool.STAGE.juggler.addTween(_slideBar, .3, Transition.easeOutCubic).animate
       ..x.to(btn.x);
@@ -54,13 +54,13 @@ class PaperTabs extends BoxSprite {
 
     tabBox.x = 0;
 
-    if(tabBox.numChildren > 0){
+    if (tabBox.numChildren > 0) {
       tabBox.y = spanHeight - tabBox.height;
 
-      if(distributeTabs){
-        for(int i = 0; i<tabBox.numChildren;i++){
+      if (distributeTabs) {
+        for (int i = 0; i < tabBox.numChildren;i++) {
           Button btn = tabBox.getChildAt(i);
-          btn.span((spanWidth/tabBox.numChildren).ceil(), 0);
+          btn.span((spanWidth / tabBox.numChildren).ceil(), 0);
         }
         tabBox.refresh();
       }
@@ -70,7 +70,7 @@ class PaperTabs extends BoxSprite {
       _slideBar.x = tabBox.getChildAt(_activeButtonIndex).x;
       _slideBar.y = spanHeight - 1;
     }
-    else{
+    else {
       _slideBar.visible = false;
     }
     super.refresh();
@@ -78,6 +78,7 @@ class PaperTabs extends BoxSprite {
 
   ///addresses a sizing bug with Graphics tool
   num get width => super.width - 2;
+
   num get spanWidth => super.spanWidth - 2;
 
 }

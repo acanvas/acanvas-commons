@@ -3,6 +3,7 @@ part of stagexl_commons;
 class NextPrevButton extends Button {
 
   UITextField _labelTF;
+
   NextPrevButton(String label, int w, int h) : super() {
     mouseChildren = false;
 
@@ -22,6 +23,6 @@ class NextPrevButton extends Button {
     _labelTF.autoSize = TextFieldAutoSize.CENTER;
     addChild(_labelTF);
 
-    _labelTF.y = ( h*.5 - _labelTF.textHeight*.5 ).floor();
+    _labelTF.y = ( h * .5 - _labelTF.textHeight * .5 ).floor();
   }
 }

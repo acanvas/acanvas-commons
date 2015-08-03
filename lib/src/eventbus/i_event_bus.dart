@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 part of stagexl_commons;
+
 abstract class IEventBus implements EventDispatcher {
 
 
@@ -22,6 +23,7 @@ abstract class IEventBus implements EventDispatcher {
 
   @override
   void dispatchEvent(Event event);
+
   @override
   bool hasEventListener(String eventType, { bool useCapture: false });
 

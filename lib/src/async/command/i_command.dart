@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 part of stagexl_commons;
-	/**
-	 * Interface to be implemented by command classes.
-	 * @author Christophe Herreman
-	 */
-	 
+/**
+ * Interface to be implemented by command classes.
+ * @author Christophe Herreman
+ */
+
 abstract class ICommand {
 
-		/**
-		 * Executes the command.
-		 */ void execute([Event event=null])
-		;
+  /**
+   * Executes the command.
+   */
+  void execute([Event event=null])
+  ;
 
-	}
+}
 
 

@@ -16,52 +16,55 @@
 part of stagexl_commons;
 
 
-	/**
-	 *
-	 * @author Christophe Herreman
-	 */
-	 class CompositeCommandEvent extends Event {
+/**
+ *
+ * @author Christophe Herreman
+ */
+class CompositeCommandEvent extends Event {
 
-		/**
-		 * Defines the value of the type property of a <code>CompositeCommandEvent.COMPLETE</code> event object.
-	   * @eventType String
-								 */
-		 static const String COMPLETE = "compositeCommandComplete";
-		/**
-		 * Defines the value of the type property of a <code>CompositeCommandEvent.ERROR</code> event object.
-	   * @eventType String
-								 */
-		 static const String ERROR = "compositeCommandError";
-		/**
-		 * Defines the value of the type property of a <code>CompositeCommandEvent.BEFORE_EXECUTE_COMMAND</code> event object.
-	   * @eventType String
-								 */
-		 static const String BEFORE_EXECUTE_COMMAND = "compositeCommandBeforeExecuteCommand";
-		/**
-		 * Defines the value of the type property of a <code>CompositeCommandEvent.AFTER_EXECUTE_COMMAND</code> event object.
-	   * @eventType String
-								 */
-		 static const String AFTER_EXECUTE_COMMAND = "compositeCommandAfterExecuteCommand";
+  /**
+   * Defines the value of the type property of a <code>CompositeCommandEvent.COMPLETE</code> event object.
+   * @eventType String
+   */
+  static const String COMPLETE = "compositeCommandComplete";
 
-		 ICommand _command; 
-		ICommand get command {
-			return _command;
-		}
+  /**
+   * Defines the value of the type property of a <code>CompositeCommandEvent.ERROR</code> event object.
+   * @eventType String
+   */
+  static const String ERROR = "compositeCommandError";
 
-		/**
-		 * Constructs a new CompositeCommandEvent
-		 */
-	 CompositeCommandEvent(String type,[ICommand command=null,bool bubbles=false,bool cancelable=false]):super(type, bubbles) {
-			_command = command;
-		}
+  /**
+   * Defines the value of the type property of a <code>CompositeCommandEvent.BEFORE_EXECUTE_COMMAND</code> event object.
+   * @eventType String
+   */
+  static const String BEFORE_EXECUTE_COMMAND = "compositeCommandBeforeExecuteCommand";
 
-		/**
-		 * Returns an exact copy of the current <code>CompositeCommandEvent</code> instance.
-		 */
-		Event clone()
-		 {
-			return new CompositeCommandEvent(this.type, _command, this.bubbles);
-		}
+  /**
+   * Defines the value of the type property of a <code>CompositeCommandEvent.AFTER_EXECUTE_COMMAND</code> event object.
+   * @eventType String
+   */
+  static const String AFTER_EXECUTE_COMMAND = "compositeCommandAfterExecuteCommand";
 
-	}
+  ICommand _command;
+
+  ICommand get command {
+    return _command;
+  }
+
+  /**
+   * Constructs a new CompositeCommandEvent
+   */
+  CompositeCommandEvent(String type, [ICommand command=null, bool bubbles=false, bool cancelable=false]):super(type, bubbles) {
+    _command = command;
+  }
+
+  /**
+   * Returns an exact copy of the current <code>CompositeCommandEvent</code> instance.
+   */
+  Event clone() {
+    return new CompositeCommandEvent(this.type, _command, this.bubbles);
+  }
+
+}
 

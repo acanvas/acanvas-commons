@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- part of stagexl_commons;
-	
-	/**
-	 * Thrown to indicate that a method has been passed an illegal or
-	 * inappropriate argument.
-	 *
-	 * @author Christophe Herreman
-	 */
-	 class IllegalArgumentError extends StateError {
-		
-		/**
-		 * Constructs a new <code>IllegalArgumentError</code>.
-		 *
-		 * @param message the detail message that describes the cause of the error
-		 */
-	 IllegalArgumentError([String message=""]):super(message) {
-		}
-	}
+part of stagexl_commons;
+
+/**
+ * Thrown to indicate that a method has been passed an illegal or
+ * inappropriate argument.
+ *
+ * @author Christophe Herreman
+ */
+class IllegalArgumentError extends StateError {
+
+  /**
+   * Constructs a new <code>IllegalArgumentError</code>.
+   *
+   * @param message the detail message that describes the cause of the error
+   */
+  IllegalArgumentError([String message=""]):super(message) {
+  }
+}
 

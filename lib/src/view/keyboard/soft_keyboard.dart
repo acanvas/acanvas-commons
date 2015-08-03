@@ -17,94 +17,92 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 part of stagexl_commons;
 
 
-
-
 /**
-	 * Dispatched when an on-screen key is pressed.
-	 * 
-	 * @eventType cc.cote.feathers.softkeyboard.KeyEvent.KEY_DOWN
-	 */
+ * Dispatched when an on-screen key is pressed.
+ *
+ * @eventType cc.cote.feathers.softkeyboard.KeyEvent.KEY_DOWN
+ */
 // [Event(name="cc.cote.feathers.softkeyboard.KeyEvent.keyDown",type="cc.cote.feathers.softkeyboard.KeyEvent")]
 
 /**
-	 * Dispatched when an on-screen key is released. The release must be above the key that was 
-	 * initially pressed otherwise the event is not fired.
-	 *
-	 * @eventType cc.cote.feathers.softkeyboard.KeyEvent.KEY_UP
-	 */
+ * Dispatched when an on-screen key is released. The release must be above the key that was
+ * initially pressed otherwise the event is not fired.
+ *
+ * @eventType cc.cote.feathers.softkeyboard.KeyEvent.KEY_UP
+ */
 // [Event(name="cc.cote.feathers.softkeyboard.KeyEvent.keyUp",type="cc.cote.feathers.softkeyboard.KeyEvent")]
 
 /**
-	 * This class allows the creation of virtual on-screen keyboards. Various types of keyboard 
-	 * configurations are included in the package such as QWERTY, NUMPAD, etc. However, if a custom 
-	 * layout is needed, it is easy to create one by extending the <code>Layout</code> base class.
-	 * 
-	 * <p>Creating a keyboard and listening for input is very easy. All you need to do is pass the
-	 * desired layout to the SoftKeyboard constructor and add an event listener:</p>
-	 * 
-	 * <listing version="3.0">
-	 * SoftKeyboard keyboard = new SoftKeyboard(new QwertyEn());
-	 * keyboard.addEventListener(SoftKeyboardEvent.KEY_UP, _onKeyUp);
-	 * addChild(keyboard);</listing>
-	 * 
-	 * <p>It is also possible to create keyboards with multiple layouts by passing a vector of 
-	 * <code>Layout</code> objects to the constructor. This makes it easy to have a keyboard with 
-	 * one layout for regular letters and another one for numbers and symbols, for example. 
-	 * Switching between them is possible by pressing the special <code>SWITCH_LAYOUT</code> key.</p> 
-	 * 
-	 * <p>Layouts that have a <code>SWITCH_LAYOUT</code> key generally accept as a constructor 
-	 * parameter the class of the layout that the <code>SWITCH_LAYOUT</code> key should instantiate
-	 * when pressed. Here is an example that will toggle between the <code>QwertyEnSingleSwitch</code> 
-	 * and <code>numsAndSymbolsSingleSwitch</code> layouts:</p>
-	 * 
-	 * <listing version="3.0">
-	 * List layouts&lt;Layout&gt; = new &lt;Layout&gt;[
-	 *     new QwertyEnSingleSwitch(numsAndSymbolsSingleSwitch), 
-	 *     new numsAndSymbolsSingleSwitch(QwertyEnSingleSwitch)
-	 * ];
-	 * SoftKeyboard keyboard = new SoftKeyboard(layouts);
-	 * addChild(keyboard);</listing>
-	 * 
-	 * <p>A full, working code example is provided with the <code>SoftKeyboard</code> download 
-	 * package.</p>
-	 * 
-	 * <p>In order for the keyboard to display properly, you must skin it through the use of a 
-	 * Feathers' theme (a sample theme is provided in the download package). If you don't, a generic
-	 * grey skin will be used for reference. Besides assigning skins in your theme, you should also
-	 * define a TextRenderer and assign a TextFormat. For more information, see the 
-	 * <a href="http://wiki.starling-framework.org/feathers/start">Feathers documentation</a>.</p>
-	 * 
-	 * <p><code>SoftKeyboard</code> requires <a href="http://feathersui.com/">Feathers 1.0 or newer</a> 
-	 * which itself requires the <a href="http://gamua.com/starling/">Starling framework</a>.</p>
-	 * 
-	 * @see cc.cote.feathers.softkeyboard.layouts
-	 * @see cc.cote.feathers.softkeyboard.KeyEvent
-	 * @see http://cote.cc/projects/softkeyboard
-	 * @see http://feathersui.com/
-	 * @see http://gamua.com/starling/
-	 * 
- 	 *	@TODO	When the keyboard is small, the _callout makes the variants keys taller than 
-	 * 				they should be. This probably warrants a support request to Josh. I SHOULD JUST 
-	 * 				GET RID OF THE FUCKING CALLOUT AND DO IT MYSELF!!!! When I fix this, the callout 
-	 * 				arrow of bottom key rows is screwed...
-	 * 
-	 * Ideas for later : dynamic 
-	 * 		@TODO	Add left/rigth key padding
-	 * 		@TODO	Add the ability to temporarily switch to another layout while pressing the 
-	 * 				SWITCH_LAYOUT key
-	 * 		@TODO 	Should we use some sort of autoscale on the key labels ? This is a minor problem
-	 * 				since the size can be changed in the theme.
-	 * 		@TODO	Remove the KeyRow object. It just feels silly. Use a layout machin ?
-	 * 		@TODO	Do we need to bother with the NUM_LOCK key ?
-	 * 		@TODO	The key icons should be resized according to the key's size (this is not such a 
-	 * 				big problem since you can always change the icons themselves).
-	 * 		@TODO 	Add the ability to modify the layouts var. This means adding several methods 
-	 * 				(addLayout, addLayoutAt, etc) or finding a way to trap modifications done 
-	 * 				directly on the vector).
-	 * 		@TODO	Can we do something about the fact that the callout component requires a 
-	 * 				background skin ?
-	 * 
-	 */
+ * This class allows the creation of virtual on-screen keyboards. Various types of keyboard
+ * configurations are included in the package such as QWERTY, NUMPAD, etc. However, if a custom
+ * layout is needed, it is easy to create one by extending the <code>Layout</code> base class.
+ *
+ * <p>Creating a keyboard and listening for input is very easy. All you need to do is pass the
+ * desired layout to the SoftKeyboard constructor and add an event listener:</p>
+ *
+ * <listing version="3.0">
+ * SoftKeyboard keyboard = new SoftKeyboard(new QwertyEn());
+ * keyboard.addEventListener(SoftKeyboardEvent.KEY_UP, _onKeyUp);
+ * addChild(keyboard);</listing>
+ *
+ * <p>It is also possible to create keyboards with multiple layouts by passing a vector of
+ * <code>Layout</code> objects to the constructor. This makes it easy to have a keyboard with
+ * one layout for regular letters and another one for numbers and symbols, for example.
+ * Switching between them is possible by pressing the special <code>SWITCH_LAYOUT</code> key.</p>
+ *
+ * <p>Layouts that have a <code>SWITCH_LAYOUT</code> key generally accept as a constructor
+ * parameter the class of the layout that the <code>SWITCH_LAYOUT</code> key should instantiate
+ * when pressed. Here is an example that will toggle between the <code>QwertyEnSingleSwitch</code>
+ * and <code>numsAndSymbolsSingleSwitch</code> layouts:</p>
+ *
+ * <listing version="3.0">
+ * List layouts&lt;Layout&gt; = new &lt;Layout&gt;[
+ *     new QwertyEnSingleSwitch(numsAndSymbolsSingleSwitch),
+ *     new numsAndSymbolsSingleSwitch(QwertyEnSingleSwitch)
+ * ];
+ * SoftKeyboard keyboard = new SoftKeyboard(layouts);
+ * addChild(keyboard);</listing>
+ *
+ * <p>A full, working code example is provided with the <code>SoftKeyboard</code> download
+ * package.</p>
+ *
+ * <p>In order for the keyboard to display properly, you must skin it through the use of a
+ * Feathers' theme (a sample theme is provided in the download package). If you don't, a generic
+ * grey skin will be used for reference. Besides assigning skins in your theme, you should also
+ * define a TextRenderer and assign a TextFormat. For more information, see the
+ * <a href="http://wiki.starling-framework.org/feathers/start">Feathers documentation</a>.</p>
+ *
+ * <p><code>SoftKeyboard</code> requires <a href="http://feathersui.com/">Feathers 1.0 or newer</a>
+ * which itself requires the <a href="http://gamua.com/starling/">Starling framework</a>.</p>
+ *
+ * @see cc.cote.feathers.softkeyboard.layouts
+ * @see cc.cote.feathers.softkeyboard.KeyEvent
+ * @see http://cote.cc/projects/softkeyboard
+ * @see http://feathersui.com/
+ * @see http://gamua.com/starling/
+ *
+ *	@TODO	When the keyboard is small, the _callout makes the variants keys taller than
+ * 				they should be. This probably warrants a support request to Josh. I SHOULD JUST
+ * 				GET RID OF THE FUCKING CALLOUT AND DO IT MYSELF!!!! When I fix this, the callout
+ * 				arrow of bottom key rows is screwed...
+ *
+ * Ideas for later : dynamic
+ * 		@TODO	Add left/rigth key padding
+ * 		@TODO	Add the ability to temporarily switch to another layout while pressing the
+ * 				SWITCH_LAYOUT key
+ * 		@TODO 	Should we use some sort of autoscale on the key labels ? This is a minor problem
+ * 				since the size can be changed in the theme.
+ * 		@TODO	Remove the KeyRow object. It just feels silly. Use a layout machin ?
+ * 		@TODO	Do we need to bother with the NUM_LOCK key ?
+ * 		@TODO	The key icons should be resized according to the key's size (this is not such a
+ * 				big problem since you can always change the icons themselves).
+ * 		@TODO 	Add the ability to modify the layouts var. This means adding several methods
+ * 				(addLayout, addLayoutAt, etc) or finding a way to trap modifications done
+ * 				directly on the vector).
+ * 		@TODO	Can we do something about the fact that the callout component requires a
+ * 				background skin ?
+ *
+ */
 class SoftKeyboard extends BoxSprite {
 
   /** Version of this SoftKeyboard library */
@@ -116,11 +114,11 @@ class SoftKeyboard extends BoxSprite {
   /** The free space between the outside of the keyboard and the keys. */
   num padding = 0;
 
-  /** 
-		 * The vector containing all active keyboard configurations. A single keyboard can have more 
-		 * than one configuration. A configuration is the container of all keys defined by a layout.
-		 * Configurations are place on the display list, they are DisplayObjects.
-		 */
+  /**
+   * The vector containing all active keyboard configurations. A single keyboard can have more
+   * than one configuration. A configuration is the container of all keys defined by a layout.
+   * Configurations are place on the display list, they are DisplayObjects.
+   */
   List<LifecycleSprite> _configurations = new List<LifecycleSprite>();
 
   /** A vector containing all layouts passed in via the constructor. */
@@ -133,17 +131,17 @@ class SoftKeyboard extends BoxSprite {
   Callout _callout;
 
   /**
-		 * Creates a new SoftKeyboard object. 
-		 * 
-		 * @param layouts A single <code>Layout</code> object or a vector of <code>Layout</code>
-		 * objects to use with the keyboard
-		 * @param width Full outer width of the keyboard (including any padding)
-		 * @param height Full outer height of the keyboard (including any padding)
-		 * 
-		 * @see cc.cote.feathers.softkeyboard.layouts
-		 * 
-		 * @throws Error First parameter must be a Layout object or a vector of Layout objects.
-		 */
+   * Creates a new SoftKeyboard object.
+   *
+   * @param layouts A single <code>Layout</code> object or a vector of <code>Layout</code>
+   * objects to use with the keyboard
+   * @param width Full outer width of the keyboard (including any padding)
+   * @param height Full outer height of the keyboard (including any padding)
+   *
+   * @see cc.cote.feathers.softkeyboard.layouts
+   *
+   * @throws Error First parameter must be a Layout object or a vector of Layout objects.
+   */
   SoftKeyboard(List<Layout> layouts, [num width = 320, num height = 160]) {
 
     _layouts = layouts;
@@ -241,10 +239,7 @@ class SoftKeyboard extends BoxSprite {
     }
 
 
-
     addChild(_callout);
-
-
 
 
     // For whatever reason, we need to manually resize the Callout otherwise in some cases
@@ -252,8 +247,6 @@ class SoftKeyboard extends BoxSprite {
     _callout.span(key.height, (key.width * key.variants.length) + (key.variants.length - 1) * 5);
 
     // THIS BREAKS THE TOP ARROW !!!!!
-
-
 
 
   }
@@ -375,7 +368,7 @@ class SoftKeyboard extends BoxSprite {
 
         key = row.keys[j];
 
-        key.span(key.relativeWidth * hUnit,  key.relativeHeight * vUnit);
+        key.span(key.relativeWidth * hUnit, key.relativeHeight * vUnit);
 
         key.x = xPos.round();
         xPos += key.spanWidth + currentLayout.horizontalGap * hUnit;
@@ -460,7 +453,8 @@ class SoftKeyboard extends BoxSprite {
 
     for (int i = 0; i < c.numChildren; i++) {
       KeyRow keyRow = c.getChildAt(i) as KeyRow;
-      for (Key key in keyRow.keys) key.changeCase(keyCase);
+      for (Key key in keyRow.keys)
+        key.changeCase(keyCase);
     }
 
   }

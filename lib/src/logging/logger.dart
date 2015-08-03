@@ -12,11 +12,11 @@ class Logger implements logging.Logger {
   @override
   void log(logging.Level logLevel, String message, [Object error, StackTrace stackTrace, Zone zone]) {
 
-    message = name + ": " + message;
+    message =  "${name}: ${message}";
 
     if (error is List) {
-      int i;
-      error.forEach((element){
+      int i = 0;
+      error.forEach((element) {
         String str = element.toString();
         i++;
         message = message.replaceFirst(new RegExp('\\{${i.toString()}\\}'), str);
@@ -26,11 +26,13 @@ class Logger implements logging.Logger {
 
     _delegate.log(logLevel, message);
   }
-  
+
   /* Proxies for ascommons-logging compatibility */
-  void debug(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.FINEST, message, error, stackTrace); 
-  void warn(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.WARNING, message, error, stackTrace); 
-  void error(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.SEVERE, message, error, stackTrace); 
+  void debug(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.FINEST, message, error, stackTrace);
+
+  void warn(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.WARNING, message, error, stackTrace);
+
+  void error(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.SEVERE, message, error, stackTrace);
 
 
   /** Log message at level [logging.Level.FINEST]. */

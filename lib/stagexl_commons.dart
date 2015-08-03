@@ -96,6 +96,7 @@ part 'src/view/interact/scroll/scrollify_event.dart';
 part 'src/view/interact/scroll/impl/scrollbar.dart';
 part 'src/view/interact/scroll/impl/default_scrollbar.dart';
 part 'src/view/interact/scroll/impl/scrollify_sprite.dart';
+part 'src/view/interact/scroll/impl/wrap.dart';
 
 part 'src/view/interact/slider/m_slider.dart';
 part 'src/view/interact/slider/slider_event.dart';

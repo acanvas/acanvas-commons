@@ -11,10 +11,10 @@ class PaperToast extends BoxSprite {
   int position;
   Stage holder;
 
-  PaperToast(String title, this.holder, {this.position: BL, 
-      int bgColor: PaperColor.WHITE, int fontColor: PaperColor.BLACK, String fontName: PaperText.DEFAULT_FONT, int fontSize: 18,
-      this.hideAfterSeconds: 3}) : super() {
-    
+  PaperToast(String title, this.holder, {this.position: BL,
+  int bgColor: PaperColor.WHITE, int fontColor: PaperColor.BLACK, String fontName: PaperText.DEFAULT_FONT, int fontSize: 18,
+  this.hideAfterSeconds: 3}) : super() {
+
     addChild(new PaperShadow(type: PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
 
     _title = new PaperText(title, size: fontSize, color: fontColor, fontName: fontName);
@@ -27,7 +27,8 @@ class PaperToast extends BoxSprite {
     holder.addChild(this);
     span(300, 50);
 
-    ContextTool.STAGE.juggler.addTween(this, .3, Transition.easeOutBounce)..animate.y.to(ContextTool.STAGE.stageHeight - this.height - 20);
+    ContextTool.STAGE.juggler.addTween(this, .3, Transition.easeOutBounce)
+      ..animate.y.to(ContextTool.STAGE.stageHeight - this.height - 20);
 
     if (hideAfterSeconds > 0) {
 
@@ -39,9 +40,9 @@ class PaperToast extends BoxSprite {
 
   void hide() {
     ContextTool.STAGE.juggler.addTween(this, .3, Transition.easeOutBounce)
-        ..animate.y.to(ContextTool.STAGE.stageHeight)
-        ..delay = hideAfterSeconds
-        ..onComplete = () => this.dispose();
+      ..animate.y.to(ContextTool.STAGE.stageHeight)
+      ..delay = hideAfterSeconds
+      ..onComplete = () => this.dispose();
   }
 
   @override void refresh() {

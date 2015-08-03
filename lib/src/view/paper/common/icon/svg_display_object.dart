@@ -9,11 +9,11 @@ class SvgDisplayObject extends DisplayObject {
 
   SvgDisplayObject(this.svg) {
 
-    if(ContextTool.FIREFOX){
+    if (ContextTool.FIREFOX) {
       //_firefox(html.window.btoa(svg));
       _allOthers("data:image/svg+xml;base64,${html.window.btoa(svg)}");
     }
-    else{
+    else {
       _allOthers("data:image/svg+xml;base64,${html.window.btoa(svg)}");
 //    _allOthers("data:image/svg+xml;charset=utf-8,$svg");
     }

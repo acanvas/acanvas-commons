@@ -10,8 +10,6 @@ class PaperListCell extends SelectableButton {
 
   PaperListCell([this.fontColor = PaperColor.GREY_DARK]) :super() {
 
-    toggleable = false;
-
     PaperRipple ripple = new PaperRipple(color: fontColor);
     addChild(ripple);
 
@@ -50,6 +48,14 @@ class PaperListCell extends SelectableButton {
     graphics.fillColor(PaperColor.WHITE);
 
     super.refresh();
+  }
+
+  @override void selectAction(){
+    downAction();
+  }
+
+  @override void deselectAction(){
+    upAction();
   }
 
 }

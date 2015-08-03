@@ -41,10 +41,11 @@ class PaperIcon {
     return new SvgDisplayObject(svg);
   }
 
-  static SvgDisplayObject black(String rawSvg){
+  static SvgDisplayObject black(String rawSvg) {
     return color(rawSvg, PaperColor.BLACK);
   }
-  static SvgDisplayObject white(String rawSvg){
+
+  static SvgDisplayObject white(String rawSvg) {
     return inverted(rawSvg);
   }
 }

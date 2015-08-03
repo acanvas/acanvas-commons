@@ -13,20 +13,21 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
- part of stagexl_commons;
+part of stagexl_commons;
 
-	/**
-	 * Describes an object that holds a reference to an <code>IEventBus</code> instance.
-	 * @author Roland Zwaga
-	 */
-	 abstract class IEventBusAware {
-		/**
-		 * The specified <code>IEventBus</code> instance.
-		 */
-		 IEventBus get eventBus;
-		/**
-		 * @
-		 */
-		 void set eventBus(IEventBus value);
-	}
+/**
+ * Describes an object that holds a reference to an <code>IEventBus</code> instance.
+ * @author Roland Zwaga
+ */
+abstract class IEventBusAware {
+  /**
+   * The specified <code>IEventBus</code> instance.
+   */
+  IEventBus get eventBus;
+
+  /**
+   * @
+   */
+  void set eventBus(IEventBus value);
+}
 

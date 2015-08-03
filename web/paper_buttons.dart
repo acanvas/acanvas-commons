@@ -24,12 +24,9 @@ void main() {
 void start() {
 
   /* Vertical Container */
-  Flow vbox = new Flow()
-    ..flowOrientation = FlowOrientation.VERTICAL
-    ..spacing = 10
+  Wrap vbox = new Wrap(spacing: 20)
     ..x = 10
-    ..y = 10
-    ..autoRefresh = false;
+    ..y = 10;
 
   /*
    * 1st row: standard square buttons with preset colors
@@ -168,8 +165,9 @@ void start() {
 
 
   vbox.addChild(hbox6);
-  vbox.refresh();
   stage.addChild(vbox);
+  vbox.span(stage.stageWidth - 10, stage.stageHeight - 10);
+
 
 
 }

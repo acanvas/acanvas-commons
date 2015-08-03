@@ -17,6 +17,6 @@ class LifecycleEvent extends Event {
   var _data;
 
   LifecycleEvent(String type, [this._data = null, bool bubbles = false]) : super(type, bubbles);
-  
+
   Event clone() => new LifecycleEvent(type, _data, bubbles);
 }

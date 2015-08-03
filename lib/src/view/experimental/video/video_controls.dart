@@ -9,6 +9,7 @@ class VideoControls extends BoxSprite {
   bool _isVideoFlushed;
   num _defaultVideoWidth;
   num _defaultVideoHeight;
+
   VideoControls(Pyro video) : super() {
     _video = video;
     _defaultVideoWidth = _video.width;
@@ -43,10 +44,10 @@ class VideoControls extends BoxSprite {
 
 
   /**
-		 * 
-		 * VIDEO AND PYRO EVENTS
-		 * 
-		 */
+   *
+   * VIDEO AND PYRO EVENTS
+   *
+   */
   void _onNewStreamInit(PyroEvent event) {
 //			_log.print("_onNewStreamInit");
   }
@@ -144,12 +145,11 @@ class VideoControls extends BoxSprite {
   }
 
 
-
   /**
-		 * 
-		 * PRELOADER
-		 * 
-		 */
+   *
+   * PRELOADER
+   *
+   */
   void _initPreloader() {
   }
 
@@ -160,14 +160,11 @@ class VideoControls extends BoxSprite {
   }
 
 
-
-
-
   /**
-		 * 
-		 * REMMOVE STAGE LISTENERS
-		 * 
-		 */
+   *
+   * REMMOVE STAGE LISTENERS
+   *
+   */
   void killStagetListeners() {
     print("VideoControls killStagetListeners");
     stage.removeEventListener(KeyboardEvent.KEY_DOWN, _onKeyboardDown);

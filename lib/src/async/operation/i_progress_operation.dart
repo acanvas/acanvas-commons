@@ -16,10 +16,10 @@
 part of stagexl_commons;
 
 /**
-   * Subinterface of <code>IOperation</code> that contains information about the progress of an operation.
-   *
-   * @author Christophe Herreman
-   */
+ * Subinterface of <code>IOperation</code> that contains information about the progress of an operation.
+ *
+ * @author Christophe Herreman
+ */
 abstract class IProgressOperation extends IOperation {
 
   // --------------------------------------------------------------------
@@ -29,17 +29,17 @@ abstract class IProgressOperation extends IOperation {
   // --------------------------------------------------------------------
 
   /**
-     * The progress of this operation.
-     *
-     * @return the progress of this operation
-     */
+   * The progress of this operation.
+   *
+   * @return the progress of this operation
+   */
   int get progress;
 
   /**
-     * The total amount of progress this operation should make before being done.
-     *
-     * @return the total amount of progress this operation should make before being done
-     */
+   * The total amount of progress this operation should make before being done.
+   *
+   * @return the total amount of progress this operation should make before being done
+   */
   int get total;
 
   // --------------------------------------------------------------------
@@ -49,16 +49,16 @@ abstract class IProgressOperation extends IOperation {
   // --------------------------------------------------------------------
 
   /**
-     * Convenience method for adding a listener to the OperationEvent.PROGRESS event.
-     *
-     * @param listener the event handler function
-     */
+   * Convenience method for adding a listener to the OperationEvent.PROGRESS event.
+   *
+   * @param listener the event handler function
+   */
   void addProgressListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
 
   /**
-     * Convenience method for removing a listener from the OperationEvent.PROGRESS event.
-     *
-     * @param listener the event handler function
-     */
+   * Convenience method for removing a listener from the OperationEvent.PROGRESS event.
+   *
+   * @param listener the event handler function
+   */
   void removeProgressListener(Function listener, [bool useCapture = false]);
 }

@@ -1,49 +1,59 @@
 part of stagexl_commons;
 
 /**
-	 * @author nilsdoehring
-	 */
+ * @author nilsdoehring
+ */
 
 class BasicEffect implements IEffect {
 
   String _type;
+
   String get type {
     return _type;
   }
+
   void set type(String type) {
     _type = type;
   }
 
   num _initialAlpha;
+
   num get initialAlpha {
     return _initialAlpha;
   }
+
   void set initialAlpha(num initialAlpha) {
     _initialAlpha = initialAlpha;
   }
 
   num _duration;
+
   void set duration(num duration) {
     _duration = duration;
   }
+
   num get duration {
     return _duration;
   }
 
   Sprite _sprite;
+
   void set sprite(Sprite sprite) {
     _sprite = sprite;
   }
+
   Sprite get sprite {
     return _sprite;
   }
 
   bool _useSprite;
+
   bool useSprite() {
     return _useSprite;
   }
 
   bool _applyRecursively;
+
   bool get applyRecursively {
     return _useSprite == true ? false : _applyRecursively;
   }
@@ -92,6 +102,7 @@ class BasicEffect implements IEffect {
     ContextTool.JUGGLER.add(tween);
 
   }
+
   void runOutEffect(BoxSprite target, num duration, Function callback) {
     //target.visible = true;
     target.alpha = 1;
@@ -115,6 +126,7 @@ class BasicEffect implements IEffect {
       }
     }
   }
+
   void onComplete([Bitmap target = null, BoxSprite page = null, Function callback = null]) {
     ContextTool.JUGGLER.removeTweens(target);
 
@@ -132,9 +144,10 @@ class BasicEffect implements IEffect {
     if (callback != null) {
       callback.call(null);
     }
-    
+
     dispose();
   }
+
   void dispose() {
     if (_sprite != null && useSprite()) {
       ContextTool.JUGGLER.removeTweens(_sprite);

@@ -20,7 +20,7 @@ class BookSampleAssets {
 
   BookSampleAssets._internal() {
     assets = new List();
-    for(int i = 1; i<= NUM_PAGES; i++){
+    for (int i = 1; i <= NUM_PAGES; i++) {
       assets.add("C_" + (i < 10 ? "0$i" : "$i") + "_768x1024Px_Vorschaufenster");
     }
   }

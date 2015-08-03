@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- part of stagexl_commons;
+part of stagexl_commons;
 
 
-	/**
-	 * Interface to be implemented by all objects that want to register themselves as
-	 * listeners to all events dispatched from the event bus.
-	 *
-	 * @author Christophe Herreman
-	 */
-	 abstract class IEventBusListener {
+/**
+ * Interface to be implemented by all objects that want to register themselves as
+ * listeners to all events dispatched from the event bus.
+ *
+ * @author Christophe Herreman
+ */
+abstract class IEventBusListener {
 
-		/**
-		 * Handles an <code>Event</code> received from the event bus.
-		 * @param the specified <code>Event</code> received from the event bus.
-		 */
-		 void onEvent(Event event);
+  /**
+   * Handles an <code>Event</code> received from the event bus.
+   * @param the specified <code>Event</code> received from the event bus.
+   */
+  void onEvent(Event event);
 
-	}
+}
 

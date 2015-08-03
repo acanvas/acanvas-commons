@@ -14,48 +14,47 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 
 */
 
- part of stagexl_commons;
-	
-	/**
-	 * The <code>NumPad</code> class defines a numpad-style keypad.
-	 */
-	 class NumPad extends Layout
-	{
-		
-		
-		/** 
-		 * Creates a new NumPad object.
-		 */
-		   NumPad() {
-				/** The label to use on <code>SWITCH_LAYOUT</code> keys pointing to this layout. */
-  		 _switchKeyLabel = '123';
-			
-			verticalGap = .2;
-			
-			// Define all rows of keys for that layout
-			rows = [
-				[
-					new Key(CharCode.DIGIT_7),
-					new Key(CharCode.DIGIT_8),
-					new Key(CharCode.DIGIT_9)
-				],
-				[
-					new Key(CharCode.DIGIT_4),
-					new Key(CharCode.DIGIT_5),
-					new Key(CharCode.DIGIT_6)
-				],
-				[
-					new Key(CharCode.DIGIT_1),
-					new Key(CharCode.DIGIT_2),
-					new Key(CharCode.DIGIT_3)
-				],
-				[
-					new Key(CharCode.DIGIT_0, null, Key.CHARACTER_KEY, null, 2.1),
-					new Key(CharCode.PERIOD)
-				]
-			];
-			
-		}					
-		
-	}
+part of stagexl_commons;
+
+/**
+ * The <code>NumPad</code> class defines a numpad-style keypad.
+ */
+class NumPad extends Layout {
+
+
+  /**
+   * Creates a new NumPad object.
+   */
+  NumPad() {
+    /** The label to use on <code>SWITCH_LAYOUT</code> keys pointing to this layout. */
+    _switchKeyLabel = '123';
+
+    verticalGap = .2;
+
+    // Define all rows of keys for that layout
+    rows = [
+      [
+        new Key(CharCode.DIGIT_7),
+        new Key(CharCode.DIGIT_8),
+        new Key(CharCode.DIGIT_9)
+      ],
+      [
+        new Key(CharCode.DIGIT_4),
+        new Key(CharCode.DIGIT_5),
+        new Key(CharCode.DIGIT_6)
+      ],
+      [
+        new Key(CharCode.DIGIT_1),
+        new Key(CharCode.DIGIT_2),
+        new Key(CharCode.DIGIT_3)
+      ],
+      [
+        new Key(CharCode.DIGIT_0, null, Key.CHARACTER_KEY, null, 2.1),
+        new Key(CharCode.PERIOD)
+      ]
+    ];
+
+  }
+
+}
 	

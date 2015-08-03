@@ -14,9 +14,9 @@ class Button extends BehaveSprite with MButton {
   void refresh() {
     //adjust inherited span size to actual size
     span(width, height, refresh: false);
-    if(this is MFlow){
+    if (this is MFlow) {
       print("${this}: ${spanWidth}x${spanHeight}  ${width}x${height}");
-      children.forEach((c){
+      children.forEach((c) {
         print("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
       });
     }
@@ -24,7 +24,7 @@ class Button extends BehaveSprite with MButton {
 
   @override
   void enable() {
-    if(_enabled)return;
+    if (_enabled)return;
 
     super.enable();
 
@@ -34,7 +34,7 @@ class Button extends BehaveSprite with MButton {
       addEventListener(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
       addEventListener(TouchEvent.TOUCH_ROLL_OUT, rollOutAction);
     }
-    else{
+    else {
       addEventListener(MouseEvent.MOUSE_UP, upAction);
       addEventListener(MouseEvent.MOUSE_DOWN, downAction);
       addEventListener(MouseEvent.ROLL_OVER, rollOverAction);
@@ -46,7 +46,7 @@ class Button extends BehaveSprite with MButton {
 
   @override
   void disable() {
-    if(!_enabled)return;
+    if (!_enabled)return;
 
     super.disable();
 
@@ -56,7 +56,7 @@ class Button extends BehaveSprite with MButton {
       removeEventListener(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
       removeEventListener(TouchEvent.TOUCH_ROLL_OUT, rollOutAction);
     }
-    else{
+    else {
       removeEventListener(MouseEvent.MOUSE_UP, upAction);
       removeEventListener(MouseEvent.MOUSE_DOWN, downAction);
       removeEventListener(MouseEvent.ROLL_OVER, rollOverAction);
@@ -66,16 +66,16 @@ class Button extends BehaveSprite with MButton {
   }
 
   void downAction([InputEvent event = null]) {
-    children.where((c) => (c is MButton && c.inheritDownAction) || c is IPaperButtonComponent ).forEach( (child){
+    children.where((c) => (c is MButton && c.inheritDownAction) || c is IPaperButtonComponent).forEach((child) {
       child.downAction(event);
     });
   }
 
   void upAction([InputEvent event = null, bool submit = true]) {
-    children.where((c) => (c is MButton && c.inheritUpAction) || c is IPaperButtonComponent).forEach( (child){
+    children.where((c) => (c is MButton && c.inheritUpAction) || c is IPaperButtonComponent).forEach((child) {
       child.upAction(event);
     });
-    if(submit){
+    if (submit) {
       this.submit();
     }
   }

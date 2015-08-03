@@ -24,12 +24,9 @@ void main() {
 void start() {
 
 
-  Flow vbox = new Flow()
-    ..flowOrientation = FlowOrientation.VERTICAL
-    ..spacing = 40
+  Wrap vbox = new Wrap(spacing: 40)
     ..x = 10
-    ..y = 10
-    ..autoRefresh = false;
+    ..y = 10;
 
   /*
    * Standard Input Field with Label
