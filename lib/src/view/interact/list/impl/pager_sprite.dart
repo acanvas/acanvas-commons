@@ -40,7 +40,7 @@ class PagerSprite extends BehaveSprite with MList, MPager {
     this.data = data;
   }
 
-  void onClickNext() {
+  void onClickNext([Button button]) {
     if (!hasNext) {
       return;
     }
@@ -55,7 +55,7 @@ class PagerSprite extends BehaveSprite with MList, MPager {
     _proxy.requestChunk(setData, _getChunkIndex(chunksPlaced), chunkSize);
   }
 
-  void onClickPrev() {
+  void onClickPrev([Button button]) {
     if (hasPrev < 1) {
       return;
     }

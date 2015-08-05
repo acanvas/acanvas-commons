@@ -39,6 +39,7 @@ class RadioGroup extends Flow {
     (getChildAt(_selectedButtonIndex) as MSelectable).selected = false;
     (getChildAt(index) as MSelectable).selected = true;
     _selectedButtonIndex = index;
+    dispatchEvent(new RadioGroupEvent(RadioGroupEvent.BUTTON_SELECTED, index));
   }
 
 }

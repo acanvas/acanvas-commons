@@ -69,7 +69,7 @@ class PaperButton extends Button {
       addChild(icon);
     }
 
-    _label = new PaperText(text, size: fontSize, color: _fontAndRippleColor, fontName: fontName);
+    _label = new PaperText(text.toUpperCase(), size: fontSize, color: _fontAndRippleColor, fontName: fontName, weight: 300);
     _label.width = LABEL_MAX_WIDTH;
     addChild(_label);
 
@@ -87,7 +87,7 @@ class PaperButton extends Button {
     }
 
     _label.width = spanWidth - SPACER;
-    _label.y = (spanHeight / 2 - _label.textHeight / 2).round();
+    _label.y = (spanHeight / 2 - _label.textHeight / 2).floor();
 
     if (icon != null) {
       icon.x = (_label.x - icon.width / 2 - 12).round();

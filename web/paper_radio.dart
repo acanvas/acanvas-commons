@@ -38,7 +38,7 @@ void start() {
   bar.span(stage.stageWidth, 100);
   
   /* Vertical Container */
-  Wrap vbox = new Wrap(spacing: 0)
+  Wrap vbox = new Wrap(spacing: 0, reflow: false)
     ..x = 10
     ..y = 110;
 

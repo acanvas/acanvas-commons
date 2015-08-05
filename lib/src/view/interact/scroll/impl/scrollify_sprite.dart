@@ -32,7 +32,6 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
   bool _changingH = false;
   bool _interactionV = false;
   bool _changingV = false;
-  Sprite _mouseWheelListenerBackground;
 
   ScrollifySprite(Sprite view, Scrollbar hScrollbar, Scrollbar vScrollbar) {
 
@@ -53,7 +52,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
     if (maskEnabled) {
       _view.mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
-        ..relativeToParent = true;
+        ..relativeToParent = false;
     }
 
     super.refresh();
@@ -63,12 +62,6 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, color: 0x00FF0000, sprite: view.parent);
   }
 
-  @override dispose(){
-    view.parent.removeChild(_mouseWheelListenerBackground);
-    _mouseWheelListenerBackground.graphics.clear();
-    _mouseWheelListenerBackground = null;
-    super.dispose();
-  }
 
   /// ---------- SCROLL BARS
 

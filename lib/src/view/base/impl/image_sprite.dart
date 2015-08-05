@@ -9,6 +9,7 @@ class ImageSprite extends BoxSprite {
     _bitmapData = bitmapData;
     addChild(new Bitmap(_bitmapData));
     refresh();
+    dispatchEvent(new Event(Event.COMPLETE));
   }
 
   void setBitmapData(BitmapData bitmapData) {
@@ -46,22 +47,24 @@ class ImageSprite extends BoxSprite {
 
     _background.graphics.clear();
     _background.graphics.rect(0, 0, spanWidth, spanHeight);
-    _background.graphics.fillColor(0xffff2222);
+    _background.graphics.fillColor(0xff000000);
 
     if (spanWidth == 0 || spanHeight == 0) {
       return;
     }
 
     num scale;
-    if (_bitmapData.width > _bitmapData.height) {
-      scale = spanHeight / _bitmapData.height;
-      if (_bitmapData.width * scale < spanWidth) {
-        scale = spanWidth / _bitmapData.width;
-      }
-    } else {
-      scale = spanWidth / _bitmapData.width;
-      if (_bitmapData.height * scale < spanHeight) {
+    if(_bitmapData != null){
+      if (_bitmapData.width > _bitmapData.height) {
         scale = spanHeight / _bitmapData.height;
+        if (_bitmapData.width * scale < spanWidth) {
+          scale = spanWidth / _bitmapData.width;
+        }
+      } else {
+        scale = spanWidth / _bitmapData.width;
+        if (_bitmapData.height * scale < spanHeight) {
+          scale = spanHeight / _bitmapData.height;
+        }
       }
     }
 
@@ -72,7 +75,7 @@ class ImageSprite extends BoxSprite {
   }
 
   void onIoError(Error e) {
-    log.debug("IO error occured while loading image");
+    this.logger.debug("IO error occured while loading image");
   }
 
   @override

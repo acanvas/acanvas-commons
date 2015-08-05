@@ -3,56 +3,60 @@ part of stagexl_commons;
 
 class PaperWrap extends BoxSprite {
 
-  num bgColor;
+  int bgColor;
+  int panelColor;
+  Sprite panelSprite;
   PaperText _title;
-  Flow _vbox;
+  Flow flow;
   ScrollifySprite _scrollManager;
 
-  PaperWrap(UITextField title, {num fontColor : PaperColor.BLACK, this.bgColor: PaperColor.WHITE, String fontName : PaperText.DEFAULT_FONT, int fontSize: 22, int spacing : 20, AlignH align : AlignH.LEFT, bool reflow: false}) : super() {
+  PaperWrap(UITextField title, {this.panelColor : PaperColor.WHITE, this.bgColor: PaperColor.WHITE, int spacing : 20, int padding: 10, AlignH align : AlignH.CENTER, bool reflow: false}) : super() {
     inheritSpan = false;
     autoRefresh = false;
+    this.padding = padding;
 
     super.addChild(new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
+
+    panelSprite = new Sprite();
+    super.addChild(panelSprite);
 
     _title = title;
     super.addChild(_title);
 
-    _vbox = new Flow()
+    flow = new Flow()
       ..autoRefresh = false
       ..reflow = reflow
       ..spacing = spacing
       ..flowOrientation = FlowOrientation.VERTICAL
       ..alignH = align;
-    super.addChild(_vbox);
+    super.addChild(flow);
 
-    _scrollManager = new ScrollifySprite(_vbox, new DefaultScrollbar(), new DefaultScrollbar());
+
+    _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar());
   }
 
   @override
   void addChild(DisplayObject child) {
-    _vbox.addChild(child);
+    flow.addChild(child);
   }
 
   @override void refresh() {
+    panelSprite.x = 0;
+    panelSprite.y = 0;
 
     _title.x = padding;
     _title.y = padding;
     _title.width = spanWidth - 2*padding;
 
-    _vbox.x = padding;
-    _vbox.y = _title.y + _title.textHeight + padding;
+    flow.x = padding;
+    flow.y = PaperDimensions.HEIGHT_APP_BAR + 2*padding;
 
-    if(_vbox.reflow){
-      _vbox.span(spanWidth - 2 * padding, spanHeight - _vbox.y - padding);
-    }
-    else{
-      _vbox.refresh();
-    }
-
-    _scrollManager.span(spanWidth - 2 * padding, spanHeight - _vbox.y - padding);
+    flow.span(spanWidth - 2 * padding, spanHeight - flow.y);
+    _scrollManager.span(spanWidth - 2 * padding, spanHeight - flow.y);
 
 
     super.refresh();
+    GraphicsUtil.rectangle(0, 0, spanWidth, PaperDimensions.HEIGHT_APP_BAR, sprite: panelSprite, color: panelColor);
   }
 
 }

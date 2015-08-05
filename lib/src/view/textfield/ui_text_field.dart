@@ -2,6 +2,8 @@ part of stagexl_commons;
 
 class UITextField extends TextField {
 
+  bool inheritWidth = true;
+
   UITextField(String value, TextFormat format, [bool html = true]) : super() {
 
     defaultTextFormat = format != null ? format : new TextFormat("Helvetica, Arial", 12, 0x000000);

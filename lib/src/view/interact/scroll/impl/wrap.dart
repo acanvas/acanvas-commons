@@ -3,43 +3,37 @@ part of stagexl_commons;
 
 class Wrap extends BoxSprite {
 
-  Flow _vbox;
+  Flow flow;
   ScrollifySprite _scrollManager;
 
-  Wrap({int spacing : 20, AlignH align : AlignH.CENTER, bool reflow: true}) : super() {
+  Wrap({int spacing : 20, AlignH align : AlignH.LEFT, bool reflow: true}) : super() {
 
     inheritSpan = true;
     autoRefresh = true;
 
-    _vbox = new Flow()
+    flow = new Flow()
       ..autoRefresh = false
       ..reflow = reflow
       ..spacing = spacing
-      ..flowOrientation = FlowOrientation.VERTICAL
+      ..flowOrientation = reflow ? FlowOrientation.HORIZONTAL : FlowOrientation.VERTICAL
       ..alignH = align;
-    super.addChild(_vbox);
+    super.addChild(flow);
 
-    _scrollManager = new ScrollifySprite(_vbox, new DefaultScrollbar(), new DefaultScrollbar());
+    _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar());
   }
 
   @override
   void addChild(DisplayObject child) {
-    _vbox.addChild(child);
+    flow.addChild(child);
   }
 
   @override void refresh() {
 
-    _vbox.x = padding;
-    _vbox.y = padding;
+    flow.x = padding;
+    flow.y = padding;
 
-    if(_vbox.reflow){
-      _vbox.span(spanWidth - 2 * padding, spanHeight - _vbox.y - padding);
-    }
-    else{
-      _vbox.refresh();
-    }
-
-    _scrollManager.span(spanWidth - 2 * padding, spanHeight - _vbox.y - padding);
+   flow.span(spanWidth - 2 * padding, spanHeight - flow.y - padding);
+    _scrollManager.span(spanWidth - 2 * padding, spanHeight - flow.y - padding);
 
     super.refresh();
   }

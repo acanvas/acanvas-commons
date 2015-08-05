@@ -6,9 +6,9 @@ class Callout extends LifecycleSprite {
   static const String DIRECTION_UP = "DIRECTION_UP";
   static const String DIRECTION_DOWN = "DIRECTION_DOWN";
 
-  Callout([String id = ""]) : super(id) {
+  Callout() : super("keyboard.callout") {
   }
 
-  Callout.show(Sprite variantsContainer, Key key, String direction, bool arg3) : super() {
+  Callout.show(Sprite variantsContainer, Key key, String direction, bool arg3) : super("keyboard.callout") {
   }
 }

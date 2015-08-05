@@ -2,8 +2,6 @@ part of stagexl_commons;
 
 class LifecycleSprite extends BehaveSprite with MLifecycle {
 
-  //TODO logger
-  Logger log;
 
   LifecycleSprite(String id) : super() {
     if (id != null) {
@@ -30,14 +28,14 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   void init({Map params: null}) {
     this.params = params;
     if (spanHeight == 0 || spanWidth == 0) {
-      log.warn("You really should set XLSprite.spanWidth and XLSprite.spanHeight properties before invoking XLSprite.init().");
+      logger.warn("You really should set XLSprite.spanWidth and XLSprite.spanHeight properties before invoking XLSprite.init().");
     }
   }
 
   void onInitComplete() {
     initialized = true;
     children.where((c) => c is MLifecycle && c.inheritInit && !c.initialized).forEach((child) {
-      if (child.inheritSpan) {
+      if ((child as MBox).inheritSpan) {
         child.span(spanWidth, spanHeight, refresh: false);
       }
       child.init();

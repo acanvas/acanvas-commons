@@ -24,7 +24,7 @@ void main() {
 void start() {
 
 
-  Wrap vbox = new Wrap(spacing: 40)
+  Wrap vbox = new Wrap(spacing: 40, reflow: false)
     ..x = 10
     ..y = 10;
 

@@ -63,6 +63,7 @@ class PaperAppBar extends BoxSprite {
     leftBox.y = (PaperDimensions.HEIGHT_APP_BAR / 2 - (leftBox.height - 0) / 2).round();
 
     if (_headline != null) {
+
       if (extended == true) {
         _headline.x = PaperDimensions.HEIGHT_APP_BAR_EXTENDED_AREA - 2;
         _headline.y = PaperDimensions.HEIGHT_APP_BAR + 20;

@@ -24,7 +24,7 @@ void main() {
 void start() {
 
   /* Vertical Container */
-  Wrap vbox = new Wrap(spacing: 20)
+  Wrap vbox = new Wrap(spacing: 20, reflow: false)
     ..x = 10
     ..y = 10;
 

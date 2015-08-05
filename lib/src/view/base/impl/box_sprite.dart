@@ -3,10 +3,10 @@ part of stagexl_commons;
 class BoxSprite extends Sprite3D with MBox {
 
   //TODO logger
-  Logger log;
+  Logger logger;
 
   BoxSprite() {
-    this.log = new Logger("$this (BoxSprite.${ new Random()
+    this.logger = new Logger("$this (BoxSprite.${ new Random()
       ..nextInt(1000000)})");
   }
 
@@ -18,15 +18,15 @@ class BoxSprite extends Sprite3D with MBox {
       if (spanHeight > 0) this.spanHeight = spanHeight;
 
       children.where((c) => c is MBox && c.inheritSpan).forEach((child) {
-        child.span(spanWidth - 2*padding, spanHeight - 2*padding, refresh: refresh);
+        child.span(spanWidth , spanHeight - 2*padding, refresh: refresh);
       });
-      children.where((c) => c is TextField).forEach((child) {
+      children.where((c) => c is UITextField && c.inheritWidth).forEach((child) {
         child.width = spanWidth - 2*padding;
       });
 
-      if (refresh) {
-        this.refresh();
-      }
+    }
+    if (refresh) {
+      this.refresh();
     }
   }
 
@@ -58,6 +58,7 @@ class BoxSprite extends Sprite3D with MBox {
   }
 
   void disposeChild(DisplayObject dobj) {
+    if(dobj == null) return;
 
     if (dobj is MBox && (dobj as MBox).inheritDispose && dobj != this) {
       (dobj as MBox).dispose();
@@ -85,7 +86,7 @@ class BoxSprite extends Sprite3D with MBox {
   void addChildAt(DisplayObject child, int index) {
     super.addChildAt(child, index);
     if (spanWidth > 0 && spanHeight > 0 && child is MBox && (child as MBox).inheritSpan) {
-      (child as MBox).span(spanWidth - 2*padding, spanHeight - 2*padding, refresh: false);
+      (child as MBox).span(spanWidth - 2*padding, spanHeight, refresh: false);
     }
 
     //todo think of a better way to ensure refresh() globally

@@ -16,6 +16,8 @@ class Slider extends BehaveSprite with MSlider {
 
   Slider() : super() {
     mouseWheelEnabled = ContextTool.MOBILE ? false : true;
+    background = GraphicsUtil.rectangle(0, 0, 1, 1, color:0x00000000);
+    thumb = GraphicsUtil.rectangle(0, 0, 1, 1, color:0x00FFFFFF);
   }
 
   //-------- SCROLL THUMB
@@ -220,12 +222,17 @@ class Slider extends BehaveSprite with MSlider {
 
 
   void _updateThumbPosition() {
-    num bgp = (horizontalScrollBehavior ? background.x : background.y);
-    num pos = 0;
-    if (valueMax != 0) {
-      pos = ((value - valueMin) * ((spanSize - _thumbSize) / valueMax) + bgp).round();
+    num bgp = 0;
+    if(background!=null){
+      bgp = (horizontalScrollBehavior ? background.x : background.y);
     }
-    horizontalScrollBehavior ? thumb.x = pos : thumb.y = pos;
+    if(thumb != null){
+      num pos = 0;
+      if (valueMax != 0) {
+        pos = ((value - valueMin) * ((spanSize - _thumbSize) / valueMax) + bgp).round();
+      }
+      horizontalScrollBehavior ? thumb.x = pos : thumb.y = pos;
+    }
   }
 
 
