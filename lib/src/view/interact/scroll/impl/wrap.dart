@@ -32,7 +32,7 @@ class Wrap extends BoxSprite {
     flow.x = padding;
     flow.y = padding;
 
-   flow.span(spanWidth - 2 * padding, spanHeight - flow.y - padding);
+    flow.span(spanWidth - 2 * padding, spanHeight - flow.y - padding);
     _scrollManager.span(spanWidth - 2 * padding, spanHeight - flow.y - padding);
 
     super.refresh();

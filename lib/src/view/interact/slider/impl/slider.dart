@@ -223,10 +223,10 @@ class Slider extends BehaveSprite with MSlider {
 
   void _updateThumbPosition() {
     num bgp = 0;
-    if(background!=null){
+    if (background != null) {
       bgp = (horizontalScrollBehavior ? background.x : background.y);
     }
-    if(thumb != null){
+    if (thumb != null) {
       num pos = 0;
       if (valueMax != 0) {
         pos = ((value - valueMin) * ((spanSize - _thumbSize) / valueMax) + bgp).round();

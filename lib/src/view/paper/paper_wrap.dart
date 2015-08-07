@@ -46,10 +46,10 @@ class PaperWrap extends BoxSprite {
 
     _title.x = padding;
     _title.y = padding;
-    _title.width = spanWidth - 2*padding;
+    _title.width = spanWidth - 2 * padding;
 
     flow.x = padding;
-    flow.y = PaperDimensions.HEIGHT_APP_BAR + 2*padding;
+    flow.y = PaperDimensions.HEIGHT_APP_BAR + 2 * padding;
 
     flow.span(spanWidth - 2 * padding, spanHeight - flow.y);
     _scrollManager.span(spanWidth - 2 * padding, spanHeight - flow.y);

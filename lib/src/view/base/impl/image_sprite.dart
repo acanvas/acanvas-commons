@@ -45,16 +45,16 @@ class ImageSprite extends BoxSprite {
   @override
   void refresh() {
 
-    _background.graphics.clear();
-    _background.graphics.rect(0, 0, spanWidth, spanHeight);
-    _background.graphics.fillColor(0xff000000);
+    graphics.clear();
+    graphics.rect(0, 0, spanWidth, spanHeight);
+    graphics.fillColor(0xff000000);
 
     if (spanWidth == 0 || spanHeight == 0) {
       return;
     }
 
     num scale;
-    if(_bitmapData != null){
+    if (_bitmapData != null) {
       if (_bitmapData.width > _bitmapData.height) {
         scale = spanHeight / _bitmapData.height;
         if (_bitmapData.width * scale < spanWidth) {
@@ -68,8 +68,10 @@ class ImageSprite extends BoxSprite {
       }
     }
 
-    mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
-      ..relativeToParent = true;
+    scaleX = scaleY = scale;
+
+   // mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
+   //   ..relativeToParent = true;
 
     super.refresh();
   }

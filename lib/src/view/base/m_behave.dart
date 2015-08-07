@@ -60,13 +60,13 @@ abstract class MBehave {
 
   void set enabled(bool enabled) {
     //if (_enabled != enabled) {
-      if (enabled) {
-        enable();
-      }
-      else {
-        disable();
-      }
-      _enabled = enabled;
+    if (enabled) {
+      enable();
+    }
+    else {
+      disable();
+    }
+    _enabled = enabled;
     //}
   }
 

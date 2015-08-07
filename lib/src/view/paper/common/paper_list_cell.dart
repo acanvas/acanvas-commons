@@ -50,11 +50,11 @@ class PaperListCell extends SelectableButton {
     super.refresh();
   }
 
-  @override void selectAction(){
+  @override void selectAction() {
     downAction();
   }
 
-  @override void deselectAction(){
+  @override void deselectAction() {
     upAction();
   }
 

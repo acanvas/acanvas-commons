@@ -193,7 +193,7 @@ class ListSprite extends ScrollifySprite with MList {
       _vScrollbar.enabled = _totalCellSize > spanHeight;
       _vScrollbar.valueMax = max(0, _totalCellSize - spanHeight);
     }
-    if(_hScrollbar.enabled || _vScrollbar.enabled){
+    if (_hScrollbar.enabled || _vScrollbar.enabled) {
       mouseWheelEnabled = true;
     }
     _updateThumbs();

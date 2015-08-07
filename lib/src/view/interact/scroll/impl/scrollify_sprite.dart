@@ -159,7 +159,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     _vScrollbar.enabled = h > spanHeight;
     _vScrollbar.valueMax = h - spanHeight;
 
-    if(_hScrollbar.enabled || _vScrollbar.enabled){
+    if (_hScrollbar.enabled || _vScrollbar.enabled) {
       mouseWheelEnabled = true;
     }
 
@@ -266,13 +266,13 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
   /// ---------- MOUSE WHEEL
   @override void set mouseWheelEnabled(bool value) {
-  if(_mouseWheelEnabled == value){
-    return;
-  }
+    if (_mouseWheelEnabled == value) {
+      return;
+    }
     _mouseWheelEnabled = value;
-  if (_mouseWheelEnabled) _view.parent.addEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel, useCapture: false, priority: 0);
-  else _view.parent.removeEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel);
-}
+    if (_mouseWheelEnabled) _view.parent.addEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel, useCapture: false, priority: 0);
+    else _view.parent.removeEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel);
+  }
 
   void _onMouseWheel(MouseEvent event) {
     clearMomentum();

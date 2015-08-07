@@ -12,7 +12,7 @@ class Logger implements logging.Logger {
   @override
   void log(logging.Level logLevel, String message, [Object error, StackTrace stackTrace, Zone zone]) {
 
-    message =  "${name}: ${message}";
+    message = "${name}: ${message}";
 
     if (error is List) {
       int i = 0;
