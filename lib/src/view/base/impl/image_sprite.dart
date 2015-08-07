@@ -45,10 +45,6 @@ class ImageSprite extends BoxSprite {
   @override
   void refresh() {
 
-    graphics.clear();
-    graphics.rect(0, 0, spanWidth, spanHeight);
-    graphics.fillColor(0xff000000);
-
     if (spanWidth == 0 || spanHeight == 0) {
       return;
     }
@@ -80,9 +76,4 @@ class ImageSprite extends BoxSprite {
     this.logger.debug("IO error occured while loading image");
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    graphics.clear();
-  }
 }
