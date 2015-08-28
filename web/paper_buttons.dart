@@ -8,18 +8,70 @@ Sprite _container;
 
 void main() {
   var opts = new StageOptions();
-  opts.renderEngine = RenderEngine.Canvas2D;
-  opts.backgroundColor = 0xFFf9f9f9;
-  opts.stageScaleMode = StageScaleMode.NO_SCALE;
+  opts.maxPixelRatio = 1.0;
+  opts.stageScaleMode = ContextTool.MOBILE ? StageScaleMode.NO_SCALE : StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
+  opts.stageRenderMode = StageRenderMode.AUTO;
+  opts.backgroundColor = 0xFFf9f9f9;
+  opts.renderEngine = ContextTool.MOBILE ? RenderEngine.WebGL : RenderEngine.Canvas2D;
+  opts.antialias = ContextTool.MOBILE ? false : true;
+  opts.inputEventMode = ContextTool.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
+  opts.preventDefaultOnTouch = true;
+  opts.preventDefaultOnWheel = true;
+  opts.preventDefaultOnKeyboard = false;
 
   stage = new Stage(html.querySelector('#stage'), options: opts);
-  ContextTool.STAGE = stage;
-  ContextTool.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
   new RenderLoop()..addStage(stage);
 
-  FontTool.addFont("Roboto");
+  ContextTool.STAGE = stage;
+  FontTool.addFont("Roboto:100,300");
   FontTool.loadFonts(start);
+}
+void gtest() {
+  Shape s = new Shape()
+    ..graphics.rect(0, 0, 30, 30)
+    ..graphics.fillColor(0xFFFF0000);
+  stage.addChild(s);
+
+}
+
+void testsimple() {
+  //10% CPU
+  PaperButton button1 = new PaperButton("SUBMIT", preset: PaperButton.PRESET_WHITE)
+  ..x = 30
+  ..y = 30;
+  stage.addChild(button1);
+}
+
+void test() {
+
+  /* Vertical Container */
+  Wrap vbox = new Wrap(spacing: 20, reflow: false)
+    ..x = 10
+    ..y = 10;
+
+  Flow hbox1 = new Flow()
+    ..inheritSpan = true
+    ..reflow = true
+    //..flowOrientation = FlowOrientation.VERTICAL
+    ..spacing = 20;
+
+  for(int i = 0; i<20; i++){
+    //1 button: 10% CPU
+    //10 buttons: 13% CPU
+    PaperButton button1 = new PaperButton("SUBMIT", preset: PaperButton.PRESET_WHITE);
+      //..x = 30
+      //..y = i*30;
+    hbox1.addChild(button1);
+  }
+
+
+
+  vbox.addChild(hbox1);
+  stage.addChild(vbox);
+  vbox.span(stage.stageWidth - 10, stage.stageHeight - 10);
+  //hbox1.span(400, 600);
+
 }
 void start() {
 
@@ -170,4 +222,25 @@ void start() {
 
 
 
+  int totalCount = _logStage(stage, 0);
+  print("totalCount: $totalCount");
+
+  //stage.renderMode = StageRenderMode.ONCE;
+}
+
+int _logStage(DisplayObjectContainer parent, int depth){
+  int count = 0;
+  String str = "";
+  for(int i=0;i<depth;i++){
+    str += "-";
+  }
+  parent.children.forEach((child){
+    print("($depth) $str ${child}");
+    count++;
+    if(child is DisplayObjectContainer){
+      count += _logStage(child, depth + 1);
+    }
+  });
+
+  return count;
 }

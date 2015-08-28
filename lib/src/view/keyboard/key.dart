@@ -375,7 +375,6 @@ class Key extends BoxSprite {
 
     // Insert new skin
     addChildAt(_skin, 0);
-    //TODO don't know\ninvalidate(INVALIDATION_FLAG_SKIN);
 
   }
 

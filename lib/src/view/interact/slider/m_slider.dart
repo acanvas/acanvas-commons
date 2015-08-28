@@ -5,6 +5,8 @@ part of stagexl_commons;
  */
 abstract class MSlider {
 
+  Timer _materializeControl;
+
   bool _horizontalScrollBehavior = false;
 
   void set horizontalScrollBehavior(bool horizontalScrollBehavior) => _horizontalScrollBehavior = horizontalScrollBehavior;
@@ -67,6 +69,11 @@ abstract class MSlider {
 
     value = value - event.deltaY * mouseWheelSensitivity;
     interactionEnd();
+    ContextTool.MATERIALIZE_REQUIRED = true;
+
+    if(_materializeControl != null) _materializeControl.cancel();
+    _materializeControl = new Timer(new Duration(milliseconds: 100), () => ContextTool.MATERIALIZE_REQUIRED = false);
+
   }
 
   void interactionStart();
@@ -206,6 +213,7 @@ abstract class MSlider {
   void set touching(bool touching) => _touching = touching;
 
   bool get touching => _touching;
+
 
   StreamSubscription<Event> addEventListener(String eventType, EventListener eventListener, {bool useCapture: false, int priority: 0 });
 

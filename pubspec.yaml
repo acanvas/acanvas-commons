@@ -5,6 +5,10 @@ dependencies:
   logging: any
   stagexl: 
     git : https://github.com/bp74/StageXL
+dependency_overrides:
+    stagexl:
+      #git: https://github.com/bp74/StageXL
+      path: /Users/ndoehring/Documents/WebstormProjects/StageXL
 transformers:
 - $dart2js:
     minify: true

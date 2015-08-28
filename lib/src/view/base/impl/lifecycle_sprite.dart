@@ -54,10 +54,12 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   }
 
   void onLoadComplete([Event e = null]) {
+    requiresLoading = false;
     dispatchEvent(new LifecycleEvent(LifecycleEvent.LOAD_COMPLETE));
   }
 
   void onLoadError(String errorMessage) {
+    requiresLoading = false;
     dispatchEvent(new LifecycleEvent(LifecycleEvent.LOAD_ERROR, errorMessage));
   }
 

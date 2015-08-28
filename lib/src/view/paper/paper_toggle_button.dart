@@ -11,10 +11,10 @@ class PaperToggleButton extends SelectableButton {
   String label;
   int labelOffset;
 
-  Shape _icon;
-  Shape _bg;
-  Shape _inactiveLine;
-  Shape _activeLine;
+  Sprite _icon;
+  Sprite _bg;
+  Sprite _inactiveLine;
+  Sprite _activeLine;
   PaperText _paperLabel;
 
   PaperRipple _ripple;
@@ -29,26 +29,26 @@ class PaperToggleButton extends SelectableButton {
     addChild(_ripple);
     _ripple.span(RADIUS * 2, RADIUS * 2);
 
-    _inactiveLine = new Shape();
+    _inactiveLine = new Sprite();
     addChild(_inactiveLine);
     _drawLine(_inactiveLine, PaperColor.BLACK, 1);
 
-    _activeLine = new Shape();
+    _activeLine = new Sprite();
     addChild(_activeLine);
     _drawLine(_activeLine, activeColor, 1);
     _activeLine.visible = false;
 
-    _bg = new Shape();
+    _bg = new Sprite();
     _bg.graphics.circle(30, 30, 8);
     _bg.graphics.strokeColor(PaperColor.BLACK, 2);
     _bg.graphics.circle(30, 30, 30);
     _bg.graphics.fillColor(0x00555555);
     if (ContextTool.WEBGL) {
-      _bg.applyCache(0, 0, 60, 60);
+      //_bg.applyCache(0, 0, 60, 60);
     }
     _holder.addChild(_bg);
 
-    _icon = new Shape();
+    _icon = new Sprite();
     _icon.graphics.circle(0, 0, 10);
     _icon.graphics.fillColor(activeColor);
     _holder.addChild(_icon);
@@ -63,8 +63,9 @@ class PaperToggleButton extends SelectableButton {
   }
 
   @override void refresh() {
-    _inactiveLine.x = _activeLine.x = labelOffset + 38;
-    _inactiveLine.y = _activeLine.y = 30;
+   _inactiveLine.x = labelOffset + 38;
+   _activeLine.x = labelOffset + 38;
+   _inactiveLine.y = _activeLine.y = 30;
 
     _holder.x = labelOffset;
     _ripple.x = labelOffset;
@@ -74,8 +75,10 @@ class PaperToggleButton extends SelectableButton {
     if (_paperLabel != null) {
       _paperLabel.x = 20;
       _paperLabel.y = 20;
+      _paperLabel.width = labelOffset - 20;
     }
     super.refresh();
+    spanHeight -= 10;
   }
 
 
@@ -114,15 +117,15 @@ class PaperToggleButton extends SelectableButton {
     }
   }
 
-  void _drawLine(Shape line, int color, num strength) {
-    line.graphics.clear();
+  void _drawLine(Sprite line, int color, num strength) {
+
     line.graphics.beginPath();
     line.graphics.moveTo(0, 0);
     line.graphics.lineTo(32, 0);
-    line.graphics.strokeColor(color, strength);
     line.graphics.closePath();
+    line.graphics.strokeColor(color, strength);
     if (ContextTool.WEBGL) {
-      line.applyCache(0, 0, 32, strength);
+      //line.applyCache(0, 0, 32, strength);
     }
   }
 }

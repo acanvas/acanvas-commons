@@ -100,17 +100,17 @@ class Slider extends BehaveSprite with MSlider {
     num posY = mouseY - _thumbSize * 0.5 - background.y;
     if (horizontalScrollBehavior) {
       value = _convertPositionToValue(posX);
-      mouseOffset = stage.mouseX - posX;
+      mouseOffset = event.stageX - posX;
     }
     else {
       value = _convertPositionToValue(posY);
-      mouseOffset = stage.mouseY - posY;
+      mouseOffset = event.stageY - posY;
     }
     interactionStart(true);
   }
 
   void _onThumbMouseDown(InputEvent event) {
-    mouseOffset = horizontalScrollBehavior ? stage.mouseX - thumb.x : stage.mouseY - thumb.y;// - _thumbSize * 0.5;
+    mouseOffset = horizontalScrollBehavior ? event.stageX - thumb.x : event.stageY - thumb.y;// - _thumbSize * 0.5;
     interactionStart();
   }
 
@@ -118,6 +118,7 @@ class Slider extends BehaveSprite with MSlider {
 
   void interactionStart([bool preventMomentum = false, bool addMouseListeners = true]) {
     if (!interaction) {
+      ContextTool.MATERIALIZE_REQUIRED = true;
       interaction = true;
 
       clearMomentum();
@@ -133,7 +134,9 @@ class Slider extends BehaveSprite with MSlider {
         }
       }
 
-      if (momentumEnabled && !preventMomentum) addEventListener(Event.ENTER_FRAME, _calcMomentum);
+      if (momentumEnabled && !preventMomentum) {
+        addEventListener(Event.ENTER_FRAME, _calcMomentum);
+      }
 
       dispatchEvent(new SliderEvent(SliderEvent.INTERACTION_START, value));
       notifyChangeStart();
@@ -144,6 +147,7 @@ class Slider extends BehaveSprite with MSlider {
 
   void interactionEnd() {
     if (interaction) {
+      ContextTool.MATERIALIZE_REQUIRED = false;
       interaction = false;
       if (ContextTool.TOUCH) {
         stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
@@ -167,7 +171,7 @@ class Slider extends BehaveSprite with MSlider {
 
   //----- SET VALUE according to MousePosition and initial Offset (on mousedown)
   void _onStageMouseMove(InputEvent event) {
-    num mousePos = (horizontalScrollBehavior ? stage.mouseX : stage.mouseY);// - _thumbSize * 0.5;
+    num mousePos = (horizontalScrollBehavior ? event.stageX : event.stageY);// - _thumbSize * 0.5;
     value = _convertPositionToValue(mousePos - mouseOffset);
     // event.updateAfterEvent();
   }
@@ -198,6 +202,7 @@ class Slider extends BehaveSprite with MSlider {
 
   void notifyChangeStart() {
     if (!_changing) {
+      ContextTool.MATERIALIZE_REQUIRED = true;
       _changing = true;
       dispatchEvent(new SliderEvent(SliderEvent.CHANGE_START, value));
     }
@@ -206,6 +211,7 @@ class Slider extends BehaveSprite with MSlider {
 
   void notifyChangeEnd() {
     if (_changing) {
+      ContextTool.MATERIALIZE_REQUIRED = false;
       _changing = false;
       dispatchEvent(new SliderEvent(SliderEvent.CHANGE_END, value));
     }
@@ -216,7 +222,6 @@ class Slider extends BehaveSprite with MSlider {
 
   num _convertPositionToValue(num position) {
     num calc = valueMin + (valueMax - valueMin) * (position / (spanSize - _thumbSize));
-    print("postoval $position calc $calc thumbsize $_thumbSize");
     return calc;
   }
 

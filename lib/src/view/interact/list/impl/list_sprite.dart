@@ -282,8 +282,6 @@ class ListSprite extends ScrollifySprite with MList {
       }
     } else {
 
-      // TODO: FIXME: Schaune, ob nach unten oder oben angebaut werden muss
-
       // Just update (e.g. render())
       cell = view.numChildren != 0 ? (view.getChildAt(0) as SelectableButton) : _getCell(true);
       firstLoop = true;
@@ -379,8 +377,8 @@ class ListSprite extends ScrollifySprite with MList {
   void _onCellMouseDown(InputEvent event) {
     _cellMoved = false;
 
-    _originX = stage.mouseX;
-    _originY = stage.mouseY;
+    _originX = event.stageX;
+    _originY = event.stageY;
 
     _mouseDownCell = (event.currentTarget as SelectableButton);
     if (_timer != null) {
@@ -437,19 +435,20 @@ class ListSprite extends ScrollifySprite with MList {
 
   @override
   void _onViewMouseDown(InputEvent event) {
+    print("Touch down");
     _touching = true;
     if (_hScrollbar.enabled) {
       _hScrollbar.interactionStart(false, false);
-      _mouseOffsetX = stage.mouseX + _hScrollbar.value;
+      _mouseOffsetX = event.stageX + _hScrollbar.value;
     } else {
-      _mouseOffsetX = stage.mouseX;
+      _mouseOffsetX = event.stageX;
     }
 
     if (_vScrollbar.enabled) {
       _vScrollbar.interactionStart(false, false);
-      _mouseOffsetY = stage.mouseY + _vScrollbar.value;
+      _mouseOffsetY = event.stageY + _vScrollbar.value;
     } else {
-      _mouseOffsetY = stage.mouseY;
+      _mouseOffsetY = event.stageY;
     }
 
     if (ContextTool.TOUCH) {
@@ -467,7 +466,7 @@ class ListSprite extends ScrollifySprite with MList {
   void _onStageMouseMove(InputEvent event) {
     super._onStageMouseMove(event);
 
-    if ((_originX - stage.mouseX).abs() > 3 || (_originY - stage.mouseY).abs() > 3) {
+    if ((_originX - event.stageX).abs() > 3 || (_originY - event.stageY).abs() > 3) {
       _cellMoved = true;
       _timer.cancel();
       if (_mouseDownCell != null) _mouseDownCell.deselect();

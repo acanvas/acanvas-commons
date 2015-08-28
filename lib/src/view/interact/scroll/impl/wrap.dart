@@ -20,6 +20,9 @@ class Wrap extends BoxSprite {
     super.addChild(flow);
 
     _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar());
+    //_scrollManager.useNativeWidth = false;
+    //_scrollManager.useNativeHeight = false;
+    //super.addChild(_scrollManager);
   }
 
   @override
@@ -33,7 +36,7 @@ class Wrap extends BoxSprite {
     flow.y = padding;
 
     flow.span(spanWidth - 2 * padding, spanHeight - flow.y - padding);
-    _scrollManager.span(spanWidth - 2 * padding, spanHeight - flow.y - padding);
+    _scrollManager.span(spanWidth, spanHeight - flow.y - padding);
 
     super.refresh();
   }

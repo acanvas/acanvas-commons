@@ -29,10 +29,13 @@ class PaperWrap extends BoxSprite {
       ..spacing = spacing
       ..flowOrientation = FlowOrientation.VERTICAL
       ..alignH = align;
-    super.addChild(flow);
+    //super.addChild(flow);
 
 
     _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar());
+    //_scrollManager.useNativeWidth = false;
+    //_scrollManager.useNativeHeight = false;
+    super.addChild(_scrollManager);
   }
 
   @override
@@ -46,14 +49,15 @@ class PaperWrap extends BoxSprite {
 
     _title.x = padding;
     _title.y = padding;
-    _title.width = spanWidth - 2 * padding;
+    _title.width = spanWidth - 2* padding;
 
+    int marginTop = PaperDimensions.HEIGHT_APP_BAR;
+
+    _scrollManager.y = marginTop;
+    _scrollManager.span(spanWidth, spanHeight - marginTop - 2*padding);
+    flow.span(spanWidth - 2 * padding, spanHeight - marginTop - 2*padding);
     flow.x = padding;
-    flow.y = PaperDimensions.HEIGHT_APP_BAR + 2 * padding;
-
-    flow.span(spanWidth - 2 * padding, spanHeight - flow.y);
-    _scrollManager.span(spanWidth - 2 * padding, spanHeight - flow.y);
-
+    flow.y = padding;
 
     super.refresh();
     GraphicsUtil.rectangle(0, 0, spanWidth, PaperDimensions.HEIGHT_APP_BAR, sprite: panelSprite, color: panelColor);

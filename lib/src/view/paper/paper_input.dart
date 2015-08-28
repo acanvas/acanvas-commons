@@ -282,7 +282,7 @@ class PaperInput extends BoxSprite {
     line.graphics.strokeColor(color, strength);
     line.graphics.closePath();
     if (ContextTool.WEBGL) {
-      line.applyCache(0, 0, spanWidth.ceil(), strength.ceil());
+      //line.applyCache(0, 0, spanWidth.ceil(), strength.ceil());
     }
   }
 

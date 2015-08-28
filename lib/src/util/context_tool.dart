@@ -6,6 +6,7 @@ class ContextTool {
   /* internals */
   Stage _stage;
   bool _webgl = false;
+  bool _materializeRequired = false;
   static final ContextTool _singleton = new ContextTool._internal();
 
   ContextTool._internal() {
@@ -36,11 +37,7 @@ class ContextTool {
   }
 
   static bool get WEBGL {
-    return _singleton._webgl;
-  }
-
-  static void set WEBGL(bool gl) {
-    _singleton._webgl = gl;
+    return _singleton._stage.renderEngine == RenderEngine.WebGL ? true : false;
   }
 
   static Stage get STAGE {
@@ -53,6 +50,14 @@ class ContextTool {
 
   static Juggler get JUGGLER {
     return _singleton._stage.juggler;
+  }
+
+  static bool get MATERIALIZE_REQUIRED {
+    return _singleton._materializeRequired;
+  }
+
+  static void set MATERIALIZE_REQUIRED( bool b ){
+    _singleton._materializeRequired = b;
   }
 
 }

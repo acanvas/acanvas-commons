@@ -43,6 +43,7 @@ class Scrollbar extends Slider with MPagedScroll {
   @override
   void interactionEnd() {
     if (_interaction) {
+      ContextTool.MATERIALIZE_REQUIRED = false;
       _interaction = false;
       if (stage != null) {
         if (ContextTool.TOUCH) {
@@ -360,6 +361,7 @@ class Scrollbar extends Slider with MPagedScroll {
   }
 
   void _pageScroll() {
+    ContextTool.MATERIALIZE_REQUIRED = true;
     if (snapToPages) {
       int thumbPos = ((currentPage * pageScrollDistance - valueMin) / (valueMax - valueMin) * (spanSize - _thumbSize)).round();
       if (thumbPos > (horizontalScrollBehavior ? mouseX : mouseY)) pageUp(); else if (thumbPos + _thumbSize < (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();

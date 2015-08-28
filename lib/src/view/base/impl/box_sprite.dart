@@ -2,7 +2,6 @@ part of stagexl_commons;
 
 class BoxSprite extends Sprite3D with MBox {
 
-  //TODO logger
   Logger logger;
 
   BoxSprite() {
@@ -37,9 +36,9 @@ class BoxSprite extends Sprite3D with MBox {
       span(width, height, refresh: false);
     }
     if (this is MFlow) {
-      print("${this}: ${spanWidth}x${spanHeight}  ${width}x${height}");
+      logger.debug("${this}: ${spanWidth}x${spanHeight}  ${width}x${height}");
       children.forEach((c) {
-        print("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
+        logger.debug("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
       });
     }
 
@@ -90,7 +89,6 @@ class BoxSprite extends Sprite3D with MBox {
       (child as MBox).span(spanWidth - 2 * padding, spanHeight, refresh: false);
     }
 
-    //todo think of a better way to ensure refresh() globally
     if (child is MBox && (child as MBox).autoRefresh) {
       (child as MBox).refresh();
     }

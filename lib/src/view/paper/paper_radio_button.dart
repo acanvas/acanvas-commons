@@ -10,8 +10,8 @@ class PaperRadioButton extends SelectableButton {
   int activeColor;
   String label;
 
-  Shape _icon;
-  Shape _bg;
+  Sprite _icon;
+  Sprite _bg;
   PaperText _paperLabel;
 
   PaperRadioButton({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : ""}) : super() {
@@ -21,17 +21,17 @@ class PaperRadioButton extends SelectableButton {
     addChild(ripple);
     ripple.span(RADIUS * 2, RADIUS * 2);
 
-    _bg = new Shape();
+    _bg = new Sprite();
     _bg.graphics.circle(30, 30, 8);
     _bg.graphics.strokeColor(PaperColor.BLACK, 2);
     _bg.graphics.circle(30, 30, 30);
     _bg.graphics.fillColor(0x00555555);
     if (ContextTool.WEBGL) {
-      _bg.applyCache(0, 0, 60, 60);
+      //_bg.applyCache(0, 0, 60, 60);
     }
     addChild(_bg);
 
-    _icon = new Shape();
+    _icon = new Sprite();
     _icon.graphics.circle(0, 0, 10);
     _icon.graphics.fillColor(activeColor);
     addChild(_icon);
@@ -43,7 +43,7 @@ class PaperRadioButton extends SelectableButton {
     }
 
     enabled = true;
-
+    _icon.scaleX = _icon.scaleY = .1;
   }
 
   @override void refresh() {
