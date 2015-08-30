@@ -25,7 +25,6 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
   num _mouseOffsetY = 0;
 
   // Scroll States
-  String _orientation;
   bool _interaction = false;
   bool _changing = false;
   bool _interactionH = false;
@@ -144,10 +143,12 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     if (_changing) {
       _changing = false;
       if (autoHideScrollbars) {
-        if (_hScrollbar.enabled) ContextTool.JUGGLER.addTween(_hScrollbar, 0.8)
-          ..animate.alpha.to(0);
-        if (_vScrollbar.enabled) ContextTool.JUGGLER.addTween(_vScrollbar, 0.8)
-          ..animate.alpha.to(0);
+        if (_hScrollbar.enabled) ContextTool.JUGGLER.addTween(_hScrollbar, 0.2)
+          ..animate.alpha.to(0)
+          ..delay = .5;
+        if (_vScrollbar.enabled) ContextTool.JUGGLER.addTween(_vScrollbar, 0.2)
+          ..animate.alpha.to(0)
+          ..delay = .5;
       }
       dispatchEvent(new ScrollifyEvent(ScrollifyEvent.CHANGE_END));
     }
@@ -157,11 +158,24 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     num w = useNativeWidth || !(_view is MBox) ? _view.width : (_view as MBox).spanWidth;
     num h = useNativeHeight || !(_view is MBox) ? _view.height : (_view as MBox).spanHeight;
 
-    _hScrollbar.enabled = w > spanWidth;
-    _hScrollbar.valueMax = w - spanWidth;
+    if(scrollOrientation == ScrollOrientation.VERTICAL){
+      _hScrollbar.enabled = false;
+    }
+    else{
+      _hScrollbar.enabled = w > spanWidth;
+      _hScrollbar.valueMax = w - spanWidth;
+    }
 
-    _vScrollbar.enabled = h > spanHeight;
-    _vScrollbar.valueMax = h - spanHeight;
+
+    print("_hScrollbar.enabled: ${_hScrollbar.enabled} – w: $w – spanWidth: $spanWidth – _view.width: ${_view.width} – (_view as MBox).spanWidth: ${(_view as MBox).spanWidth}");
+
+    if(scrollOrientation == ScrollOrientation.HORIZONTAL){
+      _vScrollbar.enabled = false;
+    }
+    else {
+      _vScrollbar.enabled = h > spanHeight;
+      _vScrollbar.valueMax = h - spanHeight;
+    }
 
     if (_hScrollbar.enabled || _vScrollbar.enabled) {
       mouseWheelEnabled = true;
@@ -290,12 +304,12 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
   void _onHScrollbarChange(SliderEvent event) {
     ContextTool.MATERIALIZE_REQUIRED = true;
-    _view.x = -event.value;
+    if (_hScrollbar.enabled) _view.x = -event.value;
   }
 
   void _onVScrollbarChange(SliderEvent event) {
     ContextTool.MATERIALIZE_REQUIRED = true;
-    _view.y = -event.value;
+    if (_vScrollbar.enabled) _view.y = -event.value;
   }
 
   @override
@@ -354,8 +368,8 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     int valV = _normalizedValueV * _vScrollbar.valueMax;
     if (valV < 0) valV = 0; else if (valV > _vScrollbar.valueMax) valV = _vScrollbar.valueMax;
 
-    _hScrollbar.value = valH;
-    _vScrollbar.value = valV;
+    if (_hScrollbar.enabled) _hScrollbar.value = valH;
+    if (_vScrollbar.enabled) _vScrollbar.value = valV;
   }
 
   void _onZoomConplete() {
@@ -424,9 +438,14 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
   }
 
   void _onStageMouseMove(InputEvent event) {
-    print("Touch move");
-    if (_hScrollbar.enabled) _hScrollbar.value = _mouseOffsetX - event.stageX;
-    if (_vScrollbar.enabled) _vScrollbar.value = _mouseOffsetY - event.stageY;
+    if (_hScrollbar.enabled) {
+      print("Touch move X");
+      _hScrollbar.value = _mouseOffsetX - event.stageX;
+    }
+    if (_vScrollbar.enabled){
+      print("Touch move Y");
+      _vScrollbar.value = _mouseOffsetY - event.stageY;
+    }
     // event.updateAfterEvent();
   }
 

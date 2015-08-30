@@ -147,6 +147,25 @@ class ListSprite extends ScrollifySprite with MList {
     updateScrollbars();
   }
 
+  void selectCellByVO(dynamic vo){
+    deselectAllCells();
+    int i=0;
+    for(i=0;i<this.data.length;i++){
+      if(vo == this.data[i]){
+        jumpToCell(i);
+        break;
+      }
+    }
+
+    view.children.forEach((child){
+      if(child is SelectableButton){
+        if((child as SelectableButton).id == i){
+          child.select();
+        }
+      }
+    });
+  }
+
 
   void jumpToCell(int nr) {
     _vScrollbar.killPageTween();
@@ -389,12 +408,21 @@ class ListSprite extends ScrollifySprite with MList {
 
 
   void _onDelayedCellMouseDown() {
-    if (_mouseDownCell != null) _mouseDownCell.select();
+    if (_mouseDownCell != null) {
+
+    if(touchable){
+      deselectAllCells();
+    }
+    _mouseDownCell.select();
+    }
   }
 
 
   void _onCellMouseUp(InputEvent event) {
     if (!_cellMoved && _mouseDownCell != null) {
+      if(touchable){
+        deselectAllCells();
+      }
       _mouseDownCell.select();
       if (_submitCallback != null) {
         _submitCallback.call(_mouseDownCell);
@@ -419,7 +447,7 @@ class ListSprite extends ScrollifySprite with MList {
       cell = (view.getChildAt(i) as SelectableButton);
       if (cell.id != exception) {
         //print("selected ${cell.id}");
-        cell.deselect();
+       cell.deselect();
       }
       else {
         //print("exception ${cell.id}");
@@ -435,7 +463,8 @@ class ListSprite extends ScrollifySprite with MList {
 
   @override
   void _onViewMouseDown(InputEvent event) {
-    print("Touch down");
+    if(_touching) return;
+    print("LS Touch down");
     _touching = true;
     if (_hScrollbar.enabled) {
       _hScrollbar.interactionStart(false, false);
@@ -469,7 +498,7 @@ class ListSprite extends ScrollifySprite with MList {
     if ((_originX - event.stageX).abs() > 3 || (_originY - event.stageY).abs() > 3) {
       _cellMoved = true;
       _timer.cancel();
-      if (_mouseDownCell != null) _mouseDownCell.deselect();
+      //if (_mouseDownCell != null) _mouseDownCell.deselect();
     }
   }
 

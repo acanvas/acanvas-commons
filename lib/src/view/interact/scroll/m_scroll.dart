@@ -4,7 +4,17 @@ part of stagexl_commons;
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
 
+enum ScrollOrientation {
+  HORIZONTAL, VERTICAL, BOTH
+  }
+
 abstract class MScroll {
+
+  ScrollOrientation _scrollOrientaton = ScrollOrientation.BOTH;
+
+  void set scrollOrientation(ScrollOrientation scrollOrientation) => _scrollOrientaton = scrollOrientation;
+
+  ScrollOrientation get scrollOrientation => _scrollOrientaton;
 
   bool _doubleClickEnabled = false;
 

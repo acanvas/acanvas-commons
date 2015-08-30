@@ -240,7 +240,7 @@ class Scrollbar extends Slider with MPagedScroll {
       scrollToPage(0);
       return true;
     } else if (value > valueMax) {
-      scrollToPage((pageCount).ceil(), 0, true);
+      scrollToPage((pageCount), 100, true);
       return true;
     }
     return false;

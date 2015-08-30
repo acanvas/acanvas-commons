@@ -82,16 +82,17 @@ class Flow extends BoxSprite with MFlow {
         _rowHeight = 0;
         _newLine = false;
       }
-      else {
-        //calculate height of current row (only in HORIZONTAL mode)
-        _rowHeight = max(_rowHeight, _childHeight);
-      }
+
       if (flowOrientation == FlowOrientation.VERTICAL) {
         //calculate height of current row (only in VERTICAL mode)
         _rowHeight = _childHeight;
         if (alignH == AlignH.CENTER) {
           _childXNew = (spanWidth / 2 - _childWidth / 2).round();
         }
+      }else{
+        //calculate height of current row (only in HORIZONTAL mode)
+        _rowHeight = max(_rowHeight, _childHeight);
+
       }
 
 

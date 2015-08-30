@@ -6,7 +6,7 @@ class Wrap extends BoxSprite {
   Flow flow;
   ScrollifySprite _scrollManager;
 
-  Wrap({int spacing : 20, AlignH align : AlignH.LEFT, bool reflow: true}) : super() {
+  Wrap({int spacing : 20, AlignH align : AlignH.LEFT, bool reflow: true, ScrollOrientation scrollOrientation : ScrollOrientation.BOTH}) : super() {
 
     inheritSpan = true;
     autoRefresh = true;
@@ -20,6 +20,7 @@ class Wrap extends BoxSprite {
     super.addChild(flow);
 
     _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar());
+    _scrollManager.scrollOrientation = scrollOrientation;
     //_scrollManager.useNativeWidth = false;
     //_scrollManager.useNativeHeight = false;
     //super.addChild(_scrollManager);

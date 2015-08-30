@@ -16,6 +16,7 @@ class PaperMenu extends ListSprite {
     PaperShadow _paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: backgroundColor, shadowEnabled : shadow);
     addChildAt(_paperShadow, 0);
 
+    //TODO this leads to render everything?
     span(PaperDimensions.WIDTH_MENU, PaperDimensions.HEIGHT_MENU_CELL * data.length);
   }
 

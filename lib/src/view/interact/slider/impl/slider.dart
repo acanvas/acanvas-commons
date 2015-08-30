@@ -65,6 +65,8 @@ class Slider extends BehaveSprite with MSlider {
 
   @override
   void enable() {
+    if(_enabled) return;
+
     Assert.notNull(background, "You need to set a background Sprite.");
     Assert.notNull(thumb, "You need to set a thumb Sprite.");
     super.enable();
@@ -82,6 +84,8 @@ class Slider extends BehaveSprite with MSlider {
 
   @override
   void disable() {
+    if(!_enabled) return;
+
     ContextTool.JUGGLER.removeTweens(this);
 
     if (ContextTool.TOUCH) {

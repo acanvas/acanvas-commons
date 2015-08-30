@@ -10,7 +10,7 @@ class PaperWrap extends BoxSprite {
   Flow flow;
   ScrollifySprite _scrollManager;
 
-  PaperWrap(UITextField title, {this.panelColor : PaperColor.WHITE, this.bgColor: PaperColor.WHITE, int spacing : 20, int padding: 10, AlignH align : AlignH.CENTER, bool reflow: false}) : super() {
+  PaperWrap(UITextField title, {this.panelColor : PaperColor.WHITE, this.bgColor: PaperColor.WHITE, int spacing : 20, int padding: 20, AlignH align : AlignH.CENTER, bool reflow: false}) : super() {
     inheritSpan = false;
     autoRefresh = false;
     this.padding = padding;
@@ -29,12 +29,8 @@ class PaperWrap extends BoxSprite {
       ..spacing = spacing
       ..flowOrientation = FlowOrientation.VERTICAL
       ..alignH = align;
-    //super.addChild(flow);
-
 
     _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar());
-    //_scrollManager.useNativeWidth = false;
-    //_scrollManager.useNativeHeight = false;
     super.addChild(_scrollManager);
   }
 
