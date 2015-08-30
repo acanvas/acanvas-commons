@@ -2,11 +2,11 @@ part of stagexl_commons;
 
 /// Vertical Alignment options of [BoxSprite]
 enum AlignV {
-TOP, CENTER, BOTTOM
+  TOP, CENTER, BOTTOM
 }
 /// Horizontal Alignment options of [BoxSprite]
 enum AlignH {
-LEFT, CENTER, RIGHT
+  LEFT, CENTER, RIGHT
 }
 
 /// The Mixin class for [BoxSprite].

@@ -66,8 +66,8 @@ class ImageSprite extends BoxSprite {
 
     scaleX = scaleY = scale;
 
-   // mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
-   //   ..relativeToParent = true;
+    // mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
+    //   ..relativeToParent = true;
 
     super.refresh();
   }

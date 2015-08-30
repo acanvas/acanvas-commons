@@ -5,3 +5,4 @@ pubspec.lock
 .DS_Store
 .settings
 .project
+.packages

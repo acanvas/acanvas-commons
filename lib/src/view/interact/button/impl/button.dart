@@ -15,9 +15,9 @@ class Button extends BehaveSprite with MButton {
     //adjust inherited span size to actual size
     span(width, height, refresh: false);
     if (this is MFlow) {
-      print("${this}: ${spanWidth}x${spanHeight}  ${width}x${height}");
+      logger.debug("${this}: ${spanWidth}x${spanHeight}  ${width}x${height}");
       children.forEach((c) {
-        print("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
+        logger.debug("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
       });
     }
   }

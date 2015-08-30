@@ -6,7 +6,7 @@ part of stagexl_commons;
 
 enum ScrollOrientation {
   HORIZONTAL, VERTICAL, BOTH
-  }
+}
 
 abstract class MScroll {
 

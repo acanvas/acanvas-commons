@@ -63,9 +63,9 @@ class PaperToggleButton extends SelectableButton {
   }
 
   @override void refresh() {
-   _inactiveLine.x = labelOffset + 38;
-   _activeLine.x = labelOffset + 38;
-   _inactiveLine.y = _activeLine.y = 30;
+    _inactiveLine.x = labelOffset + 38;
+    _activeLine.x = labelOffset + 38;
+    _inactiveLine.y = _activeLine.y = 30;
 
     _holder.x = labelOffset;
     _ripple.x = labelOffset;

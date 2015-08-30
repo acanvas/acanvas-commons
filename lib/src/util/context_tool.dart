@@ -56,7 +56,7 @@ class ContextTool {
     return _singleton._materializeRequired;
   }
 
-  static void set MATERIALIZE_REQUIRED( bool b ){
+  static void set MATERIALIZE_REQUIRED(bool b) {
     _singleton._materializeRequired = b;
   }
 

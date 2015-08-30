@@ -71,7 +71,7 @@ abstract class MSlider {
     interactionEnd();
     ContextTool.MATERIALIZE_REQUIRED = true;
 
-    if(_materializeControl != null) _materializeControl.cancel();
+    if (_materializeControl != null) _materializeControl.cancel();
     _materializeControl = new Timer(new Duration(milliseconds: 100), () => ContextTool.MATERIALIZE_REQUIRED = false);
 
   }

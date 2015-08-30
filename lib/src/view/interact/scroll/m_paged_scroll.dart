@@ -4,7 +4,7 @@ part of stagexl_commons;
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
 enum ScrollDirection {
-HORIZONTAL, VERTICAL
+  HORIZONTAL, VERTICAL
 }
 
 abstract class MPagedScroll {

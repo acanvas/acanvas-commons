@@ -158,18 +158,15 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
     num w = useNativeWidth || !(_view is MBox) ? _view.width : (_view as MBox).spanWidth;
     num h = useNativeHeight || !(_view is MBox) ? _view.height : (_view as MBox).spanHeight;
 
-    if(scrollOrientation == ScrollOrientation.VERTICAL){
+    if (scrollOrientation == ScrollOrientation.VERTICAL) {
       _hScrollbar.enabled = false;
     }
-    else{
+    else {
       _hScrollbar.enabled = w > spanWidth;
       _hScrollbar.valueMax = w - spanWidth;
     }
 
-
-    print("_hScrollbar.enabled: ${_hScrollbar.enabled} – w: $w – spanWidth: $spanWidth – _view.width: ${_view.width} – (_view as MBox).spanWidth: ${(_view as MBox).spanWidth}");
-
-    if(scrollOrientation == ScrollOrientation.HORIZONTAL){
+    if (scrollOrientation == ScrollOrientation.HORIZONTAL) {
       _vScrollbar.enabled = false;
     }
     else {
@@ -401,7 +398,6 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
   }
 
   void _onViewMouseDown(InputEvent event) {
-    print("Touch down");
     _touching = true;
     if (_hScrollbar.enabled) _hScrollbar.interactionStart(false, false);
     if (_vScrollbar.enabled) _vScrollbar.interactionStart(false, false);
@@ -418,18 +414,17 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
   }
 
   void _onStageMouseUp(InputEvent event) {
-    print("Touch up");
     _touching = false;
     if (_hScrollbar.enabled) _hScrollbar.interactionEnd();
     if (_vScrollbar.enabled) _vScrollbar.interactionEnd();
-      if (ContextTool.TOUCH) {
-        ContextTool.STAGE.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
-        ContextTool.STAGE.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
-      }
-      else {
-        ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
-        ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
-      }
+    if (ContextTool.TOUCH) {
+      ContextTool.STAGE.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
+      ContextTool.STAGE.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
+    }
+    else {
+      ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
+      ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
+    }
   }
 
   void clearMomentum() {
@@ -439,11 +434,9 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
   void _onStageMouseMove(InputEvent event) {
     if (_hScrollbar.enabled) {
-      print("Touch move X");
       _hScrollbar.value = _mouseOffsetX - event.stageX;
     }
-    if (_vScrollbar.enabled){
-      print("Touch move Y");
+    if (_vScrollbar.enabled) {
       _vScrollbar.value = _mouseOffsetY - event.stageY;
     }
     // event.updateAfterEvent();

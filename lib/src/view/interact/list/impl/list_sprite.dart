@@ -147,19 +147,19 @@ class ListSprite extends ScrollifySprite with MList {
     updateScrollbars();
   }
 
-  void selectCellByVO(dynamic vo){
+  void selectCellByVO(dynamic vo) {
     deselectAllCells();
-    int i=0;
-    for(i=0;i<this.data.length;i++){
-      if(vo == this.data[i]){
+    int i = 0;
+    for (i = 0;i < this.data.length;i++) {
+      if (vo == this.data[i]) {
         jumpToCell(i);
         break;
       }
     }
 
-    view.children.forEach((child){
-      if(child is SelectableButton){
-        if((child as SelectableButton).id == i){
+    view.children.forEach((child) {
+      if (child is SelectableButton) {
+        if ((child as SelectableButton).id == i) {
           child.select();
         }
       }
@@ -410,17 +410,17 @@ class ListSprite extends ScrollifySprite with MList {
   void _onDelayedCellMouseDown() {
     if (_mouseDownCell != null) {
 
-    if(touchable){
-      deselectAllCells();
-    }
-    _mouseDownCell.select();
+      if (touchable) {
+        deselectAllCells();
+      }
+      _mouseDownCell.select();
     }
   }
 
 
   void _onCellMouseUp(InputEvent event) {
     if (!_cellMoved && _mouseDownCell != null) {
-      if(touchable){
+      if (touchable) {
         deselectAllCells();
       }
       _mouseDownCell.select();
@@ -447,7 +447,7 @@ class ListSprite extends ScrollifySprite with MList {
       cell = (view.getChildAt(i) as SelectableButton);
       if (cell.id != exception) {
         //print("selected ${cell.id}");
-       cell.deselect();
+        cell.deselect();
       }
       else {
         //print("exception ${cell.id}");
@@ -463,8 +463,7 @@ class ListSprite extends ScrollifySprite with MList {
 
   @override
   void _onViewMouseDown(InputEvent event) {
-    if(_touching) return;
-    print("LS Touch down");
+    if (_touching) return;
     _touching = true;
     if (_hScrollbar.enabled) {
       _hScrollbar.interactionStart(false, false);
