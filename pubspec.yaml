@@ -4,6 +4,11 @@ description: StageXL Commons consist of a port of as3commons and highly customiz
 dependencies:
   logging: any
   stagexl: 
+    git : https://github.com/bp74/StageXL
+# temporary override until StageXL accepts pull request
+# https://github.com/bp74/StageXL/pull/212
+dependency_overrides:
+  stagexl:
     git : https://github.com/blockforest/StageXL
 transformers:
 - $dart2js:
