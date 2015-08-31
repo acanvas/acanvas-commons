@@ -3,9 +3,8 @@ version: 0.5.0
 description: StageXL Commons consist of a port of as3commons and highly customizable View Components
 dependencies:
   logging: any
-# temporarily use a fork - https://github.com/bp74/StageXL/pull/212
   stagexl:
-    git : https://github.com/blockforest/StageXL
+    git : https://github.com/bp74/StageXL
 transformers:
 - $dart2js:
     minify: true
