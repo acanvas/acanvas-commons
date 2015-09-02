@@ -33,7 +33,7 @@ class PaperCheckbox extends SelectableButton {
     _box.graphics.rect(-BOXWIDTH / 2, -BOXWIDTH / 2, BOXWIDTH, BOXWIDTH);
     _box.graphics.strokeColor(boxColor, 2);
     if (ContextTool.WEBGL) {
-      //_box.applyCache(-(BOXWIDTH / 2).round(), -(BOXWIDTH / 2).round(), BOXWIDTH, BOXWIDTH);
+      _box.applyCache(-(BOXWIDTH / 2).round(), -(BOXWIDTH / 2).round(), BOXWIDTH, BOXWIDTH);
     }
     addChild(_box);
 
@@ -45,7 +45,7 @@ class PaperCheckbox extends SelectableButton {
     _icon.graphics.strokeColor(activeColor, 3);
     _icon.graphics.closePath();
     if (ContextTool.WEBGL) {
-      //_icon.applyCache(-8, -17, 26, 20);
+      _icon.applyCache(-8, -17, 26, 20);
     }
     addChild(_icon);
     _icon.visible = false;

@@ -1,13 +1,13 @@
 part of stagexl_commons;
 
 class ImageSprite extends BoxSprite {
-  Shape _background;
-
+  Bitmap _image;
   BitmapData _bitmapData;
 
   void set bitmapData(BitmapData bitmapData) {
     _bitmapData = bitmapData;
-    addChild(new Bitmap(_bitmapData));
+    _image = new Bitmap(_bitmapData);
+    addChild(_image);
     refresh();
     dispatchEvent(new Event(Event.COMPLETE));
   }
@@ -26,8 +26,6 @@ class ImageSprite extends BoxSprite {
   }
 
   ImageSprite() : super() {
-    _background = new Shape();
-    addChild(_background);
   }
 
   void scaleToWidth(num w) {
@@ -49,7 +47,7 @@ class ImageSprite extends BoxSprite {
       return;
     }
 
-    num scale;
+    num scale = 0;
     if (_bitmapData != null) {
       if (_bitmapData.width > _bitmapData.height) {
         scale = spanHeight / _bitmapData.height;
@@ -62,12 +60,15 @@ class ImageSprite extends BoxSprite {
           scale = spanHeight / _bitmapData.height;
         }
       }
+
+      _image.x = (spanWidth  - _bitmapData.width)  / 2 ..floor();
+      _image.y = (spanHeight - _bitmapData.height) / 2 ..floor();
     }
 
     scaleX = scaleY = scale;
 
-    // mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
-    //   ..relativeToParent = true;
+    mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
+      ..relativeToParent = true;
 
     super.refresh();
   }

@@ -43,7 +43,7 @@ class PaperShadow extends BoxSprite implements IPaperButtonComponent {
         if (shadow) {
           //GraphicsUtil.circle(spanWidth/2, spanWidth/2-1, spanWidth/2,   round : true, color: 0x11000000, sprite: target != null ? target : this, clear : true);
           //GraphicsUtil.circle(spanWidth/2-1, spanWidth/2, spanWidth/2+1, round : true, color: 0x22000000, sprite: target != null ? target : this, clear : false);
-          GraphicsUtil.circle(spanWidth / 2, spanWidth / 2 + 1, spanWidth / 2 + 1, round : true, color: 0x33000000, sprite: target != null ? target : this, clear : false);
+          GraphicsUtil.circle(spanWidth / 2, spanWidth / 2 + 1, spanWidth / 2 + 1, round : true, color: 0x33000000, sprite: target != null ? target : this, clear : true);
         }
         GraphicsUtil.circle(spanWidth / 2, spanWidth / 2, spanWidth / 2, round : true, color: bgColor, sprite: target != null ? target : this, clear : !shadow);
         break;
@@ -52,10 +52,12 @@ class PaperShadow extends BoxSprite implements IPaperButtonComponent {
 
   @override
   downAction([Event e = null]) {
-    if (!respondToClick || !shadowEnabled || (_shadow != null && _shadow.distance == _activeDistance) || !ContextTool.WEBGL) return;
-
+    if (!respondToClick || !shadowEnabled || !ContextTool.WEBGL) return;
     _prepareShadowAnimation();
 
+    if(_trans != null && ContextTool.STAGE.juggler.contains(_trans)){
+      ContextTool.STAGE.juggler.remove(_trans);
+    }
     _trans = new Translation(_initialDistance, _activeDistance, .15)
       ..onUpdate = (num val) {
       _shadow.distance = val;
@@ -68,10 +70,11 @@ class PaperShadow extends BoxSprite implements IPaperButtonComponent {
 
   @override
   upAction([Event e = null]) {
-    if (!respondToClick || !shadowEnabled || (_shadow != null && _shadow.distance == _initialDistance) || !ContextTool.WEBGL) return;
-
+    if (!respondToClick || !shadowEnabled || !ContextTool.WEBGL) return;
+    if(_trans != null && ContextTool.STAGE.juggler.contains(_trans)){
+     ContextTool.STAGE.juggler.remove(_trans);
+    }
     _prepareShadowAnimation();
-
     _trans = new Translation(_activeDistance, _initialDistance, .15)
       ..onUpdate = (num val) {
       _shadow.distance = val;
@@ -85,9 +88,7 @@ class PaperShadow extends BoxSprite implements IPaperButtonComponent {
 
 
   void _prepareShadowAnimation() {
-    if (_trans != null) {
-      ContextTool.STAGE.juggler.remove(_trans);
-    }
+
     if (_shadow == null) {
       _shadow = new DropShadowFilter(_initialDistance, PI / 2, shadowColor, _blurXY, _blurXY, QUALITY);
       target != null ? target.filters = [_shadow] : filters = [_shadow];

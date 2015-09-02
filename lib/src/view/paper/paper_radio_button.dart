@@ -27,7 +27,7 @@ class PaperRadioButton extends SelectableButton {
     _bg.graphics.circle(30, 30, 30);
     _bg.graphics.fillColor(0x00555555);
     if (ContextTool.WEBGL) {
-      //_bg.applyCache(0, 0, 60, 60);
+      _bg.applyCache(0, 0, 60, 60);
     }
     addChild(_bg);
 

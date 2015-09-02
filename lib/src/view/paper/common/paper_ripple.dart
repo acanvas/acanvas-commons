@@ -28,10 +28,10 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
   void refresh() {
     switch (type) {
       case CIRCLE:
-        mask = new Mask.circle(spanWidth / 2, spanWidth / 2, spanWidth / 2);
+        mask = new Mask.circle(spanWidth / 2, spanWidth / 2, spanWidth / 2 + 2);
         break;
       case RECTANGLE:
-        mask = new Mask.rectangle(0, 0, spanWidth, spanHeight);
+        mask = new Mask.rectangle(0, 0, spanWidth+2, spanHeight+3);
         break;
     }
   }
@@ -46,7 +46,7 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
 
     int waveRadius = (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(spanWidth, spanHeight)) / 1.2).round();
 
-    Shape inner = new Shape()
+    Sprite inner = new Sprite()
       ..graphics.circle(0, 0, waveRadius)
       ..graphics.fillColor(color)
       ..alpha = _initialOpacity
