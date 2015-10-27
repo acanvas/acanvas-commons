@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Provides additional functionality for working with Points.
  *
@@ -20,8 +19,6 @@ part of stagexl_commons;
  *
  */
 class SuperPoint {
-
-
   /**
    * Rounds the x and y values of a Point instance.
    *
@@ -30,14 +27,10 @@ class SuperPoint {
    *
    * @return	A new Point instance storing the round coordinate.
    */
-  static Point round(Point point, [int factor=1]) {
+  static Point round(Point point, [int factor = 1]) {
     Point newPoint = new Point(0, 0);
     newPoint.x = (point.x * factor).round() / factor;
     newPoint.y = (point.y * factor).round() / factor;
     return newPoint;
   }
-
-
 }
-	
-	

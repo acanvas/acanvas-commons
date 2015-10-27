@@ -25,27 +25,26 @@ class ComponentFlickImage extends BoxSprite {
     _placeItem(dobj, MIDDLE);
 
     if (flickInterval > 0) {
-      _flickTimer = new Timer.periodic(new Duration(milliseconds : flickInterval), next);
+      _flickTimer = new Timer.periodic(new Duration(milliseconds: flickInterval), next);
     }
   }
 
   void _placeItem(Sprite data, String position) {
     Sprite child;
     switch (position) {
-      case LEFT :
+      case LEFT:
         child = _holder.getChildAt(0);
         data.x = (child.x - data.width).toInt();
         _holder.addChildAt(data, 0);
 
-        ContextTool.JUGGLER.addTween(data, 1)
-          ..animate.x.to(0);
+        ContextTool.JUGGLER.addTween(data, 1)..animate.x.to(0);
 
         ContextTool.JUGGLER.addTween(child, 1)
           ..animate.x.to(child.width.toInt())
           ..onComplete = () => Function.apply(_onTweenComplete, [child]);
 
         if (fadeChildren) {
-          for (int i = 0;i < data.numChildren;i++) {
+          for (int i = 0; i < data.numChildren; i++) {
             data.getChildAt(i).alpha = 0;
           }
           _fadeChildren(data, 1);
@@ -53,23 +52,22 @@ class ComponentFlickImage extends BoxSprite {
         }
         tweening = true;
         break;
-      case MIDDLE :
+      case MIDDLE:
         _holder.addChildAt(data, 0);
         break;
-      case RIGHT :
+      case RIGHT:
         child = _holder.getChildAt(0);
         data.x = (child.x + child.width).toInt();
         _holder.addChildAt(data, 0);
 
-        ContextTool.JUGGLER.addTween(data, 1)
-          ..animate.x.to(0);
+        ContextTool.JUGGLER.addTween(data, 1)..animate.x.to(0);
 
         ContextTool.JUGGLER.addTween(child, 1)
           ..animate.x.to(-child.width.toInt())
           ..onComplete = () => Function.apply(_onTweenComplete, [child]);
 
         if (fadeChildren) {
-          for (int i = 0;i < data.numChildren;i++) {
+          for (int i = 0; i < data.numChildren; i++) {
             data.getChildAt(i).alpha = 0;
           }
           _fadeChildren(data, 1);
@@ -86,7 +84,6 @@ class ComponentFlickImage extends BoxSprite {
     tweening = false;
   }
 
-
   void next([Timer timer = null]) {
     if (tweening == true) {
       return;
@@ -99,7 +96,6 @@ class ComponentFlickImage extends BoxSprite {
     _placeItem(_data[_currentIndex], RIGHT);
   }
 
-
   void prev() {
     if (tweening == true) {
       return;
@@ -110,7 +106,6 @@ class ComponentFlickImage extends BoxSprite {
 
     _placeItem(_data[_currentIndex], LEFT);
   }
-
 
   void gotoPage(int page) {
     if (page == _currentIndex) {
@@ -132,11 +127,10 @@ class ComponentFlickImage extends BoxSprite {
   }
 
   void _fadeChildren(Sprite data, int alph) {
-    for (int i = 0;i < data.numChildren;i++) {
+    for (int i = 0; i < data.numChildren; i++) {
       ContextTool.JUGGLER.addTween(data.getChildAt(i), .3)
         ..animate.alpha.to(alph)
         ..delay = (i + alph) * .3;
     }
   }
 }
-

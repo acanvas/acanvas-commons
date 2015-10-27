@@ -46,7 +46,6 @@ part of stagexl_commons;
  * @author Christophe Herreman
  */
 abstract class IOperation extends EventDispatcher {
-
   // --------------------------------------------------------------------
   //
   // Properties
@@ -75,7 +74,6 @@ abstract class IOperation extends EventDispatcher {
    */
   dynamic get error;
 
-
   // --------------------------------------------------------------------
   //
   // Methods
@@ -87,48 +85,42 @@ abstract class IOperation extends EventDispatcher {
    *
    * @param listener the event handler function
    */
-  void addCompleteListener(Function listener, [bool useCapture=false, int priority=0, bool useWeakReference=false])
-  ;
+  void addCompleteListener(Function listener,
+      [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
 
   /**
    * Convenience method for adding a listener to the OperationEvent.ERROR event.
    *
    * @param listener the event handler function
    */
-  void addErrorListener(Function listener, [bool useCapture=false, int priority=0, bool useWeakReference=false])
-  ;
+  void addErrorListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
 
   /**
    * Convenience method for adding a listener to the OperationEvent.TIMEOUT event.
    *
    * @param listener the event handler function
    */
-  void addTimeoutListener(Function listener, [bool useCapture=false, int priority=0, bool useWeakReference=false])
-  ;
+  void addTimeoutListener(Function listener,
+      [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
 
   /**
    * Convenience method for removing a listener from the OperationEvent.COMPLETE event.
    *
    * @param listener the event handler function
    */
-  void removeCompleteListener(Function listener, [bool useCapture=false])
-  ;
+  void removeCompleteListener(Function listener, [bool useCapture = false]);
 
   /**
    * Convenience method for removing a listener from the OperationEvent.ERROR event.
    *
    * @param listener the event handler function
    */
-  void removeErrorListener(Function listener, [bool useCapture=false])
-  ;
+  void removeErrorListener(Function listener, [bool useCapture = false]);
 
   /**
    * Convenience method for removing a listener from the OperationEvent.TIMEOUT event.
    *
    * @param listener the event handler function
    */
-  void removeTimeoutListener(Function listener, [bool useCapture=false])
-  ;
-
+  void removeTimeoutListener(Function listener, [bool useCapture = false]);
 }
-

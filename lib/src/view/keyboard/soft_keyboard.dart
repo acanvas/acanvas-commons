@@ -16,7 +16,6 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 
 part of stagexl_commons;
 
-
 /**
  * Dispatched when an on-screen key is pressed.
  *
@@ -104,7 +103,6 @@ part of stagexl_commons;
  *
  */
 class SoftKeyboard extends BoxSprite {
-
   /** Version of this SoftKeyboard library */
   static const String VERSION = '1.0a rev8';
 
@@ -143,7 +141,6 @@ class SoftKeyboard extends BoxSprite {
    * @throws Error First parameter must be a Layout object or a vector of Layout objects.
    */
   SoftKeyboard(List<Layout> layouts, [num width = 320, num height = 160]) {
-
     _layouts = layouts;
 
     // Assign parameters locally
@@ -162,19 +159,14 @@ class SoftKeyboard extends BoxSprite {
 
     // Add background skin (if any has been specified)
     if (backgroundSkin != null) addChildAt(backgroundSkin, 0);
-
-
   }
 
   /** @ */
   void _addKeyListenersToConfiguration(Sprite conf) {
-
     for (int i = 0; i < conf.numChildren; i++) {
-
       KeyRow kr = conf.getChildAt(i) as KeyRow;
 
       for (int j = 0; j < kr.numChildren; j++) {
-
         Key k = kr.getChildAt(j) as Key;
         k.addEventListener(KeyEvent.KEY_UP_PRINTABLE, _onKeyUpPrintableOrVisible);
         k.addEventListener(KeyEvent.KEY_UP_VISIBLE, _onKeyUpPrintableOrVisible);
@@ -182,38 +174,28 @@ class SoftKeyboard extends BoxSprite {
         k.addEventListener(KeyEvent.KEY_DOWN, _onKeyDown);
         k.addEventListener(KeyEvent.KEY_UP, _onKeyUp);
         k.addEventListener(KeyEvent.SHOW_VARIANTS, _onShowVariants);
-
       }
-
     }
-
   }
 
   /** @ */
   void _removeKeyListenersFromConfiguration(Sprite conf) {
-
     for (int i = 0; i < conf.numChildren; i++) {
-
       KeyRow kr = conf.getChildAt(i) as KeyRow;
 
       for (int j = 0; j < kr.numChildren; j++) {
-
         Key k = kr.getChildAt(j) as Key;
         k.removeEventListener(KeyEvent.KEY_UP_PRINTABLE, _onKeyUpPrintableOrVisible);
         k.removeEventListener(KeyEvent.KEY_UP_VISIBLE, _onKeyUpPrintableOrVisible);
         k.removeEventListener(KeyEvent.KEY_DOWN, _onKeyDown);
         k.removeEventListener(KeyEvent.KEY_UP, _onKeyUp);
         k.removeEventListener(KeyEvent.SHOW_VARIANTS, _onShowVariants);
-
       }
-
     }
-
   }
 
   /** @ */
   void _onShowVariants(KeyEvent e) {
-
     // If the callout is already on the stage, it means that the user rolled out and back in
     // while keeping the key pressed. In that case, it shouldn't be displayed again.
     if (_callout != null && _callout.stage != null) return;
@@ -238,22 +220,17 @@ class SoftKeyboard extends BoxSprite {
 //				throw(error);
     }
 
-
     addChild(_callout);
-
 
     // For whatever reason, we need to manually resize the Callout otherwise in some cases
     // (when the keyboard is small for instance) the variant keys are too small.
     _callout.span(key.height, (key.width * key.variants.length) + (key.variants.length - 1) * 5);
 
     // THIS BREAKS THE TOP ARROW !!!!!
-
-
   }
 
   /** @ */
   Sprite _buildConfiguration(Layout layout) {
-
     LifecycleSprite keyboard = new LifecycleSprite();
     keyboard.inheritSpan = true;
 
@@ -267,34 +244,27 @@ class SoftKeyboard extends BoxSprite {
     }
 
     return keyboard;
-
   }
 
   /** @ */
   void _onKeyDown(KeyEvent e) {
-
     // Re-dispatch the event so implementors can easily listen on the SoftKeyboard object
     // directly
     dispatchEvent(e);
-
   }
 
   void _onKeyUpPrintableOrVisible(KeyEvent e) {
-
     // Re-dispatch the event so implementors can easily listen on the SoftKeyboard object
     // directly
     dispatchEvent(e);
-
   }
 
   /** @ */
   void _onKeyUp(KeyEvent e) {
-
     Key key = e.currentTarget as Key;
 
     // Treat the special SWITCH_LAYOUT case
     if (e.charCode == CharCode.SWITCH_LAYOUT) {
-
       // If a layout to switch to has been defined on the key, use it first. If not, go to
       // next layout by default.
       //Layout currentLayout = layouts[layoutIndex];
@@ -302,18 +272,15 @@ class SoftKeyboard extends BoxSprite {
       if (key.switchToLayoutType != null) {
         layoutIndex = _getLayoutIndex(key.switchToLayoutType);
       } else {
-
         // Otherwise, go to next layout
         if (layoutIndex + 1 < layouts.length) {
           layoutIndex++;
         } else {
           layoutIndex = 0;
         }
-
       }
 
       return;
-
     }
 
     // Treat the special CAPS_LOCK case
@@ -327,12 +294,10 @@ class SoftKeyboard extends BoxSprite {
     if (key.switchToLayoutType != null) {
       layoutIndex = _getLayoutIndex(key.switchToLayoutType);
     }
-
   }
 
   /** @ */
   int _getLayoutIndex(Layout layoutType) {
-
     for (int i = 0; i < _layouts.length; i++) {
       if (_layouts[i] == layoutType) return i;
     }
@@ -340,11 +305,9 @@ class SoftKeyboard extends BoxSprite {
     return _currentLayoutIndex;
   }
 
-
   /** @ */
   @override
   void refresh() {
-
     // Fetch info about current keyboard
     Sprite keyboard = _configurations[_currentLayoutIndex];
     int rowCount = keyboard.numChildren;
@@ -359,22 +322,18 @@ class SoftKeyboard extends BoxSprite {
     Key key;
     // Loop through all rows of keys
     for (int i = 0; i < rowCount; i++) {
-
       KeyRow row = keyboard.getChildAt(i) as KeyRow;
 
       // Position and size each key (keeping track of where we are with xPos)
       num xPos = 0;
       for (int j = 0; j < row.keys.length; j++) {
-
         key = row.keys[j];
 
         key.span(key.relativeWidth * hUnit, key.relativeHeight * vUnit);
 
         key.x = xPos.round();
         xPos += key.spanWidth + currentLayout.horizontalGap * hUnit;
-
       }
-
     }
 
     // Key rows are centered in a second stage because they do not all have the same width.
@@ -389,12 +348,10 @@ class SoftKeyboard extends BoxSprite {
       backgroundSkin.width = width;
       backgroundSkin.height = height;
     }
-
   }
 
   /** @ */
   KeyRow _getWidestRow(Sprite keyboard) {
-
     KeyRow widest = (keyboard.getChildAt(0) as KeyRow);
 
     for (int i = 0; i < keyboard.numChildren; i++) {
@@ -403,16 +360,13 @@ class SoftKeyboard extends BoxSprite {
     }
 
     return widest;
-
   }
 
   /** @ */
   void _changeCapsLockKeyStatus([bool highlight = true]) {
-
     Sprite config = _configurations[_currentLayoutIndex];
 
     for (int i = 0; i < config.numChildren; i++) {
-
       KeyRow keyRow = config.getChildAt(i) as KeyRow;
 
       // This allows for more than one capsLock keys on the same layout
@@ -421,9 +375,7 @@ class SoftKeyboard extends BoxSprite {
           key.isSelected = highlight;
         }
       }
-
     }
-
   }
 
   /** Indicates whether the caps lock key is currently activated (or as true) not (false). */
@@ -433,7 +385,6 @@ class SoftKeyboard extends BoxSprite {
 
   /** @  */
   void set capsLock(bool value) {
-
     _layouts[_currentLayoutIndex].capsLock = value;
 
     if (value == true) {
@@ -443,20 +394,16 @@ class SoftKeyboard extends BoxSprite {
     }
 
     _changeCapsLockKeyStatus(value);
-
   }
 
   /** @ */
   void _changeKeyCase(String keyCase) {
-
     Sprite c = _configurations[layoutIndex];
 
     for (int i = 0; i < c.numChildren; i++) {
       KeyRow keyRow = c.getChildAt(i) as KeyRow;
-      for (Key key in keyRow.keys)
-        key.changeCase(keyCase);
+      for (Key key in keyRow.keys) key.changeCase(keyCase);
     }
-
   }
 
   /** A vector of all Layout objects assigned to the keyboard. */
@@ -471,7 +418,6 @@ class SoftKeyboard extends BoxSprite {
 
   /** @ */
   void set layoutIndex(int value) {
-
     // Check if value is valid
     if (value >= layouts.length) {
       throw (new StateError('Requested layout index is invalid.'));
@@ -488,7 +434,5 @@ class SoftKeyboard extends BoxSprite {
     _addKeyListenersToConfiguration(_configurations[layoutIndex]);
     capsLock = _layouts[_currentLayoutIndex].capsLock;
 //			invalidate(INVALIDATION_FLAG_STATE);
-
   }
-
 }

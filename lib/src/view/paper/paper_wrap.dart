@@ -1,8 +1,6 @@
 part of stagexl_commons;
 
-
 class PaperWrap extends BoxSprite {
-
   int bgColor;
   int panelColor;
   Sprite panelSprite;
@@ -10,12 +8,19 @@ class PaperWrap extends BoxSprite {
   Flow flow;
   ScrollifySprite _scrollManager;
 
-  PaperWrap(UITextField title, {this.panelColor : PaperColor.WHITE, this.bgColor: PaperColor.WHITE, int spacing : 20, int padding: 20, AlignH align : AlignH.CENTER, bool reflow: false}) : super() {
+  PaperWrap(UITextField title,
+      {this.panelColor: PaperColor.WHITE,
+      this.bgColor: PaperColor.WHITE,
+      int spacing: 20,
+      int padding: 20,
+      AlignH align: AlignH.CENTER,
+      bool reflow: false})
+      : super() {
     inheritSpan = false;
     autoRefresh = false;
     this.padding = padding;
 
-    super.addChild(new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
+    super.addChild(new PaperShadow(type: PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
 
     panelSprite = new Sprite();
     super.addChild(panelSprite);
@@ -58,5 +63,4 @@ class PaperWrap extends BoxSprite {
     super.refresh();
     GraphicsUtil.rectangle(0, 0, spanWidth, PaperDimensions.HEIGHT_APP_BAR, sprite: panelSprite, color: panelColor);
   }
-
 }

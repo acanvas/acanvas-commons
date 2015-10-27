@@ -15,14 +15,12 @@ class SliderEvent extends Event {
   static const String MOMENTUM_END = "SliderEvent.MOMENTUM_END";
   num value;
 
-  SliderEvent(String type, num value, [bool bubbles=false, bool cancelable=false]): super(type, bubbles) {
+  SliderEvent(String type, num value, [bool bubbles = false, bool cancelable = false]) : super(type, bubbles) {
     this.value = value;
     ;
   }
-
 
   Event clone() {
     return new SliderEvent(type, value, bubbles);
   }
 }
-

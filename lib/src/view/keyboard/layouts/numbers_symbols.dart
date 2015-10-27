@@ -21,8 +21,6 @@ part of stagexl_commons;
  * and the most useful symbol characters (including many key variants).
  */
 class numsSymbols extends Layout {
-
-
   /**
    * Creates a new numsSymbols object.
    */
@@ -72,8 +70,5 @@ class numsSymbols extends Layout {
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.5)
       ]
     ];
-
   }
-
 }
-	

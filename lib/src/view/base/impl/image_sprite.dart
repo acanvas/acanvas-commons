@@ -4,8 +4,15 @@ class ImageSprite extends BoxSprite {
   Bitmap _image;
   BitmapData _bitmapData;
 
+  AlignH alignH;
+  AlignV alignV;
+
   void set bitmapData(BitmapData bitmapData) {
     _bitmapData = bitmapData;
+    if (_image != null) {
+      removeChild(_image);
+      _image = null;
+    }
     _image = new Bitmap(_bitmapData);
     addChild(_image);
     refresh();
@@ -25,29 +32,30 @@ class ImageSprite extends BoxSprite {
     BitmapData.load(_href, opts).then(setBitmapData).catchError(onIoError);
   }
 
-  ImageSprite() : super() {
+  ImageSprite({this.alignH: AlignH.CENTER, this.alignV: AlignV.TOP}) : super() {
+    autoSpan = false;
   }
 
   void scaleToWidth(num w) {
     num scale;
     scale = w / _bitmapData.width;
-    scaleX = scaleY = scale;
+    _image.scaleX = _image.scaleY = scale;
   }
 
   void scaleToHeight(num h) {
     num scale;
     scale = h / _bitmapData.height;
-    scaleX = scaleY = scale;
+    _image.scaleX = _image.scaleY = scale;
   }
 
   @override
   void refresh() {
-
     if (spanWidth == 0 || spanHeight == 0) {
       return;
     }
 
-    num scale = 0;
+    num scale = _image.scaleX = _image.scaleY = 1;
+
     if (_bitmapData != null) {
       if (_bitmapData.width > _bitmapData.height) {
         scale = spanHeight / _bitmapData.height;
@@ -61,14 +69,34 @@ class ImageSprite extends BoxSprite {
         }
       }
 
-      _image.x = (spanWidth  - _bitmapData.width)  / 2 ..floor();
-      _image.y = (spanHeight - _bitmapData.height) / 2 ..floor();
+      _image.scaleX = _image.scaleY = scale;
+
+      switch (alignH) {
+        case AlignH.LEFT:
+          _image.x = 0;
+          break;
+        case AlignH.CENTER:
+          _image.x = (spanWidth - _image.width) / 2..floor();
+          break;
+        case AlignH.RIGHT:
+          _image.x = (spanWidth - _image.width).floor();
+          break;
+      }
+
+      switch (alignV) {
+        case AlignV.TOP:
+          _image.y = 0;
+          break;
+        case AlignV.CENTER:
+          _image.y = (spanHeight - _image.height) / 2..floor();
+          break;
+        case AlignV.BOTTOM:
+          _image.y = (spanHeight - _image.height).floor();
+          break;
+      }
     }
 
-    scaleX = scaleY = scale;
-
-    mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
-      ..relativeToParent = true;
+    mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)..relativeToParent = true;
 
     super.refresh();
   }
@@ -76,5 +104,4 @@ class ImageSprite extends BoxSprite {
   void onIoError(Error e) {
     this.logger.debug("IO error occured while loading image");
   }
-
 }

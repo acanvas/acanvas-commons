@@ -1,13 +1,10 @@
 part of stagexl_commons;
 
 /// Vertical Alignment options of [BoxSprite]
-enum AlignV {
-  TOP, CENTER, BOTTOM
-}
+enum AlignV { TOP, CENTER, BOTTOM }
+
 /// Horizontal Alignment options of [BoxSprite]
-enum AlignH {
-  LEFT, CENTER, RIGHT
-}
+enum AlignH { LEFT, CENTER, RIGHT }
 
 /// The Mixin class for [BoxSprite].
 ///
@@ -15,7 +12,6 @@ enum AlignH {
 /// [BoxSprite] adds box model features to StageXL.
 /// See the examples.
 abstract class MBox {
-
   //-------- Child Alignment
 
   /// Setter/Getter of horizontal alignment.
@@ -193,5 +189,4 @@ abstract class MBox {
   /// This method is implemented by [BoxSprite] and *really* cleans up.
   /// Override to add additional cleanup, for example of custom listeners.
   void dispose();
-
 }

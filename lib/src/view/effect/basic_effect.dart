@@ -5,7 +5,6 @@ part of stagexl_commons;
  */
 
 class BasicEffect implements IEffect {
-
   String _type;
 
   String get type {
@@ -68,7 +67,6 @@ class BasicEffect implements IEffect {
   }
 
   Bitmap _registerBitmapSprite(BoxSprite target) {
-
     _applyRecursively = false;
 
     target.alpha = 1;
@@ -88,9 +86,7 @@ class BasicEffect implements IEffect {
 
     _sprite.addChild(outputBmp);
     return outputBmp;
-
   }
-
 
   //These two are the only methods you'll need to override @see BitmapAlphaEffect.
   void runInEffect(BoxSprite target, num duration, Function callback) {
@@ -100,7 +96,6 @@ class BasicEffect implements IEffect {
     tween.animate.alpha.to(1.0); // target value = 0.0
     tween.onComplete = () => callback.call();
     ContextTool.JUGGLER.add(tween);
-
   }
 
   void runOutEffect(BoxSprite target, num duration, Function callback) {
@@ -159,4 +154,3 @@ class BasicEffect implements IEffect {
     }
   }
 }
-

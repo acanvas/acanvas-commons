@@ -40,5 +40,4 @@ abstract class MButton {
   void rollOverAction([InputEvent event = null]);
 
   void rollOutAction([InputEvent event = null]);
-
 }

@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Provides basic functionality for drawing with the Drawing API.
  *
@@ -21,20 +20,15 @@ part of stagexl_commons;
  *
  */
 class DrawingTool {
-
-
   // constants:
   static const String CROSS = "cross";
   static const String CIRCLE = "circle";
-
 
   /**
    * Constructor.
    * @
    */
-  DrawingTool() {
-  }
-
+  DrawingTool() {}
 
   /**
    * Draws a cross shaped marker on the specified coordinate(s).
@@ -51,7 +45,8 @@ class DrawingTool {
    * @see		DrawingTool#CIRCLE
    *
    */
-  static void drawMarker(Graphics graphics, dynamic point, [num size=10, String shape=CROSS, LineStyle lineStyle=null]) {
+  static void drawMarker(Graphics graphics, dynamic point,
+      [num size = 10, String shape = CROSS, LineStyle lineStyle = null]) {
     if (point is List) {
       for (String i in point) {
         drawMarker(graphics, point[i], size, shape);
@@ -59,7 +54,7 @@ class DrawingTool {
     }
     if (point is Point) {
       switch (shape) {
-        case CROSS :
+        case CROSS:
           Point point1 = new Point(point.x - size / 2, point.y - size / 2);
           Point point2 = new Point(point.x + size / 2, point.y + size / 2);
           Point point3 = new Point(point.x + size / 2, point.y - size / 2);
@@ -67,7 +62,7 @@ class DrawingTool {
           drawLine(graphics, point1, point2, lineStyle);
           drawLine(graphics, point3, point4, lineStyle);
           break;
-        case CIRCLE :
+        case CIRCLE:
           if (lineStyle != null) {
             lineStyle.applyTo(graphics);
           }
@@ -80,7 +75,6 @@ class DrawingTool {
       }
     }
   }
-
 
   /**
    * Draws lines between the Point instances in the area List onto graphics with the drawing API.
@@ -114,7 +108,7 @@ class DrawingTool {
    * @see		LineStyle
    *
    */
-  static void draw(Graphics graphics, List area, [bool connect=true, LineStyle lineStyle=null]) {
+  static void draw(Graphics graphics, List area, [bool connect = true, LineStyle lineStyle = null]) {
     int i;
     List newArea = [];
     for (i = 0; i < area.length; i++) {
@@ -136,7 +130,6 @@ class DrawingTool {
     }
   }
 
-
   /**
    * Draws lines between the four corners of a Rectangle.
    * Note that this method is not the same as the method with the same name in the Graphics class, which takes the parameters of the Rectangle constructor as parameters, instead of a Rectangle instance, as does this method.
@@ -149,14 +142,10 @@ class DrawingTool {
    * @see		LineStyle
    * @see		DrawingTool#draw()
    */
-  static void rect(Graphics graphics, Rectangle rect, [LineStyle lineStyle=null]) {
-    List area = [rect.topLeft,
-    new Point(rect.right, rect.top),
-    rect.bottomRight,
-    new Point(rect.left, rect.bottom)];
+  static void rect(Graphics graphics, Rectangle rect, [LineStyle lineStyle = null]) {
+    List area = [rect.topLeft, new Point(rect.right, rect.top), rect.bottomRight, new Point(rect.left, rect.bottom)];
     draw(graphics, area, true, lineStyle);
   }
-
 
   /**
    * Draws a line from one Point to another.
@@ -170,8 +159,8 @@ class DrawingTool {
    *
    * @see		LineStyle
    */
-  static void drawLine(Graphics graphics, Point point1, Point point2, [LineStyle lineStyle=null, bool moveTo=true]) {
-
+  static void drawLine(Graphics graphics, Point point1, Point point2,
+      [LineStyle lineStyle = null, bool moveTo = true]) {
     if (moveTo != null || moveTo == true) {
       graphics.moveTo(point1.x, point1.y);
     }
@@ -199,7 +188,6 @@ class DrawingTool {
         graphics.lineTo(next.x, next.y);
         lineStyle.applyTo(graphics);
       }
-
     } else {
       // draw normal line
 
@@ -207,11 +195,8 @@ class DrawingTool {
       if (lineStyle != null) {
         lineStyle.applyTo(graphics);
       }
-
     }
-
   }
-
 
   /**
    * Sets the lineStyle of a Graphics instance to none.
@@ -222,7 +207,4 @@ class DrawingTool {
   static void clearLineStyle(Graphics graphics) {
     //graphics.lineStyle(undefined, undefined, undefined);
   }
-
-
 }
-	

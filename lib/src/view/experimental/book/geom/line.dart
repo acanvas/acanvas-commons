@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Describes a line consisting of two Points.
  *
@@ -21,8 +20,6 @@ part of stagexl_commons;
  *
  */
 class Line extends InfiniteLine {
-
-
   /**
    * @
    */
@@ -32,7 +29,6 @@ class Line extends InfiniteLine {
    * @
    */
   Point _b = new Point(1, 1);
-
 
   /**
    * Constructor.
@@ -44,11 +40,10 @@ class Line extends InfiniteLine {
    * @see		Line#b
    *
    */
-  Line([Point pointA=null, Point pointB=null]) {
+  Line([Point pointA = null, Point pointB = null]) {
     if (pointA != null) this.a = pointA;
     if (pointA != null) this.b = pointB;
   }
-
 
   /**
    * Returns a Point instance that represents the coordinate at which two Line instances intersect.
@@ -69,7 +64,6 @@ class Line extends InfiniteLine {
     }
   }
 
-
   /**
    * Creates a Line from an InfiniteLine instance.
    *
@@ -81,7 +75,7 @@ class Line extends InfiniteLine {
    *
    * @return	Line.
    */
-  static Line createFromInfinite(InfiniteLine line, [num range=100]) {
+  static Line createFromInfinite(InfiniteLine line, [num range = 100]) {
     Point point1;
     Point point2;
     if (!line.horizontal) {
@@ -120,7 +114,6 @@ class Line extends InfiniteLine {
     return "Line((" + this.a.x + "," + this.a.y + ")->(" + this.b.x + "," + this.b.y + "))";
   }
 
-
   /**
    * Sets both ends of this Line instance equal to the values of the respective parameter values. This method does nothing more than setting the values of the a and b properties.
    *
@@ -137,7 +130,6 @@ class Line extends InfiniteLine {
     this.b = b;
   }
 
-
   /**
    * Returns a cloned instance of this Line.
    *
@@ -147,7 +139,6 @@ class Line extends InfiniteLine {
   dynamic clone() {
     return new Line(this.a, this.b);
   }
-
 
   /**
    * Returns true if the provided coordinate is on this Line.
@@ -160,10 +151,12 @@ class Line extends InfiniteLine {
    * @returns	bool
    */
   @override
-  bool containsPoint(Point point, [bool round=true]) {
+  bool containsPoint(Point point, [bool round = true]) {
     // coordinate can't be on this Line if both Points in this Line are on one side of the coordinate:
-    if ((point.x < this.a.x && point.x < this.b.x) || (point.x > this.a.x && point.x > this.b.x) ||
-    (point.y < this.a.y && point.y < this.b.y) || (point.y > this.a.y && point.y > this.b.y)) {
+    if ((point.x < this.a.x && point.x < this.b.x) ||
+        (point.x > this.a.x && point.x > this.b.x) ||
+        (point.y < this.a.y && point.y < this.b.y) ||
+        (point.y > this.a.y && point.y > this.b.y)) {
       return false;
     }
     // invoke super:
@@ -183,7 +176,7 @@ class Line extends InfiniteLine {
    *
    * @returns	bool
    */
-  bool containsLine(Line line, [bool round=true]) {
+  bool containsLine(Line line, [bool round = true]) {
     return (this.containsPoint(line.a, round) && this.containsPoint(line.b, round));
   }
 
@@ -200,10 +193,10 @@ class Line extends InfiniteLine {
    *
    * @returns	bool
    */
-  bool containsLinePartially(Line line, [bool round=true]) {
-    return ((this.containsPoint(line.a, round) || this.containsPoint(line.b, round)) && this.xCoefficient == line.xCoefficient);
+  bool containsLinePartially(Line line, [bool round = true]) {
+    return ((this.containsPoint(line.a, round) || this.containsPoint(line.b, round)) &&
+        this.xCoefficient == line.xCoefficient);
   }
-
 
   /**
    * Returns true if the provided Line instance is equal to this Line.
@@ -217,7 +210,7 @@ class Line extends InfiniteLine {
    * @return	bool
    */
   @override
-  bool equals(InfiniteLine line, [bool round=true]) {
+  bool equals(InfiniteLine line, [bool round = true]) {
     if (line is Line) {
       Line castLine = (line);
       Point a1 = (round) ? SuperPoint.round(this.a) : this.a;
@@ -229,7 +222,6 @@ class Line extends InfiniteLine {
       return super == (line);
     }
   }
-
 
   /**
    * The outcome of Point B its x-position minus Point A its x-position.
@@ -247,14 +239,12 @@ class Line extends InfiniteLine {
     return this.b.y - this.a.y;
   }
 
-
   /**
    * The exact center of the first and second Points of this Line.
    */
   Point get middle {
     return Point.interpolate(this.a, this.b, 0.5);
   }
-
 
   /**
    * Line's first Point.
@@ -268,7 +258,6 @@ class Line extends InfiniteLine {
     super.syncToPoints(this.a, this.b);
   }
 
-
   /**
    * Line's second Point.
    */
@@ -280,7 +269,6 @@ class Line extends InfiniteLine {
     this._b = point;
     super.syncToPoints(this.a, this.b);
   }
-
 
   /**
    * @inheritdoc
@@ -314,7 +302,6 @@ class Line extends InfiniteLine {
     this.setYIntersection(value);
   }
 
-
   /**
    * @inheritdoc
    * @see	InfiniteLine#xCoefficient
@@ -340,7 +327,6 @@ class Line extends InfiniteLine {
     this._b = new Point(xIntersect.x + dist2 * cos(angle), xIntersect.y + dist2 * sin(angle));
   }
 
-
   /**
    * @inheritdoc
    * @see	InfiniteLine#yCoefficient
@@ -365,8 +351,4 @@ class Line extends InfiniteLine {
     angle += PI;
     this._b = new Point(xIntersect.x + dist2 * cos(angle), xIntersect.y + dist2 * sin(angle));
   }
-
-
 }
-	
-	

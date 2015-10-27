@@ -15,12 +15,10 @@
 */
 part of stagexl_commons;
 
-
 /**
  * Simplified EventBus for Dart
  */
 class XLEventBus extends EventDispatcher implements IEventBus {
-
   static final XLEventBus _singleton = new XLEventBus._internal();
   Logger LOGGER;
 
@@ -28,11 +26,8 @@ class XLEventBus extends EventDispatcher implements IEventBus {
     return _singleton;
   }
 
-
   XLEventBus._internal() {
     // initialization logic here
     LOGGER = new Logger("DartEventBus");
   }
-
-
 }

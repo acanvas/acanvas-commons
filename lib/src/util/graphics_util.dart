@@ -1,12 +1,11 @@
 part of stagexl_commons;
 
 class GraphicsUtil {
-
-  static Sprite rectangle(num x, num y, num w, num h, {int color : 0xFF000000, Sprite sprite : null, bool round : false, bool clear : true}) {
+  static Sprite rectangle(num x, num y, num w, num h,
+      {int color: 0xFF000000, Sprite sprite: null, bool round: false, bool clear: true}) {
     if (sprite == null) {
       sprite = new Sprite();
-    }
-    else if (clear == true) {
+    } else if (clear == true) {
       sprite.graphics.clear();
     }
 
@@ -29,11 +28,11 @@ class GraphicsUtil {
     return sprite;
   }
 
-  static Sprite rectRound(num x, num y, num w, num h, num ew, num eh, {int color : 0xFF000000, Sprite sprite : null, bool round : false, bool clear : true}) {
+  static Sprite rectRound(num x, num y, num w, num h, num ew, num eh,
+      {int color: 0xFF000000, Sprite sprite: null, bool round: false, bool clear: true}) {
     if (sprite == null) {
       sprite = new Sprite();
-    }
-    else if (clear == true) {
+    } else if (clear == true) {
       sprite.graphics.clear();
     }
 
@@ -56,11 +55,11 @@ class GraphicsUtil {
     return sprite;
   }
 
-  static Sprite circle(num x, num y, num r, {int color : 0xFF000000, Sprite sprite : null, bool round : false, bool clear : true}) {
+  static Sprite circle(num x, num y, num r,
+      {int color: 0xFF000000, Sprite sprite: null, bool round: false, bool clear: true}) {
     if (sprite == null) {
       sprite = new Sprite();
-    }
-    else if (clear == true) {
+    } else if (clear == true) {
       sprite.graphics.clear();
     }
 
@@ -82,11 +81,10 @@ class GraphicsUtil {
     return sprite;
   }
 
-  static Sprite line(num x, num y, {int color : 0xFF000000, num strength : 1, Sprite sprite : null, bool round : false}) {
+  static Sprite line(num x, num y, {int color: 0xFF000000, num strength: 1, Sprite sprite: null, bool round: false}) {
     if (sprite == null) {
       sprite = new Sprite();
-    }
-    else {
+    } else {
       sprite.graphics.clear();
     }
 
@@ -108,7 +106,6 @@ class GraphicsUtil {
     return sprite;
   }
 
-
   static GraphicsGradient linearGraphicsGradient(List colors, List alphas, List ratios, Matrix matrix) {
     GraphicsGradient g = new GraphicsGradient.linear(matrix.tx, matrix.ty, matrix.a * matrix.c, matrix.b * matrix.d);
     for (int i = 0; i < colors.length; i++) {
@@ -116,5 +113,4 @@ class GraphicsUtil {
     }
     return g;
   }
-
 }

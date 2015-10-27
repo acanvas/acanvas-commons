@@ -20,7 +20,6 @@ part of stagexl_commons;
  * @author Roland Zwaga
  */
 abstract class IDisposable {
-
   // --------------------------------------------------------------------
   //
   // Properties
@@ -43,4 +42,3 @@ abstract class IDisposable {
    */
   void dispose();
 }
-

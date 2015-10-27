@@ -21,7 +21,6 @@ part of stagexl_commons;
  * @author Christophe Herreman
  */
 abstract class ICloneable {
-
   /**
    * Clones this object. Implementations should decide on a per class basis wether a deep or a shallow clone
    * will be done.
@@ -29,6 +28,4 @@ abstract class ICloneable {
    * @return a new object which is a clone of this object
    */
   dynamic clone();
-
 }
-

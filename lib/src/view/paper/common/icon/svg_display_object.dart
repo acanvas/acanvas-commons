@@ -1,23 +1,19 @@
 part of stagexl_commons;
 
 class SvgDisplayObject extends DisplayObject {
-
   RenderTexture _renderTexture;
   RenderTextureQuad _renderTextureQuad;
 
   String svg;
 
   SvgDisplayObject(this.svg) {
-
     if (ContextTool.FIREFOX) {
       //_firefox(html.window.btoa(svg));
       _allOthers("data:image/svg+xml;base64,${html.window.btoa(svg)}");
-    }
-    else {
+    } else {
       _allOthers("data:image/svg+xml;base64,${html.window.btoa(svg)}");
 //    _allOthers("data:image/svg+xml;charset=utf-8,$svg");
     }
-
   }
 
   void _allOthers(String svgUrl) {
@@ -45,7 +41,7 @@ class SvgDisplayObject extends DisplayObject {
 
   render(RenderState renderState) {
     if (_renderTextureQuad != null) {
-      renderState.renderQuad(_renderTextureQuad);
+      renderState.renderTextureQuad(_renderTextureQuad);
     }
   }
 }

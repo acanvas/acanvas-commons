@@ -5,7 +5,6 @@ part of stagexl_commons;
  */
 
 class SelectableButton extends Button with MSelectable {
-
   SelectableButton() : super() {
     autoSelect = true;
   }
@@ -14,7 +13,6 @@ class SelectableButton extends Button with MSelectable {
 
   @override void downAction([InputEvent event = null]) {
     super.downAction(event);
-
   }
 
   @override void upAction([InputEvent event = null, bool submit = true]) {
@@ -25,7 +23,7 @@ class SelectableButton extends Button with MSelectable {
     }
   }
 
-  @override void select({bool submit : false}) {
+  @override void select({bool submit: false}) {
     if (!selected) {
       selectAction();
       _selected = true;
@@ -41,5 +39,4 @@ class SelectableButton extends Button with MSelectable {
       _selected = false;
     }
   }
-
 }

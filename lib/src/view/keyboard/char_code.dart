@@ -29,7 +29,6 @@ part of stagexl_commons;
  * @see cc.cote.feathers.softkeyboard.keycollections
  */
 class CharCode {
-
   /** Constant associated with the character code value for the special <code>SWITCH_LAYOUT</code> key. */
   static final int SWITCH_LAYOUT = -1;
 
@@ -362,6 +361,4 @@ class CharCode {
 
   /** Constant associated with the character code value for the <code>DELETE</code> key. */
   static final int SCROLL_LOCK = 145;
-
 }
-	

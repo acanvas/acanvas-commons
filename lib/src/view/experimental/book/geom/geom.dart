@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * All-static class providing functionality for making basic geometric calculations.
  *
@@ -22,8 +21,6 @@ part of stagexl_commons;
  *
  */
 class Geom {
-
-
   /**
    * String representation for top.
    */
@@ -64,7 +61,6 @@ class Geom {
    */
   static final String TR = "topright";
 
-
   /**
    * @see	Geom#getHVLineIntersection()
    * @
@@ -77,14 +73,11 @@ class Geom {
    */
   static final String VERTICAL = "v";
 
-
   /**
    * Constructor.
    * @
    */
-  Geom() {
-  }
-
+  Geom() {}
 
   /**
    * Calculates angle (in radians) between two Points.
@@ -98,7 +91,6 @@ class Geom {
   static num getAngle(Point point1, Point point2) {
     return atan2(point2.y - point1.y, point2.x - point1.x);
   }
-
 
   /**
    * Takes a value and transforms it from degrees into radians.
@@ -128,7 +120,6 @@ class Geom {
     return PI / 180 * degrees;
   }
 
-
   /**
    * Calculates the position of Point #2, which is positioned on a certain amount of pixels (radius parameter) from Point #1 (point parameter) at a certain angle (angle parameter).
    *
@@ -143,7 +134,6 @@ class Geom {
     num y = point.y + radius * sin(angle);
     return new Point(x, y);
   }
-
 
   /**
    * Indicates whether or not a Point is in a certain corner of a Rectangle.
@@ -161,13 +151,9 @@ class Geom {
    * @return	true if point is in the specified corner of rect.
    *
    */
-  static bool isPointInCorner(Rectangle rect, Point point, String corner, [bool triangular=true]) {
-
+  static bool isPointInCorner(Rectangle rect, Point point, String corner, [bool triangular = true]) {
     // if the value of the corner parameter is invalid, return false:
-    if (corner != Geom.BL &&
-    corner != Geom.BR &&
-    corner != Geom.TL &&
-    corner != Geom.TR) {
+    if (corner != Geom.BL && corner != Geom.BR && corner != Geom.TL && corner != Geom.TR) {
       return false;
     }
     // if the Rectangle does not contain Point at all, return false:
@@ -207,9 +193,7 @@ class Geom {
       // return value:
       return innerRect.containsPoint(point);
     }
-
   }
-
 
   /**
    * Returns an List of Points indicating where a Line intersects with a Rectangle.
@@ -231,7 +215,7 @@ class Geom {
    *
    * @return	List
    */
-  static List getRectIntersections(Line line, Rectangle rect, [bool includeNull=false]) {
+  static List getRectIntersections(Line line, Rectangle rect, [bool includeNull = false]) {
     List intersections = [];
     List lines = SuperRectangle.createSuperRectangle(rect).getLines();
     Point intersection;
@@ -244,7 +228,6 @@ class Geom {
     return intersections;
   }
 
-
   /**
    * Indicates whether or not two Points are in such a position on a SuperRectangle its border that they need extra inbetween Points to describe the inbetween path from one to another along the SuperRectangle its border. This method is typically used by the trim method.
    *
@@ -253,7 +236,6 @@ class Geom {
    * @
    */
   static bool needsCorners(Map point1, Map point2, SuperRectangle rect) {
-
     if (point1["isOriginal"] != point2["isOriginal"]) {
       Map one = (point1["isOriginal"]) ? point2 : point1;
       Map two = (point2["isOriginal"]) ? point2 : point1;
@@ -269,18 +251,18 @@ class Geom {
         }
         if (rect.isOnSide(point1["point"]) == rect.isOnSide(point2["point"])) {
           switch (rect.isOnSide(point1["point"])) {
-            case SuperRectangle.NONE :
+            case SuperRectangle.NONE:
               return true;
-            case SuperRectangle.TOP :
+            case SuperRectangle.TOP:
               if (point2["point"].x < point1["point"].x) return true;
               break;
-            case SuperRectangle.RIGHT :
+            case SuperRectangle.RIGHT:
               if (point2["point"].y < point1["point"].y) return true;
               break;
-            case SuperRectangle.BOTTOM :
+            case SuperRectangle.BOTTOM:
               if (point2["point"].x > point1["point"].x) return true;
               break;
-            case SuperRectangle.LEFT :
+            case SuperRectangle.LEFT:
               if (point2["point"].y > point1["point"].y) return true;
               break;
           }
@@ -290,7 +272,6 @@ class Geom {
 
     return false;
   }
-
 
   /**
    * Returns the List index of the Point that is the nearest to a given coordinate.
@@ -313,7 +294,6 @@ class Geom {
     return nearest;
   }
 
-
   /**
    * Returns the coordinates of a star shape.
    *
@@ -324,7 +304,7 @@ class Geom {
    *
    * @returns	List of Points.
    */
-  static List star(num radius, Point center, [num rotation=0, int points=5]) {
+  static List star(num radius, Point center, [num rotation = 0, int points = 5]) {
     List area = [];
     num angle = (PI * 2) / (points * 2);
     rotation -= PI / 2;
@@ -334,8 +314,4 @@ class Geom {
     }
     return area;
   }
-
-
 }
-	
-	

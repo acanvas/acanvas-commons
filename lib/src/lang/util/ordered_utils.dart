@@ -21,7 +21,6 @@ part of stagexl_commons;
  * @see org.as3commons.lang.IOrdered IOrdered
  */
 class OrderedUtils {
-
   /**
    * The property name that is used to sort objects that implement the <code>IOrdered</code> abstract class.
    */
@@ -53,8 +52,7 @@ class OrderedUtils {
       if (a < b) return -1;
       else return 0;
     });
-    return ordered
-      ..addAll(unordered);
+    return ordered..addAll(unordered);
   }
 
   /**
@@ -83,4 +81,3 @@ class OrderedUtils {
     }
   }
 }
-

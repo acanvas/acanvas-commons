@@ -1,7 +1,6 @@
 part of stagexl_commons;
 
 abstract class MSelectable {
-
   int _id = 0;
 
   int get id => _id;
@@ -42,22 +41,18 @@ abstract class MSelectable {
     if (_selected != selected) {
       if (selected) {
         select();
-      }
-      else {
+      } else {
         deselect();
       }
       _selected = selected;
     }
   }
 
-  void select({bool submit : false});
+  void select({bool submit: false});
 
-  void selectAction() {
-  }
+  void selectAction() {}
 
   void deselect();
 
-  void deselectAction() {
-  }
-
+  void deselectAction() {}
 }

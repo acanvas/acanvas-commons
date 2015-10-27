@@ -5,7 +5,6 @@ part of stagexl_commons;
  */
 
 abstract class MBehave {
-
   bool _touchable = ContextTool.MOBILE ? true : false;
 
   void set touchable(bool touchable) {
@@ -62,8 +61,7 @@ abstract class MBehave {
     //if (_enabled != enabled) {
     if (enabled) {
       enable();
-    }
-    else {
+    } else {
       disable();
     }
     _enabled = enabled;
@@ -87,6 +85,4 @@ abstract class MBehave {
   }
 
   bool get inheritEnabled => _inheritEnabled;
-
-
 }

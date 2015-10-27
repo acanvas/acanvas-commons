@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Error class specifying exceptions for certain situations that may occur when working with the Book class.
  *
@@ -29,8 +28,6 @@ part of stagexl_commons;
  *
  */
 class BookError extends StateError {
-
-
   /**
    * Error message indicating that a method expecting a Page instance parameter was passed a non-Page DisplayObject.
    * Due to the lack of covariance in Actionscript overriding methods need to have the exact same signiature as the super-class' method.
@@ -49,7 +46,8 @@ class BookError extends StateError {
    * Error message indicating that the index indicating the z-index of a Page is out of bounds.
    * For instance, providing PageManager's removeChildAt with an index parameter which is smaller than 0 or greater than (or equal to) the length of PageManager's pages property, will result in a BookError with its message set to OUT_OF_BOUNDS its value.
    */
-  static final String OUT_OF_BOUNDS = "Supplied index is below zero or greater than the amount of pages in PageManager (minus one).";
+  static final String OUT_OF_BOUNDS =
+      "Supplied index is below zero or greater than the amount of pages in PageManager (minus one).";
 
   /**
    * Error message indicating the value of the message of a BookError when a pageflip is attempted on a Page that has no flipside.
@@ -57,17 +55,11 @@ class BookError extends StateError {
    */
   static final String NO_FLIPSIDE = "Page must have a flipside.";
 
-
   /**
    * Creates a new BookError object. If message is specified, its value is assigned to the object's message property.
    *
    * @param	message	A string associated with the BookError object.
    * @param	id		A reference number to associate with the specific error message.
    */
-  BookError([String message="", int id=0]): super(message) {
-  }
-
-
+  BookError([String message = "", int id = 0]) : super(message) {}
 }
-	
-	

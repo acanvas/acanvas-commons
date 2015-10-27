@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Stores line-styles.
  *
@@ -22,8 +21,6 @@ part of stagexl_commons;
  *
  */
 class LineStyle {
-
-
   /**
    * @
    */
@@ -90,7 +87,6 @@ class LineStyle {
    */
   static const num MIN_DASH = 0.1;
 
-
   /**
    * Constructor.
    *
@@ -105,8 +101,15 @@ class LineStyle {
    *
    * @see		http://livedocs.adobe.com/flex/2/langref/flash/display/Graphics.html#lineStyle()
    */
-  LineStyle([num thickness=1, int color=0, num alpha=1.0, bool pixelHinting=false, String scaleMode="normal", String caps=null, String joints=null, num miterLimit=3]) {
-
+  LineStyle(
+      [num thickness = 1,
+      int color = 0,
+      num alpha = 1.0,
+      bool pixelHinting = false,
+      String scaleMode = "normal",
+      String caps = null,
+      String joints = null,
+      num miterLimit = 3]) {
     this.thickness = thickness;
     this.color = color;
     this.alpha = alpha;
@@ -115,9 +118,7 @@ class LineStyle {
     this.caps = caps;
     this.joints = joints;
     this.miterLimit = miterLimit;
-
   }
-
 
   /**
    * An integer that indicates the thickness of the line in points; valid values are 0 to 255.
@@ -200,7 +201,6 @@ class LineStyle {
     this._miterLimit = value;
   }
 
-
   /**
    * Sets a Graphics instance its lineStyle equal to the values of the native supported properties (all of which can be set through this class its constructor).
    *
@@ -230,7 +230,6 @@ class LineStyle {
 								 */
   }
 
-
   /**
    * The length of a dash in a dashed line. When this property is set, dashEnabled is automatically set to true.
    *
@@ -249,7 +248,6 @@ class LineStyle {
     this.dashEnabled = true;
   }
 
-
   /**
    * The space between two dashes in a dashed line. If untouched, the value of the space property will be equal to that of the dash property.
    *
@@ -266,8 +264,4 @@ class LineStyle {
     if (value < MIN_DASH) value = MIN_DASH;
     this._space = value;
   }
-
-
 }
-	
-	

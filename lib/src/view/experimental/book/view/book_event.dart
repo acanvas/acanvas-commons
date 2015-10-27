@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Event class specifying type property values for Events broadcasted by the Book class.
  *
@@ -28,8 +27,6 @@ part of stagexl_commons;
  *
  */
 class BookEvent extends Event {
-
-
   /**
    * @
    */
@@ -131,7 +128,6 @@ class BookEvent extends Event {
    */
   static final String CURRENTPAGE_CHANGED = "currentPageChanged";
 
-
   /**
    * Creates a BookEvent object to pass as a parameter to event listeners.
    *
@@ -140,11 +136,11 @@ class BookEvent extends Event {
    * @param	cancelable	Determines whether the BookEvent object can be canceled.
    *
    */
-  BookEvent(String type, PageManager book, [Page page=null, bool bubbles=false, bool cancelable=false]): super(type, bubbles/*, cancelable*/) {
+  BookEvent(String type, PageManager book, [Page page = null, bool bubbles = false, bool cancelable = false])
+      : super(type, bubbles /*, cancelable*/) {
     this._pageManager = book;
     this._page = page;
   }
-
 
   /**
    * Returns the PageManager instance associated with this BookEvent.
@@ -168,8 +164,4 @@ class BookEvent extends Event {
   Page get page {
     return this._page;
   }
-
-
 }
-	
-	

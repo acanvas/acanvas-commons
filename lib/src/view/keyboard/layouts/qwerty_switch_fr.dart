@@ -21,8 +21,6 @@ part of stagexl_commons;
  * most useful key variants in a French context as well as a <code>SWITCH_LAYOUT</code> key.
  */
 class QwertySwitchFr extends Layout {
-
-
   /**
    * Creates a new QwertySwitchFr object.
    *
@@ -76,8 +74,5 @@ class QwertySwitchFr extends Layout {
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.5)
       ]
     ];
-
   }
-
 }
-	

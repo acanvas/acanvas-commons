@@ -1,11 +1,9 @@
 part of stagexl_commons;
 
 class UITextField extends TextField {
-
   bool inheritWidth = true;
 
   UITextField(String value, TextFormat format, [bool html = true]) : super() {
-
     defaultTextFormat = format != null ? format : new TextFormat("Roboto, Helvetica, Arial", 12, 0xFF000000);
 
     // Standardwerte für dynamische Textfelder setzen
@@ -31,7 +29,6 @@ class UITextField extends TextField {
     borderColor = 0x0;
 
     text = value;
-
   }
 
   void keyDownAction(int keyCode) {

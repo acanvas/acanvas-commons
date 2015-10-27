@@ -31,7 +31,17 @@ class PaperInput extends BoxSprite {
   /* bool to indicate if label is currently floating */
   bool _currentlyFloating = false;
 
-  PaperInput(String text, {this.fontSize: 14, this.textColor: PaperColor.BLACK, String fontName: DEFAULT_FONT, bool multiline: false, int rows: 1, this.floating: false, this.required: "", this.keyboard: false, this.password: false}) : super() {
+  PaperInput(String text,
+      {this.fontSize: 14,
+      this.textColor: PaperColor.BLACK,
+      String fontName: DEFAULT_FONT,
+      bool multiline: false,
+      int rows: 1,
+      this.floating: false,
+      this.required: "",
+      this.keyboard: false,
+      this.password: false})
+      : super() {
     inheritSpan = true;
 
     //force onscreen keyboard on mobile devices
@@ -94,7 +104,6 @@ class PaperInput extends BoxSprite {
     addEventListener(KeyboardEvent.KEY_UP, keyUpAction);
   }
 
-
   /*
    * Redraws and adjusts lines and textfield widths
    */
@@ -120,14 +129,14 @@ class PaperInput extends BoxSprite {
 
   /* User clicks into TextField */
   void mouseDownAction([InputEvent event = null]) {
+    ContextTool.MATERIALIZE_REQUIRED = true;
+
     /* Animate active line */
     if (_activeLine.alpha == 0) {
       _activeLine.scaleX = 0.01;
       _activeLine.alpha = 1;
       _activeLine.x = spanWidth / 2;
-      ContextTool.STAGE.juggler.addTween(_activeLine, .2).animate
-        ..x.to(0)
-        ..scaleX.to(1);
+      ContextTool.JUGGLER.addTween(_activeLine, .2).animate..x.to(0)..scaleX.to(1);
     }
 
     /* Animate cursor box */
@@ -137,11 +146,9 @@ class PaperInput extends BoxSprite {
       _cursorBox.alpha = 1;
 
       Tween tw = new Tween(_cursorBox, .1);
-      tw.animate
-        ..x.to(0)
-        ..scaleX.to(0.2);
+      tw.animate..x.to(0)..scaleX.to(0.2);
       tw.onComplete = () => _cursorBox.alpha = 0;
-      ContextTool.STAGE.juggler.add(tw);
+      ContextTool.JUGGLER.add(tw);
     }
 
     /* If the label is currently floating, color it blue or red again */
@@ -152,8 +159,7 @@ class PaperInput extends BoxSprite {
     /* If this textfield is mandatory, make explanatory text red */
     if (required != "") {
       _requiredTextField.color = PaperColor.RED;
-      ContextTool.STAGE.juggler.addTween(_requiredIconActive, .1).animate
-        ..alpha.to(1);
+      ContextTool.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
     }
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
@@ -169,7 +175,6 @@ class PaperInput extends BoxSprite {
     } else {
       ContextTool.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
-
   }
 
   /**
@@ -181,6 +186,8 @@ class PaperInput extends BoxSprite {
     }
     if (event.target is! UITextFieldInput && event.target is! PaperInput) {
       ContextTool.STAGE.focus = null;
+    } else {
+      ContextTool.MATERIALIZE_REQUIRED = false;
     }
     if (ContextTool.TOUCH) {
       ContextTool.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
@@ -188,8 +195,7 @@ class PaperInput extends BoxSprite {
       ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
     /* Make active blue line invisible */
-    ContextTool.STAGE.juggler.addTween(_activeLine, .1).animate
-      ..alpha.to(0);
+    ContextTool.JUGGLER.addTween(_activeLine, .1).animate..alpha.to(0);
 
     /* Make floating label grey again */
     if (_currentlyFloating) {
@@ -199,8 +205,7 @@ class PaperInput extends BoxSprite {
     /* Make explanatory text grey again */
     if (required != "") {
       _requiredTextField.color = PaperColor.GREY_DARK;
-      ContextTool.STAGE.juggler.addTween(_requiredIconActive, .1).animate
-        ..alpha.to(0);
+      ContextTool.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(0);
     }
 
     if (keyboard) {
@@ -229,20 +234,19 @@ class PaperInput extends BoxSprite {
           _currentlyFloating = true;
           Translation tr = new Translation(0, 1, .2)
             ..onUpdate = (num val) {
-            _defaultTextField.y = val * -(fontSize + 3);
-            _defaultTextField.scaleX = 1 - val / 4;
-            _defaultTextField.scaleY = 1 - val / 4;
-          }
+              _defaultTextField.y = val * -(fontSize + 3);
+              _defaultTextField.scaleX = 1 - val / 4;
+              _defaultTextField.scaleY = 1 - val / 4;
+            }
             ..onComplete = () {
-            _defaultTextField.color = _highlightColor;
-          };
-          ContextTool.STAGE.juggler.add(tr);
+              _defaultTextField.color = _highlightColor;
+            };
+          ContextTool.JUGGLER.add(tr);
         }
       } else {
         _defaultTextField.alpha = 0;
       }
     }
-
   }
 
   /**
@@ -256,14 +260,14 @@ class PaperInput extends BoxSprite {
           _currentlyFloating = false;
           Translation tr = new Translation(1, 0, .2)
             ..onUpdate = (num val) {
-            _defaultTextField.y = val * -(fontSize + 3);
-            _defaultTextField.scaleX = 1 - val / 4;
-            _defaultTextField.scaleY = 1 - val / 4;
-          }
+              _defaultTextField.y = val * -(fontSize + 3);
+              _defaultTextField.scaleX = 1 - val / 4;
+              _defaultTextField.scaleY = 1 - val / 4;
+            }
             ..onComplete = () {
-            _defaultTextField.color = PaperColor.GREY_DARK;
-          };
-          ContextTool.STAGE.juggler.add(tr);
+              _defaultTextField.color = PaperColor.GREY_DARK;
+            };
+          ContextTool.JUGGLER.add(tr);
         }
       } else {
         _defaultTextField.alpha = 1;
@@ -273,7 +277,6 @@ class PaperInput extends BoxSprite {
     _activeLine.y = _inputTextField.textHeight + 5;
   }
 
-
   void _drawLine(Shape line, int color, num strength) {
     line.graphics.clear();
     line.graphics.beginPath();
@@ -282,7 +285,7 @@ class PaperInput extends BoxSprite {
     line.graphics.strokeColor(color, strength);
     line.graphics.closePath();
     if (ContextTool.WEBGL) {
-      //line.applyCache(0, 0, spanWidth.ceil(), strength.ceil());
+      line.applyCache(0, 0, spanWidth.ceil(), strength.ceil());
     }
   }
 

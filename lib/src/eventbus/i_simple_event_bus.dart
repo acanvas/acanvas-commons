@@ -15,7 +15,6 @@
 */
 part of stagexl_commons;
 
-
 /**
  * Describes an object that is used as a publish/subscribe event mechanism that lets objects communicate
  * with eachother in a loosely coupled manner.
@@ -50,7 +49,7 @@ abstract class ISimpleEventBus {
    * @param eventType the type of event to listen to
    * @param listener the event handler function
    */
-  bool addEventListener(String eventType, Function listener, [bool useWeakReference=false, Object topic=null]);
+  bool addEventListener(String eventType, Function listener, [bool useWeakReference = false, Object topic = null]);
 
   /**
    * Adds a proxied event handler as a listener to the specified event type.
@@ -62,7 +61,7 @@ abstract class ISimpleEventBus {
   /**
    * Adds the given listener object as a listener to all events sent through the event bus.
    */
-  bool addListener(IEventBusListener listener, [bool useWeakReference=false, Object topic=null]);
+  bool addListener(IEventBusListener listener, [bool useWeakReference = false, Object topic = null]);
 
   /**
    * Removes all event listeners, interceptors and listener interceptors from the current <code>IEventBus</code> instance.
@@ -74,13 +73,13 @@ abstract class ISimpleEventBus {
    * eventType and call <code>dispatchEvent()</code> on the event bus.
    * @param eventType the type of the event to dispatch.
    */
-  bool dispatch(String eventType, [Object topic=null]);
+  bool dispatch(String eventType, [Object topic = null]);
 
   /**
    * Dispatches the specified <code>Event</code> on the event bus.
    * @param event The specified <code>Event</code>.
    */
-  bool dispatchEvent(Event event, [Object topic=null]);
+  bool dispatchEvent(Event event, [Object topic = null]);
 
   /**
    * The number of registered event listeners for the specified event class, optionally also for the specified topic. Omitting the topic argument will return the number
@@ -90,7 +89,7 @@ abstract class ISimpleEventBus {
    * @return The specified number of event listeners.
    */
   int getClassListenerCount(/*Class*/
-                            eventClass, [Object topic=null]);
+      eventClass, [Object topic = null]);
 
   /**
    * The number of registered event listener proxies for the specified event class, optionally also for the specified topic. Omitting the topic argument will return the number
@@ -100,7 +99,7 @@ abstract class ISimpleEventBus {
    * @return The specified number of event listener proxies.
    */
   int getClassProxyListenerCount(/*Class*/
-                                 eventClass, [Object topic=null]);
+      eventClass, [Object topic = null]);
 
   /**
    * The number of registered event listeners for the specified event eventType, optionally also for the specified topic. Omitting the topic argument will return the number
@@ -109,7 +108,7 @@ abstract class ISimpleEventBus {
    * @param topic The specified optional topic.
    * @return The specified number of event listeners.
    */
-  int getEventListenerCount(String eventType, [Object topic=null]);
+  int getEventListenerCount(String eventType, [Object topic = null]);
 
   /**
    * The number of registered event listener proxies for the specified event type, optionally also for the specified topic. Omitting the topic argument will return the number
@@ -118,7 +117,7 @@ abstract class ISimpleEventBus {
    * @param topic The specified optional topic.
    * @return The specified number of event listener proxies.
    */
-  int getEventListenerProxyCount(String eventType, [Object topic=null]);
+  int getEventListenerProxyCount(String eventType, [Object topic = null]);
 
   /**
    * The number of registered global event listeners, optionally for the specified topic. Omitting the topic argument will return the number
@@ -126,20 +125,23 @@ abstract class ISimpleEventBus {
    * @param topic The specified optional topic.
    * @return The specified number of global listeners.
    */
-  int getListenerCount([Object topic=null]);
+  int getListenerCount([Object topic = null]);
 
   /**
    * Removes all types of listeners.
    */
-  void removeAllListeners([Object topic=null]);
+  void removeAllListeners([Object topic = null]);
 
   /**
    * Removes a listener function for events of a specific Class.
    * @param eventClass The specified <code>Class</code>.
    * @param listener The specified listener function.
    */
-  void removeEventClassListener(/*Class*/
-                                eventClass, Function listener, [Object topic=null]);
+  void removeEventClassListener(
+      /*Class*/
+      eventClass,
+      Function listener,
+      [Object topic = null]);
 
   /**
    * Removes a proxied event handler as a listener for events of a specific <code>Class</code>.
@@ -153,7 +155,7 @@ abstract class ISimpleEventBus {
    * @param eventType
    * @param listener
    */
-  void removeEventListener(String eventType, Function listener, [Object topic=null]);
+  void removeEventListener(String eventType, Function listener, [Object topic = null]);
 
   /**
    * Removes a proxied event handler as a listener from the specified event type.
@@ -164,7 +166,5 @@ abstract class ISimpleEventBus {
    * Removes the given listener from the event bus.
    * @param listener
    */
-  void removeListener(IEventBusListener listener, [Object topic=null]);
-
+  void removeListener(IEventBusListener listener, [Object topic = null]);
 }
-

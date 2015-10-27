@@ -5,7 +5,6 @@ part of stagexl_commons;
  */
 
 abstract class MDuration {
-
   num _duration = 0;
 
   num get duration {
@@ -15,5 +14,4 @@ abstract class MDuration {
   void set duration(num value) {
     _duration = value;
   }
-
 }

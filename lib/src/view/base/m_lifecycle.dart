@@ -4,7 +4,6 @@ part of stagexl_commons;
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
 abstract class MLifecycle {
-
   static const double APPEAR_DURATION_DEFAULT = 0.0;
   static const double DISAPPEAR_DURATION_DEFAULT = 0.0;
 
@@ -51,7 +50,6 @@ abstract class MLifecycle {
 
   onInitComplete();
 
-
   void load({Map params: null});
 
   void appear({double duration: APPEAR_DURATION_DEFAULT}) {
@@ -61,7 +59,7 @@ abstract class MLifecycle {
     }, duration);
   }
 
-  void disappear({double duration: DISAPPEAR_DURATION_DEFAULT, bool autoDispose : false}) {
+  void disappear({double duration: DISAPPEAR_DURATION_DEFAULT, bool autoDispose: false}) {
     //event disappear
   }
 

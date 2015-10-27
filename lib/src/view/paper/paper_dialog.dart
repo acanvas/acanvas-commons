@@ -1,8 +1,6 @@
 part of stagexl_commons;
 
-
 class PaperDialog extends BoxSprite {
-
   num bgColor;
   bool enableRipple;
   Shape _bg;
@@ -10,9 +8,10 @@ class PaperDialog extends BoxSprite {
   Flow _vbox;
   Flow _hbox;
 
-  PaperDialog(String title, {num fontColor : PaperColor.BLACK, this.bgColor: PaperColor.WHITE, String fontName : PaperText.DEFAULT_FONT}) : super() {
-
-    addChild(new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
+  PaperDialog(String title,
+      {num fontColor: PaperColor.BLACK, this.bgColor: PaperColor.WHITE, String fontName: PaperText.DEFAULT_FONT})
+      : super() {
+    addChild(new PaperShadow(type: PaperShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
 
     _title = new PaperText(title, size: 22, color: fontColor, fontName: fontName);
     addChild(_title);
@@ -27,8 +26,6 @@ class PaperDialog extends BoxSprite {
       ..spacing = 20
       ..snapToPixels = true;
     addChild(_hbox);
-
-
   }
 
   void addContent(InteractiveObject spr) {
@@ -38,7 +35,6 @@ class PaperDialog extends BoxSprite {
   void addButton(Button btn) {
     _hbox.addChild(btn);
   }
-
 
   @override void refresh() {
     super.refresh();
@@ -55,8 +51,6 @@ class PaperDialog extends BoxSprite {
     _hbox.x = (spanWidth - _hbox.width - 20).round();
     _hbox.y = (spanHeight - _hbox.height - 30).round();
 
-
     //filters = [ new DropShadowFilter(5, 90,PaperColor.GREY_SHADOW, 10, 10) ];
   }
-
 }

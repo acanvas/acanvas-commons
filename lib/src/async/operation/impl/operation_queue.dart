@@ -15,7 +15,6 @@
  */
 part of stagexl_commons;
 
-
 /**
  * Dispatched when all the operations in the current <code>OperationQueue</code> have received a result.
  * @eventType org.as3commons.async.operation.OperationEvent#COMPLETE OperationEvent.COMPLETE
@@ -30,7 +29,6 @@ part of stagexl_commons;
  * @author Christophe Herreman
  */
 class OperationQueue extends AbstractProgressOperation implements IOperationQueue {
-
   /** A static counter of queues. */
   static int _queueCounter = 0;
 
@@ -44,7 +42,7 @@ class OperationQueue extends AbstractProgressOperation implements IOperationQueu
    * Creates a new <code>OperationQueue</code> instance.
    * @param name the name of the queue; if no name is given, one will be generated.
    */
-  OperationQueue([String name=""]) {
+  OperationQueue([String name = ""]) {
     _queueCounter++;
     _name = (name == "") ? "queue_" + _queueCounter.toString() : name;
   }
@@ -95,7 +93,15 @@ class OperationQueue extends AbstractProgressOperation implements IOperationQueu
    */
   @override
   String toString() {
-    return "[OperationQueue(name='" + name + "',operations:'" + _operations.length.toString() + "', total:'" + total.toString() + "', progress:'" + progress.toString() + "')]";
+    return "[OperationQueue(name='" +
+        name +
+        "',operations:'" +
+        _operations.length.toString() +
+        "', total:'" +
+        total.toString() +
+        "', progress:'" +
+        progress.toString() +
+        "')]";
   }
 
   /**
@@ -188,4 +194,3 @@ class OperationQueue extends AbstractProgressOperation implements IOperationQueu
     }
   }
 }
-

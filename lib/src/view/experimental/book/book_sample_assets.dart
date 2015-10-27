@@ -1,12 +1,11 @@
 part of stagexl_commons;
 
-
 class BookSampleAssets {
-
   static const int NUM_PAGES = 12;
 
   static Bitmap getPage(int i) {
-    return new Bitmap(_singleton.mgr.getBitmapData("C_" + (i < 10 ? "0$i" : "$i") + "_768x1024Px_Vorschaufenster").clone());
+    return new Bitmap(
+        _singleton.mgr.getBitmapData("C_" + (i < 10 ? "0$i" : "$i") + "_768x1024Px_Vorschaufenster").clone());
   }
 
   List assets;
@@ -24,7 +23,6 @@ class BookSampleAssets {
       assets.add("C_" + (i < 10 ? "0$i" : "$i") + "_768x1024Px_Vorschaufenster");
     }
   }
-
 
   static void load(Function cb) {
     _singleton.assets.forEach((String asset) => _singleton.mgr.addBitmapData(asset, 'book/' + asset + '.jpg'));

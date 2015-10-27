@@ -24,7 +24,6 @@ part of stagexl_commons;
  * @author James Ghandour
  */
 class StringUtils {
-
   /** Character code for the WINDOWS line break. */
   static String WIN_BREAK = new String.fromCharCode(13) + new String.fromCharCode(10);
 
@@ -32,10 +31,44 @@ class StringUtils {
   static String MAC_BREAK = new String.fromCharCode(13);
 
   /** Default map for escaping strings. */
-  static List DEFAULT_ESCAPE_MAP = ["\\t", "\t", "\\n", "\n", "\\r", "\r", "\\\"", "\"", "\\\\", "\\", "\\'", "\'", "\\f", "\f", "\\b", "\b", "\\", ""];
+  static List DEFAULT_ESCAPE_MAP = [
+    "\\t",
+    "\t",
+    "\\n",
+    "\n",
+    "\\r",
+    "\r",
+    "\\\"",
+    "\"",
+    "\\\\",
+    "\\",
+    "\\'",
+    "\'",
+    "\\f",
+    "\f",
+    "\\b",
+    "\b",
+    "\\",
+    ""
+  ];
 
   /** The characters that have to be escaped. */
-  static List PROPERTIES_ESCAPE_MAP = ["\\t", "\t", "\\n", "\n", "\\r", "\r", "\\\"", "\"", "\\\\", "\\", "\\'", "\'", "\\f", "\f"];
+  static List PROPERTIES_ESCAPE_MAP = [
+    "\\t",
+    "\t",
+    "\\n",
+    "\n",
+    "\\r",
+    "\r",
+    "\\\"",
+    "\"",
+    "\\\\",
+    "\\",
+    "\\'",
+    "\'",
+    "\\f",
+    "\f"
+  ];
 
   /**
    * The empty String <code>""</code>
@@ -2093,8 +2126,7 @@ class StringUtils {
    * Fixes double newlines in a text.
    */
   static String fixNewlines(String string) {
-    return string
-      ..replaceAll(new RegExp(r'/\r\n/gm'), "\n");
+    return string..replaceAll(new RegExp(r'/\r\n/gm'), "\n");
   }
 
   /**
@@ -2236,7 +2268,7 @@ class StringUtils {
    * @returns -1 if not enough ocurances of needle are found
    * @returns charIndex of nth needle ocurances
    */
-  static int nthIndexOf(String haystack, int n, String needle, [num startIndex=0]) {
+  static int nthIndexOf(String haystack, int n, String needle, [num startIndex = 0]) {
     int result = startIndex;
 
     if (n >= 1) {
@@ -2281,11 +2313,9 @@ class StringUtils {
     bool lowerCaseBeforeUpperCase = true; // used to be a method argument, keep this
 
     // replace null values with empty strings
-    if (a == null)
-      a = "";
+    if (a == null) a = "";
 
-    if (b == null)
-      b = "";
+    if (b == null) b = "";
 
     /*if (!caseSensitive) {
 			   a = a.toLowerCase();
@@ -2397,8 +2427,7 @@ class StringUtils {
           bias = -1;
         }
       } else if (ca > cb) {
-        if (bias == 0)
-          bias = 1;
+        if (bias == 0) bias = 1;
       } else if (ca.length == 0 && cb.length == 0) {
         return bias;
       }
@@ -2505,7 +2534,7 @@ class StringUtils {
    * @param ignoreUnicode Pass "true" to ignore automatic parsing of unicode escaped characters.
    * @return Escaped string.
    */
-  static String escape(String string, [List keyMap=null, bool ignoreUnicode=true]) {
+  static String escape(String string, [List keyMap = null, bool ignoreUnicode = true]) {
     if (string == null) {
       return string;
     }
@@ -2523,7 +2552,9 @@ class StringUtils {
       l = string.length;
       while (i < l) {
         if (string.substring(i, i + 2) == "\\u") {
-          string = string.substring(0, i) + String.fromCharCode(parseInt(string.substring(i + 2, i + 6), 16)) + string.substring(i + 6);
+          string = string.substring(0, i) +
+              String.fromCharCode(parseInt(string.substring(i + 2, i + 6), 16)) +
+              string.substring(i + 6);
         }
         i++;
       }
@@ -2556,7 +2587,7 @@ class StringUtils {
    * @author Martin Heidegger
    * @author Simon Wacker
    */
-  static Object parseProperties(String str, [Object properties=null]) {
+  static Object parseProperties(String str, [Object properties = null]) {
     properties = properties || {};
     num i;
     List lines = str.split(WIN_BREAK).join("\n").split(MAC_BREAK).join("\n").split("\n");
@@ -2588,8 +2619,7 @@ class StringUtils {
             if (char == "'") {
               j++;
             } else {
-              if (char == ":" || char == "=" || char == "	")
-                break;
+              if (char == ":" || char == "=" || char == "	") break;
             }
           }
           sep = ((j == l) ? line.length : j);
@@ -2613,4 +2643,3 @@ class StringUtils {
     return properties;
   }
 }
-

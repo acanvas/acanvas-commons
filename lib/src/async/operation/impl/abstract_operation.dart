@@ -15,7 +15,6 @@
  */
 part of stagexl_commons;
 
-
 /**
  * Dispatched when the current <code>AbstractOperation</code> has completed its functionality successfully.
  * @eventType org.as3commons.async.operation.OperationEvent#COMPLETE OperationEvent.COMPLETE
@@ -36,7 +35,6 @@ part of stagexl_commons;
  * @author Christophe Herreman
  */
 class AbstractOperation extends EventDispatcher implements IOperation {
-
   // --------------------------------------------------------------------
   //
   // Constructor
@@ -50,7 +48,6 @@ class AbstractOperation extends EventDispatcher implements IOperation {
    * @param autoStartTimeout
    */
   AbstractOperation([int timeoutInMilliseconds = 0, bool autoStartTimeout = true]) {
-
     m_timeout = timeoutInMilliseconds;
     m_autoStartTimeout = autoStartTimeout;
   }
@@ -102,8 +99,9 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   /**
    * @inheritDoc
    */
-  void addCompleteListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
-    addEventListener(OperationEvent.COMPLETE, listener/*, useCapture, priority, useWeakReference*/);
+  void addCompleteListener(Function listener,
+      [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+    addEventListener(OperationEvent.COMPLETE, listener /*, useCapture, priority, useWeakReference*/);
   }
 
   /**
@@ -116,7 +114,8 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   /**
    * @inheritDoc
    */
-  void addTimeoutListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+  void addTimeoutListener(Function listener,
+      [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
     addEventListener(OperationEvent.TIMEOUT, listener /*, useCapture, priority, useWeakReference*/);
   }
 
@@ -241,15 +240,12 @@ class AbstractOperation extends EventDispatcher implements IOperation {
     }
   }
 
-
   // --------------------------------------------------------------------
   //
   // Protected Methods
   //
   // --------------------------------------------------------------------
-  void completeHandler(OperationEvent event) {
-  }
+  void completeHandler(OperationEvent event) {}
 
-  void errorHandler(OperationEvent event) {
-  }
+  void errorHandler(OperationEvent event) {}
 }

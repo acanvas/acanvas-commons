@@ -1,7 +1,6 @@
 part of stagexl_commons;
 
 class HLeftSwipeTransition extends BasicEffect {
-
   HLeftSwipeTransition() : super() {
     _applyRecursively = false;
   }
@@ -18,9 +17,9 @@ class HLeftSwipeTransition extends BasicEffect {
     ContextTool.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
       ..animate.x.to(iTargetXOriginal)
       ..onComplete = () {
-      callback.call();
-      target.parent.mask = null;
-    };
+        callback.call();
+        target.parent.mask = null;
+      };
   }
 
   @override
@@ -30,9 +29,8 @@ class HLeftSwipeTransition extends BasicEffect {
     ContextTool.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
       ..animate.x.to(-target.width)
       ..onComplete = () {
-      callback.call();
-      target.parent.mask = null;
-    };
+        callback.call();
+        target.parent.mask = null;
+      };
   }
-
 }

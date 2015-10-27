@@ -1,4 +1,3 @@
 part of stagexl_commons;
 
-abstract class IXLVO {
-}
+abstract class IXLVO {}

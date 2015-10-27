@@ -5,7 +5,6 @@ part of stagexl_commons;
  */
 
 abstract class MPager {
-
   List chunksPlaced = [];
   int chunkSize = 8;
 
@@ -41,7 +40,6 @@ abstract class MPager {
     _listItemSpacer = listItemSpacer;
   }
 
-
   int _rows = 1;
 
   int get rows => _rows;
@@ -50,5 +48,4 @@ abstract class MPager {
     if (rows == 0) rows++;
     _rows = rows;
   }
-
 }

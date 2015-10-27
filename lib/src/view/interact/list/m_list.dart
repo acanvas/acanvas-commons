@@ -3,12 +3,9 @@ part of stagexl_commons;
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
-enum ListDirection {
-  HORIZONTAL, VERTICAL
-}
+enum ListDirection { HORIZONTAL, VERTICAL }
 
 abstract class MList {
-
   bool _horizontalFlow = false;
 
   ListDirection _listDirection;
@@ -55,5 +52,4 @@ abstract class MList {
   void set constantCellSize(bool constantCellSize) => _constantCellSize = constantCellSize;
 
   bool get constantCellSize => _constantCellSize;
-
 }

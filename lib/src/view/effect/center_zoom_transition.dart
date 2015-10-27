@@ -1,12 +1,10 @@
 part of stagexl_commons;
 
 class CenterZoomTransition extends BasicEffect {
-  CenterZoomTransition() : super() {
-  }
+  CenterZoomTransition() : super() {}
 
   @override
   void runInEffect(BoxSprite target, num duration, Function callback) {
-
     target.pivotX = target.spanWidth / 2;
     target.pivotY = target.height / 2;
     target.alpha = 0;
@@ -30,5 +28,4 @@ class CenterZoomTransition extends BasicEffect {
       ..animate.alpha.to(0)
       ..onComplete = () => onComplete(null, target, callback);
   }
-
 }

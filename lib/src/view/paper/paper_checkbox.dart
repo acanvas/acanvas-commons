@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
@@ -17,9 +16,13 @@ class PaperCheckbox extends SelectableButton {
   Sprite _box;
   PaperText _paperLabel;
 
-  PaperCheckbox({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : "", this.boxColor : PaperColor.BLACK}) : super() {
-
-    PaperRipple ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity : .2);
+  PaperCheckbox(
+      {int rippleColor: PaperColor.GREY_DARK,
+      this.activeColor: PaperColor.GREEN,
+      this.label: "",
+      this.boxColor: PaperColor.BLACK})
+      : super() {
+    PaperRipple ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity: .2);
     ripple.inheritSpan = false;
     addChild(ripple);
     ripple.span(RADIUS * 2, RADIUS * 2);
@@ -51,10 +54,9 @@ class PaperCheckbox extends SelectableButton {
     _icon.visible = false;
 
     if (label != "") {
-      _paperLabel = new PaperText(label, size : 16);
+      _paperLabel = new PaperText(label, size: 16);
       addChild(_paperLabel);
     }
-
   }
 
   @override void refresh() {
@@ -75,13 +77,9 @@ class PaperCheckbox extends SelectableButton {
     _icon.scaleX = _icon.scaleY = .3;
     _icon.visible = true;
 
-    ContextTool.STAGE.juggler.addTween(_box, .15).animate
-      ..alpha.to(0)
-      ..rotation.to(.8)
-      ..scaleX.to(.3)
-      ..scaleY.to(.3);
+    ContextTool.JUGGLER.addTween(_box, .15).animate..alpha.to(0)..rotation.to(.8)..scaleX.to(.3)..scaleY.to(.3);
 
-    ContextTool.STAGE.juggler.addTween(_icon, .1)
+    ContextTool.JUGGLER.addTween(_icon, .1)
       ..animate.scaleX.to(1)
       ..animate.scaleY.to(1)
       ..delay = .1;
@@ -93,15 +91,13 @@ class PaperCheckbox extends SelectableButton {
 
   @override void deselectAction() {
     Tween tw = new Tween(_icon, .2);
-    tw.animate
-      ..scaleX.to(.3)
-      ..scaleY.to(.3);
+    tw.animate..scaleX.to(.3)..scaleY.to(.3);
     tw.onComplete = () {
       _icon.visible = false;
     };
-    ContextTool.STAGE.juggler.add(tw);
+    ContextTool.JUGGLER.add(tw);
 
-    ContextTool.STAGE.juggler.addTween(_box, .1)
+    ContextTool.JUGGLER.addTween(_box, .1)
       ..animate.alpha.to(1)
       ..animate.rotation.to(0)
       ..animate.scaleX.to(1)

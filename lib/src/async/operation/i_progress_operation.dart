@@ -21,7 +21,6 @@ part of stagexl_commons;
  * @author Christophe Herreman
  */
 abstract class IProgressOperation extends IOperation {
-
   // --------------------------------------------------------------------
   //
   // Properties
@@ -53,7 +52,8 @@ abstract class IProgressOperation extends IOperation {
    *
    * @param listener the event handler function
    */
-  void addProgressListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
+  void addProgressListener(Function listener,
+      [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
 
   /**
    * Convenience method for removing a listener from the OperationEvent.PROGRESS event.

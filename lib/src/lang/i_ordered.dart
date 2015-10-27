@@ -21,7 +21,6 @@ part of stagexl_commons;
  * @author Christophe Herreman
  */
 abstract class IOrdered {
-
   /**
    * Return the order value of this object, with a higher value meaning greater in terms of sorting.
    * <p>Normally starting with 0 or 1. Same order values will result in arbitrary positions for the affected objects.</p>
@@ -34,6 +33,4 @@ abstract class IOrdered {
    * @
    */
   void set order(int value);
-
 }
-

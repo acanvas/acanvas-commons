@@ -15,13 +15,11 @@
  */
 part of stagexl_commons;
 
-
 /**
  *
  * @author Christophe Herreman
  */
 class CompositeCommandEvent extends Event {
-
   /**
    * Defines the value of the type property of a <code>CompositeCommandEvent.COMPLETE</code> event object.
    * @eventType String
@@ -55,7 +53,8 @@ class CompositeCommandEvent extends Event {
   /**
    * Constructs a new CompositeCommandEvent
    */
-  CompositeCommandEvent(String type, [ICommand command=null, bool bubbles=false, bool cancelable=false]):super(type, bubbles) {
+  CompositeCommandEvent(String type, [ICommand command = null, bool bubbles = false, bool cancelable = false])
+      : super(type, bubbles) {
     _command = command;
   }
 
@@ -65,6 +64,4 @@ class CompositeCommandEvent extends Event {
   Event clone() {
     return new CompositeCommandEvent(this.type, _command, this.bubbles);
   }
-
 }
-

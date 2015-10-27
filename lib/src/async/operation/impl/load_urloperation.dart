@@ -15,13 +15,11 @@
  */
 part of stagexl_commons;
 
-
 /**
  * An <code>IOperation</code> implementation that can load arbitrary data from a specified URL.
  * @author Roland Zwaga
  */
 class LoadURLOperation extends AbstractProgressOperation {
-
   /**
    * Creates a new <code>LoadURLOperation</code> instance.
    * @param url The specified URL from which the data will be loaded.
@@ -32,7 +30,6 @@ class LoadURLOperation extends AbstractProgressOperation {
     (dataFormat != null) ? dataFormat : dataFormat = URLLoaderDataFormat.TEXT_FILE;
     createLoader(name, url, dataFormat);
   }
-
 
   /**
    * Internal <code>URLLoader</code> instance that is used to do the actual loading of the data.
@@ -51,7 +48,6 @@ class LoadURLOperation extends AbstractProgressOperation {
     _name = name;
     _url = url;
     _dataFormat = dataFormat;
-
 
     resourceManager = new ResourceManager();
     switch (_dataFormat) {
@@ -80,7 +76,6 @@ class LoadURLOperation extends AbstractProgressOperation {
    * @param event The specified <code>Event.COMPLETE</code> event.
    */
   void urlLoaderCompleteHandler(ResourceManager res) {
-
     switch (_dataFormat) {
       case URLLoaderDataFormat.TEXT_FILE:
         result = res.getTextFile(_name);
@@ -102,10 +97,8 @@ class LoadURLOperation extends AbstractProgressOperation {
     dispatchCompleteEvent();
   }
 
-
   @override
   String toString() {
     return "[LoadURLOperation(url:'" + _url + "')]";
   }
-
 }

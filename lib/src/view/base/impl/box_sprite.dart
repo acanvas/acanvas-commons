@@ -1,7 +1,6 @@
 part of stagexl_commons;
 
 class BoxSprite extends Sprite3D with MBox {
-
   Logger logger;
 
   BoxSprite() {
@@ -9,21 +8,20 @@ class BoxSprite extends Sprite3D with MBox {
       ..nextInt(1000000)})");
   }
 
-
   @override
   void span(spanWidth, spanHeight, {bool refresh: true}) {
-    if (this.spanWidth != spanWidth || this.spanHeight != spanHeight) {
-      if (spanWidth > 0) this.spanWidth = spanWidth;
-      if (spanHeight > 0) this.spanHeight = spanHeight;
+    //if (this.spanWidth != spanWidth || this.spanHeight != spanHeight) {
+    if (spanWidth > 0) this.spanWidth = spanWidth;
+    if (spanHeight > 0) this.spanHeight = spanHeight;
 
-      children.where((c) => c is MBox && c.inheritSpan).forEach((child) {
-        child.span(spanWidth, spanHeight - 2 * padding, refresh: refresh);
-      });
-      children.where((c) => c is UITextField && c.inheritWidth).forEach((child) {
-        child.width = spanWidth - 2 * padding;
-      });
+    children.where((c) => c is MBox && c.inheritSpan).forEach((child) {
+      child.span(spanWidth, spanHeight - 2 * padding, refresh: refresh);
+    });
+    children.where((c) => c is UITextField && c.inheritWidth).forEach((child) {
+      child.width = spanWidth - 2 * padding;
+    });
 
-    }
+    //}
     if (refresh) {
       this.refresh();
     }
@@ -41,14 +39,12 @@ class BoxSprite extends Sprite3D with MBox {
         logger.debug("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
       });
     }
-
   }
 
   @override
   void dispose() {
-
     //children.forEach doesn't work here, as dispose influences children<List>
-    for (int i = 0;i < numChildren;i++) {
+    for (int i = 0; i < numChildren; i++) {
       disposeChild(getChildAt(i));
     }
 

@@ -30,4 +30,3 @@ abstract class IEventBusAware {
    */
   void set eventBus(IEventBus value);
 }
-

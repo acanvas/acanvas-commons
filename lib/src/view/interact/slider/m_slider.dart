@@ -4,12 +4,12 @@ part of stagexl_commons;
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
 abstract class MSlider {
-
   Timer _materializeControl;
 
   bool _horizontalScrollBehavior = false;
 
-  void set horizontalScrollBehavior(bool horizontalScrollBehavior) => _horizontalScrollBehavior = horizontalScrollBehavior;
+  void set horizontalScrollBehavior(bool horizontalScrollBehavior) =>
+      _horizontalScrollBehavior = horizontalScrollBehavior;
 
   bool get horizontalScrollBehavior => _horizontalScrollBehavior;
 
@@ -30,8 +30,7 @@ abstract class MSlider {
 
   bool get continuous => _continuous;
 
-  _updateThumbPosition() {
-  }
+  _updateThumbPosition() {}
 
   bool _bounce = ContextTool.MOBILE ? true : false;
 
@@ -73,7 +72,6 @@ abstract class MSlider {
 
     if (_materializeControl != null) _materializeControl.cancel();
     _materializeControl = new Timer(new Duration(milliseconds: 100), () => ContextTool.MATERIALIZE_REQUIRED = false);
-
   }
 
   void interactionStart();
@@ -121,8 +119,8 @@ abstract class MSlider {
   num _value = 0;
 
   void set value(num newValue) {
-
-    if (newValue < valueMin) newValue = valueMin; else if (newValue > valueMax) newValue = valueMax;
+    if (newValue < valueMin) newValue = valueMin;
+    else if (newValue > valueMax) newValue = valueMax;
     if (!continuous) newValue = (newValue).round();
 
     if (newValue != _value) {
@@ -214,11 +212,10 @@ abstract class MSlider {
 
   bool get touching => _touching;
 
+  StreamSubscription<Event> addEventListener(String eventType, EventListener eventListener,
+      {bool useCapture: false, int priority: 0});
 
-  StreamSubscription<Event> addEventListener(String eventType, EventListener eventListener, {bool useCapture: false, int priority: 0 });
-
-  void removeEventListener(String eventType, EventListener eventListener, {bool useCapture: false });
+  void removeEventListener(String eventType, EventListener eventListener, {bool useCapture: false});
 
   void dispatchEvent(Event event);
-
 }

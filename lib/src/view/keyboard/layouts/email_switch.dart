@@ -21,8 +21,6 @@ part of stagexl_commons;
  * designed for email address entry.
  */
 class EmailSwitch extends Layout {
-
-
   /**
    * Creates a new Email object.
    */
@@ -70,8 +68,5 @@ class EmailSwitch extends Layout {
         new Key(CharCode.SWITCH_LAYOUT, null, Key.SYSTEM_KEY, switchKeyType.SWITCH_KEY_LABEL, 2.5, 1, switchKeyType)
       ]
     ];
-
   }
-
 }
-	

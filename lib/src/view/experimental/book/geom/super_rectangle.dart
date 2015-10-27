@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Provides functionality for working with Rectangles. This class extends the RoundedRectangle class and thus has all of its functionality (and also the functionality of the Rectangle class, which RoundedRectangle extends).
  *
@@ -22,24 +21,21 @@ part of stagexl_commons;
  *
  */
 class SuperRectangle extends Rectangle {
-
-
   static const int NONE = -1;
   static const int TOP = 0;
   static const int RIGHT = 1;
   static const int BOTTOM = 2;
   static const int LEFT = 3;
 
-
   /**
    * Constructor.
    */
   num _cornerRadius;
 
-  SuperRectangle([num x=0, num y=0, num width=0, num height=0, num cornerRadius=0]) : super(x, y, width, height) {
+  SuperRectangle([num x = 0, num y = 0, num width = 0, num height = 0, num cornerRadius = 0])
+      : super(x, y, width, height) {
     _cornerRadius = cornerRadius;
   }
-
 
   /**
    * Takes a Rectangle instance and returns it as a SuperRectangle with the same position, width, height, and (if applicable) corner-radius.
@@ -59,7 +55,6 @@ class SuperRectangle extends Rectangle {
     return newRect;
   }
 
-
   /**
    * Indicates on which side of this SuperRectangle a Point is. Note that if the Point is not on the SuperRectangle its border, -1 will be the return-value.
    *
@@ -78,20 +73,19 @@ class SuperRectangle extends Rectangle {
     for (int i = 0; i < lines.length; i++) {
       if (lines[i].containsPoint(point)) {
         switch (i) {
-          case 0 :
+          case 0:
             return SuperRectangle.TOP;
-          case 1 :
+          case 1:
             return SuperRectangle.RIGHT;
-          case 2 :
+          case 2:
             return SuperRectangle.BOTTOM;
-          case 3 :
+          case 3:
             return SuperRectangle.LEFT;
         }
       }
     }
     return SuperRectangle.NONE;
   }
-
 
   /**
    * Returns an List with Point instances indicating the corners of the SuperRectangle. The first index (0) is the top-left corner, the second (1) the top-right, etc.
@@ -130,14 +124,12 @@ class SuperRectangle extends Rectangle {
     return this.getCorners();
   }
 
-
   /**
    * The center of the SuperRectangle.
    */
   Point get center {
     return Point.interpolate(this.bottomRight, this.topLeft, 0.5);
   }
-
 
   /**
    * Point representing the lower left corner of this SuperRectangle.
@@ -153,7 +145,6 @@ class SuperRectangle extends Rectangle {
     return new Point(this.right, this.top);
   }
 
-
   /**
    * The center of this SuperRectangle instance.
    */
@@ -167,8 +158,4 @@ class SuperRectangle extends Rectangle {
   num get cornerRadius {
     return _cornerRadius;
   }
-
-
 }
-	
-	

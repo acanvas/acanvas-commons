@@ -15,7 +15,6 @@
  */
 part of stagexl_commons;
 
-
 /**
  * Assertion utility Type that assists in validating arguments.
  * Useful for identifying programmer errors early and clearly at runtime.
@@ -23,7 +22,6 @@ part of stagexl_commons;
  * @author Christophe Herreman
  */
 class Assert {
-
   /**
    * Asserts a boolean expression to be <code>true</code>.
    * <pre class="code">Assert.isTrue(value, "The expression must be true");</pre>
@@ -93,7 +91,6 @@ class Assert {
       }
    */
 
-
   /**
    * Asserts that a Type is a subType of another class.
       static void subclassOf(Type clazz, Type parentClass, [String message = ""]) {
@@ -145,7 +142,8 @@ class Assert {
   static void hasText(String string, [String message = ""]) {
     if (StringUtils.isBlank(string)) {
       if (message == null || message.length == 0) {
-        message = "[Assertion failed] - this String argument must have text; it must not be <code>null</code>, empty, or blank";
+        message =
+            "[Assertion failed] - this String argument must have text; it must not be <code>null</code>, empty, or blank";
       }
       throw new IllegalArgumentError(message);
     }

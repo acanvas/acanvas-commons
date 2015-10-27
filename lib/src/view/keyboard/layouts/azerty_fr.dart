@@ -21,8 +21,6 @@ part of stagexl_commons;
  * key variants useful in a French context.
  */
 class AzertyFr extends Layout {
-
-
   /**
    * Creates a new AzertyFr object.
    */
@@ -71,8 +69,5 @@ class AzertyFr extends Layout {
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.6)
       ]
     ];
-
   }
-
 }
-	

@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Provides additional functionality for Lists.
  *
@@ -21,15 +20,11 @@ part of stagexl_commons;
  *
  */
 class ListTool {
-
-
   /**
    * Constructor.
    * @
    */
-  ListTool() {
-  }
-
+  ListTool() {}
 
   /**
    * Adjusts all values in an List.
@@ -45,21 +40,21 @@ class ListTool {
    *
    * @return	List with adjusted values
    */
-  static List adjustValues(List array, dynamic value, [String operator="*"]) {
+  static List adjustValues(List array, dynamic value, [String operator = "*"]) {
     List newList = [];
 
     for (int i = 0; i < array.length; i++) {
       switch (operator) {
-        case MathTool.PLUS :
+        case MathTool.PLUS:
           newList.add(array[i] + value);
           break;
-        case MathTool.MINUS :
+        case MathTool.MINUS:
           newList.add(array[i] - value);
           break;
-        case MathTool.MULTIPLICATION :
+        case MathTool.MULTIPLICATION:
           newList.add(array[i] * value);
           break;
-        case MathTool.DIVISION :
+        case MathTool.DIVISION:
           newList.add(array[i] / value);
           break;
       }
@@ -67,7 +62,6 @@ class ListTool {
 
     return newList;
   }
-
 
   /**
    * Similar to ListUtil.getItemIndex(), this method searches an List for an Map with a given property that has a certain value. Can also search for nested Maps.<br /><br />
@@ -85,7 +79,6 @@ class ListTool {
    * @return	Index of the item where the value was found on the end of the property chain.
    */
   static int getValueMatchIndex(List array, dynamic property, dynamic value) {
-
     // if property param is neither an List nor a String nor a numeric value, try to cast it to a String:
     if (!(property is List) && !(property is String) && !(property is int || property is int || property is num)) {
       property = (property).toString();
@@ -119,7 +112,6 @@ class ListTool {
     return -1;
   }
 
-
   /**
    * Returns a shallow copy of an List.
    *
@@ -137,7 +129,4 @@ class ListTool {
     }
     return array;
   }
-
 }
-	
-	

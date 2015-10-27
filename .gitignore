@@ -1,5 +1,7 @@
+.idea
 build
 packages
+.packages
 dart_commons
 pubspec.lock
 .DS_Store

@@ -1,7 +1,6 @@
 part of stagexl_commons;
 
 class PaperAppBar extends BoxSprite {
-
   int bgColor;
   int highlightColor;
   bool extended = false;
@@ -12,17 +11,14 @@ class PaperAppBar extends BoxSprite {
   Flow rightBox;
   PaperTabs tabs;
 
-  PaperAppBar({this.highlightColor : PaperColor.WHITE, this.bgColor: PaperColor.BLACK, this.extended : false}) : super() {
+  PaperAppBar({this.highlightColor: PaperColor.WHITE, this.bgColor: PaperColor.BLACK, this.extended: false}) : super() {
     inheritSpan = true;
 
-    leftBox = new Flow()
-      ..spacing = 20;
+    leftBox = new Flow()..spacing = 20;
     addChild(leftBox);
 
-    rightBox = new Flow()
-      ..spacing = 20;
+    rightBox = new Flow()..spacing = 20;
     addChild(rightBox);
-
   }
 
   void addToTL(InteractiveObject spr) {
@@ -63,12 +59,10 @@ class PaperAppBar extends BoxSprite {
     leftBox.y = (PaperDimensions.HEIGHT_APP_BAR / 2 - (leftBox.height - 0) / 2).round();
 
     if (_headline != null) {
-
       if (extended == true) {
         _headline.x = PaperDimensions.HEIGHT_APP_BAR_EXTENDED_AREA - 2;
         _headline.y = PaperDimensions.HEIGHT_APP_BAR + 20;
-      }
-      else {
+      } else {
         _headline.x = leftBox.x + leftBox.width + 20;
         _headline.y = (PaperDimensions.HEIGHT_APP_BAR / 2 - _headline.height / 2 + 0).round();
       }
@@ -82,8 +76,7 @@ class PaperAppBar extends BoxSprite {
       tabs.y = spanHeight - tabs.height;
     }
 
-    GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color : bgColor);
+    GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color: bgColor);
     super.refresh();
   }
-
 }

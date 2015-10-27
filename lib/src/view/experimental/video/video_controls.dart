@@ -1,7 +1,6 @@
 part of stagexl_commons;
 
 class VideoControls extends BoxSprite {
-
   Pyro _video;
 
 //		 SWC_sprite_AppPreloader _preloader;
@@ -39,9 +38,7 @@ class VideoControls extends BoxSprite {
 
     stage.addEventListener(KeyboardEvent.KEY_DOWN, _onKeyboardDown, false, 0, true);
     stage.addEventListener(Event.FULLSCREEN, _onFullscreen, false, 0, true);
-
   }
-
 
   /**
    *
@@ -54,7 +51,8 @@ class VideoControls extends BoxSprite {
 
   void _onVideoClick(MouseEvent event) {
 //			_log.print("_onVideoClick");
-    if (_isVideoCompleted) _playAgain(); else _video.togglePause();
+    if (_isVideoCompleted) _playAgain();
+    else _video.togglePause();
   }
 
   void _onVideoDoubleClick(MouseEvent event) {
@@ -144,21 +142,16 @@ class VideoControls extends BoxSprite {
     }
   }
 
-
   /**
    *
    * PRELOADER
    *
    */
-  void _initPreloader() {
-  }
+  void _initPreloader() {}
 
-  void _showPreloader() {
-  }
+  void _showPreloader() {}
 
-  void _hidePreloader() {
-  }
-
+  void _hidePreloader() {}
 
   /**
    *
@@ -170,5 +163,4 @@ class VideoControls extends BoxSprite {
     stage.removeEventListener(KeyboardEvent.KEY_DOWN, _onKeyboardDown);
     stage.removeEventListener(Event.FULLSCREEN, _onFullscreen);
   }
-
 }

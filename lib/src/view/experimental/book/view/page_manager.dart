@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Dispatched when a page is added to or removed from the PageManager.
  * @eventType	com.rubenswieringa.book.BookEvent.CONTENT_CHANGED
@@ -8,7 +7,6 @@ part of stagexl_commons;
  * @see			PageManager#pages
  */
 // [Event(name="contentChanged", type="com.rockdot.library.view.component.book.view.BookEvent")]
-
 
 /**
  * PageManager provides the core functionality for the Book class.
@@ -38,8 +36,6 @@ part of stagexl_commons;
  *
  */
 class PageManager extends LifecycleSprite {
-
-
   /**
    * Left-hand stack of Page instances.
    * @
@@ -78,21 +74,17 @@ class PageManager extends LifecycleSprite {
    */
   List _pages = new List();
 
-
   // CONSTRUCTOR:
 
   /**
    * Constructor.
    */
-  PageManager(String id): super(id) {
-
+  PageManager(String id) : super(id) {
     StateManager.instance.register(this);
 //			this._pages.addEventListener(CollectionEvent.COLLECTION_CHANGE, this.onContentChanged);
   }
 
-
   // LISTENERS:
-
 
   /**
    * Listener-method for the collectionChange Event of the pages property.
@@ -104,7 +96,6 @@ class PageManager extends LifecycleSprite {
   void onContentChanged() {
     this.dispatchEvent(new BookEvent(BookEvent.CONTENT_CHANGED, this));
   }
-
 
   // OVERRIDES:
 
@@ -118,7 +109,6 @@ class PageManager extends LifecycleSprite {
     this.refreshViewStacks();
   }
 
-
   /**
    * Adds the ViewStacks for left and right, also adds a render Shape (for during pageflips).
    *
@@ -126,7 +116,6 @@ class PageManager extends LifecycleSprite {
    */
   @override
   void init({Map params: null}) {
-
     super.init(params: params);
 
     this.pageL.span(spanWidth / 2, spanHeight);
@@ -152,7 +141,6 @@ class PageManager extends LifecycleSprite {
     // activate children:
     this.refreshViewStacks();
   }
-
 
   /**
    * Adds a child Page instance to this PageManager instance. Regardless of this method's signiature, the child parameter must always be an instance of the Page class.
@@ -210,7 +198,6 @@ class PageManager extends LifecycleSprite {
       throw new BookError(BookError.CHILD_NOT_PAGE);
     }
   }
-
 
   /**
    * Removes all children (Page instances) from the child list of this container.
@@ -307,7 +294,6 @@ class PageManager extends LifecycleSprite {
     return page;
   }
 
-
   /**
    * Changes the position of an existing child in the PageManager container.
    *
@@ -325,12 +311,12 @@ class PageManager extends LifecycleSprite {
   void setChildIndex(DisplayObject child, int newIndex) {
     // only instances of the Page class are allowed as children:
     if (child is Page) {
-      if ((child ).book != this || (child ).index == -1) {
+      if ((child).book != this || (child).index == -1) {
         throw new ArgumentError(BookError.PAGE_NOT_CHILD);
       }
       this.removeChild(child);
       this.addChildAt(child, newIndex);
-      (child ).refreshFoldGradient();
+      (child).refreshFoldGradient();
     } else {
       throw new BookError(BookError.CHILD_NOT_PAGE);
     }
@@ -353,17 +339,17 @@ class PageManager extends LifecycleSprite {
   void swapChildren(DisplayObject child1, DisplayObject child2) {
     if (child1 is Page && child2 is Page) {
       // if both children are Pages, treat them special
-      int index1 = (child1 ).index;
-      int index2 = (child2 ).index;
-      if ((child1 ).book != this || index1 == -1 || (child2 ).book != this || index2 == -1) {
+      int index1 = (child1).index;
+      int index2 = (child2).index;
+      if ((child1).book != this || index1 == -1 || (child2).book != this || index2 == -1) {
         throw new ArgumentError(BookError.PAGE_NOT_CHILD);
       }
       ChildTool.swapChildren(child1, child2);
       this._pages[index1] = (child2);
       this._pages[index2] = (child1);
       this.refreshViewStacks();
-      (child1 ).refreshFoldGradient();
-      (child2 ).refreshFoldGradient();
+      (child1).refreshFoldGradient();
+      (child2).refreshFoldGradient();
     } else {
       // if children are not both Pages, then they don't belong to the externally visible part of this instance:
       throw new BookError(BookError.CHILD_NOT_PAGE);
@@ -381,7 +367,6 @@ class PageManager extends LifecycleSprite {
   void swapChildrenAt(int index1, int index2) {
     this.swapChildren((this._pages[index1] as Page), (this._pages[index2] as Page));
   }
-
 
   /**
    * Returns the child display object that exists with the specified name.
@@ -435,7 +420,6 @@ class PageManager extends LifecycleSprite {
 		}
 		 */
 
-
   /**
    * Determines whether the specified display object is a child of the PageManager instance or the instance itself.
    *
@@ -450,7 +434,6 @@ class PageManager extends LifecycleSprite {
   }
 
   // COMMON USAGE:
-
 
   /**
    * Sets standard settings (such as width and height) for Page instances, typically called by addChildAt().
@@ -474,7 +457,6 @@ class PageManager extends LifecycleSprite {
     onContentChanged();
   }
 
-
   /**
    * Calculates the relative index at which a Page should be added to either one of the two ViewStacks. Not to be confused with the absolute index used in the pages property.
    *
@@ -492,7 +474,6 @@ class PageManager extends LifecycleSprite {
       return (index / 2).round();
     }
   }
-
 
   /**
    * Makes all Page instances above (or equal to) the provided index switch ViewStacks. Called, for example, by addChildAt because when a new Page is inserted lefthand-side Pages become righthand-side Pages, etc.
@@ -513,28 +494,26 @@ class PageManager extends LifecycleSprite {
     }
   }
 
-
   /**
    * Displays the appropriate Pages in the two ViewStacks.
    *
    * @
    */
   void refreshViewStacks() {
-
-    this.pageL.visible = ((!this.isFirstPage(this._currentPage + 1) || this._pages.length <= 1) && this.pageL.numChildren > 0);
+    this.pageL.visible =
+        ((!this.isFirstPage(this._currentPage + 1) || this._pages.length <= 1) && this.pageL.numChildren > 0);
     if (this.pageL.visible) {
       this.pageL.selectedChild = (this._pages[this._currentPage] as Sprite);
     }
     this.pageL.refresh();
 
-    this.pageR.visible = ((!this.isLastPage(this._currentPage) || this._pages.length <= 1) && this.pageR.numChildren > 0);
+    this.pageR.visible =
+        ((!this.isLastPage(this._currentPage) || this._pages.length <= 1) && this.pageR.numChildren > 0);
     if (this.pageR.visible) {
       this.pageR.selectedChild = (this._pages[this._currentPage + 1] as Sprite);
     }
     this.pageR.refresh();
-
   }
-
 
   /**
    * Returns true if the provided Page is the first Page in the List, false if otherwise.
@@ -570,7 +549,6 @@ class PageManager extends LifecycleSprite {
     return (page != null && page.index == this._pages.length - 1);
   }
 
-
   /**
    * Takes an index or Page instance and returns it as a Page instance.
    *
@@ -581,7 +559,7 @@ class PageManager extends LifecycleSprite {
    *
    * @
    */
-  Page getPage(dynamic page, [bool varify=false]) {
+  Page getPage(dynamic page, [bool varify = false]) {
     // throw Error if page is not a Page instance nor a numeric variable:
     if (!(page is Page) && !(page is int) && !(page is int)) {
       throw new BookError(BookError.CHILD_NOT_PAGE);
@@ -618,14 +596,12 @@ class PageManager extends LifecycleSprite {
    *
    * @
    */
-  int getPageIndex(dynamic page, [bool varify=false]) {
+  int getPageIndex(dynamic page, [bool varify = false]) {
     page = this.getPage(page, varify);
     return (page == null) ? -1 : page.index;
   }
 
-
   // ACCESSORS:
-
 
   /**
    * Flag indicating whether the instance has reached the creationComplete state.
@@ -635,7 +611,6 @@ class PageManager extends LifecycleSprite {
     return (StateManager.instance.getState(this) >= StateManager.CREATION_COMPLETE);
   }
 
-
   /**
    * Index of the current left-hand page (-1 if the Book is unopened).
    */
@@ -643,7 +618,6 @@ class PageManager extends LifecycleSprite {
   int get currentPage {
     return this._currentPage;
   }
-
 
   /**
    * Internet accessor for the  currentPage property.
@@ -666,7 +640,6 @@ class PageManager extends LifecycleSprite {
     return this.__currentPage;
   }
 
-
   /**
    * Index of the Page at which the Book is opened at startup, can only be set once, and only at startup.
    * @default	-1
@@ -688,7 +661,6 @@ class PageManager extends LifecycleSprite {
     this._openAt = value;
   }
 
-
   /**
    * List of all respective Pages in this Book instance.
    */
@@ -696,8 +668,4 @@ class PageManager extends LifecycleSprite {
   List get pages {
     return this._pages;
   }
-
-
 }
-	
-	

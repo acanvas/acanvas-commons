@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Type that enables you to keep track of which state (creationComplete, childrenCreated, etc.) a certain component is in. Note that StateManager is a singleton class.
  *
@@ -20,8 +19,6 @@ part of stagexl_commons;
  *
  */
 class StateManager {
-
-
   /**
    * @
    */
@@ -37,12 +34,10 @@ class StateManager {
    */
   List _states = [];
 
-
   /**
    * @
    */
   static final List STATES = [BABY, PREINITIALIZE, INITIALIZE, CREATION_COMPLETE, UPDATE_COMPLETE];
-
 
   /**
    * Indicates that a component has not reached the first state yet.
@@ -69,14 +64,12 @@ class StateManager {
    */
   static final int UPDATE_COMPLETE = 3;
 
-
   /**
    * Constructor.
    */
   StateManager() {
     // static class
   }
-
 
   /**
    * Singleton instance.
@@ -87,7 +80,6 @@ class StateManager {
     }
     return StateManager._instance;
   }
-
 
   /**
    * Registers the provided UIComponent with this StateManager so that the component its state will be available through the getState method.
@@ -111,23 +103,22 @@ class StateManager {
     item.addEventListener(LifecycleEvent.LOAD_COMPLETE, this.updateState);
   }
 
-
   /**
    * Event-handler for the listeners that watch the state-changes of the registered components.
    *
    * @
    */
-  void updateState([Event event=null]) {
+  void updateState([Event event = null]) {
     BoxSprite item = this._items[this._items.indexOf(event.target)];
     // set state in List:
     switch (event.type) {
       case LifecycleEvent.INIT_COMPLETE:
         this.setState(item, StateManager.CREATION_COMPLETE);
         break;
-//				case FlexEvent.INITIALIZE : 
+//				case FlexEvent.INITIALIZE :
 //					this.setState(item, StateManager.INITIALIZE);
 //					break;
-    /*case LifecycleEvent.INIT_START:
+      /*case LifecycleEvent.INIT_START:
 					this.setState(item, StateManager.PREINITIALIZE);
 					break;*/
       case LifecycleEvent.LOAD_COMPLETE:
@@ -142,7 +133,6 @@ class StateManager {
     }
   }
 
-
   /**
    * Returns a numeric value corresponding to one of the the constants in the StateManager class.
    *
@@ -151,7 +141,7 @@ class StateManager {
    * @return	Value indicating the current state of the provided UIComponent.
    */
   int getState(BoxSprite item) {
-    return this._states[ this._items.indexOf(item)];
+    return this._states[this._items.indexOf(item)];
   }
 
   /**
@@ -166,7 +156,6 @@ class StateManager {
     this._states[this._items.indexOf(item)] = state;
   }
 
-
   /**
    * List with all items registered with this class.
    */
@@ -174,15 +163,10 @@ class StateManager {
     return this._items;
   }
 
-
   /**
    * A reference to the last state (known to the StateManager class) a registered component can be in.
    */
   static int get LAST_STATE {
     return StateManager.STATES[StateManager.STATES.length - 1];
   }
-
-
 }
-	
-	

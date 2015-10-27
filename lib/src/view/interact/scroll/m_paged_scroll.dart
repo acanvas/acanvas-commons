@@ -3,12 +3,9 @@ part of stagexl_commons;
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
-enum ScrollDirection {
-  HORIZONTAL, VERTICAL
-}
+enum ScrollDirection { HORIZONTAL, VERTICAL }
 
 abstract class MPagedScroll {
-
   ScrollDirection _direction;
 
   void set direction(ScrollDirection direction) => _direction = direction;
@@ -44,5 +41,4 @@ abstract class MPagedScroll {
   void set pageScrollDistance(num pageScrollDistance) => _pageScrollDistance = pageScrollDistance;
 
   num get pageScrollDistance => _pageScrollDistance;
-
 }

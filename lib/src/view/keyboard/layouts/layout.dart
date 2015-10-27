@@ -21,7 +21,6 @@ part of stagexl_commons;
  * contains a few properties that all layouts shoud contain.
  */
 class Layout {
-
   /**
    * Listof rows defined for the layout. Each row is itself a vector of <code>Key</code>
    * objects.
@@ -47,8 +46,5 @@ class Layout {
   }
 
   /** Constructor */
-  Layout() {
-  }
-
+  Layout() {}
 }
-	

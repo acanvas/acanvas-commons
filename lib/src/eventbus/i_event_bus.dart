@@ -16,16 +16,15 @@
 part of stagexl_commons;
 
 abstract class IEventBus implements EventDispatcher {
-
-
   @override
-  StreamSubscription<Event> addEventListener(String eventType, void eventListener(event), {bool useCapture: false, int priority: 0});
+  StreamSubscription<Event> addEventListener(String eventType, void eventListener(event),
+      {bool useCapture: false, int priority: 0});
 
   @override
   void dispatchEvent(Event event);
 
   @override
-  bool hasEventListener(String eventType, { bool useCapture: false });
+  bool hasEventListener(String eventType, {bool useCapture: false});
 
   @override
   EventStream<Event> on(String eventType);

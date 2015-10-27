@@ -22,7 +22,4 @@ part of stagexl_commons;
  * @author Christophe Herreman
  */
 
-abstract class IAsyncCommand implements ICommand, IOperation {
-
-}
-
+abstract class IAsyncCommand implements ICommand, IOperation {}

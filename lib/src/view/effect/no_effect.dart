@@ -1,8 +1,7 @@
 part of stagexl_commons;
 
 class NoEffect extends BasicEffect {
-  NoEffect():super() {
-
+  NoEffect() : super() {
     _applyRecursively = false;
   }
 
@@ -14,6 +13,4 @@ class NoEffect extends BasicEffect {
   @override void runOutEffect(BoxSprite target, double duration, Function callback) {
     callback.call();
   }
-
 }
-

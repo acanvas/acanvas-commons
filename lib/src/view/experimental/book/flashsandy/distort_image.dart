@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Tesselates an area into several triangles to allow free transform distortion on BitmapData objects.
  *
@@ -28,8 +27,6 @@ part of stagexl_commons;
  *
  */
 class DistortImage {
-
-
   // skew and translation matrix:
   /**
    * @
@@ -67,14 +64,12 @@ class DistortImage {
    */
   num _w, _h;
 
-
   // plain  properties
   /**
    * Indicates whether or not use pixelsmoothing in the beginBitmapFill method of the Graphics class.
    * @default	true
    */
   bool smoothing = true;
-
 
   /**
    * Constructor.
@@ -85,14 +80,13 @@ class DistortImage {
    * @param	vseg	Vertical precision
    *
    */
-  DistortImage(num w, num h, [int hseg=2, int vseg=2]) {
+  DistortImage(num w, num h, [int hseg = 2, int vseg = 2]) {
     _w = w;
     _h = h;
     _vseg = vseg;
     _hseg = hseg;
     __init();
   }
-
 
   /**
    * Tesselates the area into triangles.
@@ -109,26 +103,25 @@ class DistortImage {
     _xMin = _yMin = 0;
     _xMax = _w;
     _yMax = _h;
-    _hsLen = _w / ( _hseg + 1 );
-    _vsLen = _h / ( _vseg + 1 );
+    _hsLen = _w / (_hseg + 1);
+    _vsLen = _h / (_vseg + 1);
     num x, y;
     // create points:
     for (ix = 0; ix < _vseg + 2; ix++) {
       for (iy = 0; iy < _hseg + 2; iy++) {
         x = ix * _hsLen;
         y = iy * _vsLen;
-        _p.add({ "x": x, "y": y, "sx": x, "sy": y });
+        _p.add({"x": x, "y": y, "sx": x, "sy": y});
       }
     }
     // create triangles:
     for (ix = 0; ix < _vseg + 1; ix++) {
       for (iy = 0; iy < _hseg + 1; iy++) {
-        _tri.add([ _p[ iy + ix * ( _hseg + 2 ) ], _p[ iy + ix * ( _hseg + 2 ) + 1 ], _p[ iy + ( ix + 1 ) * ( _hseg + 2 ) ] ]);
-        _tri.add([ _p[ iy + ( ix + 1 ) * ( _hseg + 2 ) + 1 ], _p[ iy + ( ix + 1 ) * ( _hseg + 2 ) ], _p[ iy + ix * ( _hseg + 2 ) + 1 ] ]);
+        _tri.add([_p[iy + ix * (_hseg + 2)], _p[iy + ix * (_hseg + 2) + 1], _p[iy + (ix + 1) * (_hseg + 2)]]);
+        _tri.add([_p[iy + (ix + 1) * (_hseg + 2) + 1], _p[iy + (ix + 1) * (_hseg + 2)], _p[iy + ix * (_hseg + 2) + 1]]);
       }
     }
   }
-
 
   /**
    * Distorts the provided BitmapData according to the provided Point instances and draws it onto the provided Graphics.
@@ -142,24 +135,22 @@ class DistortImage {
    *
    */
   void setTransform(Graphics graphics, BitmapData bmd, Point tl, Point tr, Point br, Point bl) {
-
     num dx30 = bl.x - tl.x;
     num dy30 = bl.y - tl.y;
     num dx21 = br.x - tr.x;
     num dy21 = br.y - tr.y;
     num l = _p.length;
     while (--l > -1) {
-      Map point = _p[ l ];
-      num gx = ( point["x"] - _xMin ) / _w;
-      num gy = ( point["y"] - _yMin ) / _h;
-      num bx = tl.x + gy * ( dx30 );
-      num by = tl.y + gy * ( dy30 );
-      point["sx"] = bx + gx * ( ( tr.x + gy * ( dx21 ) ) - bx );
-      point["sy"] = by + gx * ( ( tr.y + gy * ( dy21 ) ) - by );
+      Map point = _p[l];
+      num gx = (point["x"] - _xMin) / _w;
+      num gy = (point["y"] - _yMin) / _h;
+      num bx = tl.x + gy * (dx30);
+      num by = tl.y + gy * (dy30);
+      point["sx"] = bx + gx * ((tr.x + gy * (dx21)) - bx);
+      point["sy"] = by + gx * ((tr.y + gy * (dy21)) - by);
     }
     __render(graphics, bmd);
   }
-
 
   /**
    * Distorts the provided BitmapData and draws it onto the provided Graphics.
@@ -179,7 +170,7 @@ class DistortImage {
     List a;
     num l = _tri.length;
     while (--l > -1) {
-      a = _tri[ l ];
+      a = _tri[l];
       p0 = a[0];
       p1 = a[1];
       p2 = a[2];
@@ -198,15 +189,15 @@ class DistortImage {
 
       _tMat.tx = u0;
       _tMat.ty = v0;
-      _tMat.a = ( u1 - u0 ) / _w;
-      _tMat.b = ( v1 - v0 ) / _w;
-      _tMat.c = ( u2 - u0 ) / _h;
-      _tMat.d = ( v2 - v0 ) / _h;
+      _tMat.a = (u1 - u0) / _w;
+      _tMat.b = (v1 - v0) / _w;
+      _tMat.c = (u2 - u0) / _h;
+      _tMat.d = (v2 - v0) / _h;
 
-      _sMat.a = ( x1 - x0 ) / _w;
-      _sMat.b = ( y1 - y0 ) / _w;
-      _sMat.c = ( x2 - x0 ) / _h;
-      _sMat.d = ( y2 - y0 ) / _h;
+      _sMat.a = (x1 - x0) / _w;
+      _sMat.b = (y1 - y0) / _w;
+      _sMat.c = (x2 - x0) / _h;
+      _sMat.d = (y2 - y0) / _h;
       _sMat.tx = x0;
       _sMat.ty = y0;
 
@@ -219,7 +210,6 @@ class DistortImage {
       graphics.fillPattern(new GraphicsPattern.noRepeat(bmd.renderTextureQuad, _tMat /*smoothing*/));
     }
   }
-
 
   /**
    * Sets the size of this DistortImage instance and re-initializes the triangular grid.
@@ -237,7 +227,6 @@ class DistortImage {
     this.__init();
   }
 
-
   /**
    * Sets the precision of this DistortImage instance and re-initializes the triangular grid.
    *
@@ -253,7 +242,6 @@ class DistortImage {
     this._vseg = vertical;
     this.__init();
   }
-
 
   /**
    * Width of this DistortImage instance. Property can only be set through the class constructor.
@@ -271,7 +259,6 @@ class DistortImage {
     return _h;
   }
 
-
   /**
    * Horizontal precision of this DistortImage instance. Property can only be set through the class constructor.
    * @see	DistortImage#setPrecision()
@@ -287,8 +274,4 @@ class DistortImage {
   int get vPrecision {
     return _vseg;
   }
-
-
 }
-	
-	

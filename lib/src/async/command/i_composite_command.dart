@@ -20,7 +20,6 @@ part of stagexl_commons;
  * @author Roland Zwaga
  */
 abstract class ICompositeCommand extends ICommand {
-
   /**
    */
   ICompositeCommand addCommandAt(ICommand command, int index);

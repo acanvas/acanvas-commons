@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
@@ -14,5 +13,4 @@ class KeyCode {
   static const int PAGE_DOWN = 34;
   static const int HOME = 36;
   static const int END = 35;
-
 }

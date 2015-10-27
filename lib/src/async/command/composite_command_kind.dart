@@ -15,7 +15,6 @@
 */
 part of stagexl_commons;
 
-
 /**
  * Enumeration that defines the different ways an <code>ICompositeCommand</code> can execute its collection.
  * of <code>ICommands</code>
@@ -24,7 +23,6 @@ part of stagexl_commons;
  * @see org.as3commons.async.command.ICommand ICommand
  */
 class CompositeCommandKind {
-
   static final Map _kinds = new Map();
 
   /**
@@ -84,6 +82,4 @@ class CompositeCommandKind {
   String toString() {
     return _name;
   }
-
 }
-

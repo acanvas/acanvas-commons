@@ -16,7 +16,6 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 
 part of stagexl_commons;
 
-
 /**
  * A <code>KeyEvent</code> object is dispatched in response to a user pressing or releasing one
  * of the keys on a <code>SoftKeyboard</code> object. Please note that this object inherits
@@ -28,7 +27,6 @@ part of stagexl_commons;
  * @see http://doc.starling-framework.org/ Starling API documentation
  */
 class KeyEvent extends Event {
-
   static final String KEY_UP_PRINTABLE = "cc.cote.feathers.softkeyboard.KeyEvent.keyUpPrintable";
   static final String KEY_UP_VISIBLE = "cc.cote.feathers.softkeyboard.KeyEvent.keyUpVisible";
 
@@ -67,11 +65,9 @@ class KeyEvent extends Event {
    * @param char The actual printable character associated to the key that triggered the event.
    * @param data Arbitrary data to pass along with the event
    */
-  KeyEvent(String type, int charCode, [String char=null, Map data=null
-  ]): super(type, false/*, data*/) {
+  KeyEvent(String type, int charCode, [String char = null, Map data = null]) : super(type, false /*, data*/) {
     _charCode = charCode;
     _char = char;
-
   }
 
   /**
@@ -93,6 +89,4 @@ class KeyEvent extends Event {
   int get charCode {
     return _charCode;
   }
-
 }
-	

@@ -37,7 +37,7 @@ class KeyRow extends BoxSprite {
    * @param keys Listof <code>Key</code> objects to add to the <code>KeyRow</code>.
    * @param gap Gap to leave between keys (in arbitraty units).
    */
-  KeyRow(List<Key> keys, num gap): super() {
+  KeyRow(List<Key> keys, num gap) : super() {
     inheritSpan = true;
 
     this.keys = keys;
@@ -55,6 +55,4 @@ class KeyRow extends BoxSprite {
   int get length {
     return keys.length;
   }
-
 }
-	

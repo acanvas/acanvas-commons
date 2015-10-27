@@ -20,13 +20,8 @@ part of stagexl_commons;
  */
 
 abstract class ICommand {
-
   /**
    * Executes the command.
    */
-  void execute([Event event=null])
-  ;
-
+  void execute([Event event = null]);
 }
-
-

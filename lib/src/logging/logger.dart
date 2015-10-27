@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 class Logger implements logging.Logger {
   final logging.Logger _delegate;
 
@@ -11,7 +10,6 @@ class Logger implements logging.Logger {
 
   @override
   void log(logging.Level logLevel, String message, [Object error, StackTrace stackTrace, Zone zone]) {
-
     message = "${name}: ${message}";
 
     if (error is List) {
@@ -20,7 +18,6 @@ class Logger implements logging.Logger {
         String str = element.toString();
         i++;
         message = message.replaceFirst(new RegExp('\\{${i.toString()}\\}'), str);
-
       });
     }
 
@@ -28,43 +25,52 @@ class Logger implements logging.Logger {
   }
 
   /* Proxies for ascommons-logging compatibility */
-  void debug(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.FINEST, message, error, stackTrace);
+  void debug(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.FINEST, message, error, stackTrace);
 
-  void warn(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.WARNING, message, error, stackTrace);
+  void warn(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.WARNING, message, error, stackTrace);
 
-  void error(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.SEVERE, message, error, stackTrace);
-
+  void error(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.SEVERE, message, error, stackTrace);
 
   /** Log message at level [logging.Level.FINEST]. */
   @override
-  void finest(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.FINEST, message, error, stackTrace);
+  void finest(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.FINEST, message, error, stackTrace);
 
   /** Log message at level [logging.Level.FINER]. */
   @override
-  void finer(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.FINER, message, error, stackTrace);
+  void finer(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.FINER, message, error, stackTrace);
 
   /** Log message at level [logging.Level.FINE]. */
   @override
-  void fine(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.FINE, message, error, stackTrace);
+  void fine(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.FINE, message, error, stackTrace);
 
   /** Log message at level [logging.Level.CONFIG]. */
   @override
-  void config(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.CONFIG, message, error, stackTrace);
+  void config(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.CONFIG, message, error, stackTrace);
 
   /** Log message at level [logging.Level.INFO]. */
   @override
-  void info(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.INFO, message, error, stackTrace);
+  void info(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.INFO, message, error, stackTrace);
 
   /** Log message at level [logging.Level.WARNING]. */
   @override
-  void warning(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.WARNING, message, error, stackTrace);
+  void warning(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.WARNING, message, error, stackTrace);
 
   /** Log message at level [logging.Level.SEVERE]. */
   @override
-  void severe(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.SEVERE, message, error, stackTrace);
+  void severe(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.SEVERE, message, error, stackTrace);
 
   /** Log message at level [logging.Level.SHOUT]. */
   @override
-  void shout(String message, [Object error, StackTrace stackTrace]) => log(logging.Level.SHOUT, message, error, stackTrace);
-
+  void shout(String message, [Object error, StackTrace stackTrace]) =>
+      log(logging.Level.SHOUT, message, error, stackTrace);
 }

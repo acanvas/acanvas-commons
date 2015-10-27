@@ -1,7 +1,6 @@
 part of stagexl_commons;
 
 class URLLoaderDataFormat {
-
   static const String BITMAP_DATA = "text";
   static const String SOUND = "text";
   static const String SOUND_SPRITE = "text";
@@ -10,4 +9,3 @@ class URLLoaderDataFormat {
   static const String TEXT = "text";
   static const String CUSTOM_OBJECT = "text";
 }
-

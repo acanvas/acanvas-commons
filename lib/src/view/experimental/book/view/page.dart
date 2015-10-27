@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Dispatched when this Page its index changes (triggered by change in the pages property of the accompanying PageManager).
  * @eventType	com.rubenswieringa.book.Page.INDEX_CHANGED
@@ -10,7 +9,6 @@ part of stagexl_commons;
  * @
  */
 // [Event(name="indexChanged", type="flash.events.Event")]
-
 
 /**
  * A container class that stores contents of a page in the Book class.
@@ -39,12 +37,10 @@ part of stagexl_commons;
  *
  */
 class Page extends Sprite {
-
-
   /**
    * @
    */
-  static final Map DEFAULT_STYLES = { "backgroundColor": 0xFFFFFFFF, "backgroundAlpha": 0.3 };
+  static final Map DEFAULT_STYLES = {"backgroundColor": 0xFFFFFFFF, "backgroundAlpha": 0.3};
 
   // internals accessors:
   /**
@@ -106,27 +102,21 @@ class Page extends Sprite {
   num _width;
   num _height;
 
-
   // CONSTRUCTOR:
-
 
   /**
    * Constructor
    */
-  Page([Bitmap bm=null]): super() {
-
+  Page([Bitmap bm = null]) : super() {
     if (bm != null || bm == true) {
       addChild(bm);
     }
 
     this._gradients = new Gradients(this);
     addChild(this._shape);
-
   }
 
-
   // CUSTOM:
-
 
   /**
    * Draws itself on a BitmapData instance and returns it.
@@ -143,7 +133,6 @@ class Page extends Sprite {
     bmd.draw(this, matrix);
     return bmd;
   }
-
 
   /**
    * Draws a gradient on the folding-side of the page.
@@ -182,7 +171,7 @@ class Page extends Sprite {
    * @param	includeFlipSide	bool indicating whether or not to draw the fold-gradient for this Page its flipside.
    *
    */
-  void refreshFoldGradient([bool includeFlipSide=true]) {
+  void refreshFoldGradient([bool includeFlipSide = true]) {
     // if flipside isn't available yet then don't bother trying to reach it:
     Page flipSide = this.getFlipSide();
     if (flipSide == null) {
@@ -202,7 +191,6 @@ class Page extends Sprite {
     }
   }
 
-
   /**
    * Tears this Page instance out of its corresponding Book.When called, this method will be executed regardless of the tearable property its value.
    *
@@ -215,10 +203,9 @@ class Page extends Sprite {
    * @see		BookError#OUT_OF_BOUNDS
    *
    */
-  void tear([bool fromTop=true]) {
+  void tear([bool fromTop = true]) {
     this._book.tearPage(this, fromTop);
   }
-
 
   /**
    * Returns the Page instance that is displayed on the other side of this Page.
@@ -235,7 +222,6 @@ class Page extends Sprite {
     }
     return (this._book.pages[i] as Page);
   }
-
 
   /**
    * Returns true if this is the first Page in the Book it belongs to, false otherwise.
@@ -261,21 +247,18 @@ class Page extends Sprite {
     return (this._book.pages.length > 0 && this == this._book.pages[this._book.pages.length - 1]);
   }
 
-
   /**
    * Re-calculates the internal for the index property of this Page instance. Typically this method is used as a listener for the contentChanged Event of the accompanying PageManager.
    * @see		BookEvent#CONTENT_CHANGED
    * @see		Page#index
    * @
    */
-  void changeIndex([BookEvent event=null]) {
+  void changeIndex([BookEvent event = null]) {
     this._index = this._book.pages.indexOf(this);
     this.dispatchEvent(new Event(Page.INDEX_CHANGED));
   }
 
-
   // ACCESSORS:
-
 
   /**
    * Gradients instance associated with this Page.
@@ -285,7 +268,6 @@ class Page extends Sprite {
   Gradients get gradients {
     return this._gradients;
   }
-
 
   /**
    * Book instance with which this Page is associated. Can only be set once.
@@ -311,7 +293,6 @@ class Page extends Sprite {
       this._book.addEventListener(BookEvent.CONTENT_CHANGED, this.changeIndex);
     }
   }
-
 
   /**
    * Indicates whether or not this Page should be hard (or as true) flexible (false). Defaults to false. Returns true if either this Page or the flipside Page has is hard..
@@ -354,7 +335,6 @@ class Page extends Sprite {
     return this._hard;
   }
 
-
   /**
    * Index of this Page within the pages property of the containing Book instance.
    *
@@ -368,7 +348,6 @@ class Page extends Sprite {
     }
     return this._book.pages.indexOf(this);
   }
-
 
   /**
    * Indicates whether or not this Page plays animation while being flipped.
@@ -388,7 +367,6 @@ class Page extends Sprite {
     this._liveBitmapping = value;
   }
 
-
   /**
    * int indicating on which side the Page is displayed (0=left, 1=right).
    *
@@ -404,7 +382,6 @@ class Page extends Sprite {
       return ((this._index + 1) % 2);
     }
   }
-
 
   /**
    * Indicates whether or not this Page should be allowed to be be torn from its Book, false if not. Defaults to false. Returns true if either this Page or its flipside Page has is tearable, or if the Book associated with this Page has its tearable property set to true.
@@ -432,7 +409,6 @@ class Page extends Sprite {
     return this._tearable;
   }
 
-
   @override
   void set width(num value) {
     _width = value;
@@ -454,6 +430,4 @@ class Page extends Sprite {
   num get height {
     return _height;
   }
-
 }
-	

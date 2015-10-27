@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
@@ -8,12 +7,11 @@ class Accordeon extends Flow with MDuration {
   bool _multiselection = false;
   Timer _timer;
 
-  Accordeon():super() {
+  Accordeon() : super() {
     duration = 0.3;
     spacing = 0;
     snapToPixels = false;
   }
-
 
   void _onSelectableButtonSelected(SelectableButton cell) {
     AccordeonButton selectedItem = cell as AccordeonButton;
@@ -24,13 +22,11 @@ class Accordeon extends Flow with MDuration {
     }
   }
 
-
   void _onSelectableButtonDeselected(SelectableButton cell) {
     _startAnimation(_duration);
   }
 
-
-  void deselectAll([AccordeonButton exception=null]) {
+  void deselectAll([AccordeonButton exception = null]) {
     int n = numChildren;
     AccordeonButton item;
     for (int i = 0; i < n; i++) {
@@ -40,20 +36,18 @@ class Accordeon extends Flow with MDuration {
     _startAnimation(_duration);
   }
 
-
   void _startAnimation(num duration) {
     if (_timer != null) {
       _timer.cancel();
     }
     addEventListener(Event.ENTER_FRAME, _onEnterFrame);
-    _timer = new Timer(new Duration(milliseconds: ((duration + 0.1) * 1000).round()), () => removeEventListener(Event.ENTER_FRAME, _onEnterFrame));
+    _timer = new Timer(new Duration(milliseconds: ((duration + 0.1) * 1000).round()),
+        () => removeEventListener(Event.ENTER_FRAME, _onEnterFrame));
   }
-
 
   void _onEnterFrame(Event event) {
     refresh();
   }
-
 
   @override
   DisplayObject addChild(DisplayObject child) {
@@ -63,8 +57,6 @@ class Accordeon extends Flow with MDuration {
     }
     super.addChild(child);
   }
-
 }
 
-class AccordeonButton extends SelectableButton with MDuration {
-}
+class AccordeonButton extends SelectableButton with MDuration {}

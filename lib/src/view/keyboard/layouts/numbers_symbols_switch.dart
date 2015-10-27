@@ -22,8 +22,6 @@ part of stagexl_commons;
  * a <code>SWITCH_LAYOUT</code> key.
  */
 class numsSymbolsSwitch extends Layout {
-
-
   /**
    * Creates a new numsSymbolsSwitch object.
    *
@@ -79,8 +77,5 @@ class numsSymbolsSwitch extends Layout {
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.5)
       ]
     ];
-
   }
-
 }
-	

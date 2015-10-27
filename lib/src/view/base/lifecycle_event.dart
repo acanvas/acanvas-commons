@@ -1,7 +1,6 @@
 part of stagexl_commons;
 
 class LifecycleEvent extends Event {
-
   static const String INIT_START = "LifecycleEvent.INIT_START";
   static const String INIT_COMPLETE = "LifecycleEvent.DID_INIT";
 

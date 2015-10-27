@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
@@ -14,9 +13,9 @@ class PaperRadioButton extends SelectableButton {
   Sprite _bg;
   PaperText _paperLabel;
 
-  PaperRadioButton({int rippleColor: PaperColor.GREY_DARK, this.activeColor : PaperColor.GREEN, this.label : ""}) : super() {
-
-    PaperRipple ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity : .2);
+  PaperRadioButton({int rippleColor: PaperColor.GREY_DARK, this.activeColor: PaperColor.GREEN, this.label: ""})
+      : super() {
+    PaperRipple ripple = new PaperRipple(type: PaperRipple.CIRCLE, color: rippleColor, velocity: .2);
     ripple.inheritSpan = false;
     addChild(ripple);
     ripple.span(RADIUS * 2, RADIUS * 2);
@@ -38,7 +37,7 @@ class PaperRadioButton extends SelectableButton {
     _icon.visible = false;
 
     if (label != "") {
-      _paperLabel = new PaperText(label, size : 16);
+      _paperLabel = new PaperText(label, size: 16);
       addChild(_paperLabel);
     }
 
@@ -58,9 +57,7 @@ class PaperRadioButton extends SelectableButton {
   void selectAction() {
     _icon.scaleX = _icon.scaleY = .1;
     _icon.visible = true;
-    ContextTool.STAGE.juggler.addTween(_icon, .1).animate
-      ..scaleX.to(1)
-      ..scaleY.to(1);
+    ContextTool.JUGGLER.addTween(_icon, .1).animate..scaleX.to(1)..scaleY.to(1);
     if (_paperLabel != null) {
       _paperLabel.color = activeColor;
     }
@@ -68,11 +65,9 @@ class PaperRadioButton extends SelectableButton {
 
   void deselectAction() {
     Tween tw = new Tween(_icon, .2);
-    tw.animate
-      ..scaleX.to(.1)
-      ..scaleY.to(.1);
+    tw.animate..scaleX.to(.1)..scaleY.to(.1);
     tw.onComplete = () => _icon.visible = false;
-    ContextTool.STAGE.juggler.add(tw);
+    ContextTool.JUGGLER.add(tw);
     if (_paperLabel != null) {
       _paperLabel.color = PaperColor.BLACK;
     }

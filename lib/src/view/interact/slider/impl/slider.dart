@@ -16,8 +16,8 @@ class Slider extends BehaveSprite with MSlider {
 
   Slider() : super() {
     mouseWheelEnabled = ContextTool.MOBILE ? false : true;
-    background = GraphicsUtil.rectangle(0, 0, 1, 1, color:0x00000000);
-    thumb = GraphicsUtil.rectangle(0, 0, 1, 1, color:0x00FFFFFF);
+    background = GraphicsUtil.rectangle(0, 0, 1, 1, color: 0x00000000);
+    thumb = GraphicsUtil.rectangle(0, 0, 1, 1, color: 0x00FFFFFF);
   }
 
   //-------- SCROLL THUMB
@@ -75,8 +75,7 @@ class Slider extends BehaveSprite with MSlider {
     if (ContextTool.TOUCH) {
       background.addEventListener(TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown, useCapture: false, priority: 0);
       thumb.addEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown, useCapture: false, priority: 0);
-    }
-    else {
+    } else {
       background.addEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown, useCapture: false, priority: 0);
       thumb.addEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown, useCapture: false, priority: 0);
     }
@@ -91,8 +90,7 @@ class Slider extends BehaveSprite with MSlider {
     if (ContextTool.TOUCH) {
       background.removeEventListener(TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown);
       thumb.removeEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown);
-    }
-    else {
+    } else {
       background.removeEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown);
       thumb.removeEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown);
     }
@@ -105,8 +103,7 @@ class Slider extends BehaveSprite with MSlider {
     if (horizontalScrollBehavior) {
       value = _convertPositionToValue(posX);
       mouseOffset = event.stageX - posX;
-    }
-    else {
+    } else {
       value = _convertPositionToValue(posY);
       mouseOffset = event.stageY - posY;
     }
@@ -114,7 +111,7 @@ class Slider extends BehaveSprite with MSlider {
   }
 
   void _onThumbMouseDown(InputEvent event) {
-    mouseOffset = horizontalScrollBehavior ? event.stageX - thumb.x : event.stageY - thumb.y;// - _thumbSize * 0.5;
+    mouseOffset = horizontalScrollBehavior ? event.stageX - thumb.x : event.stageY - thumb.y; // - _thumbSize * 0.5;
     interactionStart();
   }
 
@@ -131,8 +128,7 @@ class Slider extends BehaveSprite with MSlider {
         if (ContextTool.TOUCH) {
           stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
           stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
-        }
-        else {
+        } else {
           stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
           stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
         }
@@ -156,8 +152,7 @@ class Slider extends BehaveSprite with MSlider {
       if (ContextTool.TOUCH) {
         stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
         stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
-      }
-      else {
+      } else {
         stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove);
         stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
       }
@@ -175,7 +170,7 @@ class Slider extends BehaveSprite with MSlider {
 
   //----- SET VALUE according to MousePosition and initial Offset (on mousedown)
   void _onStageMouseMove(InputEvent event) {
-    num mousePos = (horizontalScrollBehavior ? event.stageX : event.stageY);// - _thumbSize * 0.5;
+    num mousePos = (horizontalScrollBehavior ? event.stageX : event.stageY); // - _thumbSize * 0.5;
     value = _convertPositionToValue(mousePos - mouseOffset);
     // event.updateAfterEvent();
   }
@@ -184,7 +179,6 @@ class Slider extends BehaveSprite with MSlider {
   void _onStageMouseUp(InputEvent event) {
     interactionEnd();
   }
-
 
   //----- NOTIFIERS FOR EXTERNAL BEHAVIOUR
 
@@ -197,12 +191,10 @@ class Slider extends BehaveSprite with MSlider {
     }
   }
 
-
   void notifyMomentumEnd() {
     dispatchEvent(new SliderEvent(SliderEvent.MOMENTUM_END, value));
     notifyChangeEnd();
   }
-
 
   void notifyChangeStart() {
     if (!_changing) {
@@ -212,7 +204,6 @@ class Slider extends BehaveSprite with MSlider {
     }
   }
 
-
   void notifyChangeEnd() {
     if (_changing) {
       ContextTool.MATERIALIZE_REQUIRED = false;
@@ -221,14 +212,12 @@ class Slider extends BehaveSprite with MSlider {
     }
   }
 
-
   //----- INTERNAL HELPERS
 
   num _convertPositionToValue(num position) {
     num calc = valueMin + (valueMax - valueMin) * (position / (spanSize - _thumbSize));
     return calc;
   }
-
 
   void _updateThumbPosition() {
     num bgp = 0;
@@ -244,14 +233,12 @@ class Slider extends BehaveSprite with MSlider {
     }
   }
 
-
   //----- MOMENTUM
 
   void _calcMomentum(Event event) {
     momentum = value - momentumDelta;
     momentumDelta = value;
   }
-
 
   void _applyMomentum(Event event) {
     momentum *= momentumFriction;
@@ -280,5 +267,4 @@ class Slider extends BehaveSprite with MSlider {
       momentum = momentumDelta = 0;
     }
   }
-
 }

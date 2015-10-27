@@ -4,13 +4,11 @@ part of stagexl_commons;
  * @author nilsdoehring
  */
 class PagerSprite extends BehaveSprite with MList, MPager {
-
   Sprite holder;
   Button btnPrev;
   Button btnNext;
 
   PagerSprite() : super() {
-
     disableClick = true;
 
     holder = new BoxSprite();
@@ -74,7 +72,6 @@ class PagerSprite extends BehaveSprite with MList, MPager {
   }
 
   void _updateControls() {
-
     if (chunksPlaced.length == 0) {
       return;
     }

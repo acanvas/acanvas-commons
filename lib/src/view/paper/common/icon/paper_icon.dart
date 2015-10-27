@@ -1,7 +1,6 @@
 part of stagexl_commons;
 
 class PaperIcon {
-
   static SvgDisplayObject color(String rawSvg, int color) {
     double r = ((color >> 16) & 0xFF) / 255;
     double g = ((color >> 8) & 0xFF) / 255;

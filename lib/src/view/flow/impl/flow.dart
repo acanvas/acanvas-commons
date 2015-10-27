@@ -4,8 +4,8 @@ part of stagexl_commons;
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
 class Flow extends BoxSprite with MFlow {
-
-  Flow(/*{FlowOrientation flow : FlowOrientation.HORIZONTAL, double spacing: 0.0, bool distribute: false, bool snapToPixels: true, bool inverted: false, bool animate: false, bool reflow: false, AlignV alignV : AlignV.TOP}*/) {
+  Flow(
+      /*{FlowOrientation flow : FlowOrientation.HORIZONTAL, double spacing: 0.0, bool distribute: false, bool snapToPixels: true, bool inverted: false, bool animate: false, bool reflow: false, AlignV alignV : AlignV.TOP}*/) {
     //inheritSpan = true;
     autoRefresh = true;
   }
@@ -35,13 +35,11 @@ class Flow extends BoxSprite with MFlow {
 
     //iterate all children
     children.forEach((child) {
-
       //get width and height values of child
       if (child is MBox /*&& !(child is MFlow)*/) {
         _childWidth = child.spanWidth;
         _childHeight = child.spanHeight;
-      }
-      else {
+      } else {
         _childWidth = child.width;
         _childHeight = child.height;
       }
@@ -50,10 +48,8 @@ class Flow extends BoxSprite with MFlow {
       _prevChildWidth = _prevChild == null ? 0 : _prevChild is MBox ? (_prevChild as MBox).spanWidth : _prevChild.width;
       _prevChildX = _prevChild == null ? (inverted ? spanWidth - padding + spacing : padding - spacing) : _prevChild.x;
 
-
       //calculate child X in inverted mode
       if (inverted) {
-
         if (snapToPixels) _childXNew = (_prevChildX - _childWidth - spacing).round();
         else _childXNew = _prevChildX - _childWidth - spacing;
 
@@ -65,12 +61,12 @@ class Flow extends BoxSprite with MFlow {
       }
       //calculate child X in normal mode
       else {
-
         if (snapToPixels) _childXNew = (_prevChildX + _prevChildWidth + spacing).round();
         else _childXNew = _prevChildX + _prevChildWidth + spacing;
 
         //row space is full
-        if ((spanWidth > 0 && reflow && _childXNew + _childWidth + spacing > spanWidth) || flowOrientation == FlowOrientation.VERTICAL) {
+        if ((spanWidth > 0 && reflow && _childXNew + _childWidth + spacing > spanWidth) ||
+            flowOrientation == FlowOrientation.VERTICAL) {
           _childXNew = padding;
           if (_prevChild != null) _newLine = true;
         }
@@ -92,9 +88,7 @@ class Flow extends BoxSprite with MFlow {
       } else {
         //calculate height of current row (only in HORIZONTAL mode)
         _rowHeight = max(_rowHeight, _childHeight);
-
       }
-
 
       //calculate child Y including vertical alignment
       switch (alignV) {
@@ -109,15 +103,13 @@ class Flow extends BoxSprite with MFlow {
           break;
       }
 
-
       //set x, y, animate
       if (animate) {
         ContextTool.JUGGLER.addTween(child, 0.2)
           ..animate.alpha.to(1.0)
           ..animate.x.to(_childXNew)
           ..animate.y.to(_childYNew);
-      }
-      else {
+      } else {
         child.x = _childXNew;
         child.y = _childYNew;
       }
@@ -127,14 +119,12 @@ class Flow extends BoxSprite with MFlow {
       }
 
       _prevChild = child;
-
     });
 
     super.refresh();
 
     num _spacer = (flowOrientation == FlowOrientation.HORIZONTAL && reflow == true) ? spacing : 0;
     span(width, _childYNew + _spacer + _childHeight + padding, refresh: false);
-
   }
 
   @override
@@ -151,10 +141,8 @@ class Flow extends BoxSprite with MFlow {
       ContextTool.JUGGLER.addTween(child, 0.2)
         ..animate.alpha.to(0.0)
         ..onComplete = () => super.removeChildAt(index);
-    }
-    else {
+    } else {
       super.removeChildAt(index);
     }
   }
-
 }

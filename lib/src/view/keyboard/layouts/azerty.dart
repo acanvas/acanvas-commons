@@ -19,8 +19,6 @@ part of stagexl_commons;
  * The <code>Azerty</code> class defines a basic azerty-inspired keyboard layout.
  */
 class Azerty extends Layout {
-
-
   /**
    * Creates a new Azerty object.
    */
@@ -69,8 +67,5 @@ class Azerty extends Layout {
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.6)
       ]
     ];
-
   }
-
 }
-	

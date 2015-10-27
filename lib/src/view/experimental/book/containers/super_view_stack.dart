@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * SuperViewStack in many ways behaves like the classic ViewStack.
  * Additional features are reversed indexing (0=top, N=bottom) and fading of children.
@@ -21,8 +20,6 @@ part of stagexl_commons;
  *
  */
 class SuperViewStack extends BoxSprite {
-
-
   // status variables:
   /**
    * @
@@ -83,13 +80,12 @@ class SuperViewStack extends BoxSprite {
    */
   static final int DEFAULT_FADECOLOR = 0xFFFFFF;
 
-
   // CONSTRUCTOR:
 
   /**
    * Constructor.
    */
-  SuperViewStack(): super() {
+  SuperViewStack() : super() {
     inheritSpan = false;
 
     this._childrenCreated = true;
@@ -98,7 +94,6 @@ class SuperViewStack extends BoxSprite {
       this.selectedIndex = 0;
     }
     this.showChildren();
-
   }
 
   /**
@@ -151,7 +146,7 @@ class SuperViewStack extends BoxSprite {
   /**
    * @
    */
-  DisplayObject _addChild(DisplayObject child, [int index=-1]) {
+  DisplayObject _addChild(DisplayObject child, [int index = -1]) {
     if (index == -1) {
       super.addChildAt(child, 0);
     } else {
@@ -309,7 +304,6 @@ class SuperViewStack extends BoxSprite {
     this._selectedIndex = -1;
   }
 
-
   // CUSTOM:
 
   /**
@@ -318,7 +312,6 @@ class SuperViewStack extends BoxSprite {
    * @
    */
   void showChildren() {
-
     for (int i = 0; i < this.numChildren; i++) {
       Sprite child = super.getChildAt(i) as Sprite;
       if (this._fade == 1.0) {
@@ -330,7 +323,6 @@ class SuperViewStack extends BoxSprite {
 
     // make sure fading is adjusted:
     this.applyFade();
-
   }
 
   /**
@@ -341,11 +333,9 @@ class SuperViewStack extends BoxSprite {
    * @
    */
   void drawFade(Sprite child) {
-
     Shape shape = new Shape();
     shape.name = SuperViewStack.FADESHAPE_NAME;
     child.addChild(shape);
-
   }
 
   /**
@@ -358,7 +348,6 @@ class SuperViewStack extends BoxSprite {
    * @
    */
   void resizeFade(Sprite child) {
-
     // point out the Shape:
     Shape shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Shape;
 
@@ -369,7 +358,6 @@ class SuperViewStack extends BoxSprite {
     //shape.height = child.getExplicitOrMeasuredHeight();
     shape.width = child.width;
     shape.height = child.height;
-
   }
 
   /**
@@ -378,12 +366,10 @@ class SuperViewStack extends BoxSprite {
    * @
    */
   void applyFade() {
-
     Sprite child;
     Shape shape;
 
     for (int i = 0; i < this.numChildren; i++) {
-
       child = super.getChildAt(i) as Sprite;
       shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Shape;
 
@@ -395,9 +381,7 @@ class SuperViewStack extends BoxSprite {
         shape.graphics.rect(0, 0, 100, 100);
         shape.graphics.fillColor(((this._fade * 256).round() << 24) + this._fadeColor);
       }
-
     }
-
   }
 
   /**
@@ -413,7 +397,6 @@ class SuperViewStack extends BoxSprite {
     return this.numChildren - 1 - value;
   }
 
-
   // ACCESSORS:
 
   /**
@@ -428,7 +411,6 @@ class SuperViewStack extends BoxSprite {
   }
 
   void set selectedIndex(int value) {
-
     // store old value:
     IndexChangedEvent event = new IndexChangedEvent(IndexChangedEvent.CHANGE);
     event.oldIndex = this.selectedIndex;
@@ -546,8 +528,4 @@ class SuperViewStack extends BoxSprite {
     this.showChildren();
     this.dispatchEvent(new Event(SuperViewStack.BEHAVIOR_CHANGED));
   }
-
-
 }
-	
-	

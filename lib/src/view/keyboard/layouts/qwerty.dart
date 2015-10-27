@@ -20,8 +20,6 @@ part of stagexl_commons;
  * The <code>Qwerty</code> class defines a basic qwerty-inspired keyboard layout.
  */
 class Qwerty extends Layout {
-
-
   /**
    * Creates a new Qwerty object.
    */
@@ -71,8 +69,5 @@ class Qwerty extends Layout {
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.5)
       ]
     ];
-
   }
-
 }
-	

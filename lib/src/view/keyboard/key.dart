@@ -16,7 +16,6 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 
 part of stagexl_commons;
 
-
 /**
  * Dispatched when a key is pressed down.
  *
@@ -182,7 +181,14 @@ class Key extends BoxSprite {
    * @param switchToType A layout (specified by its class) to switch to when the key is
    * released. Only works with <code>Softhtml.KeyCode.SWITCH_LAYOUT</code> keys.
    */
-  Key(int charCode, [List<Key> variants = null, String type = 'characterKey', String label = null, num relativeWidth = 1, num relativeHeight = 1, Layout switchToLayoutType = null]):super() {
+  Key(int charCode,
+      [List<Key> variants = null,
+      String type = 'characterKey',
+      String label = null,
+      num relativeWidth = 1,
+      num relativeHeight = 1,
+      Layout switchToLayoutType = null])
+      : super() {
     name = "Key_${charCode.toString()}";
 
     inheritSpan = true;
@@ -196,8 +202,7 @@ class Key extends BoxSprite {
 
     // Flag each variant as such (if any)
     if (variants != null || variants == true) {
-      for (Key k in variants)
-        k.isVariant = true;
+      for (Key k in variants) k.isVariant = true;
     }
 
     // Create the label and name it so it can be specifically styled through a theme
@@ -224,7 +229,6 @@ class Key extends BoxSprite {
     } else if (isPrintable != null || isPrintable == true) {
       _character = new String.fromCharCode(_charCode);
     }
-
 
     // A string representation of the charCode is added to the nameList so keys can be
     // styled individually (if needed).
@@ -270,8 +274,7 @@ class Key extends BoxSprite {
       addEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       addEventListener(TouchEvent.TOUCH_END, _onTouch);
       addEventListener(TouchEvent.TOUCH_MOVE, _onTouch);
-    }
-    else {
+    } else {
       addEventListener(MouseEvent.MOUSE_DOWN, _onTouch);
       addEventListener(MouseEvent.MOUSE_UP, _onTouch);
       addEventListener(MouseEvent.MOUSE_MOVE, _onTouch);
@@ -281,7 +284,6 @@ class Key extends BoxSprite {
   }
 
   void _onRemovedFromStage(Event e) {
-
     if (_variantsTimer != null) {
       _variantsTimer.cancel();
 
@@ -291,7 +293,6 @@ class Key extends BoxSprite {
 				}
 				 */
     }
-
   }
 
   void dispose() {
@@ -309,8 +310,7 @@ class Key extends BoxSprite {
       removeEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       removeEventListener(TouchEvent.TOUCH_END, _onTouch);
       removeEventListener(TouchEvent.TOUCH_MOVE, _onTouch);
-    }
-    else {
+    } else {
       removeEventListener(MouseEvent.MOUSE_DOWN, _onTouch);
       removeEventListener(MouseEvent.MOUSE_UP, _onTouch);
       removeEventListener(MouseEvent.MOUSE_MOVE, _onTouch);
@@ -322,7 +322,6 @@ class Key extends BoxSprite {
 
   @override
   void refresh() {
-
 //			if (_skin) {
 
     GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, color: PaperColor.BLUE, sprite: _skin);
@@ -342,7 +341,6 @@ class Key extends BoxSprite {
       _icon.x = (spanWidth / 2 - _icon.width / 2).round();
       _icon.y = (spanHeight / 2 - _icon.height / 2).round();
     }
-
   }
 
   /**
@@ -352,7 +350,6 @@ class Key extends BoxSprite {
    * <code>AVAILABLE_STATES</code> constant array.
    */
   void changeState(String state) {
-
     // If the state is invalid or not being changed, abort!
     if (AVAILABLE_STATES.indexOf(state) == -1 || state == _state) return;
     _state = state;
@@ -375,7 +372,6 @@ class Key extends BoxSprite {
 
     // Insert new skin
     addChildAt(_skin, 0);
-
   }
 
   /** @ */
@@ -410,7 +406,6 @@ class Key extends BoxSprite {
       if (hasVariants) {
         _variantsTimer = new Timer(new Duration(milliseconds: keyVariantsDelay), _onShowAlternates);
       }
-
     }
     /*else if (touch.phase == TouchPhase.HOVER) {
 				
@@ -437,32 +432,23 @@ class Key extends BoxSprite {
       // If the key has variants and the variants are currently being displayed, check if
       // one should be highlighted
       if (hasVariants && _variantsContainer.numChildren > 0) {
-
         // Loop through all alternate keys to see if we are above one
         for (Key altKey in variants) {
-
           if (altKey.hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, false)) {
             altKey.changeState(DOWN_STATE);
           } else {
             altKey.changeState(UP_STATE);
           }
-
         }
-
       }
-
-
     } else if (e.type == TouchEvent.TOUCH_END || e.type == MouseEvent.MOUSE_UP) {
-
       if (variants != null || variants == true) {
-
         // Reset
         _variantsTimer.cancel();
 
         // Loop through all alternate keys to see if we are above one of them. If it's
         // the case, trigger event for that variant key
         for (Key altK in variants) {
-
           if (altK.hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, false)) {
             _triggerEvent(altK, KeyEvent.KEY_UP);
             altK.changeState(UP_STATE);
@@ -472,7 +458,6 @@ class Key extends BoxSprite {
 
         // Empty the callout container when done.
         _variantsContainer.removeChildren();
-
       }
 
       // Abort if the release is outside the original key
@@ -490,23 +475,18 @@ class Key extends BoxSprite {
       if (isVisible || _charCode == CharCode.SPACE) {
         _triggerEvent(this, KeyEvent.KEY_UP_VISIBLE);
       }
-
     }
-
   }
 
   /** @ */
   void _triggerEvent(Key key, String type) {
-
     // Trigger requested keyboard event
     KeyEvent event = new KeyEvent(type, key.charCode, key.character);
     dispatchEvent(event);
-
   }
 
   /** @ */
   void _onShowAlternates() {
-
     // Place variants in the container
     Point pos = new Point(0, 0);
     for (Key altKey in variants) {
@@ -520,7 +500,6 @@ class Key extends BoxSprite {
     // Dispatch event
     Event event = new KeyEvent(KeyEvent.SHOW_VARIANTS, charCode, character);
     dispatchEvent(event);
-
   }
 
   /**
@@ -531,13 +510,11 @@ class Key extends BoxSprite {
    * <code>TypographicCase.LOWERCASE</code>.
    */
   void changeCase(String keyCase) {
-
     if (keyCase == UPPERCASE) {
       uppercase();
     } else if (keyCase == LOWERCASE) {
       lowercase();
     }
-
   }
 
   /**
@@ -545,7 +522,6 @@ class Key extends BoxSprite {
    * <code>isVisible</code> property return <code>true</code>.
    */
   void uppercase() {
-
     if (isVisible == true) {
       _label.text = _label.text.toUpperCase();
       _character = character.toUpperCase();
@@ -557,7 +533,6 @@ class Key extends BoxSprite {
         }
       }
     }
-
   }
 
   /**
@@ -565,7 +540,6 @@ class Key extends BoxSprite {
    * <code>isVisible</code> property return <code>true</code>.
    */
   void lowercase() {
-
     if (isVisible == true) {
       _label.text = _label.text.toLowerCase();
       _character = character.toLowerCase();
@@ -577,16 +551,13 @@ class Key extends BoxSprite {
         }
       }
     }
-
   }
 
   /** @ */
   DisplayObject _buildGenericSkin() {
-
     // Temporarily draw into a Shape object
     Sprite canvas = GraphicsUtil.rectangle(0, 0, 44, 52, color: PaperColor.BLUE);
     return canvas;
-
   }
 
   /** Relative width of the key expressed as a ratio of the default key width. */
@@ -624,7 +595,10 @@ class Key extends BoxSprite {
    * include all letters, numbers and symbols as well as the ENTER, SPACE and TAB keys.
    */
   bool get isPrintable {
-    return (type == CHARACTER_KEY || type == NUMERIC_KEYPAD_KEY || _charCode == CharCode.ENTER || _charCode == CharCode.TAB);
+    return (type == CHARACTER_KEY ||
+        type == NUMERIC_KEYPAD_KEY ||
+        _charCode == CharCode.ENTER ||
+        _charCode == CharCode.TAB);
   }
 
   /**
@@ -632,7 +606,8 @@ class Key extends BoxSprite {
    * all letters, numbers and symbols.
    */
   bool get isVisible {
-    return ((type == CHARACTER_KEY || type == NUMERIC_KEYPAD_KEY) && !(_charCode == CharCode.ENTER || _charCode == CharCode.TAB || _charCode == CharCode.SPACE));
+    return ((type == CHARACTER_KEY || type == NUMERIC_KEYPAD_KEY) &&
+        !(_charCode == CharCode.ENTER || _charCode == CharCode.TAB || _charCode == CharCode.SPACE));
   }
 
   /**
@@ -646,13 +621,11 @@ class Key extends BoxSprite {
 
   /** @ */
   void set isSelected(bool value) {
-
     if (value == _isSelected) return;
     _isSelected = value;
 
     // Swap icon (if an appropriate one has been defined)
     if ((_isSelected && selectedIcon != null) || (!_isSelected && icon != null)) {
-
       int index = getChildIndex(_icon);
       _icon = _isSelected ? selectedIcon : icon;
       removeChildAt(index);
@@ -660,7 +633,6 @@ class Key extends BoxSprite {
       //TODO don't know\ninvalidate(INVALIDATION_FLAG_SKIN);
 
     }
-
   }
 
   /**
@@ -699,5 +671,4 @@ class Key extends BoxSprite {
   void set label(Label value) {
     _label = value;
   }
-
 }

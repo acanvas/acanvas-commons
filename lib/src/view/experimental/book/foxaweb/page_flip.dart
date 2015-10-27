@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Computes, generates, and draws a pageflip.
  *
@@ -67,8 +66,6 @@ part of stagexl_commons;
  * PT(0,1)                                           PT(1,1)
  */
 class PageFlip {
-
-
   // ------------------------------------------------
   //
   // ---o  static methods
@@ -94,7 +91,6 @@ class PageFlip {
    *
    */
   static Map computeFlip(Point ptd, Point pt, int pw, int ph, bool ish, int sens) {
-
     // useful vars
     num dfx = ptd.x - pw * pt.x;
     num dfy = ptd.y - ph * pt.y;
@@ -154,7 +150,7 @@ class PageFlip {
 
     // fliped angle
     num theta = atan2(dy, drx);
-    if (dy == 0)theta = 0;
+    if (dy == 0) theta = 0;
 
     // another fliped angle
     num beta = PI / 2 - theta;
@@ -165,11 +161,10 @@ class PageFlip {
     // if hyp is greater than the height of the sheet or hyp is
     // negative, the fliped part has 4 points
     // else, it's just a 3 points part (simple corner).
-    if (hyp > ph || hyp < 0)vhyp = ph;
+    if (hyp > ph || hyp < 0) vhyp = ph;
 
     // second fliped point
-    cPoints[1] = new Point(cPoints[0].x + cos(-beta) * vhyp,
-    cPoints[0].y + sin(-beta) * vhyp);
+    cPoints[1] = new Point(cPoints[0].x + cos(-beta) * vhyp, cPoints[0].y + sin(-beta) * vhyp);
 
     // last fliped point
     cPoints[3] = new Point(cPoints[0].x + drx, pt2.y);
@@ -213,9 +208,9 @@ class PageFlip {
 
     num gama = theta;
 
-    if (pt.y == 0)gama = -gama;
-    if (pt.x == 0)gama = PI + PI - gama;
-    if (ish == null || ish == false)gama = PI - gama;
+    if (pt.y == 0) gama = -gama;
+    if (pt.x == 0) gama = PI + PI - gama;
+    if (ish == null || ish == false) gama = PI - gama;
 
     mat.a = cos(gama);
     mat.b = sin(gama);
@@ -225,11 +220,11 @@ class PageFlip {
     ordMatrix(mat, spt, opw, oph, ish, cPoints, pPoints, gama, beta);
 
     // here we fix some mathematical bugs or instabilities
-    if (vhyp == 0)cPoints = null;
-    if ((dfx) < 1 && dfy.abs() < 1)cPoints = null;
+    if (vhyp == 0) cPoints = null;
+    if ((dfx) < 1 && dfy.abs() < 1) cPoints = null;
 
     // now we just have to return all the stuff
-    return {"cPoints":cPoints, "pPoints":pPoints, "matrix":mat, "width":opw, "height":oph};
+    return {"cPoints": cPoints, "pPoints": pPoints, "matrix": mat, "width": opw, "height": oph};
   }
 
   /**
@@ -242,7 +237,6 @@ class PageFlip {
    *
    */
   static void drawBitmapSheet(Map ocf, Shape mc, BitmapData bmp0, BitmapData bmp1) {
-
     // affectations
     num wid = ocf["width"];
     num hei = ocf["height"];
@@ -250,21 +244,19 @@ class PageFlip {
     List ppts = ocf["pPoints"];
     List cpts = ocf["cPoints"];
 
-
     // draw the fixed part
     nb = ppts.length;
     mc.graphics.moveTo(ppts[nb - 1].x, ppts[nb - 1].y);
-    while (--nb >= 0)mc.graphics.lineTo(ppts[nb].x, ppts[nb].y);
+    while (--nb >= 0) mc.graphics.lineTo(ppts[nb].x, ppts[nb].y);
     mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp0.renderTextureQuad, new Matrix.fromIdentity()));
 
     // draw the flipped part
-    if (cpts == null)return;
+    if (cpts == null) return;
 
     nb = cpts.length;
     mc.graphics.moveTo(cpts[nb - 1].x, cpts[nb - 1].y);
-    while (--nb >= 0)mc.graphics.lineTo(cpts[nb].x, cpts[nb].y);
+    while (--nb >= 0) mc.graphics.lineTo(cpts[nb].x, cpts[nb].y);
     mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp1.renderTextureQuad, ocf["matrix"]));
-
   }
 
   // ------------------------------------------------
@@ -278,7 +270,6 @@ class PageFlip {
    * @
    */
   static void oriPoints(List pts, Point po, num pw, num ph) {
-
     num nb = pts.length;
     num temp;
 
@@ -294,13 +285,11 @@ class PageFlip {
    * @
    */
   static void flipDrag(Point ptd, Point po, num pw, num ph) {
-
     // flip y
-    if (po.y == 0)ptd.y = ph - ptd.y;
+    if (po.y == 0) ptd.y = ph - ptd.y;
 
     // flip x
-    if (po.x == 0)ptd.x = pw - ptd.x;
-
+    if (po.x == 0) ptd.x = pw - ptd.x;
   }
 
   /**
@@ -308,13 +297,12 @@ class PageFlip {
    * @
    */
   static void flipPoints(List pts, Point po, num pw, num ph) {
-
     num nb = pts.length;
     // flip
     if (po.y == 0 || po.x == 0) {
       while (--nb >= 0) {
-        if (po.y == 0)pts[nb].y = ph - pts[nb].y;
-        if (po.x == 0)pts[nb].x = pw - pts[nb].x;
+        if (po.y == 0) pts[nb].y = ph - pts[nb].y;
+        if (po.x == 0) pts[nb].x = pw - pts[nb].x;
       }
     }
   }
@@ -335,7 +323,6 @@ class PageFlip {
    * @
    */
   static void limitPoint(Point ptd, Point pt, num dsquare) {
-
     num theta;
     num lim;
 
@@ -357,8 +344,8 @@ class PageFlip {
    * matric correction
    * @
    */
-  static void ordMatrix(Matrix mat, Point spt, num opw, num oph, bool ish, List cPoints, List pPoint, num gama, num beta) {
-
+  static void ordMatrix(
+      Matrix mat, Point spt, num opw, num oph, bool ish, List cPoints, List pPoint, num gama, num beta) {
     if (spt.x == 1 && spt.y == 0) {
       mat.tx = cPoints[0].x;
       mat.ty = cPoints[0].y;

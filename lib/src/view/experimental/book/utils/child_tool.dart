@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * All-static class that provides additional functionality for adding and removing children to and from Containers.
  *
@@ -17,15 +16,11 @@ part of stagexl_commons;
  *
  */
 class ChildTool {
-
-
   /**
    * Constructor.
    * @
    */
-  ChildTool() {
-  }
-
+  ChildTool() {}
 
   /**
    * Moves child1 to child2 its place and the other way around.
@@ -45,7 +40,6 @@ class ChildTool {
     ChildTool.moveChild(child2, parent1, index1);
   }
 
-
   /**
    * Removes a DisplayObject from its parent and adds it to a new parent at a certain index (if provided).
    *
@@ -54,7 +48,7 @@ class ChildTool {
    * @param	index		Index at which to add child to container.
    *
    */
-  static void moveChild(DisplayObject child, DisplayObjectContainer container, [int index=-1]) {
+  static void moveChild(DisplayObject child, DisplayObjectContainer container, [int index = -1]) {
     // remove child from old parent:
     child.parent.removeChild(child);
     // add child to new parent:
@@ -64,8 +58,4 @@ class ChildTool {
       container.addChildAt(child, index);
     }
   }
-
-
 }
-	
-	

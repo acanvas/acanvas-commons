@@ -15,7 +15,6 @@
  */
 part of stagexl_commons;
 
-
 /**
  * Provides utilities for working with <code>Class</code> objects.
  *
@@ -23,7 +22,6 @@ part of stagexl_commons;
  * @author Erik Westra
  */
 class ClassUtils {
-
   // --------------------------------------------------------------------
   //
   // describeType cache implementation
@@ -52,16 +50,13 @@ class ClassUtils {
   static void set clearCacheIntervalEnabled(bool value) {
     _clearCacheIntervalEnabled = value;
 
-    if (!_clearCacheIntervalEnabled) {
-    }
+    if (!_clearCacheIntervalEnabled) {}
   }
-
 
   static const String AS3VEC_SUFFIX = '__AS3__.vec';
   static const String CONSTRUCTOR_FIELD_NAME = "constructor";
   static const String LESS_THAN = '<';
   static const String PACKAGE_CLASS_SEPARATOR = "::";
-
 
   static Object _typeDescriptionCache = {};
 
@@ -73,9 +68,7 @@ class ClassUtils {
    */
   static void clearDescribeTypeCache() {
     _typeDescriptionCache = {};
-
   }
-
 
   /**
    * Returns a <code>Class</code> object that corresponds with the given
@@ -93,7 +86,6 @@ class ClassUtils {
     return reflect(instance).runtimeType;
   }
 
-
   /**
    * Returns the fully qualified name of the given class.
    *
@@ -107,7 +99,6 @@ class ClassUtils {
     String result = reflectClass(clazz).qualifiedName.toString();
     return result;
   }
-
 
   /**
    * Returns the name of the given class.
@@ -138,7 +129,6 @@ class ClassUtils {
     }
   }
 
-
   /**
    * Determines if the class or abstract class represented by the clazz1 parameter is either the same as, or is
    * a superclass or superabstract class of the clazz2 parameter. It returns true if so; otherwise it returns false.
@@ -149,7 +139,6 @@ class ClassUtils {
     return reflectClass(clazz2).isAssignableTo(reflectClass(clazz1));
     // || clazz2 is clazz1;
   }
-
 
   /**
    * Creates an instance of the given class and passes the arguments to
@@ -178,9 +167,7 @@ class ClassUtils {
   }
 
   static bool isImplementationOf(Type clazz, Type interfaze) {
-
     return reflectClass(clazz).isSubtypeOf(reflectClass(interfaze));
-
   }
 
   /**
@@ -191,5 +178,4 @@ class ClassUtils {
   static bool isSubclassOf(Type clazz, Type parentClass) {
     return reflectClass(clazz).isSubtypeOf(reflectClass(parentClass));
   }
-
 }

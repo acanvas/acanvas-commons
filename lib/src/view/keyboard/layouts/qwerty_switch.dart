@@ -21,8 +21,6 @@ part of stagexl_commons;
  * provides a <code>SWITCH_LAYOUT</code> key.
  */
 class QwertySwitch extends Layout {
-
-
   /**
    * Creates a new <code>QwertySwitch</code> object.
    *
@@ -32,7 +30,6 @@ class QwertySwitch extends Layout {
   QwertySwitch(Layout switchKeyType) {
     /** The label to use on <code>SWITCH_LAYOUT</code> keys pointing to this layout. */
     _switchKeyLabel = 'ABC';
-
 
     // Define all rows of keys for that layout
     rows = [
@@ -77,8 +74,5 @@ class QwertySwitch extends Layout {
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.5)
       ]
     ];
-
   }
-
 }
-	

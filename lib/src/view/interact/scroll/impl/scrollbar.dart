@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
@@ -8,7 +7,7 @@ class Scrollbar extends Slider with MPagedScroll {
   NumericStepper _pageStepper;
   Timer _timer;
 
-  Scrollbar({ScrollDirection direction : ScrollDirection.VERTICAL}) : super() {
+  Scrollbar({ScrollDirection direction: ScrollDirection.VERTICAL}) : super() {
     this.direction = direction;
     _pageStepper = new NumericStepper(0, 0, 1, false);
   }
@@ -49,8 +48,7 @@ class Scrollbar extends Slider with MPagedScroll {
         if (ContextTool.TOUCH) {
           stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false);
           stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false);
-        }
-        else {
+        } else {
           stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false);
           stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false);
         }
@@ -63,33 +61,26 @@ class Scrollbar extends Slider with MPagedScroll {
 
         if (snapToPages) {
           if (!tweening) snapToCurrentPage();
-        }
-        else if (bounce) {
+        } else if (bounce) {
           if (!checkOuterFrame() && !tweening) notifyMomentumStart();
-        }
-        else notifyMomentumStart();
-      }
-      else {
+        } else notifyMomentumStart();
+      } else {
         if (snapToPages) {
           if (!tweening) snapToCurrentPage();
-        }
-        else if (bounce) {
+        } else if (bounce) {
           if (!checkOuterFrame() && !tweening) notifyMomentumStart();
-        }
-        else if (!tweening) {
+        } else if (!tweening) {
           notifyChangeEnd();
         }
       }
     }
   }
 
-
   void snapToCurrentPage() {
     if (momentum < 0) scrollToPage(currentPage - (_rawPagePos - currentPage < 0 ? 1 : 0), 0, true);
     else if (momentum > 0) scrollToPage(currentPage + (_rawPagePos - currentPage > 0 ? 1 : 0), 0, true);
     else scrollToPage(currentPage);
   }
-
 
   void pageUp() {
     if (snapToPages) {
@@ -108,11 +99,9 @@ class Scrollbar extends Slider with MPagedScroll {
         }, pageScrollDuration);
 
         _scrollTransition(val);
-
       }
     }
   }
-
 
   void pageDown() {
     if (snapToPages) {
@@ -135,7 +124,6 @@ class Scrollbar extends Slider with MPagedScroll {
     }
   }
 
-
   void scrollToPage(int page, [num offset = 0, bool force = false]) {
     _pageStepper.jumpTo(page);
     if (page == _pageStepper.value || offset != 0 || force) {
@@ -156,23 +144,19 @@ class Scrollbar extends Slider with MPagedScroll {
     }
   }
 
-
   int get currentPage {
     return _pageStepper.jumpTo((value / pageScrollDistance).round());
   }
 
-
   num get _rawPagePos {
     return value / pageScrollDistance;
   }
-
 
   @override
   void _onThumbMouseDown(InputEvent event) {
     killPageTween();
     super._onThumbMouseDown(event);
   }
-
 
   void killPageTween() {
     if (pageScrollDuration != 0) {
@@ -181,26 +165,22 @@ class Scrollbar extends Slider with MPagedScroll {
     }
   }
 
-
   @override
   void _onBackgroundMouseDown(InputEvent event) {
     interactionStart(true, false);
     if (ContextTool.TOUCH) {
       stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
-    }
-    else {
+    } else {
       stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
     }
     _startPageScrollTimer();
   }
-
 
   @override
   void _onStageMouseUp(InputEvent event) {
     _stopPageScrollTimer();
     interactionEnd();
   }
-
 
   /**
    *
@@ -234,7 +214,6 @@ class Scrollbar extends Slider with MPagedScroll {
     }
   }
 
-
   bool checkOuterFrame() {
     if (value < valueMin) {
       scrollToPage(0);
@@ -245,7 +224,6 @@ class Scrollbar extends Slider with MPagedScroll {
     }
     return false;
   }
-
 
   void set pageCount(num pages) {
     if (pages != pageCount) {
@@ -258,45 +236,34 @@ class Scrollbar extends Slider with MPagedScroll {
     }
   }
 
-
   @override
   void set value(num newValue) {
-
     if (newValue < valueMin) {
       newValue = bounce ? valueMin + (newValue - valueMin) * 0.5 : valueMin;
-    }
-    else if (newValue > valueMax) {
+    } else if (newValue > valueMax) {
       newValue = bounce ? valueMax + (newValue - valueMax) * 0.5 : valueMax;
     }
     if (!_continuous && newValue != null) newValue = (newValue).round();
 
     if (newValue != value) {
-
       if (bounce) {
         _value = newValue;
-      }
-
-      else {
+      } else {
         num delta = value - newValue;
 
         if (delta < 0) {
           delta = value - max(delta, -300);
-        }
-        else {
+        } else {
           delta = value - min(delta, 300);
-
         }
 
         _value = delta;
-
       }
-
 
       refresh();
       dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE, value));
     }
   }
-
 
   @override
   void refresh() {
@@ -318,7 +285,7 @@ class Scrollbar extends Slider with MPagedScroll {
       offset = -pos;
       thumbSize = max(10, (spanSize / pageCount).round() - offset * 4);
       pos = 0;
-    } else if (pos > maxPos/* && !bounce*/) {
+    } else if (pos > maxPos /* && !bounce*/) {
       offset = pos - maxPos;
       thumbSize = max(10, (spanSize / pageCount).round() - offset * 4);
       pos = (spanSize - thumbSize).floor();
@@ -333,7 +300,6 @@ class Scrollbar extends Slider with MPagedScroll {
     horizontalScrollBehavior ? thumb.width = _thumbSize : thumb.height = _thumbSize;
     horizontalScrollBehavior ? thumb.x = pos : thumb.y = pos;
   }
-
 
   @override
   void set valueMax(num maxi) {
@@ -363,10 +329,14 @@ class Scrollbar extends Slider with MPagedScroll {
   void _pageScroll() {
     ContextTool.MATERIALIZE_REQUIRED = true;
     if (snapToPages) {
-      int thumbPos = ((currentPage * pageScrollDistance - valueMin) / (valueMax - valueMin) * (spanSize - _thumbSize)).round();
-      if (thumbPos > (horizontalScrollBehavior ? mouseX : mouseY)) pageUp(); else if (thumbPos + _thumbSize < (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
+      int thumbPos =
+          ((currentPage * pageScrollDistance - valueMin) / (valueMax - valueMin) * (spanSize - _thumbSize)).round();
+      if (thumbPos > (horizontalScrollBehavior ? mouseX : mouseY)) pageUp();
+      else if (thumbPos + _thumbSize < (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
     } else {
-      if ((horizontalScrollBehavior ? thumb.x : thumb.y) > (horizontalScrollBehavior ? mouseX : mouseY)) pageUp(); else if ((horizontalScrollBehavior ? thumb.x : thumb.y) + _thumbSize < (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
+      if ((horizontalScrollBehavior ? thumb.x : thumb.y) > (horizontalScrollBehavior ? mouseX : mouseY)) pageUp();
+      else if ((horizontalScrollBehavior ? thumb.x : thumb.y) + _thumbSize <
+          (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
     }
   }
 
@@ -375,7 +345,6 @@ class Scrollbar extends Slider with MPagedScroll {
       _timer.cancel();
     }
   }
-
 
   void _scrollTransition(num val) {
     Translation t = new Translation(value, val, pageScrollDuration, Transition.easeOutExponential)
@@ -393,5 +362,3 @@ class Scrollbar extends Slider with MPagedScroll {
     notifyChangeEnd();
   }
 }
-
-

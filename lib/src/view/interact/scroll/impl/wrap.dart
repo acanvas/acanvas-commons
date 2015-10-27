@@ -1,13 +1,16 @@
 part of stagexl_commons;
 
-
 class Wrap extends BoxSprite {
-
   Flow flow;
   ScrollifySprite _scrollManager;
 
-  Wrap({int spacing : 20, AlignH align : AlignH.LEFT, bool reflow: true, ScrollOrientation scrollOrientation : ScrollOrientation.BOTH}) : super() {
-
+  Wrap(
+      {int spacing: 20,
+      AlignH align: AlignH.LEFT,
+      bool reflow: true,
+      ScrollOrientation scrollOrientation: ScrollOrientation.BOTH,
+      enableMask: true})
+      : super() {
     inheritSpan = true;
     autoRefresh = true;
 
@@ -19,7 +22,8 @@ class Wrap extends BoxSprite {
       ..alignH = align;
     super.addChild(flow);
 
-    _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar());
+    _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar())
+      ..maskEnabled = enableMask;
     _scrollManager.scrollOrientation = scrollOrientation;
     //_scrollManager.useNativeWidth = false;
     //_scrollManager.useNativeHeight = false;
@@ -32,7 +36,6 @@ class Wrap extends BoxSprite {
   }
 
   @override void refresh() {
-
     flow.x = padding;
     flow.y = padding;
 
@@ -41,5 +44,4 @@ class Wrap extends BoxSprite {
 
     super.refresh();
   }
-
 }

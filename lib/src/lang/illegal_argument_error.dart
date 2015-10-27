@@ -22,13 +22,10 @@ part of stagexl_commons;
  * @author Christophe Herreman
  */
 class IllegalArgumentError extends StateError {
-
   /**
    * Constructs a new <code>IllegalArgumentError</code>.
    *
    * @param message the detail message that describes the cause of the error
    */
-  IllegalArgumentError([String message=""]):super(message) {
-  }
+  IllegalArgumentError([String message = ""]) : super(message) {}
 }
-

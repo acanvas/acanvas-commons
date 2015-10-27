@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 class PaperButton extends Button {
   static const int SPACER = 10;
 
@@ -18,11 +17,19 @@ class PaperButton extends Button {
   SvgDisplayObject icon;
   bool shadow;
 
-  PaperButton(String text, {num width: 120, num height: PaperDimensions.HEIGHT_BUTTON,
-  int bgColor: -1, int fontColor : -1, String fontName: PaperText.DEFAULT_FONT, int fontSize: 14,
-  int preset: PRESET_WHITE,
-  this.shadow : true, bool background : true, bool ripple: true,
-  this.icon}) : super() {
+  PaperButton(String text,
+      {num width: 120,
+      num height: PaperDimensions.HEIGHT_BUTTON,
+      int bgColor: -1,
+      int fontColor: -1,
+      String fontName: PaperText.DEFAULT_FONT,
+      int fontSize: 14,
+      int preset: PRESET_WHITE,
+      this.shadow: true,
+      bool background: true,
+      bool ripple: true,
+      this.icon})
+      : super() {
     int _fontAndRippleColor;
     switch (preset) {
       case PRESET_WHITE:
@@ -56,7 +63,8 @@ class PaperButton extends Button {
     }
 
     if (background) {
-      _paperShadow = new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: _bgColor, shadowEnabled : shadow/*, target: this*/);
+      _paperShadow =
+          new PaperShadow(type: PaperShadow.RECTANGLE, bgColor: _bgColor, shadowEnabled: shadow /*, target: this*/);
       addChild(_paperShadow);
     }
 
@@ -69,16 +77,16 @@ class PaperButton extends Button {
       addChild(icon);
     }
 
-    _label = new PaperText(text.toUpperCase(), size: fontSize, color: _fontAndRippleColor, fontName: fontName, weight: 300);
+    _label =
+        new PaperText(text.toUpperCase(), size: fontSize, color: _fontAndRippleColor, fontName: fontName, weight: 300);
     _label.width = LABEL_MAX_WIDTH;
     addChild(_label);
 
+    autoSpan = false;
     span(width, height);
   }
 
-
   @override void refresh() {
-
     if (spanWidth > 0) {
       _label.x = (spanWidth / 2 - _label.textWidth / 2).round() - 3;
     } else {
@@ -103,5 +111,4 @@ class PaperButton extends Button {
     _label.text = labelText;
     refresh();
   }
-
 }

@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Provides additional mathematic functionality.
  *
@@ -17,22 +16,14 @@ part of stagexl_commons;
  *
  */
 class MathTool {
-
-
   static const String PLUS = "+";
   static const String MINUS = "-";
   static const String MULTIPLICATION = "*";
   static const String DIVISION = "/";
 
-
   /**
    * Constructor.
    * @
    */
-  MathTool() {
-  }
-
-
+  MathTool() {}
 }
-	
-	

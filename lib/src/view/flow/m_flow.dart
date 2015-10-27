@@ -3,12 +3,9 @@ part of stagexl_commons;
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
-enum FlowOrientation {
-  HORIZONTAL, VERTICAL
-}
+enum FlowOrientation { HORIZONTAL, VERTICAL }
 
 abstract class MFlow {
-
   FlowOrientation _flow = FlowOrientation.HORIZONTAL;
 
   void set flowOrientation(FlowOrientation flow) => _flow = flow;
@@ -54,5 +51,4 @@ abstract class MFlow {
   bool get animate => _animate;
 
   void refresh();
-
 }

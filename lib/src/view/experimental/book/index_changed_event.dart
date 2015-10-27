@@ -1,4 +1,5 @@
 part of stagexl_commons;
+
 /**
  * @author nilsdoehring
  */
@@ -8,6 +9,5 @@ class IndexChangedEvent extends Event {
   int newIndex;
   Sprite relatedObject;
 
-  IndexChangedEvent(String change): super(change) {
-  }
+  IndexChangedEvent(String change) : super(change) {}
 }

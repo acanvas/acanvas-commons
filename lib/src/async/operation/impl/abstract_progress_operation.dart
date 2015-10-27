@@ -25,7 +25,6 @@ part of stagexl_commons;
  * @author Roland Zwaga
  */
 class AbstractProgressOperation extends AbstractOperation implements IProgressOperation {
-
   // --------------------------------------------------------------------
   //
   // Constructor
@@ -35,7 +34,8 @@ class AbstractProgressOperation extends AbstractOperation implements IProgressOp
   /**
    * Creates a new <code>AbstractProgressOperation</code> instance.
    */
-  AbstractProgressOperation([int timeoutInMilliseconds=0, bool autoStartTimeout=true]):super(timeoutInMilliseconds, autoStartTimeout) {
+  AbstractProgressOperation([int timeoutInMilliseconds = 0, bool autoStartTimeout = true])
+      : super(timeoutInMilliseconds, autoStartTimeout) {
     progress = 0;
   }
 
@@ -68,15 +68,16 @@ class AbstractProgressOperation extends AbstractOperation implements IProgressOp
   /**
    * @inheritDoc
    */
-  void addProgressListener(Function listener, [bool useCapture=false, int priority=0, bool useWeakReference=false]) {
-    addEventListener(OperationEvent.PROGRESS, listener, useCapture:useCapture, priority:priority);
+  void addProgressListener(Function listener,
+      [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+    addEventListener(OperationEvent.PROGRESS, listener, useCapture: useCapture, priority: priority);
   }
 
   /**
    * @inheritDoc
    */
-  void removeProgressListener(Function listener, [bool useCapture=false]) {
-    removeEventListener(OperationEvent.PROGRESS, listener, useCapture:useCapture);
+  void removeProgressListener(Function listener, [bool useCapture = false]) {
+    removeEventListener(OperationEvent.PROGRESS, listener, useCapture: useCapture);
   }
 
   // --------------------------------------------------------------------
@@ -132,6 +133,4 @@ class AbstractProgressOperation extends AbstractOperation implements IProgressOp
   void dispatchProgressEvent() {
     dispatchEvent(OperationEvent.createProgressEvent(this));
   }
-
 }
-

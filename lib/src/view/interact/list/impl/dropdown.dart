@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 class ComponentDropdown extends BehaveSprite {
   static const String ROLLOUT_OPEN = "OPEN";
   static const String ROLLOUT_CLOSE = "CLOSE";
@@ -14,14 +13,13 @@ class ComponentDropdown extends BehaveSprite {
   Function _onToggleCallback;
 
   ComponentDropdown() : super() {
-
     _sprRollout = new BoxSprite();
     addChild(_sprRollout);
 
     if (cmpListFlyout != null) {
       cmpListFlyout.submitCallback = _onCellSubmit;
       _sprRollout.addChild(cmpListFlyout);
-      //dartcomment 
+      //dartcomment
       //cmpListFlyout.refresh();
     }
 
@@ -66,8 +64,7 @@ class ComponentDropdown extends BehaveSprite {
 
       _sprRollout.visible = true;
       _strRolloutState = ROLLOUT_OPEN;
-      ContextTool.JUGGLER.addTween(_sprRollout, 0.5)
-        ..animate.y.to(spanHeight);
+      ContextTool.JUGGLER.addTween(_sprRollout, 0.5)..animate.y.to(spanHeight);
       if (_onToggleCallback != null) {
         _onToggleCallback.call(_strRolloutState);
       }
@@ -96,7 +93,6 @@ class ComponentDropdown extends BehaveSprite {
   }
 
   void _onCellSubmit(SelectableButton cell) {
-
     btnRolloutToggle.labelText = cell.data;
 
     if (submitCallback != null) {

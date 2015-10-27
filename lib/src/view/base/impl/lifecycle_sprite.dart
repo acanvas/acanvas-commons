@@ -1,8 +1,6 @@
 part of stagexl_commons;
 
 class LifecycleSprite extends BehaveSprite with MLifecycle {
-
-
   LifecycleSprite(String id) : super() {
     if (id != null) {
       this.name = id;
@@ -28,7 +26,8 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   void init({Map params: null}) {
     this.params = params;
     if (spanHeight == 0 || spanWidth == 0) {
-      logger.warn("You really should set XLSprite.spanWidth and XLSprite.spanHeight properties before invoking XLSprite.init().");
+      logger.warn(
+          "You really should set XLSprite.spanWidth and XLSprite.spanHeight properties before invoking XLSprite.init().");
     }
   }
 
@@ -47,8 +46,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   void load({Map params: null}) {
     if (requiresLoading) {
       throw new StateError("You cannot invoke XLSprite.load() directly. Override it.");
-    }
-    else {
+    } else {
       onLoadComplete();
     }
   }
@@ -64,21 +62,16 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   }
 
   @override
-  void refresh() {
-  }
-
-  @override
   void appear({double duration: MLifecycle.APPEAR_DURATION_DEFAULT}) {
     children.where((c) => c is MLifecycle && c.inheritAppear).forEach((child) {
       child.appear(duration: duration);
     });
 
     super.appear(duration: duration);
-
   }
 
   @override
-  void disappear({double duration: MLifecycle.DISAPPEAR_DURATION_DEFAULT, bool autoDispose : false}) {
+  void disappear({double duration: MLifecycle.DISAPPEAR_DURATION_DEFAULT, bool autoDispose: false}) {
     children.where((c) => c is MLifecycle && c.inheritDisappear).forEach((child) {
       child.disappear(duration: duration, autoDispose: autoDispose);
     });
@@ -88,7 +81,6 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
         this.dispose();
       }
     }, duration);
-
   }
 
   @override
@@ -103,5 +95,4 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
       }
     }
   }
-
 }

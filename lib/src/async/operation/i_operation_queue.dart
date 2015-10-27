@@ -15,13 +15,10 @@
 */
 part of stagexl_commons;
 
-
 abstract class IOperationQueue extends IProgressOperation {
-
   String get name;
 
   bool addOperation(IOperation operation);
 
   bool hasOperation(IOperation operation);
 }
-

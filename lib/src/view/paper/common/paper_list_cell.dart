@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
@@ -8,8 +7,7 @@ class PaperListCell extends SelectableButton {
   PaperText title;
   int fontColor;
 
-  PaperListCell([this.fontColor = PaperColor.GREY_DARK]) :super() {
-
+  PaperListCell([this.fontColor = PaperColor.GREY_DARK]) : super() {
     PaperRipple ripple = new PaperRipple(color: fontColor);
     addChild(ripple);
 
@@ -17,10 +15,8 @@ class PaperListCell extends SelectableButton {
     addChild(title);
   }
 
-
   @override
   SelectableButton clone() => new PaperListCell(fontColor);
-
 
   @override
   void set data(Object newdata) {
@@ -57,6 +53,4 @@ class PaperListCell extends SelectableButton {
   @override void deselectAction() {
     upAction();
   }
-
 }
-

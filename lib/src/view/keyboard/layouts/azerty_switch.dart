@@ -21,8 +21,6 @@ part of stagexl_commons;
  * includes a <code>SWITCH_LAYOUT</code> key.
  */
 class AzertySwitch extends Layout {
-
-
   /**
    * Creates a new AzertySwitch object.
    *
@@ -75,8 +73,5 @@ class AzertySwitch extends Layout {
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.6)
       ]
     ];
-
   }
-
 }
-	

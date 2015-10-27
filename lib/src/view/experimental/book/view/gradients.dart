@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Draws shadows and highlights for a Page.
  *
@@ -28,8 +27,6 @@ part of stagexl_commons;
  *
  */
 class Gradients {
-
-
   // internals accessors:
   /**
    * @
@@ -68,46 +65,65 @@ class Gradients {
    * @
    */
   static final Map FLIPSIDE = {
-    "light": { "color": [LIGHTCOLOR, LIGHTCOLOR, LIGHTCOLOR, DARKCOLOR, DARKCOLOR],
-      "alpha": [ 0, 0.3, 0.2, 0.5, 0],
-      "ratio": [ 0, 88, 96, 128, 129] },
-    "dark": { "color": [0xCCCCCC, 0x999999, 0x444444, 0x000000],
-      "alpha": [ 0, 0.1, 0.3, 0.6],
-      "ratio": [ 0, 74, 100, 128] } };
+    "light": {
+      "color": [LIGHTCOLOR, LIGHTCOLOR, LIGHTCOLOR, DARKCOLOR, DARKCOLOR],
+      "alpha": [0, 0.3, 0.2, 0.5, 0],
+      "ratio": [0, 88, 96, 128, 129]
+    },
+    "dark": {
+      "color": [0xCCCCCC, 0x999999, 0x444444, 0x000000],
+      "alpha": [0, 0.1, 0.3, 0.6],
+      "ratio": [0, 74, 100, 128]
+    }
+  };
 
   /**
    * @
    */
   static final Map INSIDE_SMOOTH = {
-    "light": { "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
-      "alpha": [ 0, 0, 0.5, 0],
-      "ratio": [ 0, 1, 128, 129] },
-    "dark": { "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
-      "alpha": [ 0, 0, 0.5, 0],
-      "ratio": [ 0, 1, 128, 129] } };
+    "light": {
+      "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
+      "alpha": [0, 0, 0.5, 0],
+      "ratio": [0, 1, 128, 129]
+    },
+    "dark": {
+      "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
+      "alpha": [0, 0, 0.5, 0],
+      "ratio": [0, 1, 128, 129]
+    }
+  };
 
   /**
    * @
    */
   static final Map OUTSIDE_SMOOTH = {
-    "light": { "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
-      "alpha": [ 0, 0.2, 0, 0, 0],
-      "ratio": [126, 127, 141, 191, 255] },
-    "dark": { "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
-      "alpha": [ 0, 0.4, 0, 0],
-      "ratio": [126, 127, 191, 255] } };
+    "light": {
+      "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
+      "alpha": [0, 0.2, 0, 0, 0],
+      "ratio": [126, 127, 141, 191, 255]
+    },
+    "dark": {
+      "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
+      "alpha": [0, 0.4, 0, 0],
+      "ratio": [126, 127, 191, 255]
+    }
+  };
 
   /**
    * @
    */
   static final Map OUTSIDE_HARD = {
-    "light": { "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
+    "light": {
+      "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
       "alpha": [0.8, 0.3, 0.1, 0],
-      "ratio": [ 0, 96, 160, 255] },
-    "dark": { "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR],
-      "alpha": [ 0, 0.2, 0.9],
-      "ratio": [ 0, 96, 255] } };
-
+      "ratio": [0, 96, 160, 255]
+    },
+    "dark": {
+      "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR],
+      "alpha": [0, 0.2, 0.9],
+      "ratio": [0, 96, 255]
+    }
+  };
 
   // CONSTRUCTOR:
 
@@ -115,11 +131,8 @@ class Gradients {
    * Constructor.
    */
   Gradients(Page p) {
-
     this._page = p;
-
   }
-
 
   // CUSTOM:
 
@@ -136,8 +149,7 @@ class Gradients {
    * @see		Book#addGradients()
    *
    */
-  void drawFold(Graphics graphics, [String tint=Gradients.LIGHT, num rotate=Gradients.ROTATE_FULL]) {
-
+  void drawFold(Graphics graphics, [String tint = Gradients.LIGHT, num rotate = Gradients.ROTATE_FULL]) {
     Map gradient = Gradients.FLIPSIDE[tint];
     SuperRectangle area = new SuperRectangle(0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
 
@@ -150,15 +162,10 @@ class Gradients {
 
     // draw gradient:
     DrawingTool.rect(graphics, area);
-    GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(
-        gradient["color"],
-        gradient["alpha"],
-        gradient["ratio"],
-        matrix);
+    GraphicsGradient g =
+        GraphicsUtil.linearGraphicsGradient(gradient["color"], gradient["alpha"], gradient["ratio"], matrix);
     graphics.fillGradient(g);
-
   }
-
 
   /**
    * Draws a gradient to simulate a shadow on the facing pages of the Book.
@@ -179,14 +186,12 @@ class Gradients {
    * @see		PageFlip#computeFlip()
    *
    */
-  void drawInside(Graphics graphics, List area, [String tint=Gradients.DARK, num rotate=Gradients.ROTATE_FULL]) {
-
+  void drawInside(Graphics graphics, List area, [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     if (this._page.hard) {
       this.drawInsideHard(graphics, area, tint, rotate);
     } else {
       this.drawInsideSmooth(graphics, area, tint, rotate);
     }
-
   }
 
   /**
@@ -194,7 +199,8 @@ class Gradients {
    *
    * @
    */
-  void drawInsideHard(Graphics graphics, List area, [String tint=Gradients.DARK, num rotate=Gradients.ROTATE_FULL]) {
+  void drawInsideHard(Graphics graphics, List area,
+      [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     // hard pages don't need highlights, only shadows:
     if (this.eliminateSolidHighlights && tint == Gradients.LIGHT) {
       return;
@@ -203,12 +209,13 @@ class Gradients {
     int color = (tint == Gradients.DARK) ? Gradients.DARKCOLOR : Gradients.LIGHTCOLOR;
 
     // calculate strength (of as opacity) the "color":
-    num strength = (this._page.book.spanWidth / 2 - (area[0].x - area[1].x)) / (this._page.book.spanWidth / 2).abs() * this._solidColorAlpha;
+    num strength = (this._page.book.spanWidth / 2 - (area[0].x - area[1].x)) /
+        (this._page.book.spanWidth / 2).abs() *
+        this._solidColorAlpha;
 
     // draw "color":
     DrawingTool.draw(graphics, area);
     graphics.fillColor(((strength * 256).round() << 24) + color);
-
   }
 
   /**
@@ -216,14 +223,15 @@ class Gradients {
    *
    * @
    */
-  void drawInsideSmooth(Graphics graphics, List area, [String tint=Gradients.DARK, num rotate=Gradients.ROTATE_FULL]) {
-
+  void drawInsideSmooth(Graphics graphics, List area,
+      [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     Map gradient = Gradients.INSIDE_SMOOTH[tint];
 
     // define the points that the calculation will be based on:
     Point point1 = area[area.length - 2];
     Point point2 = area[area.length - 1];
-    Point point3 = new Point((this._page.book.spanWidth / 2) * this._page.book.getLastFlippedCorner().x, this._page.book.spanHeight * this._page.book.getLastFlippedCorner().y);
+    Point point3 = new Point((this._page.book.spanWidth / 2) * this._page.book.getLastFlippedCorner().x,
+        this._page.book.spanHeight * this._page.book.getLastFlippedCorner().y);
     Point point4 = area[0];
     List newArea = [point1, point2];
 
@@ -240,14 +248,12 @@ class Gradients {
 
     // if only one corner is flipping:
     if (area.length == 3) {
-
       x = (this._page.side == Page.LEFT) ? 0 : this._page.book.spanWidth / 2;
       newArea.add(new Point(x, y));
       newArea.insert(1, area[0]);
 
       // if flipped corner is outside of the Book its boundaries:
       if (area[0].y < 0 || area[0].y > this._page.book.spanHeight) {
-
         Point intersection1;
         Point intersection2;
 
@@ -265,19 +271,16 @@ class Gradients {
 
         // replace the out-of-bounds Point with the two intersection Points:
         newArea.replaceRange(1, 1, [intersection2, intersection1]);
-
       }
-
     }
 
     // if two corners are flipped:
     if (area.length == 4) {
-
       Point intersection;
 
       // calculate intersection (if both flipped corners are out of the bounds of the Book):
-      if ((area[0].y < 0 && area[1].y < 0) || (area[0].y > this._page.book.spanHeight && area[1].y > this._page.book.spanHeight)) {
-
+      if ((area[0].y < 0 && area[1].y < 0) ||
+          (area[0].y > this._page.book.spanHeight && area[1].y > this._page.book.spanHeight)) {
         int correctionIndex;
 
         if (this._page.book.lastFlippedSide == Page.LEFT) {
@@ -299,7 +302,6 @@ class Gradients {
 
         // calculate intersection (if only one flipped corner is out of the bounds of the Book):
       } else {
-
         newArea.insert(1, area[1]);
         newArea.insert(2, area[0]);
         line = new Line(newArea[1], newArea[2]);
@@ -319,9 +321,7 @@ class Gradients {
           if (newArea[2].y < 0 || newArea[2].y > this._page.book.spanHeight) spliceAt = newArea.length - 4;
           newArea.replaceRange(spliceAt, 2, [intersection]);
         }
-
       }
-
     }
 
     // calculate strength of the gradient:
@@ -333,16 +333,10 @@ class Gradients {
     // draw gradient:
     DrawingTool.draw(graphics, newArea);
 
-    GraphicsGradient gr = GraphicsUtil.linearGraphicsGradient(
-        gradient["color"],
-        gradient["alpha"],
-        gradient["ratio"],
-        matrix);
+    GraphicsGradient gr =
+        GraphicsUtil.linearGraphicsGradient(gradient["color"], gradient["alpha"], gradient["ratio"], matrix);
     graphics.fillGradient(gr);
-
-
   }
-
 
   /**
    * Draws a gradient to simulate a shadow on the next page of the Book.
@@ -363,14 +357,12 @@ class Gradients {
    * @see		PageFlip#computeFlip()
    *
    */
-  void drawOutside(Graphics graphics, List area, [String tint=Gradients.DARK, num rotate=Gradients.ROTATE_FULL]) {
-
+  void drawOutside(Graphics graphics, List area, [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     if (this._page.hard) {
       this.drawOutsideHard(graphics, area);
     } else {
       this.drawOutsideSmooth(graphics, area, tint, rotate);
     }
-
   }
 
   /**
@@ -379,7 +371,6 @@ class Gradients {
    * @
    */
   void drawOutsideHard(Graphics graphics, List area) {
-
     Map gradient0 = Gradients.OUTSIDE_HARD["dark"];
     Map gradient1 = Gradients.OUTSIDE_HARD["light"];
 
@@ -404,25 +395,18 @@ class Gradients {
     // draw left gradient:
     if (strength0 > 0) {
       DrawingTool.rect(graphics, area0);
-      GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(
-          gradient0["color"],
-          ListTool.adjustValues(gradient0["alpha"], strength0, MathTool.MULTIPLICATION),
-          gradient0["ratio"],
-          matrix0);
+      GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(gradient0["color"],
+          ListTool.adjustValues(gradient0["alpha"], strength0, MathTool.MULTIPLICATION), gradient0["ratio"], matrix0);
       graphics.fillGradient(g);
     }
 
     // draw right gradient:
     if (strength1 > 0) {
       DrawingTool.rect(graphics, area1);
-      GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(
-          gradient1["color"],
-          ListTool.adjustValues(gradient1["alpha"], strength1, MathTool.MULTIPLICATION),
-          gradient1["ratio"],
-          matrix1);
+      GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(gradient1["color"],
+          ListTool.adjustValues(gradient1["alpha"], strength1, MathTool.MULTIPLICATION), gradient1["ratio"], matrix1);
       graphics.fillGradient(g);
     }
-
   }
 
   /**
@@ -430,8 +414,8 @@ class Gradients {
    *
    * @
    */
-  void drawOutsideSmooth(Graphics graphics, List area, [String tint=Gradients.DARK, num rotate=Gradients.ROTATE_FULL]) {
-
+  void drawOutsideSmooth(Graphics graphics, List area,
+      [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     Map gradient = Gradients.OUTSIDE_SMOOTH[tint];
 
     // define the points that the calculation will be based on:
@@ -449,7 +433,8 @@ class Gradients {
       if (area.length == 4) {
         int spliceAt = (newArea[1].y == 0) ? 0 : newArea.length - 1;
         if (newArea[0].y == this._page.book.spanHeight || newArea[1].y == this._page.book.spanHeight) {
-          newArea.insert(spliceAt, new Point(this._page.side * this._page.book.spanWidth / 2, this._page.book.spanHeight));
+          newArea.insert(
+              spliceAt, new Point(this._page.side * this._page.book.spanWidth / 2, this._page.book.spanHeight));
         }
       }
     }
@@ -481,15 +466,10 @@ class Gradients {
 
     // draw gradient:
     DrawingTool.draw(graphics, newArea);
-    GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(
-        gradient["color"],
-        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION),
-        gradient["ratio"],
-        matrix);
+    GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(gradient["color"],
+        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION), gradient["ratio"], matrix);
     graphics.fillGradient(g);
-
   }
-
 
   /**
    * Draws a gradient to simulate depth on the flipside of the Page.
@@ -510,8 +490,7 @@ class Gradients {
    * @see		PageFlip#computeFlip()
    *
    */
-  void drawFlipside(Graphics graphics, List area, [String tint=Gradients.LIGHT, num rotate=Gradients.ROTATE_FULL]) {
-
+  void drawFlipside(Graphics graphics, List area, [String tint = Gradients.LIGHT, num rotate = Gradients.ROTATE_FULL]) {
     // this method is not applicable to hard Pages:
     if (this._page.hard) {
       return;
@@ -534,15 +513,10 @@ class Gradients {
 
     // draw gradient:
     DrawingTool.draw(graphics, area);
-    GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(
-        gradient["color"],
-        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION),
-        gradient["ratio"],
-        matrix);
+    GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(gradient["color"],
+        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION), gradient["ratio"], matrix);
     graphics.fillGradient(g);
-
   }
-
 
   /**
    * Returns a Matrix instance with a gradientbox with the properties read from the provided parameters.
@@ -562,8 +536,7 @@ class Gradients {
    *
    * @
    */
-  Matrix createNewMatrix(Point point1, Point point2, [num rotate=Gradients.ROTATE_FULL]) {
-
+  Matrix createNewMatrix(Point point1, Point point2, [num rotate = Gradients.ROTATE_FULL]) {
     rotate *= PI * 2;
 
     // get offset and angle:
@@ -585,7 +558,6 @@ class Gradients {
 
     // return value:
     return matrix;
-
   }
 
   /**
@@ -606,7 +578,6 @@ class Gradients {
     Point offset = new Point(average.x - middle.x, average.y - middle.y);
     return offset;
   }
-
 
   // ACCESSORS:
 
@@ -634,8 +605,4 @@ class Gradients {
     if (value > 1) value = 1;
     this._solidColorAlpha = value;
   }
-
-
 }
-	
-	

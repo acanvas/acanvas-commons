@@ -1,16 +1,13 @@
 part of stagexl_commons;
 
-
 class ContextTool {
-
   /* internals */
   Stage _stage;
   bool _webgl = false;
   bool _materializeRequired = false;
   static final ContextTool _singleton = new ContextTool._internal();
 
-  ContextTool._internal() {
-  }
+  ContextTool._internal() {}
 
   factory ContextTool() {
     return _singleton;
@@ -21,7 +18,8 @@ class ContextTool {
   }
 
   static bool get MOBILE {
-    return html.window.navigator.userAgent.contains(new RegExp('Android|OPiOS|CriOS|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini'));
+    return html.window.navigator.userAgent
+        .contains(new RegExp('Android|OPiOS|CriOS|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini'));
   }
 
   static bool get CHROME_IOS {
@@ -59,5 +57,4 @@ class ContextTool {
   static void set MATERIALIZE_REQUIRED(bool b) {
     _singleton._materializeRequired = b;
   }
-
 }

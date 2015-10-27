@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * Describes a line consisting of a slope (and as coefficient) an intersection-point with either the x or y axis.
  *
@@ -20,8 +19,6 @@ part of stagexl_commons;
  *
  */
 class InfiniteLine {
-
-
   /**
    * @
    */
@@ -42,7 +39,6 @@ class InfiniteLine {
    */
   static final int ROUND = 100;
 
-
   /**
    * Constructor.
    *
@@ -55,11 +51,10 @@ class InfiniteLine {
    * @see		InfiniteLine#yCoefficient
    *
    */
-  InfiniteLine([num xIntersection=0, num xCoefficient=1]) {
+  InfiniteLine([num xIntersection = 0, num xCoefficient = 1]) {
     this.setXCoefficient(xCoefficient);
     this.setXIntersection(xIntersection);
   }
-
 
   /**
    * Returns a Point instance that represents the coordinate at which two InfiniteLine instances intersect.
@@ -73,7 +68,6 @@ class InfiniteLine {
    * @return	A Point instance if intersections occurs, null of otherwise.
    */
   static Point getIntersection(InfiniteLine line1, InfiniteLine line2) {
-
     if (line1.horizontal) return line2.getPointByY(line1.yIntersection);
     if (line1.vertical) return line2.getPointByX(line1.xIntersection);
     if (line2.horizontal) return line1.getPointByY(line2.yIntersection);
@@ -104,7 +98,6 @@ class InfiniteLine {
     return line1.getPointByX(x);
   }
 
-
   /**
    * Creates an InfiniteLine at the hand of two Points.
    *
@@ -121,7 +114,6 @@ class InfiniteLine {
     return line;
   }
 
-
   /**
    * Returns a cloned instance of this InfiniteLine.
    *
@@ -133,7 +125,6 @@ class InfiniteLine {
     return line;
   }
 
-
   /**
    * The String representation of this InfiniteLine instance.
    *
@@ -142,7 +133,6 @@ class InfiniteLine {
   String toString() {
     return "InfiniteLine(xIntersection=${this.xIntersection}, xCoefficient=${this.xCoefficient})";
   }
-
 
   /**
    * Synchronizes this InfiniteLine instance to contain two Points.
@@ -167,7 +157,6 @@ class InfiniteLine {
       this.setYIntersection(a.y);
     }
   }
-
 
   /**
    * Creates an InfiniteLine instance at the hand of an x-intersection and an x-coefficient. Note that this method is exactly the same as the class its constructor.
@@ -204,7 +193,6 @@ class InfiniteLine {
     return line;
   }
 
-
   /**
    * Returns the angle of this InfiniteLine with the x-axis.
    *
@@ -217,7 +205,6 @@ class InfiniteLine {
     Point point2 = new Point(this.xIntersection + 1, this.xCoefficient);
     return atan2(point2.y - point1.y, point2.x - point1.x);
   }
-
 
   /**
    * Return a Point on this InfiniteLine where the x-position equals the specified value.
@@ -243,7 +230,6 @@ class InfiniteLine {
     return new Point(x, y);
   }
 
-
   /**
    * Returns true if the provided Point is on this InfiniteLine.
    *
@@ -254,7 +240,7 @@ class InfiniteLine {
    *
    * @returns	bool
    */
-  bool containsPoint(Point point, [bool round=true]) {
+  bool containsPoint(Point point, [bool round = true]) {
     num value1;
     num value2;
     // single-axis equation for horizontal and vertical Lines:
@@ -280,7 +266,6 @@ class InfiniteLine {
     return (value1 == value2);
   }
 
-
   /**
    * Returns true if the provided InfiniteLine instance is parallel to this InfiniteLine.
    *
@@ -289,7 +274,7 @@ class InfiniteLine {
    *
    * @return	bool
    */
-  bool isParallelTo(InfiniteLine line, [bool round=true]) {
+  bool isParallelTo(InfiniteLine line, [bool round = true]) {
     num value1 = this.xCoefficient;
     num value2 = line.xCoefficient;
     if (round != null || round == true) {
@@ -307,7 +292,7 @@ class InfiniteLine {
    *
    * @return	bool
    */
-  bool equals(InfiniteLine line, [bool round=true]) {
+  bool equals(InfiniteLine line, [bool round = true]) {
     num value1 = this.xIntersection;
     num value2 = line.xIntersection;
     num value3 = this.yIntersection;
@@ -320,7 +305,6 @@ class InfiniteLine {
     }
     return (this.isParallelTo(line) && (value1 == value2 || value3 == value4));
   }
-
 
   /**
    * Indicates whether or not this InfiniteLine instance is horizontal.
@@ -360,7 +344,6 @@ class InfiniteLine {
     }
   }
 
-
   /**
    * The x-position of the coordinate where this InfiniteLine crosses the x-axis (and consequently the y-position will be equal to zero).
    * @see	InfiniteLine#xCoefficient
@@ -386,7 +369,6 @@ class InfiniteLine {
     this._xIntersection = value;
     this._yIntersection = -value * this.xCoefficient;
   }
-
 
   /**
    * The y-position of the coordinate where this InfiniteLine crosses the y-axis (and consequently the x-position will be equal to zero).
@@ -414,7 +396,6 @@ class InfiniteLine {
     this._xIntersection = -value / this.xCoefficient;
   }
 
-
   /**
    * Value with which the y-position of this InfiniteLine increases, relative to that with which the x-position increases.
    * @see	InfiniteLine#yCoefficient
@@ -441,7 +422,6 @@ class InfiniteLine {
     this.setXIntersection(this.xIntersection);
   }
 
-
   /**
    * Value with which the x-position of this InfiniteLine increases, relative to that with which the y-position increases.
    * @see	InfiniteLine#xCoefficient
@@ -466,8 +446,4 @@ class InfiniteLine {
   void setYCoefficient(num value) {
     this.setXCoefficient(1 / value);
   }
-
-
 }
-	
-	

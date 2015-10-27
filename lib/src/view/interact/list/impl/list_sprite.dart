@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
@@ -13,7 +12,6 @@ class ListSprite extends ScrollifySprite with MList {
   SelectableButton _mouseDownCell;
   Map _selectedCells = {};
 
-
   bool _cellMoved = false;
   int _cellsLoaded = 0;
   int _scrollPos = 0;
@@ -21,12 +19,11 @@ class ListSprite extends ScrollifySprite with MList {
   int _oldVScrollbarValue = 0;
   Timer _timer;
 
-
   num _originX = 0;
   num _originY = 0;
 
-
-  ListSprite(List data, SelectableButton cell, Scrollbar hScrollbar, Scrollbar vScrollbar) : super(new BoxSprite(), hScrollbar, vScrollbar) {
+  ListSprite(List data, SelectableButton cell, Scrollbar hScrollbar, Scrollbar vScrollbar)
+      : super(new BoxSprite(), hScrollbar, vScrollbar) {
     this.data = data;
     _cellFactory = cell;
     _cellSize = _cellFactory.spanHeight;
@@ -36,6 +33,13 @@ class ListSprite extends ScrollifySprite with MList {
   void span(spanWidth, spanHeight, {bool refresh: true}) {
     super.span(spanWidth, spanHeight, refresh: refresh);
     _cellFactory.span(spanWidth, spanHeight, refresh: false);
+    init();
+  }
+
+  void setDataAfterInit(List dta) {
+    data = dta;
+    view.dispose();
+    addChildAt(view, 0);
     init();
   }
 
@@ -54,7 +58,6 @@ class ListSprite extends ScrollifySprite with MList {
       });
     }
   }
-
 
   void init() {
     _scrollPos = 0;
@@ -90,7 +93,6 @@ class ListSprite extends ScrollifySprite with MList {
         }
         //fill up lookup
         _selectedCells[i] = false;
-
       }
     } else {
       // Variable cell height
@@ -101,8 +103,8 @@ class ListSprite extends ScrollifySprite with MList {
           cell.id = i;
           cell.data = data.elementAt(i);
           if (_totalCellSize < (_horizontalFlow ? spanWidth : spanHeight)) {
-            // Show cell
-            _horizontalFlow ? cell.x = _totalCellSize : cell.y = _totalCellSize;
+                // Show cell
+                _horizontalFlow ? cell.x = _totalCellSize : cell.y = _totalCellSize;
             _totalCellSize += ((_horizontalFlow ? cell.spanWidth : cell.spanHeight)).round() + spacing;
             view.addChild(cell);
           } else {
@@ -150,7 +152,7 @@ class ListSprite extends ScrollifySprite with MList {
   void selectCellByVO(dynamic vo) {
     deselectAllCells();
     int i = 0;
-    for (i = 0;i < this.data.length;i++) {
+    for (i = 0; i < this.data.length; i++) {
       if (vo == this.data[i]) {
         jumpToCell(i);
         break;
@@ -166,13 +168,13 @@ class ListSprite extends ScrollifySprite with MList {
     });
   }
 
-
   void jumpToCell(int nr) {
     _vScrollbar.killPageTween();
     clearMomentum();
     (_horizontalFlow ? _hScrollbar : _vScrollbar).interactionStart();
     if (_constantCellSize) {
-      if ((_horizontalFlow ? _hScrollbar : _vScrollbar).enabled) (_horizontalFlow ? _hScrollbar : _vScrollbar).value = nr * _cellSize;
+      if ((_horizontalFlow ? _hScrollbar : _vScrollbar).enabled) (_horizontalFlow ? _hScrollbar : _vScrollbar).value =
+          nr * _cellSize;
     } else {
       if ((_horizontalFlow ? _hScrollbar : _vScrollbar).enabled) {
         SelectableButton cell;
@@ -198,7 +200,6 @@ class ListSprite extends ScrollifySprite with MList {
     (_horizontalFlow ? _hScrollbar : _vScrollbar).interactionEnd();
   }
 
-
   @override
   void updateScrollbars() {
     if (_horizontalFlow) {
@@ -218,7 +219,6 @@ class ListSprite extends ScrollifySprite with MList {
     _updateThumbs();
   }
 
-
   @override
   void _updateThumbs() {
     if (_horizontalFlow) {
@@ -230,18 +230,15 @@ class ListSprite extends ScrollifySprite with MList {
     }
   }
 
-
   void _onHScrollbarChange(SliderEvent event) {
     if (_horizontalFlow) _onListScrollbarChange(event);
     //else _onHScrollbarChange(event);
   }
 
-
   void _onVScrollbarChange(SliderEvent event) {
     if (_horizontalFlow == false) _onListScrollbarChange(event);
     //else _onVScrollbarChange(event);
   }
-
 
   void _onListScrollbarChange(SliderEvent event) {
     _scrollPos = _oldVScrollbarValue - event.value;
@@ -249,9 +246,7 @@ class ListSprite extends ScrollifySprite with MList {
     _updateCells();
   }
 
-
   void _updateCells() {
-
     int n = view.numChildren;
     SelectableButton cell;
     List cellsToPool = [];
@@ -259,7 +254,8 @@ class ListSprite extends ScrollifySprite with MList {
     for (int i = 0; i < n; i++) {
       cell = (view.getChildAt(i) as SelectableButton);
       _horizontalFlow ? cell.x += _scrollPos : cell.y += _scrollPos;
-      if ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0 || (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)) cellsToPool.add(cell);
+      if ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0 ||
+          (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)) cellsToPool.add(cell);
     }
 
     // Put collected cells in pool
@@ -281,14 +277,17 @@ class ListSprite extends ScrollifySprite with MList {
         }
         cell = _unshiftNewCell(cell);
         if (cell == null) break;
-        (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight) ? _putCellInPool(cell) : view.addChildAt(cell, 0);
+        (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)
+            ? _putCellInPool(cell)
+            : view.addChildAt(cell, 0);
       }
     } else if (_scrollPos < 0) {
       // Scrolling down
       cell = view.numChildren != 0 ? (view.getChildAt(view.numChildren - 1) as SelectableButton) : _getCell(true);
       firstLoop = true;
 
-      while ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < (_horizontalFlow ? spanWidth : spanHeight)) {
+      while ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) <
+          (_horizontalFlow ? spanWidth : spanHeight)) {
         if (firstLoop != null) {
           if (cell.parent == null) _putCellInPool(cell);
           firstLoop = false;
@@ -297,10 +296,11 @@ class ListSprite extends ScrollifySprite with MList {
         if (cell == null) {
           break;
         }
-        (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0 ? _putCellInPool(cell) : view.addChild(cell);
+        (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0
+            ? _putCellInPool(cell)
+            : view.addChild(cell);
       }
     } else {
-
       // Just update (e.g. render())
       cell = view.numChildren != 0 ? (view.getChildAt(0) as SelectableButton) : _getCell(true);
       firstLoop = true;
@@ -311,19 +311,24 @@ class ListSprite extends ScrollifySprite with MList {
         }
         cell = _unshiftNewCell(cell);
         if (cell == null) break;
-        (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight) ? _putCellInPool(cell) : view.addChildAt(cell, 0);
+        (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)
+            ? _putCellInPool(cell)
+            : view.addChildAt(cell, 0);
       }
       cell = view.numChildren != 0 ? (view.getChildAt(view.numChildren - 1) as SelectableButton) : _getCell(true);
 
       firstLoop = true;
-      while ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < (_horizontalFlow ? spanWidth : spanHeight)) {
+      while ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) <
+          (_horizontalFlow ? spanWidth : spanHeight)) {
         if (firstLoop) {
           if (cell.parent == null) _putCellInPool(cell);
           firstLoop = false;
         }
         cell = _addNewCell(cell);
         if (cell == null) break;
-        (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0 ? _putCellInPool(cell) : view.addChild(cell);
+        (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0
+            ? _putCellInPool(cell)
+            : view.addChild(cell);
       }
     }
 
@@ -341,12 +346,13 @@ class ListSprite extends ScrollifySprite with MList {
     newCell.visible = newCell.data != null;
     _selectedCells[newCell.id] == true ? newCell.select() : newCell.deselect();
 
-    num pos = ((_horizontalFlow ? oldCell.x : oldCell.y) + (_horizontalFlow ? oldCell.spanWidth : oldCell.spanHeight)).round() + spacing;
+    num pos = ((_horizontalFlow ? oldCell.x : oldCell.y) + (_horizontalFlow ? oldCell.spanWidth : oldCell.spanHeight))
+            .round() +
+        spacing;
     _horizontalFlow ? newCell.x = pos : newCell.y = pos;
 
     return newCell;
   }
-
 
   SelectableButton _unshiftNewCell(SelectableButton oldCell) {
     if (oldCell.id - 1 < 0) return null;
@@ -357,7 +363,9 @@ class ListSprite extends ScrollifySprite with MList {
     newCell.visible = newCell.data != null;
     _selectedCells[newCell.id] == true ? newCell.select() : newCell.deselect();
 
-    num pos = ((_horizontalFlow ? oldCell.x : oldCell.y) - (_horizontalFlow ? newCell.spanWidth : newCell.spanHeight)).round() - spacing;
+    num pos = ((_horizontalFlow ? oldCell.x : oldCell.y) - (_horizontalFlow ? newCell.spanWidth : newCell.spanHeight))
+            .round() -
+        spacing;
     _horizontalFlow ? newCell.x = pos : newCell.y = pos;
 
     return newCell;
@@ -377,21 +385,18 @@ class ListSprite extends ScrollifySprite with MList {
       if (ContextTool.TOUCH) {
         cell.addEventListener(TouchEvent.TOUCH_BEGIN, _onCellMouseDown, useCapture: false, priority: 0);
         cell.addEventListener(TouchEvent.TOUCH_END, _onCellMouseUp, useCapture: false, priority: 0);
-      }
-      else {
+      } else {
         cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown, useCapture: false, priority: 0);
         cell.addEventListener(MouseEvent.MOUSE_UP, _onCellMouseUp, useCapture: false, priority: 0);
       }
 
       cell.submitCallback = _onCellSelected;
-    }
-    else {
+    } else {
       cell = pop ? _cellPool.removeLast() : _cellPool.removeAt(0);
       cell.span(spanWidth, spanHeight);
     }
     return cell;
   }
-
 
   void _onCellMouseDown(InputEvent event) {
     _cellMoved = false;
@@ -406,17 +411,14 @@ class ListSprite extends ScrollifySprite with MList {
     _timer = new Timer(new Duration(milliseconds: 500), _onDelayedCellMouseDown);
   }
 
-
   void _onDelayedCellMouseDown() {
     if (_mouseDownCell != null) {
-
       if (touchable) {
         deselectAllCells();
       }
       _mouseDownCell.select();
     }
   }
-
 
   void _onCellMouseUp(InputEvent event) {
     if (!_cellMoved && _mouseDownCell != null) {
@@ -431,14 +433,12 @@ class ListSprite extends ScrollifySprite with MList {
     _mouseDownCell = null;
   }
 
-
   void _putCellInPool(SelectableButton cell) {
     cell.inheritDispose = false;
     if (cell.parent != null) cell.parent.removeChild(cell);
     _cellPool.add(cell);
     _selectedCells[cell.id] = cell.selected;
   }
-
 
   void deselectAllCells([int exception = -1]) {
     int n = view.numChildren;
@@ -448,8 +448,7 @@ class ListSprite extends ScrollifySprite with MList {
       if (cell.id != exception) {
         //print("selected ${cell.id}");
         cell.deselect();
-      }
-      else {
+      } else {
         //print("exception ${cell.id}");
       }
     }
@@ -459,7 +458,6 @@ class ListSprite extends ScrollifySprite with MList {
       _selectedCells[i] = false;
     }
   }
-
 
   @override
   void _onViewMouseDown(InputEvent event) {
@@ -482,13 +480,11 @@ class ListSprite extends ScrollifySprite with MList {
     if (ContextTool.TOUCH) {
       stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false, priority: 0);
       stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
-    }
-    else {
+    } else {
       stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false, priority: 0);
       stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
     }
   }
-
 
   @override
   void _onStageMouseMove(InputEvent event) {
@@ -501,11 +497,9 @@ class ListSprite extends ScrollifySprite with MList {
     }
   }
 
-
   void _onCellSelected([SelectableButton cell = null]) {
     if (cell != null) {
       deselectAllCells(cell.id);
     }
   }
-
 }

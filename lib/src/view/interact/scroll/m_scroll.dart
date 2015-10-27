@@ -4,12 +4,9 @@ part of stagexl_commons;
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
 
-enum ScrollOrientation {
-  HORIZONTAL, VERTICAL, BOTH
-}
+enum ScrollOrientation { HORIZONTAL, VERTICAL, BOTH }
 
 abstract class MScroll {
-
   ScrollOrientation _scrollOrientaton = ScrollOrientation.BOTH;
 
   void set scrollOrientation(ScrollOrientation scrollOrientation) => _scrollOrientaton = scrollOrientation;
@@ -81,5 +78,4 @@ abstract class MScroll {
   void set zoomOutValue(num zoomOutValue) => _zoomOutValue = zoomOutValue;
 
   num get zoomOutValue => _zoomOutValue;
-
 }

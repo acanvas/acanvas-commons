@@ -17,7 +17,7 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
 
   Sprite holder;
 
-  PaperRipple({this.color : 0xFF000000, this.type : RECTANGLE, this.velocity: 0.5 }):super() {
+  PaperRipple({this.color: 0xFF000000, this.type: RECTANGLE, this.velocity: 0.5}) : super() {
     inheritSpan = true;
     if (ContextTool.TOUCH) {
       velocity = 1;
@@ -31,7 +31,7 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
         mask = new Mask.circle(spanWidth / 2, spanWidth / 2, spanWidth / 2 + 2);
         break;
       case RECTANGLE:
-        mask = new Mask.rectangle(0, 0, spanWidth+2, spanHeight+3);
+        mask = new Mask.rectangle(0, 0, spanWidth + 2, spanHeight + 3);
         break;
     }
   }
@@ -41,10 +41,11 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
     num localX = e == null ? spanWidth / 2 : e.localX;
     num localY = e == null ? spanHeight / 2 : e.localY;
 
-    num touchX = localX > spanWidth ? spanWidth : localX;// - rect.left;
-    num touchY = localY > spanHeight ? spanHeight : localY;// - rect.top;
+    num touchX = localX > spanWidth ? spanWidth : localX; // - rect.left;
+    num touchY = localY > spanHeight ? spanHeight : localY; // - rect.top;
 
-    int waveRadius = (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(spanWidth, spanHeight)) / 1.2).round();
+    int waveRadius =
+        (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(spanWidth, spanHeight)) / 1.2).round();
 
     Sprite inner = new Sprite()
       ..graphics.circle(0, 0, waveRadius)
@@ -61,28 +62,24 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
 
     addChild(inner);
 
-    Tween tw = new Tween(inner, velocity, Transition.easeOutElastic)
-      ..animate.scaleX.to(1.2)
-      ..animate.scaleY.to(1.2);
+    Tween tw = new Tween(inner, velocity, Transition.easeOutElastic)..animate.scaleX.to(1.2)..animate.scaleY.to(1.2);
 
-    ContextTool.STAGE.juggler.add(tw);
-
+    ContextTool.JUGGLER.add(tw);
   }
 
   @override
   upAction([Event e = null]) {
-
     for (int i = 0; i < numChildren; i++) {
       DisplayObject dobj = getChildAt(i);
 
-      ContextTool.STAGE.juggler.removeTweens(dobj);
-      ContextTool.STAGE.juggler.addTween(dobj, velocity)
+      ContextTool.JUGGLER.removeTweens(dobj);
+      ContextTool.JUGGLER.addTween(dobj, velocity)
         ..animate.alpha.to(0)
         ..animate.scaleX.to(1.0)
         ..animate.scaleY.to(1.0)
         ..onComplete = () {
-        disposeChild(dobj);
-      };
+          disposeChild(dobj);
+        };
     }
   }
 
@@ -97,5 +94,4 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
     num br_d = dist(point, new Point(size.x, size.y));
     return max(max(tl_d, tr_d), max(bl_d, br_d));
   }
-
 }

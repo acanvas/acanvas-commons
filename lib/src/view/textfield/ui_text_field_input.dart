@@ -1,9 +1,7 @@
 part of stagexl_commons;
 
 class UITextFieldInput extends UITextField {
-
   UITextFieldInput(String value, TextFormat format) : super(value, format, false) {
-
     type = TextFieldType.INPUT;
     //selectable = true;
     mouseEnabled = true;
@@ -17,5 +15,4 @@ class UITextFieldInput extends UITextField {
 
   //TODO implement selectable
   bool selectable = false;
-
 }

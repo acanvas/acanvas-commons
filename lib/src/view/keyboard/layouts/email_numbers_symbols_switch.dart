@@ -24,8 +24,6 @@ part of stagexl_commons;
  * <p>The referencee used to determine which symbols should be included is the following: dynamic http://en.wikipedia.org/wiki/E-mail_address#RFC_specification</p>
  */
 class EmailnumsSymbolsSwitch extends Layout {
-
-
   /**
    * Creates a new EmailnumsSymbolsSwitch object.
    *
@@ -78,8 +76,5 @@ class EmailnumsSymbolsSwitch extends Layout {
         new Key(CharCode.SWITCH_LAYOUT, null, Key.SYSTEM_KEY, switchKeyType.SWITCH_KEY_LABEL, 2.5, 1, switchKeyType)
       ]
     ];
-
   }
-
 }
-	

@@ -1,11 +1,9 @@
 part of stagexl_commons;
 
 class BehaveSprite extends BoxSprite with MBehave {
-
   BehaveSprite() : super() {
     submitCallbackParams = [this];
   }
-
 
   @override
   void enable() {
@@ -35,8 +33,7 @@ class BehaveSprite extends BoxSprite with MBehave {
     if (child is MBehave && (child as MBehave).inheritEnabled) {
       if (this.enabled) {
         (child as MBehave).enable();
-      }
-      else {
+      } else {
         (child as MBehave).disable();
       }
     }

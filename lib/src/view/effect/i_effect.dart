@@ -1,6 +1,5 @@
 part of stagexl_commons;
 
-
 /**
  * @author nilsdoehring
  */
