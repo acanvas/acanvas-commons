@@ -31,6 +31,8 @@ class PaperInput extends BoxSprite {
   /* bool to indicate if label is currently floating */
   bool _currentlyFloating = false;
 
+  bool KEYBOARD_NATIVE = true;
+
   PaperInput(String text,
       {this.fontSize: 14,
       this.textColor: PaperColor.BLACK,
@@ -121,6 +123,11 @@ class PaperInput extends BoxSprite {
       _requiredTextField.y = _inactiveLine.y + 5;
       _requiredIconActive.x = _requiredIconInactive.x = spanWidth - 24;
       _requiredIconActive.y = _requiredIconInactive.y = _requiredTextField.y;
+    }
+
+    if(_nativeKeyboard != null){
+      _nativeKeyboard.x = _inputTextField.x;
+      _nativeKeyboard.y = _inputTextField.y;
     }
 
     super.refresh();
@@ -295,32 +302,39 @@ class PaperInput extends BoxSprite {
     box.graphics.fillColor(color);
   }
 
-  SoftKeyboard _softKeyboard;
+  PaperKeyboard _softKeyboard;
+  NativeKeyboard _nativeKeyboard;
 
   void _createKeyboard() {
-    Layout layout = new Qwerty();
-    _softKeyboard = new SoftKeyboard([layout]);
-    _softKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
-      softKeyboardInputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
-    });
-    _softKeyboard.addEventListener(KeyEvent.KEY_UP, (KeyEvent e) {
-      softKeyboardDownAction(e.charCode);
-    });
-
-    ContextTool.STAGE.addChild(_softKeyboard);
-    ContextTool.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
-    _resizeKeyboard();
-  }
-
-  void _resizeKeyboard([Event e = null]) {
-    _softKeyboard.span(ContextTool.STAGE.stageWidth, min(ContextTool.STAGE.stageHeight / 2, 400));
-    _softKeyboard.y = ContextTool.STAGE.stageHeight - _softKeyboard.spanHeight;
+    if (KEYBOARD_NATIVE == false) {
+      _softKeyboard = new PaperKeyboard();
+      _softKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
+        softKeyboardInputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
+      });
+      _softKeyboard.addEventListener(KeyEvent.KEY_UP, (KeyEvent e) {
+        softKeyboardDownAction(e.charCode);
+      });
+    } else {
+      _nativeKeyboard = new NativeKeyboard();
+      _nativeKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
+        softKeyboardInputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
+      });
+      addChild(_nativeKeyboard);
+      _nativeKeyboard.x = _inputTextField.x;
+      _nativeKeyboard.y = _inputTextField.y;
+      _nativeKeyboard.createKeyboard();
+    }
   }
 
   void _disposeKeyboard() {
-    ContextTool.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
-    disposeChild(_softKeyboard);
-    _softKeyboard = null;
+    if (KEYBOARD_NATIVE == false) {
+      _softKeyboard.removeEventListeners(KeyEvent.KEY_UP_VISIBLE);
+      _softKeyboard.removeEventListeners(KeyEvent.KEY_UP);
+      _softKeyboard.dispose();
+    } else {
+      _nativeKeyboard.removeEventListeners(KeyEvent.KEY_UP_VISIBLE);
+      _nativeKeyboard.dispose();
+    }
   }
 
   ///addresses a sizing bug with Graphics tool

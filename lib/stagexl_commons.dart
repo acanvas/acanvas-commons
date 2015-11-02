@@ -103,6 +103,8 @@ part 'src/view/interact/slider/slider_event.dart';
 part 'src/view/interact/slider/impl/slider.dart';
 
 //view/keyboard
+part 'src/view/keyboard/native_keyboard.dart';
+part 'src/view/keyboard/paper_keyboard.dart';
 part 'src/view/keyboard/char_code.dart';
 part 'src/view/keyboard/key.dart';
 part 'src/view/keyboard/key_event.dart';

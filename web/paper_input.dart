@@ -8,14 +8,13 @@ Sprite _container;
 
 void main() {
   var opts = new StageOptions();
-  opts.renderEngine = RenderEngine.Canvas2D;
+  opts.renderEngine = RenderEngine.WebGL;
   opts.backgroundColor = 0xFFf9f9f9;
   opts.stageScaleMode = StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
 
   stage = new Stage(html.querySelector('#stage'), options: opts);
   ContextTool.STAGE = stage;
-  ContextTool.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
   new RenderLoop()..addStage(stage);
 
   FontTool.addFont("Roboto");
