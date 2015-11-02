@@ -231,7 +231,7 @@ class SoftKeyboard extends BoxSprite {
 
   /** @ */
   Sprite _buildConfiguration(Layout layout) {
-    LifecycleSprite keyboard = new LifecycleSprite();
+    BoxSprite keyboard = new BoxSprite();
     keyboard.inheritSpan = true;
 
     // Check if rows have been defined properly in the layout

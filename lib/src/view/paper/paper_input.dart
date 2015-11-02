@@ -50,6 +50,9 @@ class PaperInput extends BoxSprite {
     if (ContextTool.MOBILE) {
       keyboard = true;
     }
+    else if(keyboard == true){
+      KEYBOARD_NATIVE = false;
+    }
 
     _defaultTextField = new UITextField(text, new TextFormat(fontName, fontSize, PaperColor.GREY_DARK));
     addChild(_defaultTextField);
@@ -172,7 +175,7 @@ class PaperInput extends BoxSprite {
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
     ContextTool.STAGE.focus = _inputTextField;
 
-    if (keyboard && _softKeyboard == null) {
+    if (keyboard && _softKeyboard == null && _nativeKeyboard == null) {
       _createKeyboard();
     }
 
@@ -331,9 +334,11 @@ class PaperInput extends BoxSprite {
       _softKeyboard.removeEventListeners(KeyEvent.KEY_UP_VISIBLE);
       _softKeyboard.removeEventListeners(KeyEvent.KEY_UP);
       _softKeyboard.dispose();
+      _softKeyboard = null;
     } else {
       _nativeKeyboard.removeEventListeners(KeyEvent.KEY_UP_VISIBLE);
       _nativeKeyboard.dispose();
+      _nativeKeyboard = null;
     }
   }
 

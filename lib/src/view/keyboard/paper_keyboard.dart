@@ -22,6 +22,13 @@ class PaperKeyboard extends BoxSprite {
     Layout layout = new Qwerty();
     _softKeyboard = new SoftKeyboard([layout]);
 
+    _softKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
+      dispatchEvent(e);
+    });
+    _softKeyboard.addEventListener(KeyEvent.KEY_UP, (KeyEvent e) {
+      dispatchEvent(e);
+    });
+
     ContextTool.STAGE.addChild(_softKeyboard);
     ContextTool.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
     _resizeKeyboard();
@@ -35,6 +42,8 @@ class PaperKeyboard extends BoxSprite {
   @override
   void dispose() {
     ContextTool.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
+    _softKeyboard.removeEventListeners(KeyEvent.KEY_UP_VISIBLE);
+    _softKeyboard.removeEventListeners(KeyEvent.KEY_UP);
     disposeChild(_softKeyboard);
     _softKeyboard = null;
   }
