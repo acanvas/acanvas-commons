@@ -51,7 +51,7 @@ class PaperInput extends BoxSprite {
       keyboard = true;
     }
     else if(keyboard == true){
-     // KEYBOARD_NATIVE = false;
+      KEYBOARD_NATIVE = false;
     }
 
     _defaultTextField = new UITextField(text, new TextFormat(fontName, fontSize, PaperColor.GREY_DARK));
