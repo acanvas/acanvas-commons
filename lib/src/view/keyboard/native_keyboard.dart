@@ -11,6 +11,7 @@ class NativeKeyboard extends BoxSprite {
   String fontName;
   bool password;
   bool multiline;
+  String text;
 
   /* The color to be used by active indicators (line, box, floating label) */
   int _highlightColor;
@@ -20,7 +21,8 @@ class NativeKeyboard extends BoxSprite {
   StreamSubscription _onKeyDownSubscriber;
 
 
-  NativeKeyboard({this.fontSize: 14,
+  NativeKeyboard(this.text,
+                 {this.fontSize: 14,
                 this.textColor: PaperColor.BLACK,
                 this.fontName: DEFAULT_FONT,
                 this.multiline: false,
@@ -32,6 +34,7 @@ class NativeKeyboard extends BoxSprite {
   void createKeyboard() {
 
     _htmlElement = new html.InputElement();
+    _htmlElement.value = text;
     _htmlElement.size = 80;
     _htmlElement.style.fontSize = fontSize.toString();
     _htmlElement.style.font = fontName;
@@ -49,6 +52,8 @@ class NativeKeyboard extends BoxSprite {
     addChild(_htmlTextField);
 
   }
+
+  html.InputElement get value => _htmlElement.value;
 
   @override
   void dispose() {
