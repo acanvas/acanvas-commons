@@ -10,7 +10,10 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
   BoxSprite get view => _view;
 
   Scrollbar _hScrollbar;
+  Scrollbar get hScrollbar => _hScrollbar;
+
   Scrollbar _vScrollbar;
+  Scrollbar get vScrollbar => _vScrollbar;
 
   // Zoom States
   bool _viewZoomed = false;

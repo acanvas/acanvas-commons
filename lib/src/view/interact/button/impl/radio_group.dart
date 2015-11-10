@@ -21,7 +21,7 @@ class RadioGroup extends Flow {
   void addChildAt(DisplayObject child, int index) {
     if (child is SelectableButton) {
       child.submitCallback = _onBtnSubmit;
-      child.autoSelect = false;
+      child.selfSelect = false;
     } else {
       throw new StateError("Only SelectableButton allowed as children");
     }

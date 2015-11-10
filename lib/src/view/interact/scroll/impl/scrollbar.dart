@@ -252,9 +252,9 @@ class Scrollbar extends Slider with MPagedScroll {
         num delta = value - newValue;
 
         if (delta < 0) {
-          delta = value - max(delta, -300);
+          delta = value - max(delta, -500);
         } else {
-          delta = value - min(delta, 300);
+          delta = value - min(delta, 500);
         }
 
         _value = delta;
@@ -310,7 +310,7 @@ class Scrollbar extends Slider with MPagedScroll {
   //----- TIMER - used for page snapping
 
   void _startPageScrollTimer() {
-    _pageScroll();
+    //_pageScroll();
     _runTimer(pageScrollIntervalFirst);
   }
 
@@ -321,7 +321,7 @@ class Scrollbar extends Slider with MPagedScroll {
     _timer = new Timer.periodic(new Duration(milliseconds: delay), _onTimer);
   }
 
-  void _onTimer(Timer timer) {
+  void _onTimer(Timer t) {
     _runTimer(pageScrollInterval);
     _pageScroll();
   }

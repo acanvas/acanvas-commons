@@ -31,7 +31,7 @@ class ListSprite extends ScrollifySprite with MList {
 
   @override
   void span(spanWidth, spanHeight, {bool refresh: true}) {
-    super.span(spanWidth, spanHeight, refresh: refresh);
+    super.span(spanWidth, spanHeight, refresh: false);
     _cellFactory.span(spanWidth, spanHeight, refresh: false);
     init();
   }
@@ -82,15 +82,16 @@ class ListSprite extends ScrollifySprite with MList {
       int cellsInFrame = ((_horizontalFlow ? spanWidth : spanHeight) / _cellSize).ceil();
       //iterate all data
       for (i = 0; i < numDataEntries; i++) {
+      /*
         //if in visible area, create cell
         if (i < cellsInFrame) {
-          cell = _getCell();
+          cell = _getEmptyCell();
           cell.id = i;
           cell.data = data.elementAt(i);
           _horizontalFlow ? cell.x = i * _cellSize : cell.y = i * _cellSize;
 
           view.addChild(cell);
-        }
+        }*/
         //fill up lookup
         _selectedCells[i] = false;
       }
@@ -99,7 +100,7 @@ class ListSprite extends ScrollifySprite with MList {
       for (i = fromIndex; i < _bufferSize; i++) {
         if (i < numDataEntries) {
           if (i == fromIndex) _scrollPos = -_totalCellSize;
-          cell = _getCell();
+          cell = _getEmptyCell();
           cell.id = i;
           cell.data = data.elementAt(i);
           if (_totalCellSize < (_horizontalFlow ? spanWidth : spanHeight)) {
@@ -135,7 +136,7 @@ class ListSprite extends ScrollifySprite with MList {
     int n = _cellsLoaded + _bufferSize;
     for (int i = fromIndex; i < n; i++) {
       if (i < numDataEntries) {
-        cell = _getCell();
+        cell = _getEmptyCell();
         cell.id = i;
         cell.data = data.elementAt(i);
 
@@ -150,10 +151,15 @@ class ListSprite extends ScrollifySprite with MList {
   }
 
   void selectCellByVO(dynamic vo) {
-    deselectAllCells();
+    if(selfDeselect){
+      deselectAllCells();
+    }
     int i = 0;
     for (i = 0; i < this.data.length; i++) {
       if (vo == this.data[i]) {
+        if(!selfDeselect && !multiSelectable){
+          deselectAllCells(i);
+        }
         jumpToCell(i);
         break;
       }
@@ -179,7 +185,7 @@ class ListSprite extends ScrollifySprite with MList {
       if ((_horizontalFlow ? _hScrollbar : _vScrollbar).enabled) {
         SelectableButton cell;
         int targetPos;
-        cell = _getCell();
+        cell = _getEmptyCell();
         for (int i = 0; i < nr; i++) {
           cell.id = i;
           cell.data = data.elementAt(i);
@@ -256,6 +262,7 @@ class ListSprite extends ScrollifySprite with MList {
       _horizontalFlow ? cell.x += _scrollPos : cell.y += _scrollPos;
       if ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0 ||
           (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)) cellsToPool.add(cell);
+      cell.span(spanWidth, spanHeight);
     }
 
     // Put collected cells in pool
@@ -266,81 +273,48 @@ class ListSprite extends ScrollifySprite with MList {
 
     // Check, if scrolling up or down
     bool firstLoop;
-    if (_scrollPos > 0) {
-      // Scrolling up
-      cell = view.numChildren != 0 ? (view.getChildAt(0) as SelectableButton) : _getCell(true);
-      firstLoop = true;
-      while ((_horizontalFlow ? cell.x : cell.y) > 0) {
-        if (firstLoop != null) {
-          if (cell.parent == null) _putCellInPool(cell);
-          firstLoop = false;
-        }
-        cell = _unshiftNewCell(cell);
-        if (cell == null) break;
-        (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)
-            ? _putCellInPool(cell)
-            : view.addChildAt(cell, 0);
-      }
-    } else if (_scrollPos < 0) {
-      // Scrolling down
-      cell = view.numChildren != 0 ? (view.getChildAt(view.numChildren - 1) as SelectableButton) : _getCell(true);
+
+      cell = view.numChildren != 0 ? (view.getChildAt(0) as SelectableButton) : _getEmptyCell(true);
       firstLoop = true;
 
-      while ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) <
-          (_horizontalFlow ? spanWidth : spanHeight)) {
-        if (firstLoop != null) {
-          if (cell.parent == null) _putCellInPool(cell);
-          firstLoop = false;
-        }
-        cell = _addNewCell(cell);
-        if (cell == null) {
-          break;
-        }
-        (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0
-            ? _putCellInPool(cell)
-            : view.addChild(cell);
-      }
-    } else {
-      // Just update (e.g. render())
-      cell = view.numChildren != 0 ? (view.getChildAt(0) as SelectableButton) : _getCell(true);
-      firstLoop = true;
+      //try adding cell(s) above first cell if it is y > 0
       while ((_horizontalFlow ? cell.x : cell.y) > 0) {
         if (firstLoop) {
           if (cell.parent == null) _putCellInPool(cell);
           firstLoop = false;
         }
-        cell = _unshiftNewCell(cell);
+        //cell.id minus 1
+        cell = _getPreviousCell(cell);
         if (cell == null) break;
         (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)
             ? _putCellInPool(cell)
             : view.addChildAt(cell, 0);
       }
-      cell = view.numChildren != 0 ? (view.getChildAt(view.numChildren - 1) as SelectableButton) : _getCell(true);
 
+      //try adding cell(s) below last cell if it there is visible space underneath
+      cell = view.numChildren != 0 ? (view.getChildAt(view.numChildren - 1) as SelectableButton) : _getEmptyCell(true);
       firstLoop = true;
-      while ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) <
-          (_horizontalFlow ? spanWidth : spanHeight)) {
+      while (_horizontalFlow ? cell.x + cell.spanWidth < spanWidth : cell.y + cell.spanHeight < spanHeight) {
         if (firstLoop) {
           if (cell.parent == null) _putCellInPool(cell);
           firstLoop = false;
         }
-        cell = _addNewCell(cell);
+        cell = _getNextCell(cell);
         if (cell == null) break;
         (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0
             ? _putCellInPool(cell)
             : view.addChild(cell);
       }
-    }
 
     if (_oldVScrollbarValue >= (_horizontalFlow ? _hScrollbar : _vScrollbar).valueMax) {
       _calcNextCells();
     }
   }
 
-  SelectableButton _addNewCell(SelectableButton oldCell) {
+  SelectableButton _getNextCell(SelectableButton oldCell) {
     if (oldCell.id + 1 >= data.length) return null;
 
-    SelectableButton newCell = _getCell();
+    SelectableButton newCell = _getEmptyCell();
     newCell.id = oldCell.id + 1;
     newCell.data = data[newCell.id];
     newCell.visible = newCell.data != null;
@@ -354,10 +328,10 @@ class ListSprite extends ScrollifySprite with MList {
     return newCell;
   }
 
-  SelectableButton _unshiftNewCell(SelectableButton oldCell) {
+  SelectableButton _getPreviousCell(SelectableButton oldCell) {
     if (oldCell.id - 1 < 0) return null;
 
-    SelectableButton newCell = _getCell();
+    SelectableButton newCell = _getEmptyCell();
     newCell.id = oldCell.id - 1;
     newCell.data = data[newCell.id];
     newCell.visible = newCell.data != null;
@@ -371,13 +345,13 @@ class ListSprite extends ScrollifySprite with MList {
     return newCell;
   }
 
-  SelectableButton _getCell([bool pop = false]) {
+  SelectableButton _getEmptyCell([bool pop = false]) {
     SelectableButton cell;
     if (_cellPool.length == 0) {
       cell = _cellFactory.clone();
       cell.span(spanWidth, spanHeight);
       cell.mouseChildren = false;
-      cell.autoSelect = false;
+      cell.selfSelect = false;
       if (touchable) {
         cell.enabled = false;
       }
@@ -441,14 +415,17 @@ class ListSprite extends ScrollifySprite with MList {
   }
 
   void deselectAllCells([int exception = -1]) {
-    int n = view.numChildren;
+    int n = view.numChildren;//data.length;
     SelectableButton cell;
     for (int i = 0; i < n; i++) {
       cell = (view.getChildAt(i) as SelectableButton);
+     // print("${i}: cell.id = ${cell.id}, exception: ${exception}");
       if (cell.id != exception) {
         //print("selected ${cell.id}");
         cell.deselect();
+      //  cell.enable();
       } else {
+      //  cell.disable();
         //print("exception ${cell.id}");
       }
     }

@@ -6,7 +6,7 @@ part of stagexl_commons;
 
 class SelectableButton extends Button with MSelectable {
   SelectableButton() : super() {
-    autoSelect = true;
+    selfSelect = true;
   }
 
   SelectableButton clone() => new SelectableButton();
@@ -16,8 +16,9 @@ class SelectableButton extends Button with MSelectable {
   }
 
   @override void upAction([InputEvent event = null, bool submit = true]) {
+
     super.upAction(event, submit);
-    if (autoSelect) {
+    if (selfSelect) {
       selected = !selected;
       //will trigger de/select()
     }

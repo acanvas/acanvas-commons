@@ -17,20 +17,13 @@ abstract class MSelectable {
     _data = data;
   }
 
-  bool _multiSelectable = false;
 
-  bool get multiSelectable => _multiSelectable;
+  bool _selfSelect = false;
 
-  void set multiSelectable(bool multiSelectable) {
-    _multiSelectable = multiSelectable;
-  }
+  bool get selfSelect => _selfSelect;
 
-  bool _autoSelect = false;
-
-  bool get autoSelect => _autoSelect;
-
-  void set autoSelect(bool autoSelect) {
-    _autoSelect = autoSelect;
+  void set selfSelect(bool selfSelect) {
+    _selfSelect = selfSelect;
   }
 
   bool _selected = false;

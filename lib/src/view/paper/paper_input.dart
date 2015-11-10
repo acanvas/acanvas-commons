@@ -129,7 +129,7 @@ class PaperInput extends BoxSprite {
     }
 
     if(_nativeKeyboard != null){
-      _nativeKeyboard.x = _inputTextField.x;
+      _nativeKeyboard.x = _inputTextField.x + int.parse(html.querySelector('body').style.top, onError: (e) => 0);
       _nativeKeyboard.y = _inputTextField.y;
     }
 

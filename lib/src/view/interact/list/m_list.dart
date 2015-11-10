@@ -52,4 +52,21 @@ abstract class MList {
   void set constantCellSize(bool constantCellSize) => _constantCellSize = constantCellSize;
 
   bool get constantCellSize => _constantCellSize;
+
+
+  bool _selfDeselect = false;
+
+  bool get selfDeselect => _selfDeselect;
+
+  void set selfDeselect(bool selfDeselect) {
+    _selfDeselect = selfDeselect;
+  }
+
+  bool _multiSelectable = false;
+
+  bool get multiSelectable => _multiSelectable;
+
+  void set multiSelectable(bool multiSelectable) {
+    _multiSelectable = multiSelectable;
+  }
 }

@@ -24,7 +24,7 @@ abstract class MPagedScroll {
 
   int get pageScrollInterval => _pageScrollInterval;
 
-  int _pageScrollIntervalFirst = 50;
+  int _pageScrollIntervalFirst = 150;
 
   void set pageScrollIntervalFirst(int pageScrollIntervalFirst) => _pageScrollIntervalFirst = pageScrollIntervalFirst;
 

@@ -53,7 +53,7 @@ class NativeKeyboard extends BoxSprite {
 
   }
 
-  html.InputElement get value => _htmlElement.value;
+  String get value => _htmlElement.value;
 
   @override
   void dispose() {
