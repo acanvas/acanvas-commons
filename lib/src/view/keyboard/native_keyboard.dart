@@ -23,7 +23,7 @@ class NativeKeyboard extends BoxSprite {
 
   NativeKeyboard(this.text,
                  {this.fontSize: 14,
-                this.textColor: PaperColor.BLACK,
+                this.textColor: MdColor.BLACK,
                 this.fontName: DEFAULT_FONT,
                 this.multiline: false,
                 this.rows: 1,

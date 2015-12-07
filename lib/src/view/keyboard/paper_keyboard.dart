@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-class PaperKeyboard extends BoxSprite {
+class MdKeyboard extends BoxSprite {
   static const DEFAULT_FONT = "Roboto, Helvetica, Arial";
 
   /* Parameters */
@@ -8,8 +8,8 @@ class PaperKeyboard extends BoxSprite {
   int textColor;
   int fontSize;
 
-  PaperKeyboard({this.fontSize: 14,
-                this.textColor: PaperColor.BLACK,
+  MdKeyboard({this.fontSize: 14,
+                this.textColor: MdColor.BLACK,
                 String fontName: DEFAULT_FONT})
       : super() {
     _createKeyboard();

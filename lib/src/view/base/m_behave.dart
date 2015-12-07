@@ -22,11 +22,11 @@ abstract class MBehave {
   bool get inheritTouchable => _inheritTouchable;
 
   //events
-  XLSignal _submitEvent;
+  RdSignal _submitEvent;
 
-  XLSignal get submitEvent => _submitEvent;
+  RdSignal get submitEvent => _submitEvent;
 
-  void set submitEvent(XLSignal submitEvent) {
+  void set submitEvent(RdSignal submitEvent) {
     _submitEvent = submitEvent;
   }
 

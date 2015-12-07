@@ -69,13 +69,13 @@ class Button extends BehaveSprite with MButton {
       swipeYDownPos = event.stageY;
     }
 
-    children.where((c) => (c is MButton && c.inheritDownAction) || c is IPaperButtonComponent).forEach((child) {
+    children.where((c) => (c is MButton && c.inheritDownAction) || c is IMdButtonComponent).forEach((child) {
       child.downAction(event);
     });
   }
 
   void upAction([InputEvent event = null, bool submit = true]) {
-    children.where((c) => (c is MButton && c.inheritUpAction) || c is IPaperButtonComponent).forEach((child) {
+    children.where((c) => (c is MButton && c.inheritUpAction) || c is IMdButtonComponent).forEach((child) {
       child.upAction(event);
     });
     if (submit) {

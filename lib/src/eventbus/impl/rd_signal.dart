@@ -1,7 +1,7 @@
 part of stagexl_commons;
 
-class XLSignal extends Event {
-  final XLEventBus eventBus = new XLEventBus();
+class RdSignal extends Event {
+  final RdEventBus eventBus = new RdEventBus();
 
   dynamic _data;
 
@@ -15,10 +15,10 @@ class XLSignal extends Event {
 
   get completeCallBack => _callback;
 
-  XLSignal(String type, [this._data = null, this._callback = null]) : super(type);
+  RdSignal(String type, [this._data = null, this._callback = null]) : super(type);
 
   void dispatch() {
-    eventBus.dispatchEvent(new XLSignal(type, _data, _callback));
+    eventBus.dispatchEvent(new RdSignal(type, _data, _callback));
   }
 
   void listen() {

@@ -175,7 +175,7 @@ abstract class MBox {
   /// whenever positioning and size need an update.
   /// This method is implemented by [BoxSprite], but only manages logic.
   /// You will have to implement positioning of children by yourself.
-  /// See [PaperButton] for an example.
+  /// See [MdButton] for an example.
   ///
   /// But it's simple: Just remember to put all positioning logic
   /// ALWAYS into the [refresh] method.
