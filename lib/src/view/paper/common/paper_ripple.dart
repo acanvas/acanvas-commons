@@ -19,7 +19,7 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
 
   PaperRipple({this.color: 0xFF000000, this.type: RECTANGLE, this.velocity: 0.5}) : super() {
     inheritSpan = true;
-    if (ContextTool.TOUCH) {
+    if (RdEnvironment.TOUCH) {
       velocity = 1;
     }
   }
@@ -54,7 +54,7 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
       ..x = touchX
       ..y = touchY;
 
-    if (ContextTool.WEBGL) {
+    if (RdEnvironment.WEBGL) {
       //inner.applyCache(-waveRadius, -waveRadius, waveRadius*2, waveRadius*2);
     }
     inner.scaleX = 0.1;
@@ -64,7 +64,7 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
 
     Tween tw = new Tween(inner, velocity, Transition.easeOutElastic)..animate.scaleX.to(1.2)..animate.scaleY.to(1.2);
 
-    ContextTool.JUGGLER.add(tw);
+    RdEnvironment.JUGGLER.add(tw);
   }
 
   @override
@@ -72,8 +72,8 @@ class PaperRipple extends BoxSprite implements IPaperButtonComponent {
     for (int i = 0; i < numChildren; i++) {
       DisplayObject dobj = getChildAt(i);
 
-      ContextTool.JUGGLER.removeTweens(dobj);
-      ContextTool.JUGGLER.addTween(dobj, velocity)
+      RdEnvironment.JUGGLER.removeTweens(dobj);
+      RdEnvironment.JUGGLER.addTween(dobj, velocity)
         ..animate.alpha.to(0)
         ..animate.scaleX.to(1.0)
         ..animate.scaleY.to(1.0)

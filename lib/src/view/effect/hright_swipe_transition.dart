@@ -17,7 +17,7 @@ class HRightSwipeTransition extends BasicEffect {
     target.x = -target.stage.stageWidth;
     target.alpha = 1;
 
-    ContextTool.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
+    RdEnvironment.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
       ..animate.x.to(iTargetXOriginal)
       ..onComplete = () {
         callback.call();
@@ -29,7 +29,7 @@ class HRightSwipeTransition extends BasicEffect {
   void runOutEffect(BoxSprite t, num duration, Function callback) {
     BoxSprite target = t as BoxSprite;
     target.parent.mask = new Mask.rectangle(target.x, target.y, target.spanWidth, target.spanHeight);
-    ContextTool.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
+    RdEnvironment.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
       ..animate.x.to(target.stage.stageWidth)
       ..onComplete = () {
         callback.call();

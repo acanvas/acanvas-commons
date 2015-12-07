@@ -31,13 +31,13 @@ abstract class MScroll {
 
   bool get doubleClickToZoom => _doubleClickToZoom;
 
-  bool _bounce = ContextTool.MOBILE ? true : false;
+  bool _bounce = RdEnvironment.MOBILE ? true : false;
 
   void set bounce(bool bounce) => _bounce = bounce;
 
   bool get bounce => _bounce;
 
-  bool _autoHide = ContextTool.MOBILE ? true : false;
+  bool _autoHide = RdEnvironment.MOBILE ? true : false;
 
   void set autoHideScrollbars(bool autoHide) => _autoHide = autoHide;
 

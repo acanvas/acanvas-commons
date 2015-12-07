@@ -61,6 +61,6 @@ class PaperWrap extends BoxSprite {
     flow.y = padding;
 
     super.refresh();
-    GraphicsUtil.rectangle(0, 0, spanWidth, PaperDimensions.HEIGHT_APP_BAR, sprite: panelSprite, color: panelColor);
+    RdGraphicsUtil.rectangle(0, 0, spanWidth, PaperDimensions.HEIGHT_APP_BAR, sprite: panelSprite, color: panelColor);
   }
 }

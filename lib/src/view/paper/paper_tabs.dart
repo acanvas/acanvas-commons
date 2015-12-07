@@ -42,12 +42,12 @@ class PaperTabs extends BoxSprite {
 
   void _onTabClick(Button btn, int index) {
     _activeButtonIndex = index;
-    ContextTool.JUGGLER.addTween(_slideBar, .3, Transition.easeOutCubic).animate..x.to(btn.x);
+    RdEnvironment.JUGGLER.addTween(_slideBar, .3, Transition.easeOutCubic).animate..x.to(btn.x);
     _slideBar.width = btn.spanWidth;
   }
 
   @override void refresh() {
-    GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: _bg, color: bgColor);
+    RdGraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: _bg, color: bgColor);
 
     tabBox.x = 0;
 
@@ -62,7 +62,7 @@ class PaperTabs extends BoxSprite {
         tabBox.refresh();
       }
 
-      GraphicsUtil.line((tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0,
+      RdGraphicsUtil.line((tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0,
           strength: 2, sprite: _slideBar, color: highlightColor);
 
       _slideBar.x = tabBox.getChildAt(_activeButtonIndex).x;

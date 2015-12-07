@@ -14,12 +14,12 @@ void main() {
   opts.stageAlign = StageAlign.TOP_LEFT;
 
   stage = new Stage(html.querySelector('#stage'), options: opts);
-  ContextTool.STAGE = stage;
-  ContextTool.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
+  RdEnvironment.STAGE = stage;
+  RdEnvironment.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
   new RenderLoop()..addStage(stage);
 
-  FontTool.addFont("Roboto");
-  FontTool.loadFonts(start);
+  RdFontUtil.addFont("Roboto");
+  RdFontUtil.loadFonts(start);
 }
 void start() {
 

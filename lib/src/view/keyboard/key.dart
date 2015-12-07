@@ -270,7 +270,7 @@ class Key extends BoxSprite {
     //if (variants != null) addChild(_variantsContainer);
 
     // Now that everything is ready, listen to touch events
-    if (ContextTool.TOUCH) {
+    if (RdEnvironment.TOUCH) {
       addEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       addEventListener(TouchEvent.TOUCH_END, _onTouch);
       addEventListener(TouchEvent.TOUCH_MOVE, _onTouch);
@@ -306,7 +306,7 @@ class Key extends BoxSprite {
 				 */
     }
 
-    if (ContextTool.TOUCH) {
+    if (RdEnvironment.TOUCH) {
       removeEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       removeEventListener(TouchEvent.TOUCH_END, _onTouch);
       removeEventListener(TouchEvent.TOUCH_MOVE, _onTouch);
@@ -324,7 +324,7 @@ class Key extends BoxSprite {
   void refresh() {
 //			if (_skin) {
 
-    GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, color: PaperColor.BLUE, sprite: _skin);
+    RdGraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, color: PaperColor.BLUE, sprite: _skin);
 //			} else {
 //				spanInternal(44, 52, false);
 //				_skin.width = 44;
@@ -556,7 +556,7 @@ class Key extends BoxSprite {
   /** @ */
   DisplayObject _buildGenericSkin() {
     // Temporarily draw into a Shape object
-    Sprite canvas = GraphicsUtil.rectangle(0, 0, 44, 52, color: PaperColor.BLUE);
+    Sprite canvas = RdGraphicsUtil.rectangle(0, 0, 44, 52, color: PaperColor.BLUE);
     return canvas;
   }
 

@@ -1,13 +1,13 @@
 part of stagexl_commons;
 
-class FontTool {
+class RdFontUtil {
   /* internals */
   List _fonts = [];
-  static final FontTool _singleton = new FontTool._internal();
+  static final RdFontUtil _singleton = new RdFontUtil._internal();
 
-  FontTool._internal() {}
+  RdFontUtil._internal() {}
 
-  factory FontTool() {
+  factory RdFontUtil() {
     return _singleton;
   }
 

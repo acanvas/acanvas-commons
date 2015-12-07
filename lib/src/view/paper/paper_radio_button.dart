@@ -25,7 +25,7 @@ class PaperRadioButton extends SelectableButton {
     _bg.graphics.strokeColor(PaperColor.BLACK, 2);
     _bg.graphics.circle(30, 30, 30);
     _bg.graphics.fillColor(0x00555555);
-    if (ContextTool.WEBGL) {
+    if (RdEnvironment.WEBGL) {
       _bg.applyCache(0, 0, 60, 60);
     }
     addChild(_bg);
@@ -57,7 +57,7 @@ class PaperRadioButton extends SelectableButton {
   void selectAction() {
     _icon.scaleX = _icon.scaleY = .1;
     _icon.visible = true;
-    ContextTool.JUGGLER.addTween(_icon, .1).animate..scaleX.to(1)..scaleY.to(1);
+    RdEnvironment.JUGGLER.addTween(_icon, .1).animate..scaleX.to(1)..scaleY.to(1);
     if (_paperLabel != null) {
       _paperLabel.color = activeColor;
     }
@@ -67,7 +67,7 @@ class PaperRadioButton extends SelectableButton {
     Tween tw = new Tween(_icon, .2);
     tw.animate..scaleX.to(.1)..scaleY.to(.1);
     tw.onComplete = () => _icon.visible = false;
-    ContextTool.JUGGLER.add(tw);
+    RdEnvironment.JUGGLER.add(tw);
     if (_paperLabel != null) {
       _paperLabel.color = PaperColor.BLACK;
     }

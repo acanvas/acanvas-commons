@@ -35,7 +35,7 @@ class PaperCheckbox extends SelectableButton {
     _box = new Sprite();
     _box.graphics.rect(-BOXWIDTH / 2, -BOXWIDTH / 2, BOXWIDTH, BOXWIDTH);
     _box.graphics.strokeColor(boxColor, 2);
-    if (ContextTool.WEBGL) {
+    if (RdEnvironment.WEBGL) {
       _box.applyCache(-(BOXWIDTH / 2).round(), -(BOXWIDTH / 2).round(), BOXWIDTH, BOXWIDTH);
     }
     addChild(_box);
@@ -47,7 +47,7 @@ class PaperCheckbox extends SelectableButton {
     _icon.graphics.lineTo(15, -15);
     _icon.graphics.strokeColor(activeColor, 3);
     _icon.graphics.closePath();
-    if (ContextTool.WEBGL) {
+    if (RdEnvironment.WEBGL) {
       _icon.applyCache(-8, -17, 26, 20);
     }
     addChild(_icon);
@@ -77,9 +77,9 @@ class PaperCheckbox extends SelectableButton {
     _icon.scaleX = _icon.scaleY = .3;
     _icon.visible = true;
 
-    ContextTool.JUGGLER.addTween(_box, .15).animate..alpha.to(0)..rotation.to(.8)..scaleX.to(.3)..scaleY.to(.3);
+    RdEnvironment.JUGGLER.addTween(_box, .15).animate..alpha.to(0)..rotation.to(.8)..scaleX.to(.3)..scaleY.to(.3);
 
-    ContextTool.JUGGLER.addTween(_icon, .1)
+    RdEnvironment.JUGGLER.addTween(_icon, .1)
       ..animate.scaleX.to(1)
       ..animate.scaleY.to(1)
       ..delay = .1;
@@ -95,9 +95,9 @@ class PaperCheckbox extends SelectableButton {
     tw.onComplete = () {
       _icon.visible = false;
     };
-    ContextTool.JUGGLER.add(tw);
+    RdEnvironment.JUGGLER.add(tw);
 
-    ContextTool.JUGGLER.addTween(_box, .1)
+    RdEnvironment.JUGGLER.addTween(_box, .1)
       ..animate.alpha.to(1)
       ..animate.rotation.to(0)
       ..animate.scaleX.to(1)

@@ -18,7 +18,7 @@ class Button extends BehaveSprite with MButton {
 
     super.enable();
 
-    if (ContextTool.TOUCH) {
+    if (RdEnvironment.TOUCH) {
       addEventListener(TouchEvent.TOUCH_END, upAction);
       addEventListener(TouchEvent.TOUCH_BEGIN, downAction);
       addEventListener(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
@@ -43,7 +43,7 @@ class Button extends BehaveSprite with MButton {
 
     super.disable();
 
-    if (ContextTool.TOUCH) {
+    if (RdEnvironment.TOUCH) {
       removeEventListener(TouchEvent.TOUCH_END, upAction);
       removeEventListener(TouchEvent.TOUCH_BEGIN, downAction);
       removeEventListener(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);

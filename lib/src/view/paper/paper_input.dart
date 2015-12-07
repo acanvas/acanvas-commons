@@ -47,7 +47,7 @@ class PaperInput extends BoxSprite {
     inheritSpan = true;
 
     //force onscreen keyboard on mobile devices
-    if (ContextTool.MOBILE) {
+    if (RdEnvironment.MOBILE) {
       keyboard = true;
     }
     else if(keyboard == true){
@@ -99,7 +99,7 @@ class PaperInput extends BoxSprite {
     addChild(_activeLine);
     _activeLine.alpha = 0;
 
-    if (ContextTool.TOUCH) {
+    if (RdEnvironment.TOUCH) {
       addEventListener(TouchEvent.TOUCH_BEGIN, mouseDownAction);
     } else {
       addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
@@ -139,18 +139,18 @@ class PaperInput extends BoxSprite {
 
   /* User clicks into TextField */
   void mouseDownAction([InputEvent event = null]) {
-    ContextTool.MATERIALIZE_REQUIRED = true;
+    RdEnvironment.MATERIALIZE_REQUIRED = true;
 
     /* Animate active line */
     if (_activeLine.alpha == 0) {
       _activeLine.scaleX = 0.01;
       _activeLine.alpha = 1;
       _activeLine.x = spanWidth / 2;
-      ContextTool.JUGGLER.addTween(_activeLine, .2).animate..x.to(0)..scaleX.to(1);
+      RdEnvironment.JUGGLER.addTween(_activeLine, .2).animate..x.to(0)..scaleX.to(1);
     }
 
     /* Animate cursor box */
-    if (ContextTool.STAGE.focus != _inputTextField) {
+    if (RdEnvironment.STAGE.focus != _inputTextField) {
       _cursorBox.scaleX = 1;
       _cursorBox.x = 80;
       _cursorBox.alpha = 1;
@@ -158,7 +158,7 @@ class PaperInput extends BoxSprite {
       Tween tw = new Tween(_cursorBox, .1);
       tw.animate..x.to(0)..scaleX.to(0.2);
       tw.onComplete = () => _cursorBox.alpha = 0;
-      ContextTool.JUGGLER.add(tw);
+      RdEnvironment.JUGGLER.add(tw);
     }
 
     /* If the label is currently floating, color it blue or red again */
@@ -169,21 +169,21 @@ class PaperInput extends BoxSprite {
     /* If this textfield is mandatory, make explanatory text red */
     if (required != "") {
       _requiredTextField.color = PaperColor.RED;
-      ContextTool.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
+      RdEnvironment.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
     }
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
-    ContextTool.STAGE.focus = _inputTextField;
+    RdEnvironment.STAGE.focus = _inputTextField;
 
     if (keyboard && _softKeyboard == null && _nativeKeyboard == null) {
       _createKeyboard();
     }
 
     /* Add a listener to Stage to manage intention to Focus out */
-    if (ContextTool.TOUCH) {
-      ContextTool.STAGE.addEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
+    if (RdEnvironment.TOUCH) {
+      RdEnvironment.STAGE.addEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
     } else {
-      ContextTool.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+      RdEnvironment.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
   }
 
@@ -195,17 +195,17 @@ class PaperInput extends BoxSprite {
       return;
     }
     if (event.target is! UITextFieldInput && event.target is! PaperInput) {
-      ContextTool.STAGE.focus = null;
+      RdEnvironment.STAGE.focus = null;
     } else {
-      ContextTool.MATERIALIZE_REQUIRED = false;
+      RdEnvironment.MATERIALIZE_REQUIRED = false;
     }
-    if (ContextTool.TOUCH) {
-      ContextTool.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
+    if (RdEnvironment.TOUCH) {
+      RdEnvironment.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
     } else {
-      ContextTool.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+      RdEnvironment.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
     /* Make active blue line invisible */
-    ContextTool.JUGGLER.addTween(_activeLine, .1).animate..alpha.to(0);
+    RdEnvironment.JUGGLER.addTween(_activeLine, .1).animate..alpha.to(0);
 
     /* Make floating label grey again */
     if (_currentlyFloating) {
@@ -215,7 +215,7 @@ class PaperInput extends BoxSprite {
     /* Make explanatory text grey again */
     if (required != "") {
       _requiredTextField.color = PaperColor.GREY_DARK;
-      ContextTool.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(0);
+      RdEnvironment.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(0);
     }
 
     if (keyboard) {
@@ -251,7 +251,7 @@ class PaperInput extends BoxSprite {
             ..onComplete = () {
               _defaultTextField.color = _highlightColor;
             };
-          ContextTool.JUGGLER.add(tr);
+          RdEnvironment.JUGGLER.add(tr);
         }
       } else {
         _defaultTextField.alpha = 0;
@@ -277,7 +277,7 @@ class PaperInput extends BoxSprite {
             ..onComplete = () {
               _defaultTextField.color = PaperColor.GREY_DARK;
             };
-          ContextTool.JUGGLER.add(tr);
+          RdEnvironment.JUGGLER.add(tr);
         }
       } else {
         _defaultTextField.alpha = 1;
@@ -294,7 +294,7 @@ class PaperInput extends BoxSprite {
     line.graphics.lineTo(spanWidth, 0);
     line.graphics.strokeColor(color, strength);
     line.graphics.closePath();
-    if (ContextTool.WEBGL) {
+    if (RdEnvironment.WEBGL) {
       line.applyCache(0, 0, spanWidth.ceil(), strength.ceil());
     }
   }

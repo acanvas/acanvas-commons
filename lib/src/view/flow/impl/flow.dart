@@ -105,7 +105,7 @@ class Flow extends BoxSprite with MFlow {
 
       //set x, y, animate
       if (animate) {
-        ContextTool.JUGGLER.addTween(child, 0.2)
+        RdEnvironment.JUGGLER.addTween(child, 0.2)
           ..animate.alpha.to(1.0)
           ..animate.x.to(_childXNew)
           ..animate.y.to(_childYNew);
@@ -138,7 +138,7 @@ class Flow extends BoxSprite with MFlow {
   @override void removeChildAt(int index) {
     if (animate) {
       DisplayObject child = getChildAt(index);
-      ContextTool.JUGGLER.addTween(child, 0.2)
+      RdEnvironment.JUGGLER.addTween(child, 0.2)
         ..animate.alpha.to(0.0)
         ..onComplete = () => super.removeChildAt(index);
     } else {

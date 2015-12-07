@@ -51,12 +51,11 @@ part 'src/logging/logger.dart';
 //mirror
 part 'src/mirror/retain.dart';
 //util
-part 'src/util/context_tool.dart';
-part 'src/util/device_detector.dart';
-part 'src/util/font_tool.dart';
-part 'src/util/graphics_util.dart';
-part 'src/util/key_code.dart';
-part 'src/util/numeric_stepper.dart';
+part 'src/util/rd_environment.dart';
+part 'src/util/rd_font_util.dart';
+part 'src/util/rd_graphics_util.dart';
+part 'package:stagexl_commons/src/lang/util/key_code.dart';
+part 'package:stagexl_commons/src/lang/util/numeric_stepper.dart';
 
 //view base: box, behave, lifecycle
 part 'src/view/base/m_box.dart';

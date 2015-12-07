@@ -42,10 +42,10 @@ class Scrollbar extends Slider with MPagedScroll {
   @override
   void interactionEnd() {
     if (_interaction) {
-      ContextTool.MATERIALIZE_REQUIRED = false;
+      RdEnvironment.MATERIALIZE_REQUIRED = false;
       _interaction = false;
       if (stage != null) {
-        if (ContextTool.TOUCH) {
+        if (RdEnvironment.TOUCH) {
           stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false);
           stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false);
         } else {
@@ -93,7 +93,7 @@ class Scrollbar extends Slider with MPagedScroll {
         notifyChangeEnd();
       } else {
         tweening = true;
-        ContextTool.JUGGLER.delayCall(() {
+        RdEnvironment.JUGGLER.delayCall(() {
           this.value = val;
           _onTweenComplete();
         }, pageScrollDuration);
@@ -114,7 +114,7 @@ class Scrollbar extends Slider with MPagedScroll {
         notifyChangeEnd();
       } else {
         tweening = true;
-        ContextTool.JUGGLER.delayCall(() {
+        RdEnvironment.JUGGLER.delayCall(() {
           this.value = val;
           _onTweenComplete();
         }, pageScrollDuration);
@@ -134,7 +134,7 @@ class Scrollbar extends Slider with MPagedScroll {
         notifyChangeEnd();
       } else {
         tweening = true;
-        ContextTool.JUGGLER.delayCall(() {
+        RdEnvironment.JUGGLER.delayCall(() {
           this.value = val;
           _onTweenComplete();
         }, pageScrollDuration);
@@ -168,7 +168,7 @@ class Scrollbar extends Slider with MPagedScroll {
   @override
   void _onBackgroundMouseDown(InputEvent event) {
     interactionStart(true, false);
-    if (ContextTool.TOUCH) {
+    if (RdEnvironment.TOUCH) {
       stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
     } else {
       stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp);
@@ -327,7 +327,7 @@ class Scrollbar extends Slider with MPagedScroll {
   }
 
   void _pageScroll() {
-    ContextTool.MATERIALIZE_REQUIRED = true;
+    RdEnvironment.MATERIALIZE_REQUIRED = true;
     if (snapToPages) {
       int thumbPos =
           ((currentPage * pageScrollDistance - valueMin) / (valueMax - valueMin) * (spanSize - _thumbSize)).round();
@@ -350,7 +350,7 @@ class Scrollbar extends Slider with MPagedScroll {
     Translation t = new Translation(value, val, pageScrollDuration, Transition.easeOutExponential)
       ..onUpdate = _onPageScrollUpdate
       ..onComplete = _onTweenComplete;
-    ContextTool.JUGGLER.add(t);
+    RdEnvironment.JUGGLER.add(t);
   }
 
   void _onPageScrollUpdate(num val) {

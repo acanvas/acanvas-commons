@@ -1,15 +1,15 @@
 part of stagexl_commons;
 
-class ContextTool {
+class RdEnvironment {
   /* internals */
   Stage _stage;
   bool _webgl = false;
   bool _materializeRequired = false;
-  static final ContextTool _singleton = new ContextTool._internal();
+  static final RdEnvironment _singleton = new RdEnvironment._internal();
 
-  ContextTool._internal() {}
+  RdEnvironment._internal() {}
 
-  factory ContextTool() {
+  factory RdEnvironment() {
     return _singleton;
   }
 

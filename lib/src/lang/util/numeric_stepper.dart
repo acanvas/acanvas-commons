@@ -1,20 +1,17 @@
 part of stagexl_commons;
 
-/**
- * @author Simon Schmid (contact(at)sschmid.com)
- */
 class NumericStepper {
-  num _min;
+  int _min;
 
-  num _max;
+  int _max;
 
-  num _step;
+  int _step;
 
   bool _loop;
 
-  num _curStep;
+  int _curStep;
 
-  NumericStepper(num min, num max, [num step = 1, bool loop = true]) {
+  NumericStepper(int min, int max, [int step = 1, bool loop = true]) {
     _min = min;
     _max = max;
     _step = step;
@@ -22,41 +19,41 @@ class NumericStepper {
     _curStep = min;
   }
 
-  num get value {
+  int get value {
     return _curStep;
   }
 
-  num get step {
+  int get step {
     return _step;
   }
 
-  void set step(num step) {
+  void set step(int step) {
     _step = step;
   }
 
-  num jumpTo(num i) {
+  int jumpTo(int i) {
     return _update(i, false);
   }
 
-  num jumpToFirst() {
+  int jumpToFirst() {
     _curStep = _min;
     return _curStep;
   }
 
-  num jumpToLast() {
+  int jumpToLast() {
     _curStep = _max;
     return _curStep;
   }
 
-  num forward() {
+  int forward() {
     return _update(_curStep + _step, _loop);
   }
 
-  num back() {
+  int back() {
     return _update(_curStep - _step, _loop);
   }
 
-  num _update(num i, bool loop) {
+  int _update(int i, bool loop) {
     if (i != _curStep) {
       if (i < _min) {
         if (loop) _curStep = _max;
@@ -71,19 +68,19 @@ class NumericStepper {
     return _curStep;
   }
 
-  num get minimum {
+  int get minimum {
     return _min;
   }
 
-  void set minimum(num min) {
+  void set minimum(int min) {
     _min = min;
   }
 
-  num get maximum {
+  int get maximum {
     return _max;
   }
 
-  void set maximum(num max) {
+  void set maximum(int max) {
     _max = max;
   }
 

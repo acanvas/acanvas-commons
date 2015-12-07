@@ -8,8 +8,8 @@ class PaperMenu extends ListSprite {
     snapToPages = false;
     doubleClickEnabled = false;
     doubleClickToZoom = false;
-    mouseWheelEnabled = ContextTool.MOBILE ? false : true;
-    touchable = ContextTool.MOBILE ? true : false;
+    mouseWheelEnabled = RdEnvironment.MOBILE ? false : true;
+    touchable = RdEnvironment.MOBILE ? true : false;
 
     PaperShadow _paperShadow =
         new PaperShadow(type: PaperShadow.RECTANGLE, bgColor: backgroundColor, shadowEnabled: shadow);

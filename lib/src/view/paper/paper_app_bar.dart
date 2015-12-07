@@ -76,7 +76,7 @@ class PaperAppBar extends BoxSprite {
       tabs.y = spanHeight - tabs.height;
     }
 
-    GraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color: bgColor);
+    RdGraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color: bgColor);
     super.refresh();
   }
 }

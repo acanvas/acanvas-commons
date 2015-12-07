@@ -29,19 +29,19 @@ class PaperKeyboard extends BoxSprite {
       dispatchEvent(e);
     });
 
-    ContextTool.STAGE.addChild(_softKeyboard);
-    ContextTool.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
+    RdEnvironment.STAGE.addChild(_softKeyboard);
+    RdEnvironment.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
     _resizeKeyboard();
   }
 
   void _resizeKeyboard([Event e = null]) {
-    _softKeyboard.span(ContextTool.STAGE.stageWidth, min(ContextTool.STAGE.stageHeight / 2, 400));
-    _softKeyboard.y = ContextTool.STAGE.stageHeight - _softKeyboard.spanHeight;
+    _softKeyboard.span(RdEnvironment.STAGE.stageWidth, min(RdEnvironment.STAGE.stageHeight / 2, 400));
+    _softKeyboard.y = RdEnvironment.STAGE.stageHeight - _softKeyboard.spanHeight;
   }
 
   @override
   void dispose() {
-    ContextTool.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
+    RdEnvironment.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
     _softKeyboard.removeEventListeners(KeyEvent.KEY_UP_VISIBLE);
     _softKeyboard.removeEventListeners(KeyEvent.KEY_UP);
     disposeChild(_softKeyboard);

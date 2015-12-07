@@ -163,7 +163,7 @@ class Gradients {
     // draw gradient:
     DrawingTool.rect(graphics, area);
     GraphicsGradient g =
-        GraphicsUtil.linearGraphicsGradient(gradient["color"], gradient["alpha"], gradient["ratio"], matrix);
+        RdGraphicsUtil.linearGraphicsGradient(gradient["color"], gradient["alpha"], gradient["ratio"], matrix);
     graphics.fillGradient(g);
   }
 
@@ -334,7 +334,7 @@ class Gradients {
     DrawingTool.draw(graphics, newArea);
 
     GraphicsGradient gr =
-        GraphicsUtil.linearGraphicsGradient(gradient["color"], gradient["alpha"], gradient["ratio"], matrix);
+        RdGraphicsUtil.linearGraphicsGradient(gradient["color"], gradient["alpha"], gradient["ratio"], matrix);
     graphics.fillGradient(gr);
   }
 
@@ -395,7 +395,7 @@ class Gradients {
     // draw left gradient:
     if (strength0 > 0) {
       DrawingTool.rect(graphics, area0);
-      GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(gradient0["color"],
+      GraphicsGradient g = RdGraphicsUtil.linearGraphicsGradient(gradient0["color"],
           ListTool.adjustValues(gradient0["alpha"], strength0, MathTool.MULTIPLICATION), gradient0["ratio"], matrix0);
       graphics.fillGradient(g);
     }
@@ -403,7 +403,7 @@ class Gradients {
     // draw right gradient:
     if (strength1 > 0) {
       DrawingTool.rect(graphics, area1);
-      GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(gradient1["color"],
+      GraphicsGradient g = RdGraphicsUtil.linearGraphicsGradient(gradient1["color"],
           ListTool.adjustValues(gradient1["alpha"], strength1, MathTool.MULTIPLICATION), gradient1["ratio"], matrix1);
       graphics.fillGradient(g);
     }
@@ -466,7 +466,7 @@ class Gradients {
 
     // draw gradient:
     DrawingTool.draw(graphics, newArea);
-    GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(gradient["color"],
+    GraphicsGradient g = RdGraphicsUtil.linearGraphicsGradient(gradient["color"],
         ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION), gradient["ratio"], matrix);
     graphics.fillGradient(g);
   }
@@ -513,7 +513,7 @@ class Gradients {
 
     // draw gradient:
     DrawingTool.draw(graphics, area);
-    GraphicsGradient g = GraphicsUtil.linearGraphicsGradient(gradient["color"],
+    GraphicsGradient g = RdGraphicsUtil.linearGraphicsGradient(gradient["color"],
         ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION), gradient["ratio"], matrix);
     graphics.fillGradient(g);
   }

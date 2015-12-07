@@ -15,10 +15,10 @@ class PaperProgress extends Slider {
     spanSize = size;
     momentumEnabled = false;
 
-    GraphicsUtil.rectangle(0, 0, size, 2, color: bgColor, sprite: this);
+    RdGraphicsUtil.rectangle(0, 0, size, 2, color: bgColor, sprite: this);
 
     _progress = new Sprite();
-    GraphicsUtil.rectangle(0, 0, 10, 2, color: barColor, sprite: _progress);
+    RdGraphicsUtil.rectangle(0, 0, 10, 2, color: barColor, sprite: _progress);
     _progress.alpha = 0;
     addChild(_progress);
   }

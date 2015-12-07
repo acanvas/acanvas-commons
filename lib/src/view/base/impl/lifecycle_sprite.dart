@@ -75,7 +75,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
     children.where((c) => c is MLifecycle && c.inheritDisappear).forEach((child) {
       child.disappear(duration: duration, autoDispose: autoDispose);
     });
-    ContextTool.JUGGLER.delayCall(() {
+    RdEnvironment.JUGGLER.delayCall(() {
       dispatchEvent(new LifecycleEvent(LifecycleEvent.DISAPPEAR_COMPLETE));
       if (autoDispose) {
         this.dispose();

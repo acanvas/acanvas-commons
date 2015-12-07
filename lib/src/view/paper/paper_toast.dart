@@ -30,20 +30,20 @@ class PaperToast extends BoxSprite {
     holder.addChild(this);
     span(300, 50);
 
-    ContextTool.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
-      ..animate.y.to(ContextTool.STAGE.stageHeight - this.height - 20);
+    RdEnvironment.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
+      ..animate.y.to(RdEnvironment.STAGE.stageHeight - this.height - 20);
 
     if (hideAfterSeconds > 0) {
       hide();
 
-      ContextTool.JUGGLER
+      RdEnvironment.JUGGLER
           .addTranslation(0, 100, hideAfterSeconds, Transition.linear, (num val) => _progress.value = val);
     }
   }
 
   void hide() {
-    ContextTool.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
-      ..animate.y.to(ContextTool.STAGE.stageHeight)
+    RdEnvironment.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
+      ..animate.y.to(RdEnvironment.STAGE.stageHeight)
       ..delay = hideAfterSeconds
       ..onComplete = () => this.dispose();
   }

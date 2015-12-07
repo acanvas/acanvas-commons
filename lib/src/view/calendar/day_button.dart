@@ -8,11 +8,11 @@ class DayButton extends Button {
   DayButton(String label, int w, int h) : super() {
     mouseChildren = false;
 
-    _bgOver = GraphicsUtil.rectangle(0, 0, w, h, color: 0xFFFFE93F);
+    _bgOver = RdGraphicsUtil.rectangle(0, 0, w, h, color: 0xFFFFE93F);
     _bgOver.alpha = 0;
     addChild(_bgOver);
 
-    Sprite bg = GraphicsUtil.rectangle(0, 0, w, h, color: 0xFF000000);
+    Sprite bg = RdGraphicsUtil.rectangle(0, 0, w, h, color: 0xFF000000);
     addChild(bg);
 
     TextFormat fm = new TextFormat("Arial", 18, 0xFFFFFFFF);
@@ -32,7 +32,7 @@ class DayButton extends Button {
   @override void rollOverAction([InputEvent event = null]) {
     if (stage != null) {
       //ContextTool.STAGE.removeTweens(_bgOver);
-      ContextTool.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(1);
+      RdEnvironment.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(1);
       _labelTF.textColor = 0xFF000000;
     } else if (_bgOver != null) {
       _bgOver.alpha = 1;
@@ -41,7 +41,7 @@ class DayButton extends Button {
 
   @override void rollOutAction([InputEvent event = null]) {
     if (stage != null) {
-      ContextTool.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(0);
+      RdEnvironment.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(0);
       _labelTF.textColor = 0xFFFFFFFF;
     } else if (_bgOver != null) {
       _bgOver.alpha = 0;
