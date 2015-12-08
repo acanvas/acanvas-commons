@@ -55,7 +55,7 @@ part 'src/mirror/retain.dart';
 //util
 part 'src/util/rd.dart';
 part 'src/util/rd_font_util.dart';
-part 'src/util/rd_graphics_util.dart';
+part 'src/util/rd_graphics.dart';
 
 //view base: box, behave, lifecycle
 part 'src/view/base/m_box.dart';

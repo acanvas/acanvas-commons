@@ -1,6 +1,6 @@
 part of stagexl_commons;
 
-class RdGraphicsUtil {
+class RdGraphics {
   static Sprite rectangle(num x, num y, num w, num h,
       {int color: 0xFF000000, Sprite sprite: null, bool round: false, bool clear: true}) {
     if (sprite == null) {

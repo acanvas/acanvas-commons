@@ -61,6 +61,6 @@ class MdWrap extends BoxSprite {
     flow.y = padding;
 
     super.refresh();
-    RdGraphicsUtil.rectangle(0, 0, spanWidth, MdDimensions.HEIGHT_APP_BAR, sprite: panelSprite, color: panelColor);
+    RdGraphics.rectangle(0, 0, spanWidth, MdDimensions.HEIGHT_APP_BAR, sprite: panelSprite, color: panelColor);
   }
 }

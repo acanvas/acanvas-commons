@@ -47,7 +47,7 @@ class MdTabs extends BoxSprite {
   }
 
   @override void refresh() {
-    RdGraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: _bg, color: bgColor);
+    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, sprite: _bg, color: bgColor);
 
     tabBox.x = 0;
 
@@ -62,7 +62,7 @@ class MdTabs extends BoxSprite {
         tabBox.refresh();
       }
 
-      RdGraphicsUtil.line((tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0,
+      RdGraphics.line((tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0,
           strength: 2, sprite: _slideBar, color: highlightColor);
 
       _slideBar.x = tabBox.getChildAt(_activeButtonIndex).x;

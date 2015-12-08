@@ -8,11 +8,11 @@ class DayButton extends Button {
   DayButton(String label, int w, int h) : super() {
     mouseChildren = false;
 
-    _bgOver = RdGraphicsUtil.rectangle(0, 0, w, h, color: 0xFFFFE93F);
+    _bgOver = RdGraphics.rectangle(0, 0, w, h, color: 0xFFFFE93F);
     _bgOver.alpha = 0;
     addChild(_bgOver);
 
-    Sprite bg = RdGraphicsUtil.rectangle(0, 0, w, h, color: 0xFF000000);
+    Sprite bg = RdGraphics.rectangle(0, 0, w, h, color: 0xFF000000);
     addChild(bg);
 
     TextFormat fm = new TextFormat("Arial", 18, 0xFFFFFFFF);

@@ -16,8 +16,8 @@ class Slider extends BehaveSprite with MSlider {
 
   Slider() : super() {
     mouseWheelEnabled = Rd.MOBILE ? false : true;
-    background = RdGraphicsUtil.rectangle(0, 0, 1, 1, color: 0x00000000);
-    thumb = RdGraphicsUtil.rectangle(0, 0, 1, 1, color: 0x00FFFFFF);
+    background = RdGraphics.rectangle(0, 0, 1, 1, color: 0x00000000);
+    thumb = RdGraphics.rectangle(0, 0, 1, 1, color: 0x00FFFFFF);
   }
 
   //-------- SCROLL THUMB

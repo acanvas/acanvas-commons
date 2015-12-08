@@ -76,7 +76,7 @@ class MdAppBar extends BoxSprite {
       tabs.y = spanHeight - tabs.height;
     }
 
-    RdGraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color: bgColor);
+    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color: bgColor);
     super.refresh();
   }
 }

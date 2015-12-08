@@ -60,7 +60,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
 
     updateScrollbars();
 
-    RdGraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, color: 0x00FF0000, sprite: view.parent);
+    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, color: 0x00FF0000, sprite: view.parent);
   }
 
   /// ---------- SCROLL BARS

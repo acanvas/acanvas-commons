@@ -324,7 +324,7 @@ class Key extends BoxSprite {
   void refresh() {
 //			if (_skin) {
 
-    RdGraphicsUtil.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.BLUE, sprite: _skin);
+    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.BLUE, sprite: _skin);
 //			} else {
 //				spanInternal(44, 52, false);
 //				_skin.width = 44;
@@ -556,7 +556,7 @@ class Key extends BoxSprite {
   /** @ */
   DisplayObject _buildGenericSkin() {
     // Temporarily draw into a Shape object
-    Sprite canvas = RdGraphicsUtil.rectangle(0, 0, 44, 52, color: MdColor.BLUE);
+    Sprite canvas = RdGraphics.rectangle(0, 0, 44, 52, color: MdColor.BLUE);
     return canvas;
   }
 

@@ -15,10 +15,10 @@ class MdProgress extends Slider {
     spanSize = size;
     momentumEnabled = false;
 
-    RdGraphicsUtil.rectangle(0, 0, size, 2, color: bgColor, sprite: this);
+    RdGraphics.rectangle(0, 0, size, 2, color: bgColor, sprite: this);
 
     _progress = new Sprite();
-    RdGraphicsUtil.rectangle(0, 0, 10, 2, color: barColor, sprite: _progress);
+    RdGraphics.rectangle(0, 0, 10, 2, color: barColor, sprite: _progress);
     _progress.alpha = 0;
     addChild(_progress);
   }

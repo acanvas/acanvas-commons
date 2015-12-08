@@ -41,24 +41,24 @@ class MdShadow extends BoxSprite implements IMdButtonComponent {
     switch (type) {
       case RECTANGLE:
         if (shadow) {
-          RdGraphicsUtil.rectangle(0, -1, spanWidth, spanHeight,
+          RdGraphics.rectangle(0, -1, spanWidth, spanHeight,
               round: true, color: 0x11000000, sprite: target != null ? target : this, clear: true);
-          RdGraphicsUtil.rectangle(-1, 0, spanWidth + 2, spanHeight + 1,
+          RdGraphics.rectangle(-1, 0, spanWidth + 2, spanHeight + 1,
               round: true, color: 0x22000000, sprite: target != null ? target : this, clear: false);
-          RdGraphicsUtil.rectangle(0, 0, spanWidth, spanHeight + 2,
+          RdGraphics.rectangle(0, 0, spanWidth, spanHeight + 2,
               round: true, color: 0x33000000, sprite: target != null ? target : this, clear: false);
         }
-        RdGraphicsUtil.rectangle(0, 0, spanWidth, spanHeight,
+        RdGraphics.rectangle(0, 0, spanWidth, spanHeight,
             round: true, color: bgColor, sprite: target != null ? target : this, clear: !shadow);
         break;
       case CIRCLE:
         if (shadow) {
           //GraphicsUtil.circle(spanWidth/2, spanWidth/2-1, spanWidth/2,   round : true, color: 0x11000000, sprite: target != null ? target : this, clear : true);
           //GraphicsUtil.circle(spanWidth/2-1, spanWidth/2, spanWidth/2+1, round : true, color: 0x22000000, sprite: target != null ? target : this, clear : false);
-          RdGraphicsUtil.circle(spanWidth / 2, spanWidth / 2 + 1, spanWidth / 2 + 1,
+          RdGraphics.circle(spanWidth / 2, spanWidth / 2 + 1, spanWidth / 2 + 1,
               round: true, color: 0x33000000, sprite: target != null ? target : this, clear: true);
         }
-        RdGraphicsUtil.circle(spanWidth / 2, spanWidth / 2, spanWidth / 2,
+        RdGraphics.circle(spanWidth / 2, spanWidth / 2, spanWidth / 2,
             round: true, color: bgColor, sprite: target != null ? target : this, clear: !shadow);
         break;
     }
