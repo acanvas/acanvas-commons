@@ -54,7 +54,7 @@ abstract class MLifecycle {
 
   void appear({double duration: APPEAR_DURATION_DEFAULT}) {
     //event appear
-    RdEnvironment.JUGGLER.delayCall(() {
+    Rd.JUGGLER.delayCall(() {
       dispatchEvent(new LifecycleEvent(LifecycleEvent.APPEAR_COMPLETE));
     }, duration);
   }

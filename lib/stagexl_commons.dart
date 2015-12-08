@@ -46,16 +46,16 @@ part 'src/lang/string_utils.dart';
 part 'src/lang/i_disposable.dart';
 part 'src/lang/i_cloneable.dart';
 part 'src/lang/i_ordered.dart';
+part 'src/lang/util/key_code.dart';
+part 'src/lang/util/numeric_stepper.dart';
 //logging
 part 'src/logging/logger.dart';
 //mirror
 part 'src/mirror/retain.dart';
 //util
-part 'src/util/rd_environment.dart';
+part 'src/util/rd.dart';
 part 'src/util/rd_font_util.dart';
 part 'src/util/rd_graphics_util.dart';
-part 'package:stagexl_commons/src/lang/util/key_code.dart';
-part 'package:stagexl_commons/src/lang/util/numeric_stepper.dart';
 
 //view base: box, behave, lifecycle
 part 'src/view/base/m_box.dart';

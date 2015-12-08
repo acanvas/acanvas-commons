@@ -19,7 +19,7 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
 
   MdRipple({this.color: 0xFF000000, this.type: RECTANGLE, this.velocity: 0.5}) : super() {
     inheritSpan = true;
-    if (RdEnvironment.TOUCH) {
+    if (Rd.TOUCH) {
       velocity = 1;
     }
   }
@@ -54,7 +54,7 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
       ..x = touchX
       ..y = touchY;
 
-    if (RdEnvironment.WEBGL) {
+    if (Rd.WEBGL) {
       //inner.applyCache(-waveRadius, -waveRadius, waveRadius*2, waveRadius*2);
     }
     inner.scaleX = 0.1;
@@ -64,7 +64,7 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
 
     Tween tw = new Tween(inner, velocity, Transition.easeOutElastic)..animate.scaleX.to(1.2)..animate.scaleY.to(1.2);
 
-    RdEnvironment.JUGGLER.add(tw);
+    Rd.JUGGLER.add(tw);
   }
 
   @override
@@ -72,8 +72,8 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
     for (int i = 0; i < numChildren; i++) {
       DisplayObject dobj = getChildAt(i);
 
-      RdEnvironment.JUGGLER.removeTweens(dobj);
-      RdEnvironment.JUGGLER.addTween(dobj, velocity)
+      Rd.JUGGLER.removeTweens(dobj);
+      Rd.JUGGLER.addTween(dobj, velocity)
         ..animate.alpha.to(0)
         ..animate.scaleX.to(1.0)
         ..animate.scaleY.to(1.0)

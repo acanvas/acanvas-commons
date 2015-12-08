@@ -9,13 +9,13 @@ Sprite _container;
 void main() {
   var opts = new StageOptions();
   opts.maxPixelRatio = 1.0;
-  opts.stageScaleMode = RdEnvironment.MOBILE ? StageScaleMode.NO_SCALE : StageScaleMode.NO_SCALE;
+  opts.stageScaleMode = Rd.MOBILE ? StageScaleMode.NO_SCALE : StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
   opts.stageRenderMode = StageRenderMode.AUTO;
   opts.backgroundColor = 0xFFf9f9f9;
-  opts.renderEngine = RdEnvironment.MOBILE ? RenderEngine.WebGL : RenderEngine.Canvas2D;
-  opts.antialias = RdEnvironment.MOBILE ? false : true;
-  opts.inputEventMode = RdEnvironment.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
+  opts.renderEngine = Rd.MOBILE ? RenderEngine.WebGL : RenderEngine.Canvas2D;
+  opts.antialias = Rd.MOBILE ? false : true;
+  opts.inputEventMode = Rd.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
   opts.preventDefaultOnTouch = true;
   opts.preventDefaultOnWheel = true;
   opts.preventDefaultOnKeyboard = false;
@@ -23,7 +23,7 @@ void main() {
   stage = new Stage(html.querySelector('#stage'), options: opts);
   new RenderLoop()..addStage(stage);
 
-  RdEnvironment.STAGE = stage;
+  Rd.STAGE = stage;
   RdFontUtil.addFont("Roboto:100,300");
   RdFontUtil.loadFonts(start);
 }

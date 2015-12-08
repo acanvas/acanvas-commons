@@ -5,7 +5,7 @@ part of stagexl_commons;
  */
 
 abstract class MBehave {
-  bool _touchable = RdEnvironment.MOBILE ? true : false;
+  bool _touchable = Rd.MOBILE ? true : false;
 
   void set touchable(bool touchable) {
     _touchable = touchable;

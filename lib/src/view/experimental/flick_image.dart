@@ -37,9 +37,9 @@ class ComponentFlickImage extends BoxSprite {
         data.x = (child.x - data.width).toInt();
         _holder.addChildAt(data, 0);
 
-        RdEnvironment.JUGGLER.addTween(data, 1)..animate.x.to(0);
+        Rd.JUGGLER.addTween(data, 1)..animate.x.to(0);
 
-        RdEnvironment.JUGGLER.addTween(child, 1)
+        Rd.JUGGLER.addTween(child, 1)
           ..animate.x.to(child.width.toInt())
           ..onComplete = () => Function.apply(_onTweenComplete, [child]);
 
@@ -60,9 +60,9 @@ class ComponentFlickImage extends BoxSprite {
         data.x = (child.x + child.width).toInt();
         _holder.addChildAt(data, 0);
 
-        RdEnvironment.JUGGLER.addTween(data, 1)..animate.x.to(0);
+        Rd.JUGGLER.addTween(data, 1)..animate.x.to(0);
 
-        RdEnvironment.JUGGLER.addTween(child, 1)
+        Rd.JUGGLER.addTween(child, 1)
           ..animate.x.to(-child.width.toInt())
           ..onComplete = () => Function.apply(_onTweenComplete, [child]);
 
@@ -128,7 +128,7 @@ class ComponentFlickImage extends BoxSprite {
 
   void _fadeChildren(Sprite data, int alph) {
     for (int i = 0; i < data.numChildren; i++) {
-      RdEnvironment.JUGGLER.addTween(data.getChildAt(i), .3)
+      Rd.JUGGLER.addTween(data.getChildAt(i), .3)
         ..animate.alpha.to(alph)
         ..delay = (i + alph) * .3;
     }

@@ -46,7 +46,7 @@ class MdToggleButton extends SelectableButton {
     _bg.graphics.strokeColor(MdColor.BLACK, 2);
     _bg.graphics.circle(30, 30, 30);
     _bg.graphics.fillColor(0x00555555);
-    if (RdEnvironment.WEBGL) {
+    if (Rd.WEBGL) {
       _bg.applyCache(0, 0, 60, 60);
     }
     _holder.addChild(_bg);
@@ -88,24 +88,24 @@ class MdToggleButton extends SelectableButton {
     _icon.scaleX = _icon.scaleY = .1;
     _icon.visible = true;
     _activeLine.visible = true;
-    RdEnvironment.JUGGLER.addTween(_icon, .1).animate..scaleX.to(1)..scaleY.to(1);
-    RdEnvironment.JUGGLER.addTween(_holder, .1).animate..x.to(labelOffset + 48);
-    RdEnvironment.JUGGLER.addTween(_ripple, .1).animate..x.to(labelOffset + 48);
+    Rd.JUGGLER.addTween(_icon, .1).animate..scaleX.to(1)..scaleY.to(1);
+    Rd.JUGGLER.addTween(_holder, .1).animate..x.to(labelOffset + 48);
+    Rd.JUGGLER.addTween(_ripple, .1).animate..x.to(labelOffset + 48);
     if (_paperLabel != null) {
       _paperLabel.color = activeColor;
     }
   }
 
   @override void deselectAction() {
-    RdEnvironment.JUGGLER.addTween(_holder, .1).animate..x.to(labelOffset);
-    RdEnvironment.JUGGLER.addTween(_ripple, .1).animate..x.to(labelOffset);
+    Rd.JUGGLER.addTween(_holder, .1).animate..x.to(labelOffset);
+    Rd.JUGGLER.addTween(_ripple, .1).animate..x.to(labelOffset);
     Tween tw = new Tween(_icon, .2);
     tw.animate..scaleX.to(.1)..scaleY.to(.1);
     tw.onComplete = () {
       _icon.visible = false;
       _activeLine.visible = false;
     };
-    RdEnvironment.JUGGLER.add(tw);
+    Rd.JUGGLER.add(tw);
     if (_paperLabel != null) {
       _paperLabel.color = MdColor.BLACK;
     }
@@ -117,7 +117,7 @@ class MdToggleButton extends SelectableButton {
     line.graphics.lineTo(32, 0);
     line.graphics.closePath();
     line.graphics.strokeColor(color, strength);
-    if (RdEnvironment.WEBGL) {
+    if (Rd.WEBGL) {
       line.applyCache(0, 0, 32, strength);
     }
   }

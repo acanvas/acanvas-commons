@@ -64,7 +64,7 @@ class ComponentDropdown extends BehaveSprite {
 
       _sprRollout.visible = true;
       _strRolloutState = ROLLOUT_OPEN;
-      RdEnvironment.JUGGLER.addTween(_sprRollout, 0.5)..animate.y.to(spanHeight);
+      Rd.JUGGLER.addTween(_sprRollout, 0.5)..animate.y.to(spanHeight);
       if (_onToggleCallback != null) {
         _onToggleCallback.call(_strRolloutState);
       }
@@ -78,7 +78,7 @@ class ComponentDropdown extends BehaveSprite {
         btnRolloutToggle.y = -1;
       }
       _strRolloutState = ROLLOUT_CLOSE;
-      RdEnvironment.JUGGLER.addTween(_sprRollout, 0)
+      Rd.JUGGLER.addTween(_sprRollout, 0)
         ..animate.y.to(-_sprRollout.height)
         ..onComplete = _onCloseRolloutComplete;
     }

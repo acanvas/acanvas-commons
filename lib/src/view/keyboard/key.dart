@@ -270,7 +270,7 @@ class Key extends BoxSprite {
     //if (variants != null) addChild(_variantsContainer);
 
     // Now that everything is ready, listen to touch events
-    if (RdEnvironment.TOUCH) {
+    if (Rd.TOUCH) {
       addEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       addEventListener(TouchEvent.TOUCH_END, _onTouch);
       addEventListener(TouchEvent.TOUCH_MOVE, _onTouch);
@@ -306,7 +306,7 @@ class Key extends BoxSprite {
 				 */
     }
 
-    if (RdEnvironment.TOUCH) {
+    if (Rd.TOUCH) {
       removeEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       removeEventListener(TouchEvent.TOUCH_END, _onTouch);
       removeEventListener(TouchEvent.TOUCH_MOVE, _onTouch);

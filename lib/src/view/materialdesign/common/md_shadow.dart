@@ -4,7 +4,7 @@ class MdShadow extends BoxSprite implements IMdButtonComponent {
   static const int RECTANGLE = 1;
   static const int CIRCLE = 2;
 
-  static int QUALITY = RdEnvironment.MOBILE ? 1 : 3;
+  static int QUALITY = Rd.MOBILE ? 1 : 3;
 
   int _blurXY = 1;
   int _initialDistance = 1;
@@ -66,11 +66,11 @@ class MdShadow extends BoxSprite implements IMdButtonComponent {
 
   @override
   downAction([Event e = null]) {
-    if (!respondToClick || !shadowEnabled || !RdEnvironment.WEBGL) return;
+    if (!respondToClick || !shadowEnabled || !Rd.WEBGL) return;
     _prepareShadowAnimation();
 
-    if (_trans != null && RdEnvironment.JUGGLER.contains(_trans)) {
-      RdEnvironment.JUGGLER.remove(_trans);
+    if (_trans != null && Rd.JUGGLER.contains(_trans)) {
+      Rd.JUGGLER.remove(_trans);
     }
     _trans = new Translation(_initialDistance, _activeDistance, .15)
       ..onUpdate = (num val) {
@@ -79,14 +79,14 @@ class MdShadow extends BoxSprite implements IMdButtonComponent {
         _shadow.blurY = (val * 4).round();
       };
 
-    RdEnvironment.JUGGLER.add(_trans);
+    Rd.JUGGLER.add(_trans);
   }
 
   @override
   upAction([Event e = null]) {
-    if (!respondToClick || !shadowEnabled || !RdEnvironment.WEBGL) return;
-    if (_trans != null && RdEnvironment.JUGGLER.contains(_trans)) {
-      RdEnvironment.JUGGLER.remove(_trans);
+    if (!respondToClick || !shadowEnabled || !Rd.WEBGL) return;
+    if (_trans != null && Rd.JUGGLER.contains(_trans)) {
+      Rd.JUGGLER.remove(_trans);
     }
     _prepareShadowAnimation();
     _trans = new Translation(_activeDistance, _initialDistance, .15)
@@ -97,7 +97,7 @@ class MdShadow extends BoxSprite implements IMdButtonComponent {
       }
       ..onComplete = () => _killShadow();
 
-    RdEnvironment.JUGGLER.add(_trans);
+    Rd.JUGGLER.add(_trans);
   }
 
   void _prepareShadowAnimation() {

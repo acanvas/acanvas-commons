@@ -32,7 +32,7 @@ abstract class MSlider {
 
   _updateThumbPosition() {}
 
-  bool _bounce = RdEnvironment.MOBILE ? true : false;
+  bool _bounce = Rd.MOBILE ? true : false;
 
   void set bounce(bool bounce) => _bounce = bounce;
 
@@ -68,10 +68,10 @@ abstract class MSlider {
 
     value = value - event.deltaY * mouseWheelSensitivity;
     interactionEnd();
-    RdEnvironment.MATERIALIZE_REQUIRED = true;
+    Rd.MATERIALIZE_REQUIRED = true;
 
     if (_materializeControl != null) _materializeControl.cancel();
-    _materializeControl = new Timer(new Duration(milliseconds: 100), () => RdEnvironment.MATERIALIZE_REQUIRED = false);
+    _materializeControl = new Timer(new Duration(milliseconds: 100), () => Rd.MATERIALIZE_REQUIRED = false);
   }
 
   void interactionStart();

@@ -35,7 +35,7 @@ class MdCheckbox extends SelectableButton {
     _box = new Sprite();
     _box.graphics.rect(-BOXWIDTH / 2, -BOXWIDTH / 2, BOXWIDTH, BOXWIDTH);
     _box.graphics.strokeColor(boxColor, 2);
-    if (RdEnvironment.WEBGL) {
+    if (Rd.WEBGL) {
       _box.applyCache(-(BOXWIDTH / 2).round(), -(BOXWIDTH / 2).round(), BOXWIDTH, BOXWIDTH);
     }
     addChild(_box);
@@ -47,7 +47,7 @@ class MdCheckbox extends SelectableButton {
     _icon.graphics.lineTo(15, -15);
     _icon.graphics.strokeColor(activeColor, 3);
     _icon.graphics.closePath();
-    if (RdEnvironment.WEBGL) {
+    if (Rd.WEBGL) {
       _icon.applyCache(-8, -17, 26, 20);
     }
     addChild(_icon);
@@ -77,9 +77,9 @@ class MdCheckbox extends SelectableButton {
     _icon.scaleX = _icon.scaleY = .3;
     _icon.visible = true;
 
-    RdEnvironment.JUGGLER.addTween(_box, .15).animate..alpha.to(0)..rotation.to(.8)..scaleX.to(.3)..scaleY.to(.3);
+    Rd.JUGGLER.addTween(_box, .15).animate..alpha.to(0)..rotation.to(.8)..scaleX.to(.3)..scaleY.to(.3);
 
-    RdEnvironment.JUGGLER.addTween(_icon, .1)
+    Rd.JUGGLER.addTween(_icon, .1)
       ..animate.scaleX.to(1)
       ..animate.scaleY.to(1)
       ..delay = .1;
@@ -95,9 +95,9 @@ class MdCheckbox extends SelectableButton {
     tw.onComplete = () {
       _icon.visible = false;
     };
-    RdEnvironment.JUGGLER.add(tw);
+    Rd.JUGGLER.add(tw);
 
-    RdEnvironment.JUGGLER.addTween(_box, .1)
+    Rd.JUGGLER.addTween(_box, .1)
       ..animate.alpha.to(1)
       ..animate.rotation.to(0)
       ..animate.scaleX.to(1)

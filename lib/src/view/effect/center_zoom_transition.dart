@@ -13,7 +13,7 @@ class CenterZoomTransition extends BasicEffect {
     target.x = target.stage.stageWidth / 2;
     target.y = target.stage.stageHeight / 2;
 
-    RdEnvironment.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
+    Rd.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
       ..animate.scaleX.to(1)
       ..animate.scaleY.to(1)
       ..animate.alpha.to(1)
@@ -22,7 +22,7 @@ class CenterZoomTransition extends BasicEffect {
 
   @override
   void runOutEffect(BoxSprite target, num duration, Function callback) {
-    RdEnvironment.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
+    Rd.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
       ..animate.scaleX.to(.8)
       ..animate.scaleY.to(.8)
       ..animate.alpha.to(0)

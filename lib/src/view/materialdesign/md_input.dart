@@ -47,7 +47,7 @@ class MdInput extends BoxSprite {
     inheritSpan = true;
 
     //force onscreen keyboard on mobile devices
-    if (RdEnvironment.MOBILE) {
+    if (Rd.MOBILE) {
       keyboard = true;
     }
     else if(keyboard == true){
@@ -99,7 +99,7 @@ class MdInput extends BoxSprite {
     addChild(_activeLine);
     _activeLine.alpha = 0;
 
-    if (RdEnvironment.TOUCH) {
+    if (Rd.TOUCH) {
       addEventListener(TouchEvent.TOUCH_BEGIN, mouseDownAction);
     } else {
       addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
@@ -139,18 +139,18 @@ class MdInput extends BoxSprite {
 
   /* User clicks into TextField */
   void mouseDownAction([InputEvent event = null]) {
-    RdEnvironment.MATERIALIZE_REQUIRED = true;
+    Rd.MATERIALIZE_REQUIRED = true;
 
     /* Animate active line */
     if (_activeLine.alpha == 0) {
       _activeLine.scaleX = 0.01;
       _activeLine.alpha = 1;
       _activeLine.x = spanWidth / 2;
-      RdEnvironment.JUGGLER.addTween(_activeLine, .2).animate..x.to(0)..scaleX.to(1);
+      Rd.JUGGLER.addTween(_activeLine, .2).animate..x.to(0)..scaleX.to(1);
     }
 
     /* Animate cursor box */
-    if (RdEnvironment.STAGE.focus != _inputTextField) {
+    if (Rd.STAGE.focus != _inputTextField) {
       _cursorBox.scaleX = 1;
       _cursorBox.x = 80;
       _cursorBox.alpha = 1;
@@ -158,7 +158,7 @@ class MdInput extends BoxSprite {
       Tween tw = new Tween(_cursorBox, .1);
       tw.animate..x.to(0)..scaleX.to(0.2);
       tw.onComplete = () => _cursorBox.alpha = 0;
-      RdEnvironment.JUGGLER.add(tw);
+      Rd.JUGGLER.add(tw);
     }
 
     /* If the label is currently floating, color it blue or red again */
@@ -169,21 +169,21 @@ class MdInput extends BoxSprite {
     /* If this textfield is mandatory, make explanatory text red */
     if (required != "") {
       _requiredTextField.color = MdColor.RED;
-      RdEnvironment.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
+      Rd.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
     }
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
-    RdEnvironment.STAGE.focus = _inputTextField;
+    Rd.STAGE.focus = _inputTextField;
 
     if (keyboard && _softKeyboard == null && _nativeKeyboard == null) {
       _createKeyboard();
     }
 
     /* Add a listener to Stage to manage intention to Focus out */
-    if (RdEnvironment.TOUCH) {
-      RdEnvironment.STAGE.addEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
+    if (Rd.TOUCH) {
+      Rd.STAGE.addEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
     } else {
-      RdEnvironment.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+      Rd.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
   }
 
@@ -195,17 +195,17 @@ class MdInput extends BoxSprite {
       return;
     }
     if (event.target is! UITextFieldInput && event.target is! MdInput) {
-      RdEnvironment.STAGE.focus = null;
+      Rd.STAGE.focus = null;
     } else {
-      RdEnvironment.MATERIALIZE_REQUIRED = false;
+      Rd.MATERIALIZE_REQUIRED = false;
     }
-    if (RdEnvironment.TOUCH) {
-      RdEnvironment.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
+    if (Rd.TOUCH) {
+      Rd.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
     } else {
-      RdEnvironment.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+      Rd.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
     /* Make active blue line invisible */
-    RdEnvironment.JUGGLER.addTween(_activeLine, .1).animate..alpha.to(0);
+    Rd.JUGGLER.addTween(_activeLine, .1).animate..alpha.to(0);
 
     /* Make floating label grey again */
     if (_currentlyFloating) {
@@ -215,7 +215,7 @@ class MdInput extends BoxSprite {
     /* Make explanatory text grey again */
     if (required != "") {
       _requiredTextField.color = MdColor.GREY_DARK;
-      RdEnvironment.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(0);
+      Rd.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(0);
     }
 
     if (keyboard) {
@@ -251,7 +251,7 @@ class MdInput extends BoxSprite {
             ..onComplete = () {
               _defaultTextField.color = _highlightColor;
             };
-          RdEnvironment.JUGGLER.add(tr);
+          Rd.JUGGLER.add(tr);
         }
       } else {
         _defaultTextField.alpha = 0;
@@ -277,7 +277,7 @@ class MdInput extends BoxSprite {
             ..onComplete = () {
               _defaultTextField.color = MdColor.GREY_DARK;
             };
-          RdEnvironment.JUGGLER.add(tr);
+          Rd.JUGGLER.add(tr);
         }
       } else {
         _defaultTextField.alpha = 1;
@@ -294,7 +294,7 @@ class MdInput extends BoxSprite {
     line.graphics.lineTo(spanWidth, 0);
     line.graphics.strokeColor(color, strength);
     line.graphics.closePath();
-    if (RdEnvironment.WEBGL) {
+    if (Rd.WEBGL) {
       line.applyCache(0, 0, spanWidth.ceil(), strength.ceil());
     }
   }

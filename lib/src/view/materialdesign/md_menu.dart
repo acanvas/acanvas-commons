@@ -8,8 +8,8 @@ class MdMenu extends ListSprite {
     snapToPages = false;
     doubleClickEnabled = false;
     doubleClickToZoom = false;
-    mouseWheelEnabled = RdEnvironment.MOBILE ? false : true;
-    touchable = RdEnvironment.MOBILE ? true : false;
+    mouseWheelEnabled = Rd.MOBILE ? false : true;
+    touchable = Rd.MOBILE ? true : false;
 
     MdShadow _paperShadow =
         new MdShadow(type: MdShadow.RECTANGLE, bgColor: backgroundColor, shadowEnabled: shadow);

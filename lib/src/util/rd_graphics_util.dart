@@ -21,7 +21,7 @@ class RdGraphicsUtil {
     sprite.graphics.fillColor(color);
     sprite.graphics.closePath();
 
-    if (RdEnvironment.WEBGL && w.round() > 0 && h.round() > 0) {
+    if (Rd.WEBGL && w.round() > 0 && h.round() > 0) {
       //sprite.applyCache(x.round(), y.round(), w.round(), h.round());
     }
 
@@ -48,7 +48,7 @@ class RdGraphicsUtil {
     sprite.graphics.rectRound(x, y, w, h, ew, eh);
     sprite.graphics.fillColor(color);
 
-    if (RdEnvironment.WEBGL && w.round() > 0 && h.round() > 0) {
+    if (Rd.WEBGL && w.round() > 0 && h.round() > 0) {
       sprite.applyCache(x.round(), y.round(), w.round(), h.round());
     }
 
@@ -74,7 +74,7 @@ class RdGraphicsUtil {
     sprite.graphics.fillColor(color);
     sprite.graphics.closePath();
 
-    if (RdEnvironment.WEBGL && (x + r).round() > 0) {
+    if (Rd.WEBGL && (x + r).round() > 0) {
       //sprite.applyCache((x - r).round(), (y - r).round(), (2*r).round(), (2*r).round());
     }
 
@@ -99,7 +99,7 @@ class RdGraphicsUtil {
     sprite.graphics.strokeColor(color, strength);
     sprite.graphics.closePath();
 
-    if (RdEnvironment.WEBGL) {
+    if (Rd.WEBGL) {
       sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() : y.ceil());
     }
 

@@ -1,15 +1,15 @@
 part of stagexl_commons;
 
-class RdEnvironment {
+class Rd {
   /* internals */
   Stage _stage;
   bool _webgl = false;
   bool _materializeRequired = false;
-  static final RdEnvironment _singleton = new RdEnvironment._internal();
+  static final Rd _singleton = new Rd._internal();
 
-  RdEnvironment._internal() {}
+  Rd._internal() {}
 
-  factory RdEnvironment() {
+  factory Rd() {
     return _singleton;
   }
 

@@ -14,7 +14,7 @@ void main() {
   opts.stageAlign = StageAlign.TOP_LEFT;
 
   stage = new Stage(html.querySelector('#stage'), options: opts);
-  RdEnvironment.STAGE = stage;
+  Rd.STAGE = stage;
   new RenderLoop()..addStage(stage);
 
   RdFontUtil.addFont("Roboto");

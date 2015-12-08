@@ -15,7 +15,7 @@ class Slider extends BehaveSprite with MSlider {
   num _thumbSize = 0;
 
   Slider() : super() {
-    mouseWheelEnabled = RdEnvironment.MOBILE ? false : true;
+    mouseWheelEnabled = Rd.MOBILE ? false : true;
     background = RdGraphicsUtil.rectangle(0, 0, 1, 1, color: 0x00000000);
     thumb = RdGraphicsUtil.rectangle(0, 0, 1, 1, color: 0x00FFFFFF);
   }
@@ -70,9 +70,9 @@ class Slider extends BehaveSprite with MSlider {
     Assert.notNull(background, "You need to set a background Sprite.");
     Assert.notNull(thumb, "You need to set a thumb Sprite.");
     super.enable();
-    RdEnvironment.JUGGLER.removeTweens(this);
+    Rd.JUGGLER.removeTweens(this);
 
-    if (RdEnvironment.TOUCH) {
+    if (Rd.TOUCH) {
       background.addEventListener(TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown, useCapture: false, priority: 0);
       thumb.addEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown, useCapture: false, priority: 0);
     } else {
@@ -85,9 +85,9 @@ class Slider extends BehaveSprite with MSlider {
   void disable() {
     if (!_enabled) return;
 
-    RdEnvironment.JUGGLER.removeTweens(this);
+    Rd.JUGGLER.removeTweens(this);
 
-    if (RdEnvironment.TOUCH) {
+    if (Rd.TOUCH) {
       background.removeEventListener(TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown);
       thumb.removeEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown);
     } else {
@@ -119,13 +119,13 @@ class Slider extends BehaveSprite with MSlider {
 
   void interactionStart([bool preventMomentum = false, bool addMouseListeners = true]) {
     if (!interaction) {
-      RdEnvironment.MATERIALIZE_REQUIRED = true;
+      Rd.MATERIALIZE_REQUIRED = true;
       interaction = true;
 
       clearMomentum();
 
       if (addMouseListeners == true) {
-        if (RdEnvironment.TOUCH) {
+        if (Rd.TOUCH) {
           stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
           stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
         } else {
@@ -147,9 +147,9 @@ class Slider extends BehaveSprite with MSlider {
 
   void interactionEnd() {
     if (interaction) {
-      RdEnvironment.MATERIALIZE_REQUIRED = false;
+      Rd.MATERIALIZE_REQUIRED = false;
       interaction = false;
-      if (RdEnvironment.TOUCH) {
+      if (Rd.TOUCH) {
         stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove);
         stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp);
       } else {
@@ -198,7 +198,7 @@ class Slider extends BehaveSprite with MSlider {
 
   void notifyChangeStart() {
     if (!_changing) {
-      RdEnvironment.MATERIALIZE_REQUIRED = true;
+      Rd.MATERIALIZE_REQUIRED = true;
       _changing = true;
       dispatchEvent(new SliderEvent(SliderEvent.CHANGE_START, value));
     }
@@ -206,7 +206,7 @@ class Slider extends BehaveSprite with MSlider {
 
   void notifyChangeEnd() {
     if (_changing) {
-      RdEnvironment.MATERIALIZE_REQUIRED = false;
+      Rd.MATERIALIZE_REQUIRED = false;
       _changing = false;
       dispatchEvent(new SliderEvent(SliderEvent.CHANGE_END, value));
     }

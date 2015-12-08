@@ -30,20 +30,20 @@ class MdToast extends BoxSprite {
     holder.addChild(this);
     span(300, 50);
 
-    RdEnvironment.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
-      ..animate.y.to(RdEnvironment.STAGE.stageHeight - this.height - 20);
+    Rd.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
+      ..animate.y.to(Rd.STAGE.stageHeight - this.height - 20);
 
     if (hideAfterSeconds > 0) {
       hide();
 
-      RdEnvironment.JUGGLER
+      Rd.JUGGLER
           .addTranslation(0, 100, hideAfterSeconds, Transition.linear, (num val) => _progress.value = val);
     }
   }
 
   void hide() {
-    RdEnvironment.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
-      ..animate.y.to(RdEnvironment.STAGE.stageHeight)
+    Rd.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
+      ..animate.y.to(Rd.STAGE.stageHeight)
       ..delay = hideAfterSeconds
       ..onComplete = () => this.dispose();
   }

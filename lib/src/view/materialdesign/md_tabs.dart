@@ -42,7 +42,7 @@ class MdTabs extends BoxSprite {
 
   void _onTabClick(Button btn, int index) {
     _activeButtonIndex = index;
-    RdEnvironment.JUGGLER.addTween(_slideBar, .3, Transition.easeOutCubic).animate..x.to(btn.x);
+    Rd.JUGGLER.addTween(_slideBar, .3, Transition.easeOutCubic).animate..x.to(btn.x);
     _slideBar.width = btn.spanWidth;
   }
 

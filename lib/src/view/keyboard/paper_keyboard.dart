@@ -29,19 +29,19 @@ class MdKeyboard extends BoxSprite {
       dispatchEvent(e);
     });
 
-    RdEnvironment.STAGE.addChild(_softKeyboard);
-    RdEnvironment.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
+    Rd.STAGE.addChild(_softKeyboard);
+    Rd.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
     _resizeKeyboard();
   }
 
   void _resizeKeyboard([Event e = null]) {
-    _softKeyboard.span(RdEnvironment.STAGE.stageWidth, min(RdEnvironment.STAGE.stageHeight / 2, 400));
-    _softKeyboard.y = RdEnvironment.STAGE.stageHeight - _softKeyboard.spanHeight;
+    _softKeyboard.span(Rd.STAGE.stageWidth, min(Rd.STAGE.stageHeight / 2, 400));
+    _softKeyboard.y = Rd.STAGE.stageHeight - _softKeyboard.spanHeight;
   }
 
   @override
   void dispose() {
-    RdEnvironment.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
+    Rd.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
     _softKeyboard.removeEventListeners(KeyEvent.KEY_UP_VISIBLE);
     _softKeyboard.removeEventListeners(KeyEvent.KEY_UP);
     disposeChild(_softKeyboard);

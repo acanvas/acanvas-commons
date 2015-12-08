@@ -356,7 +356,7 @@ class ListSprite extends ScrollifySprite with MList {
         cell.enabled = false;
       }
 
-      if (RdEnvironment.TOUCH) {
+      if (Rd.TOUCH) {
         cell.addEventListener(TouchEvent.TOUCH_BEGIN, _onCellMouseDown, useCapture: false, priority: 0);
         cell.addEventListener(TouchEvent.TOUCH_END, _onCellMouseUp, useCapture: false, priority: 0);
       } else {
@@ -454,7 +454,7 @@ class ListSprite extends ScrollifySprite with MList {
       _mouseOffsetY = event.stageY;
     }
 
-    if (RdEnvironment.TOUCH) {
+    if (Rd.TOUCH) {
       stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false, priority: 0);
       stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
     } else {

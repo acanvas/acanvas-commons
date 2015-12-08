@@ -14,8 +14,8 @@ void main() {
   opts.stageAlign = StageAlign.TOP_LEFT;
 
   stage = new Stage(html.querySelector('#stage'), options: opts);
-  RdEnvironment.STAGE = stage;
-  RdEnvironment.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
+  Rd.STAGE = stage;
+  Rd.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
   new RenderLoop()..addStage(stage);
 
   RdFontUtil.addFont("Roboto");

@@ -7,7 +7,7 @@ class SvgDisplayObject extends DisplayObject {
   String svg;
 
   SvgDisplayObject(this.svg) {
-    if (RdEnvironment.FIREFOX) {
+    if (Rd.FIREFOX) {
       //_firefox(html.window.btoa(svg));
       _allOthers("data:image/svg+xml;base64,${html.window.btoa(svg)}");
     } else {
