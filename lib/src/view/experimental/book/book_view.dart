@@ -1326,7 +1326,7 @@ class BookView extends PageManager {
   void setLastFlippedTime() {
     if (this.flipOnClick && !this.autoFlipActive) {
       this.lastFlippedTime = /*getTimer()*/
-          (Rd.STAGE.elapsedTime * 1000).round();
+          (Rd.JUGGLER.elapsedTime * 1000).round();
     }
   }
 
@@ -1389,7 +1389,7 @@ class BookView extends PageManager {
   bool get flipOnRelease {
     if (this.flipOnClick && !this.autoFlipActive) {
       return (/*getTimer()*/
-          (Rd.STAGE.elapsedTime * 1000) - this.lastFlippedTime <= BookView.CLICK_INTERVAL);
+          (Rd.JUGGLER.elapsedTime * 1000) - this.lastFlippedTime <= BookView.CLICK_INTERVAL);
     } else {
       return false;
     }

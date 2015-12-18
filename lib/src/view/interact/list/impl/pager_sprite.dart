@@ -20,7 +20,7 @@ class PagerSprite extends BehaveSprite with MList, MPager {
     _updateControls();
   }
 
-  void setProxyVO(IXLVO vo) {
+  void setProxyVO(IRdVO vo) {
     _proxy.dataRetrieveCommandVO = vo;
     resetAndLoad();
   }

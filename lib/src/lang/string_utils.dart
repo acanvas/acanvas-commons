@@ -233,7 +233,7 @@ class StringUtils {
     if (isEmpty(str)) {
       return str;
     }
-    return str.replace(pattern, '');
+    return str.replaceAll(pattern, '');
   }
 
   /**
@@ -310,8 +310,8 @@ class StringUtils {
     if (pads <= 0) {
       return str;
     }
-    str = leftPad(str, strLen + pads / 2, padStr);
-    str = rightPad(str, size, padStr);
+    str = leftPad(str, (strLen + pads / 2).round(), padStr);
+    str = rightPadChar(str, size, padStr);
 
     return str;
   }
@@ -344,131 +344,8 @@ class StringUtils {
       return null;
     }
 
-    if (isEmpty(padStr)) {
-      padStr = " ";
-    }
-    int padLen = padStr.length;
-    int strLen = str.length;
-    int pads = size - strLen;
+    return str.padLeft(size, padStr);
 
-    if (pads <= 0) {
-      return str;
-      // returns original String when possible
-    }
-
-    if (padLen == 1 && pads <= PAD_LIMIT) {
-      return leftPadChar(str, size, padStr.charAt(0));
-    }
-
-    if (pads == padLen) {
-      return padStr.concat(str);
-    } else if (pads < padLen) {
-      return padStr.substring(0, pads).concat(str);
-    } else {
-      List padding = [];
-      List padChars = padStr.split("");
-
-      for (int i = 0; i < pads; i++) {
-        padding[i] = padChars[i % padLen];
-      }
-      return padding.join("").concat(str);
-    }
-  }
-
-  /**
-   * <p>Left pad a String with a specified character.</p>
-   *
-   * <p>Pad to a size of <code>size</code>.</p>
-   *
-   * <pre>
-   * StringUtils.leftPadChar(null, *, *)     = null
-   * StringUtils.leftPadChar("", 3, 'z')     = "zzz"
-   * StringUtils.leftPadChar("bat", 3, 'z')  = "bat"
-   * StringUtils.leftPadChar("bat", 5, 'z')  = "zzbat"
-   * StringUtils.leftPadChar("bat", 1, 'z')  = "bat"
-   * StringUtils.leftPadChar("bat", -1, 'z') = "bat"
-   * </pre>
-   *
-   * @param str  the String to pad out, may be null
-   * @param size  the size to pad to
-   * @param padChar  the character to pad with
-   * @return left padded String or original String if no padding is necessary,
-   *  <code>null</code> if null String input
-   */
-  static String leftPadChar(String str, int size, String padChar) {
-    if (str == null) {
-      return null;
-    }
-    int pads = size - str.length;
-
-    if (pads <= 0) {
-      return str;
-      // returns original String when possible
-    }
-
-    if (pads > PAD_LIMIT) {
-      return leftPad(str, size, padChar);
-    }
-    return padding(pads, padChar).concat(str);
-  }
-
-  /**
-   * <p>Right pad a String with a specified String.</p>
-   *
-   * <p>The String is padded to the size of <code>size</code>.</p>
-   *
-   * <pre>
-   * StringUtils.rightPad(null, *, *)      = null
-   * StringUtils.rightPad("", 3, "z")      = "zzz"
-   * StringUtils.rightPad("bat", 3, "yz")  = "bat"
-   * StringUtils.rightPad("bat", 5, "yz")  = "batyz"
-   * StringUtils.rightPad("bat", 8, "yz")  = "batyzyzy"
-   * StringUtils.rightPad("bat", 1, "yz")  = "bat"
-   * StringUtils.rightPad("bat", -1, "yz") = "bat"
-   * StringUtils.rightPad("bat", 5, null)  = "bat  "
-   * StringUtils.rightPad("bat", 5, "")    = "bat  "
-   * </pre>
-   *
-   * @param str  the String to pad out, may be null
-   * @param size  the size to pad to
-   * @param padStr  the String to pad with, null or empty treated as single space
-   * @return right padded String or original String if no padding is necessary,
-   *  <code>null</code> if null String input
-   */
-  static String rightPad(String str, int size, String padStr) {
-    if (str == null) {
-      return null;
-    }
-
-    if (isEmpty(padStr)) {
-      padStr = " ";
-    }
-    int padLen = padStr.length;
-    int strLen = str.length;
-    int pads = size - strLen;
-
-    if (pads <= 0) {
-      return str;
-      // returns original String when possible
-    }
-
-    if (padLen == 1 && pads <= PAD_LIMIT) {
-      return rightPadChar(str, size, padStr.charAt(0));
-    }
-
-    if (pads == padLen) {
-      return str.concat(padStr);
-    } else if (pads < padLen) {
-      return str.concat(padStr.substring(0, pads));
-    } else {
-      List padding = [];
-      List padChars = padStr.split("");
-
-      for (int i = 0; i < pads; i++) {
-        padding[i] = padChars[i % padLen];
-      }
-      return str.concat(padding.join(""));
-    }
   }
 
   /**
@@ -485,7 +362,7 @@ class StringUtils {
    * StringUtils.rightPadChar("bat", -1, 'z') = "bat"
    * </pre>
    *
-   * @param str  the String to pad out, may be null
+   * @param str  the String to pad out, may be null, should have length of 1
    * @param size  the size to pad to
    * @param padChar  the character to pad with
    * @return right padded String or original String if no padding is necessary,
@@ -495,17 +372,8 @@ class StringUtils {
     if (str == null) {
       return null;
     }
-    int pads = size - str.length;
 
-    if (pads <= 0) {
-      return str;
-      // returns original String when possible
-    }
-
-    if (pads > PAD_LIMIT) {
-      return rightPad(str, size, padChar);
-    }
-    return str.concat(padding(pads, padChar));
+    return str.padRight(size, padChar);
   }
 
   /**
@@ -537,14 +405,14 @@ class StringUtils {
    * <p>A <code>null</code> reference passed to this method is a no-op.</p>
    *
    * <pre>
-   * StringUtils.replace(null, *, *)        = null
-   * StringUtils.replace("", *, *)          = ""
-   * StringUtils.replace("any", null, *)    = "any"
-   * StringUtils.replace("any", *, null)    = "any"
-   * StringUtils.replace("any", "", *)      = "any"
-   * StringUtils.replace("aba", "a", null)  = "aba"
-   * StringUtils.replace("aba", "a", "")    = "b"
-   * StringUtils.replace("aba", "a", "z")   = "zbz"
+   * StringUtils.replaceAll(null, *, *)        = null
+   * StringUtils.replaceAll("", *, *)          = ""
+   * StringUtils.replaceAll("any", null, *)    = "any"
+   * StringUtils.replaceAll("any", *, null)    = "any"
+   * StringUtils.replaceAll("any", "", *)      = "any"
+   * StringUtils.replaceAll("aba", "a", null)  = "aba"
+   * StringUtils.replaceAll("aba", "a", "")    = "b"
+   * StringUtils.replaceAll("aba", "a", "z")   = "zbz"
    * </pre>
    *
    * @param text  text to search and replace in, may be null
@@ -557,7 +425,7 @@ class StringUtils {
     if (text == null || isEmpty(pattern) || repl == null) {
       return text;
     }
-    return text.replace(new RegExp(pattern, 'g'), repl);
+    return text.replaceAll(new RegExp(pattern), repl);
   }
 
   /**
@@ -635,7 +503,7 @@ class StringUtils {
     if (text == null || isEmpty(pattern) || repl == null) {
       return text;
     }
-    return text.replace(new RegExp(pattern, ''), repl);
+    return text.replaceFirst(new RegExp(pattern), repl);
   }
 
   /**
@@ -809,7 +677,7 @@ class StringUtils {
     if (isEmpty(str)) {
       return str;
     }
-    return str.charAt(0).toUpperCase() + str.substring(1);
+    return str.codeUnitAt(0).toString().toUpperCase() + str.substring(1);
   }
 
   /**
@@ -831,7 +699,7 @@ class StringUtils {
     if (isEmpty(str)) {
       return str;
     }
-    return str.charAt(0).toLowerCase() + str.substring(1);
+    return str.codeUnitAt(0).toString().toLowerCase() + str.substring(1);
   }
 
   /**
@@ -1432,7 +1300,7 @@ class StringUtils {
     if (isEmpty(str) || isEmpty(searchChars)) {
       return INDEX_NOT_FOUND;
     }
-    return str.search(new RegExp(r'[' + searchChars + ']'));
+    return str.indexOf(new RegExp(r'[' + searchChars + ']'));
   }
 
   /**
@@ -1459,7 +1327,7 @@ class StringUtils {
     if (isEmpty(str) || isEmpty(searchChars)) {
       return INDEX_NOT_FOUND;
     }
-    return str.search(new RegExp('[^' + searchChars + ']', ''));
+    return str.indexOf(new RegExp('[^' + searchChars + ']'));
   }
 
   /**
@@ -1535,7 +1403,7 @@ class StringUtils {
     int i;
 
     for (i = 0; i < str1.length && i < str2.length; ++i) {
-      if (str1.charAt(i) != str2.charAt(i)) {
+      if (str1.codeUnitAt(i) != str2.codeUnitAt(i)) {
         break;
       }
     }
@@ -1769,7 +1637,7 @@ class StringUtils {
   }
 
   static bool testString(String str, RegExp pattern) {
-    return str != null && pattern.test(str);
+    return str != null && pattern.hasMatch(str);
   }
 
   /**
@@ -1831,7 +1699,7 @@ class StringUtils {
       start = end;
       end = temp;
     }
-    return str.substring(0, start).concat(overlay).concat(str.substring(end));
+    return str.substring(0, start) + (overlay) + (str.substring(end));
   }
 
   /**
@@ -1857,7 +1725,7 @@ class StringUtils {
    *  <code>null</code> if null String input
    */
   static String remove(String str, String remove) {
-    return safeRemove(str, new RegExp(remove, 'g'));
+    return safeRemove(str, new RegExp(remove));
   }
 
   /**
@@ -1917,7 +1785,7 @@ class StringUtils {
     if (isEmpty(str)) {
       return str;
     }
-    return str.replace(pattern, '');
+    return str.replaceAll(pattern, '');
   }
 
   /**
@@ -1938,7 +1806,7 @@ class StringUtils {
    */
   static bool endsWith(String str, String end) {
     if ((str != null) && (end != null) && (str.length >= end.length)) {
-      return (str.substr((str.length - end.length), str.length) == end);
+      return (str.substring((str.length - end.length), str.length) == end);
     } else {
       return false;
     }
@@ -1962,7 +1830,7 @@ class StringUtils {
    */
   static bool endsWithIgnoreCase(String str, String end) {
     if ((str != null) && (end != null) && (str.length >= end.length)) {
-      return (str.toUpperCase().substr((str.length - end.length), str.length) == end.toUpperCase());
+      return (str.toUpperCase().substring((str.length - end.length), str.length) == end.toUpperCase());
     } else {
       return false;
     }
@@ -1986,7 +1854,7 @@ class StringUtils {
    */
   static bool startsWith(String str, String start) {
     if ((str != null) && (start != null) && (str.length >= start.length)) {
-      return (str.substr(0, start.length) == start);
+      return (str.substring(0, start.length) == start);
     } else {
       return false;
     }
@@ -2010,7 +1878,7 @@ class StringUtils {
    */
   static bool startsWithIgnoreCase(String str, String start) {
     if ((str != null) && (start != null) && (str.length >= start.length)) {
-      return (str.toUpperCase().substr(0, start.length) == start.toUpperCase());
+      return (str.toUpperCase().substring(0, start.length) == start.toUpperCase());
     } else {
       return false;
     }
@@ -2065,7 +1933,7 @@ class StringUtils {
    * other string. In this case, <code>compareTo</code> returns the
    * difference of the two character values at position <code>k</code> in
    * the two string -- that is, the value: dynamic <blockquote><pre>
-   * this.charAt(k)-anotherString.charAt(k)
+   * this.codeUnitAt(k)-anotherString.codeUnitAt(k)
    * </pre></blockquote>
    * If there is no index position at which they differ, then the shorter
    * string lexicographically precedes the longer string. In this case,
@@ -2089,7 +1957,7 @@ class StringUtils {
     if (str2 == null) {
       str2 = "";
     }
-    return str1.localeCompare(str2);
+    return str1.compareTo(str2);
   }
 
   /**
@@ -2108,10 +1976,10 @@ class StringUtils {
    * Replaces a part of the text between 2 positions.
    */
   static String replaceAt(String string, dynamic value, int beginIndex, int endIndex) {
-    beginIndex = Math.maxValue(beginIndex, 0);
-    endIndex = Math.min(endIndex, string.length);
-    String firstPart = string.substr(0, beginIndex);
-    String secondPart = string.substr(endIndex, string.length);
+    beginIndex = max(beginIndex, 0);
+    endIndex = min(endIndex, string.length);
+    String firstPart = string.substring(0, beginIndex);
+    String secondPart = string.substring(endIndex, string.length);
     return (firstPart + value + secondPart);
   }
 
@@ -2285,14 +2153,14 @@ class StringUtils {
    * Returns if the given character is a white space or not.
    */
   static bool characterIsWhitespace(String a) {
-    return (a.charCodeAt(0) <= 32);
+    return (a.codeUnitAt(0) <= 32);
   }
 
   /**
    * Returns if the given character is a digit or not.
    */
   static bool characterIsDigit(String a) {
-    num charCode = a.charCodeAt(0);
+    int charCode = a.codeUnitAt(0);
     return (charCode >= 48 && charCode <= 57);
   }
 
@@ -2422,11 +2290,11 @@ class StringUtils {
         return -1;
       } else if (!StringUtils.characterIsDigit(cb)) {
         return 1;
-      } else if (ca < cb) {
+      } else if (ca.length < cb.length) {
         if (bias == 0) {
           bias = -1;
         }
-      } else if (ca > cb) {
+      } else if (ca.length > cb.length) {
         if (bias == 0) bias = 1;
       } else if (ca.length == 0 && cb.length == 0) {
         return bias;
@@ -2538,7 +2406,7 @@ class StringUtils {
     if (string == null) {
       return string;
     }
-    if (!keyMap) {
+    if (keyMap == null) {
       keyMap = DEFAULT_ESCAPE_MAP;
     }
     num i = 0;
@@ -2553,7 +2421,7 @@ class StringUtils {
       while (i < l) {
         if (string.substring(i, i + 2) == "\\u") {
           string = string.substring(0, i) +
-              String.fromCharCode(parseInt(string.substring(i + 2, i + 6), 16)) +
+              new String.fromCharCode(int.parse(string.substring(i + 2, i + 6), radix: 16)) +
               string.substring(i + 6);
         }
         i++;
@@ -2569,7 +2437,7 @@ class StringUtils {
    */
   static bool isValidFileName(String fileName) {
     if (!isEmpty(fileName)) {
-      return FILENAME_CHARS_NOT_ALLOWED.exec(fileName) == null;
+      return FILENAME_CHARS_NOT_ALLOWED.hasMatch(fileName);
     }
     return false;
   }
@@ -2587,7 +2455,7 @@ class StringUtils {
    * @author Martin Heidegger
    * @author Simon Wacker
    */
-  static Object parseProperties(String str, [Object properties = null]) {
+  static Object parseProperties(String str, [Map properties = null]) {
     properties = properties || {};
     num i;
     List lines = str.split(WIN_BREAK).join("\n").split(MAC_BREAK).join("\n").split("\n");
@@ -2615,7 +2483,7 @@ class StringUtils {
           num j;
           num l = line.length;
           for (j = 0; j < l; j++) {
-            String char = line.charAt(j);
+            String char = line.codeUnitAt(j);
             if (char == "'") {
               j++;
             } else {
@@ -2623,7 +2491,7 @@ class StringUtils {
             }
           }
           sep = ((j == l) ? line.length : j);
-          key = rightTrim(line.substr(0, sep));
+          key = rightTrim(line.substring(0, sep));
           value = line.substring(sep + 1);
           formerKey = key;
           formerValue = value;
@@ -2631,8 +2499,8 @@ class StringUtils {
         // Trim the content
         value = leftTrim(value);
         // Allow normal lines
-        if (value.charAt(value.length - 1) == "\\") {
-          formerValue = value = value.substr(0, value.length - 1);
+        if (value.codeUnitAt(value.length - 1) == "\\") {
+          formerValue = value = value.substring(0, value.length - 1);
           useNextLine = true;
         } else {
           // Commit Property

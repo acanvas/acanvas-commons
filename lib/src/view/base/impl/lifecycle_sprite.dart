@@ -27,7 +27,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
     this.params = params;
     if (spanHeight == 0 || spanWidth == 0) {
       logger.warn(
-          "You really should set XLSprite.spanWidth and XLSprite.spanHeight properties before invoking XLSprite.init().");
+          "You really should set LifecycleSprite.spanWidth and LifecycleSprite.spanHeight properties before invoking LifecycleSprite.init().");
     }
   }
 
@@ -45,7 +45,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
 
   void load({Map params: null}) {
     if (requiresLoading) {
-      throw new StateError("You cannot invoke XLSprite.load() directly. Override it.");
+      throw new StateError("You cannot invoke LifecycleSprite.load() directly. Override it.");
     } else {
       onLoadComplete();
     }

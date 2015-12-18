@@ -30,24 +30,24 @@ void start() {
   /*
    * Standard Input Field with Label
    */
-  PaperInput input1 = new PaperInput("Type something", keyboard: true);
+  MdInput input1 = new MdInput("Type something", keyboard: true);
   vbox.addChild(input1);
   /*
    * Standard Input Field with Floating Label
    */
-  PaperInput input2 = new PaperInput("Type something (floating)", floating : true);
+  MdInput input2 = new MdInput("Type something (floating)", floating : true);
   vbox.addChild(input2);
 
   /*
    * Mandatory Input Field
    */
-  PaperInput input3 = new PaperInput("Type something", required : "This input requires a value.");
+  MdInput input3 = new MdInput("Type something", required : "This input requires a value.");
   vbox.addChild(input3);
 
   /*
    * Mandatory Input Field with Floating Label
    */
-  PaperInput input4 = new PaperInput("Type something (floating)", required : "This input requires a value.", floating : true);
+  MdInput input4 = new MdInput("Type something (floating)", required : "This input requires a value.", floating : true);
   vbox.addChild(input4);
 
   stage.addChild(vbox);

@@ -19,7 +19,7 @@ abstract class MList {
 
   num _spacing = 0.0;
 
-  void set spacing(num spacing) => _spacing = spacing;
+  void set spacing(num spacing)  {  _spacing = spacing; }
 
   num get spacing => _spacing;
 
@@ -49,7 +49,7 @@ abstract class MList {
 
   bool _constantCellSize = true;
 
-  void set constantCellSize(bool constantCellSize) => _constantCellSize = constantCellSize;
+  void set constantCellSize(bool constantCellSize)  {  _constantCellSize = constantCellSize; }
 
   bool get constantCellSize => _constantCellSize;
 

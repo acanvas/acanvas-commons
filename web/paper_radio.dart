@@ -15,7 +15,6 @@ void main() {
 
   stage = new Stage(html.querySelector('#stage'), options: opts);
   Rd.STAGE = stage;
-  Rd.WEBGL = stage.renderEngine == RenderEngine.WebGL ? true : false;
   new RenderLoop()..addStage(stage);
 
   RdFontUtil.addFont("Roboto");
@@ -23,16 +22,16 @@ void main() {
 }
 void start() {
 
-  PaperTabs tab = new PaperTabs(highlightColor : PaperColor.BLUE, bgColor: PaperColor.BLACK);
-  tab.addTab(new PaperButton("ITEM ONE", preset: PaperButton.PRESET_WHITE, shadow: false));
-  tab.addTab(new PaperButton("ITEM TWO", preset: PaperButton.PRESET_WHITE, shadow: false));
-  tab.addTab(new PaperButton("ITEM THREE", preset: PaperButton.PRESET_WHITE, shadow: false));
+  MdTabs tab = new MdTabs(highlightColor : MdColor.BLUE, bgColor: MdColor.BLACK);
+  tab.addTab(new MdButton("ITEM ONE", preset: MdButton.PRESET_WHITE, shadow: false));
+  tab.addTab(new MdButton("ITEM TWO", preset: MdButton.PRESET_WHITE, shadow: false));
+  tab.addTab(new MdButton("ITEM THREE", preset: MdButton.PRESET_WHITE, shadow: false));
 
-  PaperAppBar bar = new PaperAppBar(highlightColor : PaperColor.WHITE, bgColor: PaperColor.BLUE);
-  bar.addToTL(new PaperIconButton(PaperIcon.white(PaperIconSet.menu), rippleColor: PaperColor.WHITE));
-  bar.addToTL(new PaperText("Title", size: 24, color: PaperColor.WHITE));
-  bar.addToTR(new PaperIconButton(PaperIcon.white(PaperIconSet.add_shopping_cart), rippleColor: PaperColor.WHITE));
-  bar.addPaperTabs(tab);
+  MdAppBar bar = new MdAppBar(highlightColor : MdColor.WHITE, bgColor: MdColor.BLUE);
+  bar.addToTL(new MdIconButton(MdIcon.white(MdIconSet.menu), rippleColor: MdColor.WHITE));
+  bar.addToTL(new MdText("Title", size: 24, color: MdColor.WHITE));
+  bar.addToTR(new MdIconButton(MdIcon.white(MdIconSet.add_shopping_cart), rippleColor: MdColor.WHITE));
+  bar.addMdTabs(tab);
 
   stage.addChild(bar);
   bar.span(stage.stageWidth, 100);
@@ -47,23 +46,23 @@ void start() {
    */
   RadioGroup radioGroupV = new RadioGroup(flowOrientation: FlowOrientation.HORIZONTAL, spacing: 5.0)
   ..autoRefresh = false;
-  radioGroupV.addChild(new PaperRadioButton(label : "Red pill", activeColor : PaperColor.RED));
-  radioGroupV.addChild(new PaperRadioButton(label : "or"));
-  radioGroupV.addChild(new PaperRadioButton(label : "Blue pill?", activeColor : PaperColor.BLUE));
+  radioGroupV.addChild(new MdRadioButton(label : "Red pill", activeColor : MdColor.RED));
+  radioGroupV.addChild(new MdRadioButton(label : "or"));
+  radioGroupV.addChild(new MdRadioButton(label : "Blue pill?", activeColor : MdColor.BLUE));
   radioGroupV.addEventListener(RadioGroupEvent.BUTTON_SELECTED, _onSelected);
   vbox.addChild(radioGroupV);
   radioGroupV.refresh();
 
-  PaperCheckbox check1 = new PaperCheckbox(label : "Checkbox with blue label", activeColor: PaperColor.BLUE);
+  MdCheckbox check1 = new MdCheckbox(label : "Checkbox with blue label", activeColor: MdColor.BLUE);
   vbox.addChild(check1);
 
-  PaperCheckbox check2 = new PaperCheckbox(label : "Checkbox with green label and ripple", rippleColor : PaperColor.GREEN);
+  MdCheckbox check2 = new MdCheckbox(label : "Checkbox with green label and ripple", rippleColor : MdColor.GREEN);
   vbox.addChild(check2);
 
-  PaperToggleButton toggle1 = new PaperToggleButton(label : "Wi-Fi");
+  MdToggleButton toggle1 = new MdToggleButton(label : "Wi-Fi");
   vbox.addChild(toggle1);
 
-  PaperToggleButton toggle2 = new PaperToggleButton(label : "Bluetooth", activeColor : PaperColor.BLUE, rippleColor : PaperColor.BLUE);
+  MdToggleButton toggle2 = new MdToggleButton(label : "Bluetooth", activeColor : MdColor.BLUE, rippleColor : MdColor.BLUE);
   vbox.addChild(toggle2);
 
   stage.addChild(vbox);
@@ -75,10 +74,10 @@ void start() {
 void _onSelected(RadioGroupEvent event) {
 switch(event.index){
   case 0:
-    new PaperToast("You chose the Red pill.", stage, fontColor: PaperColor.WHITE, bgColor : PaperColor.RED);
+    new MdToast("You chose the Red pill.", stage, fontColor: MdColor.WHITE, bgColor : MdColor.RED);
   break;
   case 2:
-    new PaperToast("You chose the Blue pill.", stage, fontColor: PaperColor.WHITE, bgColor : PaperColor.BLUE, position: PaperToast.BR);
+    new MdToast("You chose the Blue pill.", stage, fontColor: MdColor.WHITE, bgColor : MdColor.BLUE, position: MdToast.BR);
   break;
   }
 }

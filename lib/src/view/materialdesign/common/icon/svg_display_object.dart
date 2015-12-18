@@ -27,6 +27,7 @@ class SvgDisplayObject extends DisplayObject {
     });
   }
 
+  /*
   void _firefox(String svgUrl) {
     var blob = new html.Blob([svgUrl], "image/svg+xml;base64");
     var url = html.Url.createObjectUrlFromBlob(blob);
@@ -38,6 +39,7 @@ class SvgDisplayObject extends DisplayObject {
       html.Url.revokeObjectUrl(url);
     });
   }
+  */
 
   render(RenderState renderState) {
     if (_renderTextureQuad != null) {

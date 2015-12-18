@@ -1,5 +1,5 @@
 part of stagexl_commons;
 
-abstract class IXLDTO {
+abstract class IRdDTO {
   Map toJson();
 }

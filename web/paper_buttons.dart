@@ -37,7 +37,7 @@ void gtest() {
 
 void testsimple() {
   //10% CPU
-  PaperButton button1 = new PaperButton("SUBMIT", preset: PaperButton.PRESET_WHITE)
+  MdButton button1 = new MdButton("SUBMIT", preset: MdButton.PRESET_WHITE)
   ..x = 30
   ..y = 30;
   stage.addChild(button1);
@@ -59,7 +59,7 @@ void test() {
   for(int i = 0; i<20; i++){
     //1 button: 10% CPU
     //10 buttons: 13% CPU
-    PaperButton button1 = new PaperButton("SUBMIT", preset: PaperButton.PRESET_WHITE);
+    MdButton button1 = new MdButton("SUBMIT", preset: MdButton.PRESET_WHITE);
       //..x = 30
       //..y = i*30;
     hbox1.addChild(button1);
@@ -86,80 +86,80 @@ void start() {
   Flow hbox1 = new Flow()
     ..spacing = 20;
 
-  PaperButton button1 = new PaperButton("SUBMIT", preset: PaperButton.PRESET_WHITE);
+  MdButton button1 = new MdButton("SUBMIT", preset: MdButton.PRESET_WHITE);
   hbox1.addChild(button1);
 
-  PaperButton button2 = new PaperButton("CANCEL", preset: PaperButton.PRESET_GREY);
+  MdButton button2 = new MdButton("CANCEL", preset: MdButton.PRESET_GREY);
   hbox1.addChild(button2);
 
-  PaperButton button3 = new PaperButton("COMPOSE", preset: PaperButton.PRESET_BLUE);
+  MdButton button3 = new MdButton("COMPOSE", preset: MdButton.PRESET_BLUE);
   hbox1.addChild(button3);
 
-  PaperButton button4 = new PaperButton("OK", preset: PaperButton.PRESET_GREEN);
+  MdButton button4 = new MdButton("OK", preset: MdButton.PRESET_GREEN);
   hbox1.addChild(button4);
 
   vbox.addChild(hbox1);
 
 
   /*
-   * 2nd row: standard square Paper buttons with Paper Ripple custom color override
+   * 2nd row: standard square Md buttons with Md Ripple custom color override
    */
   Flow hbox2 = new Flow()
     ..spacing = 20;
 
-  PaperButton plusOneButton1 = new PaperButton("+1", width: 60, preset: PaperButton.PRESET_GREY, fontSize: 16);
+  MdButton plusOneButton1 = new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16);
   hbox2.addChild(plusOneButton1);
 
-  PaperButton plusOneButton2 = new PaperButton("+1", width: 60, preset: PaperButton.PRESET_GREY, fontSize: 16, fontColor: PaperColor.BLUE);
+  MdButton plusOneButton2 = new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16, fontColor: MdColor.BLUE);
   hbox2.addChild(plusOneButton2);
 
-  PaperButton plusOneButton3 = new PaperButton("+1", width: 60, preset: PaperButton.PRESET_GREY, fontSize: 16, fontColor: PaperColor.RED);
+  MdButton plusOneButton3 = new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16, fontColor: MdColor.RED);
   hbox2.addChild(plusOneButton3);
 
   vbox.addChild(hbox2);
 
 
   /*
-   * 3rd row: transparent round Paper buttons with Core Icons and Paper Ripples
+   * 3rd row: transparent round Md buttons with Core Icons and Md Ripples
    */
   Flow hbox3 = new Flow()
     ..spacing = 20;
 
-  PaperFab iconButton1 = new PaperFab(PaperIcon.black(PaperIconSet.menu), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK, shadow: false);
+  MdFab iconButton1 = new MdFab(MdIcon.black(MdIconSet.menu), bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.BLACK, shadow: false);
   hbox3.addChild(iconButton1);
 
-  PaperFab iconButton2 = new PaperFab(PaperIcon.black(PaperIconSet.more_vert), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLACK, shadow: false);
+  MdFab iconButton2 = new MdFab(MdIcon.black(MdIconSet.more_vert), bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.BLACK, shadow: false);
   hbox3.addChild(iconButton2);
 
-  PaperFab iconButton3 = new PaperFab(PaperIcon.black(PaperIconSet.delete), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.RED, shadow: false);
+  MdFab iconButton3 = new MdFab(MdIcon.black(MdIconSet.delete), bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.RED, shadow: false);
   hbox3.addChild(iconButton3);
 
-  PaperFab iconButton4 = new PaperFab(PaperIcon.black(PaperIconSet.account_box), bgColor: PaperColor.TRANSPARENT, rippleColor: PaperColor.BLUE, shadow: false);
+  MdFab iconButton4 = new MdFab(MdIcon.black(MdIconSet.account_box), bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.BLUE, shadow: false);
   hbox3.addChild(iconButton4);
 
   vbox.addChild(hbox3);
 
 
   /*
-   * 4th row: standard Paper Fabs with Core Icons and Paper Ripples
+   * 4th row: standard Md Fabs with Core Icons and Md Ripples
    */
   Flow hbox4 = new Flow()
     ..spacing = 20;
 
-  PaperFab roundButton1 = new PaperFab(PaperIcon.white(PaperIconSet.add), bgColor: PaperColor.RED);
+  MdFab roundButton1 = new MdFab(MdIcon.white(MdIconSet.add), bgColor: MdColor.RED);
   hbox4.addChild(roundButton1);
 
-  PaperFab roundButton2 = new PaperFab(PaperIcon.white(PaperIconSet.mail), bgColor: PaperColor.BLUE);
+  MdFab roundButton2 = new MdFab(MdIcon.white(MdIconSet.mail), bgColor: MdColor.BLUE);
   hbox4.addChild(roundButton2);
 
-  PaperFab roundButton3 = new PaperFab(PaperIcon.white(PaperIconSet.create), bgColor: PaperColor.GREEN);
+  MdFab roundButton3 = new MdFab(MdIcon.white(MdIconSet.create), bgColor: MdColor.GREEN);
   hbox4.addChild(roundButton3);
 
   vbox.addChild(hbox4);
 
 
   /*
-   * 5th row: Paper Menus with Paper Items and Paper Ripples
+   * 5th row: Md Menus with Md Items and Md Ripples
    */
   Flow hbox5 = new Flow()
     ..spacing = 20;
@@ -172,13 +172,13 @@ void start() {
     testList.add(vo);
   }
 
-  PaperMenu list1 = new PaperMenu( testList, cell: new PaperListCell(PaperColor.GREY_DARK), shadow: false);
+  MdMenu list1 = new MdMenu( testList, cell: new MdListCell(MdColor.GREY_DARK), shadow: false);
   //list.submitCallback = _onCellCommit;
   list1.touchable = true;
   hbox5.addChild(list1);
   list1.span(400, 400);
 
-  PaperMenu list2 = new PaperMenu( testList, cell: new PaperListCell(PaperColor.BLUE), shadow: true);
+  MdMenu list2 = new MdMenu( testList, cell: new MdListCell(MdColor.BLUE), shadow: true);
   //list.submitCallback = _onCellCommit;
   hbox5.addChild(list2);
   list2.span(400, 400);
@@ -187,31 +187,31 @@ void start() {
 
 
   /*
-   * 6th row: Paper Dialog with Paper Text and Paper Buttons; also, Custom Cards
+   * 6th row: Md Dialog with Md Text and Md Buttons; also, Custom Cards
    */
   Flow hbox6 = new Flow()
     ..spacing = 20;
 
-  PaperDialog dialog = new PaperDialog("Permission");
-  dialog.addContent(new PaperText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."));
-  dialog.addButton( new PaperButton("DECLINE", preset: PaperButton.PRESET_RED, fontColor: PaperColor.GREY_DARK, width: 90, background : false) );
-  dialog.addButton( new PaperButton("ACCEPT", preset: PaperButton.PRESET_BLUE, fontColor: PaperColor.BLUE, width: 90, background : false) );
+  MdDialog dialog = new MdDialog("Permission");
+  dialog.addContent(new MdText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."));
+  dialog.addButton( new MdButton("DECLINE", preset: MdButton.PRESET_RED, fontColor: MdColor.GREY_DARK, width: 90, background : false) );
+  dialog.addButton( new MdButton("ACCEPT", preset: MdButton.PRESET_BLUE, fontColor: MdColor.BLUE, width: 90, background : false) );
   dialog.span(300, 240);
   hbox6.addChild(dialog);
 
   Button card = new Button();
-  card.addChild( new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: PaperColor.WHITE, respondToClick: false) );
-  card.addChild( new PaperRipple(color: PaperColor.GREY_DARK) );
+  card.addChild( new MdShadow(type : MdShadow.RECTANGLE, bgColor: MdColor.WHITE, respondToClick: false) );
+  card.addChild( new MdRipple(color: MdColor.GREY_DARK) );
   card.span(300, 240);
   hbox6.addChild(card);
 
   Button image = new Button();
-  image.addChild( new PaperShadow(type : PaperShadow.RECTANGLE, bgColor: PaperColor.WHITE, respondToClick: false) );
+  image.addChild( new MdShadow(type : MdShadow.RECTANGLE, bgColor: MdColor.WHITE, respondToClick: false) );
   image.addChild( new ImageSprite()
                         ..span(300, 240, refresh: false)
                         ..href = "http://lorempixel.com/300/240/nature/"
   );
-  image.addChild( new PaperRipple(color: PaperColor.WHITE) );
+  image.addChild( new MdRipple(color: MdColor.WHITE) );
   image.span(300, 240);
   hbox6.addChild(image);
 

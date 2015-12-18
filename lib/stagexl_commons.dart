@@ -1,11 +1,11 @@
 library stagexl_commons;
 
 import 'dart:async' show Timer, Duration, Completer, StreamSubscription, Zone;
-import 'dart:math';
+import 'dart:math' hide Point, Rectangle;
 import 'dart:html' as html;
 import 'dart:js' as js;
 
-/* Rockdot Commons depend on StageXL, especially its Event system */
+/* Rockdot Cömmöns depend on StageXL, especially its Event system */
 import 'package:stagexl/stagexl.dart';
 /* required by Logger */
 import 'package:logging/logging.dart' as logging;
@@ -28,8 +28,8 @@ part 'src/async/operation/i_progress_operation.dart';
 part 'src/async/operation/event/operation_event.dart';
 //data
 part 'src/data/i_data_proxy.dart';
-part 'src/data/i_xl_vo.dart';
-part 'src/data/i_xl_dto.dart';
+part 'src/data/i_rd_vo.dart';
+part 'src/data/i_rd_dto.dart';
 //eventbus
 part 'src/eventbus/i_event_bus.dart';
 part 'src/eventbus/i_event_bus_aware.dart';

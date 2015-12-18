@@ -15,7 +15,7 @@ abstract class MSlider {
 
   bool _snapToPages = false;
 
-  void set snapToPages(bool snapToPages) => _snapToPages = snapToPages;
+  void set snapToPages(bool snapToPages)  {  _snapToPages = snapToPages; }
 
   bool get snapToPages => _snapToPages;
 
@@ -34,13 +34,13 @@ abstract class MSlider {
 
   bool _bounce = Rd.MOBILE ? true : false;
 
-  void set bounce(bool bounce) => _bounce = bounce;
+  void set bounce(bool bounce)  {  _bounce = bounce; }
 
   bool get bounce => _bounce;
 
   num _mouseWheelSensitivity = 1.0;
 
-  void set mouseWheelSensitivity(num mouseWheelSensitivity) => _mouseWheelSensitivity = mouseWheelSensitivity;
+  void set mouseWheelSensitivity(num mouseWheelSensitivity)  {  _mouseWheelSensitivity = mouseWheelSensitivity; }
 
   num get mouseWheelSensitivity => _mouseWheelSensitivity;
 
@@ -82,37 +82,37 @@ abstract class MSlider {
 
   num _spanSize = 0;
 
-  void set spanSize(num spanSize) => _spanSize = spanSize;
+  void set spanSize(num spanSize)  {  _spanSize = spanSize; }
 
   num get spanSize => _spanSize;
 
   bool _momentumEnabled = false;
 
-  void set momentumEnabled(bool momentumEnabled) => _momentumEnabled = momentumEnabled;
+  void set momentumEnabled(bool momentumEnabled)  {  _momentumEnabled = momentumEnabled; }
 
   bool get momentumEnabled => _momentumEnabled;
 
   num _momentum = 0.0;
 
-  void set momentum(num momentum) => _momentum = momentum;
+  void set momentum(num momentum)  {  _momentum = momentum; }
 
   num get momentum => _momentum;
 
   num _momentumDelta = 0;
 
-  void set momentumDelta(num momentumDelta) => _momentumDelta = momentumDelta;
+  void set momentumDelta(num momentumDelta)  {  _momentumDelta = momentumDelta; }
 
   num get momentumDelta => _momentumDelta;
 
   num _momentumFriction = 0.85;
 
-  void set momentumFriction(num momentumFriction) => _momentumFriction = momentumFriction;
+  void set momentumFriction(num momentumFriction)  {  _momentumFriction = momentumFriction; }
 
   num get momentumFriction => _momentumFriction;
 
   num _momentumClearThreshold = 1;
 
-  void set momentumClearThreshold(num momentumClearThreshold) => _momentumClearThreshold = momentumClearThreshold;
+  void set momentumClearThreshold(num momentumClearThreshold)  {  _momentumClearThreshold = momentumClearThreshold; }
 
   num get momentumClearThreshold => _momentumClearThreshold;
 
@@ -160,55 +160,55 @@ abstract class MSlider {
 
   num _pageCount = 1;
 
-  void set pageCount(num pageCount) => _pageCount = pageCount;
+  void set pageCount(num pageCount)  {  _pageCount = pageCount; }
 
   num get pageCount => _pageCount;
 
   num _mouseOffsetX = 0;
 
-  void set mouseOffsetX(num mouseOffsetX) => _mouseOffsetX = mouseOffsetX;
+  void set mouseOffsetX(num mouseOffsetX)  {  _mouseOffsetX = mouseOffsetX; }
 
-  num get mouseOffsetX => _mouseOffsetX;
+  num get mouseOffsetX  {  _mouseOffsetX; }
 
   num _mouseOffsetY = 0;
 
-  void set mouseOffsetY(num mouseOffsetY) => _mouseOffsetY = mouseOffsetY;
+  void set mouseOffsetY(num mouseOffsetY)  {  _mouseOffsetY = mouseOffsetY; }
 
-  num get mouseOffsetY => _mouseOffsetY;
+  num get mouseOffsetY  {  _mouseOffsetY; }
 
   num _mouseOffset = 0;
 
-  void set mouseOffset(num mouseOffset) => _mouseOffset = mouseOffset;
+  void set mouseOffset(num mouseOffset)  {  _mouseOffset = mouseOffset; }
 
-  num get mouseOffset => _mouseOffset;
+  num get mouseOffset  {  _mouseOffset; }
 
   bool _interactionH = false;
 
-  void set interactionH(bool interactionH) => _interactionH = interactionH;
+  void set interactionH(bool interactionH)  {  _interactionH = interactionH; }
 
   bool get interactionH => _interactionH;
 
   bool _interactionV = false;
 
-  void set interactionV(bool interactionV) => _interactionV = interactionV;
+  void set interactionV(bool interactionV)  {  _interactionV = interactionV; }
 
   bool get interactionV => _interactionV;
 
   bool _interaction = false;
 
-  void set interaction(bool interaction) => _interaction = interaction;
+  void set interaction(bool interaction)  {  _interaction = interaction; }
 
   bool get interaction => _interaction;
 
   bool _changing = false;
 
-  void set changing(bool changing) => _changing = changing;
+  void set changing(bool changing)  {  _changing = changing; }
 
   bool get changing => _changing;
 
   bool _touching = false;
 
-  void set touching(bool touching) => _touching = touching;
+  void set touching(bool touching)  {  _touching = touching; }
 
   bool get touching => _touching;
 

@@ -8,9 +8,9 @@ abstract class IDataProxy {
 
   List get dataCache;
 
-  void set dataRetrieveCommandVO(IXLVO dataRetrieveCommandVO);
+  void set dataRetrieveCommandVO(IRdVO dataRetrieveCommandVO);
 
-  IXLVO get dataRetrieveCommandVO;
+  IRdVO get dataRetrieveCommandVO;
 
   void set dataTotalSize(int dataTotalSize);
 

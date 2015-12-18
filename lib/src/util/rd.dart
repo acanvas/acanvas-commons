@@ -3,7 +3,6 @@ part of stagexl_commons;
 class Rd {
   /* internals */
   Stage _stage;
-  bool _webgl = false;
   bool _materializeRequired = false;
   static final Rd _singleton = new Rd._internal();
 

@@ -66,7 +66,7 @@ class BasicEffect implements IEffect {
     _useSprite = false;
   }
 
-  Bitmap _registerBitmapSprite(BoxSprite target) {
+  Bitmap registerBitmapSprite(BoxSprite target) {
     _applyRecursively = false;
 
     target.alpha = 1;
