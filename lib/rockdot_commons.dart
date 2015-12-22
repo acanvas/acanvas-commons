@@ -1,4 +1,4 @@
-library stagexl_commons;
+library rockdot_commons;
 
 import 'dart:async' show Timer, Duration, Completer, StreamSubscription, Zone;
 import 'dart:math' hide Point, Rectangle;

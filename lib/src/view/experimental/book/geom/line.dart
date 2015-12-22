@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Describes a line consisting of two Points.

@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * All-static class that provides additional functionality for adding and removing children to and from Containers.

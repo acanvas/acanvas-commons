@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Dispatched when a page is added to or removed from the PageManager.

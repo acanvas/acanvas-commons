@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class MdButton extends Button {
   static const int SPACER = 10;

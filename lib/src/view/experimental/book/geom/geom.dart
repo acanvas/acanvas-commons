@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * All-static class providing functionality for making basic geometric calculations.

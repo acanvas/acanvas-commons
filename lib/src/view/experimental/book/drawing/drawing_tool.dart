@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Provides basic functionality for drawing with the Drawing API.

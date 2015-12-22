@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Dispatched when this Page its index changes (triggered by change in the pages property of the accompanying PageManager).

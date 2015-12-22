@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Tesselates an area into several triangles to allow free transform distortion on BitmapData objects.

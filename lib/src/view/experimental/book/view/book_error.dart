@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Error class specifying exceptions for certain situations that may occur when working with the Book class.

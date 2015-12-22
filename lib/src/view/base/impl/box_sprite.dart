@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class BoxSprite extends Sprite3D with MBox {
   Logger logger;

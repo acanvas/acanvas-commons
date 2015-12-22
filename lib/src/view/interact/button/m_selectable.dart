@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 abstract class MSelectable {
   int _id = 0;

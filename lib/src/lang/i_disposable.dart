@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * This describes an object that is able to release any resources it might hold a reference to.

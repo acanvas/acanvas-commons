@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class RdGraphics {
   static Sprite rectangle(num x, num y, num w, num h,

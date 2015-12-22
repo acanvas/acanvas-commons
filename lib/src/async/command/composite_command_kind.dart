@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Enumeration that defines the different ways an <code>ICompositeCommand</code> can execute its collection.

@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class BookSampleAssets {
   static const int NUM_PAGES = 12;

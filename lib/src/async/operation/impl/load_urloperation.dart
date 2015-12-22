@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * An <code>IOperation</code> implementation that can load arbitrary data from a specified URL.

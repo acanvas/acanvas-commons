@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class BehaveSprite extends BoxSprite with MBehave {
   BehaveSprite() : super() {

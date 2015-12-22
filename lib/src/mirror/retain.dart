@@ -1,7 +1,7 @@
 /*
  * defines  annotation
  */
-part of stagexl_commons;
+part of rockdot_commons;
 
 const Retain retain = const Retain();
 

@@ -3,7 +3,7 @@
 Röckdöt Cömmöns consist of
 * Highly customizable, rock solid UI Components (Button, Radio, Checkbox, DropDown, Scrollable, List, Pager, Gallery)
 * Implementation of Material Design (Polymer Paper Components), see /web folder for a sneak peek.
-* Port of [Flexbook](http://www.rubenswieringa.com/code/as3/flex/Book/), see web/stagexl_book.html for a sneak peek.
+* Port of [Flexbook](http://www.rubenswieringa.com/code/as3/flex/Book/), see web/rockdot_book.html for a sneak peek.
 * Port of [AS3 Cömmöns](http://www.as3commons.org/) projects to Dart/StageXL.
 
 #### Google Material Design

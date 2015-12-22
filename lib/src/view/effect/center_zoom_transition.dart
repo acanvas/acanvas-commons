@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class CenterZoomTransition extends BasicEffect {
   CenterZoomTransition() : super() {}

@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -60,6 +60,7 @@ class ListSprite extends ScrollifySprite with MList {
   }
 
   void init() {
+    view.removeChildren();
     _scrollPos = 0;
     _oldVScrollbarValue = 0;
     _totalCellSize = 0;
@@ -83,15 +84,16 @@ class ListSprite extends ScrollifySprite with MList {
       //iterate all data
       for (i = 0; i < numDataEntries; i++) {
       /*
+        }*/
         //if in visible area, create cell
-        if (i < cellsInFrame) {
+        if (i < 1) {
           cell = _getEmptyCell();
           cell.id = i;
           cell.data = data.elementAt(i);
           _horizontalFlow ? cell.x = i * _cellSize : cell.y = i * _cellSize;
 
           view.addChild(cell);
-        }*/
+        }
         //fill up lookup
         _selectedCells[i] = false;
       }
@@ -299,6 +301,7 @@ class ListSprite extends ScrollifySprite with MList {
           if (cell.parent == null) _putCellInPool(cell);
           firstLoop = false;
         }
+        //cell.id plus 1
         cell = _getNextCell(cell);
         if (cell == null) break;
         (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0

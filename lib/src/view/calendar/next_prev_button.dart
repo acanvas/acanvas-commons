@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class NextPrevButton extends Button {
   UITextField _labelTF;

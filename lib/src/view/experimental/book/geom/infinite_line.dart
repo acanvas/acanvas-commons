@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Describes a line consisting of a slope (and as coefficient) an intersection-point with either the x or y axis.

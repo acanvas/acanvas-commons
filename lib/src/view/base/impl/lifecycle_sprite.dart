@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class LifecycleSprite extends BehaveSprite with MLifecycle {
   LifecycleSprite(String id) : super() {

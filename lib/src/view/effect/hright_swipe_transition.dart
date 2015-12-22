@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring(gmail as at).com)

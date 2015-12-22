@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class MdInput extends BoxSprite {
   static const DEFAULT_FONT = "Roboto, Helvetica, Arial";

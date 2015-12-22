@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class MdRipple extends BoxSprite implements IMdButtonComponent {
   static const int RECTANGLE = 1;

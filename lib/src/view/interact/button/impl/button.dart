@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class Button extends BehaveSprite with MButton {
   num swipeXDownPos;

@@ -1,6 +1,6 @@
-name: stagexl_commons
+name: rockdot_commons
 version: 0.5.0
-description: Röckdöt Cömmöns consist of a port of as3commons and highly customizable View Components
+description: Röckdöt Cömmöns consist of a port of as3commons and highly customizable View Components, including a Material Design implementation
 dependencies:
   logging: any
   stagexl:

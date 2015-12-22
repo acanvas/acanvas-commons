@@ -14,7 +14,7 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 
 */
 
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * The <code>numsSymbols</code> class defines a keyboard layout containing all 10 digits

@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Provides functionality for working with Rectangles. This class extends the RoundedRectangle class and thus has all of its functionality (and also the functionality of the Rectangle class, which RoundedRectangle extends).

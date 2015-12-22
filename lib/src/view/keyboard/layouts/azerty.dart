@@ -13,7 +13,7 @@ consent from its author. Comments and suggestions are always encouraged.
 This library is provided "as is" with no guarantees whatsoever. Use it at your own risk.
 
 */
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * The <code>Azerty</code> class defines a basic azerty-inspired keyboard layout.

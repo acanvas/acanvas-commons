@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Event class specifying type property values for Events broadcasted by the Book class.

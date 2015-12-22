@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class Logger implements logging.Logger {
   final logging.Logger _delegate;

@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 class VideoControls extends BoxSprite {
   Pyro _video;

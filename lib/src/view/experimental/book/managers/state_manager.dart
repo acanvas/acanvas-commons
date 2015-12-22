@@ -1,4 +1,4 @@
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Type that enables you to keep track of which state (creationComplete, childrenCreated, etc.) a certain component is in. Note that StateManager is a singleton class.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-part of stagexl_commons;
+part of rockdot_commons;
 
 /**
  * Assertion utility Type that assists in validating arguments.
