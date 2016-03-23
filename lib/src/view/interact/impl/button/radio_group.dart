@@ -15,17 +15,28 @@ class RadioGroup extends Flow {
   RadioGroup({FlowOrientation flowOrientation: FlowOrientation.VERTICAL, double spacing: 0.0}) : super() {
     this.flowOrientation = flowOrientation;
     this.spacing = spacing;
+    inheritSpan = true;
+  }
+
+  @override
+  void addChild(DisplayObject child) {
+    super.addChild(child);
+    _addRdChild(child);
   }
 
   @override
   void addChildAt(DisplayObject child, int index) {
+    super.addChildAt(child, index);
+    _addRdChild(child);
+  }
+
+  void _addRdChild(DisplayObject child) {
     if (child is SelectableButton) {
       child.submitCallback = _onBtnSubmit;
       child.selfSelect = false;
     } else {
       throw new StateError("Only SelectableButton allowed as children");
     }
-    super.addChildAt(child, index);
   }
 
   void _onBtnSubmit(SelectableButton button) {

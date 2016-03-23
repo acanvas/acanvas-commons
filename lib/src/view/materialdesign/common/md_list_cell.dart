@@ -16,7 +16,7 @@ class MdListCell extends SelectableButton {
   }
 
   @override
-  SelectableButton clone() => new MdListCell(fontColor);
+  SelectableButton clone() => new MdListCell(fontColor)..selfSelect = false;
 
   @override
   void set data(Object newdata) {
@@ -46,11 +46,4 @@ class MdListCell extends SelectableButton {
     super.refresh();
   }
 
-  @override void selectAction() {
-    downAction();
-  }
-
-  @override void deselectAction() {
-    upAction();
-  }
 }

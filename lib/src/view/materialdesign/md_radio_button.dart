@@ -15,6 +15,9 @@ class MdRadioButton extends SelectableButton {
 
   MdRadioButton({int rippleColor: MdColor.GREY_DARK, this.activeColor: MdColor.GREEN, this.label: ""})
       : super() {
+
+    inheritSpan = true;
+
     MdRipple ripple = new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
     ripple.inheritSpan = false;
     addChild(ripple);
@@ -26,7 +29,7 @@ class MdRadioButton extends SelectableButton {
     _bg.graphics.circle(30, 30, 30);
     _bg.graphics.fillColor(0x00555555);
     if (Rd.WEBGL) {
-      _bg.applyCache(0, 0, 60, 60);
+      //_bg.applyCache(0, 0, 60, 60);
     }
     addChild(_bg);
 

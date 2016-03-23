@@ -61,7 +61,7 @@ part 'src/util/rd_graphics.dart';
 part 'src/view/base/m_box.dart';
 part 'src/view/base/m_behave.dart';
 part 'src/view/base/m_lifecycle.dart';
-part 'src/view/base/lifecycle_event.dart';
+part 'package:rockdot_commons/src/view/base/event/lifecycle_event.dart';
 part 'src/view/base/impl/box_sprite.dart';
 part 'src/view/base/impl/behave_sprite.dart';
 part 'src/view/base/impl/lifecycle_sprite.dart';
@@ -71,37 +71,45 @@ part 'src/view/calendar/calendar.dart';
 part 'src/view/calendar/day_button.dart';
 part 'src/view/calendar/next_prev_button.dart';
 
+// Flow, Wrap, Accordeon
+
 part 'src/view/flow/m_flow.dart';
 part 'src/view/flow/m_duration.dart';
-part 'src/view/flow/impl/flow.dart';
 part 'src/view/flow/impl/accordeon.dart';
+part 'src/view/flow/impl/flow.dart';
+part 'src/view/flow/impl/wrap.dart';
 
-part 'src/view/interact/button/m_button.dart';
-part 'src/view/interact/button/m_selectable.dart';
-part 'src/view/interact/button/radio_group_event.dart';
-part 'src/view/interact/button/impl/button.dart';
-part 'src/view/interact/button/impl/selectable_button.dart';
-part 'src/view/interact/button/impl/radio_group.dart';
+// Interact: Buttons, List, Dropdown, Slider, Scroll Management
 
-part 'src/view/interact/list/m_list.dart';
-part 'src/view/interact/list/m_pager.dart';
-part 'src/view/interact/list/impl/list_sprite.dart';
-part 'src/view/interact/list/impl/pager_sprite.dart';
-part 'src/view/interact/list/impl/dropdown.dart';
+part 'src/view/interact/m_button.dart';
+part 'src/view/interact/m_selectable.dart';
+part 'src/view/interact/m_list.dart';
+part 'src/view/interact/m_pager.dart';
+part 'src/view/interact/m_paged_scroll.dart';
+part 'src/view/interact/m_scroll.dart';
+part 'src/view/interact/m_slider.dart';
 
-part 'src/view/interact/scroll/m_paged_scroll.dart';
-part 'src/view/interact/scroll/m_scroll.dart';
-part 'src/view/interact/scroll/scrollify_event.dart';
-part 'src/view/interact/scroll/impl/scrollbar.dart';
-part 'src/view/interact/scroll/impl/default_scrollbar.dart';
-part 'src/view/interact/scroll/impl/scrollify_sprite.dart';
-part 'src/view/interact/scroll/impl/wrap.dart';
+part 'src/view/interact/event/interact_event.dart';
+part 'src/view/interact/event/radio_group_event.dart';
+part 'src/view/interact/event/scrollify_event.dart';
+part 'src/view/interact/event/slider_event.dart';
 
-part 'src/view/interact/slider/m_slider.dart';
-part 'src/view/interact/slider/slider_event.dart';
-part 'src/view/interact/slider/impl/slider.dart';
+part 'src/view/interact/impl/button/button.dart';
+part 'src/view/interact/impl/button/selectable_button.dart';
+part 'src/view/interact/impl/button/radio_group.dart';
 
-//view/keyboard
+part 'src/view/interact/impl/list/list_sprite.dart';
+part 'src/view/interact/impl/list/pager_sprite.dart';
+part 'src/view/interact/impl/list/dropdown.dart';
+
+part 'src/view/interact/impl/scroll/scrollbar.dart';
+part 'src/view/interact/impl/scroll/default_scrollbar.dart';
+part 'src/view/interact/impl/scroll/sprite_scrollifier.dart';
+
+part 'src/view/interact/impl/slider/slider.dart';
+
+// Keyboard
+
 part 'src/view/keyboard/native_keyboard.dart';
 part 'src/view/keyboard/paper_keyboard.dart';
 part 'src/view/keyboard/char_code.dart';

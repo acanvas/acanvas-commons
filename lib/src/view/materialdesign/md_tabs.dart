@@ -49,6 +49,7 @@ class MdTabs extends BoxSprite {
   @override void refresh() {
     RdGraphics.rectangle(0, 0, spanWidth, spanHeight, sprite: _bg, color: bgColor);
 
+
     tabBox.x = 0;
 
     if (tabBox.numChildren > 0) {
@@ -57,7 +58,8 @@ class MdTabs extends BoxSprite {
       if (distributeTabs) {
         for (int i = 0; i < tabBox.numChildren; i++) {
           Button btn = tabBox.getChildAt(i);
-          btn.span((spanWidth / tabBox.numChildren).ceil(), 0);
+          print("spanwidth md_tabs refresh: ${spanWidth}");
+          btn.span(((spanWidth) / tabBox.numChildren), 0);
         }
         tabBox.refresh();
       }
@@ -74,7 +76,7 @@ class MdTabs extends BoxSprite {
   }
 
   ///addresses a sizing bug with Graphics tool
-  num get width => super.width - 2;
+  num get width => super.width;
 
-  num get spanWidth => super.spanWidth - 2;
+  num get spanWidth => super.spanWidth;
 }

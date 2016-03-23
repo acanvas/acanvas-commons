@@ -49,7 +49,7 @@ class RdGraphics {
     sprite.graphics.fillColor(color);
 
     if (Rd.WEBGL && w.round() > 0 && h.round() > 0) {
-      sprite.applyCache(x.round(), y.round(), w.round(), h.round());
+      //sprite.applyCache(x.round(), y.round(), w.round(), h.round());
     }
 
     return sprite;
@@ -100,7 +100,7 @@ class RdGraphics {
     sprite.graphics.closePath();
 
     if (Rd.WEBGL) {
-      sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() : y.ceil());
+      //sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() : y.ceil());
     }
 
     return sprite;

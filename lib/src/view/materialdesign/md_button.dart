@@ -1,6 +1,6 @@
 part of rockdot_commons;
 
-class MdButton extends Button {
+class MdButton extends SelectableButton {
   static const int SPACER = 10;
 
   static const int PRESET_WHITE = 1;
@@ -14,8 +14,10 @@ class MdButton extends Button {
   MdText _label;
   int _bgColor;
   MdShadow _paperShadow;
+  MdRipple _paperRipple;
   SvgDisplayObject icon;
   bool shadow;
+
 
   MdButton(String text,
       {num width: 120,
@@ -30,7 +32,10 @@ class MdButton extends Button {
       bool ripple: true,
       this.icon})
       : super() {
+
+    selfSelect = false;
     int _fontAndRippleColor;
+
     switch (preset) {
       case PRESET_WHITE:
         _bgColor = MdColor.WHITE;
@@ -69,8 +74,8 @@ class MdButton extends Button {
     }
 
     if (ripple) {
-      MdRipple paperRipple = new MdRipple(color: _fontAndRippleColor);
-      addChild(paperRipple);
+      _paperRipple = new MdRipple(color: _fontAndRippleColor);
+      addChild(_paperRipple);
     }
 
     if (icon != null) {
@@ -104,6 +109,18 @@ class MdButton extends Button {
     }
 
     super.refresh();
+  }
+
+  @override selectAction(){
+   // _paperRipple.disableUpAction = true;
+    _paperRipple ?? _paperRipple.downAction();
+    _paperShadow ?? _paperShadow.downAction();
+  }
+
+  @override deselectAction(){
+   // _paperRipple.disableUpAction = false;
+    _paperRipple ?? _paperRipple.upAction();
+    _paperShadow ?? _paperShadow.upAction();
   }
 
   @override void set labelText(String labelText) {

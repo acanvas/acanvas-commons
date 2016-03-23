@@ -3,7 +3,7 @@ part of rockdot_commons;
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
-class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
+class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
   //Sprites
   BoxSprite _view;
 
@@ -33,7 +33,7 @@ class ScrollifySprite extends BehaveSprite with MScroll, MSlider {
   bool _interactionV = false;
   bool _changingV = false;
 
-  ScrollifySprite(Sprite view, Scrollbar hScrollbar, Scrollbar vScrollbar) {
+  SpriteScrollifier(Sprite view, Scrollbar hScrollbar, Scrollbar vScrollbar) {
     _view = view;
     if (_view.parent == null) {
       addChild(_view);

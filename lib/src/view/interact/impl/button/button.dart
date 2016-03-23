@@ -15,7 +15,6 @@ class Button extends BehaveSprite with MButton {
   @override
   void enable() {
     if (_enabled) return;
-
     super.enable();
 
     if (Rd.TOUCH) {
@@ -34,6 +33,8 @@ class Button extends BehaveSprite with MButton {
   }
 
   void enableAction() {
+    alpha = 1;
+    filters = [];
     rollOutAction();
   }
 
@@ -58,6 +59,11 @@ class Button extends BehaveSprite with MButton {
   }
 
   void disableAction() {
+    alpha = .6;
+    filters = [
+      new ColorMatrixFilter.grayscale()
+    ];
+
     rollOverAction();
   }
 
@@ -72,6 +78,8 @@ class Button extends BehaveSprite with MButton {
     children.where((c) => (c is MButton && c.inheritDownAction) || c is IMdButtonComponent).forEach((child) {
       child.downAction(event);
     });
+
+    dispatchEvent(new InteractEvent(InteractEvent.DOWN_ACTION));
   }
 
   void upAction([InputEvent event = null, bool submit = true]) {
@@ -81,13 +89,14 @@ class Button extends BehaveSprite with MButton {
     if (submit) {
       this.submit();
     }
+    dispatchEvent(new InteractEvent(InteractEvent.UP_ACTION));
   }
 
   void rollOverAction([InputEvent event = null]) {
-    // Override this method
+    dispatchEvent(new InteractEvent(InteractEvent.OVER_ACTION));
   }
 
   void rollOutAction([InputEvent event = null]) {
-    // Override this method
+    dispatchEvent(new InteractEvent(InteractEvent.OUT_ACTION));
   }
 }

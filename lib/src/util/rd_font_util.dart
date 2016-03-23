@@ -32,6 +32,9 @@ class RdFontUtil {
       return;
     }
     webFont.callMethod("load", [webFontConfig]);
-    completer.future.then((_) => callback.call());
+    completer.future.then((_) => callback.call()).catchError((e) {
+      print("Error while loading fonts. ${e}");
+      callback.call();
+    });
   }
 }

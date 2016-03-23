@@ -128,12 +128,24 @@ class Flow extends BoxSprite with MFlow {
   }
 
   @override
+  void addChild(DisplayObject child) {
+    super.addChild(child);
+    _addRdChild(child);
+  }
+
+  @override
   void addChildAt(DisplayObject child, int index) {
+    super.addChildAt(child, index);
+    _addRdChild(child);
+  }
+
+  void _addRdChild(DisplayObject child) {
     if (animate) {
       child.alpha = 0;
     }
-    super.addChildAt(child, index);
   }
+
+
 
   @override void removeChildAt(int index) {
     if (animate) {

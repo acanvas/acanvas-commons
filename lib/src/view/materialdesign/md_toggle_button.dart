@@ -25,6 +25,9 @@ class MdToggleButton extends SelectableButton {
       this.label: "",
       this.labelOffset: 150})
       : super() {
+
+    inheritSpan = true;
+
     _holder = new BoxSprite();
 
     _ripple = new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
@@ -47,7 +50,7 @@ class MdToggleButton extends SelectableButton {
     _bg.graphics.circle(30, 30, 30);
     _bg.graphics.fillColor(0x00555555);
     if (Rd.WEBGL) {
-      _bg.applyCache(0, 0, 60, 60);
+      //_bg.applyCache(0, 0, 60, 60);
     }
     _holder.addChild(_bg);
 
@@ -115,10 +118,10 @@ class MdToggleButton extends SelectableButton {
     line.graphics.beginPath();
     line.graphics.moveTo(0, 0);
     line.graphics.lineTo(32, 0);
-    line.graphics.closePath();
     line.graphics.strokeColor(color, strength);
+    line.graphics.closePath();
     if (Rd.WEBGL) {
-      line.applyCache(0, 0, 32, strength);
+      //line.applyCache(0, 0, 32, strength);
     }
   }
 }

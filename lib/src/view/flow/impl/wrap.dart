@@ -2,7 +2,7 @@ part of rockdot_commons;
 
 class Wrap extends BoxSprite {
   Flow flow;
-  ScrollifySprite _scrollManager;
+  SpriteScrollifier _scrollManager;
 
   Wrap(
       {int spacing: 20,
@@ -22,7 +22,7 @@ class Wrap extends BoxSprite {
       ..alignH = align;
     super.addChild(flow);
 
-    _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar())
+    _scrollManager = new SpriteScrollifier(flow, new DefaultScrollbar(), new DefaultScrollbar())
       ..maskEnabled = enableMask;
     _scrollManager.scrollOrientation = scrollOrientation;
     //_scrollManager.useNativeWidth = false;
@@ -34,6 +34,13 @@ class Wrap extends BoxSprite {
   void addChild(DisplayObject child) {
     flow.addChild(child);
   }
+
+  /*
+  @override
+  void addChildAt(DisplayObject child, int index) {
+    flow.addChildAt(child, index);
+  }
+  */
 
   @override void refresh() {
     flow.x = padding;

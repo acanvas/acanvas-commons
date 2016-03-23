@@ -45,7 +45,7 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
     num touchY = localY > spanHeight ? spanHeight : localY; // - rect.top;
 
     int waveRadius =
-        (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(spanWidth, spanHeight)) / 1.2).round();
+        (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(spanWidth, spanHeight)) / 1.1).round();
 
     Sprite inner = new Sprite()
       ..graphics.circle(0, 0, waveRadius)

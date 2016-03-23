@@ -6,7 +6,7 @@ class MdWrap extends BoxSprite {
   Sprite panelSprite;
   MdText _title;
   Flow flow;
-  ScrollifySprite _scrollManager;
+  SpriteScrollifier _scrollManager;
 
   MdWrap(UITextField title,
       {this.panelColor: MdColor.WHITE,
@@ -35,7 +35,7 @@ class MdWrap extends BoxSprite {
       ..flowOrientation = FlowOrientation.VERTICAL
       ..alignH = align;
 
-    _scrollManager = new ScrollifySprite(flow, new DefaultScrollbar(), new DefaultScrollbar());
+    _scrollManager = new SpriteScrollifier(flow, new DefaultScrollbar(), new DefaultScrollbar());
     super.addChild(_scrollManager);
   }
 

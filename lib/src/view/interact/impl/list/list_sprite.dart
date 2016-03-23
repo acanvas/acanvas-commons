@@ -3,7 +3,7 @@ part of rockdot_commons;
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
-class ListSprite extends ScrollifySprite with MList {
+class ListSprite extends SpriteScrollifier with MList {
   //
 
   SelectableButton _cellFactory;

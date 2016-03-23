@@ -22,6 +22,9 @@ class MdCheckbox extends SelectableButton {
       this.label: "",
       this.boxColor: MdColor.BLACK})
       : super() {
+
+    inheritSpan = true;
+
     MdRipple ripple = new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
     ripple.inheritSpan = false;
     addChild(ripple);
@@ -36,7 +39,7 @@ class MdCheckbox extends SelectableButton {
     _box.graphics.rect(-BOXWIDTH / 2, -BOXWIDTH / 2, BOXWIDTH, BOXWIDTH);
     _box.graphics.strokeColor(boxColor, 2);
     if (Rd.WEBGL) {
-      _box.applyCache(-(BOXWIDTH / 2).round(), -(BOXWIDTH / 2).round(), BOXWIDTH, BOXWIDTH);
+      //_box.applyCache(-(BOXWIDTH / 2).round(), -(BOXWIDTH / 2).round(), BOXWIDTH, BOXWIDTH);
     }
     addChild(_box);
 
@@ -48,7 +51,7 @@ class MdCheckbox extends SelectableButton {
     _icon.graphics.strokeColor(activeColor, 3);
     _icon.graphics.closePath();
     if (Rd.WEBGL) {
-      _icon.applyCache(-8, -17, 26, 20);
+      //_icon.applyCache(-8, -17, 26, 20);
     }
     addChild(_icon);
     _icon.visible = false;

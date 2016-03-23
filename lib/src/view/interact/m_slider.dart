@@ -8,8 +8,9 @@ abstract class MSlider {
 
   bool _horizontalScrollBehavior = false;
 
-  void set horizontalScrollBehavior(bool horizontalScrollBehavior) =>
-      _horizontalScrollBehavior = horizontalScrollBehavior;
+  void set horizontalScrollBehavior(bool horizontalScrollBehavior) {
+    _horizontalScrollBehavior = horizontalScrollBehavior;
+  }
 
   bool get horizontalScrollBehavior => _horizontalScrollBehavior;
 

@@ -32,6 +32,7 @@ class SelectableButton extends Button with MSelectable {
         this.submit();
       }
     }
+    dispatchEvent(new InteractEvent(InteractEvent.SELECT_ACTION));
   }
 
   @override void deselect() {
@@ -39,5 +40,6 @@ class SelectableButton extends Button with MSelectable {
       deselectAction();
       _selected = false;
     }
+    dispatchEvent(new InteractEvent(InteractEvent.DESELECT_ACTION));
   }
 }

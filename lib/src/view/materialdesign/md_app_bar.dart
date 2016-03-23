@@ -45,8 +45,7 @@ class MdAppBar extends BoxSprite {
       h += MdDimensions.HEIGHT_APP_BAR_EXTENDED_AREA;
     }
     if (tabs != null) {
-      tabs.span(w, MdDimensions.HEIGHT_BUTTON);
-      h += tabs.spanHeight;
+       h += MdDimensions.HEIGHT_BUTTON;
     }
     super.span(w, h, refresh: refresh);
   }
@@ -72,6 +71,7 @@ class MdAppBar extends BoxSprite {
     rightBox.y = (MdDimensions.HEIGHT_APP_BAR / 2 - (rightBox.height - 0) / 2).round();
 
     if (tabs != null && tabs.numChildren > 0) {
+      tabs.span(spanWidth, MdDimensions.HEIGHT_BUTTON);
       tabs.x = 0;
       tabs.y = spanHeight - tabs.height;
     }

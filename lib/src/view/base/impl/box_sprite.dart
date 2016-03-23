@@ -79,8 +79,18 @@ class BoxSprite extends Sprite3D with MBox {
   }
 
   @override
+  void addChild(DisplayObject child) {
+    super.addChild(child);
+    _addRdChild(child);
+  }
+
+  @override
   void addChildAt(DisplayObject child, int index) {
     super.addChildAt(child, index);
+    _addRdChild(child);
+  }
+
+  void _addRdChild(DisplayObject child) {
     if (spanWidth > 0 && spanHeight > 0 && child is MBox && (child as MBox).inheritSpan) {
       (child as MBox).span(spanWidth - 2 * padding, spanHeight, refresh: false);
     }

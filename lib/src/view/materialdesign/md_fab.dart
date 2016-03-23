@@ -34,7 +34,7 @@ class MdFab extends Button {
   @override void refresh() {
     icon.pivotX = 12;
     icon.pivotY = 12;
-    icon.x = (spanWidth / 2).ceil() - 1;
+    icon.x = (spanWidth / 2).ceil();
     icon.y = (spanHeight / 2).ceil();
 
     super.refresh();
