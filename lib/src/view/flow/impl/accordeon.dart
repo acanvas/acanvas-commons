@@ -50,7 +50,7 @@ class Accordeon extends Flow with MDuration {
   }
 
   @override
-  DisplayObject addChild(DisplayObject child) {
+  void addChild(DisplayObject child) {
     if (child is AccordeonButton) {
       child.submitCallback = _onSelectableButtonSelected;
       child.duration = _duration;

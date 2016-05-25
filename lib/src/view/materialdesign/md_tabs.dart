@@ -58,7 +58,6 @@ class MdTabs extends BoxSprite {
       if (distributeTabs) {
         for (int i = 0; i < tabBox.numChildren; i++) {
           Button btn = tabBox.getChildAt(i);
-          print("spanwidth md_tabs refresh: ${spanWidth}");
           btn.span(((spanWidth) / tabBox.numChildren), 0);
         }
         tabBox.refresh();
