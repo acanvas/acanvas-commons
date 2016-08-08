@@ -16,6 +16,8 @@ class MdMenu extends ListSprite {
     addChildAt(_paperShadow, 0);
 
     //TODO this leads to render everything?
-    span(MdDimensions.WIDTH_MENU, MdDimensions.HEIGHT_MENU_CELL * data.length);
+    if(data.length > 0){
+      span(MdDimensions.WIDTH_MENU, MdDimensions.HEIGHT_MENU_CELL * data.length);
+    }
   }
 }
