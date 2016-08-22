@@ -46,6 +46,9 @@ class numsSymbolsSwitch extends Layout {
         new Key(CharCode.DIGIT_9),
         new Key(CharCode.DIGIT_0)
       ],
+
+      /*
+
       [
         new Key(CharCode.HYPHEN, SymbolKeyVariants.MINUS),
         new Key(CharCode.SLASH, SymbolKeyVariants.SLASH),
@@ -71,6 +74,9 @@ class numsSymbolsSwitch extends Layout {
         new Key(CharCode.ASTERISK, SymbolKeyVariants.ASTERISK),
         new Key(CharCode.BACKSPACE, null, Key.EDITING_KEY, 'BACKSPACE', 1.55)
       ],
+
+      */
+
       [
         new Key(CharCode.SWITCH_LAYOUT, null, Key.SYSTEM_KEY, switchKeyType.SWITCH_KEY_LABEL, 2.5, 1, switchKeyType),
         new Key(CharCode.SPACE, null, Key.CHARACTER_KEY, '', 5),

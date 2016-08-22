@@ -59,13 +59,19 @@ class MdAppBar extends BoxSprite {
     leftBox.y = (MdDimensions.HEIGHT_APP_BAR / 2 - (leftBox.height - 0) / 2).round();
 
     if (_headline != null) {
+      num hw = spanWidth - rightBox.width - 20 - _headline.x;
+      if(hw > 270){
+        _headline.width = hw;
+      }
+
       if (extended == true) {
         _headline.x = MdDimensions.HEIGHT_APP_BAR_EXTENDED_AREA - 2;
         _headline.y = MdDimensions.HEIGHT_APP_BAR + 20;
       } else {
         _headline.x = leftBox.x + leftBox.width + 20;
-        _headline.y = (MdDimensions.HEIGHT_APP_BAR / 2 - _headline.height / 2 + 0).round();
+        _headline.y = (MdDimensions.HEIGHT_APP_BAR / 2 - _headline.height/ 2 + 0).round();
       }
+
     }
 
     rightBox.x = spanWidth - rightBox.width - 20;

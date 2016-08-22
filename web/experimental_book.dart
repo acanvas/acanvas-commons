@@ -14,6 +14,7 @@ void main() {
 
   stage = new Stage(html.querySelector('#stage'), options: opts);
 
+  Rd.STAGE = stage;
   new RenderLoop()..addStage(stage);
   BookSampleAssets.load(start);
 }
@@ -43,8 +44,8 @@ void start() {
     book.addChild(page);
   }
 
-  book.init();
   book.addEventListener(LifecycleEvent.INIT_COMPLETE, onBookInit);
+  book.init();
 
 }
 

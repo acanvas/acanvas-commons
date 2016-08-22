@@ -2456,7 +2456,7 @@ class StringUtils {
    * @author Simon Wacker
    */
   static Object parseProperties(String str, [Map properties = null]) {
-    properties = properties || {};
+    properties = properties ?? {};
     num i;
     List lines = str.split(WIN_BREAK).join("\n").split(MAC_BREAK).join("\n").split("\n");
     num length = lines.length;
@@ -2483,7 +2483,7 @@ class StringUtils {
           num j;
           num l = line.length;
           for (j = 0; j < l; j++) {
-            String char = line.codeUnitAt(j);
+            String char = line[j];
             if (char == "'") {
               j++;
             } else {

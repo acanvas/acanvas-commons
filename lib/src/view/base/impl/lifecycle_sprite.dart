@@ -23,7 +23,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
     }
   }
 
-  void init({Map params: null}) {
+  init({Map params: null}) {
     this.params = params;
     if (spanHeight == 0 || spanWidth == 0) {
       logger.warn(
@@ -43,11 +43,12 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
     dispatchEvent(new LifecycleEvent(LifecycleEvent.INIT_COMPLETE));
   }
 
-  void load({Map params: null}) {
+  Future<bool> load({Map params: null}) async {
     if (requiresLoading) {
       throw new StateError("You cannot invoke LifecycleSprite.load() directly. Override it.");
     } else {
       onLoadComplete();
+      return true;
     }
   }
 

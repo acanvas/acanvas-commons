@@ -42,6 +42,9 @@ class numsSymbols extends Layout {
         new Key(CharCode.DIGIT_9),
         new Key(CharCode.DIGIT_0)
       ],
+
+      /*
+
       [
         new Key(CharCode.HYPHEN, SymbolKeyVariants.MINUS),
         new Key(CharCode.SLASH, SymbolKeyVariants.SLASH),
@@ -65,6 +68,8 @@ class numsSymbols extends Layout {
         new Key(CharCode.ASTERISK, SymbolKeyVariants.ASTERISK),
         new Key(CharCode.BACKSPACE, null, Key.EDITING_KEY, 'BACKSPACE', 1.55)
       ],
+
+      */
       [
         new Key(CharCode.SPACE, null, Key.CHARACTER_KEY, '', 7),
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.5)

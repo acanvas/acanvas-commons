@@ -1,11 +1,11 @@
 library rockdot_commons;
 
-import 'dart:async' show Timer, Completer, StreamSubscription, Zone;
+import 'dart:async' show Completer, Future, Stream, StreamSubscription, Timer, Zone;
 import 'dart:math' hide Point, Rectangle;
 import 'dart:html' as html;
 import 'dart:js' as js;
 
-/* Rockdot Cömmöns depend on StageXL, especially its Event system */
+/* Rockdot Commons depend on StageXL, especially its Event system */
 import 'package:stagexl/stagexl.dart';
 /* required by Logger */
 import 'package:logging/logging.dart' as logging;
@@ -119,9 +119,7 @@ part 'src/view/keyboard/key_row.dart';
 part 'src/view/keyboard/label.dart';
 part 'src/view/keyboard/callout.dart';
 part 'src/view/keyboard/layouts/azerty.dart';
-part 'src/view/keyboard/layouts/azerty_fr.dart';
 part 'src/view/keyboard/layouts/azerty_switch.dart';
-part 'src/view/keyboard/layouts/azerty_switch_fr.dart';
 part 'src/view/keyboard/layouts/email_numbers_symbols_switch.dart';
 part 'src/view/keyboard/layouts/email_switch.dart';
 part 'src/view/keyboard/layouts/layout.dart';
@@ -130,9 +128,7 @@ part 'src/view/keyboard/layouts/numbers_symbols_switch.dart';
 part 'src/view/keyboard/layouts/num_pad.dart';
 part 'src/view/keyboard/layouts/num_pad_operators.dart';
 part 'src/view/keyboard/layouts/qwerty.dart';
-part 'src/view/keyboard/layouts/qwerty_fr.dart';
 part 'src/view/keyboard/layouts/qwerty_switch.dart';
-part 'src/view/keyboard/layouts/qwerty_switch_fr.dart';
 part 'src/view/keyboard/soft_keyboard.dart';
 
 //view:experimental

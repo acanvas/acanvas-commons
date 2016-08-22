@@ -50,7 +50,7 @@ abstract class MLifecycle {
 
   onInitComplete();
 
-  void load({Map params: null});
+  Future<bool> load({Map params: null});
 
   void appear({double duration: APPEAR_DURATION_DEFAULT}) {
     //event appear

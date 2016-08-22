@@ -1,10 +1,10 @@
-.idea
 build
 packages
-.packages
 dart_commons
 pubspec.lock
+.idea
 .DS_Store
 .settings
 .project
 .packages
+.pub/

@@ -49,12 +49,12 @@ class LineStyle {
   /**
    * @
    */
-  String _caps;
+  CapsStyle _caps;
 
   /**
    * @
    */
-  String _joints;
+  JointStyle _joints;
 
   /**
    * @
@@ -107,8 +107,8 @@ class LineStyle {
       num alpha = 1.0,
       bool pixelHinting = false,
       String scaleMode = "normal",
-      String caps = null,
-      String joints = null,
+      CapsStyle caps = null,
+      JointStyle joints = null,
       num miterLimit = 3]) {
     this.thickness = thickness;
     this.color = color;
@@ -164,11 +164,11 @@ class LineStyle {
    * A value from the CapsStyle class that specifies the type of caps at the end of lines.
    * @see		http://livedocs.adobe.com/flex/2/langref/flash/display/CapsStyle.html
    */
-  String get caps {
+  CapsStyle get caps {
     return (this._caps != null) ? this._caps : CapsStyle.ROUND;
   }
 
-  void set caps(String value) {
+  void set caps(CapsStyle value) {
     //if (value == CapsStyle.NONE || value == CapsStyle.ROUND || value == CapsStyle.SQUARE){
     this._caps = value;
     //}
@@ -178,11 +178,11 @@ class LineStyle {
    * A value from the JointStyle class that specifies the type of joint appearance used at angles.
    * @see		http://livedocs.adobe.com/flex/2/langref/flash/display/JointStyle.html
    */
-  String get joints {
+  JointStyle get joints {
     return (this._joints != null) ? this._joints : JointStyle.ROUND;
   }
 
-  void set joints(String value) {
+  void set joints(JointStyle value) {
     if (value == JointStyle.BEVEL || value == JointStyle.MITER || value == JointStyle.ROUND) {
       this._joints = value;
     }

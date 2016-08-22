@@ -5,7 +5,7 @@ class Logger implements logging.Logger {
 
   Logger(String name) : _delegate = new logging.Logger(name);
 
-  //noSuchMethod(Invocation invocation) => reflect(_delegate).delegate(invocation);
+  @override
   String get name => _delegate.name;
 
   @override
@@ -73,4 +73,30 @@ class Logger implements logging.Logger {
   @override
   void shout(String message, [Object error, StackTrace stackTrace]) =>
       log(logging.Level.SHOUT, message, error, stackTrace);
+
+  @override
+  void clearListeners() => _delegate.clearListeners();
+
+  @override
+  bool isLoggable(logging.Level value) => _delegate.isLoggable(value);
+
+  @override
+  String get fullName => _delegate.fullName;
+
+  @override
+  logging.Level get level => _delegate.level;
+
+  @override
+  void set level (logging.Level value) {
+    _delegate.level = value;
+  }
+
+  @override
+  Stream<logging.LogRecord> get onRecord => _delegate.onRecord;
+
+  @override
+  Map<String, logging.Logger> get children => _delegate.children;
+
+  @override
+  logging.Logger get parent => _delegate.parent;
 }

@@ -138,7 +138,7 @@ class BookView extends PageManager {
    * List in which the BitmapData for Page instance is stored in. Note that after each pageflip this List is cleaned.
    * @
    */
-  Map bitmapData = {};
+  Map<int,BitmapData> bitmapData = {};
 
   /**
    * DistortImage instance for rendering hard-back Pages during pageflips.
@@ -1213,6 +1213,7 @@ class BookView extends PageManager {
   void saveBitmapData(Page front, Page back) {
     back.hideFoldGradient();
     this.bitmapData = {}; // dispose of BitmapData of pages we won't need right now
+    this.bitmapData?.forEach((idx, BitmapData bmd) => bmd.clear());
     this.bitmapData[front.index] = front.getBitmapData();
     this.bitmapData[back.index] = back.getBitmapData();
     back.showFoldGradient();
@@ -1490,25 +1491,25 @@ class BookView extends PageManager {
     this.regions[0]["TR"] = new Rectangle(0, 0, this._regionSize, this._regionSize);
     this.regions[0]["BR"] = new Rectangle(0, 0, this._regionSize, this._regionSize);
     this.regions[0]["BL"] = new Rectangle(0, 0, this._regionSize, this._regionSize);
-    this.regions[0]["TR"].x += spanWidth / 2 - this.regionSize;
-    this.regions[0]["BR"].x += spanWidth / 2 - this.regionSize;
-    this.regions[0]["BR"].y += spanHeight - this.regionSize;
-    this.regions[0]["BL"].y += spanHeight - this.regionSize;
+    this.regions[0]["TR"].left += spanWidth / 2 - this.regionSize;
+    this.regions[0]["BR"].left += spanWidth / 2 - this.regionSize;
+    this.regions[0]["BR"].top += spanHeight - this.regionSize;
+    this.regions[0]["BL"].top += spanHeight - this.regionSize;
     // specify regions for right-hand page:
     this.regions.add(new Map());
     this.regions[1]["TL"] = new Rectangle(spanWidth / 2, 0, this._regionSize, this._regionSize);
     this.regions[1]["TR"] = new Rectangle(spanWidth / 2, 0, this._regionSize, this._regionSize);
     this.regions[1]["BR"] = new Rectangle(spanWidth / 2, 0, this._regionSize, this._regionSize);
     this.regions[1]["BL"] = new Rectangle(spanWidth / 2, 0, this._regionSize, this._regionSize);
-    this.regions[1]["TR"].x += spanWidth / 2 - this.regionSize;
-    this.regions[1]["BR"].x += spanWidth / 2 - this.regionSize;
-    this.regions[1]["BR"].y += spanHeight - this.regionSize;
-    this.regions[1]["BL"].y += spanHeight - this.regionSize;
+    this.regions[1]["TR"].left += spanWidth / 2 - this.regionSize;
+    this.regions[1]["BR"].left += spanWidth / 2 - this.regionSize;
+    this.regions[1]["BR"].top += spanHeight - this.regionSize;
+    this.regions[1]["BL"].top += spanHeight - this.regionSize;
     // specify side-flip regions for both pages:
     this.regions[0]
         ["side"] = new Rectangle(0, (spanHeight - this._regionSize) / 2, this._regionSize / 2, this._regionSize);
     this.regions[1]["side"] = this.regions[0]["side"].clone();
-    this.regions[0]["side"].x = spanWidth - this._regionSize / 2;
+    this.regions[0]["side"].left = spanWidth - this._regionSize / 2;
   }
 
   /**

@@ -1,6 +1,6 @@
 name: rockdot_commons
-version: 0.5.2
-description: Röckdöt Cömmöns consist of a port of as3commons and highly customizable View Components, including a Material Design implementation
+version: 0.5.5
+description: Rockdot Commons consist of a port of as3commons and highly customizable View Components, including a Material Design implementation
 dependencies:
   logging: any
   stagexl: any
