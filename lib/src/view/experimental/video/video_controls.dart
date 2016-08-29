@@ -51,8 +51,10 @@ class VideoControls extends BoxSprite {
 
   void _onVideoClick(MouseEvent event) {
 //			_log.print("_onVideoClick");
-    if (_isVideoCompleted) _playAgain();
-    else _video.togglePause();
+    if (_isVideoCompleted)
+      _playAgain();
+    else
+      _video.togglePause();
   }
 
   void _onVideoDoubleClick(MouseEvent event) {

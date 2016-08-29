@@ -70,7 +70,7 @@ class Page extends Sprite {
   /**
    * @
    */
-  Shape _shape = new Shape();
+  Sprite _shape = new Sprite();
 
   /**
    * @see	Page#liveBitmapping
@@ -108,7 +108,7 @@ class Page extends Sprite {
    * Constructor
    */
   Page([Bitmap bm = null]) : super() {
-    if (bm != null || bm == true) {
+    if (bm != null) {
       addChild(bm);
     }
 
@@ -140,7 +140,7 @@ class Page extends Sprite {
   void drawFoldGradient() {
     String tint = (this.side == Page.LEFT) ? Gradients.LIGHT : Gradients.DARK;
     num rotate = (this.side == Page.LEFT) ? Gradients.ROTATE_FULL : Gradients.ROTATE_HALF;
-    this._shape.graphics.clear();
+    clearFoldGradient();
     this._gradients.drawFold(this._shape.graphics, tint, rotate);
   }
 
@@ -180,12 +180,12 @@ class Page extends Sprite {
     // refresh fold-gradients:
     if (this.hard) {
       this.clearFoldGradient();
-      if (includeFlipSide != null || includeFlipSide == true) {
+      if (includeFlipSide) {
         flipSide.clearFoldGradient();
       }
     } else {
       this.drawFoldGradient();
-      if (includeFlipSide != null || includeFlipSide == true) {
+      if (includeFlipSide) {
         flipSide.drawFoldGradient();
       }
     }

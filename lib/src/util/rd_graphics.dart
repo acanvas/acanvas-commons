@@ -106,11 +106,29 @@ class RdGraphics {
     return sprite;
   }
 
-  static GraphicsGradient linearGraphicsGradient(List colors, List alphas, List ratios, Matrix matrix) {
-    GraphicsGradient g = new GraphicsGradient.linear(matrix.tx, matrix.ty, matrix.a * matrix.c, matrix.b * matrix.d);
+  static GraphicsGradient linearGraphicsGradient(List colors, List alphas, List ratios, Matrix matrix, Point p1, Point p2) {
+    //Point point1 = matrix.transformPoint(p1);
+    //Point point2 = matrix.transformPoint(p2);
+
+    Point point1 = matrix.transformPoint(new Point(0,0));
+    Point point2 = matrix.transformPoint(new Point(1,0));
+
+    //hack 1 doesnt seem to work
+    Rectangle r = new Rectangle(0, 0, 1, 1);
+    r = matrix.transformRectangle(r);
+    //print("point1.x: ${point1.x} rect TLx: ${r.topLeft.x}");
+
+
+
+    //GraphicsGradient g = new GraphicsGradient.linear(r.topLeft.x, r.topLeft.y, r.topRight.x, r.topRight.y);
+    GraphicsGradient g = new GraphicsGradient.linear(point1.x, point1.y, point2.x, point2.y);
+    /*
+    GraphicsGradient g = new GraphicsGradient.linear(450, 0, 0, 600);
+    */
     for (int i = 0; i < colors.length; i++) {
-      g.addColorStop(ratios[i] / 255, ((alphas[i] * 256).round() << 24) + colors[i]);
+      g.addColorStop(ratios[i] / 255, ((alphas[i] * 255).round() << 24) + colors[i]);
     }
     return g;
   }
+
 }

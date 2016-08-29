@@ -104,7 +104,7 @@ class PageFlip {
     // transform matrix
     Matrix mat = new Matrix.fromIdentity();
 
-    if (ish == null || ish == false) {
+    if (!ish) {
       // size
       temp = pw;
       pw = ph;
@@ -199,7 +199,7 @@ class PageFlip {
 
     // if !ish (vertical mode)
     // we have to change the points orientation
-    if (ish == null || ish == false) {
+    if (!ish) {
       oriPoints(cPoints, spt, pw, ph);
       oriPoints(pPoints, spt, pw, ph);
     }
@@ -210,7 +210,7 @@ class PageFlip {
 
     if (pt.y == 0) gama = -gama;
     if (pt.x == 0) gama = PI + PI - gama;
-    if (ish == null || ish == false) gama = PI - gama;
+    if (!ish) gama = PI - gama;
 
     mat.a = cos(gama);
     mat.b = sin(gama);
@@ -221,7 +221,7 @@ class PageFlip {
 
     // here we fix some mathematical bugs or instabilities
     if (vhyp == 0) cPoints = null;
-    if ((dfx) < 1 && dfy.abs() < 1) cPoints = null;
+    if ((dfx).abs() < 1 && dfy.abs() < 1) cPoints = null;
 
     // now we just have to return all the stuff
     return {"cPoints": cPoints, "pPoints": pPoints, "matrix": mat, "width": opw, "height": oph};
@@ -236,7 +236,7 @@ class PageFlip {
    * @param	bmp1		Second page bitmap (left-top aligned)
    *
    */
-  static void drawBitmapSheet(Map ocf, Shape mc, BitmapData bmp0, BitmapData bmp1) {
+  static void drawBitmapSheet(Map ocf, Sprite mc, BitmapData bmp0, BitmapData bmp1) {
     // affectations
     num wid = ocf["width"];
     num hei = ocf["height"];
@@ -246,17 +246,21 @@ class PageFlip {
 
     // draw the fixed part
     nb = ppts.length;
+    mc.graphics.beginPath();
     mc.graphics.moveTo(ppts[nb - 1].x, ppts[nb - 1].y);
     while (--nb >= 0) mc.graphics.lineTo(ppts[nb].x, ppts[nb].y);
     mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp0.renderTextureQuad, new Matrix.fromIdentity()));
+    mc.graphics.closePath();
 
     // draw the flipped part
     if (cpts == null) return;
 
     nb = cpts.length;
+    mc.graphics.beginPath();
     mc.graphics.moveTo(cpts[nb - 1].x, cpts[nb - 1].y);
     while (--nb >= 0) mc.graphics.lineTo(cpts[nb].x, cpts[nb].y);
     mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp1.renderTextureQuad, ocf["matrix"]));
+    mc.graphics.closePath();
   }
 
   // ------------------------------------------------
@@ -349,7 +353,7 @@ class PageFlip {
     if (spt.x == 1 && spt.y == 0) {
       mat.tx = cPoints[0].x;
       mat.ty = cPoints[0].y;
-      if (ish == null || ish == false) {
+      if (!ish) {
         mat.tx = cPoints[0].x - cos(gama) * opw - cos(-beta) * oph;
         mat.ty = cPoints[0].y - sin(gama) * opw - sin(-beta) * oph;
       }
@@ -358,7 +362,7 @@ class PageFlip {
     if (spt.x == 1 && spt.y == 1) {
       mat.tx = cPoints[0].x + cos(-beta) * oph;
       mat.ty = cPoints[0].y + sin(-beta) * oph;
-      if (ish == null || ish == false) {
+      if (!ish) {
         mat.tx = cPoints[0].x + cos(-beta) * oph;
         mat.ty = cPoints[0].y - sin(-beta) * oph;
       }
@@ -372,7 +376,7 @@ class PageFlip {
     if (spt.x == 0 && spt.y == 1) {
       mat.tx = cPoints[0].x - cos(gama) * opw - cos(-beta) * oph;
       mat.ty = cPoints[0].y - sin(gama) * opw + sin(-beta) * oph;
-      if (ish == null || ish == false) {
+      if (!ish) {
         mat.tx = cPoints[0].x;
         mat.ty = cPoints[0].y;
       }

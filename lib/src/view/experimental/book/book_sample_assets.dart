@@ -25,7 +25,7 @@ class BookSampleAssets {
   }
 
   static void load(Function cb) {
-    _singleton.assets.forEach((String asset)  =>  _singleton.mgr.addBitmapData(asset, 'book/' + asset + '.jpg'));
+    _singleton.assets.forEach((String asset) => _singleton.mgr.addBitmapData(asset, 'book/' + asset + '.jpg'));
     _singleton.mgr.load().then((ResourceManager mgr) => cb());
   }
 }

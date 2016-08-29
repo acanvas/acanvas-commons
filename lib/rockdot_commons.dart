@@ -135,6 +135,7 @@ part 'src/view/keyboard/soft_keyboard.dart';
 part 'src/view/experimental/flick_image.dart';
 //view:book
 part 'src/view/experimental/book/book_view.dart';
+part 'src/view/experimental/book/md_sample_page.dart';
 part 'src/view/experimental/book/book_sample_assets.dart';
 part 'src/view/experimental/book/containers/super_view_stack.dart';
 part 'src/view/experimental/book/drawing/drawing_tool.dart';

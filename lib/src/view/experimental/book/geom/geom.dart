@@ -162,7 +162,7 @@ class Geom {
     }
 
     // find out whether or not the provided corner of Rectangle contains Point:
-    if (triangular != null || triangular == true) {
+    if (triangular == true) {
       bool value;
       Point relativeMouse = new Point(point.x - rect.left, point.y - rect.top);
       // if we're working with an imaginary seperation-line going from top-right to bottom-left:

@@ -258,7 +258,7 @@ class InfiniteLine {
       value2 = point.y;
     }
     // round if necessary:
-    if (round != null || round == true) {
+    if (round == true) {
       value1 = (value1).round();
       value2 = (value2).round();
     }
@@ -277,7 +277,7 @@ class InfiniteLine {
   bool isParallelTo(InfiniteLine line, [bool round = true]) {
     num value1 = this.xCoefficient;
     num value2 = line.xCoefficient;
-    if (round != null || round == true) {
+    if (round == true) {
       value1 = (value1 * InfiniteLine.ROUND).round() / InfiniteLine.ROUND;
       value2 = (value2 * InfiniteLine.ROUND).round() / InfiniteLine.ROUND;
     }
@@ -297,7 +297,7 @@ class InfiniteLine {
     num value2 = line.xIntersection;
     num value3 = this.yIntersection;
     num value4 = line.yIntersection;
-    if (round != null || round == true) {
+    if (round == true) {
       value1 = (value1).round();
       value2 = (value2).round();
       value3 = (value3).round();
@@ -318,7 +318,7 @@ class InfiniteLine {
     if (this.horizontal == value) {
       return;
     }
-    if (value != null || value == true) {
+    if (value == true) {
       this.setXCoefficient(0);
     } else {
       this.setXCoefficient(1);
@@ -337,7 +337,7 @@ class InfiniteLine {
     if (this.vertical == value) {
       return;
     }
-    if (value != null || value == true) {
+    if (value == true) {
       this.yCoefficient = (this.yCoefficient >= 0) ? double.INFINITY : double.NEGATIVE_INFINITY;
     } else {
       this.yCoefficient = 1;

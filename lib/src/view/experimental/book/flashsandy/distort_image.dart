@@ -135,6 +135,17 @@ class DistortImage {
    *
    */
   void setTransform(Graphics graphics, BitmapData bmd, Point tl, Point tr, Point br, Point bl) {
+/*
+    tl.x = 0;
+    tl.y = 0;
+    tr.x = 450;
+    tr.y = -40;
+    br.x = 450;
+    br.y = 640;
+    bl.x = 0;
+    bl.y = 600;
+*/
+
     num dx30 = bl.x - tl.x;
     num dy30 = bl.y - tl.y;
     num dx21 = br.x - tr.x;
@@ -146,8 +157,8 @@ class DistortImage {
       num gy = (point["y"] - _yMin) / _h;
       num bx = tl.x + gy * (dx30);
       num by = tl.y + gy * (dy30);
-      point["sx"] = bx + gx * ((tr.x + gy * (dx21)) - bx);
-      point["sy"] = by + gx * ((tr.y + gy * (dy21)) - by);
+      _p[l]["sx"] = bx + gx * ((tr.x + gy * (dx21)) - bx);
+      _p[l]["sy"] = by + gx * ((tr.y + gy * (dy21)) - by);
     }
     __render(graphics, bmd);
   }
@@ -163,12 +174,14 @@ class DistortImage {
   void __render(Graphics graphics, BitmapData bmd) {
     num t;
     List vertices;
-    /*Object*/
-    Map p0, p1, p2;
     _tMat = new Matrix.fromIdentity();
     _sMat = new Matrix.fromIdentity();
+    var _spcMat = new Matrix.fromIdentity();
+    /*Object*/
+    Map p0, p1, p2;
     List a;
     num l = _tri.length;
+
     while (--l > -1) {
       a = _tri[l];
       p0 = a[0];
@@ -203,11 +216,25 @@ class DistortImage {
 
       _tMat.invert();
       _tMat.concat(_sMat);
-      // draw:
+
+      // draw (uncomment lines to show tesselation lines for debugging):
+      graphics.beginPath();
       graphics.moveTo(x0, y0);
       graphics.lineTo(x1, y1);
       graphics.lineTo(x2, y2);
-      graphics.fillPattern(new GraphicsPattern.noRepeat(bmd.renderTextureQuad, _tMat /*smoothing*/));
+      graphics.lineTo(x0, y0);
+      // graphics.fillColor((0x55FF0000 / (l+1/12)).round());
+      // graphics.strokeColor(0x00FF0000);
+
+      graphics.closePath();
+
+      if (l == 17) {
+        _spcMat = _tMat;
+      }
+
+      //graphics.fillPattern(new GraphicsPattern.noRepeat(new BitmapData(450, 600, 0x55FF0000).renderTextureQuad, _tMat /*smoothing*/));
+      var pat = new GraphicsPattern.noRepeat(bmd.renderTextureQuad, l == 0 ? _spcMat : _tMat /*smoothing*/);
+      graphics.fillPattern(pat);
     }
   }
 

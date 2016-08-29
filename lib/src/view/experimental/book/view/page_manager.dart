@@ -49,10 +49,10 @@ class PageManager extends LifecycleSprite {
   SuperViewStack pageR = new SuperViewStack();
 
   /**
-   * Shape instance on which pageflips are drawn as BitmapData.
+   * Sprite instance on which pageflips are drawn as BitmapData.
    * @
    */
-  Shape renderShape = new Shape();
+  Sprite renderSprite = new Sprite();
 
   // internals for accessors:
   /**
@@ -110,7 +110,7 @@ class PageManager extends LifecycleSprite {
   }
 
   /**
-   * Adds the ViewStacks for left and right, also adds a render Shape (for during pageflips).
+   * Adds the ViewStacks for left and right, also adds a render Sprite (for during pageflips).
    *
    * @
    */
@@ -122,11 +122,11 @@ class PageManager extends LifecycleSprite {
     this.pageR.span(spanWidth / 2, spanHeight);
 
     this.pageL.fade = this.pageR.fade = 0;
-    this.pageR.x = this.renderShape.x = spanWidth / 2;
+    this.pageR.x = this.renderSprite.x = spanWidth / 2;
 
     super.addChild(this.pageL);
     super.addChild(this.pageR);
-    super.addChild(this.renderShape);
+    super.addChild(this.renderSprite);
 
     // if the amount of Pages is uneven, add another Page:
     if (this._pages.length % 2 == 1) {
@@ -344,7 +344,8 @@ class PageManager extends LifecycleSprite {
       if ((child1).book != this || index1 == -1 || (child2).book != this || index2 == -1) {
         throw new ArgumentError(BookError.PAGE_NOT_CHILD);
       }
-      ChildTool.swapChildren(child1, child2);
+      super.swapChildren(child1, child2);
+
       this._pages[index1] = (child2);
       this._pages[index2] = (child1);
       this.refreshViewStacks();

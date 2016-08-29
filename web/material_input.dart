@@ -25,7 +25,8 @@ void start() {
 
   Wrap vbox = new Wrap(spacing: 40, reflow: false)
     ..x = 10
-    ..y = 10;
+    ..y = 10
+  ..autoSpan = false;
 
   /*
    * Standard Input Field with Label

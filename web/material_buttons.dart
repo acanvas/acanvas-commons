@@ -78,13 +78,15 @@ void start() {
   /* Vertical Container */
   Wrap vbox = new Wrap(spacing: 20, reflow: false)
     ..x = 10
-    ..y = 10;
+    ..y = 10
+  ..flow.flowOrientation = FlowOrientation.VERTICAL;
 
   /*
    * 1st row: standard square buttons with preset colors
    */
   Flow hbox1 = new Flow()
-    ..spacing = 20;
+    ..spacing = 20
+  ..inheritSpan = true;
 
   MdButton button1 = new MdButton("SUBMIT", preset: MdButton.PRESET_WHITE);
   hbox1.addChild(button1);
@@ -101,11 +103,13 @@ void start() {
   vbox.addChild(hbox1);
 
 
+
   /*
    * 2nd row: standard square Md buttons with Md Ripple custom color override
    */
   Flow hbox2 = new Flow()
-    ..spacing = 20;
+    ..spacing = 20
+    ..inheritSpan = true;
 
   MdButton plusOneButton1 = new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16);
   hbox2.addChild(plusOneButton1);
@@ -123,7 +127,9 @@ void start() {
    * 3rd row: transparent round Md buttons with Core Icons and Md Ripples
    */
   Flow hbox3 = new Flow()
-    ..spacing = 20;
+    ..spacing = 20
+    ..inheritSpan = true;
+
 
   MdFab iconButton1 = new MdFab(MdIcon.black(MdIconSet.menu), bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.BLACK, shadow: false);
   hbox3.addChild(iconButton1);
@@ -144,7 +150,9 @@ void start() {
    * 4th row: standard Md Fabs with Core Icons and Md Ripples
    */
   Flow hbox4 = new Flow()
-    ..spacing = 20;
+    ..spacing = 20
+    ..inheritSpan = true;
+
 
   MdFab roundButton1 = new MdFab(MdIcon.white(MdIconSet.add), bgColor: MdColor.RED);
   hbox4.addChild(roundButton1);
@@ -162,7 +170,9 @@ void start() {
    * 5th row: Md Menus with Md Items and Md Ripples
    */
   Flow hbox5 = new Flow()
-    ..spacing = 20;
+    ..spacing = 20
+    ..inheritSpan = true;
+
 
   List testList = [];
   for(int i = 0; i < 40; i++){

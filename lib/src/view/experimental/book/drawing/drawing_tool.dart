@@ -37,7 +37,7 @@ class DrawingTool {
    * @param	graphics	Graphics instance on which to draw the shape.
    * @param	point		List or Point specifying one or more Point instances. If the point parameter value is neither a Point nor an List then the function will silently fail.
    * @param	size		Size of the marker.
-   * @param	shape		Shape of the marker, either DrawingTool.CROSS or DrawingTool.CIRCLE. Defaults to DrawingTool.CROSS.
+   * @param	shape		Sprite of the marker, either DrawingTool.CROSS or DrawingTool.CIRCLE. Defaults to DrawingTool.CROSS.
    * @param	lineStyle	LineStyle instance carrying the styles for the lines of the marker to be drawn.
    *
    * @see		LineStyle
@@ -125,7 +125,7 @@ class DrawingTool {
         drawLine(graphics, newArea[i - 1], newArea[i], lineStyle, false);
       }
     }
-    if (connect != null || connect == true) {
+    if (connect == true) {
       drawLine(graphics, newArea[newArea.length - 1], newArea[0], lineStyle, false);
     }
   }
@@ -161,7 +161,7 @@ class DrawingTool {
    */
   static void drawLine(Graphics graphics, Point point1, Point point2,
       [LineStyle lineStyle = null, bool moveTo = true]) {
-    if (moveTo != null || moveTo == true) {
+    if (moveTo == true) {
       graphics.moveTo(point1.x, point1.y);
     }
 

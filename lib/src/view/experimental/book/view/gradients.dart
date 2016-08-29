@@ -161,10 +161,12 @@ class Gradients {
     Matrix matrix = this.createNewMatrix(point1, point2, rotate);
 
     // draw gradient:
-    DrawingTool.rect(graphics, area);
-    GraphicsGradient g =
-        RdGraphics.linearGraphicsGradient(gradient["color"], gradient["alpha"], gradient["ratio"], matrix);
+    graphics.beginPath();
+    graphics.rect(area.left, area.top, area.width, area.height);
+    GraphicsGradient g = RdGraphics.linearGraphicsGradient(
+        gradient["color"], gradient["alpha"], gradient["ratio"], matrix, point1, point2);
     graphics.fillGradient(g);
+    graphics.closePath();
   }
 
   /**
@@ -209,13 +211,15 @@ class Gradients {
     int color = (tint == Gradients.DARK) ? Gradients.DARKCOLOR : Gradients.LIGHTCOLOR;
 
     // calculate strength (of as opacity) the "color":
-    num strength = (this._page.book.spanWidth / 2 - (area[0].x - area[1].x)) /
-        (this._page.book.spanWidth / 2).abs() *
+    num strength = (this._page.book.spanWidth / 2 - (area[0].x - area[1].x).abs()) /
+        (this._page.book.spanWidth / 2) *
         this._solidColorAlpha;
 
     // draw "color":
+    graphics.beginPath();
     DrawingTool.draw(graphics, area);
-    graphics.fillColor(((strength * 256).round() << 24) + color);
+    graphics.fillColor(((strength * 255).round() << 24) + color);
+    graphics.closePath();
   }
 
   /**
@@ -270,7 +274,7 @@ class Gradients {
         intersection2 = Line.getIntersection(line, hLine);
 
         // replace the out-of-bounds Point with the two intersection Points:
-        newArea.replaceRange(1, 1, [intersection2, intersection1]);
+        newArea.replaceRange(1, 2, [intersection2, intersection1]);
       }
     }
 
@@ -319,7 +323,7 @@ class Gradients {
           int spliceAt;
           if (newArea[1].y < 0 || newArea[1].y > this._page.book.spanHeight) spliceAt = 0;
           if (newArea[2].y < 0 || newArea[2].y > this._page.book.spanHeight) spliceAt = newArea.length - 4;
-          newArea.replaceRange(spliceAt, 2, [intersection]);
+          newArea.replaceRange(spliceAt, spliceAt + 2, [intersection]);
         }
       }
     }
@@ -331,11 +335,18 @@ class Gradients {
     Matrix matrix = this.createNewMatrix(point1, point2, rotate);
 
     // draw gradient:
+    graphics.beginPath();
     DrawingTool.draw(graphics, newArea);
 
-    GraphicsGradient gr =
-        RdGraphics.linearGraphicsGradient(gradient["color"], gradient["alpha"], gradient["ratio"], matrix);
+    GraphicsGradient gr = RdGraphics.linearGraphicsGradient(
+        gradient["color"],
+        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION),
+        gradient["ratio"],
+        matrix,
+        point1,
+        point2);
     graphics.fillGradient(gr);
+    graphics.closePath();
   }
 
   /**
@@ -373,7 +384,6 @@ class Gradients {
   void drawOutsideHard(Graphics graphics, List area) {
     Map gradient0 = Gradients.OUTSIDE_HARD["dark"];
     Map gradient1 = Gradients.OUTSIDE_HARD["light"];
-
     // define the coordinates for the gradients:
     Rectangle area0 = new Rectangle(0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
     Rectangle area1 = new Rectangle(0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
@@ -394,18 +404,32 @@ class Gradients {
 
     // draw left gradient:
     if (strength0 > 0) {
-      DrawingTool.rect(graphics, area0);
-      GraphicsGradient g = RdGraphics.linearGraphicsGradient(gradient0["color"],
-          ListTool.adjustValues(gradient0["alpha"], strength0, MathTool.MULTIPLICATION), gradient0["ratio"], matrix0);
+      graphics.beginPath();
+      graphics.rect(area0.left, area0.top, area0.width, area0.height);
+      GraphicsGradient g = RdGraphics.linearGraphicsGradient(
+          gradient0["color"],
+          ListTool.adjustValues(gradient0["alpha"], strength0, MathTool.MULTIPLICATION),
+          gradient0["ratio"],
+          matrix0,
+          area0.topLeft,
+          area0.bottomRight);
       graphics.fillGradient(g);
+      graphics.closePath();
     }
 
     // draw right gradient:
     if (strength1 > 0) {
-      DrawingTool.rect(graphics, area1);
-      GraphicsGradient g = RdGraphics.linearGraphicsGradient(gradient1["color"],
-          ListTool.adjustValues(gradient1["alpha"], strength1, MathTool.MULTIPLICATION), gradient1["ratio"], matrix1);
+      graphics.beginPath();
+      graphics.rect(area1.left, area1.top, area1.width, area1.height);
+      GraphicsGradient g = RdGraphics.linearGraphicsGradient(
+          gradient1["color"],
+          ListTool.adjustValues(gradient1["alpha"], strength1, MathTool.MULTIPLICATION),
+          gradient1["ratio"],
+          matrix1,
+          area1.topLeft,
+          area1.bottomRight);
       graphics.fillGradient(g);
+      graphics.closePath();
     }
   }
 
@@ -417,9 +441,8 @@ class Gradients {
   void drawOutsideSmooth(Graphics graphics, List area,
       [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     Map gradient = Gradients.OUTSIDE_SMOOTH[tint];
-
     // define the points that the calculation will be based on:
-    List newArea;
+    List<Point> newArea;
     Point point1 = area[area.length - 3];
     Point point2 = area[area.length - 2];
     // calculation for normal pageflips:
@@ -455,7 +478,7 @@ class Gradients {
     num strength;
     if (!this._page.book.tearActive) {
       max = this._page.book.spanWidth / 2;
-      strength = 1 - (max / 2 - (point3.x - point4.x).abs()) / (max / 2).abs();
+      strength = 1 - (max / 2 - (point3.x - point4.x).abs()).abs() / (max / 2);
     } else {
       max = this._page.book.spanHeight;
       strength = 1 - (point3.y - point4.y).abs() / max;
@@ -465,10 +488,17 @@ class Gradients {
     Matrix matrix = this.createNewMatrix(point1, point2, rotate);
 
     // draw gradient:
+    graphics.beginPath();
     DrawingTool.draw(graphics, newArea);
-    GraphicsGradient g = RdGraphics.linearGraphicsGradient(gradient["color"],
-        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION), gradient["ratio"], matrix);
+    GraphicsGradient g = RdGraphics.linearGraphicsGradient(
+        gradient["color"],
+        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION),
+        gradient["ratio"],
+        matrix,
+        point1,
+        point2);
     graphics.fillGradient(g);
+    graphics.closePath();
   }
 
   /**
@@ -495,7 +525,6 @@ class Gradients {
     if (this._page.hard) {
       return;
     }
-
     Map gradient = Gradients.FLIPSIDE[tint];
 
     // define the points that the calculation will be based on:
@@ -506,16 +535,23 @@ class Gradients {
     Point point3 = Point.interpolate(point1, point2, 0.5);
     Point point4 = Point.interpolate(area[0], area[1], 0.5);
     num max = this._page.book.spanWidth / 2;
-    num strength = 0.5 + ((point3.x - point4.x) / max).abs() * 0.5;
+    num strength = 0.5 + ((point3.x - point4.x).abs() / max) * 0.5;
 
     // create the model for the gradient:
     Matrix matrix = this.createNewMatrix(point1, point2, rotate);
 
     // draw gradient:
+    graphics.beginPath();
     DrawingTool.draw(graphics, area);
-    GraphicsGradient g = RdGraphics.linearGraphicsGradient(gradient["color"],
-        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION), gradient["ratio"], matrix);
+    GraphicsGradient g = RdGraphics.linearGraphicsGradient(
+        gradient["color"],
+        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION),
+        gradient["ratio"],
+        matrix,
+        point1,
+        point2);
     graphics.fillGradient(g);
+    graphics.closePath();
   }
 
   /**
@@ -537,7 +573,7 @@ class Gradients {
    * @
    */
   Matrix createNewMatrix(Point point1, Point point2, [num rotate = Gradients.ROTATE_FULL]) {
-    rotate *= PI * 2;
+    rotate *= PI * 2; // convert to radians
 
     // get offset and angle:
     Point offset = this.getOffset(point1, point2);
@@ -552,9 +588,22 @@ class Gradients {
       offset.y -= (larger - smaller) / 2;
     }
 
+    Sprite s = new Sprite();
+    s.graphics.rect(0, 0, larger, larger);
+    s.pivotX = larger / 2;
+    s.pivotY = larger / 2;
+    s.rotation = angle;
+
+    //this here should be right for all
+    num offsetX = offset.x + s.boundsTransformed.topLeft.x + larger / 2;
+    num offsetY = offset.y + s.boundsTransformed.topLeft.y + larger / 2;
+
     // create the model for the gradient:
     Matrix matrix = new Matrix.fromIdentity();
-    matrix.createBox(larger, larger, angle, offset.x, offset.y);
+    matrix.createBox(larger, larger, angle, offsetX, offsetY);
+
+    s.graphics.clear();
+    s = null;
 
     // return value:
     return matrix;

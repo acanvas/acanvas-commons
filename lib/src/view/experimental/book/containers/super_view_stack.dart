@@ -44,7 +44,7 @@ class SuperViewStack extends BoxSprite {
 
   // constants:
   /**
-   * Name of the Shape that is used to simulate fading of Containers.
+   * Name of the Sprite that is used to simulate fading of Containers.
    */
   static final String FADESHAPE_NAME = "superviewstackfade";
 
@@ -153,7 +153,7 @@ class SuperViewStack extends BoxSprite {
       super.addChildAt(child, this.reverseIndex(index) + 1);
     }
 
-    // create a Shape for the fade to be drawn on and make sure it gets sized on the right time:
+    // create a Sprite for the fade to be drawn on and make sure it gets sized on the right time:
     this.drawFade(child as Sprite);
     child.addEventListener(Event.ADDED_TO_STAGE, this.childCreationComplete);
 
@@ -326,30 +326,30 @@ class SuperViewStack extends BoxSprite {
   }
 
   /**
-   * Creates an empty Shape (for the fade to be drawn on) inside a child.
+   * Creates an empty Sprite (for the fade to be drawn on) inside a child.
    *
    * @param	child	Child of this SuperViewStack instance
    *
    * @
    */
   void drawFade(Sprite child) {
-    Shape shape = new Shape();
+    Sprite shape = new Sprite();
     shape.name = SuperViewStack.FADESHAPE_NAME;
     child.addChild(shape);
   }
 
   /**
-   * Sizes of resizes the Shape in which the fade is drawn, called by childCreationComplete()
+   * Sizes of resizes the Sprite in which the fade is drawn, called by childCreationComplete()
    *
-   * @param	child	Child of this SuperViewStack instance whose fade Shape to resize.
+   * @param	child	Child of this SuperViewStack instance whose fade Sprite to resize.
    *
    * @see		SuperViewStack#childCreationComplete()
    *
    * @
    */
   void resizeFade(Sprite child) {
-    // point out the Shape:
-    Shape shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Shape;
+    // point out the Sprite:
+    Sprite shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Sprite;
 
     // size and position:
     shape.x = -child.x;
@@ -367,19 +367,21 @@ class SuperViewStack extends BoxSprite {
    */
   void applyFade() {
     Sprite child;
-    Shape shape;
+    Sprite shape;
 
     for (int i = 0; i < this.numChildren; i++) {
       child = super.getChildAt(i) as Sprite;
-      shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Shape;
+      shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Sprite;
 
       shape.visible = (this._fade != 0);
       if (!shape.visible) continue;
 
       shape.graphics.clear();
       if (i != this._selectedIndex) {
+        shape.graphics.beginPath();
         shape.graphics.rect(0, 0, 100, 100);
-        shape.graphics.fillColor(((this._fade * 256).round() << 24) + this._fadeColor);
+        shape.graphics.fillColor(((this._fade * 255).round() << 24) + this._fadeColor);
+        shape.graphics.closePath();
       }
     }
   }
