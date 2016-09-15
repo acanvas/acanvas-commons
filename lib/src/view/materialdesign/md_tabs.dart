@@ -53,7 +53,6 @@ class MdTabs extends BoxSprite {
     tabBox.x = 0;
 
     if (tabBox.numChildren > 0) {
-      tabBox.y = spanHeight - tabBox.height;
 
       if (distributeTabs) {
         for (int i = 0; i < tabBox.numChildren; i++) {
@@ -62,6 +61,8 @@ class MdTabs extends BoxSprite {
         }
         tabBox.refresh();
       }
+
+      tabBox.y = spanHeight - tabBox.height;
 
       RdGraphics.line((tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0,
           strength: 2, sprite: _slideBar, color: highlightColor);
