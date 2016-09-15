@@ -33,7 +33,7 @@ class Button extends BehaveSprite with MButton {
   }
 
   void enableAction() {
-    alpha = 1;
+    if(alpha == 0.6) alpha = 1;
     filters = [];
     rollOutAction();
   }
@@ -59,7 +59,7 @@ class Button extends BehaveSprite with MButton {
   }
 
   void disableAction() {
-    alpha = .6;
+    if(alpha == 1.0) alpha = .6;
     filters = [
       new ColorMatrixFilter.grayscale()
     ];
