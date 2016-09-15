@@ -1,5 +1,7 @@
 part of rockdot_commons;
 
+enum IconPosition { LEFT, RIGHT }
+
 class MdButton extends SelectableButton {
   static const int SPACER = 10;
 
@@ -17,6 +19,7 @@ class MdButton extends SelectableButton {
   MdRipple _paperRipple;
   SvgDisplayObject icon;
   bool shadow;
+  IconPosition iconPosition;
 
 
   MdButton(String text,
@@ -24,38 +27,41 @@ class MdButton extends SelectableButton {
       num height: MdDimensions.HEIGHT_BUTTON,
       int bgColor: -1,
       int fontColor: -1,
+      int rippleColor: -1,
       String fontName: MdText.DEFAULT_FONT,
       int fontSize: 14,
       int preset: PRESET_WHITE,
       this.shadow: true,
       bool background: true,
       bool ripple: true,
-      this.icon})
+      this.icon,
+      this.iconPosition : IconPosition.LEFT})
       : super() {
 
     selfSelect = false;
-    int _fontAndRippleColor;
+    int _fontColor;
+    int _rippleColor;
 
     switch (preset) {
       case PRESET_WHITE:
         _bgColor = MdColor.WHITE;
-        _fontAndRippleColor = 0xFF646464;
+        _fontColor = 0xFF646464;
         break;
       case PRESET_GREY:
         _bgColor = MdColor.GREY;
-        _fontAndRippleColor = 0xFF646464;
+        _fontColor = _rippleColor = 0xFF646464;
         break;
       case PRESET_BLUE:
         _bgColor = MdColor.BLUE;
-        _fontAndRippleColor = 0xFFFFFFFF;
+        _fontColor = _rippleColor = 0xFFFFFFFF;
         break;
       case PRESET_GREEN:
         _bgColor = MdColor.GREEN;
-        _fontAndRippleColor = 0xFFFFFFFF;
+        _fontColor = _rippleColor = 0xFFFFFFFF;
         break;
       case PRESET_RED:
         _bgColor = MdColor.RED;
-        _fontAndRippleColor = 0xFFFFFFFF;
+        _fontColor = _rippleColor = 0xFFFFFFFF;
         break;
     }
 
@@ -64,7 +70,11 @@ class MdButton extends SelectableButton {
     }
 
     if (fontColor != -1) {
-      _fontAndRippleColor = fontColor;
+      _fontColor = _rippleColor = fontColor;
+    }
+
+    if (rippleColor != -1) {
+      _rippleColor = rippleColor;
     }
 
     if (background) {
@@ -74,7 +84,7 @@ class MdButton extends SelectableButton {
     }
 
     if (ripple) {
-      _paperRipple = new MdRipple(color: _fontAndRippleColor);
+      _paperRipple = new MdRipple(color: _rippleColor);
       addChild(_paperRipple);
     }
 
@@ -83,7 +93,7 @@ class MdButton extends SelectableButton {
     }
 
     _label =
-        new MdText(text.toUpperCase(), size: fontSize, color: _fontAndRippleColor, fontName: fontName, weight: 300);
+        new MdText(text.toUpperCase(), size: fontSize, color: _fontColor, fontName: fontName, weight: 300);
     _label.width = LABEL_MAX_WIDTH;
     addChild(_label);
 
@@ -100,11 +110,21 @@ class MdButton extends SelectableButton {
     }
 
     _label.width = spanWidth - SPACER;
-    _label.y = (spanHeight / 2 - _label.textHeight / 2).floor();
+    _label.y = (spanHeight / 2 - _label.textHeight / 2 + 2).floor();
 
     if (icon != null) {
-      icon.x = (_label.x - icon.width / 2 - 12).round();
-      _label.x += (14 + icon.width).round();
+
+      switch(iconPosition){
+        case IconPosition.LEFT:
+          icon.x = (_label.x - icon.width / 2 - 12).round();
+          _label.x += (14 + icon.width).round();
+          break;
+        case IconPosition.RIGHT:
+          icon.x = (_label.x + _label.textWidth + icon.width / 2 - 12).round();
+          _label.x -= (14 + icon.width).round();
+          break;
+      }
+
       icon.y = _label.y - 4;
     }
 
