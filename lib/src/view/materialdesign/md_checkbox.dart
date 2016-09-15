@@ -31,28 +31,27 @@ class MdCheckbox extends SelectableButton {
     ripple.span(RADIUS * 2, RADIUS * 2);
 
     _bg = new Sprite();
+    _bg.graphics.beginPath();
     _bg.graphics.rect(0, 0, RADIUS * 2, RADIUS * 2);
+    _bg.graphics.closePath();
     _bg.graphics.fillColor(0x00555555);
     addChild(_bg);
 
     _box = new Sprite();
+    _box.graphics.beginPath();
     _box.graphics.rect(-BOXWIDTH / 2, -BOXWIDTH / 2, BOXWIDTH, BOXWIDTH);
+    _box.graphics.closePath();
     _box.graphics.strokeColor(boxColor, 2);
-    if (Rd.WEBGL) {
-      //_box.applyCache(-(BOXWIDTH / 2).round(), -(BOXWIDTH / 2).round(), BOXWIDTH, BOXWIDTH);
-    }
     addChild(_box);
 
     _icon = new Sprite();
-    _icon.graphics.beginPath();
+    //_icon.graphics.beginPath();
     _icon.graphics.moveTo(-6, -6);
     _icon.graphics.lineTo(0, 0);
     _icon.graphics.lineTo(15, -15);
+    //_icon.graphics.closePath();
     _icon.graphics.strokeColor(activeColor, 3);
-    _icon.graphics.closePath();
-    if (Rd.WEBGL) {
-      //_icon.applyCache(-8, -17, 26, 20);
-    }
+
     addChild(_icon);
     _icon.visible = false;
 

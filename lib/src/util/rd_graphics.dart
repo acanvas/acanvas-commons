@@ -18,8 +18,8 @@ class RdGraphics {
 
     sprite.graphics.beginPath();
     sprite.graphics.rect(x, y, w, h);
-    sprite.graphics.fillColor(color);
     sprite.graphics.closePath();
+    sprite.graphics.fillColor(color);
 
     if (Rd.WEBGL && w.round() > 0 && h.round() > 0) {
       //sprite.applyCache(x.round(), y.round(), w.round(), h.round());
@@ -45,7 +45,9 @@ class RdGraphics {
       eh = eh.round();
     }
 
+    sprite.graphics.beginPath();
     sprite.graphics.rectRound(x, y, w, h, ew, eh);
+    sprite.graphics.closePath();
     sprite.graphics.fillColor(color);
 
     if (Rd.WEBGL && w.round() > 0 && h.round() > 0) {
@@ -71,8 +73,8 @@ class RdGraphics {
 
     sprite.graphics.beginPath();
     sprite.graphics.circle(x, y, r);
-    sprite.graphics.fillColor(color);
     sprite.graphics.closePath();
+    sprite.graphics.fillColor(color);
 
     if (Rd.WEBGL && (x + r).round() > 0) {
       //sprite.applyCache((x - r).round(), (y - r).round(), (2*r).round(), (2*r).round());
@@ -96,8 +98,8 @@ class RdGraphics {
     sprite.graphics.beginPath();
     sprite.graphics.moveTo(0, 0);
     sprite.graphics.lineTo(x, y);
-    sprite.graphics.strokeColor(color, strength);
     sprite.graphics.closePath();
+    sprite.graphics.strokeColor(color, strength);
 
     if (Rd.WEBGL) {
       //sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() : y.ceil());
