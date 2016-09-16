@@ -347,4 +347,8 @@ class MdInput extends BoxSprite {
   num get width => super.width - 2;
 
   num get spanWidth => super.spanWidth - 2;
+
+  String getText(){
+    return _inputTextField.text;
+  }
 }
