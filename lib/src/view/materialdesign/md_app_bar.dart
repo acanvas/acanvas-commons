@@ -5,7 +5,7 @@ class MdAppBar extends BoxSprite {
   int highlightColor;
   bool extended = false;
 
-  Sprite _headline;
+  InteractiveObject _headline;
 
   Flow leftBox;
   Flow rightBox;

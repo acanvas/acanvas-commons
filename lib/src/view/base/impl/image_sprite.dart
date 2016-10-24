@@ -50,7 +50,7 @@ class ImageSprite extends BoxSprite {
 
   @override
   void refresh() {
-    if (spanWidth == 0 || spanHeight == 0) {
+    if (spanWidth == 0 || spanHeight == 0 || _image == null) {
       return;
     }
 
