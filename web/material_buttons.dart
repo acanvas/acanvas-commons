@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html' as html;
 import 'package:rockdot_commons/rockdot_commons.dart';
 import 'package:stagexl/stagexl.dart';
@@ -6,7 +7,7 @@ Stage stage;
 Sprite _container;
 
 
-void main() {
+Future main() async{
   var opts = new StageOptions();
   opts.maxPixelRatio = 1.0;
   opts.stageScaleMode = Rd.MOBILE ? StageScaleMode.NO_SCALE : StageScaleMode.NO_SCALE;
@@ -25,7 +26,8 @@ void main() {
 
   Rd.STAGE = stage;
   RdFontUtil.addFont("Roboto:100,300");
-  RdFontUtil.loadFonts(start);
+  await RdFontUtil.loadFonts();
+  start();
 }
 void gtest() {
   Shape s = new Shape()

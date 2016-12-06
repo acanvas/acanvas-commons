@@ -227,7 +227,7 @@ class Scrollbar extends Slider with MPagedScroll {
 
   void set pageCount(num pages) {
     if (pages != pageCount) {
-      _pageCount = max(pages, 1);
+      _pageCount = max(pages, 1).toInt();
       _pageStepper.maximum = pageCount - 1;
       pageScrollDistance = valueMax / (pageCount < 2 ? 1 : pageCount - 1);
       _thumbSize = max(10, (spanSize / pageCount).round());

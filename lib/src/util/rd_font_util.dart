@@ -15,7 +15,7 @@ class RdFontUtil {
     _singleton._fonts.add(font /* + ":300"*/);
   }
 
-  static void loadFonts(Function callback) {
+  static Future<bool> loadFonts() async {
     var completer = new Completer();
     var googleFontFamilies = _singleton._fonts;
 
@@ -28,13 +28,16 @@ class RdFontUtil {
     });
 
     if (webFont == null) {
-      callback.call();
-      return;
+      return false;
     }
     webFont.callMethod("load", [webFontConfig]);
-    completer.future.then((_) => callback.call()).catchError((e) {
-      print("Error while loading fonts. ${e}");
-      callback.call();
+
+    await completer.future.catchError((e) {
+      throw("Error while loading fonts. ${e}");
     });
+
+    return true;
+
   }
+
 }

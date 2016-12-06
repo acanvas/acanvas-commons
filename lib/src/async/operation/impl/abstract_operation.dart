@@ -101,14 +101,14 @@ class AbstractOperation extends EventDispatcher implements IOperation {
    */
   void addCompleteListener(Function listener,
       [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
-    addEventListener(OperationEvent.COMPLETE, listener /*, useCapture, priority, useWeakReference*/);
+    addEventListener(OperationEvent.COMPLETE, listener, useCapture:useCapture, priority: priority);
   }
 
   /**
    * @inheritDoc
    */
   void addErrorListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
-    addEventListener(OperationEvent.ERROR, listener /*, useCapture, priority, useWeakReference*/);
+    addEventListener(OperationEvent.ERROR, listener, useCapture:useCapture, priority: priority);
   }
 
   /**
@@ -116,7 +116,7 @@ class AbstractOperation extends EventDispatcher implements IOperation {
    */
   void addTimeoutListener(Function listener,
       [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
-    addEventListener(OperationEvent.TIMEOUT, listener /*, useCapture, priority, useWeakReference*/);
+    addEventListener(OperationEvent.TIMEOUT, listener, useCapture:useCapture, priority: priority);
   }
 
   // --------------------------------------------------------------------

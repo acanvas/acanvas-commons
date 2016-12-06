@@ -421,7 +421,6 @@ class SoftKeyboard extends BoxSprite {
     // Check if value is valid
     if (value >= layouts.length) {
       throw (new StateError('Requested layout index is invalid.'));
-      return;
     }
 
     // Remove previous configuration

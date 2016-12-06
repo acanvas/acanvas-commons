@@ -2262,8 +2262,6 @@ class StringUtils {
       ++ia;
       ++ib;
     }
-
-    return 0;
   }
 
   /**
@@ -2300,8 +2298,6 @@ class StringUtils {
         return bias;
       }
     }
-
-    return 0;
   }
 
   /**

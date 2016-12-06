@@ -159,29 +159,29 @@ abstract class MSlider {
 
   //--------- INTERNAL STATE VALUES
 
-  num _pageCount = 1;
+  int _pageCount = 1;
 
-  void set pageCount(num pageCount)  {  _pageCount = pageCount; }
+  void set pageCount(int pageCount)  {  _pageCount = pageCount; }
 
-  num get pageCount => _pageCount;
+  int get pageCount => _pageCount;
 
   num _mouseOffsetX = 0;
 
   void set mouseOffsetX(num mouseOffsetX)  {  _mouseOffsetX = mouseOffsetX; }
 
-  num get mouseOffsetX  {  _mouseOffsetX; }
+  num get mouseOffsetX  => _mouseOffsetX;
 
   num _mouseOffsetY = 0;
 
   void set mouseOffsetY(num mouseOffsetY)  {  _mouseOffsetY = mouseOffsetY; }
 
-  num get mouseOffsetY  {  _mouseOffsetY; }
+  num get mouseOffsetY  => _mouseOffsetY;
 
   num _mouseOffset = 0;
 
   void set mouseOffset(num mouseOffset)  {  _mouseOffset = mouseOffset; }
 
-  num get mouseOffset  {  _mouseOffset; }
+  num get mouseOffset =>  _mouseOffset;
 
   bool _interactionH = false;
 

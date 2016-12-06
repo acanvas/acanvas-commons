@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html' as html;
 import 'package:rockdot_commons/rockdot_commons.dart';
 import 'package:stagexl/stagexl.dart';
@@ -6,7 +7,7 @@ Stage stage;
 Sprite _container;
 
 
-void main() {
+Future main() async {
   var opts = new StageOptions();
   opts.renderEngine = RenderEngine.Canvas2D;
   opts.backgroundColor = 0xFFf9f9f9;
@@ -18,7 +19,8 @@ void main() {
   new RenderLoop()..addStage(stage);
 
   RdFontUtil.addFont("Roboto");
-  RdFontUtil.loadFonts(start);
+  await RdFontUtil.loadFonts();
+  start();
 }
 void start() {
 
