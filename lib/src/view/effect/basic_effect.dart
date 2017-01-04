@@ -143,7 +143,7 @@ class BasicEffect implements IEffect {
     dispose();
   }
 
-  void dispose() {
+  void dispose({bool removeSelf: true}) {
     if (_sprite != null && useSprite()) {
       Rd.JUGGLER.removeTweens(_sprite);
       if (_sprite.parent != null) {

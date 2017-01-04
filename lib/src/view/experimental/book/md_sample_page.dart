@@ -5,10 +5,12 @@ class MdSamplePage extends Page {
    * Constructor
    */
   MdSamplePage() : super() {
-    start();
   }
 
-  void start() {
+  @override
+  void init({Map params : null}){
+
+    super.init();
     RdGraphics.rectangle(0, 0, 450, 600, color: Color.White, sprite: this, clear: false);
 
     /* Vertical Container */
@@ -167,6 +169,8 @@ class MdSamplePage extends Page {
     vbox.addChild(hbox6);
     addChild(vbox);
     vbox.span(430, 580);
+
+    onInitComplete();
   }
 
   /**

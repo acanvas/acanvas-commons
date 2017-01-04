@@ -36,7 +36,7 @@ part of rockdot_commons;
  *   You may obtain a copy of the License at: dynamic   http://creativecommons.org/licenses/by/3.0/deed.en
  *
  */
-class Page extends Sprite {
+class Page extends LifecycleSprite {
   /**
    * @
    */
@@ -70,7 +70,7 @@ class Page extends Sprite {
   /**
    * @
    */
-  Sprite _shape = new Sprite();
+  Sprite _shape ;
 
   /**
    * @see	Page#liveBitmapping
@@ -102,34 +102,61 @@ class Page extends Sprite {
   num _width;
   num _height;
 
+  Bitmap bm;
+
   // CONSTRUCTOR:
 
   /**
    * Constructor
    */
-  Page([Bitmap bm = null]) : super() {
+  Page([this.bm = null]) : super(null) {
+
+  }
+
+  // CUSTOM:
+  @override
+  void init({Map params : null}){
+    super.init(params: params);
+
     if (bm != null) {
       addChild(bm);
     }
 
     this._gradients = new Gradients(this);
+
+    _shape = new Sprite();
     addChild(this._shape);
+
+    onInitComplete();
   }
 
-  // CUSTOM:
+  @override
+  void dispose({bool removeSelf: true}) {
+
+    if(contains(bm)) removeChild(bm); // save BitmapData from being trashed in super call
+    _gradients = null;
+
+    super.dispose(removeSelf: false);
+  }
+
+  @override
+  void enable(){
+    super.enable();
+
+  }
 
   /**
    * Draws itself on a BitmapData instance and returns it.
    *
    * @return	BitmapData
    */
-  BitmapData getBitmapData() {
+  BitmapData getBitmapData({bool scale: false}) {
     num mScaleX = super.width / _width;
     num mScaleY = super.height / _height;
 
     BitmapData bmd = new BitmapData(_width.round(), _height.round(), 0x00ffffff);
     Matrix matrix = new Matrix.fromIdentity();
-    matrix.scale(mScaleX, mScaleY);
+    if(scale)matrix.scale(mScaleX, mScaleY);
     bmd.draw(this, matrix);
     return bmd;
   }
@@ -155,14 +182,14 @@ class Page extends Sprite {
    * Hides fold-gradient.
    */
   void hideFoldGradient() {
-    this._shape.visible = false;
+    this._shape?.visible = false;
   }
 
   /**
    * Shows fold-gradient.
    */
   void showFoldGradient() {
-    this._shape.visible = true;
+    this._shape?.visible = true;
   }
 
   /**

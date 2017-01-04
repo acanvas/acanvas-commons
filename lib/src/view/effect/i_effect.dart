@@ -31,5 +31,5 @@ abstract class IEffect {
 
   void cancel([BoxSprite target = null]);
 
-  void dispose();
+  void dispose({bool removeSelf: true});
 }

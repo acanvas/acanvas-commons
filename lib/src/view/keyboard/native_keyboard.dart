@@ -56,7 +56,7 @@ class NativeKeyboard extends BoxSprite {
   String get value => _htmlElement.value;
 
   @override
-  void dispose() {
+  void dispose({bool removeSelf: true}) {
     removeChild(_htmlTextField);
     _onKeyDownSubscriber.cancel();
     _htmlElement.remove();

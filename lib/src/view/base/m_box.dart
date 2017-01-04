@@ -188,5 +188,5 @@ abstract class MBox {
   ///
   /// This method is implemented by [BoxSprite] and *really* cleans up.
   /// Override to add additional cleanup, for example of custom listeners.
-  void dispose();
+  void dispose({bool removeSelf: true});
 }

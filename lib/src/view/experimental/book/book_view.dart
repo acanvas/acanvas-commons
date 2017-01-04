@@ -376,17 +376,17 @@ class BookView extends PageManager {
    */
   BookView(String id) : super(id) {
 //			 set initial status:
-    this.setStatus(BookEvent.NOT_FLIPPING, false);
+    setStatus(BookEvent.NOT_FLIPPING, false);
 
     // make sure certain getter/setter values are processed where appropriate:
-    this.easing = 0.7;
-    this.hover = true;
+    easing = 0.7;
+    hover = true;
 
     // add event listener:
     if (Rd.MOBILE) {
-      this.addEventListener(TouchEvent.TOUCH_BEGIN, this.startPageFlip);
+      addEventListener(TouchEvent.TOUCH_BEGIN, startPageFlip);
     } else {
-      this.addEventListener(MouseEvent.MOUSE_DOWN, this.startPageFlip);
+      addEventListener(MouseEvent.MOUSE_DOWN, startPageFlip);
     }
   }
 
@@ -402,12 +402,15 @@ class BookView extends PageManager {
     super.init(params: params);
 
     // make sure that non-hard pages whose flipsides are hard don't have fold-gradients:
-    for (int i = 0; i < this._pages.length; i++) {
-      (this._pages[i] as Page).refreshFoldGradient();
+    for (int i = 0; i < _pages.length; i++) {
+      if(i < 3){
+        _pages[i].init();
+        _pages[i].refreshFoldGradient(false);
+      }
     }
 
     // create hit regions for page-corners:
-    this.createRegions();
+    createRegions();
 
     onInitComplete();
   }
@@ -421,9 +424,9 @@ class BookView extends PageManager {
   void refresh() {
     super.refresh();
 
-    this.createRegions();
+    createRegions();
     // now is a good time to create DistortImage since width and height will have been set:
-    this.distortion = new DistortImage(spanWidth / 2, spanHeight);
+    distortion = new DistortImage(spanWidth / 2, spanHeight);
   }
 
   /**
@@ -434,8 +437,8 @@ class BookView extends PageManager {
   @override
   void jumpViewStacks(int fromIndex) {
     super.jumpViewStacks(fromIndex);
-    for (int i = fromIndex; i < this._pages.length; i++) {
-      (this._pages[i] as Page).refreshFoldGradient(false);
+    for (int i = fromIndex; i < _pages.length; i++) {
+      (_pages[i]).refreshFoldGradient(false);
     }
   }
 
@@ -472,142 +475,142 @@ class BookView extends PageManager {
       //touchX = event.stageX;
       //touchY = event.stageY;
       updateTouchPosition(event);
-      this.addEventListener(TouchEvent.TOUCH_MOVE, this.updateTouchPosition);
+      addEventListener(TouchEvent.TOUCH_MOVE, updateTouchPosition);
       print("touchX: $touchX, touchY: $touchY");
     }
 
-    int side = this.getCurrentSide();
-    Page oldPage = this.getPage(this._currentPage + this.lastFlippedSide, false);
+    int side = getCurrentSide();
+    Page oldPage = getPage(_currentPage + lastFlippedSide, false);
 
     // no pageflips before creationComplete:
-    if (!this.created) {
+    if (!created) {
       return;
     }
     // if the Book was clicked and gotoPage is active then attempt to abort gotoPage:
-    if (this.autoFlipActive &&
-        !this.tearActive &&
-        this.pageCorner.x >= 0 &&
-        this.pageCorner.x <= spanWidth / 2 &&
+    if (autoFlipActive &&
+        !tearActive &&
+        pageCorner.x >= 0 &&
+        pageCorner.x <= spanWidth / 2 &&
         event != null) {
-      this.cancelGotoPage(false);
+      cancelGotoPage(false);
       return;
     }
     // stop if the clicked SuperViewStack does not show any Pages:
-    if (((!this.pageL.visible && side == Page.LEFT) || (!this.pageR.visible && side == Page.RIGHT)) &&
-        this._status != BookEvent.PAGEFLIP_STARTED &&
-        this._status != BookEvent.PAGEFLIP_ENDING &&
-        this._status != BookEvent.HOVER_STARTED &&
-        this._status != BookEvent.HOVER_ENDING) {
+    if (((!pageL.visible && side == Page.LEFT) || (!pageR.visible && side == Page.RIGHT)) &&
+        _status != BookEvent.PAGEFLIP_STARTED &&
+        _status != BookEvent.PAGEFLIP_ENDING &&
+        _status != BookEvent.HOVER_STARTED &&
+        _status != BookEvent.HOVER_ENDING) {
       return;
     }
     // stop if none of the pagecorners are hit:
-    if (!this.isPageCornerHit() && (!this.sideFlip || !this.isPageSideHit()) && !this.autoFlipActive) {
+    if (!isPageCornerHit() && (!sideFlip || !isPageSideHit()) && !autoFlipActive) {
       return;
     }
     // don't flip if Page isn't allowed to:
-    if ((this._pages[this._currentPage + side] as Page).lock) {
-      this.autoFlipActive = false; // shut-down auto-pageflip if active
+    if ((_pages[_currentPage + side]).lock) {
+      autoFlipActive = false; // shut-down auto-pageflip if active
       return;
     }
     // stop if a page corner is flipping back into position
-    if ((this._status == BookEvent.PAGEFLIP_ENDING || this._status == BookEvent.HOVER_ENDING) &&
-        !this.autoFlipActive &&
-        !this.lastFlipSucceeded) {
+    if ((_status == BookEvent.PAGEFLIP_ENDING || _status == BookEvent.HOVER_ENDING) &&
+        !autoFlipActive &&
+        !lastFlipSucceeded) {
       // switch back to flipping mode if the same page corner was picked up:
-      if (this.lastFlippedCorner == (this.getCurrentCorner()) && this.sideFlipActive == this.isPageSideHit()) {
+      if (lastFlippedCorner == (getCurrentCorner()) && sideFlipActive == isPageSideHit()) {
         if (Rd.MOBILE) {
-          this.stage.addEventListener(TouchEvent.TOUCH_END, this.endPageFlip);
+          stage.addEventListener(TouchEvent.TOUCH_END, endPageFlip);
         } else {
-          this.stage.addEventListener(MouseEvent.MOUSE_UP, this.endPageFlip);
+          stage.addEventListener(MouseEvent.MOUSE_UP, endPageFlip);
         }
-        String newStatus = (this.hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED;
-        this.setStatus(newStatus, true, oldPage);
+        String newStatus = (hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED;
+        setStatus(newStatus, true, oldPage);
       }
       return;
     }
     // stop if the Book is not inactive and not hovering:
-    if (this._status != BookEvent.NOT_FLIPPING && !this.hoverActive) {
+    if (_status != BookEvent.NOT_FLIPPING && !hoverActive) {
       return;
     }
     // if the page is hovering and an actual pageflip should begin:
-    if (this.hoverActive && this._status == BookEvent.HOVER_STARTED) {
-      this.hoverActive = false;
-      this.setLastFlippedTime(); // if necessary, remember time at which pageflip started
-      this.setStatus(BookEvent.PAGEFLIP_STARTED, true, oldPage);
+    if (hoverActive && _status == BookEvent.HOVER_STARTED) {
+      hoverActive = false;
+      setLastFlippedTime(); // if necessary, remember time at which pageflip started
+      setStatus(BookEvent.PAGEFLIP_STARTED, true, oldPage);
       return;
     }
 
     // throw an Error if the Page in question has no flipside:
     // in the above stated situation the right-hand side Page typically does not have a flipside, and consequently its index will be equal to the total amount of pages (minus one). Also note that any left-hand side Page will always have a flipside, because the first Page in a Book is always on the right-hand side.
-    if (this._currentPage + 1 == this._pages.length - 1 && side == Page.RIGHT) {
+    if (_currentPage + 1 == _pages.length - 1 && side == Page.RIGHT) {
       throw new BookError(BookError.NO_FLIPSIDE);
     }
 
     // set hover-flag:
-    this.hoverActive = attemptHover;
+    hoverActive = attemptHover;
 
     // set direction markers and position the render:
-    if (this.autoFlipActive && !this.tearActive) this.lastFlippedCorner = new Point(side, 1);
-    if (this.autoFlipActive && this.tearActive) this.lastFlippedCorner = new Point(side, (this.tearFromTop) ? 0 : 1);
-    if (!this.autoFlipActive) this.lastFlippedCorner = this.getCurrentCorner();
-    this.lastFlippedSide = this.lastFlippedCorner.x;
-    this.lastFlippedDirection = (side == Page.LEFT) ? -1 : 1;
-    this.sideFlipActive = (!this.tearActive && this.sideFlip && this.isPageSideHit());
-    this.renderSprite.x = this.lastFlippedSide * spanWidth / 2;
+    if (autoFlipActive && !tearActive) lastFlippedCorner = new Point(side, 1);
+    if (autoFlipActive && tearActive) lastFlippedCorner = new Point(side, (tearFromTop) ? 0 : 1);
+    if (!autoFlipActive) lastFlippedCorner = getCurrentCorner();
+    lastFlippedSide = lastFlippedCorner.x;
+    lastFlippedDirection = (side == Page.LEFT) ? -1 : 1;
+    sideFlipActive = (!tearActive && sideFlip && isPageSideHit());
+    renderSprite.x = lastFlippedSide * spanWidth / 2;
 
     // specify front and flipside indexes:
-    int frontIndex = this._currentPage + this.lastFlippedSide;
-    int backIndex = this._currentPage + this.lastFlippedSide + this.lastFlippedDirection;
+    int frontIndex = _currentPage + lastFlippedSide;
+    int backIndex = _currentPage + lastFlippedSide + lastFlippedDirection;
     // save bitmapData:
-    this.saveBitmapData((this._pages[frontIndex] as Page), (this._pages[backIndex]) as Page);
+    saveBitmapData((_pages[frontIndex]), (_pages[backIndex]));
 
     // select pages in SuperViewStacks:
-    if (this.lastFlippedSide == Page.LEFT) {
+    if (lastFlippedSide == Page.LEFT) {
       // if left-hand page was flipped
-      this.pageL.visible = !this.isFirstPage(this._currentPage + 1 - 2);
-      if (this.pageL.visible) {
-        this.pageL.selectedChild = (this._pages[this._currentPage - 2] as Sprite);
+      pageL.visible = !isFirstPage(_currentPage + 1 - 2);
+      if (pageL.visible) {
+        pageL.selectedChild = (_pages[_currentPage - 2]);
       } else {}
     }
-    if (this.lastFlippedSide == Page.RIGHT) {
+    if (lastFlippedSide == Page.RIGHT) {
       // if right-hand page was flipped
-      this.pageR.visible = !this.isLastPage(this._currentPage + 2);
-      if (this.pageR.visible) {
-        this.pageR.selectedChild = (this._pages[this._currentPage + 1 + 2] as Sprite);
+      pageR.visible = !isLastPage(_currentPage + 2);
+      if (pageR.visible) {
+        pageR.selectedChild = (_pages[_currentPage + 1 + 2]);
       }
     }
 
     // set page corner markers:
-    this.pageCorner = new Point(this.lastFlippedCorner.x * spanWidth / 2, this.lastFlippedCorner.y * spanHeight);
-    if (this.autoFlipActive) {
-      this.pageCornerTarget = this.pageCorner.clone();
+    pageCorner = new Point(lastFlippedCorner.x * spanWidth / 2, lastFlippedCorner.y * spanHeight);
+    if (autoFlipActive) {
+      pageCornerTarget = pageCorner.clone();
     }
 
     // if necessary, remember time at which pageflip started:
-    this.setLastFlippedTime();
+    setLastFlippedTime();
 
     // set status:
-    this.setStatus((this.hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED,
+    setStatus((hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED,
         false); // false = dispatch Event later
 
     // add listeners:
-    this.dragPageCorner();
-    // this.addEventListener(Event.ENTER_FRAME, this.dragPageCorner);
+    dragPageCorner();
+    // addEventListener(Event.ENTER_FRAME, dragPageCorner);
 
-    _onEnterFrameDragSubscription = Rd.JUGGLER.onElapsedTimeChange.listen((e) => this.dragPageCorner());
+    _onEnterFrameDragSubscription = Rd.JUGGLER.onElapsedTimeChange.listen((e) => dragPageCorner());
 
     if (Rd.MOBILE) {
-      this.stage.addEventListener(TouchEvent.TOUCH_END, this.endPageFlip);
+      stage.addEventListener(TouchEvent.TOUCH_END, endPageFlip);
     } else {
-      this.stage.addEventListener(MouseEvent.MOUSE_UP, this.endPageFlip);
+      stage.addEventListener(MouseEvent.MOUSE_UP, endPageFlip);
     }
 
     // dispatch event:
-    Page page = (this._pages[this._currentPage + this.lastFlippedSide] as Page);
-    if (this.hoverActive) {
-      this.dispatchEvent(new BookEvent(BookEvent.HOVER_STARTED, this, page));
+    Page page = (_pages[_currentPage + lastFlippedSide]);
+    if (hoverActive) {
+      dispatchEvent(new BookEvent(BookEvent.HOVER_STARTED, this, page));
     } else {
-      this.dispatchEvent(new BookEvent(BookEvent.PAGEFLIP_STARTED, this, page));
+      dispatchEvent(new BookEvent(BookEvent.PAGEFLIP_STARTED, this, page));
     }
   }
 
@@ -623,60 +626,60 @@ class BookView extends PageManager {
    */
   void dragPageCorner([Event event = null]) {
     // stop if the startPageFlip() or endPageFlip() have not been executed:
-    if (this._status != BookEvent.PAGEFLIP_STARTED &&
-        this._status != BookEvent.HOVER_STARTED &&
-        this._status != BookEvent.PAGEFLIP_ENDING &&
-        this._status != BookEvent.HOVER_ENDING) {
+    if (_status != BookEvent.PAGEFLIP_STARTED &&
+        _status != BookEvent.HOVER_STARTED &&
+        _status != BookEvent.PAGEFLIP_ENDING &&
+        _status != BookEvent.HOVER_ENDING) {
       return;
     }
 
     // create faux mouse to create easing:
-    if (this._status == BookEvent.PAGEFLIP_STARTED || this._status == BookEvent.HOVER_STARTED) {
-      if (this.movePageCornerTarget() && this.autoFlipActive) {
-        this.endPageFlip();
+    if (_status == BookEvent.PAGEFLIP_STARTED || _status == BookEvent.HOVER_STARTED) {
+      if (movePageCornerTarget() && autoFlipActive) {
+        endPageFlip();
         return;
       }
     }
-    this.movePageCorner();
+    movePageCorner();
 
     // clear render:
-    this.renderSprite.graphics.clear();
+    renderSprite.graphics.clear();
 
     // check if the pageflip has ended:
-    if (this.pageCorner == (this.pageCornerTarget) &&
-        (this._status == BookEvent.PAGEFLIP_ENDING || this._status == BookEvent.HOVER_ENDING)) {
-      this.finishPageFlip();
+    if (pageCorner == (pageCornerTarget) &&
+        (_status == BookEvent.PAGEFLIP_ENDING || _status == BookEvent.HOVER_ENDING)) {
+      finishPageFlip();
       return;
     }
 
     // specify front and flipside indexes:
-    int frontIndex = this._currentPage + this.lastFlippedSide;
-    int backIndex = this._currentPage + this.lastFlippedSide + this.lastFlippedDirection;
-    Page front = (this._pages[frontIndex] as Page);
-    Page back = (this._pages[backIndex] as Page);
+    int frontIndex = _currentPage + lastFlippedSide;
+    int backIndex = _currentPage + lastFlippedSide + lastFlippedDirection;
+    Page front = (_pages[frontIndex]);
+    Page back = (_pages[backIndex]);
 
     // if liveBitmapping is enabled, refresh corresponding values in bitmapData List:
     if (front.liveBitmapping || back.liveBitmapping) {
-      this.saveBitmapData(front, back);
+      saveBitmapData(front, back);
     }
 
     // perform pageflip:
     if (!front.explicitHard && !back.explicitHard) {
-      Map ocf = PageFlip.computeFlip(this.pageCorner.clone(), this.lastFlippedCorner, (spanWidth / 2).round(),
-          spanHeight.round(), !this.tearActive, 1);
-      PageFlip.drawBitmapSheet(ocf, this.renderSprite, this.bitmapData[frontIndex], this.bitmapData[backIndex]);
+      Map ocf = PageFlip.computeFlip(pageCorner.clone(), lastFlippedCorner, (spanWidth / 2).round(),
+          spanHeight.round(), !tearActive, 1);
+      PageFlip.drawBitmapSheet(ocf, renderSprite, bitmapData[frontIndex], bitmapData[backIndex]);
 
       // add shadows or highlights to the render:
-      this.addSmoothGradients(ocf);
+      addSmoothGradients(ocf);
 
       // take ocf and find out whether we should start tearing this Page off:
-      if (this._status == BookEvent.PAGEFLIP_STARTED &&
-          (this._pages[this._currentPage + this.lastFlippedSide] as Page).tearable &&
+      if (_status == BookEvent.PAGEFLIP_STARTED &&
+          (_pages[_currentPage + lastFlippedSide]).tearable &&
           ocf["cPoints"] != null) {
-        this.evaluateTear(ocf["cPoints"][2].clone());
+        evaluateTear(ocf["cPoints"][2].clone());
       }
     } else {
-      this.drawHardPage(this.bitmapData[frontIndex], this.bitmapData[backIndex]);
+      drawHardPage(bitmapData[frontIndex], bitmapData[backIndex]);
     }
   }
 
@@ -689,51 +692,51 @@ class BookView extends PageManager {
    */
   void endPageFlip([InputEvent event = null]) {
     // stop if the Book is not currently performing a pageflip:
-    if (this._status != BookEvent.PAGEFLIP_STARTED && this._status != BookEvent.HOVER_STARTED) {
+    if (_status != BookEvent.PAGEFLIP_STARTED && _status != BookEvent.HOVER_STARTED) {
       return;
     }
     // ignore mouse-up event if a Page is being torn out of the Book:
-    if (this.tearActive && event != null) {
+    if (tearActive && event != null) {
       return;
     }
 
     // turn page if flipOnClick is enabled:
-    if (this.flipOnClick && this.flipOnRelease && event != null) {
-      this.gotoPage((this._currentPage + this.lastFlippedDirection * 2)
+    if (flipOnClick && flipOnRelease && event != null) {
+      gotoPage((_currentPage + lastFlippedDirection * 2)
           .toInt()); // cast to int because gotoPage has its page parameter typed with a * and will assume the value is an int, and thus change any negative values to positives
       return;
     }
 
     // remove mouse-listener:
     if (Rd.MOBILE) {
-      this.removeEventListener(TouchEvent.TOUCH_MOVE, this.updateTouchPosition);
-      this.stage.removeEventListener(TouchEvent.TOUCH_END, this.endPageFlip);
+      removeEventListener(TouchEvent.TOUCH_MOVE, updateTouchPosition);
+      stage.removeEventListener(TouchEvent.TOUCH_END, endPageFlip);
     } else {
-      this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.endPageFlip);
+      stage.removeEventListener(MouseEvent.MOUSE_UP, endPageFlip);
     }
 
     // make sure page corner slides to the appropriate position:
-    if (!this.tearActive) {
+    if (!tearActive) {
       num x;
-      num y = this.lastFlippedCorner.y * spanHeight;
-      if (this.lastFlippedSide == Page.LEFT) {
+      num y = lastFlippedCorner.y * spanHeight;
+      if (lastFlippedSide == Page.LEFT) {
         // if left-hand page was flipped
-        this.lastFlipSucceeded = (this.pageCornerTarget.x > spanWidth / 2);
-        x = (this.lastFlipSucceeded) ? spanWidth : 0;
+        lastFlipSucceeded = (pageCornerTarget.x > spanWidth / 2);
+        x = (lastFlipSucceeded) ? spanWidth : 0;
       } else {
         // if right-hand page was flipped
-        this.lastFlipSucceeded = (this.pageCornerTarget.x < 0);
-        x = (this.lastFlipSucceeded) ? -spanWidth / 2 : spanWidth / 2;
+        lastFlipSucceeded = (pageCornerTarget.x < 0);
+        x = (lastFlipSucceeded) ? -spanWidth / 2 : spanWidth / 2;
       }
-      this.pageCornerTarget = new Point(x, y);
+      pageCornerTarget = new Point(x, y);
     } else {
-      this.lastFlipSucceeded = false;
+      lastFlipSucceeded = false;
     }
 
     // set status and dispatch event:
-    String newStatus = (this._status == BookEvent.HOVER_STARTED) ? BookEvent.HOVER_ENDING : BookEvent.PAGEFLIP_ENDING;
-    Page page = (this._pages[this._currentPage + this.lastFlippedSide] as Page);
-    this.setStatus(newStatus, true, page);
+    String newStatus = (_status == BookEvent.HOVER_STARTED) ? BookEvent.HOVER_ENDING : BookEvent.PAGEFLIP_ENDING;
+    Page page = (_pages[_currentPage + lastFlippedSide]);
+    setStatus(newStatus, true, page);
   }
 
   /**
@@ -743,82 +746,82 @@ class BookView extends PageManager {
    */
   void finishPageFlip() {
     // stop is endFlip() has not already been called:
-    if (this._status != BookEvent.PAGEFLIP_ENDING && this._status != BookEvent.HOVER_ENDING) {
+    if (_status != BookEvent.PAGEFLIP_ENDING && _status != BookEvent.HOVER_ENDING) {
       return;
     }
 
     // stop the dragPageCorner() method from being executed:
     _onEnterFrameDragSubscription.cancel();
-    //this.removeEventListener(Event.ENTER_FRAME, this.dragPageCorner);
+    //removeEventListener(Event.ENTER_FRAME, dragPageCorner);
 
     // remember current Page for Events dispatched later:
-    Page page = (this._pages[this._currentPage + this.lastFlippedSide] as Page);
+    Page page = (_pages[_currentPage + lastFlippedSide]);
 
     bool wasLastPage = false;
 
     // remove Pages if they were torn out:
-    if (this.tearActive) {
-      //   bool wasLastPage = this.isLastPage(this._currentPage);
-      //   this.removeChild(page.getFlipSide());
-      //   this.removeChild(page);
+    if (tearActive) {
+      //   bool wasLastPage = isLastPage(_currentPage);
+      //   removeChild(page.getFlipSide());
+      //   removeChild(page);
     }
 
     // if the page has been flipped over, change the _currentPage property:
-    if (this.lastFlipSucceeded && !this.tearActive) {
+    if (lastFlipSucceeded && !tearActive) {
       // lastFlipSucceeded is always false when a Page was torn, but this makes the code more readable
-      this._currentPage += this.lastFlippedDirection * 2;
+      _currentPage += lastFlippedDirection * 2;
     }
     // change _currentPage where appropriate after a page-tear:
-    if (this.tearActive && this.lastFlippedSide == Page.LEFT && !wasLastPage) {
-      this._currentPage -= 2;
+    if (tearActive && lastFlippedSide == Page.LEFT && !wasLastPage) {
+      _currentPage -= 2;
     }
 
     // make sure the SuperViewStacks display the right Pages
-    this.refreshViewStacks();
+    refreshViewStacks();
 
     // set status:
-    this.setStatus(BookEvent.NOT_FLIPPING, true, page,
-        (this.hoverActive) ? BookEvent.HOVER_FINISHED : BookEvent.PAGEFLIP_FINISHED);
+    setStatus(BookEvent.NOT_FLIPPING, true, page,
+        (hoverActive) ? BookEvent.HOVER_FINISHED : BookEvent.PAGEFLIP_FINISHED);
 
     // dispatch additional events:
-    if (!this.hoverActive) {
-      if (!this.tearActive) {
-        if (this.lastFlipSucceeded) {
-          this.dispatchEvent(new BookEvent(BookEvent.PAGE_TURNED, this, page));
-          if ((this.lastFlippedSide == Page.RIGHT && this._currentPage == 1) ||
-              (this.lastFlippedSide == Page.LEFT && this._currentPage == this._pages.length - 3)) {
-            this.dispatchEvent(new BookEvent(BookEvent.BOOK_OPENED, this));
+    if (!hoverActive) {
+      if (!tearActive) {
+        if (lastFlipSucceeded) {
+          dispatchEvent(new BookEvent(BookEvent.PAGE_TURNED, this, page));
+          if ((lastFlippedSide == Page.RIGHT && _currentPage == 1) ||
+              (lastFlippedSide == Page.LEFT && _currentPage == _pages.length - 3)) {
+            dispatchEvent(new BookEvent(BookEvent.BOOK_OPENED, this));
           }
-          if ((this.lastFlippedSide == Page.LEFT && this._currentPage == -1) ||
-              (this.lastFlippedSide == Page.RIGHT && this._currentPage == this._pages.length - 1)) {
-            this.dispatchEvent(new BookEvent(BookEvent.BOOK_CLOSED, this));
+          if ((lastFlippedSide == Page.LEFT && _currentPage == -1) ||
+              (lastFlippedSide == Page.RIGHT && _currentPage == _pages.length - 1)) {
+            dispatchEvent(new BookEvent(BookEvent.BOOK_CLOSED, this));
           }
         } else {
-          this.dispatchEvent(new BookEvent(BookEvent.PAGE_NOT_TURNED, this, page));
+          dispatchEvent(new BookEvent(BookEvent.PAGE_NOT_TURNED, this, page));
         }
       } else {
-        this.dispatchEvent(new BookEvent(BookEvent.PAGE_TORN, this, page));
+        dispatchEvent(new BookEvent(BookEvent.PAGE_TORN, this, page));
       }
     }
 
     // if this was a pageflip triggered by gotoPage then switch back to normal mode:
-    if (this.autoFlipActive) {
-      if (this.tearActive) {
-        this.tearActive = false;
-        this.autoFlipActive = false;
+    if (autoFlipActive) {
+      if (tearActive) {
+        tearActive = false;
+        autoFlipActive = false;
       } else {
-        if (this._currentPage == this.autoFlipIndex) {
-          this.autoFlipActive = false;
+        if (_currentPage == autoFlipIndex) {
+          autoFlipActive = false;
         } else {
-          this.startPageFlip();
+          startPageFlip();
         }
       }
     }
 
     // turn off flags:
-    this.hoverActive = false;
-    this.sideFlipActive = false;
-    this.tearActive = false;
+    hoverActive = false;
+    sideFlipActive = false;
+    tearActive = false;
   }
 
   /**
@@ -835,10 +838,10 @@ class BookView extends PageManager {
   void drawHardPage(BitmapData front, BitmapData back) {
     // calculate position correction:
     num w;
-    if (this.lastFlippedDirection == 1) {
-      w = this.pageCorner.x - (1 - this.lastFlippedSide) * spanWidth / 2;
+    if (lastFlippedDirection == 1) {
+      w = pageCorner.x - (1 - lastFlippedSide) * spanWidth / 2;
     } else {
-      w = this.pageCorner.x - spanWidth / 2;
+      w = pageCorner.x - spanWidth / 2;
     }
     if (w < -spanWidth / 2) w = -spanWidth / 2;
     if (w > spanWidth / 2) w = spanWidth / 2;
@@ -848,10 +851,10 @@ class BookView extends PageManager {
 
     // define positions of page-corners:
     List pPoints = [];
-    pPoints.add(new Point((1 - this.lastFlippedSide) * spanWidth / 2, 0));
-    pPoints.add(new Point(pPoints[0].x + w, 0 - closeness * this.hardPerspective));
-    pPoints.add(new Point(pPoints[0].x + w, spanHeight + closeness * this.hardPerspective));
-    pPoints.add(new Point((1 - this.lastFlippedSide) * spanWidth / 2, spanHeight));
+    pPoints.add(new Point((1 - lastFlippedSide) * spanWidth / 2, 0));
+    pPoints.add(new Point(pPoints[0].x + w, 0 - closeness * hardPerspective));
+    pPoints.add(new Point(pPoints[0].x + w, spanHeight + closeness * hardPerspective));
+    pPoints.add(new Point((1 - lastFlippedSide) * spanWidth / 2, spanHeight));
 
     // make sure the first Point in the List is always the top-left, etc:
     List p = [];
@@ -862,15 +865,15 @@ class BookView extends PageManager {
 
     // draw page:
     BitmapData bmd;
-    if (this.lastFlippedSide == 0) {
-      bmd = (this.pageCorner.x > spanWidth / 2) ? back : front;
+    if (lastFlippedSide == 0) {
+      bmd = (pageCorner.x > spanWidth / 2) ? back : front;
     } else {
-      bmd = (this.pageCorner.x < 0) ? back : front;
+      bmd = (pageCorner.x < 0) ? back : front;
     }
-    this.distortion.setTransform(this.renderSprite.graphics, bmd, p[0], p[1], p[2], p[3]);
+    distortion.setTransform(renderSprite.graphics, bmd, p[0], p[1], p[2], p[3]);
 
     // draw gradients:
-    this.addHardGradients(pPoints);
+    addHardGradients(pPoints);
   }
 
   /**
@@ -885,27 +888,27 @@ class BookView extends PageManager {
       return;
     }
 
-    int side = this.getCurrentSide();
-    bool pageCornerHit = this.isPageCornerHit();
+    int side = getCurrentSide();
+    bool pageCornerHit = isPageCornerHit();
 
     // if the hovered ViewStack does not display any Pages:
-    if (((side == Page.LEFT && !this.pageL.visible) || (side == Page.RIGHT && !this.pageR.visible)) &&
-        (!this.hoverActive || this._status == BookEvent.HOVER_ENDING)) {
+    if (((side == Page.LEFT && !pageL.visible) || (side == Page.RIGHT && !pageR.visible)) &&
+        (!hoverActive || _status == BookEvent.HOVER_ENDING)) {
       return;
     }
     // don't hover hard Pages:
-    if ((this._pages[this._currentPage + side] as Page).hard) {
+    if ((_pages[_currentPage + side]).hard) {
       return;
     }
 
     // roll over:
-    if ((pageCornerHit || (this.sideFlip && this.isPageSideHit())) &&
-        ((!this.hoverActive && this._status == BookEvent.NOT_FLIPPING) || this._status == BookEvent.HOVER_ENDING)) {
-      this.startPageFlip(null, true);
+    if ((pageCornerHit || (sideFlip && isPageSideHit())) &&
+        ((!hoverActive && _status == BookEvent.NOT_FLIPPING) || _status == BookEvent.HOVER_ENDING)) {
+      startPageFlip(null, true);
     }
     // roll out:
-    if (!pageCornerHit && (!this.sideFlip || !this.isPageSideHit()) && this.hoverActive) {
-      this.endPageFlip();
+    if (!pageCornerHit && (!sideFlip || !isPageSideHit()) && hoverActive) {
+      endPageFlip();
     }
   }
 
@@ -920,20 +923,20 @@ class BookView extends PageManager {
    */
   void evaluateTear(Point point) {
     // no evaluation necessary if the Book has not even started flipping yet:
-    if (this._status != BookEvent.PAGEFLIP_STARTED) {
+    if (_status != BookEvent.PAGEFLIP_STARTED) {
       return;
     }
     // stop if an auto-flip or page-tear is already active:
-    if (this.tearActive || this.autoFlipActive) {
+    if (tearActive || autoFlipActive) {
       return;
     }
 
     // evaluate:
-    if ((point.x).round() == (1 - this.lastFlippedCorner.x) * spanWidth / 2 &&
-        (point.y).round() == this.lastFlippedCorner.y * spanHeight) {
-      this.tearActive = true;
-      this.autoFlipActive = true;
-      this.autoFlipCancelable = false;
+    if ((point.x).round() == (1 - lastFlippedCorner.x) * spanWidth / 2 &&
+        (point.y).round() == lastFlippedCorner.y * spanHeight) {
+      tearActive = true;
+      autoFlipActive = true;
+      autoFlipCancelable = false;
     }
   }
 
@@ -954,20 +957,20 @@ class BookView extends PageManager {
    *
    */
   void gotoPage(dynamic page, [bool cancelable = true]) {
-    page = this.getPageIndex(page, true);
+    page = getPageIndex(page, true);
     if (page % 2 != 1 && page != -1) page -= 1;
 
     // return if we're already at the specified Page:
-    if (this._currentPage == page) {
+    if (_currentPage == page) {
       return;
     }
 
     // set target index and start pageflip:
-    this.autoFlipIndex = page;
-    this.autoFlipCancelable = cancelable;
-    if (!this.autoFlipActive) {
-      this.autoFlipActive = true;
-      this.startPageFlip();
+    autoFlipIndex = page;
+    autoFlipCancelable = cancelable;
+    if (!autoFlipActive) {
+      autoFlipActive = true;
+      startPageFlip();
     }
   }
 
@@ -981,19 +984,19 @@ class BookView extends PageManager {
    */
   void cancelGotoPage([bool finishFlip = true]) {
     // stop if gotoPage is not active:
-    if (!this.autoFlipActive) {
+    if (!autoFlipActive) {
       return;
     }
     // stop if gotoPage is not cancelable:
-    if (!this.autoFlipCancelable) {
+    if (!autoFlipCancelable) {
       return;
     }
 
     // end the auto-flip:
     if (finishFlip == true) {
-      this.autoFlipIndex = this._currentPage + 2 * this.lastFlippedDirection;
+      autoFlipIndex = _currentPage + 2 * lastFlippedDirection;
     } else {
-      this.autoFlipActive = false;
+      autoFlipActive = false;
     }
   }
 
@@ -1005,8 +1008,8 @@ class BookView extends PageManager {
    *
    */
   void nextPage() {
-    if (this._currentPage + 2 <= this._pages.length - 1) {
-      this.gotoPage(this._currentPage + 2, false);
+    if (_currentPage + 2 <= _pages.length - 1) {
+      gotoPage(_currentPage + 2, false);
     }
   }
 
@@ -1018,8 +1021,8 @@ class BookView extends PageManager {
    *
    */
   void prevPage() {
-    if (this._currentPage - 2 >= -1) {
-      this.gotoPage(this._currentPage - 2, false);
+    if (_currentPage - 2 >= -1) {
+      gotoPage(_currentPage - 2, false);
     }
   }
 
@@ -1037,14 +1040,14 @@ class BookView extends PageManager {
    * @see		BookError#OUT_OF_BOUNDS
    */
   void tearPage(dynamic page, [bool fromTop = true]) {
-    page = this.getPage(page, true);
+    page = getPage(page, true);
 
     // stop if we're not currently inactive or hovering:
-    if (this._status != BookEvent.NOT_FLIPPING && this._status != BookEvent.HOVER_STARTED) {
+    if (_status != BookEvent.NOT_FLIPPING && _status != BookEvent.HOVER_STARTED) {
       return;
     }
     // fail silently if the provided Page is not one of the currently visible Pages:
-    if (page.index != this._currentPage && page.index != this._currentPage + 1) {
+    if (page.index != _currentPage && page.index != _currentPage + 1) {
       return;
     }
     // don't tear hard Pages:
@@ -1053,12 +1056,12 @@ class BookView extends PageManager {
     }
 
     // set vars to let the pageflip processing methods know that we're tearing:
-    this.tearActive = true;
-    this.tearSide = page.side;
-    this.tearFromTop = fromTop;
-    this.autoFlipActive = true;
-    this.autoFlipCancelable = false;
-    this.startPageFlip();
+    tearActive = true;
+    tearSide = page.side;
+    tearFromTop = fromTop;
+    autoFlipActive = true;
+    autoFlipCancelable = false;
+    startPageFlip();
   }
 
   // GRADIENTS:
@@ -1075,21 +1078,21 @@ class BookView extends PageManager {
    */
   void addHardGradients(List area) {
     // determine page:
-    Page page = (this._pages[this._currentPage + this.lastFlippedSide] as Page);
+    Page page = (_pages[_currentPage + lastFlippedSide]);
 
     // determine shadow or highlight:
     String tint;
-    if (this.lastFlippedSide == Page.LEFT) {
+    if (lastFlippedSide == Page.LEFT) {
       // if left-hand page was flipped
-      tint = (this.pageCornerTarget.x > spanWidth / 2) ? Gradients.DARK : Gradients.LIGHT;
+      tint = (pageCornerTarget.x > spanWidth / 2) ? Gradients.DARK : Gradients.LIGHT;
     } else {
       // if right-hand page was flipped
-      tint = (this.pageCornerTarget.x < 0) ? Gradients.LIGHT : Gradients.DARK;
+      tint = (pageCornerTarget.x < 0) ? Gradients.LIGHT : Gradients.DARK;
     }
 
     // draw gradients:
-    page.gradients.drawOutside(this.renderSprite.graphics, area, tint);
-    page.gradients.drawInside(this.renderSprite.graphics, area, tint);
+    page.gradients.drawOutside(renderSprite.graphics, area, tint);
+    page.gradients.drawInside(renderSprite.graphics, area, tint);
   }
 
   /**
@@ -1108,30 +1111,30 @@ class BookView extends PageManager {
    */
   void addSmoothGradients(Map ocf) {
     // determine page:
-    Page page = (this._pages[this._currentPage + this.lastFlippedSide] as Page);
+    Page page = (_pages[_currentPage + lastFlippedSide]);
 
     // determine rotation correction:
     num rotate;
-    if (this.lastFlippedCorner == (new Point(1, 0)) || this.lastFlippedCorner == (new Point(0, 1))) {
+    if (lastFlippedCorner == (new Point(1, 0)) || lastFlippedCorner == (new Point(0, 1))) {
       // if the upper right or lower left corner is being flipped and the Page isn't torn out of its Book, correct the angle with 45 degrees:
-      rotate = (!this.tearActive) ? Gradients.ROTATE_HALF : Gradients.ROTATE_FULL;
+      rotate = (!tearActive) ? Gradients.ROTATE_HALF : Gradients.ROTATE_FULL;
     }
-    if (this.lastFlippedCorner == (new Point(0, 0)) || this.lastFlippedCorner == (new Point(1, 1))) {
+    if (lastFlippedCorner == (new Point(0, 0)) || lastFlippedCorner == (new Point(1, 1))) {
       // if the upper left or lower right corner is being flipped and the Page isn't torn out of its Book, correct the angle with minus 45 degrees:
-      rotate = (!this.tearActive) ? Gradients.ROTATE_FULL : Gradients.ROTATE_HALF;
+      rotate = (!tearActive) ? Gradients.ROTATE_FULL : Gradients.ROTATE_HALF;
     }
 
     // determine shadow or highlight:
-    String tint1 = (this.lastFlippedSide == 1) ? Gradients.LIGHT : Gradients.DARK;
-    String tint2 = (this.lastFlippedSide == 1) ? Gradients.DARK : Gradients.LIGHT;
+    String tint1 = (lastFlippedSide == 1) ? Gradients.LIGHT : Gradients.DARK;
+    String tint2 = (lastFlippedSide == 1) ? Gradients.DARK : Gradients.LIGHT;
     num testval = 1; //PI / 180;
     // draw gradients:
     if (ocf["cPoints"] != null)
-      page.gradients.drawFlipside(this.renderSprite.graphics, ocf["cPoints"], tint1, rotate * testval);
+      page.gradients.drawFlipside(renderSprite.graphics, ocf["cPoints"], tint1, rotate * testval);
     if (ocf["pPoints"] != null)
-      page.gradients.drawOutside(this.renderSprite.graphics, ocf["pPoints"], tint1, rotate * testval);
-    if (ocf["cPoints"] != null && !this.tearActive)
-      page.gradients.drawInside(this.renderSprite.graphics, ocf["cPoints"], tint2, rotate * testval);
+      page.gradients.drawOutside(renderSprite.graphics, ocf["pPoints"], tint1, rotate * testval);
+    if (ocf["cPoints"] != null && !tearActive)
+      page.gradients.drawInside(renderSprite.graphics, ocf["cPoints"], tint2, rotate * testval);
   }
 
   // PAGEFLIP ASSISTANCE:
@@ -1151,61 +1154,61 @@ class BookView extends PageManager {
     num y;
 
     // if gotoPage is not active then set the page corner target equal to the mouse position:
-    if (!this.autoFlipActive) {
+    if (!autoFlipActive) {
       // calculate coordinates:
-      x = Rd.MOBILE ? this.touchX : this.mouseX;
-      y = (!this.sideFlipActive) ? Rd.MOBILE ? this.touchY : this.mouseY : this.lastFlippedCorner.y * spanHeight;
+      x = Rd.MOBILE ? touchX : mouseX;
+      y = (!sideFlipActive) ? Rd.MOBILE ? touchY : mouseY : lastFlippedCorner.y * spanHeight;
       // adjust x per position of render:
-      if (this.lastFlippedSide == Page.RIGHT) {
+      if (lastFlippedSide == Page.RIGHT) {
         x -= (spanWidth / 2);
       }
       // adjust x and y if a side-flip is active:
-      if (this.sideFlipActive) {
+      if (sideFlipActive) {
         // adjust x so that pageflip won't start acting weird when mouse is out of bounds:
-        num xMin = 0 - this.lastFlippedSide * (spanWidth / 2);
+        num xMin = 0 - lastFlippedSide * (spanWidth / 2);
         num xMax = xMin + spanWidth;
         if (x < xMin) x = xMin;
         if (x > xMax) x = xMax;
         // adjust y to make the pageflip a bit more pretty:
-        if (!this.hoverActive) {
-          y = this.getPageCornerYFromX(x, BookView.SIDE_FLIP_CURVE);
+        if (!hoverActive) {
+          y = getPageCornerYFromX(x, BookView.SIDE_FLIP_CURVE);
         }
       }
       // set position:
-      this.pageCornerTarget = new Point(x, y);
+      pageCornerTarget = new Point(x, y);
     }
 
     // if gotoPage is active then move the page corner target to the opposite corner:
-    if (this.autoFlipActive) {
+    if (autoFlipActive) {
       // calculate coordinates:
-      x = (!this.tearActive) ? this.pageCornerTarget.x : this.lastFlippedSide * (spanWidth / 2);
-      y = this.pageCornerTarget.y;
+      x = (!tearActive) ? pageCornerTarget.x : lastFlippedSide * (spanWidth / 2);
+      y = pageCornerTarget.y;
       Point opposite = new Point(0, 0);
       // if this is a normal auto-flip:
-      if (!this.tearActive) {
-        opposite.x = this.lastFlippedSide * (spanWidth / 2) - spanWidth * this.lastFlippedDirection;
-        if ((x - opposite.x).abs() >= this.autoFlipSpeed) {
-          x += this.autoFlipSpeed * -this.lastFlippedDirection;
+      if (!tearActive) {
+        opposite.x = lastFlippedSide * (spanWidth / 2) - spanWidth * lastFlippedDirection;
+        if ((x - opposite.x).abs() >= autoFlipSpeed) {
+          x += autoFlipSpeed * -lastFlippedDirection;
         } else {
           x = opposite.x;
         }
-        y = this.getPageCornerYFromX(x);
+        y = getPageCornerYFromX(x);
       }
       // if this is a tearing auto-flip:
-      if (this.tearActive) {
-        num directionY = (this.lastFlippedCorner.y == 0) ? 1 : -1;
+      if (tearActive) {
+        num directionY = (lastFlippedCorner.y == 0) ? 1 : -1;
         opposite.y = (spanHeight / 2) + (spanHeight * 1.5 * directionY);
-        if ((y - opposite.y).abs() >= this.autoFlipSpeed) {
-          y += this.autoFlipSpeed * directionY;
+        if ((y - opposite.y).abs() >= autoFlipSpeed) {
+          y += autoFlipSpeed * directionY;
         } else {
           y = opposite.y;
         }
       }
       // set position:
-      this.pageCornerTarget = new Point(x, y);
+      pageCornerTarget = new Point(x, y);
       // return true if pageCornerTarget has reached the opposite corner of where it started:
-      if (this.pageCornerTarget == (this.pageCorner) &&
-          ((this.tearActive && y == opposite.y) || (!this.tearActive && x == opposite.x))) {
+      if (pageCornerTarget == (pageCorner) &&
+          ((tearActive && y == opposite.y) || (!tearActive && x == opposite.x))) {
         return true;
       }
     }
@@ -1223,24 +1226,24 @@ class BookView extends PageManager {
    */
   void movePageCorner() {
     // calculate differences:
-    Point corner = this.pageCorner;
-    Point target = this.pageCornerTarget;
+    Point corner = pageCorner;
+    Point target = pageCornerTarget;
     num diffX = target.x - corner.x;
     num diffY = target.y - corner.y;
 
     // apply easing if difference is substantial:
-    if (Point.distance(this.pageCorner, this.pageCornerTarget) > BookView.MAX_EASING_DIFFERENCE &&
-        (!this.snap || (this._status != BookEvent.PAGEFLIP_STARTED && this._status != BookEvent.HOVER_STARTED))) {
-      this.pageCorner.x += diffX * this._easing;
-      this.pageCorner.y += diffY * this._easing;
+    if (Point.distance(pageCorner, pageCornerTarget) > BookView.MAX_EASING_DIFFERENCE &&
+        (!snap || (_status != BookEvent.PAGEFLIP_STARTED && _status != BookEvent.HOVER_STARTED))) {
+      pageCorner.x += diffX * _easing;
+      pageCorner.y += diffY * _easing;
     } else {
-      this.pageCorner = this.pageCornerTarget.clone();
+      pageCorner = pageCornerTarget.clone();
     }
 
     // make sure pageCorner is within bounds so no weird animation will result:
-    if ((this._status == BookEvent.PAGEFLIP_ENDING || this._status == BookEvent.HOVER_ENDING) && !this.tearActive) {
-      if (this.pageCorner.y < 0) this.pageCorner.y = 0;
-      if (this.pageCorner.y > spanHeight) this.pageCorner.y = spanHeight;
+    if ((_status == BookEvent.PAGEFLIP_ENDING || _status == BookEvent.HOVER_ENDING) && !tearActive) {
+      if (pageCorner.y < 0) pageCorner.y = 0;
+      if (pageCorner.y > spanHeight) pageCorner.y = spanHeight;
     }
   }
 
@@ -1254,10 +1257,10 @@ class BookView extends PageManager {
    */
   void saveBitmapData(Page front, Page back) {
     back.hideFoldGradient();
-    this.bitmapData?.forEach((idx, bmd) => bmd.clear());
-    this.bitmapData = {}; // dispose of BitmapData of pages we won't need right now
-    this.bitmapData[front.index] = front.getBitmapData();
-    this.bitmapData[back.index] = back.getBitmapData();
+    bitmapData?.forEach((idx, bmd) => bmd.clear());
+    bitmapData = {}; // dispose of BitmapData of pages we won't need right now
+    bitmapData[front.index] = front.getBitmapData();
+    bitmapData[back.index] = back.getBitmapData();
     back.showFoldGradient();
   }
 
@@ -1271,8 +1274,8 @@ class BookView extends PageManager {
   Point getCurrentCorner() {
     Point corner = new Point(0, 0);
     // determine corner:
-    corner.x = (Rd.MOBILE ? this.touchX : this.mouseX < spanWidth / 2) ? 0 : 1;
-    corner.y = (Rd.MOBILE ? this.touchY : this.mouseY < spanHeight / 2) ? 0 : 1;
+    corner.x = (Rd.MOBILE ? touchX : mouseX < spanWidth / 2) ? 0 : 1;
+    corner.y = (Rd.MOBILE ? touchY : mouseY < spanHeight / 2) ? 0 : 1;
     // return value:
     return corner;
   }
@@ -1283,7 +1286,7 @@ class BookView extends PageManager {
    * @return	Point
    */
   Point getLastFlippedCorner() {
-    return this.lastFlippedCorner;
+    return lastFlippedCorner;
   }
 
   /**
@@ -1304,14 +1307,14 @@ class BookView extends PageManager {
         point = new Point(touchX, touchY);
       }
       else{
-        point = new Point(this.mouseX, this.mouseY);
+        point = new Point(mouseX, mouseY);
       }
     }
     // return value:
-    if (Geom.isPointInCorner(this.regions[0]["TL"], point, Geom.TL) ||
-        Geom.isPointInCorner(this.regions[0]["BL"], point, Geom.BL) ||
-        Geom.isPointInCorner(this.regions[1]["TR"], point, Geom.TR) ||
-        Geom.isPointInCorner(this.regions[1]["BR"], point, Geom.BR)) {
+    if (Geom.isPointInCorner(regions[0]["TL"], point, Geom.TL) ||
+        Geom.isPointInCorner(regions[0]["BL"], point, Geom.BL) ||
+        Geom.isPointInCorner(regions[1]["TR"], point, Geom.TR) ||
+        Geom.isPointInCorner(regions[1]["BR"], point, Geom.BR)) {
       return true;
     } else {
       return false;
@@ -1335,10 +1338,10 @@ class BookView extends PageManager {
       point = new Point(touchX, touchY);
     }
     else{
-      point = new Point(this.mouseX, this.mouseY);
+      point = new Point(mouseX, mouseY);
     }
     // return value:
-    if (this.regions[0]["side"].containsPoint(point) || this.regions[1]["side"].containsPoint(point)) {
+    if (regions[0]["side"].containsPoint(point) || regions[1]["side"].containsPoint(point)) {
       return true;
     } else {
       return false;
@@ -1357,13 +1360,13 @@ class BookView extends PageManager {
    */
   int getCurrentSide() {
     int side;
-    if (!this.autoFlipActive) {
-      side = (Rd.MOBILE ? this.touchX : this.mouseX <= spanWidth / 2) ? Page.LEFT : Page.RIGHT;
+    if (!autoFlipActive) {
+      side = (Rd.MOBILE ? touchX : mouseX <= spanWidth / 2) ? Page.LEFT : Page.RIGHT;
     } else {
-      if (!this.tearActive) {
-        side = (this.autoFlipIndex < this._currentPage) ? Page.LEFT : Page.RIGHT;
+      if (!tearActive) {
+        side = (autoFlipIndex < _currentPage) ? Page.LEFT : Page.RIGHT;
       } else {
-        side = this.tearSide;
+        side = tearSide;
       }
     }
     return side;
@@ -1375,8 +1378,8 @@ class BookView extends PageManager {
    * @
    */
   void setLastFlippedTime() {
-    if (this.flipOnClick && !this.autoFlipActive) {
-      this.lastFlippedTime = /*getTimer()*/
+    if (flipOnClick && !autoFlipActive) {
+      lastFlippedTime = /*getTimer()*/
           (Rd.JUGGLER.elapsedTime * 1000).round();
     }
   }
@@ -1393,8 +1396,8 @@ class BookView extends PageManager {
    * @
    */
   void setStatus(String newStatus, [bool dispatchEvent = true, Page page = null, String eventType = ""]) {
-    if (this._status != newStatus) {
-      this._status = newStatus;
+    if (_status != newStatus) {
+      _status = newStatus;
       this.dispatchEvent(new BookEvent(BookEvent.STATUS_CHANGED, this));
     }
     if (dispatchEvent == true) {
@@ -1418,10 +1421,10 @@ class BookView extends PageManager {
    * @
    */
   num getPageCornerYFromX(num x, [num curve = BookView.AUTO_FLIP_CURVE]) {
-    num middleX = this.lastFlippedSide * (spanWidth / 2) - (spanWidth / 2) * this.lastFlippedDirection;
+    num middleX = lastFlippedSide * (spanWidth / 2) - (spanWidth / 2) * lastFlippedDirection;
     num progress = (middleX - x) / (spanWidth / 2).abs();
     num y;
-    if (this.lastFlippedCorner.y == 0) {
+    if (lastFlippedCorner.y == 0) {
       y = spanHeight * curve * (1 - progress);
     } else {
       y = spanHeight * (1 - curve) + progress * (spanHeight * curve);
@@ -1438,9 +1441,9 @@ class BookView extends PageManager {
    * @
    */
   bool get flipOnRelease {
-    if (this.flipOnClick && !this.autoFlipActive) {
+    if (flipOnClick && !autoFlipActive) {
       return (/*getTimer()*/
-          (Rd.JUGGLER.elapsedTime * 1000) - this.lastFlippedTime <= BookView.CLICK_INTERVAL);
+          (Rd.JUGGLER.elapsedTime * 1000) - lastFlippedTime <= BookView.CLICK_INTERVAL);
     } else {
       return false;
     }
@@ -1454,7 +1457,7 @@ class BookView extends PageManager {
    * @
    */
   int get autoFlipSpeed {
-    return (spanWidth / ((this.autoFlipDuration / 1000) * 20)).round();
+    return (spanWidth / ((autoFlipDuration / 1000) * 20)).round();
   }
 
   /**
@@ -1462,13 +1465,13 @@ class BookView extends PageManager {
    * @default	0.7
    */
   num get easing {
-    return (1 - this._easing) / 0.9;
+    return (1 - _easing) / 0.9;
   }
 
   void set easing(num value) {
     if (value < 0) value = 0;
     if (value > 1) value = 1;
-    this._easing = 1 - (value * 0.9);
+    _easing = 1 - (value * 0.9);
   }
 
   /**
@@ -1476,20 +1479,20 @@ class BookView extends PageManager {
    * @default	true
    */
   bool get hardCover {
-    return this._hardCover;
+    return _hardCover;
   }
 
   void set hardCover(bool value) {
     // return if there is no change in value:
-    if (this._hardCover == value) {
+    if (_hardCover == value) {
       return;
     }
     // set value:
-    this._hardCover = value;
+    _hardCover = value;
     // erase or draw fold gradient for first and last Pages:
     if (StateManager.instance.getState(this) >= StateManager.CREATION_COMPLETE) {
-      (this._pages[0] as Page).refreshFoldGradient();
-      (this._pages[this._pages.length - 1] as Page).refreshFoldGradient();
+      (_pages[0]).refreshFoldGradient();
+      (_pages[_pages.length - 1]).refreshFoldGradient();
     }
   }
 
@@ -1498,22 +1501,22 @@ class BookView extends PageManager {
    * @default	true
    */
   bool get hover {
-    return this._hoverEnabled;
+    return _hoverEnabled;
   }
 
   void set hover(bool value) {
     // return if there is no change in value:
-    if (this._hoverEnabled == value) {
+    if (_hoverEnabled == value) {
       return;
     }
     // set value:
-    this._hoverEnabled = value;
+    _hoverEnabled = value;
     // add/remove listeners:
-    if (this._hoverEnabled) {
-      //this.addEventListener(Event.ENTER_FRAME, this.evaluateHover);
-      _onEnterFrameHoverSubscription = Rd.JUGGLER.onElapsedTimeChange.listen((e) => this.evaluateHover());
+    if (_hoverEnabled) {
+      //addEventListener(Event.ENTER_FRAME, evaluateHover);
+      _onEnterFrameHoverSubscription = Rd.JUGGLER.onElapsedTimeChange.listen((e) => evaluateHover());
     } else {
-      //this.removeEventListener(Event.ENTER_FRAME, this.evaluateHover);
+      //removeEventListener(Event.ENTER_FRAME, evaluateHover);
       _onEnterFrameHoverSubscription.cancel();
     }
   }
@@ -1523,12 +1526,12 @@ class BookView extends PageManager {
    * @default	150
    */
   int get regionSize {
-    return this._regionSize;
+    return _regionSize;
   }
 
   void set regionSize(int value) {
-    this._regionSize = value;
-    this.createRegions();
+    _regionSize = value;
+    createRegions();
   }
 
   /**
@@ -1538,31 +1541,31 @@ class BookView extends PageManager {
    */
   void createRegions() {
     // specify regions for left-hand page:
-    this.regions = [];
-    this.regions.add(new Map());
-    this.regions[0]["TL"] = new Rectangle(0, 0, this._regionSize, this._regionSize);
-    this.regions[0]["TR"] = new Rectangle(0, 0, this._regionSize, this._regionSize);
-    this.regions[0]["BR"] = new Rectangle(0, 0, this._regionSize, this._regionSize);
-    this.regions[0]["BL"] = new Rectangle(0, 0, this._regionSize, this._regionSize);
-    this.regions[0]["TR"].left += spanWidth / 2 - this.regionSize;
-    this.regions[0]["BR"].left += spanWidth / 2 - this.regionSize;
-    this.regions[0]["BR"].top += spanHeight - this.regionSize;
-    this.regions[0]["BL"].top += spanHeight - this.regionSize;
+    regions = [];
+    regions.add(new Map());
+    regions[0]["TL"] = new Rectangle(0, 0, _regionSize, _regionSize);
+    regions[0]["TR"] = new Rectangle(0, 0, _regionSize, _regionSize);
+    regions[0]["BR"] = new Rectangle(0, 0, _regionSize, _regionSize);
+    regions[0]["BL"] = new Rectangle(0, 0, _regionSize, _regionSize);
+    regions[0]["TR"].left += spanWidth / 2 - regionSize;
+    regions[0]["BR"].left += spanWidth / 2 - regionSize;
+    regions[0]["BR"].top += spanHeight - regionSize;
+    regions[0]["BL"].top += spanHeight - regionSize;
     // specify regions for right-hand page:
-    this.regions.add(new Map());
-    this.regions[1]["TL"] = new Rectangle(spanWidth / 2, 0, this._regionSize, this._regionSize);
-    this.regions[1]["TR"] = new Rectangle(spanWidth / 2, 0, this._regionSize, this._regionSize);
-    this.regions[1]["BR"] = new Rectangle(spanWidth / 2, 0, this._regionSize, this._regionSize);
-    this.regions[1]["BL"] = new Rectangle(spanWidth / 2, 0, this._regionSize, this._regionSize);
-    this.regions[1]["TR"].left += spanWidth / 2 - this.regionSize;
-    this.regions[1]["BR"].left += spanWidth / 2 - this.regionSize;
-    this.regions[1]["BR"].top += spanHeight - this.regionSize;
-    this.regions[1]["BL"].top += spanHeight - this.regionSize;
+    regions.add(new Map());
+    regions[1]["TL"] = new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
+    regions[1]["TR"] = new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
+    regions[1]["BR"] = new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
+    regions[1]["BL"] = new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
+    regions[1]["TR"].left += spanWidth / 2 - regionSize;
+    regions[1]["BR"].left += spanWidth / 2 - regionSize;
+    regions[1]["BR"].top += spanHeight - regionSize;
+    regions[1]["BL"].top += spanHeight - regionSize;
     // specify side-flip regions for both pages:
-    this.regions[0]["side"] =
-        new Rectangle(0, (spanHeight - this._regionSize) / 2, this._regionSize / 2, this._regionSize);
-    this.regions[1]["side"] = this.regions[0]["side"].clone();
-    this.regions[0]["side"].left = spanWidth - this._regionSize / 2;
+    regions[0]["side"] =
+        new Rectangle(0, (spanHeight - _regionSize) / 2, _regionSize / 2, _regionSize);
+    regions[1]["side"] = regions[0]["side"].clone();
+    regions[0]["side"].left = spanWidth - _regionSize / 2;
   }
 
   /**
@@ -1573,7 +1576,7 @@ class BookView extends PageManager {
    */
   // [Bindable(event='statusChanged')]
   String get status {
-    return this._status;
+    return _status;
   }
 
   void updateTouchPosition(InputEvent event) {

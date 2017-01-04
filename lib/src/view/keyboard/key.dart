@@ -295,7 +295,7 @@ class Key extends BoxSprite {
     }
   }
 
-  void dispose() {
+  void dispose({bool removeSelf: true}) {
     super.dispose();
 
     if (_variantsTimer != null) {

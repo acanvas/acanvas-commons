@@ -40,5 +40,5 @@ abstract class IDisposable {
   /**
    * Release any resources that the current object might hold a reference to.
    */
-  void dispose();
+  void dispose({bool removeSelf: true});
 }

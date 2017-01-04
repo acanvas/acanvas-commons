@@ -1,5 +1,13 @@
 # CHANGELOG ROCKDOT_COMMONS
 
+## 0.6.1
+
+- added removeSelf option to dispose method
+
+## 0.6.0
+
+- Strong mode fixes
+
 ## 0.5.5
 
 - LifecycleSprite now using async/await for load method

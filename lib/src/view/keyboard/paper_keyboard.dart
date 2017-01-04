@@ -40,7 +40,7 @@ class MdKeyboard extends BoxSprite {
   }
 
   @override
-  void dispose() {
+  void dispose({bool removeSelf: true}) {
     Rd.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
     _softKeyboard.removeEventListeners(KeyEvent.KEY_UP_VISIBLE);
     _softKeyboard.removeEventListeners(KeyEvent.KEY_UP);

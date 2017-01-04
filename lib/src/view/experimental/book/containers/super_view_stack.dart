@@ -299,7 +299,7 @@ class SuperViewStack extends BoxSprite {
    * @see		mx.containers.ViewStack#removeAllChildren()
    */
   @override
-  void dispose() {
+  void dispose({bool removeSelf: true}) {
     super.dispose();
     this._selectedIndex = -1;
   }
@@ -351,6 +351,8 @@ class SuperViewStack extends BoxSprite {
     // point out the Sprite:
     Sprite shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Sprite;
 
+    if(shape == null) return;
+
     // size and position:
     shape.x = -child.x;
     shape.y = -child.y;
@@ -373,6 +375,7 @@ class SuperViewStack extends BoxSprite {
       child = super.getChildAt(i) as Sprite;
       shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Sprite;
 
+      if(shape == null) continue;
       shape.visible = (this._fade != 0);
       if (!shape.visible) continue;
 

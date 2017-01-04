@@ -121,7 +121,7 @@ class ComponentFlickImage extends BoxSprite {
   }
 
   @override
-  void dispose() {
+  void dispose({bool removeSelf: true}) {
     _flickTimer.cancel();
     super.dispose();
   }

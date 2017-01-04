@@ -22,9 +22,9 @@ class BehaveSprite extends BoxSprite with MBehave {
   }
 
   @override
-  void dispose() {
+  void dispose({bool removeSelf: true}) {
     disable();
-    super.dispose();
+    super.dispose(removeSelf: removeSelf);
   }
 
   @override

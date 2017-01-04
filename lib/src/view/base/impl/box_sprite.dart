@@ -42,13 +42,13 @@ class BoxSprite extends Sprite3D with MBox {
   }
 
   @override
-  void dispose() {
+  void dispose({bool removeSelf: true}) {
     //children.forEach doesn't work here, as dispose influences children<List>
     for (int i = 0; i < numChildren; i++) {
       disposeChild(getChildAt(i));
     }
 
-    if (parent != null) {
+    if (removeSelf && parent != null) {
       parent.removeChild(this);
     }
   }

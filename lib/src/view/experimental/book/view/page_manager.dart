@@ -72,7 +72,7 @@ class PageManager extends LifecycleSprite {
    * @see	PageManager#pages
    * @
    */
-  List _pages = new List();
+  List<Page> _pages = new List<Page>();
 
   // CONSTRUCTOR:
 
@@ -203,13 +203,13 @@ class PageManager extends LifecycleSprite {
    * Removes all children (Page instances) from the child list of this container.
    */
   @override
-  void dispose() {
+  void dispose({bool removeSelf: true}) {
     // remove all Pages children from ViewStacks:
     this.pageL.dispose();
     this.pageR.dispose();
     // clear book property of Pages:
     for (int i = 0; i < this._pages.length; i++) {
-      (this._pages[i] as Page).setBook(null);
+      (this._pages[i]).setBook(null);
     }
     // reset properties:
     this._pages = new List();
@@ -266,7 +266,7 @@ class PageManager extends LifecycleSprite {
       throw new ArgumentError(BookError.OUT_OF_BOUNDS);
     }
     // define Page:
-    Page page = (this._pages[index] as Page);
+    Page page = (this._pages[index]);
     // remove Page from left or right ViewStack:
     if (index % 2 == 1) {
       this.pageL.removeChild(page);
@@ -366,7 +366,7 @@ class PageManager extends LifecycleSprite {
    */
   @override
   void swapChildrenAt(int index1, int index2) {
-    this.swapChildren((this._pages[index1] as Page), (this._pages[index2] as Page));
+    this.swapChildren((this._pages[index1]), (this._pages[index2]));
   }
 
   /**
@@ -382,7 +382,7 @@ class PageManager extends LifecycleSprite {
     // see if child with provided name is in either one of the ViewStacks:
     Page child;
     for (int i = 0; i < this._pages.length; i++) {
-      child = (this._pages[i] as Page);
+      child = (this._pages[i]);
       if (child.name == name) {
         return child;
       }
@@ -486,7 +486,7 @@ class PageManager extends LifecycleSprite {
   void jumpViewStacks(int fromIndex) {
     Page page;
     for (int i = fromIndex; i < this._pages.length; i++) {
-      page = (this._pages[i] as Page);
+      page = (this._pages[i]);
       if (page.side != Page.LEFT) {
         ChildTool.moveChild(page, this.pageR, this.generateStackIndex(page));
       } else {
@@ -504,14 +504,14 @@ class PageManager extends LifecycleSprite {
     this.pageL.visible =
         ((!this.isFirstPage(this._currentPage + 1) || this._pages.length <= 1) && this.pageL.numChildren > 0);
     if (this.pageL.visible) {
-      this.pageL.selectedChild = (this._pages[this._currentPage] as Sprite);
+      this.pageL.selectedChild = (this._pages[this._currentPage]);
     }
     this.pageL.refresh();
 
     this.pageR.visible =
         ((!this.isLastPage(this._currentPage) || this._pages.length <= 1) && this.pageR.numChildren > 0);
     if (this.pageR.visible) {
-      this.pageR.selectedChild = (this._pages[this._currentPage + 1] as Sprite);
+      this.pageR.selectedChild = (this._pages[this._currentPage + 1]);
     }
     this.pageR.refresh();
   }
@@ -576,7 +576,7 @@ class PageManager extends LifecycleSprite {
           page = null;
         }
       } else {
-        page = (this._pages[page] as Page);
+        page = (this._pages[page]);
       }
     }
     // throw Error if Page its parent is not this PageManager instance:
