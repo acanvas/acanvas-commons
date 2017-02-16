@@ -17,7 +17,7 @@ void main() {
   opts.preventDefaultOnKeyboard = false;
   //opts.maxPixelRatio = 1.0;
 
-  stage = new Stage(html.querySelector('#stage'), width: 1020, height: 720, options: opts);
+  stage = new Stage(html.querySelector('#stage') as html.CanvasElement, width: 1020, height: 720, options: opts);
 
   Rd.STAGE = stage;
   new RenderLoop()..addStage(stage);
@@ -91,7 +91,7 @@ void _addToBook(Sprite spr) {
   }
 }
 
-void onBookInit(event) {
+void onBookInit(LifecycleEvent event) {
   book.removeEventListener(LifecycleEvent.INIT_COMPLETE, onBookInit);
  // book.nextPage();
 }

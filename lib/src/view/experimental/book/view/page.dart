@@ -115,7 +115,7 @@ class Page extends LifecycleSprite {
 
   // CUSTOM:
   @override
-  void init({Map params : null}){
+  void init({Map<String, String> params : null}){
     super.init(params: params);
 
     if (bm != null) {

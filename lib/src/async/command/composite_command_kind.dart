@@ -23,7 +23,7 @@ part of rockdot_commons;
  * @see org.as3commons.async.command.ICommand ICommand
  */
 class CompositeCommandKind {
-  static final Map _kinds = new Map();
+  static final Map<String, CompositeCommandKind> _kinds = new Map();
 
   /**
    * Determines that the <code>ICompositeCommand</code> will execute its collection of command one after the other.
@@ -66,7 +66,7 @@ class CompositeCommandKind {
    * to the specified <code>name</code> argument, or null if the name doesn't exist.
    */
   static CompositeCommandKind fromName(String name) {
-    return _kinds[(name.toLowerCase()).trim()] as CompositeCommandKind;
+    return _kinds[(name.toLowerCase()).trim()];
   }
 
   /**

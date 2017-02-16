@@ -14,8 +14,8 @@ class BoxSprite extends Sprite3D with MBox {
     if (spanWidth > 0) this.spanWidth = spanWidth;
     if (spanHeight > 0) this.spanHeight = spanHeight;
 
-    children.where((c) => c is MBox && c.inheritSpan).forEach((child) {
-      child.span(spanWidth, spanHeight - 2 * padding, refresh: refresh);
+    children.where((c) => c is MBox && (c as MBox).inheritSpan).forEach((child) {
+      (child as MBox).span(spanWidth, spanHeight - 2 * padding, refresh: refresh);
     });
     children.where((c) => c is UITextField && c.inheritWidth).forEach((child) {
       child.width = spanWidth - 2 * padding;

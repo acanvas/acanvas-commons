@@ -2,7 +2,7 @@ part of rockdot_commons;
 
 class RdFontUtil {
   /* internals */
-  List _fonts = [];
+  List<String> _fonts = new List();
   static final RdFontUtil _singleton = new RdFontUtil._internal();
 
   RdFontUtil._internal() {}
@@ -16,10 +16,10 @@ class RdFontUtil {
   }
 
   static Future<bool> loadFonts() async {
-    var completer = new Completer();
+    Completer completer = new Completer<dynamic>();
     var googleFontFamilies = _singleton._fonts;
 
-    js.JsObject webFont = js.context["WebFont"];
+    js.JsObject webFont = js.context["WebFont"] as js.JsObject;
     js.JsObject webFontConfig = new js.JsObject.jsify({
       "google": {"families": googleFontFamilies},
       "loading": () => print("loading fonts"),
@@ -32,7 +32,7 @@ class RdFontUtil {
     }
     webFont.callMethod("load", [webFontConfig]);
 
-    await completer.future.catchError((e) {
+    await completer.future.catchError((Error e) {
       throw("Error while loading fonts. ${e}");
     });
 

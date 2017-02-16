@@ -3,7 +3,7 @@ part of rockdot_commons;
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
-abstract class MSlider {
+abstract class MSlider extends EventDispatcher{
   Timer _materializeControl;
 
   bool _horizontalScrollBehavior = false;
@@ -31,13 +31,8 @@ abstract class MSlider {
 
   bool get continuous => _continuous;
 
-  _updateThumbPosition() {}
+  void _updateThumbPosition() {}
 
-  bool _bounce = Rd.MOBILE ? true : false;
-
-  void set bounce(bool bounce)  {  _bounce = bounce; }
-
-  bool get bounce => _bounce;
 
   num _mouseWheelSensitivity = 1.0;
 
@@ -213,10 +208,4 @@ abstract class MSlider {
 
   bool get touching => _touching;
 
-  StreamSubscription<Event> addEventListener(String eventType, EventListener eventListener,
-      {bool useCapture: false, int priority: 0});
-
-  void removeEventListener(String eventType, EventListener eventListener, {bool useCapture: false});
-
-  void dispatchEvent(Event event);
 }

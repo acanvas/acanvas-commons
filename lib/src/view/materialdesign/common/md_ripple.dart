@@ -12,7 +12,7 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
   }
 
   int color;
-  num type;
+  int type;
   num velocity = 1.5;
 
   Sprite holder;
@@ -37,7 +37,7 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
   }
 
   @override
-  downAction([InputEvent e = null]) {
+  void downAction([InputEvent e = null]) {
     num localX = e == null ? spanWidth / 2 : e.localX;
     num localY = e == null ? spanHeight / 2 : e.localY;
 

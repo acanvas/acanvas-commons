@@ -82,26 +82,6 @@ abstract class ISimpleEventBus {
   bool dispatchEvent(Event event, [Object topic = null]);
 
   /**
-   * The number of registered event listeners for the specified event class, optionally also for the specified topic. Omitting the topic argument will return the number
-   * of event listeners that have been registered without a topic, so *not* the entire count.
-   * @param eventClass The specified event Class.
-   * @param topic The specified optional topic.
-   * @return The specified number of event listeners.
-   */
-  int getClassListenerCount(/*Class*/
-      eventClass, [Object topic = null]);
-
-  /**
-   * The number of registered event listener proxies for the specified event class, optionally also for the specified topic. Omitting the topic argument will return the number
-   * of event listener proxies that have been registered without a topic, so *not* the entire count.
-   * @param eventClass The specified event Class.
-   * @param topic The specified optional topic.
-   * @return The specified number of event listener proxies.
-   */
-  int getClassProxyListenerCount(/*Class*/
-      eventClass, [Object topic = null]);
-
-  /**
    * The number of registered event listeners for the specified event eventType, optionally also for the specified topic. Omitting the topic argument will return the number
    * of event listeners that have been registered without a topic, so *not* the entire count.
    * @param eventType The specified event type.
@@ -131,17 +111,6 @@ abstract class ISimpleEventBus {
    * Removes all types of listeners.
    */
   void removeAllListeners([Object topic = null]);
-
-  /**
-   * Removes a listener function for events of a specific Class.
-   * @param eventClass The specified <code>Class</code>.
-   * @param listener The specified listener function.
-   */
-  void removeEventClassListener(
-      /*Class*/
-      eventClass,
-      Function listener,
-      [Object topic = null]);
 
   /**
    * Removes a proxied event handler as a listener for events of a specific <code>Class</code>.

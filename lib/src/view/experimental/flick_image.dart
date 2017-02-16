@@ -18,7 +18,7 @@ class ComponentFlickImage extends BoxSprite {
     _holder = new Sprite();
     addChild(_holder);
 
-    Sprite dobj = _data[_currentIndex];
+    Sprite dobj = _data[_currentIndex] as Sprite;
 
     //_holder.mask = new Mask.rectangle(0, 0, dobj.width, dobj.height + 50);
 
@@ -33,7 +33,7 @@ class ComponentFlickImage extends BoxSprite {
     Sprite child;
     switch (position) {
       case LEFT:
-        child = _holder.getChildAt(0);
+        child = _holder.getChildAt(0) as Sprite;
         data.x = (child.x - data.width).toInt();
         _holder.addChildAt(data, 0);
 
@@ -56,7 +56,7 @@ class ComponentFlickImage extends BoxSprite {
         _holder.addChildAt(data, 0);
         break;
       case RIGHT:
-        child = _holder.getChildAt(0);
+        child = _holder.getChildAt(0) as Sprite;
         data.x = (child.x + child.width).toInt();
         _holder.addChildAt(data, 0);
 
@@ -93,7 +93,7 @@ class ComponentFlickImage extends BoxSprite {
       _currentIndex = 0;
     }
 
-    _placeItem(_data[_currentIndex], RIGHT);
+    _placeItem(_data[_currentIndex] as Sprite, RIGHT);
   }
 
   void prev() {
@@ -104,7 +104,7 @@ class ComponentFlickImage extends BoxSprite {
       _currentIndex = _data.length - 1;
     }
 
-    _placeItem(_data[_currentIndex], LEFT);
+    _placeItem(_data[_currentIndex] as Sprite, LEFT);
   }
 
   void gotoPage(int page) {
@@ -117,7 +117,7 @@ class ComponentFlickImage extends BoxSprite {
     }
 
     _currentIndex = page;
-    _placeItem(_data[_currentIndex], LEFT);
+    _placeItem(_data[_currentIndex] as Sprite, LEFT);
   }
 
   @override

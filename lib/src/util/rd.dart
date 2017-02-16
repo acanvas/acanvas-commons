@@ -3,7 +3,6 @@ part of rockdot_commons;
 class Rd {
   /* internals */
   Stage _stage;
-  bool _materializeRequired = false;
   static final Rd _singleton = new Rd._internal();
 
   Rd._internal() {}
@@ -49,11 +48,9 @@ class Rd {
     return _singleton._stage.juggler;
   }
 
-  static bool get MATERIALIZE_REQUIRED {
-    return _singleton._materializeRequired;
-  }
-
   static void set MATERIALIZE_REQUIRED(bool b) {
-    _singleton._materializeRequired = b;
+    if(b && STAGE.renderMode != StageRenderMode.AUTO){
+      STAGE.renderMode = StageRenderMode.ONCE;
+    };
   }
 }

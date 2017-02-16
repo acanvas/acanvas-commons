@@ -4,7 +4,7 @@ class MdWrap extends BoxSprite {
   int bgColor;
   int panelColor;
   Sprite panelSprite;
-  MdText _title;
+  UITextField _title;
   Flow flow;
   SpriteScrollifier _scrollManager;
 

@@ -55,7 +55,7 @@ part of rockdot_commons;
  */
 class Key extends BoxSprite {
   //feathers
-  List nameList = [];
+  List<String> nameList = [];
   static final String UPPERCASE = 'Uppercase';
   static final String LOWERCASE = 'Lowercase';
 
@@ -324,7 +324,7 @@ class Key extends BoxSprite {
   void refresh() {
 //			if (_skin) {
 
-    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.BLUE, sprite: _skin);
+    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.BLUE, sprite: _skin as Sprite);
 //			} else {
 //				spanInternal(44, 52, false);
 //				_skin.width = 44;

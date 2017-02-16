@@ -47,10 +47,10 @@ class DrawingTool {
    */
   static void drawMarker(Graphics graphics, dynamic point,
       [num size = 10, String shape = CROSS, LineStyle lineStyle = null]) {
-    if (point is List) {
-      for (String i in point) {
-        drawMarker(graphics, point[i], size, shape);
-      }
+    if (point is List<Point>) {
+      point.forEach( (point) {
+        drawMarker(graphics, point, size, shape);
+      });
     }
     if (point is Point) {
       switch (shape) {
@@ -108,9 +108,9 @@ class DrawingTool {
    * @see		LineStyle
    *
    */
-  static void draw(Graphics graphics, List area, [bool connect = true, LineStyle lineStyle = null]) {
+  static void draw(Graphics graphics, List<Point> area, [bool connect = true, LineStyle lineStyle = null]) {
     int i;
-    List newArea = [];
+    List<Point> newArea = [];
     for (i = 0; i < area.length; i++) {
       if (area[i] != null) {
         newArea.add(area[i]);
@@ -143,7 +143,7 @@ class DrawingTool {
    * @see		DrawingTool#draw()
    */
   static void rect(Graphics graphics, Rectangle rect, [LineStyle lineStyle = null]) {
-    List area = [rect.topLeft, new Point(rect.right, rect.top), rect.bottomRight, new Point(rect.left, rect.bottom)];
+    List<Point> area = [rect.topLeft, new Point(rect.right, rect.top), rect.bottomRight, new Point(rect.left, rect.bottom)];
     draw(graphics, area, true, lineStyle);
   }
 

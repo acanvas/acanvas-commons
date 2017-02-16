@@ -21,7 +21,7 @@ Future main() async{
   opts.preventDefaultOnWheel = true;
   opts.preventDefaultOnKeyboard = false;
 
-  stage = new Stage(html.querySelector('#stage'), options: opts);
+  stage = new Stage(html.querySelector('#stage') as html.CanvasElement, options: opts);
   new RenderLoop()..addStage(stage);
 
   Rd.STAGE = stage;
@@ -176,9 +176,9 @@ void start() {
     ..inheritSpan = true;
 
 
-  List testList = [];
+  List<Map<String, String>> testList = [];
   for(int i = 0; i < 40; i++){
-    Map vo = {};
+    Map<String, String> vo = {};
     vo['label'] = "Menu item #$i";
     vo['url'] = "";
     testList.add(vo);

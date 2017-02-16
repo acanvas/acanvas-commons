@@ -5,7 +5,7 @@ part of rockdot_commons;
  */
 
 abstract class MPager {
-  List chunksPlaced = [];
+  List<int> chunksPlaced = [];
   int chunkSize = 8;
 
   int hasPrev = 0;

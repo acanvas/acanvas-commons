@@ -41,4 +41,10 @@ abstract class MPagedScroll {
   void set pageScrollDistance(num pageScrollDistance)  {  _pageScrollDistance = pageScrollDistance; }
 
   num get pageScrollDistance => _pageScrollDistance;
+
+  bool _bounce = Rd.MOBILE ? true : false;
+
+  void set bounce(bool bounce)  {  _bounce = bounce; }
+
+  bool get bounce => _bounce;
 }

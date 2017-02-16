@@ -69,7 +69,7 @@ class SuperRectangle extends Rectangle {
    * @return	An integer indicating on which side a given coordinate is. 0 stands for he top-side, 1 for right-side, etc. Use the constants of the SuperRectangle class for improved code-readability.
    */
   int isOnSide(Point point) {
-    List lines = this.getLines();
+    List<Line> lines = this.getLines();
     for (int i = 0; i < lines.length; i++) {
       if (lines[i].containsPoint(point)) {
         switch (i) {
@@ -92,7 +92,7 @@ class SuperRectangle extends Rectangle {
    *
    * @return	List
    */
-  List getCorners() {
+  List<Point> getCorners() {
     return [this.topLeft, this.topRight, this.bottomRight, this.bottomLeft];
   }
 
@@ -103,9 +103,9 @@ class SuperRectangle extends Rectangle {
    *
    * @return	List
    */
-  List getLines() {
-    List lines = [];
-    List corners = this.getCorners();
+  List<Line> getLines() {
+    List<Line> lines = [];
+    List<Point> corners = this.getCorners();
     lines.add(new Line(corners[0], corners[1]));
     lines.add(new Line(corners[1], corners[2]));
     lines.add(new Line(corners[2], corners[3]));

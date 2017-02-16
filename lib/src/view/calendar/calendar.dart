@@ -1,10 +1,10 @@
 part of rockdot_commons;
 
 class Calendar extends BoxSprite {
-  num _firstDay = 0;
+  int _firstDay = 0;
 
   //1=Sunday, 0=Monday
-  List monthNames = [
+  List<String> monthNames = [
     "Januar",
     "Februar",
     "März",
@@ -18,16 +18,16 @@ class Calendar extends BoxSprite {
     "November",
     "Dezember"
   ];
-  List dayButtons = [];
+  List<DayButton> dayButtons = [];
   int dayButtonGap = 1;
   int dayButtonWidth = 30;
   int dayButtonHeight = 30;
   UITextField _dateLabel;
   Sprite dayButtonHolder;
 
-  num _month;
-  num _year;
-  num _day;
+  int _month;
+  int _year;
+  int _day;
 
   Calendar() : super() {
     dayButtonHolder = new Sprite();
@@ -95,7 +95,7 @@ class Calendar extends BoxSprite {
   }
 
   int getLastDayOfMonth(num month, num year) {
-    switch (month - 1) {
+    switch ((month - 1).toInt()) {
       case 0: // jan
       case 2: // mar
       case 4: // may

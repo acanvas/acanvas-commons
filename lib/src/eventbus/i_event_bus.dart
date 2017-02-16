@@ -17,8 +17,9 @@ part of rockdot_commons;
 
 abstract class IEventBus implements EventDispatcher {
   @override
-  StreamSubscription<Event> addEventListener(String eventType, void eventListener(event),
-      {bool useCapture: false, int priority: 0});
+  StreamSubscription<T> addEventListener<T extends Event>(
+      String eventType, EventListener<T> eventListener, {
+      bool useCapture: false, int priority: 0 });
 
   @override
   void dispatchEvent(Event event);
@@ -27,10 +28,11 @@ abstract class IEventBus implements EventDispatcher {
   bool hasEventListener(String eventType, {bool useCapture: false});
 
   @override
-  EventStream<Event> on(String eventType);
+  EventStream<T> on<T extends Event>(String eventType);
 
   @override
-  void removeEventListener(String eventType, void eventListener(event), {bool useCapture: false});
+  void removeEventListener<T extends Event>(String eventType, EventListener<T> eventListener, {
+  bool useCapture: false });
 
   @override
   void removeEventListeners(String eventType);

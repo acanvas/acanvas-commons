@@ -8,7 +8,7 @@ class MdSamplePage extends Page {
   }
 
   @override
-  void init({Map params : null}){
+  void init({Map<String, String> params : null}){
 
     super.init();
     RdGraphics.rectangle(0, 0, 450, 600, color: Color.White, sprite: this, clear: false);
@@ -111,9 +111,9 @@ class MdSamplePage extends Page {
       ..spacing = 20
       ..inheritSpan = true;
 
-    List testList = [];
+    List<Map<String, String>> testList = [];
     for (int i = 0; i < 40; i++) {
-      Map vo = {};
+      Map<String, String> vo = {};
       vo['label'] = "Menu item #$i";
       vo['url'] = "";
       testList.add(vo);
@@ -178,7 +178,7 @@ class MdSamplePage extends Page {
    *
    * @return	BitmapData
    */
-  BitmapData getBitmapData() {
+  BitmapData getBitmapData({bool scale: false}) {
     BitmapData bmd = new BitmapData(_width.round(), _height.round(), 0x00ffffff);
     bmd.draw(this);
     return bmd;

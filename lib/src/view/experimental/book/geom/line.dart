@@ -111,7 +111,7 @@ class Line extends InfiniteLine {
    */
   @override
   String toString() {
-    return "Line((" + this.a.x + "," + this.a.y + ")->(" + this.b.x + "," + this.b.y + "))";
+    return "Line((${this.a.x}, ${this.a.y})->(${this.b.x}, ${this.b.y}))";
   }
 
   /**

@@ -13,8 +13,8 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
       if (spanWidth > 0) this.spanWidth = spanWidth;
       if (spanHeight > 0) this.spanHeight = spanHeight;
 
-      children.where((c) => c is MBox && c.inheritSpan).forEach((child) {
-        child.span(spanWidth, spanHeight, refresh: refresh);
+      children.where((c) => c is MBox && (c as MBox).inheritSpan).forEach((child) {
+        (child as MBox).span(spanWidth, spanHeight, refresh: refresh);
       });
 
       if (refresh && initialized) {
@@ -23,7 +23,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
     }
   }
 
-  init({Map params: null}) {
+  init({Map<String, String> params: null}) {
     this.params = params;
     if (spanHeight == 0 || spanWidth == 0) {
       logger.warn(
@@ -33,11 +33,11 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
 
   void onInitComplete() {
     initialized = true;
-    children.where((c) => c is MLifecycle && c.inheritInit && !c.initialized).forEach((child) {
+    children.where((c) => c is MLifecycle && (c as MLifecycle).inheritInit && !(c as MLifecycle).initialized).forEach((child) {
       if ((child as MBox).inheritSpan) {
-        child.span(spanWidth, spanHeight, refresh: false);
+        (child as MBox).span(spanWidth, spanHeight, refresh: false);
       }
-      child.init();
+      (child as MLifecycle).init();
     });
     refresh();
     dispatchEvent(new LifecycleEvent(LifecycleEvent.INIT_COMPLETE));
@@ -64,8 +64,8 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
 
   @override
   void appear({double duration: MLifecycle.APPEAR_DURATION_DEFAULT}) {
-    children.where((c) => c is MLifecycle && c.inheritAppear).forEach((child) {
-      child.appear(duration: duration);
+    children.where((c) => c is MLifecycle && (c as MLifecycle).inheritAppear).forEach((child) {
+      (child as MLifecycle).appear(duration: duration);
     });
 
     super.appear(duration: duration);
@@ -73,8 +73,8 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
 
   @override
   void disappear({double duration: MLifecycle.DISAPPEAR_DURATION_DEFAULT, bool autoDispose: false}) {
-    children.where((c) => c is MLifecycle && c.inheritDisappear).forEach((child) {
-      child.disappear(duration: duration, autoDispose: autoDispose);
+    children.where((c) => c is MLifecycle && (c as MLifecycle).inheritDisappear).forEach((child) {
+      (child as MLifecycle).disappear(duration: duration, autoDispose: autoDispose);
     });
     Rd.JUGGLER.delayCall(() {
       dispatchEvent(new LifecycleEvent(LifecycleEvent.DISAPPEAR_COMPLETE));

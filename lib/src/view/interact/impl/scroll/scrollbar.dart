@@ -292,8 +292,8 @@ class Scrollbar extends Slider with MPagedScroll {
       //print("pos>maxPos $pos");
     } else {
       offset = 0;
-      num t = (spanSize / pageCount).round() - offset * 4;
-      thumbSize = max(10, t);
+      int t = (spanSize / pageCount).round() - offset * 4;
+      thumbSize = max<int>(10, t);
       //print("pos<maxPos $pos");
     }
     _thumbSize = thumbSize;

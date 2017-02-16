@@ -216,8 +216,8 @@ class Geom {
    * @return	List
    */
   static List getRectIntersections(Line line, Rectangle rect, [bool includeNull = false]) {
-    List intersections = [];
-    List lines = SuperRectangle.createSuperRectangle(rect).getLines();
+    List<Point> intersections = [];
+    List<Line> lines = SuperRectangle.createSuperRectangle(rect).getLines();
     Point intersection;
     for (int i = 0; i < lines.length; i++) {
       intersection = Line.getIntersection(line, lines[i]);
@@ -229,51 +229,6 @@ class Geom {
   }
 
   /**
-   * Indicates whether or not two Points are in such a position on a SuperRectangle its border that they need extra inbetween Points to describe the inbetween path from one to another along the SuperRectangle its border. This method is typically used by the trim method.
-   *
-   * @see	Geom#trim()
-   *
-   * @
-   */
-  static bool needsCorners(Map point1, Map point2, SuperRectangle rect) {
-    if (point1["isOriginal"] != point2["isOriginal"]) {
-      Map one = (point1["isOriginal"]) ? point2 : point1;
-      Map two = (point2["isOriginal"]) ? point2 : point1;
-      if (!one["parent"].a.equals(two["point"]) && !one["parent"].b.equals(two["point"])) {
-        return true;
-      }
-    }
-
-    if (!point1["isOriginal"] && !point2["isOriginal"]) {
-      if (!point1["parent"].equals(point2["parent"])) {
-        if (rect.isOnSide(point1["point"]) != rect.isOnSide(point2["point"])) {
-          return true;
-        }
-        if (rect.isOnSide(point1["point"]) == rect.isOnSide(point2["point"])) {
-          switch (rect.isOnSide(point1["point"])) {
-            case SuperRectangle.NONE:
-              return true;
-            case SuperRectangle.TOP:
-              if (point2["point"].x < point1["point"].x) return true;
-              break;
-            case SuperRectangle.RIGHT:
-              if (point2["point"].y < point1["point"].y) return true;
-              break;
-            case SuperRectangle.BOTTOM:
-              if (point2["point"].x > point1["point"].x) return true;
-              break;
-            case SuperRectangle.LEFT:
-              if (point2["point"].y > point1["point"].y) return true;
-              break;
-          }
-        }
-      }
-    }
-
-    return false;
-  }
-
-  /**
    * Returns the List index of the Point that is the nearest to a given coordinate.
    *
    * @param	area	An List consisting of Points.
@@ -281,7 +236,7 @@ class Geom {
    *
    * @return	Index of the nearest Point. Returns -1 if no Point instance was found in the provided List.
    */
-  static int getNearest(List area, Point point) {
+  static int getNearest(List<Point> area, Point point) {
     int nearest = -1;
     for (int i = 0; i < area.length; i++) {
       if (area[i] == null || !(area[i] is Point)) {
@@ -305,7 +260,7 @@ class Geom {
    * @returns	List of Points.
    */
   static List star(num radius, Point center, [num rotation = 0, int points = 5]) {
-    List area = [];
+    List<Point> area = [];
     num angle = (PI * 2) / (points * 2);
     rotation -= PI / 2;
     for (int i = 0; i < points; i++) {

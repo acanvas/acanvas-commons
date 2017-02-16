@@ -36,9 +36,9 @@ class Flow extends BoxSprite with MFlow {
     //iterate all children
     children.forEach((child) {
       //get width and height values of child
-      if (child is MBox /*&& !(child is MFlow)*/) {
-        _childWidth = child.spanWidth;
-        _childHeight = child.spanHeight;
+      if (child is MBox) {
+        _childWidth = (child as MBox).spanWidth;
+        _childHeight = (child as MBox).spanHeight;
       } else {
         _childWidth = child.width;
         _childHeight = child.height;

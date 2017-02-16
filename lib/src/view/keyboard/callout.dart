@@ -1,7 +1,7 @@
 part of rockdot_commons;
 
 class Callout extends LifecycleSprite {
-  List nameList = [];
+  List<String> nameList = [];
   static const String DIRECTION_UP = "DIRECTION_UP";
   static const String DIRECTION_DOWN = "DIRECTION_DOWN";
 

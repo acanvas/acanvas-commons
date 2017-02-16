@@ -11,7 +11,7 @@ void main() {
   opts.stageScaleMode = StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
 
-  stage = new Stage(html.querySelector('#stage'), options: opts);
+  stage = new Stage(html.querySelector('#stage') as html.CanvasElement, options: opts);
 
   new RenderLoop()
     ..addStage(stage);
@@ -21,7 +21,7 @@ void main() {
 
 void start(){
 
-  List colors = [0x33FF0000, 0x3300FF00, 0x330000FF];
+  List<int> colors = [0x33FF0000, 0x3300FF00, 0x330000FF];
 
   Sprite s = new Sprite();
   stage.addChild(s);

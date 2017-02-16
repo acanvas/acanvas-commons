@@ -35,7 +35,7 @@ class SuperViewStack extends BoxSprite {
   /**
    * @
    */
-  List __fade = [DEFAULT_FADE, 1.0];
+  List<num> __fade = [DEFAULT_FADE, 1.0];
 
   /**
    * @
@@ -529,7 +529,7 @@ class SuperViewStack extends BoxSprite {
     if (value == this.behavior || (value != SuperViewStack.SUPER && value != SuperViewStack.NORMAL)) {
       return;
     }
-    this.__fade = this.__fade.reversed;
+    this.__fade = this.__fade.reversed.toList();
     this.showChildren();
     this.dispatchEvent(new Event(SuperViewStack.BEHAVIOR_CHANGED));
   }

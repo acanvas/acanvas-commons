@@ -93,7 +93,7 @@ class ComponentDropdown extends BehaveSprite {
   }
 
   void _onCellSubmit(SelectableButton cell) {
-    btnRolloutToggle.labelText = cell.data;
+    btnRolloutToggle.labelText = cell.data.toString();
 
     if (submitCallback != null) {
       submitCallback.call(cell);

@@ -63,8 +63,8 @@ class OrderedUtils {
    */
   static int orderedCompareFunction(dynamic itemA, dynamic itemB) {
     if ((itemA is IOrdered) && (itemB is IOrdered)) {
-      int vA = (itemA as IOrdered).order;
-      int vB = (itemB as IOrdered).order;
+      int vA = itemA.order;
+      int vB = itemB.order;
       if (vA < vB) {
         return -1;
       } else if (vA == vB) {

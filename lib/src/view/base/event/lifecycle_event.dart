@@ -13,7 +13,7 @@ class LifecycleEvent extends Event {
   static const String DID_ACTIVATE = "LifecycleEvent.DID_ACTIVATE";
   static const String DID_DEACTIVATE = "LifecycleEvent.DID_DEACTIVATE";
 
-  var _data;
+  Object _data;
 
   LifecycleEvent(String type, [this._data = null, bool bubbles = false]) : super(type, bubbles);
 

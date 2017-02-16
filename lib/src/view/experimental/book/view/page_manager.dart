@@ -115,7 +115,7 @@ class PageManager extends LifecycleSprite {
    * @
    */
   @override
-  void init({Map params: null}) {
+  void init({Map<String, String> params: null}) {
     super.init(params: params);
 
     this.pageL.span(spanWidth / 2, spanHeight);
@@ -401,7 +401,7 @@ class PageManager extends LifecycleSprite {
    */
   @override
   int getChildIndex(DisplayObject child) {
-    return this._pages.indexOf(child);
+    return this._pages.indexOf(child as Page);
   }
 
   /**
@@ -568,7 +568,7 @@ class PageManager extends LifecycleSprite {
     // if page is numeric, transform it into a Page:
     if (!(page is Page)) {
       // throw Error if index is out of bounds:
-      if (page < 0 || page >= this._pages.length) {
+      if ((page as int)  < 0 || (page as int) >= this._pages.length) {
         if (varify && page != -1) {
           // even though -1 is not a valid index, it does virtually indicate a Page
           throw new ArgumentError(BookError.OUT_OF_BOUNDS);
@@ -576,7 +576,7 @@ class PageManager extends LifecycleSprite {
           page = null;
         }
       } else {
-        page = (this._pages[page]);
+        page = (this._pages[(page as int)]);
       }
     }
     // throw Error if Page its parent is not this PageManager instance:
@@ -584,7 +584,7 @@ class PageManager extends LifecycleSprite {
       throw new ArgumentError(BookError.PAGE_NOT_CHILD);
     }
     // return index:
-    return page;
+    return page as Page;
   }
 
   /**
@@ -599,7 +599,7 @@ class PageManager extends LifecycleSprite {
    */
   int getPageIndex(dynamic page, [bool varify = false]) {
     page = this.getPage(page, varify);
-    return (page == null) ? -1 : page.index;
+    return (page == null) ? -1 : (page as Page).index;
   }
 
   // ACCESSORS:

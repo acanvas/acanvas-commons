@@ -1,5 +1,10 @@
 # CHANGELOG ROCKDOT_COMMONS
 
+## 0.9.8 2017-02-16
+
+- Strong mode fixes
+- Bumped minor and release version to align with other rockdot components
+
 ## 0.6.1
 
 - added removeSelf option to dispose method

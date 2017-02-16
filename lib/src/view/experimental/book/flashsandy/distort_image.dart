@@ -36,7 +36,7 @@ class DistortImage {
   /**
    * @
    */
-  num _xMin, _xMax, _yMin, _yMax;
+  num _xMin, _yMin;
 
   /**
    * @
@@ -51,12 +51,12 @@ class DistortImage {
   /**
    * @
    */
-  List _p;
+  List<Map<String, num>> _p;
 
   /**
    * @
    */
-  List _tri;
+  List<List<Map<String, num>>> _tri;
 
   // internals for accessors:
   /**
@@ -96,13 +96,9 @@ class DistortImage {
   void __init() {
     _p = new List();
     _tri = new List();
-    num ix;
-    num iy;
-    num w2 = _w / 2;
-    num h2 = _h / 2;
+    int ix;
+    int iy;
     _xMin = _yMin = 0;
-    _xMax = _w;
-    _yMax = _h;
     _hsLen = _w / (_hseg + 1);
     _vsLen = _h / (_vseg + 1);
     num x, y;
@@ -150,9 +146,9 @@ class DistortImage {
     num dy30 = bl.y - tl.y;
     num dx21 = br.x - tr.x;
     num dy21 = br.y - tr.y;
-    num l = _p.length;
+    int l = _p.length;
     while (--l > -1) {
-      Map point = _p[l];
+      Map<String, num> point = _p[l];
       num gx = (point["x"] - _xMin) / _w;
       num gy = (point["y"] - _yMin) / _h;
       num bx = tl.x + gy * (dx30);
@@ -172,15 +168,13 @@ class DistortImage {
    * @
    */
   void __render(Graphics graphics, BitmapData bmd) {
-    num t;
-    List vertices;
     _tMat = new Matrix.fromIdentity();
     _sMat = new Matrix.fromIdentity();
     var _spcMat = new Matrix.fromIdentity();
     /*Object*/
-    Map p0, p1, p2;
-    List a;
-    num l = _tri.length;
+    Map<String, num> p0, p1, p2;
+    List<Map<String, num>> a;
+    int l = _tri.length;
 
     while (--l > -1) {
       a = _tri[l];
@@ -264,7 +258,7 @@ class DistortImage {
    * @see	DistortImage#vPrecision
    *
    */
-  void setPrecision(num horizontal, num vertical) {
+  void setPrecision(int horizontal, int vertical) {
     this._hseg = horizontal;
     this._vseg = vertical;
     this.__init();

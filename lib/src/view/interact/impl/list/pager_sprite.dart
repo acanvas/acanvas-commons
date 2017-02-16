@@ -107,7 +107,7 @@ class PagerSprite extends BehaveSprite with MList, MPager {
 //			uiService.unlock();
   }
 
-  int _getChunkIndex(List chunks) {
+  int _getChunkIndex(List<int> chunks) {
     int idx = 0;
     for (int num in chunks) {
       idx += num;

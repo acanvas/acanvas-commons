@@ -1,7 +1,7 @@
 part of rockdot_commons;
 
 abstract class IMdButtonComponent {
-  downAction([Event e = null]);
+  void downAction([InputEvent e = null]);
 
-  upAction([Event e = null]);
+  void upAction([InputEvent e = null]);
 }

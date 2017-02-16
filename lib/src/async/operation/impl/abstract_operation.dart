@@ -99,7 +99,7 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   /**
    * @inheritDoc
    */
-  void addCompleteListener(Function listener,
+  void addCompleteListener<T extends Event>(EventListener<T> listener,
       [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
     addEventListener(OperationEvent.COMPLETE, listener, useCapture:useCapture, priority: priority);
   }
@@ -107,14 +107,14 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   /**
    * @inheritDoc
    */
-  void addErrorListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
+  void addErrorListener<T extends Event>(EventListener<T> listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
     addEventListener(OperationEvent.ERROR, listener, useCapture:useCapture, priority: priority);
   }
 
   /**
    * @inheritDoc
    */
-  void addTimeoutListener(Function listener,
+  void addTimeoutListener<T extends Event>(EventListener<T> listener,
       [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
     addEventListener(OperationEvent.TIMEOUT, listener, useCapture:useCapture, priority: priority);
   }
@@ -194,21 +194,21 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   /**
    * @inheritDoc
    */
-  void removeCompleteListener(Function listener, [bool useCapture = false]) {
+  void removeCompleteListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]) {
     removeEventListener(OperationEvent.COMPLETE, listener);
   }
 
   /**
    * @inheritDoc
    */
-  void removeErrorListener(Function listener, [bool useCapture = false]) {
+  void removeErrorListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]) {
     removeEventListener(OperationEvent.ERROR, listener);
   }
 
   /**
    * @inheritDoc
    */
-  void removeTimeoutListener(Function listener, [bool useCapture = false]) {
+  void removeTimeoutListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]) {
     removeEventListener(OperationEvent.TIMEOUT, listener);
   }
 

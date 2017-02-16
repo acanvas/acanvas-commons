@@ -89,7 +89,7 @@ class BasicEffect implements IEffect {
   }
 
   //These two are the only methods you'll need to override @see BitmapAlphaEffect.
-  void runInEffect(BoxSprite target, num duration, Function callback) {
+  void runInEffect(BoxSprite target, double duration, Function callback) {
     target.alpha = 0;
 
     var tween = new Tween(target, duration, Transition.easeInCubic);
@@ -98,7 +98,7 @@ class BasicEffect implements IEffect {
     Rd.JUGGLER.add(tween);
   }
 
-  void runOutEffect(BoxSprite target, num duration, Function callback) {
+  void runOutEffect(BoxSprite target, double duration, Function callback) {
     //target.visible = true;
     target.alpha = 1;
 

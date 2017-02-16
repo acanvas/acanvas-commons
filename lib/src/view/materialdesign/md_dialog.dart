@@ -1,7 +1,7 @@
 part of rockdot_commons;
 
 class MdDialog extends BoxSprite {
-  num bgColor;
+  int bgColor;
   bool enableRipple;
   Shape _bg;
   MdText _title;
@@ -9,7 +9,7 @@ class MdDialog extends BoxSprite {
   Flow _hbox;
 
   MdDialog(String title,
-      {num fontColor: MdColor.BLACK, this.bgColor: MdColor.WHITE, String fontName: MdText.DEFAULT_FONT})
+      {int fontColor: MdColor.BLACK, this.bgColor: MdColor.WHITE, String fontName: MdText.DEFAULT_FONT})
       : super() {
     addChild(new MdShadow(type: MdShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
 

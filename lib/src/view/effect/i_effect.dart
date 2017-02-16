@@ -25,9 +25,9 @@ abstract class IEffect {
 
   bool useSprite();
 
-  void runInEffect(BoxSprite target, num duration, Function callback);
+  void runInEffect(BoxSprite target, double duration, Function callback);
 
-  void runOutEffect(BoxSprite target, num duration, Function callback);
+  void runOutEffect(BoxSprite target, double duration, Function callback);
 
   void cancel([BoxSprite target = null]);
 

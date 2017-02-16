@@ -85,7 +85,7 @@ abstract class IOperation extends EventDispatcher {
    *
    * @param listener the event handler function
    */
-  void addCompleteListener(Function listener,
+  void addCompleteListener<T extends Event>(EventListener<T> listener,
       [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
 
   /**
@@ -93,14 +93,14 @@ abstract class IOperation extends EventDispatcher {
    *
    * @param listener the event handler function
    */
-  void addErrorListener(Function listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
+  void addErrorListener<T extends Event>(EventListener<T> listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
 
   /**
    * Convenience method for adding a listener to the OperationEvent.TIMEOUT event.
    *
    * @param listener the event handler function
    */
-  void addTimeoutListener(Function listener,
+  void addTimeoutListener<T extends Event>(EventListener<T> listener,
       [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
 
   /**
@@ -108,19 +108,19 @@ abstract class IOperation extends EventDispatcher {
    *
    * @param listener the event handler function
    */
-  void removeCompleteListener(Function listener, [bool useCapture = false]);
+  void removeCompleteListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]);
 
   /**
    * Convenience method for removing a listener from the OperationEvent.ERROR event.
    *
    * @param listener the event handler function
    */
-  void removeErrorListener(Function listener, [bool useCapture = false]);
+  void removeErrorListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]);
 
   /**
    * Convenience method for removing a listener from the OperationEvent.TIMEOUT event.
    *
    * @param listener the event handler function
    */
-  void removeTimeoutListener(Function listener, [bool useCapture = false]);
+  void removeTimeoutListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]);
 }

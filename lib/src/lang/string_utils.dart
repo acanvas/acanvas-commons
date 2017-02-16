@@ -31,7 +31,7 @@ class StringUtils {
   static String MAC_BREAK = new String.fromCharCode(13);
 
   /** Default map for escaping strings. */
-  static List DEFAULT_ESCAPE_MAP = [
+  static List<String> DEFAULT_ESCAPE_MAP = [
     "\\t",
     "\t",
     "\\n",
@@ -53,7 +53,7 @@ class StringUtils {
   ];
 
   /** The characters that have to be escaped. */
-  static List PROPERTIES_ESCAPE_MAP = [
+  static List<String> PROPERTIES_ESCAPE_MAP = [
     "\\t",
     "\t",
     "\\n",
@@ -722,7 +722,7 @@ class StringUtils {
     if (isEmpty(str)) {
       return str;
     }
-    List words = str.toLowerCase().split(' ');
+    List<String> words = str.toLowerCase().split(' ');
 
     for (int i = 0; i < words.length; i++) {
       words[i] = capitalize(words[i]);
@@ -1969,7 +1969,7 @@ class StringUtils {
     }
     String firstPart = string.substring(0, position);
     String secondPart = string.substring(position, string.length);
-    return (firstPart + value + secondPart);
+    return (firstPart + value.toString() + secondPart);
   }
 
   /**
@@ -1980,7 +1980,7 @@ class StringUtils {
     endIndex = min(endIndex, string.length);
     String firstPart = string.substring(0, beginIndex);
     String secondPart = string.substring(endIndex, string.length);
-    return (firstPart + value + secondPart);
+    return (firstPart + value.toString() + secondPart);
   }
 
   /**
@@ -2050,8 +2050,8 @@ class StringUtils {
    * @return the trimmed string
    */
   static String leftTrimForChars(String string, String chars) {
-    num from = 0;
-    num to = string.length;
+    int from = 0;
+    int to = string.length;
 
     while (from < to && chars.indexOf(string[from]) >= 0) {
       from++;
@@ -2076,13 +2076,13 @@ class StringUtils {
    * @return the trimmed string
    */
   static String rightTrimForChars(String string, String chars) {
-    num from = 0;
-    num to = string.length - 1;
+    int from = 0;
+    int to = string.length - 1;
 
     while (from < to && chars.indexOf(string[to]) >= 0) {
       to--;
     }
-    return (to >= 0 ? string.substring(from, to + 1) : string);
+    return (to >= 0 ? string.substring(from, (to + 1)) : string);
   }
 
   /**
@@ -2136,7 +2136,7 @@ class StringUtils {
    * @returns -1 if not enough ocurances of needle are found
    * @returns charIndex of nth needle ocurances
    */
-  static int nthIndexOf(String haystack, int n, String needle, [num startIndex = 0]) {
+  static int nthIndexOf(String haystack, int n, String needle, [int startIndex = 0]) {
     int result = startIndex;
 
     if (n >= 1) {
@@ -2304,7 +2304,7 @@ class StringUtils {
    * Tokenizes a string to an array using the given delimiters.
    */
   static List tokenizeToList(String string, String delimiters) {
-    List result = [];
+    List<String> result = new List();
     int numCharacters = string.length;
     String token = "";
 
@@ -2360,18 +2360,18 @@ class StringUtils {
    * @param rest
    * @return
    */
-  static String substitute(String str, List rest) {
+  static String substitute(String str, List<dynamic> rest) {
     if (str == null) {
       return '';
     }
 
     int len = rest.length;
-    List args;
-    if (len == 1 && rest[0] is List) {
-      args = rest[0];
+    List<String> args;
+    if (len == 1 && rest[0] is List<String>) {
+      args = rest[0] as List<String>;
       len = args.length;
     } else {
-      args = rest;
+      args = rest as List<String>;
     }
 
     for (int i = 0; i < len; i++) {
@@ -2398,15 +2398,15 @@ class StringUtils {
    * @param ignoreUnicode Pass "true" to ignore automatic parsing of unicode escaped characters.
    * @return Escaped string.
    */
-  static String escape(String string, [List keyMap = null, bool ignoreUnicode = true]) {
+  static String escape(String string, [List<String> keyMap = null, bool ignoreUnicode = true]) {
     if (string == null) {
       return string;
     }
     if (keyMap == null) {
       keyMap = DEFAULT_ESCAPE_MAP;
     }
-    num i = 0;
-    num l = keyMap.length;
+    int i = 0;
+    int l = keyMap.length;
     while (i < l) {
       string = string.split(keyMap[i]).join(keyMap[i + 1]);
       i += 2;
@@ -2451,11 +2451,11 @@ class StringUtils {
    * @author Martin Heidegger
    * @author Simon Wacker
    */
-  static Object parseProperties(String str, [Map properties = null]) {
+  static Object parseProperties(String str, [Map<String, String> properties = null]) {
     properties = properties ?? {};
-    num i;
-    List lines = str.split(WIN_BREAK).join("\n").split(MAC_BREAK).join("\n").split("\n");
-    num length = lines.length;
+    int i;
+    List<String> lines = str.split(WIN_BREAK).join("\n").split(MAC_BREAK).join("\n").split("\n");
+    int length = lines.length;
     String key;
     String value;
     String formerKey;
@@ -2474,10 +2474,10 @@ class StringUtils {
           value = formerValue + line;
           useNextLine = false;
         } else {
-          num sep;
+          int sep;
           // Gets the seperationated
-          num j;
-          num l = line.length;
+          int j;
+          int l = line.length;
           for (j = 0; j < l; j++) {
             String char = line[j];
             if (char == "'") {

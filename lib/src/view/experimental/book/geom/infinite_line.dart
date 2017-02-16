@@ -75,7 +75,6 @@ class InfiniteLine {
 
     num lengthA = (line2.yIntersection - line1.yIntersection).abs();
     num lengthB;
-    num lengthC;
 
     num arcB;
     num arcC;
@@ -91,7 +90,6 @@ class InfiniteLine {
 
     num ratio = sin(arcA) / lengthA;
     lengthB = sin(arcB) / ratio;
-    lengthC = sin(arcC) / ratio;
 
     num x = sin(arcC) * lengthB;
 

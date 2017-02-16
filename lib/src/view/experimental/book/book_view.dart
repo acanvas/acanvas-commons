@@ -260,7 +260,7 @@ class BookView extends PageManager {
    * @see	Book#createRegions()
    * @
    */
-  List regions = [];
+  List<Map<String, Rectangle<num>>> regions = [];
 
   // internals for accessors:
   /**
@@ -398,7 +398,7 @@ class BookView extends PageManager {
    * @
    */
   @override
-  void init({Map params: null}) {
+  void init({Map<String, String> params: null}) {
     super.init(params: params);
 
     // make sure that non-hard pages whose flipsides are hard don't have fold-gradients:
@@ -448,7 +448,7 @@ class BookView extends PageManager {
   @override
   void swapChildren(DisplayObject child1, DisplayObject child2) {
     super.swapChildren(child1, child2);
-    List children = [];
+    List<Page> children = [];
     if (child1 is Page) children.add(child1);
     if (child2 is Page) children.add(child2);
     for (int i = 0; i < children.length; i++) {
@@ -553,7 +553,7 @@ class BookView extends PageManager {
     if (autoFlipActive && !tearActive) lastFlippedCorner = new Point(side, 1);
     if (autoFlipActive && tearActive) lastFlippedCorner = new Point(side, (tearFromTop) ? 0 : 1);
     if (!autoFlipActive) lastFlippedCorner = getCurrentCorner();
-    lastFlippedSide = lastFlippedCorner.x;
+    lastFlippedSide = lastFlippedCorner.x.round();
     lastFlippedDirection = (side == Page.LEFT) ? -1 : 1;
     sideFlipActive = (!tearActive && sideFlip && isPageSideHit());
     renderSprite.x = lastFlippedSide * spanWidth / 2;
@@ -665,7 +665,7 @@ class BookView extends PageManager {
 
     // perform pageflip:
     if (!front.explicitHard && !back.explicitHard) {
-      Map ocf = PageFlip.computeFlip(pageCorner.clone(), lastFlippedCorner, (spanWidth / 2).round(),
+      Map<String, dynamic> ocf = PageFlip.computeFlip(pageCorner.clone(), lastFlippedCorner, (spanWidth / 2).round(),
           spanHeight.round(), !tearActive, 1);
       PageFlip.drawBitmapSheet(ocf, renderSprite, bitmapData[frontIndex], bitmapData[backIndex]);
 
@@ -676,7 +676,7 @@ class BookView extends PageManager {
       if (_status == BookEvent.PAGEFLIP_STARTED &&
           (_pages[_currentPage + lastFlippedSide]).tearable &&
           ocf["cPoints"] != null) {
-        evaluateTear(ocf["cPoints"][2].clone());
+        evaluateTear((ocf["cPoints"] as List<Point<num>>)[2].clone());
       }
     } else {
       drawHardPage(bitmapData[frontIndex], bitmapData[backIndex]);
@@ -850,14 +850,14 @@ class BookView extends PageManager {
     num closeness = sin(acos(w / (spanWidth / 2)));
 
     // define positions of page-corners:
-    List pPoints = [];
+    List<Point<num>> pPoints = [];
     pPoints.add(new Point((1 - lastFlippedSide) * spanWidth / 2, 0));
     pPoints.add(new Point(pPoints[0].x + w, 0 - closeness * hardPerspective));
     pPoints.add(new Point(pPoints[0].x + w, spanHeight + closeness * hardPerspective));
     pPoints.add(new Point((1 - lastFlippedSide) * spanWidth / 2, spanHeight));
 
     // make sure the first Point in the List is always the top-left, etc:
-    List p = [];
+    List<Point<num>> p = [];
     p.add((pPoints[0].x < pPoints[1].x) ? pPoints[0] : pPoints[1]);
     p.add((pPoints[0].x > pPoints[1].x) ? pPoints[0] : pPoints[1]);
     p.add((pPoints[2].x > pPoints[3].x) ? pPoints[2] : pPoints[3]);
@@ -966,7 +966,7 @@ class BookView extends PageManager {
     }
 
     // set target index and start pageflip:
-    autoFlipIndex = page;
+    autoFlipIndex = page as int;
     autoFlipCancelable = cancelable;
     if (!autoFlipActive) {
       autoFlipActive = true;
@@ -1051,13 +1051,13 @@ class BookView extends PageManager {
       return;
     }
     // don't tear hard Pages:
-    if (page.hard) {
+    if ((page as Page).hard) {
       return;
     }
 
     // set vars to let the pageflip processing methods know that we're tearing:
     tearActive = true;
-    tearSide = page.side;
+    tearSide = (page as Page).side;
     tearFromTop = fromTop;
     autoFlipActive = true;
     autoFlipCancelable = false;
@@ -1076,7 +1076,7 @@ class BookView extends PageManager {
    *
    * @
    */
-  void addHardGradients(List area) {
+  void addHardGradients(List<Point<num>> area) {
     // determine page:
     Page page = (_pages[_currentPage + lastFlippedSide]);
 
@@ -1109,7 +1109,7 @@ class BookView extends PageManager {
    *
    * @
    */
-  void addSmoothGradients(Map ocf) {
+  void addSmoothGradients(Map<String, dynamic> ocf) {
     // determine page:
     Page page = (_pages[_currentPage + lastFlippedSide]);
 
@@ -1130,11 +1130,11 @@ class BookView extends PageManager {
     num testval = 1; //PI / 180;
     // draw gradients:
     if (ocf["cPoints"] != null)
-      page.gradients.drawFlipside(renderSprite.graphics, ocf["cPoints"], tint1, rotate * testval);
+      page.gradients.drawFlipside(renderSprite.graphics, ocf["cPoints"] as List<Point<num>>, tint1, rotate * testval);
     if (ocf["pPoints"] != null)
-      page.gradients.drawOutside(renderSprite.graphics, ocf["pPoints"], tint1, rotate * testval);
+      page.gradients.drawOutside(renderSprite.graphics, ocf["pPoints"] as List<Point<num>>, tint1, rotate * testval);
     if (ocf["cPoints"] != null && !tearActive)
-      page.gradients.drawInside(renderSprite.graphics, ocf["cPoints"], tint2, rotate * testval);
+      page.gradients.drawInside(renderSprite.graphics, ocf["cPoints"] as List<Point<num>>, tint2, rotate * testval);
   }
 
   // PAGEFLIP ASSISTANCE:
@@ -1274,8 +1274,8 @@ class BookView extends PageManager {
   Point getCurrentCorner() {
     Point corner = new Point(0, 0);
     // determine corner:
-    corner.x = (Rd.MOBILE ? touchX : mouseX < spanWidth / 2) ? 0 : 1;
-    corner.y = (Rd.MOBILE ? touchY : mouseY < spanHeight / 2) ? 0 : 1;
+    corner.x = (Rd.MOBILE ? touchX : mouseX) < spanWidth / 2 ? 0 : 1;
+    corner.y = (Rd.MOBILE ? touchY : mouseY) < spanHeight / 2 ? 0 : 1;
     // return value:
     return corner;
   }
@@ -1361,7 +1361,7 @@ class BookView extends PageManager {
   int getCurrentSide() {
     int side;
     if (!autoFlipActive) {
-      side = (Rd.MOBILE ? touchX : mouseX <= spanWidth / 2) ? Page.LEFT : Page.RIGHT;
+      side = (Rd.MOBILE ? touchX : mouseX) <= spanWidth / 2 ? Page.LEFT : Page.RIGHT;
     } else {
       if (!tearActive) {
         side = (autoFlipIndex < _currentPage) ? Page.LEFT : Page.RIGHT;
@@ -1542,7 +1542,7 @@ class BookView extends PageManager {
   void createRegions() {
     // specify regions for left-hand page:
     regions = [];
-    regions.add(new Map());
+    regions.add(new Map<String, Rectangle>());
     regions[0]["TL"] = new Rectangle(0, 0, _regionSize, _regionSize);
     regions[0]["TR"] = new Rectangle(0, 0, _regionSize, _regionSize);
     regions[0]["BR"] = new Rectangle(0, 0, _regionSize, _regionSize);

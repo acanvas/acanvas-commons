@@ -9,7 +9,7 @@ class Wrap extends BoxSprite {
       AlignH align: AlignH.LEFT,
       bool reflow: true,
       ScrollOrientation scrollOrientation: ScrollOrientation.BOTH,
-      enableMask: true})
+      bool enableMask: true})
       : super() {
     inheritSpan = true;
     autoRefresh = true;

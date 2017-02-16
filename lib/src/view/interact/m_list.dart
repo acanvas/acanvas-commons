@@ -17,11 +17,11 @@ abstract class MList {
 
   ListDirection get listDirection => _listDirection;
 
-  num _spacing = 0.0;
+  int _spacing = 0;
 
-  void set spacing(num spacing)  {  _spacing = spacing; }
+  void set spacing(int spacing)  {  _spacing = spacing; }
 
-  num get spacing => _spacing;
+  int get spacing => _spacing;
 
   IDataProxy _proxy;
 
@@ -31,11 +31,11 @@ abstract class MList {
     _proxy = m;
   }
 
-  List _data = [];
+  List<Object> _data = new List<Object>();
 
   List get data => _data;
 
-  set data(List data) {
+  set data(List<Object> data) {
     _data = data;
   }
 

@@ -40,8 +40,8 @@ class ListTool {
    *
    * @return	List with adjusted values
    */
-  static List adjustValues(List array, dynamic value, [String operator = "*"]) {
-    List newList = [];
+  static List<num> adjustValues(List<num> array, num value, [String operator = "*"]) {
+    List<num> newList = [];
 
     for (int i = 0; i < array.length; i++) {
       switch (operator) {
@@ -64,55 +64,6 @@ class ListTool {
   }
 
   /**
-   * Similar to ListUtil.getItemIndex(), this method searches an List for an Map with a given property that has a certain value. Can also search for nested Maps.<br /><br />
-   *
-   * @example	The following code returns 2:<br /><br />
-   * <code>List array = [ {foo: {bar: 'value1'}}, {foo: {bar: 'value2'}}, {foo: {bar: 'value3'}} ];<br />
-   * List propChain = ['foo', 'bar'];<br />
-   * String value = 'value3';<br />
-   * ListTool.getValueMatchIndex (array, propChain, value); // outputs 2</code>
-   *
-   * @param	array		List to search.
-   * @param	property	Property or property-chain to try every item in the List for. This parameter can either be a String (normal property), List (property-chain), or numeric value (array index).
-   * @param	value		Value to be found.
-   *
-   * @return	Index of the item where the value was found on the end of the property chain.
-   */
-  static int getValueMatchIndex(List array, dynamic property, dynamic value) {
-    // if property param is neither an List nor a String nor a numeric value, try to cast it to a String:
-    if (!(property is List) && !(property is String) && !(property is int || property is int || property is num)) {
-      property = (property).toString();
-    }
-    // now make sure that we have a chain of properties (in the form of an List) to loop through:
-    List propertyChain;
-    if (property is List) {
-      propertyChain = property;
-    } else {
-      propertyChain = [property];
-    }
-
-    // loop through source List:
-    dynamic path;
-    for (int i = 0; i < array.length; i++) {
-      path = array[i];
-      // loop through property-chain:
-      for (int j = 0; j < propertyChain.length; j++) {
-        if (path.hasOwnProperty(propertyChain[j])) {
-          path = path[propertyChain[j]];
-          if (j == propertyChain.length - 1 && path == value) {
-            return i;
-          }
-        } else {
-          break;
-        }
-      }
-    }
-
-    // if value was not found:
-    return -1;
-  }
-
-  /**
    * Returns a shallow copy of an List.
    *
    * @param	source	List to be copied.
@@ -123,10 +74,6 @@ class ListTool {
    *
    */
   static List copy(List source) {
-    List array = [];
-    for (int i = 0; i < source.length; i++) {
-      array[i] = source[i];
-    }
-    return array;
+    return source.toList();
   }
 }

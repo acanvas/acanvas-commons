@@ -22,8 +22,8 @@ class MdListCell extends SelectableButton {
   void set data(Object newdata) {
     if (newdata != data) {
       super.data = newdata;
-      if (data != null && data is Map) {
-        title.text = (data as Map)["label"];
+      if (data != null && data is Map<String, String>) {
+        title.text = (data as Map<String, String>)["label"];
         refresh();
       }
     }

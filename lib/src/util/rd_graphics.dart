@@ -108,7 +108,7 @@ class RdGraphics {
     return sprite;
   }
 
-  static GraphicsGradient linearGraphicsGradient(List colors, List alphas, List ratios, Matrix matrix, Point p1, Point p2) {
+  static GraphicsGradient linearGraphicsGradient(List<num> colors, List<num> alphas, List<num> ratios, Matrix matrix, Point p1, Point p2) {
     //Point point1 = matrix.transformPoint(p1);
     //Point point2 = matrix.transformPoint(p2);
 
@@ -128,7 +128,7 @@ class RdGraphics {
     GraphicsGradient g = new GraphicsGradient.linear(450, 0, 0, 600);
     */
     for (int i = 0; i < colors.length; i++) {
-      g.addColorStop(ratios[i] / 255, ((alphas[i] * 255).round() << 24) + colors[i]);
+      g.addColorStop(ratios[i] / 255, (((alphas[i] * 255).round() << 24) + colors[i]).round());
     }
     return g;
   }

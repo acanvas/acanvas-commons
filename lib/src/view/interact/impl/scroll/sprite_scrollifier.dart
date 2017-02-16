@@ -17,9 +17,10 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
 
   // Zoom States
   bool _viewZoomed = false;
-  num _normalizedValueH = 0;
-  num _normalizedValueV = 0;
+  int _normalizedValueH = 0;
+  int _normalizedValueV = 0;
 
+  /*
   // Touch States
   bool _touching = false;
   num _mouseOffsetX = 0;
@@ -29,11 +30,13 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
   bool _interaction = false;
   bool _changing = false;
   bool _interactionH = false;
-  bool _changingH = false;
   bool _interactionV = false;
+
+  */
+  bool _changingH = false;
   bool _changingV = false;
 
-  SpriteScrollifier(Sprite view, Scrollbar hScrollbar, Scrollbar vScrollbar) {
+  SpriteScrollifier(BoxSprite view, Scrollbar hScrollbar, Scrollbar vScrollbar) {
     _view = view;
     if (_view.parent == null) {
       addChild(_view);
@@ -60,7 +63,7 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
 
     updateScrollbars();
 
-    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, color: 0x00FF0000, sprite: view.parent);
+    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, color: 0x00FF0000, sprite: view.parent as Sprite);
   }
 
   /// ---------- SCROLL BARS
@@ -70,6 +73,7 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
     _hScrollbar.inheritSpan = true;
     _hScrollbar.horizontalScrollBehavior = true;
     _hScrollbar.mouseWheelSensitivity = 10;
+    //_hScrollbar.on<SliderEvent>(SliderEvent.VALUE_CHANGE).listen(_onHScrollbarChange);
     _hScrollbar.addEventListener(SliderEvent.VALUE_CHANGE, _onHScrollbarChange, useCapture: false, priority: 0);
     _hScrollbar.addEventListener(SliderEvent.INTERACTION_START, _onScrollbarInteractionStart,
         useCapture: false, priority: 0);
@@ -157,8 +161,8 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
   }
 
   void updateScrollbars() {
-    num w = useNativeWidth || !(_view is MBox) ? _view.width : (_view as MBox).spanWidth;
-    num h = useNativeHeight || !(_view is MBox) ? _view.height : (_view as MBox).spanHeight;
+    num w = useNativeWidth || !(_view is MBox) ? _view.width : _view.spanWidth;
+    num h = useNativeHeight || !(_view is MBox) ? _view.height : _view.spanHeight;
 
     if (scrollOrientation == ScrollOrientation.VERTICAL) {
       _hScrollbar.enabled = false;
@@ -196,8 +200,8 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
   }
 
   void _updateThumbs() {
-    num w = useNativeWidth || !(_view is MBox) ? _view.width : (_view as MBox).spanWidth;
-    num h = useNativeHeight || !(_view is MBox) ? _view.height : (_view as MBox).spanHeight;
+    num w = useNativeWidth || !(_view is MBox) ? _view.width : _view.spanWidth;
+    num h = useNativeHeight || !(_view is MBox) ? _view.height : _view.spanHeight;
     if (spanWidth > 0) {
       _hScrollbar.pageCount = w / spanWidth;
     }
@@ -350,14 +354,14 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
   }
 
   void zoom(num scale, num xPos, num yPos) {
-    if (_hScrollbar.enabled) _normalizedValueH = _hScrollbar.value / _hScrollbar.valueMax;
-    if (_vScrollbar.enabled) _normalizedValueV = _vScrollbar.value / _vScrollbar.valueMax;
+    if (_hScrollbar.enabled) _normalizedValueH = (_hScrollbar.value / _hScrollbar.valueMax).round();
+    if (_vScrollbar.enabled) _normalizedValueV = (_vScrollbar.value / _vScrollbar.valueMax).round();
 
     interactionStart();
     changeStart();
 
-    _normalizedValueH = (xPos - spanWidth / (2 * scale)) / ((_view.width / _view.scaleX) - spanWidth / scale);
-    _normalizedValueV = (yPos - spanHeight / (2 * scale)) / ((_view.height / _view.scaleY) - spanHeight / scale);
+    _normalizedValueH = ((xPos - spanWidth / (2 * scale)) / ((_view.width / _view.scaleX) - spanWidth / scale)).round();
+    _normalizedValueV = ((yPos - spanHeight / (2 * scale)) / ((_view.height / _view.scaleY) - spanHeight / scale)).round();
 
     Rd.JUGGLER.addTween(_view, 0.3)
       ..animate.scaleX.to(scale)
@@ -371,13 +375,13 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
   void _keepPos() {
     updateScrollbars();
 
-    int valH = _normalizedValueH * _hScrollbar.valueMax;
+    int valH = (_normalizedValueH * _hScrollbar.valueMax).round();
     if (valH < 0) valH = 0;
-    else if (valH > _hScrollbar.valueMax) valH = _hScrollbar.valueMax;
+    else if (valH > _hScrollbar.valueMax) valH = _hScrollbar.valueMax.round();
 
-    int valV = _normalizedValueV * _vScrollbar.valueMax;
+    int valV = (_normalizedValueV * _vScrollbar.valueMax).round();
     if (valV < 0) valV = 0;
-    else if (valV > _vScrollbar.valueMax) valV = _vScrollbar.valueMax;
+    else if (valV > _vScrollbar.valueMax) valV = _vScrollbar.valueMax.round();
 
     if (_hScrollbar.enabled) _hScrollbar.value = valH;
     if (_vScrollbar.enabled) _vScrollbar.value = valV;

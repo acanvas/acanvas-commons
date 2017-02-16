@@ -30,8 +30,8 @@ class ChildTool {
    *
    */
   static void swapChildren(DisplayObject child1, DisplayObject child2) {
-    DisplayObjectContainer parent1 = child1.parent;
-    DisplayObjectContainer parent2 = child2.parent;
+    DisplayObjectContainer parent1 = child1.parent as DisplayObjectContainer;
+    DisplayObjectContainer parent2 = child2.parent as DisplayObjectContainer;
 
     int index1 = parent1.getChildIndex(child1);
     int index2 = parent2.getChildIndex(child2);

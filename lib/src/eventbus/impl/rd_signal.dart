@@ -11,9 +11,9 @@ class RdSignal extends Event {
     _data = data;
   }
 
-  var _callback;
+  EventListener _callback;
 
-  get completeCallBack => _callback;
+  Function get completeCallBack => _callback;
 
   RdSignal(String type, [this._data = null, this._callback = null]) : super(type);
 

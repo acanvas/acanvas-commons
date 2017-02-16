@@ -64,7 +64,7 @@ class Gradients {
   /**
    * @
    */
-  static final Map FLIPSIDE = {
+  static final Map<String, Map<String, List<num>>> FLIPSIDE = {
     "light": {
       "color": [LIGHTCOLOR, LIGHTCOLOR, LIGHTCOLOR, DARKCOLOR, DARKCOLOR],
       "alpha": [0, 0.3, 0.2, 0.5, 0],
@@ -80,7 +80,7 @@ class Gradients {
   /**
    * @
    */
-  static final Map INSIDE_SMOOTH = {
+  static final Map<String, Map<String, List<num>>> INSIDE_SMOOTH = {
     "light": {
       "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
       "alpha": [0, 0, 0.5, 0],
@@ -96,7 +96,7 @@ class Gradients {
   /**
    * @
    */
-  static final Map OUTSIDE_SMOOTH = {
+  static final Map<String, Map<String, List<num>>> OUTSIDE_SMOOTH = {
     "light": {
       "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
       "alpha": [0, 0.2, 0, 0, 0],
@@ -112,7 +112,7 @@ class Gradients {
   /**
    * @
    */
-  static final Map OUTSIDE_HARD = {
+  static final Map<String, Map<String, List<num>>> OUTSIDE_HARD = {
     "light": {
       "color": [DARKCOLOR, DARKCOLOR, DARKCOLOR, DARKCOLOR],
       "alpha": [0.8, 0.3, 0.1, 0],
@@ -150,7 +150,7 @@ class Gradients {
    *
    */
   void drawFold(Graphics graphics, [String tint = Gradients.LIGHT, num rotate = Gradients.ROTATE_FULL]) {
-    Map gradient = Gradients.FLIPSIDE[tint];
+    Map<String, List<num>> gradient = Gradients.FLIPSIDE[tint];
     SuperRectangle area = new SuperRectangle(0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
 
     // define the points that the calculation will be based on:
@@ -188,7 +188,7 @@ class Gradients {
    * @see		PageFlip#computeFlip()
    *
    */
-  void drawInside(Graphics graphics, List area, [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
+  void drawInside(Graphics graphics, List<Point<num>> area, [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     if (this._page.hard) {
       this.drawInsideHard(graphics, area, tint, rotate);
     } else {
@@ -201,7 +201,7 @@ class Gradients {
    *
    * @
    */
-  void drawInsideHard(Graphics graphics, List area,
+  void drawInsideHard(Graphics graphics, List<Point<num>> area,
       [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     // hard pages don't need highlights, only shadows:
     if (this.eliminateSolidHighlights && tint == Gradients.LIGHT) {
@@ -227,9 +227,9 @@ class Gradients {
    *
    * @
    */
-  void drawInsideSmooth(Graphics graphics, List area,
+  void drawInsideSmooth(Graphics graphics, List<Point<num>> area,
       [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
-    Map gradient = Gradients.INSIDE_SMOOTH[tint];
+    Map<String, List<num>> gradient = Gradients.INSIDE_SMOOTH[tint];
 
     // define the points that the calculation will be based on:
     Point point1 = area[area.length - 2];
@@ -237,7 +237,7 @@ class Gradients {
     Point point3 = new Point((this._page.book.spanWidth / 2) * this._page.book.getLastFlippedCorner().x,
         this._page.book.spanHeight * this._page.book.getLastFlippedCorner().y);
     Point point4 = area[0];
-    List newArea = [point1, point2];
+    List<Point<num>> newArea = [point1, point2];
 
     // adjust area (inside shadow is in a combination-area of the facing and flipping coordinates):
     num x = (this._page.side == Page.LEFT) ? this._page.book.spanWidth : -this._page.book.spanWidth / 2;
@@ -368,7 +368,7 @@ class Gradients {
    * @see		PageFlip#computeFlip()
    *
    */
-  void drawOutside(Graphics graphics, List area, [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
+  void drawOutside(Graphics graphics, List<Point<num>> area, [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     if (this._page.hard) {
       this.drawOutsideHard(graphics, area);
     } else {
@@ -381,9 +381,9 @@ class Gradients {
    *
    * @
    */
-  void drawOutsideHard(Graphics graphics, List area) {
-    Map gradient0 = Gradients.OUTSIDE_HARD["dark"];
-    Map gradient1 = Gradients.OUTSIDE_HARD["light"];
+  void drawOutsideHard(Graphics graphics, List<Point<num>> area) {
+    Map<String, List<num>> gradient0 = Gradients.OUTSIDE_HARD["dark"];
+    Map<String, List<num>> gradient1 = Gradients.OUTSIDE_HARD["light"];
     // define the coordinates for the gradients:
     Rectangle area0 = new Rectangle(0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
     Rectangle area1 = new Rectangle(0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
@@ -438,11 +438,11 @@ class Gradients {
    *
    * @
    */
-  void drawOutsideSmooth(Graphics graphics, List area,
+  void drawOutsideSmooth(Graphics graphics, List<Point<num>> area,
       [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
-    Map gradient = Gradients.OUTSIDE_SMOOTH[tint];
+    Map<String, List<num>> gradient = Gradients.OUTSIDE_SMOOTH[tint];
     // define the points that the calculation will be based on:
-    List<Point> newArea;
+    List<Point<num>> newArea;
     Point point1 = area[area.length - 3];
     Point point2 = area[area.length - 2];
     // calculation for normal pageflips:
@@ -463,7 +463,7 @@ class Gradients {
     }
     // calculation for tearing pageflips:
     if (this._page.book.tearActive) {
-      newArea = ListTool.copy(area);
+      newArea = area.toList();
       if (newArea[0].y == 0) {
         newArea[0].y = newArea[3].y = this._page.book.spanHeight;
       } else {
@@ -520,12 +520,12 @@ class Gradients {
    * @see		PageFlip#computeFlip()
    *
    */
-  void drawFlipside(Graphics graphics, List area, [String tint = Gradients.LIGHT, num rotate = Gradients.ROTATE_FULL]) {
+  void drawFlipside(Graphics graphics, List<Point<num>> area, [String tint = Gradients.LIGHT, num rotate = Gradients.ROTATE_FULL]) {
     // this method is not applicable to hard Pages:
     if (this._page.hard) {
       return;
     }
-    Map gradient = Gradients.FLIPSIDE[tint];
+    Map<String, List<num>> gradient = Gradients.FLIPSIDE[tint];
 
     // define the points that the calculation will be based on:
     Point point1 = area[area.length - 2];

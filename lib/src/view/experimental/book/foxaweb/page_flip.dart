@@ -90,7 +90,7 @@ class PageFlip {
    * 				height:num - Sheet height.
    *
    */
-  static Map computeFlip(Point ptd, Point pt, int pw, int ph, bool ish, int sens) {
+  static Map<String, dynamic> computeFlip(Point ptd, Point pt, int pw, int ph, bool ish, int sens) {
     // useful vars
     num dfx = ptd.x - pw * pt.x;
     num dfy = ptd.y - ph * pt.y;
@@ -108,7 +108,7 @@ class PageFlip {
       // size
       temp = pw;
       pw = ph;
-      ph = temp;
+      ph = temp.round();
 
       // ptd
       temp = ptd.x;
@@ -127,9 +127,9 @@ class PageFlip {
 
     // default points array
     // cPoints -> the fliped part
-    List cPoints = [null, null, null, null];
+    List<Point<num>> cPoints = new List(4);
     // pPoints -> the fixed part
-    List pPoints = [new Point(0, 0), new Point(pw, 0), null, null, new Point(0, ph)];
+    List<Point<num>> pPoints = [new Point(0, 0), new Point(pw, 0), null, null, new Point(0, ph)];
 
     // compute some flip
     flipDrag(ptd, spt, pw, ph);
@@ -224,7 +224,7 @@ class PageFlip {
     if ((dfx).abs() < 1 && dfy.abs() < 1) cPoints = null;
 
     // now we just have to return all the stuff
-    return {"cPoints": cPoints, "pPoints": pPoints, "matrix": mat, "width": opw, "height": oph};
+    return <String, dynamic>{"cPoints": cPoints, "pPoints": pPoints, "matrix": mat, "width": opw, "height": oph};
   }
 
   /**
@@ -238,11 +238,9 @@ class PageFlip {
    */
   static void drawBitmapSheet(Map ocf, Sprite mc, BitmapData bmp0, BitmapData bmp1) {
     // affectations
-    num wid = ocf["width"];
-    num hei = ocf["height"];
-    num nb;
-    List ppts = ocf["pPoints"];
-    List cpts = ocf["cPoints"];
+    int nb;
+    List<Point<num>> ppts = ocf["pPoints"] as List<Point<num>>;
+    List<Point<num>> cpts = ocf["cPoints"] as List<Point<num>>;
 
     // draw the fixed part
     nb = ppts.length;
@@ -259,7 +257,7 @@ class PageFlip {
     mc.graphics.beginPath();
     mc.graphics.moveTo(cpts[nb - 1].x, cpts[nb - 1].y);
     while (--nb >= 0) mc.graphics.lineTo(cpts[nb].x, cpts[nb].y);
-    mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp1.renderTextureQuad, ocf["matrix"]));
+    mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp1.renderTextureQuad, ocf["matrix"] as Matrix));
     mc.graphics.closePath();
   }
 
@@ -273,8 +271,8 @@ class PageFlip {
    * orientation correction
    * @
    */
-  static void oriPoints(List pts, Point po, num pw, num ph) {
-    num nb = pts.length;
+  static void oriPoints(List<Point<num>> pts, Point po, num pw, num ph) {
+    int nb = pts.length;
     num temp;
 
     while (--nb >= 0) {
@@ -300,8 +298,8 @@ class PageFlip {
    * flip correction
    * @
    */
-  static void flipPoints(List pts, Point po, num pw, num ph) {
-    num nb = pts.length;
+  static void flipPoints(List<Point<num>> pts, Point po, num pw, num ph) {
+    int nb = pts.length;
     // flip
     if (po.y == 0 || po.x == 0) {
       while (--nb >= 0) {
@@ -349,7 +347,7 @@ class PageFlip {
    * @
    */
   static void ordMatrix(
-      Matrix mat, Point spt, num opw, num oph, bool ish, List cPoints, List pPoint, num gama, num beta) {
+      Matrix mat, Point spt, num opw, num oph, bool ish, List<Point<num>> cPoints, List<Point<num>> pPoint, num gama, num beta) {
     if (spt.x == 1 && spt.y == 0) {
       mat.tx = cPoints[0].x;
       mat.ty = cPoints[0].y;

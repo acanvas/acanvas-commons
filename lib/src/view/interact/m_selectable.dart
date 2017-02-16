@@ -9,11 +9,11 @@ abstract class MSelectable {
     _id = id;
   }
 
-  dynamic _data;
+  Object _data;
 
-  dynamic get data => _data;
+  Object get data => _data;
 
-  set data(dynamic data) {
+  set data(Object data) {
     _data = data;
   }
 

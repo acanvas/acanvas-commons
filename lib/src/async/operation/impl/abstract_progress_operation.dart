@@ -68,7 +68,7 @@ class AbstractProgressOperation extends AbstractOperation implements IProgressOp
   /**
    * @inheritDoc
    */
-  void addProgressListener(Function listener,
+  void addProgressListener<T extends Event>(EventListener<T> listener,
       [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
     addEventListener(OperationEvent.PROGRESS, listener, useCapture: useCapture, priority: priority);
   }
@@ -76,7 +76,7 @@ class AbstractProgressOperation extends AbstractOperation implements IProgressOp
   /**
    * @inheritDoc
    */
-  void removeProgressListener(Function listener, [bool useCapture = false]) {
+  void removeProgressListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]) {
     removeEventListener(OperationEvent.PROGRESS, listener, useCapture: useCapture);
   }
 
@@ -97,7 +97,7 @@ class AbstractProgressOperation extends AbstractOperation implements IProgressOp
    *
    * @param value the progress of this operation
    */
-  void set progress(dynamic value) {
+  void set progress(int value) {
     if (value != progress) {
       _progress = value;
     }
@@ -114,7 +114,7 @@ class AbstractProgressOperation extends AbstractOperation implements IProgressOp
    *
    * @param value the total amount of progress this operation should make before being done
    */
-  void set total(dynamic value) {
+  void set total(int value) {
     if (value != total) {
       _total = value;
     }

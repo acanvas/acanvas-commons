@@ -133,14 +133,24 @@ class MdButton extends SelectableButton {
 
   @override selectAction(){
    // _paperRipple.disableUpAction = true;
-    _paperRipple ?? _paperRipple.downAction();
-    _paperShadow ?? _paperShadow.downAction();
+    if(_paperRipple != null){
+      _paperRipple.downAction();
+    }
+
+    if(_paperShadow != null){
+      _paperShadow.downAction();
+    }
   }
 
   @override deselectAction(){
    // _paperRipple.disableUpAction = false;
-    _paperRipple ?? _paperRipple.upAction();
-    _paperShadow ?? _paperShadow.upAction();
+
+    if(_paperRipple != null){
+      _paperRipple.upAction();
+    }
+    if(_paperShadow != null){
+      _paperShadow.upAction();
+    }
   }
 
   @override void set labelText(String labelText) {

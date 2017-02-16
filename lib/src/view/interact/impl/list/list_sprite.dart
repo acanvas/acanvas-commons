@@ -7,10 +7,10 @@ class ListSprite extends SpriteScrollifier with MList {
   //
 
   SelectableButton _cellFactory;
-  List _cellPool = [];
+  List<SelectableButton> _cellPool = [];
   num _cellSize = 0;
   SelectableButton _mouseDownCell;
-  Map _selectedCells = {};
+  Map<int, bool> _selectedCells = {};
 
   bool _cellMoved = false;
   int _cellsLoaded = 0;
@@ -22,7 +22,7 @@ class ListSprite extends SpriteScrollifier with MList {
   num _originX = 0;
   num _originY = 0;
 
-  ListSprite(List data, SelectableButton cell, Scrollbar hScrollbar, Scrollbar vScrollbar)
+  ListSprite(List<Object> data, SelectableButton cell, Scrollbar hScrollbar, Scrollbar vScrollbar)
       : super(new BoxSprite(), hScrollbar, vScrollbar) {
     this.data = data;
     _cellFactory = cell;
@@ -54,7 +54,7 @@ class ListSprite extends SpriteScrollifier with MList {
     super.touchable = touchable;
     if (touchable) {
       view.children.forEach((child) {
-        child.disable();
+        (child as MBehave).disable();
       });
     }
   }
@@ -169,7 +169,7 @@ class ListSprite extends SpriteScrollifier with MList {
 
     view.children.forEach((child) {
       if (child is SelectableButton) {
-        if ((child as SelectableButton).id == i) {
+        if (child.id == i) {
           child.select();
         }
       }
@@ -197,7 +197,7 @@ class ListSprite extends SpriteScrollifier with MList {
         int safetyFlag = -1;
         while ((_horizontalFlow ? _hScrollbar : _vScrollbar).value != targetPos) {
           if (safetyFlag != (_horizontalFlow ? _hScrollbar : _vScrollbar).value) {
-            safetyFlag = (_horizontalFlow ? _hScrollbar : _vScrollbar).value;
+            safetyFlag = (_horizontalFlow ? _hScrollbar : _vScrollbar).value.round();
             (_horizontalFlow ? _hScrollbar : _vScrollbar).value = targetPos;
           } else {
             break;
@@ -249,15 +249,15 @@ class ListSprite extends SpriteScrollifier with MList {
   }
 
   void _onListScrollbarChange(SliderEvent event) {
-    _scrollPos = _oldVScrollbarValue - event.value;
-    _oldVScrollbarValue = event.value;
+    _scrollPos = _oldVScrollbarValue - event.value.round();
+    _oldVScrollbarValue = event.value.round();
     _updateCells();
   }
 
   void _updateCells() {
     int n = view.numChildren;
     SelectableButton cell;
-    List cellsToPool = [];
+    List<SelectableButton> cellsToPool = [];
     // Push not visible cells to "cellsToPool"
     for (int i = 0; i < n; i++) {
       cell = (view.getChildAt(i) as SelectableButton);

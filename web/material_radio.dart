@@ -14,7 +14,7 @@ Future main() async {
   opts.stageScaleMode = StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
 
-  stage = new Stage(html.querySelector('#stage'), options: opts);
+  stage = new Stage(html.querySelector('#stage') as html.CanvasElement, options: opts);
   Rd.STAGE = stage;
   new RenderLoop()..addStage(stage);
 

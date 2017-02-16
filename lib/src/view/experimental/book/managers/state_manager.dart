@@ -27,17 +27,17 @@ class StateManager {
   /**
    * @
    */
-  List _items = [];
+  List<BoxSprite> _items = [];
 
   /**
    * @
    */
-  List _states = [];
+  List<int> _states = [];
 
   /**
    * @
    */
-  static final List STATES = [BABY, PREINITIALIZE, INITIALIZE, CREATION_COMPLETE, UPDATE_COMPLETE];
+  static final List<int> STATES = [BABY, PREINITIALIZE, INITIALIZE, CREATION_COMPLETE, UPDATE_COMPLETE];
 
   /**
    * Indicates that a component has not reached the first state yet.
@@ -109,7 +109,7 @@ class StateManager {
    * @
    */
   void updateState([Event event = null]) {
-    BoxSprite item = this._items[this._items.indexOf(event.target)];
+    BoxSprite item = this._items[this._items.indexOf(event.target as BoxSprite)];
     // set state in List:
     switch (event.type) {
       case LifecycleEvent.INIT_COMPLETE:

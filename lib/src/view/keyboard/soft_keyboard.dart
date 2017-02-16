@@ -117,7 +117,7 @@ class SoftKeyboard extends BoxSprite {
    * than one configuration. A configuration is the container of all keys defined by a layout.
    * Configurations are place on the display list, they are DisplayObjects.
    */
-  List<LifecycleSprite> _configurations = new List<LifecycleSprite>();
+  List<BoxSprite> _configurations = new List<BoxSprite>();
 
   /** A vector containing all layouts passed in via the constructor. */
   List<Layout> _layouts;
@@ -230,7 +230,7 @@ class SoftKeyboard extends BoxSprite {
   }
 
   /** @ */
-  Sprite _buildConfiguration(Layout layout) {
+  BoxSprite _buildConfiguration(Layout layout) {
     BoxSprite keyboard = new BoxSprite();
     keyboard.inheritSpan = true;
 
