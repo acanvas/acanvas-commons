@@ -6,8 +6,7 @@ import 'package:stagexl/stagexl.dart';
 Stage stage;
 Sprite _container;
 
-
-Future main() async{
+Future main() async {
   var opts = new StageOptions();
   opts.renderEngine = RenderEngine.WebGL;
   opts.backgroundColor = 0xFFf9f9f9;
@@ -22,13 +21,12 @@ Future main() async{
   await RdFontUtil.loadFonts();
   start();
 }
+
 void start() {
-
-
   Wrap vbox = new Wrap(spacing: 40, reflow: false)
     ..x = 10
     ..y = 10
-  ..autoSpan = false;
+    ..autoSpan = false;
 
   /*
    * Standard Input Field with Label
@@ -38,19 +36,19 @@ void start() {
   /*
    * Standard Input Field with Floating Label
    */
-  MdInput input2 = new MdInput("Type something (floating)", floating : true);
+  MdInput input2 = new MdInput("Type something (floating)", floating: true);
   vbox.addChild(input2);
 
   /*
    * Mandatory Input Field
    */
-  MdInput input3 = new MdInput("Type something", required : "This input requires a value.");
+  MdInput input3 = new MdInput("Type something", required: "This input requires a value.");
   vbox.addChild(input3);
 
   /*
    * Mandatory Input Field with Floating Label
    */
-  MdInput input4 = new MdInput("Type something (floating)", required : "This input requires a value.", floating : true);
+  MdInput input4 = new MdInput("Type something (floating)", required: "This input requires a value.", floating: true);
   vbox.addChild(input4);
 
   stage.addChild(vbox);

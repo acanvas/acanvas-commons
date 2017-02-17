@@ -351,7 +351,7 @@ class SuperViewStack extends BoxSprite {
     // point out the Sprite:
     Sprite shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Sprite;
 
-    if(shape == null) return;
+    if (shape == null) return;
 
     // size and position:
     shape.x = -child.x;
@@ -375,7 +375,7 @@ class SuperViewStack extends BoxSprite {
       child = super.getChildAt(i) as Sprite;
       shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Sprite;
 
-      if(shape == null) continue;
+      if (shape == null) continue;
       shape.visible = (this._fade != 0);
       if (!shape.visible) continue;
 

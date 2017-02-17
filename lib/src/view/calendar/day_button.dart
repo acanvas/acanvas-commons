@@ -29,7 +29,8 @@ class DayButton extends Button {
     _labelTF.y = (h * .5 - _labelTF.height * .5).floor();
   }
 
-  @override void rollOverAction([InputEvent event = null]) {
+  @override
+  void rollOverAction([InputEvent event = null]) {
     if (stage != null) {
       //ContextTool.STAGE.removeTweens(_bgOver);
       Rd.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(1);
@@ -39,7 +40,8 @@ class DayButton extends Button {
     }
   }
 
-  @override void rollOutAction([InputEvent event = null]) {
+  @override
+  void rollOutAction([InputEvent event = null]) {
     if (stage != null) {
       Rd.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(0);
       _labelTF.textColor = 0xFFFFFFFF;

@@ -11,7 +11,7 @@ class RdSignal extends Event {
     _data = data;
   }
 
-  EventListener _callback;
+  Function _callback;
 
   Function get completeCallBack => _callback;
 
@@ -22,10 +22,10 @@ class RdSignal extends Event {
   }
 
   void listen() {
-    eventBus.addEventListener(type, _callback);
+    eventBus.addEventListener(type, (e) => _callback());
   }
 
   void unlisten() {
-    eventBus.removeEventListener(type, _callback);
+    eventBus.removeEventListener(type, (e) => _callback());
   }
 }

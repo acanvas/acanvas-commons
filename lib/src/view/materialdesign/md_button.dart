@@ -21,7 +21,6 @@ class MdButton extends SelectableButton {
   bool shadow;
   IconPosition iconPosition;
 
-
   MdButton(String text,
       {num width: 120,
       num height: MdDimensions.HEIGHT_BUTTON,
@@ -35,9 +34,8 @@ class MdButton extends SelectableButton {
       bool background: true,
       bool ripple: true,
       this.icon,
-      this.iconPosition : IconPosition.LEFT})
+      this.iconPosition: IconPosition.LEFT})
       : super() {
-
     selfSelect = false;
     int _fontColor;
     int _rippleColor;
@@ -92,8 +90,7 @@ class MdButton extends SelectableButton {
       addChild(icon);
     }
 
-    _label =
-        new MdText(text.toUpperCase(), size: fontSize, color: _fontColor, fontName: fontName, weight: 300);
+    _label = new MdText(text.toUpperCase(), size: fontSize, color: _fontColor, fontName: fontName, weight: 300);
     _label.width = LABEL_MAX_WIDTH;
     addChild(_label);
 
@@ -101,7 +98,8 @@ class MdButton extends SelectableButton {
     span(width, height);
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     if (spanWidth > 0) {
       _label.x = (spanWidth / 2 - _label.textWidth / 2).round() - 3;
     } else {
@@ -113,8 +111,7 @@ class MdButton extends SelectableButton {
     _label.y = (spanHeight / 2 - _label.textHeight / 2 + 2).floor();
 
     if (icon != null) {
-
-      switch(iconPosition){
+      switch (iconPosition) {
         case IconPosition.LEFT:
           icon.x = (_label.x - icon.width / 2 - 12).round();
           _label.x += (14 + icon.width).round();
@@ -131,29 +128,32 @@ class MdButton extends SelectableButton {
     super.refresh();
   }
 
-  @override selectAction(){
-   // _paperRipple.disableUpAction = true;
-    if(_paperRipple != null){
+  @override
+  selectAction() {
+    // _paperRipple.disableUpAction = true;
+    if (_paperRipple != null) {
       _paperRipple.downAction();
     }
 
-    if(_paperShadow != null){
+    if (_paperShadow != null) {
       _paperShadow.downAction();
     }
   }
 
-  @override deselectAction(){
-   // _paperRipple.disableUpAction = false;
+  @override
+  deselectAction() {
+    // _paperRipple.disableUpAction = false;
 
-    if(_paperRipple != null){
+    if (_paperRipple != null) {
       _paperRipple.upAction();
     }
-    if(_paperShadow != null){
+    if (_paperShadow != null) {
       _paperShadow.upAction();
     }
   }
 
-  @override void set labelText(String labelText) {
+  @override
+  void set labelText(String labelText) {
     super.labelText = labelText;
     _label.text = labelText;
     refresh();

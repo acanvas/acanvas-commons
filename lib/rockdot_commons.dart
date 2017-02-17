@@ -161,7 +161,6 @@ part 'src/view/experimental/book/view/page_manager.dart';
 //part 'src/view/component/video/video_controls.dart';
 //part 'src/view/component/video/video_player.dart';
 
-
 //view:effect
 part 'src/view/effect/i_effect.dart';
 part 'src/view/effect/no_effect.dart';
@@ -198,5 +197,3 @@ part 'src/view/materialdesign/md_tabs.dart';
 part 'src/view/materialdesign/md_toast.dart';
 part 'src/view/materialdesign/md_toggle_button.dart';
 part 'src/view/materialdesign/md_wrap.dart';
-
-

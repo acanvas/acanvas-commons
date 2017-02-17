@@ -8,17 +8,13 @@ class MdKeyboard extends BoxSprite {
   int textColor;
   int fontSize;
 
-  MdKeyboard({this.fontSize: 14,
-                this.textColor: MdColor.BLACK,
-                String fontName: DEFAULT_FONT})
-      : super() {
+  MdKeyboard({this.fontSize: 14, this.textColor: MdColor.BLACK, String fontName: DEFAULT_FONT}) : super() {
     _createKeyboard();
   }
 
   SoftKeyboard _softKeyboard;
 
   void _createKeyboard() {
-
     Layout layout = new Qwerty();
     _softKeyboard = new SoftKeyboard([layout]);
 
@@ -47,5 +43,4 @@ class MdKeyboard extends BoxSprite {
     disposeChild(_softKeyboard);
     _softKeyboard = null;
   }
-
 }

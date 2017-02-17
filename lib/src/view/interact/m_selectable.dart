@@ -17,7 +17,6 @@ abstract class MSelectable {
     _data = data;
   }
 
-
   bool _selfSelect = false;
 
   bool get selfSelect => _selfSelect;

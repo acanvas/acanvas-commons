@@ -13,9 +13,7 @@ class MdRadioButton extends SelectableButton {
   Sprite _bg;
   MdText _paperLabel;
 
-  MdRadioButton({int rippleColor: MdColor.GREY_DARK, this.activeColor: MdColor.GREEN, this.label: ""})
-      : super() {
-
+  MdRadioButton({int rippleColor: MdColor.GREY_DARK, this.activeColor: MdColor.GREEN, this.label: ""}) : super() {
     inheritSpan = true;
 
     MdRipple ripple = new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
@@ -48,7 +46,8 @@ class MdRadioButton extends SelectableButton {
     _icon.scaleX = _icon.scaleY = .1;
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     _icon.x = _icon.y = 30;
     if (_paperLabel != null) {
       _paperLabel.x = 60;

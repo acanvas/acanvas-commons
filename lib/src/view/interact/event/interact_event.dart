@@ -11,13 +11,9 @@ class InteractEvent extends Event {
   static final String DRAG_STOP_ACTION = "InteractEvent.DRAG_STOP_ACTION";
 
   /// Creates an [InteractEvent] of specified [type].
-  InteractEvent(String type, [bool bubbles = false]) : super(type, bubbles){
-
-  }
+  InteractEvent(String type, [bool bubbles = false]) : super(type, bubbles) {}
 
   Event clone() {
     return new InteractEvent(type, bubbles);
   }
-
 }
-

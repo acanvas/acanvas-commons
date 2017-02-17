@@ -48,7 +48,7 @@ class DrawingTool {
   static void drawMarker(Graphics graphics, dynamic point,
       [num size = 10, String shape = CROSS, LineStyle lineStyle = null]) {
     if (point is List<Point>) {
-      point.forEach( (point) {
+      point.forEach((point) {
         drawMarker(graphics, point, size, shape);
       });
     }
@@ -143,7 +143,12 @@ class DrawingTool {
    * @see		DrawingTool#draw()
    */
   static void rect(Graphics graphics, Rectangle rect, [LineStyle lineStyle = null]) {
-    List<Point> area = [rect.topLeft, new Point(rect.right, rect.top), rect.bottomRight, new Point(rect.left, rect.bottom)];
+    List<Point> area = [
+      rect.topLeft,
+      new Point(rect.right, rect.top),
+      rect.bottomRight,
+      new Point(rect.left, rect.bottom)
+    ];
     draw(graphics, area, true, lineStyle);
   }
 

@@ -70,7 +70,7 @@ class Page extends LifecycleSprite {
   /**
    * @
    */
-  Sprite _shape ;
+  Sprite _shape;
 
   /**
    * @see	Page#liveBitmapping
@@ -109,13 +109,11 @@ class Page extends LifecycleSprite {
   /**
    * Constructor
    */
-  Page([this.bm = null]) : super(null) {
-
-  }
+  Page([this.bm = null]) : super(null) {}
 
   // CUSTOM:
   @override
-  void init({Map<String, String> params : null}){
+  void init({Map<String, String> params: null}) {
     super.init(params: params);
 
     if (bm != null) {
@@ -132,17 +130,15 @@ class Page extends LifecycleSprite {
 
   @override
   void dispose({bool removeSelf: true}) {
-
-    if(contains(bm)) removeChild(bm); // save BitmapData from being trashed in super call
+    if (contains(bm)) removeChild(bm); // save BitmapData from being trashed in super call
     _gradients = null;
 
     super.dispose(removeSelf: false);
   }
 
   @override
-  void enable(){
+  void enable() {
     super.enable();
-
   }
 
   /**
@@ -156,7 +152,7 @@ class Page extends LifecycleSprite {
 
     BitmapData bmd = new BitmapData(_width.round(), _height.round(), 0x00ffffff);
     Matrix matrix = new Matrix.fromIdentity();
-    if(scale)matrix.scale(mScaleX, mScaleY);
+    if (scale) matrix.scale(mScaleX, mScaleY);
     bmd.draw(this, matrix);
     return bmd;
   }

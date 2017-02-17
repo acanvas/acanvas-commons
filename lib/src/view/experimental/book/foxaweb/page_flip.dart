@@ -346,8 +346,8 @@ class PageFlip {
    * matric correction
    * @
    */
-  static void ordMatrix(
-      Matrix mat, Point spt, num opw, num oph, bool ish, List<Point<num>> cPoints, List<Point<num>> pPoint, num gama, num beta) {
+  static void ordMatrix(Matrix mat, Point spt, num opw, num oph, bool ish, List<Point<num>> cPoints,
+      List<Point<num>> pPoint, num gama, num beta) {
     if (spt.x == 1 && spt.y == 0) {
       mat.tx = cPoints[0].x;
       mat.ty = cPoints[0].y;

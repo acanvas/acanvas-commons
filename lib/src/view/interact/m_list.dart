@@ -19,7 +19,9 @@ abstract class MList {
 
   int _spacing = 0;
 
-  void set spacing(int spacing)  {  _spacing = spacing; }
+  void set spacing(int spacing) {
+    _spacing = spacing;
+  }
 
   int get spacing => _spacing;
 
@@ -49,10 +51,11 @@ abstract class MList {
 
   bool _constantCellSize = true;
 
-  void set constantCellSize(bool constantCellSize)  {  _constantCellSize = constantCellSize; }
+  void set constantCellSize(bool constantCellSize) {
+    _constantCellSize = constantCellSize;
+  }
 
   bool get constantCellSize => _constantCellSize;
-
 
   bool _selfDeselect = false;
 

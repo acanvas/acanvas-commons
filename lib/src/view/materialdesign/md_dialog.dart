@@ -36,7 +36,8 @@ class MdDialog extends BoxSprite {
     _hbox.addChild(btn);
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     super.refresh();
 
     _title.x = 20;

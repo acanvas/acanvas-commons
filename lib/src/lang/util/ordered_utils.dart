@@ -49,8 +49,10 @@ class OrderedUtils {
     //ordered.sortOn(ORDERED_PROPERTYNAME, List.NUMERIC);
     ordered.sort((a, b) {
       if (a > b) return 1;
-      if (a < b) return -1;
-      else return 0;
+      if (a < b)
+        return -1;
+      else
+        return 0;
     });
     return ordered..addAll(unordered);
   }

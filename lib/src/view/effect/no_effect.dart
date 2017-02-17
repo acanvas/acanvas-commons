@@ -5,12 +5,14 @@ class NoEffect extends BasicEffect {
     _applyRecursively = false;
   }
 
-  @override void runInEffect(BoxSprite target, double duration, Function callback) {
+  @override
+  void runInEffect(BoxSprite target, double duration, Function callback) {
     target.alpha = 1;
     callback.call();
   }
 
-  @override void runOutEffect(BoxSprite target, double duration, Function callback) {
+  @override
+  void runOutEffect(BoxSprite target, double duration, Function callback) {
     callback.call();
   }
 }

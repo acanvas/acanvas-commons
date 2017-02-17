@@ -20,12 +20,8 @@ class MdToggleButton extends SelectableButton {
   BoxSprite _holder;
 
   MdToggleButton(
-      {int rippleColor: MdColor.GREY_DARK,
-      this.activeColor: MdColor.GREEN,
-      this.label: "",
-      this.labelOffset: 150})
+      {int rippleColor: MdColor.GREY_DARK, this.activeColor: MdColor.GREEN, this.label: "", this.labelOffset: 150})
       : super() {
-
     inheritSpan = true;
 
     _holder = new BoxSprite();
@@ -68,7 +64,8 @@ class MdToggleButton extends SelectableButton {
     }
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     _inactiveLine.x = labelOffset + 38;
     _activeLine.x = labelOffset + 38;
     _inactiveLine.y = _activeLine.y = 30;
@@ -87,7 +84,8 @@ class MdToggleButton extends SelectableButton {
     spanHeight -= 10;
   }
 
-  @override void selectAction() {
+  @override
+  void selectAction() {
     _icon.scaleX = _icon.scaleY = .1;
     _icon.visible = true;
     _activeLine.visible = true;
@@ -99,7 +97,8 @@ class MdToggleButton extends SelectableButton {
     }
   }
 
-  @override void deselectAction() {
+  @override
+  void deselectAction() {
     Rd.JUGGLER.addTween(_holder, .1).animate..x.to(labelOffset);
     Rd.JUGGLER.addTween(_ripple, .1).animate..x.to(labelOffset);
     Tween tw = new Tween(_icon, .2);

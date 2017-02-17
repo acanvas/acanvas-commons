@@ -39,7 +39,8 @@ class MdAppBar extends BoxSprite {
     addChild(tabs);
   }
 
-  @override void span(num w, num h, {bool refresh: true}) {
+  @override
+  void span(num w, num h, {bool refresh: true}) {
     h = MdDimensions.HEIGHT_APP_BAR;
     if (extended == true) {
       h += MdDimensions.HEIGHT_APP_BAR_EXTENDED_AREA;
@@ -51,7 +52,8 @@ class MdAppBar extends BoxSprite {
     super.span(w, h, refresh: refresh);
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     leftBox.refresh();
     rightBox.refresh();
 
@@ -60,7 +62,7 @@ class MdAppBar extends BoxSprite {
 
     if (_headline != null) {
       num hw = spanWidth - rightBox.width - 20 - _headline.x;
-      if(hw > 270){
+      if (hw > 270) {
         _headline.width = hw;
       }
 
@@ -69,9 +71,8 @@ class MdAppBar extends BoxSprite {
         _headline.y = MdDimensions.HEIGHT_APP_BAR + 20;
       } else {
         _headline.x = leftBox.x + leftBox.width + 20;
-        _headline.y = (MdDimensions.HEIGHT_APP_BAR / 2 - _headline.height/ 2 + 0).round();
+        _headline.y = (MdDimensions.HEIGHT_APP_BAR / 2 - _headline.height / 2 + 0).round();
       }
-
     }
 
     rightBox.x = spanWidth - rightBox.width - 20;

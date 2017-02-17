@@ -33,7 +33,9 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
 
   void onInitComplete() {
     initialized = true;
-    children.where((c) => c is MLifecycle && (c as MLifecycle).inheritInit && !(c as MLifecycle).initialized).forEach((child) {
+    children
+        .where((c) => c is MLifecycle && (c as MLifecycle).inheritInit && !(c as MLifecycle).initialized)
+        .forEach((child) {
       if ((child as MBox).inheritSpan) {
         (child as MBox).span(spanWidth, spanHeight, refresh: false);
       }

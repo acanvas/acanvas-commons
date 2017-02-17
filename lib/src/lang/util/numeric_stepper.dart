@@ -56,11 +56,15 @@ class NumericStepper {
   int _update(int i, bool loop) {
     if (i != _curStep) {
       if (i < _min) {
-        if (loop) _curStep = _max;
-        else _curStep = _min;
+        if (loop)
+          _curStep = _max;
+        else
+          _curStep = _min;
       } else if (i > _max) {
-        if (loop) _curStep = _min;
-        else _curStep = _max;
+        if (loop)
+          _curStep = _min;
+        else
+          _curStep = _max;
       } else {
         _curStep = i;
       }

@@ -30,14 +30,12 @@ class MdToast extends BoxSprite {
     holder.addChild(this);
     span(300, 50);
 
-    Rd.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
-      ..animate.y.to(Rd.STAGE.stageHeight - this.height - 20);
+    Rd.JUGGLER.addTween(this, .3, Transition.easeOutBounce)..animate.y.to(Rd.STAGE.stageHeight - this.height - 20);
 
     if (hideAfterSeconds > 0) {
       hide();
 
-      Rd.JUGGLER
-          .addTranslation(0, 100, hideAfterSeconds, Transition.linear, (num val) => _progress.value = val);
+      Rd.JUGGLER.addTranslation(0, 100, hideAfterSeconds, Transition.linear, (num val) => _progress.value = val);
     }
   }
 
@@ -48,7 +46,8 @@ class MdToast extends BoxSprite {
       ..onComplete = () => this.dispose();
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     _title.x = 20;
     _title.y = (spanHeight / 2 - _title.textHeight / 2).round();
     _title.width = spanWidth - 40;

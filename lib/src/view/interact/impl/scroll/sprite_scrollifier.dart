@@ -97,26 +97,34 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
   }
 
   void _onScrollbarInteractionStart(SliderEvent event) {
-    if (event.target == _hScrollbar) _interactionH = true;
-    else _interactionV = true;
+    if (event.target == _hScrollbar)
+      _interactionH = true;
+    else
+      _interactionV = true;
     interactionStart();
   }
 
   void _onScrollbarInteractionEnd(SliderEvent event) {
-    if (event.target == _hScrollbar) _interactionH = false;
-    else _interactionV = false;
+    if (event.target == _hScrollbar)
+      _interactionH = false;
+    else
+      _interactionV = false;
     if (!_interactionH && !_interactionV) interactionEnd();
   }
 
   void _onScrollbarChangeStart(SliderEvent event) {
-    if (event.target == _hScrollbar) _changingH = true;
-    else _changingV = true;
+    if (event.target == _hScrollbar)
+      _changingH = true;
+    else
+      _changingV = true;
     changeStart();
   }
 
   void _onScrollbarChangeEnd(SliderEvent event) {
-    if (event.target == _hScrollbar) _changingH = false;
-    else _changingV = false;
+    if (event.target == _hScrollbar)
+      _changingH = false;
+    else
+      _changingV = false;
     if (!_changingH && !_changingV) changeEnd();
   }
 
@@ -149,12 +157,14 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
     if (_changing) {
       _changing = false;
       if (autoHideScrollbars) {
-        if (_hScrollbar.enabled) Rd.JUGGLER.addTween(_hScrollbar, 0.2)
-          ..animate.alpha.to(0)
-          ..delay = .5;
-        if (_vScrollbar.enabled) Rd.JUGGLER.addTween(_vScrollbar, 0.2)
-          ..animate.alpha.to(0)
-          ..delay = .5;
+        if (_hScrollbar.enabled)
+          Rd.JUGGLER.addTween(_hScrollbar, 0.2)
+            ..animate.alpha.to(0)
+            ..delay = .5;
+        if (_vScrollbar.enabled)
+          Rd.JUGGLER.addTween(_vScrollbar, 0.2)
+            ..animate.alpha.to(0)
+            ..delay = .5;
       }
       dispatchEvent(new ScrollifyEvent(ScrollifyEvent.CHANGE_END));
     }
@@ -185,7 +195,8 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
     _updateThumbs();
   }
 
-  @override void set value(num newValue) {
+  @override
+  void set value(num newValue) {
     if (scrollOrientation == ScrollOrientation.VERTICAL) {
       newValue = newValue > _vScrollbar.valueMax ? _vScrollbar.valueMax : newValue;
       _vScrollbar.scrollToPage(0, newValue);
@@ -219,7 +230,8 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
     if (keyboardEnabled) {
       addEventListener(KeyboardEvent.KEY_DOWN, _onKeyDown, useCapture: false, priority: 0);
       Rd.STAGE.focus = this;
-    } else removeEventListener(KeyboardEvent.KEY_DOWN, _onKeyDown);
+    } else
+      removeEventListener(KeyboardEvent.KEY_DOWN, _onKeyDown);
   }
 
   void _onKeyDown(KeyboardEvent event) {
@@ -259,8 +271,10 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
       case KeyCode.SPACE:
         if (_vScrollbar.enabled) {
           clearMomentum();
-          if (!event.shiftKey) _vScrollbar.pageDown();
-          else _vScrollbar.pageUp();
+          if (!event.shiftKey)
+            _vScrollbar.pageDown();
+          else
+            _vScrollbar.pageUp();
         }
         break;
       case KeyCode.PAGE_DOWN:
@@ -296,23 +310,27 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
   }
 
   /// ---------- MOUSE WHEEL
-  @override void set mouseWheelEnabled(bool value) {
+  @override
+  void set mouseWheelEnabled(bool value) {
     if (_mouseWheelEnabled == value) {
       return;
     }
     _mouseWheelEnabled = value;
-    if (_mouseWheelEnabled) _view.parent
-        .addEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel, useCapture: false, priority: 0);
-    else _view.parent.removeEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel);
+    if (_mouseWheelEnabled)
+      _view.parent.addEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel, useCapture: false, priority: 0);
+    else
+      _view.parent.removeEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel);
   }
 
   void _onMouseWheel(MouseEvent event) {
     clearMomentum();
     if (event.shiftKey) {
-      if (_hScrollbar.enabled) _hScrollbar._onMouseWheel(event);
+      if (_hScrollbar.enabled)
+        _hScrollbar._onMouseWheel(event);
       else if (_vScrollbar.enabled) _vScrollbar._onMouseWheel(event);
     } else {
-      if (_vScrollbar.enabled) _vScrollbar._onMouseWheel(event);
+      if (_vScrollbar.enabled)
+        _vScrollbar._onMouseWheel(event);
       else if (_hScrollbar.enabled) _hScrollbar._onMouseWheel(event);
     }
     event.stopImmediatePropagation();
@@ -361,7 +379,8 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
     changeStart();
 
     _normalizedValueH = ((xPos - spanWidth / (2 * scale)) / ((_view.width / _view.scaleX) - spanWidth / scale)).round();
-    _normalizedValueV = ((yPos - spanHeight / (2 * scale)) / ((_view.height / _view.scaleY) - spanHeight / scale)).round();
+    _normalizedValueV =
+        ((yPos - spanHeight / (2 * scale)) / ((_view.height / _view.scaleY) - spanHeight / scale)).round();
 
     Rd.JUGGLER.addTween(_view, 0.3)
       ..animate.scaleX.to(scale)
@@ -376,11 +395,13 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
     updateScrollbars();
 
     int valH = (_normalizedValueH * _hScrollbar.valueMax).round();
-    if (valH < 0) valH = 0;
+    if (valH < 0)
+      valH = 0;
     else if (valH > _hScrollbar.valueMax) valH = _hScrollbar.valueMax.round();
 
     int valV = (_normalizedValueV * _vScrollbar.valueMax).round();
-    if (valV < 0) valV = 0;
+    if (valV < 0)
+      valV = 0;
     else if (valV > _vScrollbar.valueMax) valV = _vScrollbar.valueMax.round();
 
     if (_hScrollbar.enabled) _hScrollbar.value = valH;

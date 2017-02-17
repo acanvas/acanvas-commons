@@ -93,7 +93,8 @@ abstract class IOperation extends EventDispatcher {
    *
    * @param listener the event handler function
    */
-  void addErrorListener<T extends Event>(EventListener<T> listener, [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
+  void addErrorListener<T extends Event>(EventListener<T> listener,
+      [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
 
   /**
    * Convenience method for adding a listener to the OperationEvent.TIMEOUT event.

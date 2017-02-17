@@ -87,7 +87,7 @@ class Logger implements logging.Logger {
   logging.Level get level => _delegate.level;
 
   @override
-  void set level (logging.Level value) {
+  void set level(logging.Level value) {
     _delegate.level = value;
   }
 

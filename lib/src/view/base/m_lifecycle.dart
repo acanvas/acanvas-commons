@@ -9,37 +9,49 @@ abstract class MLifecycle {
 
   Map<String, String> _params = new Map();
 
-  void set params(Map<String, String> params) {_params = params;}
+  void set params(Map<String, String> params) {
+    _params = params;
+  }
 
   Map<String, String> get params => _params;
 
   bool _inheritInit = true;
 
-  void set inheritInit(bool inheritInit) {_inheritInit = inheritInit;}
+  void set inheritInit(bool inheritInit) {
+    _inheritInit = inheritInit;
+  }
 
   bool get inheritInit => _inheritInit;
 
   bool _inheritAppear = true;
 
-  void set inheritAppear(bool inheritAppear) {_inheritAppear = inheritAppear;}
+  void set inheritAppear(bool inheritAppear) {
+    _inheritAppear = inheritAppear;
+  }
 
   bool get inheritAppear => _inheritAppear;
 
   bool _inheritDisappear = true;
 
-  void set inheritDisappear(bool inheritDisappear) { _inheritDisappear = inheritDisappear;}
+  void set inheritDisappear(bool inheritDisappear) {
+    _inheritDisappear = inheritDisappear;
+  }
 
   bool get inheritDisappear => _inheritDisappear;
 
   bool _initialized = false;
 
-  void set initialized(bool initialized) {_initialized = initialized;}
+  void set initialized(bool initialized) {
+    _initialized = initialized;
+  }
 
   bool get initialized => _initialized;
 
   bool _requiresLoading = false;
 
-  void set requiresLoading(bool requiresLoading) {_requiresLoading = requiresLoading; }
+  void set requiresLoading(bool requiresLoading) {
+    _requiresLoading = requiresLoading;
+  }
 
   bool get requiresLoading => _requiresLoading;
 

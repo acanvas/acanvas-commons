@@ -11,12 +11,13 @@ class SelectableButton extends Button with MSelectable {
 
   SelectableButton clone() => new SelectableButton();
 
-  @override void downAction([InputEvent event = null]) {
+  @override
+  void downAction([InputEvent event = null]) {
     super.downAction(event);
   }
 
-  @override void upAction([InputEvent event = null, bool submit = true]) {
-
+  @override
+  void upAction([InputEvent event = null, bool submit = true]) {
     super.upAction(event, submit);
     if (selfSelect) {
       selected = !selected;
@@ -24,7 +25,8 @@ class SelectableButton extends Button with MSelectable {
     }
   }
 
-  @override void select({bool submit: false}) {
+  @override
+  void select({bool submit: false}) {
     if (!selected) {
       selectAction();
       _selected = true;
@@ -35,7 +37,8 @@ class SelectableButton extends Button with MSelectable {
     dispatchEvent(new InteractEvent(InteractEvent.SELECT_ACTION));
   }
 
-  @override void deselect() {
+  @override
+  void deselect() {
     if (selected) {
       deselectAction();
       _selected = false;

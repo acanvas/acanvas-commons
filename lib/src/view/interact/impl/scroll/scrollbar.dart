@@ -63,7 +63,8 @@ class Scrollbar extends Slider with MPagedScroll {
           if (!tweening) snapToCurrentPage();
         } else if (bounce) {
           if (!checkOuterFrame() && !tweening) notifyMomentumStart();
-        } else notifyMomentumStart();
+        } else
+          notifyMomentumStart();
       } else {
         if (snapToPages) {
           if (!tweening) snapToCurrentPage();
@@ -77,9 +78,12 @@ class Scrollbar extends Slider with MPagedScroll {
   }
 
   void snapToCurrentPage() {
-    if (momentum < 0) scrollToPage(currentPage - (_rawPagePos - currentPage < 0 ? 1 : 0), 0, true);
-    else if (momentum > 0) scrollToPage(currentPage + (_rawPagePos - currentPage > 0 ? 1 : 0), 0, true);
-    else scrollToPage(currentPage);
+    if (momentum < 0)
+      scrollToPage(currentPage - (_rawPagePos - currentPage < 0 ? 1 : 0), 0, true);
+    else if (momentum > 0)
+      scrollToPage(currentPage + (_rawPagePos - currentPage > 0 ? 1 : 0), 0, true);
+    else
+      scrollToPage(currentPage);
   }
 
   void pageUp() {
@@ -194,7 +198,8 @@ class Scrollbar extends Slider with MPagedScroll {
       // Stop momentum
       value += momentum;
       clearMomentum();
-      if (value < valueMin) value = valueMin;
+      if (value < valueMin)
+        value = valueMin;
       else if (value > valueMax) value = valueMax;
       notifyMomentumEnd();
     } else {
@@ -331,10 +336,12 @@ class Scrollbar extends Slider with MPagedScroll {
     if (snapToPages) {
       int thumbPos =
           ((currentPage * pageScrollDistance - valueMin) / (valueMax - valueMin) * (spanSize - _thumbSize)).round();
-      if (thumbPos > (horizontalScrollBehavior ? mouseX : mouseY)) pageUp();
+      if (thumbPos > (horizontalScrollBehavior ? mouseX : mouseY))
+        pageUp();
       else if (thumbPos + _thumbSize < (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
     } else {
-      if ((horizontalScrollBehavior ? thumb.x : thumb.y) > (horizontalScrollBehavior ? mouseX : mouseY)) pageUp();
+      if ((horizontalScrollBehavior ? thumb.x : thumb.y) > (horizontalScrollBehavior ? mouseX : mouseY))
+        pageUp();
       else if ((horizontalScrollBehavior ? thumb.x : thumb.y) + _thumbSize <
           (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
     }

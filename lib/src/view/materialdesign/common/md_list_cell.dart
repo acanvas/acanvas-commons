@@ -34,7 +34,8 @@ class MdListCell extends SelectableButton {
     super.span(w, MdDimensions.HEIGHT_MENU_CELL, refresh: refresh);
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     title.width = spanWidth - 10;
     title.x = 10;
     title.y = (spanHeight / 2 - title.textHeight / 2).round();
@@ -45,5 +46,4 @@ class MdListCell extends SelectableButton {
 
     super.refresh();
   }
-
 }

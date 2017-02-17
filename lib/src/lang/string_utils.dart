@@ -345,7 +345,6 @@ class StringUtils {
     }
 
     return str.padLeft(size, padStr);
-
   }
 
   /**

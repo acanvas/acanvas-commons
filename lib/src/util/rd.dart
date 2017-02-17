@@ -49,8 +49,9 @@ class Rd {
   }
 
   static void set MATERIALIZE_REQUIRED(bool b) {
-    if(b && STAGE.renderMode != StageRenderMode.AUTO){
+    if (b && STAGE.renderMode != StageRenderMode.AUTO) {
       STAGE.renderMode = StageRenderMode.ONCE;
-    };
+    }
+    ;
   }
 }

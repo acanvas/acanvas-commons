@@ -23,8 +23,8 @@ void main() {
   new RenderLoop()..addStage(stage);
   BookSampleAssets.load(start);
 }
+
 void start() {
-  
   book = new BookView("book");
   book.span(900, 600);
   book.x = 60;
@@ -46,9 +46,9 @@ void start() {
   Page page;
   for (int i = 1; i < BookSampleAssets.NUM_PAGES; i++) {
     page = new Page(BookSampleAssets.getPage(i));
-    if(i==4){
+    if (i == 4) {
       page.tearable = true;
-      book.addChild( new MdSamplePage() );
+      book.addChild(new MdSamplePage());
     }
     book.addChild(page);
   }
@@ -70,16 +70,13 @@ void start() {
   book.addEventListener(BookEvent.STATUS_CHANGED, onBookStatusChange);
   book.addEventListener(BookEvent.PAGE_TURNED, onBookPageTurned);
   book.init();
-
 }
 
-
 void _addToBook(Sprite spr) {
-  if(spr is Page){
+  if (spr is Page) {
     book.addChild(spr);
-  }
-  else{
-    if(spr is BoxSprite){
+  } else {
+    if (spr is BoxSprite) {
       spr.inheritSpan = false;
       spr.spanWidth = 450;
       spr.spanHeight = 600;
@@ -93,11 +90,11 @@ void _addToBook(Sprite spr) {
 
 void onBookInit(LifecycleEvent event) {
   book.removeEventListener(LifecycleEvent.INIT_COMPLETE, onBookInit);
- // book.nextPage();
+  // book.nextPage();
 }
 
 void onBookStatusChange(BookEvent event) {
- // print("NEW STATUS: ${book.status}");
+  // print("NEW STATUS: ${book.status}");
 }
 
 void onBookPageTurned(BookEvent event) {
@@ -113,35 +110,32 @@ void onBookPageTurned(BookEvent event) {
   Page page;
 
   for (int i = 0; i < book.pages.length; i++) {
-
     page = book.getPage(i);
 
     // filter for page range around index of current left page (2 pages before, right page of current page, next 2 pages)
-    if(book.currentPage - 2 <= i && i <= book.currentPage + 3){
+    if (book.currentPage - 2 <= i && i <= book.currentPage + 3) {
 /*
 */
-      if(!page.initialized){
+      if (!page.initialized) {
         page.init();
         print("init $i");
       }
       //filter for current page and the page next to it
-      if(book.currentPage - 1 <= i && i <= book.currentPage + 1){
-        if(!page.enabled){
+      if (book.currentPage - 1 <= i && i <= book.currentPage + 1) {
+        if (!page.enabled) {
           page.enable();
           print("enable $i");
         }
-      }
-      else{
-        if(page.enabled){
+      } else {
+        if (page.enabled) {
           page.disable();
           print("disable $i");
         }
       }
-    }
-    else{
-        print("dispose $i");
-        page.dispose(removeSelf: false);
-        page.initialized = false;
+    } else {
+      print("dispose $i");
+      page.dispose(removeSelf: false);
+      page.initialized = false;
     }
   }
 

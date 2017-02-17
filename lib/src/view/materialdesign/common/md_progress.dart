@@ -7,8 +7,7 @@ class MdProgress extends Slider {
   int barColor;
   Sprite _progress;
 
-  MdProgress(num min, num max, num size, {this.barColor: MdColor.BLACK, int bgColor: MdColor.WHITE})
-      : super() {
+  MdProgress(num min, num max, num size, {this.barColor: MdColor.BLACK, int bgColor: MdColor.WHITE}) : super() {
     horizontalScrollBehavior = true;
     valueMin = min;
     valueMax = max;

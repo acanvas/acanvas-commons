@@ -568,7 +568,7 @@ class PageManager extends LifecycleSprite {
     // if page is numeric, transform it into a Page:
     if (!(page is Page)) {
       // throw Error if index is out of bounds:
-      if ((page as int)  < 0 || (page as int) >= this._pages.length) {
+      if ((page as int) < 0 || (page as int) >= this._pages.length) {
         if (varify && page != -1) {
           // even though -1 is not a valid index, it does virtually indicate a Page
           throw new ArgumentError(BookError.OUT_OF_BOUNDS);

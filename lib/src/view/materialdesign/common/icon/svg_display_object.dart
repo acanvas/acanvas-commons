@@ -21,7 +21,8 @@ class SvgDisplayObject extends DisplayObject {
     imageElement.src = svgUrl;
     imageElement.onLoad.listen((c) {
       _renderTexture = new RenderTexture.fromImageElement(imageElement);
-      _renderTexture.canvas; // this copies the image to a canvas; workaround for https://github.com/bp74/StageXL/issues/198
+      _renderTexture
+          .canvas; // this copies the image to a canvas; workaround for https://github.com/bp74/StageXL/issues/198
       _renderTextureQuad = _renderTexture.quad;
       html.Url.revokeObjectUrl(svgUrl);
     });

@@ -20,26 +20,23 @@ class NativeKeyboard extends BoxSprite {
   HtmlObject _htmlTextField;
   StreamSubscription _onKeyDownSubscriber;
 
-
   NativeKeyboard(this.text,
-                 {this.fontSize: 14,
-                this.textColor: MdColor.BLACK,
-                this.fontName: DEFAULT_FONT,
-                this.multiline: false,
-                this.rows: 1,
-                this.password: false})
-      : super() {
-  }
+      {this.fontSize: 14,
+      this.textColor: MdColor.BLACK,
+      this.fontName: DEFAULT_FONT,
+      this.multiline: false,
+      this.rows: 1,
+      this.password: false})
+      : super() {}
 
   void createKeyboard() {
-
     _htmlElement = new html.InputElement();
     _htmlElement.value = text;
     _htmlElement.size = 80;
     _htmlElement.style.fontSize = fontSize.toString();
     _htmlElement.style.font = fontName;
 
-    _onKeyDownSubscriber = _htmlElement.onKeyDown.listen((e){
+    _onKeyDownSubscriber = _htmlElement.onKeyDown.listen((e) {
       dispatchEvent(new KeyEvent(KeyEvent.KEY_UP_VISIBLE, e.keyCode, new String.fromCharCode(e.keyCode)));
     });
 
@@ -50,7 +47,6 @@ class NativeKeyboard extends BoxSprite {
     _htmlTextField.visible = true;
 
     addChild(_htmlTextField);
-
   }
 
   String get value => _htmlElement.value;
@@ -62,5 +58,4 @@ class NativeKeyboard extends BoxSprite {
     _htmlElement.remove();
     _htmlElement = null;
   }
-
 }

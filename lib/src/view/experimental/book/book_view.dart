@@ -134,10 +134,8 @@ part of rockdot_commons;
  *
  */
 class BookView extends PageManager {
-
   num touchX = 0;
   num touchY = 0;
-
 
   /**
    * List in which the BitmapData for Page instance is stored in. Note that after each pageflip this List is cleaned.
@@ -403,7 +401,7 @@ class BookView extends PageManager {
 
     // make sure that non-hard pages whose flipsides are hard don't have fold-gradients:
     for (int i = 0; i < _pages.length; i++) {
-      if(i < 3){
+      if (i < 3) {
         _pages[i].init();
         _pages[i].refreshFoldGradient(false);
       }
@@ -470,8 +468,7 @@ class BookView extends PageManager {
    * @
    */
   void startPageFlip([InputEvent event = null, bool attemptHover = false]) {
-
-    if(event != null && Rd.MOBILE){
+    if (event != null && Rd.MOBILE) {
       //touchX = event.stageX;
       //touchY = event.stageY;
       updateTouchPosition(event);
@@ -487,11 +484,7 @@ class BookView extends PageManager {
       return;
     }
     // if the Book was clicked and gotoPage is active then attempt to abort gotoPage:
-    if (autoFlipActive &&
-        !tearActive &&
-        pageCorner.x >= 0 &&
-        pageCorner.x <= spanWidth / 2 &&
-        event != null) {
+    if (autoFlipActive && !tearActive && pageCorner.x >= 0 && pageCorner.x <= spanWidth / 2 && event != null) {
       cancelGotoPage(false);
       return;
     }
@@ -590,8 +583,8 @@ class BookView extends PageManager {
     setLastFlippedTime();
 
     // set status:
-    setStatus((hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED,
-        false); // false = dispatch Event later
+    setStatus(
+        (hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED, false); // false = dispatch Event later
 
     // add listeners:
     dragPageCorner();
@@ -665,8 +658,8 @@ class BookView extends PageManager {
 
     // perform pageflip:
     if (!front.explicitHard && !back.explicitHard) {
-      Map<String, dynamic> ocf = PageFlip.computeFlip(pageCorner.clone(), lastFlippedCorner, (spanWidth / 2).round(),
-          spanHeight.round(), !tearActive, 1);
+      Map<String, dynamic> ocf = PageFlip.computeFlip(
+          pageCorner.clone(), lastFlippedCorner, (spanWidth / 2).round(), spanHeight.round(), !tearActive, 1);
       PageFlip.drawBitmapSheet(ocf, renderSprite, bitmapData[frontIndex], bitmapData[backIndex]);
 
       // add shadows or highlights to the render:
@@ -780,8 +773,8 @@ class BookView extends PageManager {
     refreshViewStacks();
 
     // set status:
-    setStatus(BookEvent.NOT_FLIPPING, true, page,
-        (hoverActive) ? BookEvent.HOVER_FINISHED : BookEvent.PAGEFLIP_FINISHED);
+    setStatus(
+        BookEvent.NOT_FLIPPING, true, page, (hoverActive) ? BookEvent.HOVER_FINISHED : BookEvent.PAGEFLIP_FINISHED);
 
     // dispatch additional events:
     if (!hoverActive) {
@@ -1207,8 +1200,7 @@ class BookView extends PageManager {
       // set position:
       pageCornerTarget = new Point(x, y);
       // return true if pageCornerTarget has reached the opposite corner of where it started:
-      if (pageCornerTarget == (pageCorner) &&
-          ((tearActive && y == opposite.y) || (!tearActive && x == opposite.x))) {
+      if (pageCornerTarget == (pageCorner) && ((tearActive && y == opposite.y) || (!tearActive && x == opposite.x))) {
         return true;
       }
     }
@@ -1303,10 +1295,9 @@ class BookView extends PageManager {
   bool isPageCornerHit([Point point = null]) {
     // if no point was provided, use the mouse coordinates:
     if (point == null) {
-      if(Rd.MOBILE){
+      if (Rd.MOBILE) {
         point = new Point(touchX, touchY);
-      }
-      else{
+      } else {
         point = new Point(mouseX, mouseY);
       }
     }
@@ -1334,10 +1325,9 @@ class BookView extends PageManager {
    */
   bool isPageSideHit([Point point = null]) {
     // if no point was provided, use the mouse coordinates:
-    if(Rd.MOBILE){
+    if (Rd.MOBILE) {
       point = new Point(touchX, touchY);
-    }
-    else{
+    } else {
       point = new Point(mouseX, mouseY);
     }
     // return value:
@@ -1562,8 +1552,7 @@ class BookView extends PageManager {
     regions[1]["BR"].top += spanHeight - regionSize;
     regions[1]["BL"].top += spanHeight - regionSize;
     // specify side-flip regions for both pages:
-    regions[0]["side"] =
-        new Rectangle(0, (spanHeight - _regionSize) / 2, _regionSize / 2, _regionSize);
+    regions[0]["side"] = new Rectangle(0, (spanHeight - _regionSize) / 2, _regionSize / 2, _regionSize);
     regions[1]["side"] = regions[0]["side"].clone();
     regions[0]["side"].left = spanWidth - _regionSize / 2;
   }

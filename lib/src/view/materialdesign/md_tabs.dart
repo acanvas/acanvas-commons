@@ -12,8 +12,7 @@ class MdTabs extends BoxSprite {
 
   int _activeButtonIndex = 0;
 
-  MdTabs({this.highlightColor: MdColor.WHITE, this.bgColor: MdColor.BLACK, this.distributeTabs: true})
-      : super() {
+  MdTabs({this.highlightColor: MdColor.WHITE, this.bgColor: MdColor.BLACK, this.distributeTabs: true}) : super() {
     _bg = new Sprite();
     addChild(_bg);
 
@@ -46,14 +45,13 @@ class MdTabs extends BoxSprite {
     _slideBar.width = btn.spanWidth;
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     RdGraphics.rectangle(0, 0, spanWidth, spanHeight, sprite: _bg, color: bgColor);
-
 
     tabBox.x = 0;
 
     if (tabBox.numChildren > 0) {
-
       if (distributeTabs) {
         for (int i = 0; i < tabBox.numChildren; i++) {
           Button btn = tabBox.getChildAt(i) as Button;

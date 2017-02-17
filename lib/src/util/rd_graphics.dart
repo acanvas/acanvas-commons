@@ -108,19 +108,18 @@ class RdGraphics {
     return sprite;
   }
 
-  static GraphicsGradient linearGraphicsGradient(List<num> colors, List<num> alphas, List<num> ratios, Matrix matrix, Point p1, Point p2) {
+  static GraphicsGradient linearGraphicsGradient(
+      List<num> colors, List<num> alphas, List<num> ratios, Matrix matrix, Point p1, Point p2) {
     //Point point1 = matrix.transformPoint(p1);
     //Point point2 = matrix.transformPoint(p2);
 
-    Point point1 = matrix.transformPoint(new Point(0,0));
-    Point point2 = matrix.transformPoint(new Point(1,0));
+    Point point1 = matrix.transformPoint(new Point(0, 0));
+    Point point2 = matrix.transformPoint(new Point(1, 0));
 
     //hack 1 doesnt seem to work
     Rectangle r = new Rectangle(0, 0, 1, 1);
     r = matrix.transformRectangle(r);
     //print("point1.x: ${point1.x} rect TLx: ${r.topLeft.x}");
-
-
 
     //GraphicsGradient g = new GraphicsGradient.linear(r.topLeft.x, r.topLeft.y, r.topRight.x, r.topRight.y);
     GraphicsGradient g = new GraphicsGradient.linear(point1.x, point1.y, point2.x, point2.y);
@@ -132,5 +131,4 @@ class RdGraphics {
     }
     return g;
   }
-
 }

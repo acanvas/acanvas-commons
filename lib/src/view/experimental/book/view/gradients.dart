@@ -188,7 +188,8 @@ class Gradients {
    * @see		PageFlip#computeFlip()
    *
    */
-  void drawInside(Graphics graphics, List<Point<num>> area, [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
+  void drawInside(Graphics graphics, List<Point<num>> area,
+      [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     if (this._page.hard) {
       this.drawInsideHard(graphics, area, tint, rotate);
     } else {
@@ -368,7 +369,8 @@ class Gradients {
    * @see		PageFlip#computeFlip()
    *
    */
-  void drawOutside(Graphics graphics, List<Point<num>> area, [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
+  void drawOutside(Graphics graphics, List<Point<num>> area,
+      [String tint = Gradients.DARK, num rotate = Gradients.ROTATE_FULL]) {
     if (this._page.hard) {
       this.drawOutsideHard(graphics, area);
     } else {
@@ -520,7 +522,8 @@ class Gradients {
    * @see		PageFlip#computeFlip()
    *
    */
-  void drawFlipside(Graphics graphics, List<Point<num>> area, [String tint = Gradients.LIGHT, num rotate = Gradients.ROTATE_FULL]) {
+  void drawFlipside(Graphics graphics, List<Point<num>> area,
+      [String tint = Gradients.LIGHT, num rotate = Gradients.ROTATE_FULL]) {
     // this method is not applicable to hard Pages:
     if (this._page.hard) {
       return;

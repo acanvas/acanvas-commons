@@ -33,11 +33,9 @@ class RdFontUtil {
     webFont.callMethod("load", [webFontConfig]);
 
     await completer.future.catchError((Error e) {
-      throw("Error while loading fonts. ${e}");
+      throw ("Error while loading fonts. ${e}");
     });
 
     return true;
-
   }
-
 }

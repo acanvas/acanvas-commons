@@ -31,7 +31,8 @@ class MdFab extends Button {
     _ripple.opacity = o;
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     icon.pivotX = 12;
     icon.pivotY = 12;
     icon.x = (spanWidth / 2).ceil();

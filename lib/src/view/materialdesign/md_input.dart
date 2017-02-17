@@ -49,8 +49,7 @@ class MdInput extends BoxSprite {
     //force onscreen keyboard on mobile devices
     if (Rd.MOBILE) {
       keyboard = true;
-    }
-    else if(keyboard == true){
+    } else if (keyboard == true) {
       KEYBOARD_NATIVE = false;
     }
 
@@ -112,7 +111,8 @@ class MdInput extends BoxSprite {
   /*
    * Redraws and adjusts lines and textfield widths
    */
-  @override refresh() {
+  @override
+  refresh() {
     _inputTextField.width = spanWidth;
 
     _drawLine(_inactiveLine, textColor, 0.2);
@@ -128,7 +128,7 @@ class MdInput extends BoxSprite {
       _requiredIconActive.y = _requiredIconInactive.y = _requiredTextField.y;
     }
 
-    if(_nativeKeyboard != null){
+    if (_nativeKeyboard != null) {
       _nativeKeyboard.x = _inputTextField.x + int.parse(html.querySelector('body').style.top, onError: (e) => 0);
       _nativeKeyboard.y = _inputTextField.y;
     }
@@ -348,7 +348,7 @@ class MdInput extends BoxSprite {
 
   num get spanWidth => super.spanWidth - 2;
 
-  String getText(){
+  String getText() {
     return _inputTextField.text;
   }
 }

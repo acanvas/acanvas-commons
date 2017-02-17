@@ -50,8 +50,10 @@ class Flow extends BoxSprite with MFlow {
 
       //calculate child X in inverted mode
       if (inverted) {
-        if (snapToPixels) _childXNew = (_prevChildX - _childWidth - spacing).round();
-        else _childXNew = _prevChildX - _childWidth - spacing;
+        if (snapToPixels)
+          _childXNew = (_prevChildX - _childWidth - spacing).round();
+        else
+          _childXNew = _prevChildX - _childWidth - spacing;
 
         //row space is full
         if ((spanWidth > 0 && reflow && _childXNew < padding) || flowOrientation == FlowOrientation.VERTICAL) {
@@ -61,8 +63,10 @@ class Flow extends BoxSprite with MFlow {
       }
       //calculate child X in normal mode
       else {
-        if (snapToPixels) _childXNew = (_prevChildX + _prevChildWidth + spacing).round();
-        else _childXNew = _prevChildX + _prevChildWidth + spacing;
+        if (snapToPixels)
+          _childXNew = (_prevChildX + _prevChildWidth + spacing).round();
+        else
+          _childXNew = _prevChildX + _prevChildWidth + spacing;
 
         //row space is full
         if ((spanWidth > 0 && reflow && _childXNew + _childWidth + spacing > spanWidth) ||
@@ -105,10 +109,7 @@ class Flow extends BoxSprite with MFlow {
 
       //set x, y, animate
       if (animate) {
-        Rd.JUGGLER.addTween(child, 0.2)
-          ..animate.alpha.to(1.0)
-          ..animate.x.to(_childXNew)
-          ..animate.y.to(_childYNew);
+        Rd.JUGGLER.addTween(child, 0.2)..animate.alpha.to(1.0)..animate.x.to(_childXNew)..animate.y.to(_childYNew);
       } else {
         child.x = _childXNew;
         child.y = _childYNew;
@@ -145,9 +146,8 @@ class Flow extends BoxSprite with MFlow {
     }
   }
 
-
-
-  @override void removeChildAt(int index) {
+  @override
+  void removeChildAt(int index) {
     if (animate) {
       DisplayObject child = getChildAt(index);
       Rd.JUGGLER.addTween(child, 0.2)

@@ -4,12 +4,10 @@ class MdSamplePage extends Page {
   /**
    * Constructor
    */
-  MdSamplePage() : super() {
-  }
+  MdSamplePage() : super() {}
 
   @override
-  void init({Map<String, String> params : null}){
-
+  void init({Map<String, String> params: null}) {
     super.init();
     RdGraphics.rectangle(0, 0, 450, 600, color: Color.White, sprite: this, clear: false);
 

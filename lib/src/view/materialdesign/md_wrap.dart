@@ -44,7 +44,8 @@ class MdWrap extends BoxSprite {
     flow.addChild(child);
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     panelSprite.x = 0;
     panelSprite.y = 0;
 

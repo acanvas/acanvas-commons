@@ -83,7 +83,7 @@ class ListSprite extends SpriteScrollifier with MList {
       int cellsInFrame = ((_horizontalFlow ? spanWidth : spanHeight) / _cellSize).ceil();
       //iterate all data
       for (i = 0; i < numDataEntries; i++) {
-      /*
+        /*
         }*/
         //if in visible area, create cell
         if (i < 1) {
@@ -106,8 +106,8 @@ class ListSprite extends SpriteScrollifier with MList {
           cell.id = i;
           cell.data = data.elementAt(i);
           if (_totalCellSize < (_horizontalFlow ? spanWidth : spanHeight)) {
-                // Show cell
-                _horizontalFlow ? cell.x = _totalCellSize : cell.y = _totalCellSize;
+            // Show cell
+            _horizontalFlow ? cell.x = _totalCellSize : cell.y = _totalCellSize;
             _totalCellSize += ((_horizontalFlow ? cell.spanWidth : cell.spanHeight)).round() + spacing;
             view.addChild(cell);
           } else {
@@ -153,13 +153,13 @@ class ListSprite extends SpriteScrollifier with MList {
   }
 
   void selectCellByVO(dynamic vo) {
-    if(selfDeselect){
+    if (selfDeselect) {
       deselectAllCells();
     }
     int i = 0;
     for (i = 0; i < this.data.length; i++) {
       if (vo == this.data[i]) {
-        if(!selfDeselect && !multiSelectable){
+        if (!selfDeselect && !multiSelectable) {
           deselectAllCells(i);
         }
         jumpToCell(i);
@@ -181,8 +181,8 @@ class ListSprite extends SpriteScrollifier with MList {
     clearMomentum();
     (_horizontalFlow ? _hScrollbar : _vScrollbar).interactionStart();
     if (_constantCellSize) {
-      if ((_horizontalFlow ? _hScrollbar : _vScrollbar).enabled) (_horizontalFlow ? _hScrollbar : _vScrollbar).value =
-          nr * _cellSize;
+      if ((_horizontalFlow ? _hScrollbar : _vScrollbar).enabled)
+        (_horizontalFlow ? _hScrollbar : _vScrollbar).value = nr * _cellSize;
     } else {
       if ((_horizontalFlow ? _hScrollbar : _vScrollbar).enabled) {
         SelectableButton cell;
@@ -276,38 +276,38 @@ class ListSprite extends SpriteScrollifier with MList {
     // Check, if scrolling up or down
     bool firstLoop;
 
-      cell = view.numChildren != 0 ? (view.getChildAt(0) as SelectableButton) : _getEmptyCell(true);
-      firstLoop = true;
+    cell = view.numChildren != 0 ? (view.getChildAt(0) as SelectableButton) : _getEmptyCell(true);
+    firstLoop = true;
 
-      //try adding cell(s) above first cell if it is y > 0
-      while ((_horizontalFlow ? cell.x : cell.y) > 0) {
-        if (firstLoop) {
-          if (cell.parent == null) _putCellInPool(cell);
-          firstLoop = false;
-        }
-        //cell.id minus 1
-        cell = _getPreviousCell(cell);
-        if (cell == null) break;
-        (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)
-            ? _putCellInPool(cell)
-            : view.addChildAt(cell, 0);
+    //try adding cell(s) above first cell if it is y > 0
+    while ((_horizontalFlow ? cell.x : cell.y) > 0) {
+      if (firstLoop) {
+        if (cell.parent == null) _putCellInPool(cell);
+        firstLoop = false;
       }
+      //cell.id minus 1
+      cell = _getPreviousCell(cell);
+      if (cell == null) break;
+      (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)
+          ? _putCellInPool(cell)
+          : view.addChildAt(cell, 0);
+    }
 
-      //try adding cell(s) below last cell if it there is visible space underneath
-      cell = view.numChildren != 0 ? (view.getChildAt(view.numChildren - 1) as SelectableButton) : _getEmptyCell(true);
-      firstLoop = true;
-      while (_horizontalFlow ? cell.x + cell.spanWidth < spanWidth : cell.y + cell.spanHeight < spanHeight) {
-        if (firstLoop) {
-          if (cell.parent == null) _putCellInPool(cell);
-          firstLoop = false;
-        }
-        //cell.id plus 1
-        cell = _getNextCell(cell);
-        if (cell == null) break;
-        (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0
-            ? _putCellInPool(cell)
-            : view.addChild(cell);
+    //try adding cell(s) below last cell if it there is visible space underneath
+    cell = view.numChildren != 0 ? (view.getChildAt(view.numChildren - 1) as SelectableButton) : _getEmptyCell(true);
+    firstLoop = true;
+    while (_horizontalFlow ? cell.x + cell.spanWidth < spanWidth : cell.y + cell.spanHeight < spanHeight) {
+      if (firstLoop) {
+        if (cell.parent == null) _putCellInPool(cell);
+        firstLoop = false;
       }
+      //cell.id plus 1
+      cell = _getNextCell(cell);
+      if (cell == null) break;
+      (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0
+          ? _putCellInPool(cell)
+          : view.addChild(cell);
+    }
 
     if (_oldVScrollbarValue >= (_horizontalFlow ? _hScrollbar : _vScrollbar).valueMax) {
       _calcNextCells();
@@ -418,17 +418,17 @@ class ListSprite extends SpriteScrollifier with MList {
   }
 
   void deselectAllCells([int exception = -1]) {
-    int n = view.numChildren;//data.length;
+    int n = view.numChildren; //data.length;
     SelectableButton cell;
     for (int i = 0; i < n; i++) {
       cell = (view.getChildAt(i) as SelectableButton);
-     // print("${i}: cell.id = ${cell.id}, exception: ${exception}");
+      // print("${i}: cell.id = ${cell.id}, exception: ${exception}");
       if (cell.id != exception) {
         //print("selected ${cell.id}");
         cell.deselect();
-      //  cell.enable();
+        //  cell.enable();
       } else {
-      //  cell.disable();
+        //  cell.disable();
         //print("exception ${cell.id}");
       }
     }

@@ -42,7 +42,8 @@ class Wrap extends BoxSprite {
   }
   */
 
-  @override void refresh() {
+  @override
+  void refresh() {
     flow.x = padding;
     flow.y = padding;
 

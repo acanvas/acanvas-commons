@@ -33,7 +33,7 @@ class Button extends BehaveSprite with MButton {
   }
 
   void enableAction() {
-    if(alpha == 0.6) alpha = 1;
+    if (alpha == 0.6) alpha = 1;
     filters = [];
     rollOutAction();
   }
@@ -59,10 +59,8 @@ class Button extends BehaveSprite with MButton {
   }
 
   void disableAction() {
-    if(alpha == 1.0) alpha = .6;
-    filters = [
-      new ColorMatrixFilter.grayscale()
-    ];
+    if (alpha == 1.0) alpha = .6;
+    filters = [new ColorMatrixFilter.grayscale()];
 
     rollOverAction();
   }
@@ -75,7 +73,9 @@ class Button extends BehaveSprite with MButton {
       swipeYDownPos = event.stageY;
     }
 
-    children.where((c) => (c is MButton && (c as MButton).inheritDownAction) || c is IMdButtonComponent).forEach((child) {
+    children
+        .where((c) => (c is MButton && (c as MButton).inheritDownAction) || c is IMdButtonComponent)
+        .forEach((child) {
       (child as MButton).downAction(event);
     });
 

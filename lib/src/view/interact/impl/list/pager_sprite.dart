@@ -15,7 +15,8 @@ class PagerSprite extends BehaveSprite with MList, MPager {
     addChild(holder);
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     super.refresh();
     _updateControls();
   }

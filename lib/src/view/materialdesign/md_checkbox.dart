@@ -22,7 +22,6 @@ class MdCheckbox extends SelectableButton {
       this.label: "",
       this.boxColor: MdColor.BLACK})
       : super() {
-
     inheritSpan = true;
 
     MdRipple ripple = new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
@@ -61,7 +60,8 @@ class MdCheckbox extends SelectableButton {
     }
   }
 
-  @override void refresh() {
+  @override
+  void refresh() {
     _icon.x = 29;
     _icon.y = 37;
     _box.x = _box.y = 30;
@@ -75,7 +75,8 @@ class MdCheckbox extends SelectableButton {
     spanHeight -= 10;
   }
 
-  @override void selectAction() {
+  @override
+  void selectAction() {
     _icon.scaleX = _icon.scaleY = .3;
     _icon.visible = true;
 
@@ -91,7 +92,8 @@ class MdCheckbox extends SelectableButton {
     }
   }
 
-  @override void deselectAction() {
+  @override
+  void deselectAction() {
     Tween tw = new Tween(_icon, .2);
     tw.animate..scaleX.to(.3)..scaleY.to(.3);
     tw.onComplete = () {
