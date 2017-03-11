@@ -36,6 +36,9 @@ class Flow extends BoxSprite with MFlow {
     //iterate all children
     children.forEach((child) {
       //get width and height values of child
+      if (child is ImageSprite && child.inheritSpan) {
+        child.scaleToWidth(spanWidth);
+      }
       if (child is MBox) {
         _childWidth = (child as MBox).spanWidth;
         _childHeight = (child as MBox).spanHeight;
@@ -125,7 +128,7 @@ class Flow extends BoxSprite with MFlow {
     super.refresh();
 
     num _spacer = (flowOrientation == FlowOrientation.HORIZONTAL && reflow == true) ? spacing : 0;
-    span(width, _childYNew + _spacer + _childHeight + padding, refresh: false);
+    span(spanWidth, _childYNew + _spacer + _childHeight + padding, refresh: false);
   }
 
   @override

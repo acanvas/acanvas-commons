@@ -73,18 +73,23 @@ class Button extends BehaveSprite with MButton {
       swipeYDownPos = event.stageY;
     }
 
-    children
-        .where((c) => (c is MButton && (c as MButton).inheritDownAction) || c is IMdButtonComponent)
-        .forEach((child) {
+    children.where((c) => (c is MButton && (c as MButton).inheritDownAction)).forEach((child) {
       (child as MButton).downAction(event);
+    });
+
+    children.where((c) => c is IMdButtonComponent).forEach((child) {
+      (child as IMdButtonComponent).downAction(event);
     });
 
     dispatchEvent(new InteractEvent(InteractEvent.DOWN_ACTION));
   }
 
   void upAction([InputEvent event = null, bool submit = true]) {
-    children.where((c) => (c is MButton && (c as MButton).inheritUpAction) || c is IMdButtonComponent).forEach((child) {
+    children.where((c) => (c is MButton && (c as MButton).inheritUpAction)).forEach((child) {
       (child as MButton).upAction(event);
+    });
+    children.where((c) => c is IMdButtonComponent).forEach((child) {
+      (child as IMdButtonComponent).upAction(event);
     });
     if (submit) {
       this.submit();

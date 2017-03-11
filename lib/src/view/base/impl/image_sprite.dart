@@ -1,6 +1,7 @@
 part of rockdot_commons;
 
 class ImageSprite extends BoxSprite {
+  bool loaded = false;
   Bitmap _image;
   BitmapData _bitmapData;
 
@@ -20,6 +21,7 @@ class ImageSprite extends BoxSprite {
   }
 
   void setBitmapData(BitmapData bitmapData) {
+    loaded = true;
     this.bitmapData = bitmapData;
   }
 
@@ -29,6 +31,7 @@ class ImageSprite extends BoxSprite {
     _href = href;
     var opts = new BitmapDataLoadOptions();
     opts.corsEnabled = true;
+    loaded = false;
     BitmapData.load(_href, opts).then(setBitmapData).catchError(onIoError);
   }
 
@@ -40,12 +43,16 @@ class ImageSprite extends BoxSprite {
     num scale;
     scale = w / _bitmapData.width;
     _image.scaleX = _image.scaleY = scale;
+    spanWidth = width;
+    spanHeight = height;
   }
 
   void scaleToHeight(num h) {
     num scale;
     scale = h / _bitmapData.height;
     _image.scaleX = _image.scaleY = scale;
+    spanWidth = width;
+    spanHeight = height;
   }
 
   @override

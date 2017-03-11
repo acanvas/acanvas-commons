@@ -22,10 +22,10 @@ class RdSignal extends Event {
   }
 
   void listen() {
-    eventBus.addEventListener(type, (e) => _callback());
+    eventBus.addEventListener(type, (e) => _callback(e));
   }
 
   void unlisten() {
-    eventBus.removeEventListener(type, (e) => _callback());
+    eventBus.removeEventListener(type, (e) => _callback(e));
   }
 }

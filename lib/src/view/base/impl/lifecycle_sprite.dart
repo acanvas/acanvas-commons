@@ -45,12 +45,11 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
     dispatchEvent(new LifecycleEvent(LifecycleEvent.INIT_COMPLETE));
   }
 
-  Future<bool> load({Map params: null}) async {
+  Future load({Map params: null}) async {
     if (requiresLoading) {
       throw new StateError("You cannot invoke LifecycleSprite.load() directly. Override it.");
     } else {
       onLoadComplete();
-      return true;
     }
   }
 

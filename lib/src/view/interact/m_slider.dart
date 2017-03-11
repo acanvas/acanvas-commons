@@ -3,7 +3,7 @@ part of rockdot_commons;
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
-abstract class MSlider extends EventDispatcher {
+abstract class MSlider {
   Timer _materializeControl;
 
   bool _horizontalScrollBehavior = false;
@@ -243,4 +243,11 @@ abstract class MSlider extends EventDispatcher {
   }
 
   bool get touching => _touching;
+
+  StreamSubscription<T> addEventListener<T extends Event>(String eventType, EventListener<T> eventListener,
+      {bool useCapture: false, int priority: 0});
+
+  void removeEventListener<T extends Event>(String eventType, EventListener<T> eventListener, {bool useCapture: false});
+
+  void dispatchEvent(Event event);
 }

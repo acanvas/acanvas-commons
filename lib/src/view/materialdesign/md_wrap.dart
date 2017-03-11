@@ -49,9 +49,9 @@ class MdWrap extends BoxSprite {
     panelSprite.x = 0;
     panelSprite.y = 0;
 
-    _title.x = padding;
-    _title.y = padding;
-    _title.width = spanWidth - 2 * padding;
+    _title.x = 20;
+    _title.y = 20;
+    _title.width = spanWidth - 40;
 
     int marginTop = MdDimensions.HEIGHT_APP_BAR;
 

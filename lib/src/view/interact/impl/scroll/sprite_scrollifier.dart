@@ -3,7 +3,7 @@ part of rockdot_commons;
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
-class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
+class SpriteScrollifier extends BehaveSprite with MSlider, MScroll {
   //Sprites
   BoxSprite _view;
 
@@ -190,6 +190,8 @@ class SpriteScrollifier extends BehaveSprite with MScroll, MSlider {
 
     if (_hScrollbar.enabled || _vScrollbar.enabled) {
       mouseWheelEnabled = true;
+    } else {
+      mouseWheelEnabled = false;
     }
 
     _updateThumbs();

@@ -1,5 +1,11 @@
 # CHANGELOG ROCKDOT_COMMONS
 
+## 0.9.9 2017-03-11
+
+- Fixed Wrap component default behavior
+- Fixed refresh bug in Flow component
+- Fixed Scroll component refresh bug
+
 ## 0.9.8 2017-02-16
 
 - Strong mode fixes

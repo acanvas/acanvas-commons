@@ -21,6 +21,9 @@ abstract class IEventBus implements EventDispatcher {
       {bool useCapture: false, int priority: 0});
 
   @override
+  void removeEventListener<T extends Event>(String eventType, EventListener<T> eventListener, {bool useCapture: false});
+
+  @override
   void dispatchEvent(Event event);
 
   @override
@@ -28,9 +31,6 @@ abstract class IEventBus implements EventDispatcher {
 
   @override
   EventStream<T> on<T extends Event>(String eventType);
-
-  @override
-  void removeEventListener<T extends Event>(String eventType, EventListener<T> eventListener, {bool useCapture: false});
 
   @override
   void removeEventListeners(String eventType);

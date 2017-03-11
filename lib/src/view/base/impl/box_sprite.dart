@@ -33,12 +33,14 @@ class BoxSprite extends Sprite3D with MBox {
     if (autoSpan) {
       span(width, height, refresh: false);
     }
+    /*
     if (this is MFlow) {
       logger.debug("${this}: ${spanWidth}x${spanHeight}  ${width}x${height}");
       children.forEach((c) {
         logger.debug("--${c}: ${c.width}x${c.height} x:${c.x} y:${c.y}");
       });
     }
+    */
   }
 
   @override
