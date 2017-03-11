@@ -23,5 +23,5 @@ abstract class ICommand {
   /**
    * Executes the command.
    */
-  void execute([Event event = null]);
+  void execute([RdSignal event = null]);
 }
