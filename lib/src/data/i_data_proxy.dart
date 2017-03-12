@@ -8,7 +8,7 @@ abstract class IDataProxy {
 
   List get dataCache;
 
-  void set dataRetrieveCommandVO(IRdVO dataRetrieveCommandVO);
+  void set dataRetrieveCommandVO(covariant IRdVO dataRetrieveCommandVO);
 
   IRdVO get dataRetrieveCommandVO;
 
