@@ -244,10 +244,10 @@ abstract class MSlider {
 
   bool get touching => _touching;
 
-  StreamSubscription<Event> addEventListener<T>( String eventType, EventListener<T> eventListener,
+  StreamSubscription<T> addEventListener<T extends Event>( String eventType, EventListener<T> eventListener,
       { bool useCapture: false, int priority: 0 });
 
-  void removeEventListener<T>(String eventType, EventListener<T> eventListener, { bool useCapture: false });
+  void removeEventListener<T extends Event>(String eventType, EventListener<T> eventListener, { bool useCapture: false });
 
   void dispatchEvent(Event event);
 }

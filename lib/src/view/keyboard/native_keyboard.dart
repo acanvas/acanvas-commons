@@ -11,51 +11,108 @@ class NativeKeyboard extends BoxSprite {
   String fontName;
   bool password;
   bool multiline;
-  String text;
+  String text = "";
+  String label = "";
 
   /* The color to be used by active indicators (line, box, floating label) */
   int _highlightColor;
 
-  html.InputElement _htmlElement;
-  HtmlObject _htmlTextField;
+  html.InputElement _htmlInputElement;
+  html.TextAreaElement _htmlTextAreaElement;
+  HtmlObject _htmlSprite;
   StreamSubscription _onKeyDownSubscriber;
 
-  NativeKeyboard(this.text,
+  NativeKeyboard(this.text, this.label,
       {this.fontSize: 14,
       this.textColor: MdColor.BLACK,
       this.fontName: DEFAULT_FONT,
       this.multiline: false,
-      this.rows: 1,
+      this.rows: 3,
       this.password: false})
       : super() {}
 
-  void createKeyboard() {
-    _htmlElement = new html.InputElement();
-    _htmlElement.value = text;
-    _htmlElement.size = 80;
-    _htmlElement.style.fontSize = fontSize.toString();
-    _htmlElement.style.font = fontName;
+  void refresh(){
+    super.refresh();
 
-    _onKeyDownSubscriber = _htmlElement.onKeyDown.listen((e) {
+    if(_htmlTextAreaElement != null){
+      _htmlTextAreaElement.style.width = "${spanWidth}px";
+     // _htmlTextAreaElement.style.height = "${spanHeight}px";
+    }
+
+    else if(_htmlInputElement != null){
+      _htmlInputElement.style.width = "${spanWidth}px";
+      //_htmlInputElement.style.height = "${spanHeight}px";
+    }
+  }
+
+  void createKeyboard() {
+
+    html.HtmlElement htmlElement;
+
+    if(multiline){
+      _htmlTextAreaElement = new html.TextAreaElement();
+      _htmlTextAreaElement.rows = rows;
+      if(text == ""){
+        _htmlTextAreaElement.placeholder = label;
+      }
+      else{
+        _htmlTextAreaElement.value = text;
+      }
+      htmlElement = _htmlTextAreaElement;
+    }
+    else{
+      _htmlInputElement = new html.InputElement();
+      _htmlInputElement.size = 60;
+      if(text == ""){
+        _htmlInputElement.placeholder = label;
+      }
+      else{
+        _htmlInputElement.value = text;
+      }
+      htmlElement = _htmlInputElement;
+    }
+
+    htmlElement.style.fontSize = fontSize.toString();
+    htmlElement.style.font = fontName;
+    //_htmlElement.value = text;
+
+    _onKeyDownSubscriber = htmlElement.onKeyUp.listen((e) {
       dispatchEvent(new KeyEvent(KeyEvent.KEY_UP_VISIBLE, e.keyCode, new String.fromCharCode(e.keyCode)));
     });
 
-    html.querySelector('body').append(_htmlElement);
-    _htmlElement.focus();
+    html.querySelector('body').append(htmlElement);
+    htmlElement.focus();
 
-    _htmlTextField = new HtmlObject(_htmlElement);
-    _htmlTextField.visible = true;
+    _htmlSprite = new HtmlObject(htmlElement);
+    _htmlSprite.visible = true;
 
-    addChild(_htmlTextField);
+    addChild(_htmlSprite);
   }
 
-  String get value => _htmlElement.value;
+  String get value {
+    if(_htmlInputElement != null){
+      return _htmlInputElement.value;
+    }
+    else if(_htmlTextAreaElement != null){
+      return _htmlTextAreaElement.value;
+    }
+    else {
+      return "";
+    }
+  }
 
   @override
   void dispose({bool removeSelf: true}) {
-    removeChild(_htmlTextField);
+    removeChild(_htmlSprite);
     _onKeyDownSubscriber.cancel();
-    _htmlElement.remove();
-    _htmlElement = null;
+    _htmlInputElement?.remove();
+    _htmlTextAreaElement?.remove();
+    _htmlInputElement = null;
+  }
+
+  void setWidth(num spanWidth) {
+    if(_htmlTextAreaElement != null){
+      _htmlTextAreaElement.cols = spanWidth;
+    }
   }
 }

@@ -1,5 +1,11 @@
 # CHANGELOG ROCKDOT_COMMONS
 
+## 0.9.10 2017-03-23
+
+- Fixed Native Keyboard workarounds
+- Updated listeners to reflect changes in StageXL
+- Updated .analysis_options
+
 ## 0.9.9 2017-03-11
 
 - Fixed Wrap component default behavior

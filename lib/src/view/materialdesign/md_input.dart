@@ -9,7 +9,10 @@ class MdInput extends BoxSprite {
   bool floating;
   bool keyboard;
   bool password;
+  bool multiline;
   String required;
+  int rows;
+  String fontName;
 
   /* The color to be used by active indicators (line, box, floating label) */
   int _highlightColor;
@@ -33,12 +36,16 @@ class MdInput extends BoxSprite {
 
   bool KEYBOARD_NATIVE = true;
 
-  MdInput(String text,
+  String label = "";
+
+  StreamSubscription<Event> _enterFrameListener;
+
+  MdInput(this.label,
       {this.fontSize: 14,
       this.textColor: MdColor.BLACK,
-      String fontName: DEFAULT_FONT,
-      bool multiline: false,
-      int rows: 1,
+      this.fontName: DEFAULT_FONT,
+      this.multiline: false,
+      this.rows: 3,
       this.floating: false,
       this.required: "",
       this.keyboard: false,
@@ -53,7 +60,7 @@ class MdInput extends BoxSprite {
       KEYBOARD_NATIVE = false;
     }
 
-    _defaultTextField = new UITextField(text, new TextFormat(fontName, fontSize, MdColor.GREY_DARK));
+    _defaultTextField = new UITextField(label, new TextFormat(fontName, fontSize, MdColor.GREY_DARK));
     addChild(_defaultTextField);
 
     /* if Mandatory Textfield */
@@ -129,8 +136,9 @@ class MdInput extends BoxSprite {
     }
 
     if (_nativeKeyboard != null) {
-      _nativeKeyboard.x = _inputTextField.x + int.parse(html.querySelector('body').style.top, onError: (e) => 0);
-      _nativeKeyboard.y = _inputTextField.y;
+    //  _nativeKeyboard.x = _inputTextField.x + int.parse(html.querySelector('body').style.left, onError: (e) => 0);
+    //  _nativeKeyboard.y = _inputTextField.y + int.parse(html.querySelector('body').style.top, onError: (e) => 0);
+      _nativeKeyboard.span(spanWidth, spanHeight);
     }
 
     super.refresh();
@@ -139,7 +147,8 @@ class MdInput extends BoxSprite {
 
   /* User clicks into TextField */
   void mouseDownAction([InputEvent event = null]) {
-    Rd.MATERIALIZE_REQUIRED = true;
+
+    _enterFrameListener = addEventListener(Event.ENTER_FRAME, (e) => Rd.MATERIALIZE_REQUIRED = true);
 
     /* Animate active line */
     if (_activeLine.alpha == 0) {
@@ -197,7 +206,8 @@ class MdInput extends BoxSprite {
     if (event.target is! UITextFieldInput && event.target is! MdInput) {
       Rd.STAGE.focus = null;
     } else {
-      Rd.MATERIALIZE_REQUIRED = false;
+      _enterFrameListener.cancel();
+      _enterFrameListener = null;
     }
     if (Rd.TOUCH) {
       Rd.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
@@ -318,7 +328,7 @@ class MdInput extends BoxSprite {
         softKeyboardDownAction(e.charCode);
       });
     } else {
-      _nativeKeyboard = new NativeKeyboard(_inputTextField.text);
+      _nativeKeyboard = new NativeKeyboard(_inputTextField.text, label, multiline: multiline, rows: rows, fontSize: fontSize, fontName: fontName);
       _nativeKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
         softKeyboardInputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
         _inputTextField.text = _nativeKeyboard.value;
@@ -327,6 +337,7 @@ class MdInput extends BoxSprite {
       _nativeKeyboard.x = _inputTextField.x;
       _nativeKeyboard.y = _inputTextField.y;
       _nativeKeyboard.createKeyboard();
+      _nativeKeyboard.span(spanWidth, spanHeight);
     }
   }
 

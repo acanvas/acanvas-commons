@@ -1,2 +1,6 @@
 analyzer:
   strong-mode: true
+  exclude:
+    - lib/src/lang/class_utils.dart
+    - lib/src/view/effect/hflip_transition.dart
+    - lib/src/view/experimental/video/**

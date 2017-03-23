@@ -127,7 +127,7 @@ class PageFlip {
 
     // default points array
     // cPoints -> the fliped part
-    List<Point<num>> cPoints = new List(4);
+    List<Point<num>> cPoints = [new Point(0,0), new Point(0,0), new Point(0,0), new Point(0,0)];
     // pPoints -> the fixed part
     List<Point<num>> pPoints = [new Point(0, 0), new Point(pw, 0), null, null, new Point(0, ph)];
 
