@@ -3,6 +3,7 @@ part of rockdot_commons;
 class MdTabs extends BoxSprite {
   int bgColor;
   int highlightColor;
+  int strokeColor;
   bool distributeTabs;
 
   Sprite _bg;
@@ -12,7 +13,7 @@ class MdTabs extends BoxSprite {
 
   int _activeButtonIndex = 0;
 
-  MdTabs({this.highlightColor: MdColor.WHITE, this.bgColor: MdColor.BLACK, this.distributeTabs: true}) : super() {
+  MdTabs({this.highlightColor: MdColor.WHITE, this.strokeColor: MdColor.WHITE,  this.bgColor: MdColor.BLACK, this.distributeTabs: true}) : super() {
     _bg = new Sprite();
     addChild(_bg);
 
@@ -63,7 +64,7 @@ class MdTabs extends BoxSprite {
       tabBox.y = spanHeight - tabBox.height;
 
       RdGraphics.line((tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0,
-          strength: 2, sprite: _slideBar, color: highlightColor);
+          strength: 2, sprite: _slideBar, color: strokeColor);
 
       _slideBar.x = tabBox.getChildAt(_activeButtonIndex).x;
       _slideBar.y = spanHeight - 1;

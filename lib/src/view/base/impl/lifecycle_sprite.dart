@@ -26,7 +26,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   init({Map<String, String> params: null}) {
     this.params = params;
     if (spanHeight == 0 || spanWidth == 0) {
-      logger.warn(
+      Rd.log.warning(
           "You really should set LifecycleSprite.spanWidth and LifecycleSprite.spanHeight properties before invoking LifecycleSprite.init().");
     }
   }

@@ -10,6 +10,7 @@ class BehaveSprite extends BoxSprite with MBehave {
     children.where((c) => (c is MBehave && (c as MBehave).inheritEnabled)).forEach((child) {
       (child as MBehave).enable();
     });
+    super.enable();
   }
 
   @override

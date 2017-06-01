@@ -8,7 +8,7 @@ import 'dart:js' as js;
 /* Rockdot Commons depend on StageXL, especially its Event system */
 import 'package:stagexl/stagexl.dart';
 /* required by Logger */
-import 'package:logging/logging.dart' as logging;
+import 'package:logging/logging.dart';
 
 //async
 part 'src/async/operation/impl/abstract_operation.dart';
@@ -49,7 +49,7 @@ part 'src/lang/i_ordered.dart';
 part 'src/lang/util/key_code.dart';
 part 'src/lang/util/numeric_stepper.dart';
 //logging
-part 'src/logging/logger.dart';
+//part 'src/logging/logger.dart';
 //mirror
 part 'src/mirror/retain.dart';
 //util

@@ -2,14 +2,19 @@ part of rockdot_commons;
 
 class Rd {
   /* internals */
+  Logger _logger;
   Stage _stage;
   static final Rd _singleton = new Rd._internal();
 
-  Rd._internal() {}
+  Rd._internal() {
+    _logger = new Logger('Rd');
+  }
 
   factory Rd() {
     return _singleton;
   }
+
+  static Logger get log => _singleton._logger;
 
   static bool get FIREFOX {
     return html.window.navigator.userAgent.toLowerCase().contains(new RegExp('firefox'));

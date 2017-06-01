@@ -109,6 +109,6 @@ class ImageSprite extends BoxSprite {
   }
 
   void onIoError(Error e) {
-    this.logger.debug("IO error occured while loading image");
+    Rd.log.warning("IO error occured while loading image");
   }
 }

@@ -281,7 +281,8 @@ class Scrollbar extends Slider with MPagedScroll {
     //value = value == 0 ? value +1 : value;
 
     if (valueMax - valueMin == 0) {
-      throw new StateError("bo");
+      return;
+      //throw new StateError("bo");
     }
 
     pos = ((value - valueMin) / (valueMax - valueMin) * maxPos).round();

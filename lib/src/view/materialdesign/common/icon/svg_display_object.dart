@@ -4,21 +4,13 @@ class SvgDisplayObject extends DisplayObject {
   RenderTexture _renderTexture;
   RenderTextureQuad _renderTextureQuad;
 
-  String svg;
+  SvgDisplayObject(String svg, {int width = 24, int height = 24}) {
+    String svgUrl = "data:image/svg+xml;base64,${html.window.btoa(svg)}";
 
-  SvgDisplayObject(this.svg) {
-    if (Rd.FIREFOX) {
-      //_firefox(html.window.btoa(svg));
-      _allOthers("data:image/svg+xml;base64,${html.window.btoa(svg)}");
-    } else {
-      _allOthers("data:image/svg+xml;base64,${html.window.btoa(svg)}");
-//    _allOthers("data:image/svg+xml;charset=utf-8,$svg");
-    }
-  }
-
-  void _allOthers(String svgUrl) {
     var imageElement = new html.ImageElement();
     imageElement.src = svgUrl;
+    imageElement.width = width;
+    imageElement.height = height;
     imageElement.onLoad.listen((c) {
       _renderTexture = new RenderTexture.fromImageElement(imageElement);
       _renderTexture
@@ -26,9 +18,14 @@ class SvgDisplayObject extends DisplayObject {
       _renderTextureQuad = _renderTexture.quad;
       html.Url.revokeObjectUrl(svgUrl);
     });
+
   }
 
+
   /*
+
+  "data:image/svg+xml;charset=utf-8,$svg"
+
   void _firefox(String svgUrl) {
     var blob = new html.Blob([svgUrl], "image/svg+xml;base64");
     var url = html.Url.createObjectUrlFromBlob(blob);
