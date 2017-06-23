@@ -34,7 +34,7 @@ class Rd {
   }
 
   static bool get TOUCH {
-    return html.TouchEvent.supported;
+    return MOBILE; //html.TouchEvent.supported; <-- always returns true in SDK 1.24.1
   }
 
   static bool get WEBGL {

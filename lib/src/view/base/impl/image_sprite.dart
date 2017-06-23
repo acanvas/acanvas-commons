@@ -57,6 +57,9 @@ class ImageSprite extends BoxSprite {
 
   @override
   void refresh() {
+
+    super.refresh();
+
     if (spanWidth == 0 || spanHeight == 0 || _image == null) {
       return;
     }
@@ -105,7 +108,6 @@ class ImageSprite extends BoxSprite {
 
     mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)..relativeToParent = true;
 
-    super.refresh();
   }
 
   void onIoError(Error e) {

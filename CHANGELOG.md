@@ -1,5 +1,10 @@
 # CHANGELOG ROCKDOT_COMMONS
 
+## 0.9.12 2017-06-23
+
+- Workaround for bug with html.TouchEvent.supported in SDK 1.24.1
+- HiDPI now also supported for SVGs
+
 ## 0.9.11 2017-06-01
 
 - Improved Logger performance

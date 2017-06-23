@@ -1,5 +1,5 @@
 name: rockdot_commons
-version: 0.9.11
+version: 0.9.12
 description: Rockdot Commons consist of a port of as3commons and highly customizable View Components, including a Material Design implementation
 dependencies:
   logging: any
