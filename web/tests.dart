@@ -5,48 +5,46 @@ import 'package:rockdot_commons/rockdot_commons.dart';
 Stage stage;
 
 void main() {
+
   var opts = new StageOptions();
-  opts.renderEngine = RenderEngine.Canvas2D;
+  opts.maxPixelRatio = 3.0;
+  opts.renderEngine = RenderEngine.WebGL;
   opts.backgroundColor = 0xFFf9f9f9;
   opts.stageScaleMode = StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
+  opts.inputEventMode = InputEventMode.MouseAndTouch;
 
   stage = new Stage(html.querySelector('#stage') as html.CanvasElement, options: opts);
+  Rd.STAGE = stage;
 
   new RenderLoop()..addStage(stage);
 
-  BookSampleAssets.load(start);
+  start();
 }
 
 void start() {
-  List<int> colors = [0x33FF0000, 0x3300FF00, 0x330000FF];
 
-  Sprite s = new Sprite();
-  stage.addChild(s);
+  Button p = new Button();
+  stage.addChild(p);
 
-  var bmd = new BitmapData(700, 30, colors[0]);
+  Sprite c = new Sprite();
+  c.graphics
+    ..rect(0, 0, 200, 100)
+    ..fillColor(Color.Red);
+  c.mask = new Mask.circle(100, 50, 50);
+  c.addTo(p);
 
-  for (int i = 0; i < 18; i++) {
-    var m = new Matrix.fromIdentity();
-    m.createBox(1, 1 / (i / 5));
-    var pat = new GraphicsPattern.noRepeat(bmd.renderTextureQuad, m);
+  p.enable();
 
-    s.graphics.beginPath();
-    s.graphics.moveTo(i * 20, 0);
-    s.graphics.lineTo(i * 20 + 20, 0);
-    s.graphics.lineTo(i * 20 + 20, 20);
-    s.graphics.lineTo(i * 20, 0);
-    s.graphics.closePath();
+/*
+  p.filters = [new ColorMatrixFilter.grayscale()];
+*/
 
-    s.graphics.fillPattern(pat);
+  //this is always true in SDK 1.24.1 on Dartium:
+  print("html.TouchEvent.supported: ${html.TouchEvent.supported}");
 
-    s.graphics.beginPath();
-    s.graphics.moveTo(i * 20, 0);
-    s.graphics.lineTo(i * 20 + 20, 20);
-    s.graphics.lineTo(i * 20, 20);
-    s.graphics.lineTo(i * 20, 0);
-    s.graphics.closePath();
+}
 
-    s.graphics.fillPattern(pat);
-  }
+void _onMouse(Event event) {
+  print("MouseEvent: ${event.type}");
 }

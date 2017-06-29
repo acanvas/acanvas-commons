@@ -25,6 +25,10 @@ class Rd {
         .contains(new RegExp('Android|OPiOS|CriOS|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini'));
   }
 
+  static bool get IOS {
+    return html.window.navigator.userAgent.contains(new RegExp('iOS|iPhone|iPad|iPod'));
+  }
+
   static bool get CHROME_IOS {
     return html.window.navigator.userAgent.contains(new RegExp('CriOS'));
   }

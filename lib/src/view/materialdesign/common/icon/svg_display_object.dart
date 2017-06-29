@@ -5,7 +5,7 @@ class SvgDisplayObject extends DisplayObject {
   RenderTextureQuad _renderTextureQuad;
 
   SvgDisplayObject(String svg, {int width = 24, int height = 24}) {
-    _working(svg, width, height);
+    _workaround(svg, width, height);
 
   }
 
