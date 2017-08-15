@@ -99,8 +99,13 @@ part 'src/view/interact/impl/button/selectable_button.dart';
 part 'src/view/interact/impl/button/radio_group.dart';
 
 part 'src/view/interact/impl/list/list_sprite.dart';
-part 'src/view/interact/impl/list/pager_sprite.dart';
 part 'src/view/interact/impl/list/dropdown.dart';
+
+part 'src/view/interact/impl/paging/abstract_photo_pager.dart';
+part 'src/view/interact/impl/paging/abstract_polaroid_pager.dart';
+part 'src/view/interact/impl/paging/pager_prev_next_button.dart';
+part 'src/view/interact/impl/paging/pager_sprite.dart';
+part 'src/view/interact/impl/paging/polaroid_item_button.dart';
 
 part 'src/view/interact/impl/scroll/scrollbar.dart';
 part 'src/view/interact/impl/scroll/default_scrollbar.dart';

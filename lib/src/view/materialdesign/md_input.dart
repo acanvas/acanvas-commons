@@ -1,6 +1,6 @@
 part of rockdot_commons;
 
-class MdInput extends BoxSprite {
+class MdInput extends BehaveSprite {
   static const DEFAULT_FONT = "Roboto, Helvetica, Arial";
 
   /* Parameters */
@@ -115,6 +115,28 @@ class MdInput extends BoxSprite {
     addEventListener(KeyboardEvent.KEY_UP, keyUpAction);
   }
 
+  @override
+  void enable() {
+    if (_enabled) return;
+
+    if (alpha == 0.6) alpha = 1;
+    filters = [];
+    mouseChildren = true;
+
+    super.enable();
+  }
+
+  @override
+  void disable() {
+    if (!_enabled) return;
+
+    if (alpha == 1.0) alpha = .6;
+    filters = [new ColorMatrixFilter.grayscale()];
+    mouseChildren = false;
+
+    super.disable();
+  }
+
   /*
    * Redraws and adjusts lines and textfield widths
    */
@@ -176,10 +198,7 @@ class MdInput extends BoxSprite {
     }
 
     /* If this textfield is mandatory, make explanatory text red */
-    if (required != "") {
-      _requiredTextField.color = MdColor.RED;
-      Rd.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
-    }
+   validate();
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
     Rd.STAGE.focus = _inputTextField;
@@ -194,6 +213,15 @@ class MdInput extends BoxSprite {
     } else {
       Rd.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
+  }
+
+  bool validate(){
+    if (required != "") {
+      _requiredTextField.color = MdColor.RED;
+      Rd.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -361,5 +389,9 @@ class MdInput extends BoxSprite {
 
   String getText() {
     return _inputTextField.text;
+  }
+
+  void setText(String txt) {
+    _inputTextField.text = txt;
   }
 }

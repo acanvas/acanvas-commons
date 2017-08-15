@@ -88,13 +88,20 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   @override
   void addChild(DisplayObject child) {
     super.addChild(child);
-    if (child is MLifecycle && !(child as MLifecycle).initialized && (child as MLifecycle).inheritInit && initialized) {
-      if (spanWidth > 0 && spanHeight > 0) {
-        if ((child as MBox).inheritSpan) {
-          (child as MBox).span(spanWidth, spanHeight, refresh: false);
-        }
-        (child as MLifecycle).init();
+
+    child.x = padding;
+    child.y = padding;
+
+    if (child is MBox &&  (child as MBox).inheritSpan) {
+      int csw = (spanWidth - 2 * padding).round();
+      int csh = (spanHeight - 2 * padding).round();
+      if (csw > 0 && csh > 0) {
+        (child as MBox).span(csw, csh, refresh: false);
       }
+    }
+
+    if (child is MLifecycle && !(child as MLifecycle).initialized && (child as MLifecycle).inheritInit && initialized) {
+        (child as MLifecycle).init();
     }
   }
 }
