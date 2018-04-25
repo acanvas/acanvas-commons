@@ -4,7 +4,6 @@ import 'package:rockdot_commons/rockdot_commons.dart';
 import 'package:stagexl/stagexl.dart';
 
 Stage stage;
-Sprite _container;
 
 Future main() async {
   var opts = new StageOptions();

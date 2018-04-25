@@ -309,11 +309,11 @@ class Page extends LifecycleSprite {
    */
   void setBook(PageManager value) {
     if (value == null) {
-      this._book.removeEventListener(BookEvent.CONTENT_CHANGED, this.changeIndex);
+      this._book.removeEventListener<BookEvent>(BookEvent.CONTENT_CHANGED, this.changeIndex);
       this._book = null;
     } else if (this._book != value && value is BookView) {
       this._book = (value);
-      this._book.addEventListener(BookEvent.CONTENT_CHANGED, this.changeIndex);
+      this._book.addEventListener<BookEvent>(BookEvent.CONTENT_CHANGED, this.changeIndex);
     }
   }
 

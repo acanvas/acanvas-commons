@@ -153,7 +153,7 @@ class PageFlip {
     if (dy == 0) theta = 0;
 
     // another fliped angle
-    num beta = PI / 2 - theta;
+    num beta = pi / 2 - theta;
     num hyp = (pw - cPoints[0].x) / cos(beta);
 
     // vhyp is the hypotenuse of the fliped part
@@ -209,8 +209,8 @@ class PageFlip {
     num gama = theta;
 
     if (pt.y == 0) gama = -gama;
-    if (pt.x == 0) gama = PI + PI - gama;
-    if (!ish) gama = PI - gama;
+    if (pt.x == 0) gama = pi + pi - gama;
+    if (!ish) gama = pi - gama;
 
     mat.a = cos(gama);
     mat.b = sin(gama);

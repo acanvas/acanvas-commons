@@ -8,3 +8,4 @@ pubspec.lock
 .project
 .packages
 .pub/
+.dart_tool/

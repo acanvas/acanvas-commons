@@ -81,11 +81,11 @@ class PagerSprite extends BehaveSprite with MList, MPager {
     List<int> chunks = [];
     chunksPlaced.forEach((int c) => chunks.add(c));
 
-    //yes, calling pop twice is correct
 
-    int checkNum = chunks.removeLast();
+    //yes, calling removeLast twice is correct
+    chunks.removeLast();
     if (chunks.length > 1) {
-      checkNum = chunks.removeLast();
+      chunks.removeLast();
     }
     hasPrev = 0;
 

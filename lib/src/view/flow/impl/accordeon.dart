@@ -22,9 +22,9 @@ class Accordeon extends Flow with MDuration {
     }
   }
 
-  void _onSelectableButtonDeselected(SelectableButton cell) {
-    _startAnimation(_duration);
-  }
+  //void _onSelectableButtonDeselected(SelectableButton cell) {
+  //  _startAnimation(_duration);
+  //}
 
   void deselectAll([AccordeonButton exception = null]) {
     int n = numChildren;

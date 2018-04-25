@@ -1,6 +1,6 @@
 library rockdot_commons;
 
-import 'dart:async' show Completer, Future, Stream, StreamSubscription, Timer, Zone;
+import 'dart:async' show Completer, Future, StreamSubscription, Timer;
 import 'dart:math' hide Point, Rectangle;
 import 'dart:html' as html;
 import 'dart:js' as js;

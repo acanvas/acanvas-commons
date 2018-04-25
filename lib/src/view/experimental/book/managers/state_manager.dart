@@ -98,9 +98,9 @@ class StateManager {
     this._items.add(item);
     this._states.add(StateManager.BABY);
     // add eventlisteners:
-    item.addEventListener(LifecycleEvent.INIT_COMPLETE, this.updateState);
+    item.addEventListener<LifecycleEvent>(LifecycleEvent.INIT_COMPLETE, this.updateState);
     //item.addEventListener(LifecycleEvent.INIT_START, this.updateState);
-    item.addEventListener(LifecycleEvent.LOAD_COMPLETE, this.updateState);
+    item.addEventListener<LifecycleEvent>(LifecycleEvent.LOAD_COMPLETE, this.updateState);
   }
 
   /**

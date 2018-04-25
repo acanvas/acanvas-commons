@@ -94,7 +94,7 @@ class LoadURLOperation extends AbstractProgressOperation {
         break;
     }
 
-    dispatchCompleteEvent();
+    dispatchCompleteEvent(result);
   }
 
   @override

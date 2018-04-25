@@ -9,8 +9,8 @@ void main() {
   var opts = new StageOptions();
   opts.renderEngine = RenderEngine.Canvas2D;
   opts.backgroundColor = 0xFFf9f9f9;
-  //opts.stageScaleMode = StageScaleMode.NO_SCALE;
-  //opts.stageAlign = StageAlign.TOP_LEFT;
+  opts.stageScaleMode = StageScaleMode.NO_SCALE;
+  opts.stageAlign = StageAlign.TOP_LEFT;
   opts.inputEventMode = Rd.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
   opts.preventDefaultOnTouch = true;
   opts.preventDefaultOnWheel = true;
@@ -55,24 +55,24 @@ void start() {
 
   /*
 
-  _addToBook(new MdButtons(null));
-  _addToBook(new MdCheckboxes(null));
- // _addToBook(new MdDialogs(null));
-  _addToBook(new MdFabs(null));
-  _addToBook(new MdIconButtons(null));
-  _addToBook(new MdRadioButtons(null));
-  _addToBook(new MdTexts(null));
-  _addToBook(new MdToasts(null));
+  addSpriteAsPage(new MdButtons(null));
+  addSpriteAsPage(new MdCheckboxes(null));
+ // addSpriteAsPage(new MdDialogs(null));
+  addSpriteAsPage(new MdFabs(null));
+  addSpriteAsPage(new MdIconButtons(null));
+  addSpriteAsPage(new MdRadioButtons(null));
+  addSpriteAsPage(new MdTexts(null));
+  addSpriteAsPage(new MdToasts(null));
 
   */
 
-  book.addEventListener(LifecycleEvent.INIT_COMPLETE, onBookInit);
-  book.addEventListener(BookEvent.STATUS_CHANGED, onBookStatusChange);
-  book.addEventListener(BookEvent.PAGE_TURNED, onBookPageTurned);
+  book.addEventListener<LifecycleEvent>(LifecycleEvent.INIT_COMPLETE, onBookInit);
+  book.addEventListener<BookEvent>(BookEvent.STATUS_CHANGED, onBookStatusChange);
+  book.addEventListener<BookEvent>(BookEvent.PAGE_TURNED, onBookPageTurned);
   book.init();
 }
 
-void _addToBook(Sprite spr) {
+void addSpriteAsPage(Sprite spr) {
   if (spr is Page) {
     book.addChild(spr);
   } else {
@@ -94,9 +94,10 @@ void onBookInit(LifecycleEvent event) {
 }
 
 void onBookStatusChange(BookEvent event) {
-  // print("NEW STATUS: ${book.status}");
+   print("NEW STATUS: ${book.status} - pageRx: ${book.pageR.x}");
 }
 
+//SUPER EXPERIMENTAL: remove unneeded pages to save bandwidth
 void onBookPageTurned(BookEvent event) {
   /*
   -1, 0   --> 0,, 1, 2
@@ -118,22 +119,19 @@ void onBookPageTurned(BookEvent event) {
 */
       if (!page.initialized) {
         page.init();
-        print("init $i");
+        page.refreshFoldGradient(false);
       }
       //filter for current page and the page next to it
       if (book.currentPage - 1 <= i && i <= book.currentPage + 1) {
         if (!page.enabled) {
           page.enable();
-          print("enable $i");
         }
       } else {
         if (page.enabled) {
           page.disable();
-          print("disable $i");
         }
       }
     } else {
-      print("dispose $i");
       page.dispose(removeSelf: false);
       page.initialized = false;
     }

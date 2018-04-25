@@ -576,7 +576,7 @@ class Gradients {
    * @
    */
   Matrix createNewMatrix(Point point1, Point point2, [num rotate = Gradients.ROTATE_FULL]) {
-    rotate *= PI * 2; // convert to radians
+    rotate *= pi * 2; // convert to radians
 
     // get offset and angle:
     Point offset = this.getOffset(point1, point2);

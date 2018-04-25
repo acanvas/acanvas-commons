@@ -8,7 +8,7 @@ class BookSampleAssets {
         _singleton.mgr.getBitmapData("C_" + (i < 10 ? "0$i" : "$i") + "_768x1024Px_Vorschaufenster").clone());
   }
 
-  List assets;
+  List<String> assets;
   ResourceManager mgr = new ResourceManager();
 
   static final BookSampleAssets _singleton = new BookSampleAssets._internal();

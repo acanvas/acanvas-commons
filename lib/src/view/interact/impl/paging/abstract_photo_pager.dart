@@ -19,7 +19,7 @@ class AbstractPhotoPager extends PagerSprite {
   int maskX;
   int maskY;
 
-  Mask _imageListMask;
+  //Mask _imageListMask;
   UITextField _tfNothingFound;
   Shape _bg;
 
@@ -63,7 +63,7 @@ class AbstractPhotoPager extends PagerSprite {
     maskWidth = spanWidth - 2 * listItemSpacer;
     maskHeight = (listItemHeight + listItemSpacer) * rows - RASTER - 2 * listItemSpacer;
 
-    _imageListMask = new Mask.rectangle(listItemSpacer, 0, maskWidth, maskHeight);
+    //_imageListMask = new Mask.rectangle(listItemSpacer, 0, maskWidth, maskHeight);
     // holder.mask = _imageListMask;
 
     if (loaded == true) {

@@ -118,15 +118,16 @@ class PageManager extends LifecycleSprite {
   void init({Map<String, String> params: null}) {
     super.init(params: params);
 
+
+    super.addChild(this.pageL);
+    super.addChild(this.pageR);
+    super.addChild(this.renderSprite);
+
     this.pageL.span(spanWidth / 2, spanHeight);
     this.pageR.span(spanWidth / 2, spanHeight);
 
     this.pageL.fade = this.pageR.fade = 0;
     this.pageR.x = this.renderSprite.x = spanWidth / 2;
-
-    super.addChild(this.pageL);
-    super.addChild(this.pageR);
-    super.addChild(this.renderSprite);
 
     // if the amount of Pages is uneven, add another Page:
     if (this._pages.length % 2 == 1) {

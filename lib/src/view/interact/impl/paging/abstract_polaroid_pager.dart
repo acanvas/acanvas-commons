@@ -98,7 +98,7 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
     PolaroidItemButton otherPhoto;
     DisplayObjectContainer holder = photo.parent;
 
-    Rectangle intersectRect;
+    //Rectangle intersectRect;
     int photoIndex = holder.getChildIndex(photo);
     int dir;
 
@@ -114,7 +114,6 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
           dir = otherPhoto.x > photo.x ? 1 : -1;
 
           //yoyo tween
-          num xOriginal = otherPhoto.x;
           Rd.JUGGLER.addTween(otherPhoto, 0.3, Transition.easeInQuintic)
             ..animate.x.to(otherPhoto.xPos + dir * (photo.width / 2));
           Rd.JUGGLER.addTween(otherPhoto, 0.7, Transition.easeOutQuintic)
@@ -134,8 +133,6 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
         ..onStart = () => (photo.parent as DisplayObjectContainer)
             .swapChildren(photo, photo.parent.getChildAt(photo.parent.numChildren - 1));
       Rd.JUGGLER.add(tween);
-      //  DropShadowFilter ds = new DropShadowFilter(20, 45, 0xff000000, 15, 15);
-      //  photo.filters = [ds];
 
     } else {
       // Is on top. Do nothing.
@@ -149,9 +146,10 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
         ..animate.scaleY.to(2.7);
       Rd.JUGGLER.add(tween);
 
-      // DropShadowFilter ds = new DropShadowFilter(20, 45, 0xff000000, 15, 15);
-      // photo.filters = [ds];
     }
+
+    // DropShadowFilter ds = new DropShadowFilter(20, 45, 0xff000000, 15, 15);
+    // photo.filters = [ds];
   }
 
   void onItemDeselect(InteractEvent event) {

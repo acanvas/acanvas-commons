@@ -103,7 +103,7 @@ class Geom {
    *
    */
   static num degrees(num radians) {
-    return radians * 180 / PI;
+    return radians * 180 / pi;
   }
 
   /**
@@ -117,7 +117,7 @@ class Geom {
    *
    */
   static num radians(num degrees) {
-    return PI / 180 * degrees;
+    return pi / 180 * degrees;
   }
 
   /**
@@ -261,8 +261,8 @@ class Geom {
    */
   static List star(num radius, Point center, [num rotation = 0, int points = 5]) {
     List<Point> area = [];
-    num angle = (PI * 2) / (points * 2);
-    rotation -= PI / 2;
+    num angle = (pi * 2) / (points * 2);
+    rotation -= pi / 2;
     for (int i = 0; i < points; i++) {
       area.add(Geom.getPointFromAngle(center, rotation + angle * (i * 2), radius));
       area.add(Geom.getPointFromAngle(center, rotation + angle * (i * 2 + 1), radius / 2));

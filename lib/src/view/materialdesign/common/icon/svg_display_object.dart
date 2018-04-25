@@ -10,7 +10,7 @@ class SvgDisplayObject extends DisplayObject {
   }
 
 
-  void _working(String svg, int width, int height) {
+/*  void _working(String svg, int width, int height) {
     width *= StageXL.environment.devicePixelRatio;
     height *= StageXL.environment.devicePixelRatio;
 
@@ -29,7 +29,7 @@ class SvgDisplayObject extends DisplayObject {
           new Rectangle<int>(0, 0, width, height),
           new Rectangle<int>(0, 0, width, height), 0, StageXL.environment.devicePixelRatio);
     });
-  }
+  }*/
 
 
     void _workaround(String svg, int width, int height) {

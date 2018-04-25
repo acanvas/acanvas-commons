@@ -80,13 +80,13 @@ class InfiniteLine {
     num arcC;
     num arcA;
     if (line1.yIntersection > line2.yIntersection) {
-      arcB = (PI / 2 + line1.getAngle()).abs();
-      arcC = (PI / 2 - line2.getAngle()).abs();
+      arcB = (pi / 2 + line1.getAngle()).abs();
+      arcC = (pi / 2 - line2.getAngle()).abs();
     } else {
-      arcB = (PI / 2 - line1.getAngle()).abs();
-      arcC = (PI / 2 + line2.getAngle()).abs();
+      arcB = (pi / 2 - line1.getAngle()).abs();
+      arcC = (pi / 2 + line2.getAngle()).abs();
     }
-    arcA = PI - arcB - arcC;
+    arcA = pi - arcB - arcC;
 
     num ratio = sin(arcA) / lengthA;
     lengthB = sin(arcB) / ratio;
@@ -198,7 +198,7 @@ class InfiniteLine {
    */
   num getAngle() {
     if (this.horizontal) return 0;
-    if (this.vertical) return PI / 2;
+    if (this.vertical) return pi / 2;
     Point point1 = new Point(this.xIntersection, 0);
     Point point2 = new Point(this.xIntersection + 1, this.xCoefficient);
     return atan2(point2.y - point1.y, point2.x - point1.x);
@@ -336,7 +336,7 @@ class InfiniteLine {
       return;
     }
     if (value == true) {
-      this.yCoefficient = (this.yCoefficient >= 0) ? double.INFINITY : double.NEGATIVE_INFINITY;
+      this.yCoefficient = (this.yCoefficient >= 0) ? double.infinity : double.negativeInfinity;
     } else {
       this.yCoefficient = 1;
     }

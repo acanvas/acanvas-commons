@@ -4,7 +4,6 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
   static const int RECTANGLE = 1;
   static const int CIRCLE = 2;
 
-  num _waveMaxRadius = 150;
   num _initialOpacity = 0.25;
 
   void set opacity(num o) {
@@ -54,9 +53,6 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
       ..x = touchX
       ..y = touchY;
 
-    if (Rd.WEBGL) {
-      //inner.applyCache(-waveRadius, -waveRadius, waveRadius*2, waveRadius*2);
-    }
     inner.scaleX = 0.1;
     inner.scaleY = 0.1;
 

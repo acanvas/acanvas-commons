@@ -45,6 +45,3 @@ void start() {
 
 }
 
-void _onMouse(Event event) {
-  print("MouseEvent: ${event.type}");
-}

@@ -80,7 +80,7 @@ class ListSprite extends SpriteScrollifier with MList {
       //length of data - unsure if needed
       _cellsLoaded = numDataEntries;
       //how many cells fit into visible area?
-      int cellsInFrame = ((_horizontalFlow ? spanWidth : spanHeight) / _cellSize).ceil();
+      //int cellsInFrame = ((_horizontalFlow ? spanWidth : spanHeight) / _cellSize).ceil();
       //iterate all data
       for (i = 0; i < numDataEntries; i++) {
         /*

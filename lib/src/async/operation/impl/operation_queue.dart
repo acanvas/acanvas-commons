@@ -110,8 +110,8 @@ class OperationQueue extends AbstractProgressOperation implements IOperationQueu
    */
   void addOperationListeners(IOperation operation) {
     if (operation != null) {
-      operation.addCompleteListener(operation_completeHandler);
-      operation.addErrorListener(operation_errorHandler);
+      operation.addCompleteListener<OperationEvent>(operation_completeHandler);
+      operation.addErrorListener<OperationEvent>(operation_errorHandler);
     }
   }
 

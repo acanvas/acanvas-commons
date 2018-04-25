@@ -382,9 +382,9 @@ class BookView extends PageManager {
 
     // add event listener:
     if (Rd.MOBILE) {
-      addEventListener(TouchEvent.TOUCH_BEGIN, startPageFlip);
+      addEventListener<InputEvent>(TouchEvent.TOUCH_BEGIN, startPageFlip);
     } else {
-      addEventListener(MouseEvent.MOUSE_DOWN, startPageFlip);
+      addEventListener<InputEvent>(MouseEvent.MOUSE_DOWN, startPageFlip);
     }
   }
 
@@ -472,7 +472,7 @@ class BookView extends PageManager {
       //touchX = event.stageX;
       //touchY = event.stageY;
       updateTouchPosition(event);
-      addEventListener(TouchEvent.TOUCH_MOVE, updateTouchPosition);
+      addEventListener<InputEvent>(TouchEvent.TOUCH_MOVE, updateTouchPosition);
       print("touchX: $touchX, touchY: $touchY");
     }
 
@@ -512,9 +512,9 @@ class BookView extends PageManager {
       // switch back to flipping mode if the same page corner was picked up:
       if (lastFlippedCorner == (getCurrentCorner()) && sideFlipActive == isPageSideHit()) {
         if (Rd.MOBILE) {
-          stage.addEventListener(TouchEvent.TOUCH_END, endPageFlip);
+          stage.addEventListener<InputEvent>(TouchEvent.TOUCH_END, endPageFlip);
         } else {
-          stage.addEventListener(MouseEvent.MOUSE_UP, endPageFlip);
+          stage.addEventListener<InputEvent>(MouseEvent.MOUSE_UP, endPageFlip);
         }
         String newStatus = (hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED;
         setStatus(newStatus, true, oldPage);
@@ -593,9 +593,9 @@ class BookView extends PageManager {
     _onEnterFrameDragSubscription = Rd.JUGGLER.onElapsedTimeChange.listen((e) => dragPageCorner());
 
     if (Rd.MOBILE) {
-      stage.addEventListener(TouchEvent.TOUCH_END, endPageFlip);
+      stage.addEventListener<InputEvent>(TouchEvent.TOUCH_END, endPageFlip);
     } else {
-      stage.addEventListener(MouseEvent.MOUSE_UP, endPageFlip);
+      stage.addEventListener<InputEvent>(MouseEvent.MOUSE_UP, endPageFlip);
     }
 
     // dispatch event:

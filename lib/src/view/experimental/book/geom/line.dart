@@ -77,19 +77,19 @@ class Line extends InfiniteLine {
    */
   static Line createFromInfinite(InfiniteLine line, [num range = 100]) {
     Point point1;
-    Point point2;
+    //Point point2;
     if (!line.horizontal) {
       point1 = new Point(line.xIntersection, 0);
-      point2 = new Point(line.xIntersection + 1, line.xCoefficient);
+      //point2 = new Point(line.xIntersection + 1, line.xCoefficient);
     } else {
       point1 = new Point(0, line.yIntersection);
-      point2 = new Point(line.yCoefficient, line.yIntersection + 1);
+      //point2 = new Point(line.yCoefficient, line.yIntersection + 1);
     }
     num angle = line.getAngle();
     // calculate ends:
     Line newLine = new Line();
     newLine.a = new Point(point1.x + range * cos(angle), point1.y + range * sin(angle));
-    angle += PI;
+    angle += pi;
     newLine.b = new Point(point1.x + range * cos(angle), point1.y + range * sin(angle));
     // return value:
     return newLine;
@@ -321,9 +321,9 @@ class Line extends InfiniteLine {
     this.setXCoefficient(value);
     // reposition both ends of this Line:
     num angle = this.getAngle();
-    angle += PI;
+    angle += pi;
     this._a = new Point(xIntersect.x + dist1 * cos(angle), xIntersect.y + dist1 * sin(angle));
-    angle += PI;
+    angle += pi;
     this._b = new Point(xIntersect.x + dist2 * cos(angle), xIntersect.y + dist2 * sin(angle));
   }
 
@@ -346,9 +346,9 @@ class Line extends InfiniteLine {
     this.setYCoefficient(value);
     // reposition both ends of this Line:
     num angle = this.getAngle();
-    angle += PI;
+    angle += pi;
     this._a = new Point(xIntersect.x + dist1 * cos(angle), xIntersect.y + dist1 * sin(angle));
-    angle += PI;
+    angle += pi;
     this._b = new Point(xIntersect.x + dist2 * cos(angle), xIntersect.y + dist2 * sin(angle));
   }
 }

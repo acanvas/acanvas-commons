@@ -102,7 +102,7 @@ class MdShadow extends BoxSprite implements IMdButtonComponent {
 
   void _prepareShadowAnimation() {
     if (_shadow == null) {
-      _shadow = new DropShadowFilter(_initialDistance, PI / 2, shadowColor, _blurXY, _blurXY, QUALITY);
+      _shadow = new DropShadowFilter(_initialDistance, pi / 2, shadowColor, _blurXY, _blurXY, QUALITY);
       target != null ? target.filters = [_shadow] : filters = [_shadow];
     }
     _drawShapes(false);

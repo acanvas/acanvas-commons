@@ -1,5 +1,10 @@
 # CHANGELOG ROCKDOT_COMMONS
 
+## 0.9.13 2018-04-25
+
+- Migrated to SDK 2.0.0-dev
+- Fixed book sample
+
 ## 0.9.12 2017-06-23
 
 - Workaround for bug with html.TouchEvent.supported in SDK 1.24.1
