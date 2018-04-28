@@ -9,7 +9,7 @@ void main() {
   var opts = new StageOptions();
   opts.renderEngine = RenderEngine.Canvas2D;
   opts.backgroundColor = 0xFFf9f9f9;
-  opts.stageScaleMode = StageScaleMode.NO_SCALE;
+  //opts.stageScaleMode = StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
   opts.inputEventMode = Rd.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
   opts.preventDefaultOnTouch = true;

@@ -1,6 +1,5 @@
 # Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
 targets:
-
   $default:
     sources:
       {"exclude" : ["bin/**"]}
@@ -8,18 +7,19 @@ targets:
       build_web_compilers|entrypoint:
         generate_for:
           - web/experimental_book.dart
+          - web/material_buttons.dart
+          - web/material_input.dart
+          - web/material_radio.dart
         dev_options:
           compiler: dartdevc
           dart2js_args:
             - --enable-asserts
-            - --preview-dart-2
         release_options:
           compiler: dart2js
           dart2js_args:
-            - --preview-dart-2
             - --fast-startup
             - --minify
             - --trust-type-annotations
             # Consult https://webdev.dartlang.org/tools/dart2js#size-and-speed-options
             # before enabling the following option:
-            # - --trust-primitives
+         # - --trust-primitives

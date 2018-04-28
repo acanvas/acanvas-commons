@@ -3,10 +3,6 @@ version: 0.9.13
 description: Rockdot Commons consist of a port of as3commons and highly customizable View Components, including a Material Design implementation
 environment:
   sdk: '>=2.0.0-dev'
-web:
-  compiler:
-    release: dart2js
-    debug: dartdevc
 dependencies:
   logging: any
   stagexl: any
