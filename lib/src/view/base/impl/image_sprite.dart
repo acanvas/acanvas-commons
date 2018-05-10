@@ -57,7 +57,6 @@ class ImageSprite extends BoxSprite {
 
   @override
   void refresh() {
-
     super.refresh();
 
     if (spanWidth == 0 || spanHeight == 0 || _image == null) {
@@ -86,7 +85,8 @@ class ImageSprite extends BoxSprite {
           _image.x = 0;
           break;
         case AlignH.CENTER:
-          _image.x = (spanWidth - _image.width) / 2..floor();
+          _image.x = (spanWidth - _image.width) / 2
+            ..floor();
           break;
         case AlignH.RIGHT:
           _image.x = (spanWidth - _image.width).floor();
@@ -98,7 +98,8 @@ class ImageSprite extends BoxSprite {
           _image.y = 0;
           break;
         case AlignV.CENTER:
-          _image.y = (spanHeight - _image.height) / 2..floor();
+          _image.y = (spanHeight - _image.height) / 2
+            ..floor();
           break;
         case AlignV.BOTTOM:
           _image.y = (spanHeight - _image.height).floor();
@@ -107,7 +108,6 @@ class ImageSprite extends BoxSprite {
     }
 
     mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)..relativeToParent = false;
-
   }
 
   void onIoError(Error e) {

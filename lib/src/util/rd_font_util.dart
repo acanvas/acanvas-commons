@@ -27,7 +27,7 @@ class RdFontUtil {
       "inactive": () => completer.completeError("Error loading fonts"),
     });
 
-    webFont.callMethod("load", [webFontConfig]);
+    webFont.callMethod("load", <dynamic>[webFontConfig]);
 
     await completer.future.catchError((Error e) {
       throw ("Error while loading fonts. ${e}");

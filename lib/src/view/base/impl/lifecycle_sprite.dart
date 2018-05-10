@@ -92,7 +92,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
     child.x = padding;
     child.y = padding;
 
-    if (child is MBox &&  (child as MBox).inheritSpan) {
+    if (child is MBox && (child as MBox).inheritSpan) {
       int csw = (spanWidth - 2 * padding).round();
       int csh = (spanHeight - 2 * padding).round();
       if (csw > 0 && csh > 0) {
@@ -101,7 +101,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
     }
 
     if (child is MLifecycle && !(child as MLifecycle).initialized && (child as MLifecycle).inheritInit && initialized) {
-        (child as MLifecycle).init();
+      (child as MLifecycle).init();
     }
   }
 }

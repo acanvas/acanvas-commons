@@ -18,15 +18,15 @@ class Button extends BehaveSprite with MButton {
     super.enable();
 
     if (Rd.TOUCH) {
-      addEventListener(TouchEvent.TOUCH_END, upAction);
-      addEventListener(TouchEvent.TOUCH_BEGIN, downAction);
-      addEventListener(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
-      addEventListener(TouchEvent.TOUCH_ROLL_OUT, rollOutAction);
+      addEventListener<InputEvent>(TouchEvent.TOUCH_END, upAction);
+      addEventListener<InputEvent>(TouchEvent.TOUCH_BEGIN, downAction);
+      addEventListener<InputEvent>(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
+      addEventListener<InputEvent>(TouchEvent.TOUCH_ROLL_OUT, rollOutAction);
     } else {
-      addEventListener(MouseEvent.MOUSE_UP, upAction);
-      addEventListener(MouseEvent.MOUSE_DOWN, downAction);
-      addEventListener(MouseEvent.ROLL_OVER, rollOverAction);
-      addEventListener(MouseEvent.ROLL_OUT, rollOutAction);
+      addEventListener<InputEvent>(MouseEvent.MOUSE_UP, upAction);
+      addEventListener<InputEvent>(MouseEvent.MOUSE_DOWN, downAction);
+      addEventListener<InputEvent>(MouseEvent.ROLL_OVER, rollOverAction);
+      addEventListener<InputEvent>(MouseEvent.ROLL_OUT, rollOutAction);
     }
 
     enableAction();
@@ -45,15 +45,15 @@ class Button extends BehaveSprite with MButton {
     super.disable();
 
     if (Rd.TOUCH) {
-      removeEventListener(TouchEvent.TOUCH_END, upAction);
-      removeEventListener(TouchEvent.TOUCH_BEGIN, downAction);
-      removeEventListener(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
-      removeEventListener(TouchEvent.TOUCH_ROLL_OUT, rollOutAction);
+      removeEventListener<InputEvent>(TouchEvent.TOUCH_END, upAction);
+      removeEventListener<InputEvent>(TouchEvent.TOUCH_BEGIN, downAction);
+      removeEventListener<InputEvent>(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
+      removeEventListener<InputEvent>(TouchEvent.TOUCH_ROLL_OUT, rollOutAction);
     } else {
-      removeEventListener(MouseEvent.MOUSE_UP, upAction);
-      removeEventListener(MouseEvent.MOUSE_DOWN, downAction);
-      removeEventListener(MouseEvent.ROLL_OVER, rollOverAction);
-      removeEventListener(MouseEvent.ROLL_OUT, rollOutAction);
+      removeEventListener<InputEvent>(MouseEvent.MOUSE_UP, upAction);
+      removeEventListener<InputEvent>(MouseEvent.MOUSE_DOWN, downAction);
+      removeEventListener<InputEvent>(MouseEvent.ROLL_OVER, rollOverAction);
+      removeEventListener<InputEvent>(MouseEvent.ROLL_OUT, rollOutAction);
     }
     disableAction();
   }

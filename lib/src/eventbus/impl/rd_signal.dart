@@ -21,11 +21,11 @@ class RdSignal extends Event {
     eventBus.dispatchEvent(new RdSignal(type, _data, _callback));
   }
 
-  void listen() {
-    eventBus.addEventListener(type, (e) => _callback(e));
+  void listen<T extends Event>() {
+    eventBus.addEventListener<T>(type, (T e) => _callback(e));
   }
 
-  void unlisten() {
-    eventBus.removeEventListener(type, (e) => _callback(e));
+  void unlisten<T extends Event>() {
+    eventBus.removeEventListener<T>(type, (T e) => _callback(e));
   }
 }

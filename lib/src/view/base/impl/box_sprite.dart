@@ -1,7 +1,6 @@
 part of rockdot_commons;
 
 class BoxSprite extends Sprite3D with MBox {
-
   BoxSprite() {}
 
   @override

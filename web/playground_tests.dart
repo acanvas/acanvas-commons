@@ -5,7 +5,6 @@ import 'package:rockdot_commons/rockdot_commons.dart';
 Stage stage;
 
 void main() {
-
   var opts = new StageOptions();
   opts.maxPixelRatio = 3.0;
   opts.renderEngine = RenderEngine.WebGL;
@@ -23,25 +22,14 @@ void main() {
 }
 
 void start() {
-
-  Button p = new Button();
+  Sprite p = new Sprite();
+  p.graphics.rect(0, 0, 200, 50);
+  p.graphics.fillColor(Color.Red);
+  p.addEventListener<MouseEvent>(MouseEvent.MOUSE_DOWN, _onSubmit);
   stage.addChild(p);
-
-  Sprite c = new Sprite();
-  c.graphics
-    ..rect(0, 0, 200, 100)
-    ..fillColor(Color.Red);
-  c.mask = new Mask.circle(100, 50, 50);
-  c.addTo(p);
-
-  p.enable();
-
-/*
-  p.filters = [new ColorMatrixFilter.grayscale()];
-*/
-
-  //this is always true in SDK 1.24.1 on Dartium:
-  print("html.TouchEvent.supported: ${html.TouchEvent.supported}");
-
 }
 
+void _onSubmit(InputEvent e) {
+  //MouseEvent me = e as MouseEvent;
+  print("test: ${e.localX}");
+}

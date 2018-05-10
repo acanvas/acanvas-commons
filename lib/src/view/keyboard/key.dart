@@ -75,7 +75,7 @@ class Key extends BoxSprite {
   static final String HOVER_STATE = 'Hover';
 
   /** List of valid key states */
-  static final List AVAILABLE_STATES = [UP_STATE, DOWN_STATE, HOVER_STATE];
+  static final List<String> AVAILABLE_STATES = [UP_STATE, DOWN_STATE, HOVER_STATE];
 
   /** An identifier for regular alphanumeric character keys. */
   static final String CHARACTER_KEY = 'characterKey';

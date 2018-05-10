@@ -1,7 +1,7 @@
 part of rockdot_commons;
 
 class MdIcon {
-  static SvgDisplayObject color(String rawSvg, int color, {int size : 24}) {
+  static SvgDisplayObject color(String rawSvg, int color, {int size: 24}) {
     double r = ((color >> 16) & 0xFF) / 255;
     double g = ((color >> 8) & 0xFF) / 255;
     double b = ((color >> 0) & 0xFF) / 255;
@@ -23,7 +23,7 @@ class MdIcon {
     return new SvgDisplayObject(svg, width: size, height: size);
   }
 
-  static SvgDisplayObject inverted(String rawSvg, {int size : 24}) {
+  static SvgDisplayObject inverted(String rawSvg, {int size: 24}) {
     String svg = """
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
         <filter id="matrix-invert">
@@ -40,11 +40,11 @@ class MdIcon {
     return new SvgDisplayObject(svg, width: size, height: size);
   }
 
-  static SvgDisplayObject black(String rawSvg, {int size : 24}) {
+  static SvgDisplayObject black(String rawSvg, {int size: 24}) {
     return color(rawSvg, MdColor.BLACK, size: size);
   }
 
-  static SvgDisplayObject white(String rawSvg, {int size : 24}) {
+  static SvgDisplayObject white(String rawSvg, {int size: 24}) {
     return inverted(rawSvg, size: size);
   }
 }

@@ -31,42 +31,36 @@ class NativeKeyboard extends BoxSprite {
       this.password: false})
       : super() {}
 
-  void refresh(){
+  void refresh() {
     super.refresh();
 
-    if(_htmlTextAreaElement != null){
+    if (_htmlTextAreaElement != null) {
       _htmlTextAreaElement.style.width = "${spanWidth}px";
-     // _htmlTextAreaElement.style.height = "${spanHeight}px";
-    }
-
-    else if(_htmlInputElement != null){
+      // _htmlTextAreaElement.style.height = "${spanHeight}px";
+    } else if (_htmlInputElement != null) {
       _htmlInputElement.style.width = "${spanWidth}px";
       //_htmlInputElement.style.height = "${spanHeight}px";
     }
   }
 
   void createKeyboard() {
-
     html.HtmlElement htmlElement;
 
-    if(multiline){
+    if (multiline) {
       _htmlTextAreaElement = new html.TextAreaElement();
       _htmlTextAreaElement.rows = rows;
-      if(text == ""){
+      if (text == "") {
         _htmlTextAreaElement.placeholder = label;
-      }
-      else{
+      } else {
         _htmlTextAreaElement.value = text;
       }
       htmlElement = _htmlTextAreaElement;
-    }
-    else{
+    } else {
       _htmlInputElement = new html.InputElement();
       _htmlInputElement.size = 60;
-      if(text == ""){
+      if (text == "") {
         _htmlInputElement.placeholder = label;
-      }
-      else{
+      } else {
         _htmlInputElement.value = text;
       }
       htmlElement = _htmlInputElement;
@@ -90,13 +84,11 @@ class NativeKeyboard extends BoxSprite {
   }
 
   String get value {
-    if(_htmlInputElement != null){
+    if (_htmlInputElement != null) {
       return _htmlInputElement.value;
-    }
-    else if(_htmlTextAreaElement != null){
+    } else if (_htmlTextAreaElement != null) {
       return _htmlTextAreaElement.value;
-    }
-    else {
+    } else {
       return "";
     }
   }
@@ -111,8 +103,8 @@ class NativeKeyboard extends BoxSprite {
   }
 
   void setWidth(num spanWidth) {
-    if(_htmlTextAreaElement != null){
-      _htmlTextAreaElement.cols = spanWidth;
+    if (_htmlTextAreaElement != null) {
+      _htmlTextAreaElement.cols = spanWidth.ceil();
     }
   }
 }

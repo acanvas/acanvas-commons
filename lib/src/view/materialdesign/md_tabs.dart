@@ -13,7 +13,12 @@ class MdTabs extends BoxSprite {
 
   int _activeButtonIndex = 0;
 
-  MdTabs({this.highlightColor: MdColor.WHITE, this.strokeColor: MdColor.WHITE,  this.bgColor: MdColor.BLACK, this.distributeTabs: true}) : super() {
+  MdTabs(
+      {this.highlightColor: MdColor.WHITE,
+      this.strokeColor: MdColor.WHITE,
+      this.bgColor: MdColor.BLACK,
+      this.distributeTabs: true})
+      : super() {
     _bg = new Sprite();
     addChild(_bg);
 
@@ -28,7 +33,7 @@ class MdTabs extends BoxSprite {
 
   void addTab(Button btn) {
     btn.submitCallback = _onTabClick;
-    btn.submitCallbackParams = [btn, tabBox.numChildren];
+    btn.submitCallbackParams = <dynamic>[btn, tabBox.numChildren];
     tabBox.addChild(btn);
   }
 

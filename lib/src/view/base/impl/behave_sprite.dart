@@ -2,7 +2,7 @@ part of rockdot_commons;
 
 class BehaveSprite extends BoxSprite with MBehave {
   BehaveSprite() : super() {
-    submitCallbackParams = [this];
+    submitCallbackParams = <dynamic>[this];
   }
 
   @override

@@ -1,5 +1,7 @@
 analyzer:
-  strong-mode: true
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
   exclude:
     - lib/src/lang/class_utils.dart
     - lib/src/view/effect/hflip_transition.dart

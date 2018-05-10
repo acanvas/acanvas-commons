@@ -158,8 +158,8 @@ class MdInput extends BehaveSprite {
     }
 
     if (_nativeKeyboard != null) {
-    //  _nativeKeyboard.x = _inputTextField.x + int.parse(html.querySelector('body').style.left, onError: (e) => 0);
-    //  _nativeKeyboard.y = _inputTextField.y + int.parse(html.querySelector('body').style.top, onError: (e) => 0);
+      //  _nativeKeyboard.x = _inputTextField.x + int.parse(html.querySelector('body').style.left, onError: (e) => 0);
+      //  _nativeKeyboard.y = _inputTextField.y + int.parse(html.querySelector('body').style.top, onError: (e) => 0);
       _nativeKeyboard.span(spanWidth, spanHeight);
     }
 
@@ -169,7 +169,6 @@ class MdInput extends BehaveSprite {
 
   /* User clicks into TextField */
   void mouseDownAction([InputEvent event = null]) {
-
     _enterFrameListener = addEventListener(Event.ENTER_FRAME, (e) => Rd.MATERIALIZE_REQUIRED = true);
 
     /* Animate active line */
@@ -198,7 +197,7 @@ class MdInput extends BehaveSprite {
     }
 
     /* If this textfield is mandatory, make explanatory text red */
-   validate();
+    validate();
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
     Rd.STAGE.focus = _inputTextField;
@@ -215,7 +214,7 @@ class MdInput extends BehaveSprite {
     }
   }
 
-  bool validate(){
+  bool validate() {
     if (required != "") {
       _requiredTextField.color = MdColor.RED;
       Rd.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
@@ -356,7 +355,8 @@ class MdInput extends BehaveSprite {
         softKeyboardDownAction(e.charCode);
       });
     } else {
-      _nativeKeyboard = new NativeKeyboard(_inputTextField.text, label, multiline: multiline, rows: rows, fontSize: fontSize, fontName: fontName);
+      _nativeKeyboard = new NativeKeyboard(_inputTextField.text, label,
+          multiline: multiline, rows: rows, fontSize: fontSize, fontName: fontName);
       _nativeKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
         softKeyboardInputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
         _inputTextField.text = _nativeKeyboard.value;

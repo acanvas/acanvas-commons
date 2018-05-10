@@ -38,11 +38,11 @@ abstract class MBehave {
     _submitCallback = submitCallback;
   }
 
-  List _submitCallbackParams;
+  List<dynamic> _submitCallbackParams;
 
-  List get submitCallbackParams => _submitCallbackParams;
+  List<dynamic> get submitCallbackParams => _submitCallbackParams;
 
-  void set submitCallbackParams(List submitCallbackParams) {
+  void set submitCallbackParams(List<dynamic> submitCallbackParams) {
     _submitCallbackParams = submitCallbackParams;
   }
 

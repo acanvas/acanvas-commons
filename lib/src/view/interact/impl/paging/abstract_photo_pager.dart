@@ -60,7 +60,7 @@ class AbstractPhotoPager extends PagerSprite {
 
     super.refresh();
 
-    maskWidth = spanWidth - 2 * listItemSpacer;
+    maskWidth = (spanWidth - 2 * listItemSpacer).round();
     maskHeight = (listItemHeight + listItemSpacer) * rows - RASTER - 2 * listItemSpacer;
 
     //_imageListMask = new Mask.rectangle(listItemSpacer, 0, maskWidth, maskHeight);

@@ -1,11 +1,11 @@
 part of rockdot_commons;
 
 class AbstractPolaroidPager extends AbstractPhotoPager {
-  static const num WIDTH_BUTTON = MdDimensions.WIDTH_BUTTON_MINIMAL;
-  static const num HEIGHT_BUTTON = MdDimensions.HEIGHT_BUTTON;
+  static const int WIDTH_BUTTON = MdDimensions.WIDTH_BUTTON_MINIMAL;
+  static const int HEIGHT_BUTTON = MdDimensions.HEIGHT_BUTTON;
 
   Shape _bg;
-  List _items;
+  List<PolaroidItemButton> _items;
 
   AbstractPolaroidPager(String labelPrev, String labelNext, String labelEmpty,
       {int buttonWidth: WIDTH_BUTTON, int DATA_PAGESIZE: 100})
@@ -41,7 +41,7 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
     int currentLine = 0;
     num rot;
 
-    _items = [];
+    _items = <PolaroidItemButton>[];
     enabled = false;
     Random rand = new Random();
 
@@ -133,7 +133,6 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
         ..onStart = () => (photo.parent as DisplayObjectContainer)
             .swapChildren(photo, photo.parent.getChildAt(photo.parent.numChildren - 1));
       Rd.JUGGLER.add(tween);
-
     } else {
       // Is on top. Do nothing.
       Rd.JUGGLER.removeTweens(photo);
@@ -145,7 +144,6 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
         ..animate.scaleX.to(2.7)
         ..animate.scaleY.to(2.7);
       Rd.JUGGLER.add(tween);
-
     }
 
     // DropShadowFilter ds = new DropShadowFilter(20, 45, 0xff000000, 15, 15);

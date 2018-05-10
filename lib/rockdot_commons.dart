@@ -39,8 +39,6 @@ part 'src/eventbus/impl/rd_event_bus.dart';
 part 'src/eventbus/impl/rd_signal.dart';
 //lang
 part 'src/lang/assert.dart';
-part 'src/lang/util/ordered_utils.dart';
-//part 'src/lang/class_utils.dart';
 part 'src/lang/illegal_argument_error.dart';
 part 'src/lang/string_utils.dart';
 part 'src/lang/i_disposable.dart';
@@ -138,30 +136,6 @@ part 'src/view/keyboard/soft_keyboard.dart';
 
 //view:experimental
 part 'src/view/experimental/flick_image.dart';
-//view:book
-part 'src/view/experimental/book/book_view.dart';
-part 'src/view/experimental/book/md_sample_page.dart';
-part 'src/view/experimental/book/book_sample_assets.dart';
-part 'src/view/experimental/book/containers/super_view_stack.dart';
-part 'src/view/experimental/book/drawing/drawing_tool.dart';
-part 'src/view/experimental/book/drawing/line_style.dart';
-part 'src/view/experimental/book/flashsandy/distort_image.dart';
-part 'src/view/experimental/book/foxaweb/page_flip.dart';
-part 'src/view/experimental/book/geom/geom.dart';
-part 'src/view/experimental/book/geom/infinite_line.dart';
-part 'src/view/experimental/book/geom/line.dart';
-part 'src/view/experimental/book/geom/super_point.dart';
-part 'src/view/experimental/book/geom/super_rectangle.dart';
-part 'src/view/experimental/book/index_changed_event.dart';
-part 'src/view/experimental/book/managers/state_manager.dart';
-part 'src/view/experimental/book/utils/array_tool.dart';
-part 'src/view/experimental/book/utils/child_tool.dart';
-part 'src/view/experimental/book/utils/math_tool.dart';
-part 'src/view/experimental/book/view/book_error.dart';
-part 'src/view/experimental/book/view/book_event.dart';
-part 'src/view/experimental/book/view/gradients.dart';
-part 'src/view/experimental/book/view/page.dart';
-part 'src/view/experimental/book/view/page_manager.dart';
 //view:video
 //part 'src/view/component/video/video_controls.dart';
 //part 'src/view/component/video/video_player.dart';

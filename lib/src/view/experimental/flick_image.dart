@@ -41,7 +41,7 @@ class ComponentFlickImage extends BoxSprite {
 
         Rd.JUGGLER.addTween(child, 1)
           ..animate.x.to(child.width.toInt())
-          ..onComplete = () => Function.apply(_onTweenComplete, [child]);
+          ..onComplete = () => Function.apply(_onTweenComplete, <dynamic>[child]);
 
         if (fadeChildren) {
           for (int i = 0; i < data.numChildren; i++) {
@@ -64,7 +64,7 @@ class ComponentFlickImage extends BoxSprite {
 
         Rd.JUGGLER.addTween(child, 1)
           ..animate.x.to(-child.width.toInt())
-          ..onComplete = () => Function.apply(_onTweenComplete, [child]);
+          ..onComplete = () => Function.apply(_onTweenComplete, <dynamic>[child]);
 
         if (fadeChildren) {
           for (int i = 0; i < data.numChildren; i++) {

@@ -6,9 +6,7 @@ class SvgDisplayObject extends DisplayObject {
 
   SvgDisplayObject(String svg, {int width = 24, int height = 24}) {
     _workaround(svg, width, height);
-
   }
-
 
 /*  void _working(String svg, int width, int height) {
     width *= StageXL.environment.devicePixelRatio;
@@ -31,8 +29,7 @@ class SvgDisplayObject extends DisplayObject {
     });
   }*/
 
-
-    void _workaround(String svg, int width, int height) {
+  void _workaround(String svg, int width, int height) {
     String svgUrl = "data:image/svg+xml;base64,${html.window.btoa(svg)}";
 
     var imageElement = new html.ImageElement();
@@ -53,5 +50,4 @@ class SvgDisplayObject extends DisplayObject {
       renderState.renderTextureQuad(_renderTextureQuad);
     }
   }
-
 }

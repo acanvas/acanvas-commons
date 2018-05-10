@@ -21,10 +21,9 @@ class PolaroidItemButton extends SelectableButton {
 
     span(w, h, refresh: false);
 
-    if(_image != ""){
+    if (_image != "") {
       _image.href = href;
-    }
-    else{
+    } else {
       refresh();
     }
   }

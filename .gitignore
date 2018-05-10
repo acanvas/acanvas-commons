@@ -1,11 +1,10 @@
-build
+build/
+.pub/
+.dart_tool/
 packages
-dart_commons
 pubspec.lock
 .idea
 .DS_Store
 .settings
 .project
 .packages
-.pub/
-.dart_tool/
