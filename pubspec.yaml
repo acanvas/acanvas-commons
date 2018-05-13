@@ -1,11 +1,12 @@
 name: rockdot_commons
-version: 0.9.14
-description: Rockdot Commons consist of a port of as3commons and highly customizable View Components, including a Material Design implementation
+version: 0.10.0
+description: A port of as3commons, plus highly customizable View Components and a Material Design implementation
 environment:
   sdk: '>=2.0.0-dev.54 <2.0.0'
 dependencies:
   logging: any
-  stagexl: any
+  stagexl:
+    git: https://github.com/bp74/StageXL/
 dev_dependencies:
   #-------- Dart 2.0.0-dev.54 --------
   build_runner: ^0.8.8

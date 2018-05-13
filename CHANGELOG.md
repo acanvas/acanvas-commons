@@ -1,8 +1,9 @@
 # CHANGELOG ROCKDOT_COMMONS
 
-## 0.9.14 2018-05-10
+## 0.10.0 2018-05-13
 
 - sdk requirement: '>=2.0.0-dev.54 <2.0.0'
+- refined analysis and build options
 - moved book sample into own project: <https://github.com/nilsdoehring/dartbook>
 
 ## 0.9.13 2018-04-25
