@@ -1,5 +1,5 @@
 name: rockdot_commons
-version: 0.10.0
+version: 0.10.0-dev
 description: A port of as3commons, plus highly customizable View Components and a Material Design implementation
 environment:
   sdk: '>=2.0.0-dev.54 <2.0.0'
