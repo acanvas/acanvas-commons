@@ -6,6 +6,8 @@ Rockdot Commons consist of
 * Port of [AS3 Commons](http://www.as3commons.org/) projects to Dart/StageXL.
 * Port of [Flexbook](http://www.rubenswieringa.com/code/as3/flex/Book/), see examples below.
 
+[Architecture Diagram](http://rockdot.sounddesignz.com/template/assets/home/rockdot_spring_architecture.png).
+
 #### Async
 A library that aims to make working with asynchronous processes easier. 
 Providing operation, command, ~~service~~ and ~~task~~ interfaces.
@@ -39,7 +41,7 @@ In order to demonstrate the flexibility of UI components, a full port of Polymer
 ### More Examples
 
 * [Rockdot Framework Demo](http://rockdot.sounddesignz.com/template/) - Generated with [Rockdot CLI](https://github.com/blockforest/rockdot-generator)
-* [FlexBook (experimental on mobile)](http://rockdot.sounddesignz.com/stagexl-commons/experimental_book.html) - [Source](https://github.com/blockforest/rockdot-commons/blob/master/web/experimental_book.dart)
+* [DartBook](http://rockdot.sounddesignz.com/dartbook/) - [Source](https://github.com/nilsdoehring/dartbook)
 * [Box2D](http://rockdot.sounddesignz.com/box2d/) - [Source](https://github.com/blockforest/rockdot-physics/tree/master/lib/src/Examples)
 * [BabylonJS StageXL Wrapper](http://rockdot.sounddesignz.com/dart/babylonjs-interop/) - [Source](https://github.com/blockforest/babylonjs-dart-facade/tree/master/example)
 * [THREE.js StageXL Wrapper](http://rockdot.sounddesignz.com/dart/threejs-interop/) - [Source](https://github.com/blockforest/threejs-dart-facade/tree/master/example)

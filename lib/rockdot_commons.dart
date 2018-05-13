@@ -46,6 +46,7 @@ part 'src/lang/i_cloneable.dart';
 part 'src/lang/i_ordered.dart';
 part 'src/lang/util/key_code.dart';
 part 'src/lang/util/numeric_stepper.dart';
+part 'src/lang/util/ordered_utils.dart';
 //logging
 //part 'src/logging/logger.dart';
 //mirror
