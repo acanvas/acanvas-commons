@@ -27,6 +27,7 @@ class RdFontUtil {
       "inactive": () => completer.completeError("Error loading fonts"),
     });
 
+    //TODO have this not throw ERR_INTERNET_DISCONNECTED when offline
     webFont.callMethod("load", <dynamic>[webFontConfig]);
 
     await completer.future.catchError((Error e) {
