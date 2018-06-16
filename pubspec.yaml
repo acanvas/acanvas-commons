@@ -9,6 +9,6 @@ dependencies:
     git: https://github.com/bp74/StageXL/
 dev_dependencies:
   #-------- Dart 2.0.0-dev.55 --------
-  build_runner: ^0.8.8
-  build_test: ^0.10.2
-  build_web_compilers: ^0.4.0
+  build_runner: '>=0.8.8'
+  build_test: '>=0.10.2'
+  build_web_compilers: '>=0.4.0'
