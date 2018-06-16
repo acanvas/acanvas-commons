@@ -4,6 +4,7 @@ build/
 packages
 pubspec.lock
 .idea
+*.iml
 .DS_Store
 .settings
 .project
