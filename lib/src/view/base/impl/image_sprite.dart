@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class ImageSprite extends BoxSprite {
   bool loaded = false;
@@ -111,6 +111,6 @@ class ImageSprite extends BoxSprite {
   }
 
   void onIoError(Error e) {
-    Rd.log.warning("IO error occured while loading image");
+    Ac.log.warning("IO error occured while loading image");
   }
 }

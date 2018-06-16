@@ -14,7 +14,7 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 
 */
 
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * The <code>KeyRow</code> class contains all the keys in a single keyboard row. It basically

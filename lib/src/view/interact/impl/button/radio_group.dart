@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -21,16 +21,16 @@ class RadioGroup extends Flow {
   @override
   void addChild(DisplayObject child) {
     super.addChild(child);
-    _addRdChild(child);
+    _addAcChild(child);
   }
 
   @override
   void addChildAt(DisplayObject child, int index) {
     super.addChildAt(child, index);
-    _addRdChild(child);
+    _addAcChild(child);
   }
 
-  void _addRdChild(DisplayObject child) {
+  void _addAcChild(DisplayObject child) {
     if (child is SelectableButton) {
       child.submitCallback = _onBtnSubmit;
       child.selfSelect = false;

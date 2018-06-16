@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class MdKeyboard extends BoxSprite {
   static const DEFAULT_FONT = "Roboto, Helvetica, Arial";
@@ -25,19 +25,19 @@ class MdKeyboard extends BoxSprite {
       dispatchEvent(e);
     });
 
-    Rd.STAGE.addChild(_softKeyboard);
-    Rd.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
+    Ac.STAGE.addChild(_softKeyboard);
+    Ac.STAGE.addEventListener(Event.RESIZE, _resizeKeyboard);
     _resizeKeyboard();
   }
 
   void _resizeKeyboard([Event e = null]) {
-    _softKeyboard.span(Rd.STAGE.stageWidth, min(Rd.STAGE.stageHeight / 2, 400));
-    _softKeyboard.y = Rd.STAGE.stageHeight - _softKeyboard.spanHeight;
+    _softKeyboard.span(Ac.STAGE.stageWidth, min(Ac.STAGE.stageHeight / 2, 400));
+    _softKeyboard.y = Ac.STAGE.stageHeight - _softKeyboard.spanHeight;
   }
 
   @override
   void dispose({bool removeSelf: true}) {
-    Rd.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
+    Ac.STAGE.removeEventListener(Event.RESIZE, _resizeKeyboard);
     _softKeyboard.removeEventListeners(KeyEvent.KEY_UP_VISIBLE);
     _softKeyboard.removeEventListeners(KeyEvent.KEY_UP);
     disposeChild(_softKeyboard);

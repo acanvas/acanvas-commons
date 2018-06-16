@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author nilsdoehring
@@ -8,9 +8,9 @@ abstract class IDataProxy {
 
   List get dataCache;
 
-  void set dataRetrieveCommandVO(covariant IRdVO dataRetrieveCommandVO);
+  void set dataRetrieveCommandVO(covariant IAcVO dataRetrieveCommandVO);
 
-  IRdVO get dataRetrieveCommandVO;
+  IAcVO get dataRetrieveCommandVO;
 
   void set dataTotalSize(int dataTotalSize);
 

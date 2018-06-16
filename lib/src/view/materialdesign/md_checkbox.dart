@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -80,9 +80,9 @@ class MdCheckbox extends SelectableButton {
     _icon.scaleX = _icon.scaleY = .3;
     _icon.visible = true;
 
-    Rd.JUGGLER.addTween(_box, .15).animate..alpha.to(0)..rotation.to(.8)..scaleX.to(.3)..scaleY.to(.3);
+    Ac.JUGGLER.addTween(_box, .15).animate..alpha.to(0)..rotation.to(.8)..scaleX.to(.3)..scaleY.to(.3);
 
-    Rd.JUGGLER.addTween(_icon, .1)
+    Ac.JUGGLER.addTween(_icon, .1)
       ..animate.scaleX.to(1)
       ..animate.scaleY.to(1)
       ..delay = .1;
@@ -99,9 +99,9 @@ class MdCheckbox extends SelectableButton {
     tw.onComplete = () {
       _icon.visible = false;
     };
-    Rd.JUGGLER.add(tw);
+    Ac.JUGGLER.add(tw);
 
-    Rd.JUGGLER.addTween(_box, .1)
+    Ac.JUGGLER.addTween(_box, .1)
       ..animate.alpha.to(1)
       ..animate.rotation.to(0)
       ..animate.scaleX.to(1)

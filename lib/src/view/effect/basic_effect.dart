@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author nilsdoehring
@@ -60,7 +60,7 @@ class BasicEffect implements IEffect {
   Stage _stage;
 
   BasicEffect() {
-    _stage = Rd.STAGE;
+    _stage = Ac.STAGE;
     _duration = 0.5;
     _applyRecursively = false;
     _useSprite = false;
@@ -95,7 +95,7 @@ class BasicEffect implements IEffect {
     var tween = new Tween(target, duration, Transition.easeInCubic);
     tween.animate.alpha.to(1.0); // target value = 0.0
     tween.onComplete = () => callback.call();
-    Rd.JUGGLER.add(tween);
+    Ac.JUGGLER.add(tween);
   }
 
   void runOutEffect(BoxSprite target, double duration, Function callback) {
@@ -105,13 +105,13 @@ class BasicEffect implements IEffect {
     var tween = new Tween(target, duration, Transition.easeInCubic);
     tween.animate.alpha.to(0); // target value = 0.0
     tween.onComplete = () => callback.call();
-    Rd.JUGGLER.add(tween);
+    Ac.JUGGLER.add(tween);
   }
 
   void cancel([BoxSprite target = null]) {
     if (target == null) return;
 
-    Rd.JUGGLER.removeTweens(target);
+    Ac.JUGGLER.removeTweens(target);
 
     DisplayObject child;
     for (int i = 0; i < (target).numChildren; i++) {
@@ -123,7 +123,7 @@ class BasicEffect implements IEffect {
   }
 
   void onComplete([Bitmap target = null, BoxSprite page = null, Function callback = null]) {
-    Rd.JUGGLER.removeTweens(target);
+    Ac.JUGGLER.removeTweens(target);
 
     if (target != null) {
       if (target.parent != null) {
@@ -145,7 +145,7 @@ class BasicEffect implements IEffect {
 
   void dispose({bool removeSelf: true}) {
     if (_sprite != null && useSprite()) {
-      Rd.JUGGLER.removeTweens(_sprite);
+      Ac.JUGGLER.removeTweens(_sprite);
       if (_sprite.parent != null) {
         _sprite.parent.removeChild(_sprite);
       }

@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class MdMenu extends ListSprite {
   bool shadow = false;
@@ -13,8 +13,8 @@ class MdMenu extends ListSprite {
     snapToPages = false;
     doubleClickEnabled = false;
     doubleClickToZoom = false;
-    mouseWheelEnabled = Rd.MOBILE ? false : true;
-    touchable = Rd.MOBILE ? true : false;
+    mouseWheelEnabled = Ac.MOBILE ? false : true;
+    touchable = Ac.MOBILE ? true : false;
 
     MdShadow _paperShadow = new MdShadow(type: MdShadow.RECTANGLE, bgColor: backgroundColor, shadowEnabled: shadow);
     addChildAt(_paperShadow, 0);

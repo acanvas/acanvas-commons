@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -26,7 +26,7 @@ class MdRadioButton extends SelectableButton {
     _bg.graphics.strokeColor(MdColor.BLACK, 2);
     _bg.graphics.circle(30, 30, 30);
     _bg.graphics.fillColor(0x00555555);
-    if (Rd.WEBGL) {
+    if (Ac.WEBGL) {
       //_bg.applyCache(0, 0, 60, 60);
     }
     addChild(_bg);
@@ -59,7 +59,7 @@ class MdRadioButton extends SelectableButton {
   void selectAction() {
     _icon.scaleX = _icon.scaleY = .1;
     _icon.visible = true;
-    Rd.JUGGLER.addTween(_icon, .1).animate..scaleX.to(1)..scaleY.to(1);
+    Ac.JUGGLER.addTween(_icon, .1).animate..scaleX.to(1)..scaleY.to(1);
     if (_paperLabel != null) {
       _paperLabel.color = activeColor;
     }
@@ -69,7 +69,7 @@ class MdRadioButton extends SelectableButton {
     Tween tw = new Tween(_icon, .2);
     tw.animate..scaleX.to(.1)..scaleY.to(.1);
     tw.onComplete = () => _icon.visible = false;
-    Rd.JUGGLER.add(tw);
+    Ac.JUGGLER.add(tw);
     if (_paperLabel != null) {
       _paperLabel.color = MdColor.BLACK;
     }

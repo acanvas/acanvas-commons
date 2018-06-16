@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class MdAppBar extends BoxSprite {
   int bgColor;
@@ -84,7 +84,7 @@ class MdAppBar extends BoxSprite {
       tabs.y = spanHeight - tabs.height;
     }
 
-    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color: bgColor);
+    AcGraphics.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color: bgColor);
     super.refresh();
   }
 }

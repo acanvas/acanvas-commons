@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-part of rockdot_commons;
+part of acanvas_commons;
 /**
  * Interface to be implemented by command classes.
  * @author Christophe Herreman
@@ -23,5 +23,5 @@ abstract class ICommand {
   /**
    * Executes the command.
    */
-  void execute([RdSignal event = null]);
+  void execute([AcSignal event = null]);
 }

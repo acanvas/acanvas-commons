@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class LifecycleSprite extends BehaveSprite with MLifecycle {
   LifecycleSprite(String id) : super() {
@@ -26,7 +26,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   init({Map<String, String> params: null}) {
     this.params = params;
     if (spanHeight == 0 || spanWidth == 0) {
-      Rd.log.warning(
+      Ac.log.warning(
           "You really should set LifecycleSprite.spanWidth and LifecycleSprite.spanHeight properties before invoking LifecycleSprite.init().");
     }
   }
@@ -77,7 +77,7 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
     children.where((c) => c is MLifecycle && (c as MLifecycle).inheritDisappear).forEach((child) {
       (child as MLifecycle).disappear(duration: duration, autoDispose: autoDispose);
     });
-    Rd.JUGGLER.delayCall(() {
+    Ac.JUGGLER.delayCall(() {
       dispatchEvent(new LifecycleEvent(LifecycleEvent.DISAPPEAR_COMPLETE));
       if (autoDispose) {
         this.dispose();

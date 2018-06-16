@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class VideoPlayer extends BoxSprite {
   Pyro _video;

@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 enum IconPosition { LEFT, RIGHT }
 

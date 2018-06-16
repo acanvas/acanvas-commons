@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class MdToast extends BoxSprite {
   static const int BL = 1;
@@ -30,18 +30,18 @@ class MdToast extends BoxSprite {
     holder.addChild(this);
     span(300, 50);
 
-    Rd.JUGGLER.addTween(this, .3, Transition.easeOutBounce)..animate.y.to(Rd.STAGE.stageHeight - this.height - 20);
+    Ac.JUGGLER.addTween(this, .3, Transition.easeOutBounce)..animate.y.to(Ac.STAGE.stageHeight - this.height - 20);
 
     if (hideAfterSeconds > 0) {
       hide();
 
-      Rd.JUGGLER.addTranslation(0, 100, hideAfterSeconds, Transition.linear, (num val) => _progress.value = val);
+      Ac.JUGGLER.addTranslation(0, 100, hideAfterSeconds, Transition.linear, (num val) => _progress.value = val);
     }
   }
 
   void hide() {
-    Rd.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
-      ..animate.y.to(Rd.STAGE.stageHeight)
+    Ac.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
+      ..animate.y.to(Ac.STAGE.stageHeight)
       ..delay = hideAfterSeconds
       ..onComplete = () => this.dispose();
   }

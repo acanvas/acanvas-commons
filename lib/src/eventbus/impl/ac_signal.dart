@@ -1,7 +1,7 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
-class RdSignal extends Event {
-  final RdEventBus eventBus = new RdEventBus();
+class AcSignal extends Event {
+  final AcEventBus eventBus = new AcEventBus();
 
   dynamic _data;
 
@@ -15,10 +15,10 @@ class RdSignal extends Event {
 
   Function get completeCallBack => _callback;
 
-  RdSignal(String type, [this._data = null, this._callback = null]) : super(type);
+  AcSignal(String type, [this._data = null, this._callback = null]) : super(type);
 
   void dispatch() {
-    eventBus.dispatchEvent(new RdSignal(type, _data, _callback));
+    eventBus.dispatchEvent(new AcSignal(type, _data, _callback));
   }
 
   void listen<T extends Event>() {

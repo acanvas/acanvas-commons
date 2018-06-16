@@ -1,4 +1,4 @@
-name: rockdot_commons
+name: acanvas_commons
 version: 0.10.0-dev
 description: A port of as3commons, plus highly customizable View Components and a Material Design implementation
 environment:

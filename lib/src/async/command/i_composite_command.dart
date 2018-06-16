@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * Interface that needs to be implemented by command classes that are composed of multiple commands.

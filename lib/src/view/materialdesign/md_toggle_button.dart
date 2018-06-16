@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -45,7 +45,7 @@ class MdToggleButton extends SelectableButton {
     _bg.graphics.strokeColor(MdColor.BLACK, 2);
     _bg.graphics.circle(30, 30, 30);
     _bg.graphics.fillColor(0x00555555);
-    if (Rd.WEBGL) {
+    if (Ac.WEBGL) {
       //_bg.applyCache(0, 0, 60, 60);
     }
     _holder.addChild(_bg);
@@ -89,9 +89,9 @@ class MdToggleButton extends SelectableButton {
     _icon.scaleX = _icon.scaleY = .1;
     _icon.visible = true;
     _activeLine.visible = true;
-    Rd.JUGGLER.addTween(_icon, .1).animate..scaleX.to(1)..scaleY.to(1);
-    Rd.JUGGLER.addTween(_holder, .1).animate..x.to(labelOffset + 48);
-    Rd.JUGGLER.addTween(_ripple, .1).animate..x.to(labelOffset + 48);
+    Ac.JUGGLER.addTween(_icon, .1).animate..scaleX.to(1)..scaleY.to(1);
+    Ac.JUGGLER.addTween(_holder, .1).animate..x.to(labelOffset + 48);
+    Ac.JUGGLER.addTween(_ripple, .1).animate..x.to(labelOffset + 48);
     if (_paperLabel != null) {
       _paperLabel.color = activeColor;
     }
@@ -99,15 +99,15 @@ class MdToggleButton extends SelectableButton {
 
   @override
   void deselectAction() {
-    Rd.JUGGLER.addTween(_holder, .1).animate..x.to(labelOffset);
-    Rd.JUGGLER.addTween(_ripple, .1).animate..x.to(labelOffset);
+    Ac.JUGGLER.addTween(_holder, .1).animate..x.to(labelOffset);
+    Ac.JUGGLER.addTween(_ripple, .1).animate..x.to(labelOffset);
     Tween tw = new Tween(_icon, .2);
     tw.animate..scaleX.to(.1)..scaleY.to(.1);
     tw.onComplete = () {
       _icon.visible = false;
       _activeLine.visible = false;
     };
-    Rd.JUGGLER.add(tw);
+    Ac.JUGGLER.add(tw);
     if (_paperLabel != null) {
       _paperLabel.color = MdColor.BLACK;
     }
@@ -119,7 +119,7 @@ class MdToggleButton extends SelectableButton {
     line.graphics.lineTo(32, 0);
     line.graphics.strokeColor(color, strength);
     line.graphics.closePath();
-    if (Rd.WEBGL) {
+    if (Ac.WEBGL) {
       //line.applyCache(0, 0, 32, strength);
     }
   }

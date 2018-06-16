@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class MdRipple extends BoxSprite implements IMdButtonComponent {
   static const int RECTANGLE = 1;
@@ -18,7 +18,7 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
 
   MdRipple({this.color: 0xFF000000, this.type: RECTANGLE, this.velocity: 0.5}) : super() {
     inheritSpan = true;
-    if (Rd.TOUCH) {
+    if (Ac.TOUCH) {
       velocity = 1;
     }
   }
@@ -60,7 +60,7 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
 
     Tween tw = new Tween(inner, velocity, Transition.easeOutElastic)..animate.scaleX.to(1.2)..animate.scaleY.to(1.2);
 
-    Rd.JUGGLER.add(tw);
+    Ac.JUGGLER.add(tw);
   }
 
   @override
@@ -68,8 +68,8 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
     for (int i = 0; i < numChildren; i++) {
       DisplayObject dobj = getChildAt(i);
 
-      Rd.JUGGLER.removeTweens(dobj);
-      Rd.JUGGLER.addTween(dobj, velocity)
+      Ac.JUGGLER.removeTweens(dobj);
+      Ac.JUGGLER.addTween(dobj, velocity)
         ..animate.alpha.to(0)
         ..animate.scaleX.to(1.0)
         ..animate.scaleY.to(1.0)

@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring(gmail as at).com)
@@ -17,7 +17,7 @@ class HRightSwipeTransition extends BasicEffect {
     target.x = -target.stage.stageWidth;
     target.alpha = 1;
 
-    Rd.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
+    Ac.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
       ..animate.x.to(iTargetXOriginal)
       ..onComplete = () {
         callback.call();
@@ -29,7 +29,7 @@ class HRightSwipeTransition extends BasicEffect {
   void runOutEffect(BoxSprite t, num duration, Function callback) {
     BoxSprite target = t;
     target.parent.mask = new Mask.rectangle(target.x, target.y, target.spanWidth, target.spanHeight);
-    Rd.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
+    Ac.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
       ..animate.x.to(target.stage.stageWidth)
       ..onComplete = () {
         callback.call();

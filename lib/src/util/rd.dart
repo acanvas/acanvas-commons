@@ -1,16 +1,16 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
-class Rd {
+class Ac {
   /* internals */
   Logger _logger;
   Stage _stage;
-  static final Rd _singleton = new Rd._internal();
+  static final Ac _singleton = new Ac._internal();
 
-  Rd._internal() {
-    _logger = new Logger('Rd');
+  Ac._internal() {
+    _logger = new Logger('Ac');
   }
 
-  factory Rd() {
+  factory Ac() {
     return _singleton;
   }
 

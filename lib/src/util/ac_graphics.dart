@@ -1,6 +1,6 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
-class RdGraphics {
+class AcGraphics {
   static Sprite rectangle(num x, num y, num w, num h,
       {int color: 0xFF000000, Sprite sprite: null, bool round: false, bool clear: true}) {
     if (sprite == null) {
@@ -21,7 +21,7 @@ class RdGraphics {
     sprite.graphics.closePath();
     sprite.graphics.fillColor(color);
 
-    if (Rd.WEBGL && w.round() > 0 && h.round() > 0) {
+    if (Ac.WEBGL && w.round() > 0 && h.round() > 0) {
       //sprite.applyCache(x.round(), y.round(), w.round(), h.round());
     }
 
@@ -50,7 +50,7 @@ class RdGraphics {
     sprite.graphics.closePath();
     sprite.graphics.fillColor(color);
 
-    if (Rd.WEBGL && w.round() > 0 && h.round() > 0) {
+    if (Ac.WEBGL && w.round() > 0 && h.round() > 0) {
       //sprite.applyCache(x.round(), y.round(), w.round(), h.round());
     }
 
@@ -76,7 +76,7 @@ class RdGraphics {
     sprite.graphics.closePath();
     sprite.graphics.fillColor(color);
 
-    if (Rd.WEBGL && (x + r).round() > 0) {
+    if (Ac.WEBGL && (x + r).round() > 0) {
       //sprite.applyCache((x - r).round(), (y - r).round(), (2*r).round(), (2*r).round());
     }
 
@@ -101,7 +101,7 @@ class RdGraphics {
     sprite.graphics.closePath();
     sprite.graphics.strokeColor(color, strength);
 
-    if (Rd.WEBGL) {
+    if (Ac.WEBGL) {
       //sprite.applyCache(0, 0, x == 0 ? strength.ceil() : x.ceil(), y == 0 ? strength.ceil() : y.ceil());
     }
 

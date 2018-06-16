@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class MdInput extends BehaveSprite {
   static const DEFAULT_FONT = "Roboto, Helvetica, Arial";
@@ -54,7 +54,7 @@ class MdInput extends BehaveSprite {
     inheritSpan = true;
 
     //force onscreen keyboard on mobile devices
-    if (Rd.MOBILE) {
+    if (Ac.MOBILE) {
       keyboard = true;
     } else if (keyboard == true) {
       KEYBOARD_NATIVE = false;
@@ -105,7 +105,7 @@ class MdInput extends BehaveSprite {
     addChild(_activeLine);
     _activeLine.alpha = 0;
 
-    if (Rd.TOUCH) {
+    if (Ac.TOUCH) {
       addEventListener(TouchEvent.TOUCH_BEGIN, mouseDownAction);
     } else {
       addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
@@ -169,18 +169,18 @@ class MdInput extends BehaveSprite {
 
   /* User clicks into TextField */
   void mouseDownAction([InputEvent event = null]) {
-    _enterFrameListener = addEventListener(Event.ENTER_FRAME, (e) => Rd.MATERIALIZE_REQUIRED = true);
+    _enterFrameListener = addEventListener(Event.ENTER_FRAME, (e) => Ac.MATERIALIZE_REQUIRED = true);
 
     /* Animate active line */
     if (_activeLine.alpha == 0) {
       _activeLine.scaleX = 0.01;
       _activeLine.alpha = 1;
       _activeLine.x = spanWidth / 2;
-      Rd.JUGGLER.addTween(_activeLine, .2).animate..x.to(0)..scaleX.to(1);
+      Ac.JUGGLER.addTween(_activeLine, .2).animate..x.to(0)..scaleX.to(1);
     }
 
     /* Animate cursor box */
-    if (Rd.STAGE.focus != _inputTextField) {
+    if (Ac.STAGE.focus != _inputTextField) {
       _cursorBox.scaleX = 1;
       _cursorBox.x = 80;
       _cursorBox.alpha = 1;
@@ -188,7 +188,7 @@ class MdInput extends BehaveSprite {
       Tween tw = new Tween(_cursorBox, .1);
       tw.animate..x.to(0)..scaleX.to(0.2);
       tw.onComplete = () => _cursorBox.alpha = 0;
-      Rd.JUGGLER.add(tw);
+      Ac.JUGGLER.add(tw);
     }
 
     /* If the label is currently floating, color it blue or red again */
@@ -200,24 +200,24 @@ class MdInput extends BehaveSprite {
     validate();
 
     /* Set Focus to InputField, otherwise Keyboard Events won't work */
-    Rd.STAGE.focus = _inputTextField;
+    Ac.STAGE.focus = _inputTextField;
 
     if (keyboard && _softKeyboard == null && _nativeKeyboard == null) {
       _createKeyboard();
     }
 
     /* Add a listener to Stage to manage intention to Focus out */
-    if (Rd.TOUCH) {
-      Rd.STAGE.addEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
+    if (Ac.TOUCH) {
+      Ac.STAGE.addEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
     } else {
-      Rd.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+      Ac.STAGE.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
   }
 
   bool validate() {
     if (required != "") {
       _requiredTextField.color = MdColor.RED;
-      Rd.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
+      Ac.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(1);
       return false;
     }
     return true;
@@ -231,18 +231,18 @@ class MdInput extends BehaveSprite {
       return;
     }
     if (event.target is! UITextFieldInput && event.target is! MdInput) {
-      Rd.STAGE.focus = null;
+      Ac.STAGE.focus = null;
     } else {
       _enterFrameListener.cancel();
       _enterFrameListener = null;
     }
-    if (Rd.TOUCH) {
-      Rd.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
+    if (Ac.TOUCH) {
+      Ac.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
     } else {
-      Rd.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
+      Ac.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
     /* Make active blue line invisible */
-    Rd.JUGGLER.addTween(_activeLine, .1).animate..alpha.to(0);
+    Ac.JUGGLER.addTween(_activeLine, .1).animate..alpha.to(0);
 
     /* Make floating label grey again */
     if (_currentlyFloating) {
@@ -252,7 +252,7 @@ class MdInput extends BehaveSprite {
     /* Make explanatory text grey again */
     if (required != "") {
       _requiredTextField.color = MdColor.GREY_DARK;
-      Rd.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(0);
+      Ac.JUGGLER.addTween(_requiredIconActive, .1).animate..alpha.to(0);
     }
 
     if (keyboard) {
@@ -288,7 +288,7 @@ class MdInput extends BehaveSprite {
             ..onComplete = () {
               _defaultTextField.color = _highlightColor;
             };
-          Rd.JUGGLER.add(tr);
+          Ac.JUGGLER.add(tr);
         }
       } else {
         _defaultTextField.alpha = 0;
@@ -314,7 +314,7 @@ class MdInput extends BehaveSprite {
             ..onComplete = () {
               _defaultTextField.color = MdColor.GREY_DARK;
             };
-          Rd.JUGGLER.add(tr);
+          Ac.JUGGLER.add(tr);
         }
       } else {
         _defaultTextField.alpha = 1;
@@ -331,7 +331,7 @@ class MdInput extends BehaveSprite {
     line.graphics.lineTo(spanWidth, 0);
     line.graphics.strokeColor(color, strength);
     line.graphics.closePath();
-    if (Rd.WEBGL) {
+    if (Ac.WEBGL) {
       //line.applyCache(0, 0, spanWidth.ceil(), strength.ceil());
     }
   }

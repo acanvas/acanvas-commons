@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * <p>Methods in this class give sample code to explain their operation.

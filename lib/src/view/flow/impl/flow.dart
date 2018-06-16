@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -112,7 +112,7 @@ class Flow extends BoxSprite with MFlow {
 
       //set x, y, animate
       if (animate) {
-        Rd.JUGGLER.addTween(child, 0.2)..animate.alpha.to(1.0)..animate.x.to(_childXNew)..animate.y.to(_childYNew);
+        Ac.JUGGLER.addTween(child, 0.2)..animate.alpha.to(1.0)..animate.x.to(_childXNew)..animate.y.to(_childYNew);
       } else {
         child.x = _childXNew;
         child.y = _childYNew;
@@ -134,16 +134,16 @@ class Flow extends BoxSprite with MFlow {
   @override
   void addChild(DisplayObject child) {
     super.addChild(child);
-    _addRdChild(child);
+    _addAcChild(child);
   }
 
   @override
   void addChildAt(DisplayObject child, int index) {
     super.addChildAt(child, index);
-    _addRdChild(child);
+    _addAcChild(child);
   }
 
-  void _addRdChild(DisplayObject child) {
+  void _addAcChild(DisplayObject child) {
     if (animate) {
       child.alpha = 0;
     }
@@ -153,7 +153,7 @@ class Flow extends BoxSprite with MFlow {
   void removeChildAt(int index) {
     if (animate) {
       DisplayObject child = getChildAt(index);
-      Rd.JUGGLER.addTween(child, 0.2)
+      Ac.JUGGLER.addTween(child, 0.2)
         ..animate.alpha.to(0.0)
         ..onComplete = () => super.removeChildAt(index);
     } else {

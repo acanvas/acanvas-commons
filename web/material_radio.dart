@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:html' as html;
-import 'package:rockdot_commons/rockdot_commons.dart';
+import 'package:acanvas_commons/acanvas_commons.dart';
 import 'package:stagexl/stagexl.dart';
 
 Stage stage;
@@ -13,11 +13,11 @@ Future main() async {
   opts.stageAlign = StageAlign.TOP_LEFT;
 
   stage = new Stage(html.querySelector('#stage') as html.CanvasElement, options: opts);
-  Rd.STAGE = stage;
+  Ac.STAGE = stage;
   new RenderLoop()..addStage(stage);
 
-  RdFontUtil.addFont("Roboto");
-  await RdFontUtil.loadFonts();
+  AcFontUtil.addFont("Roboto");
+  await AcFontUtil.loadFonts();
   start();
 }
 

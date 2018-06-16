@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class AbstractPolaroidPager extends AbstractPhotoPager {
   static const int WIDTH_BUTTON = MdDimensions.WIDTH_BUTTON_MINIMAL;
@@ -74,8 +74,8 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
 
         _items.add(item);
 
-        Rd.JUGGLER.removeTweens(item);
-        Rd.JUGGLER.addTween(item, 0.8, Transition.easeOutQuintic)
+        Ac.JUGGLER.removeTweens(item);
+        Ac.JUGGLER.addTween(item, 0.8, Transition.easeOutQuintic)
           ..delay = i * 0.1
           ..animate.x.to(item.xPos)
           ..animate.y.to(item.yPos)
@@ -114,14 +114,14 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
           dir = otherPhoto.x > photo.x ? 1 : -1;
 
           //yoyo tween
-          Rd.JUGGLER.addTween(otherPhoto, 0.3, Transition.easeInQuintic)
+          Ac.JUGGLER.addTween(otherPhoto, 0.3, Transition.easeInQuintic)
             ..animate.x.to(otherPhoto.xPos + dir * (photo.width / 2));
-          Rd.JUGGLER.addTween(otherPhoto, 0.7, Transition.easeOutQuintic)
+          Ac.JUGGLER.addTween(otherPhoto, 0.7, Transition.easeOutQuintic)
             ..animate.x.to(otherPhoto.xPos)
             ..delay = .4;
         }
       }
-      Rd.JUGGLER.removeTweens(photo);
+      Ac.JUGGLER.removeTweens(photo);
 
       Tween tween = new Tween(photo, 0.6, Transition.easeOutQuintic)
         ..delay = 0.2
@@ -132,10 +132,10 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
         ..animate.scaleY.to(2.7)
         ..onStart = () => (photo.parent as DisplayObjectContainer)
             .swapChildren(photo, photo.parent.getChildAt(photo.parent.numChildren - 1));
-      Rd.JUGGLER.add(tween);
+      Ac.JUGGLER.add(tween);
     } else {
       // Is on top. Do nothing.
-      Rd.JUGGLER.removeTweens(photo);
+      Ac.JUGGLER.removeTweens(photo);
       Tween tween = new Tween(photo, 0.6, Transition.easeOutQuintic)
         ..delay = 0.2
         ..animate.x.to(spanWidth / 2)
@@ -143,7 +143,7 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
         ..animate.rotation.to(0)
         ..animate.scaleX.to(2.7)
         ..animate.scaleY.to(2.7);
-      Rd.JUGGLER.add(tween);
+      Ac.JUGGLER.add(tween);
     }
 
     // DropShadowFilter ds = new DropShadowFilter(20, 45, 0xff000000, 15, 15);
@@ -155,7 +155,7 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
 
     PolaroidItemButton photo = (event.target as PolaroidItemButton);
 
-    Rd.JUGGLER.removeTweens(photo);
+    Ac.JUGGLER.removeTweens(photo);
     Tween tween = new Tween(photo, 0.6, Transition.easeOutQuintic)
       ..delay = 0.2
       ..animate.x.to(photo.xPos)
@@ -163,7 +163,7 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
       ..animate.rotation.to(photo.rot)
       ..animate.scaleX.to(1)
       ..animate.scaleY.to(1);
-    Rd.JUGGLER.add(tween);
+    Ac.JUGGLER.add(tween);
 
     // DropShadowFilter ds = new DropShadowFilter(2, 45, 0xff000000, 10, 10);
     // photo.filters = [ds];

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * Interface that can be implemented by objects that should be orderable, for example in a Collection.

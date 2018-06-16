@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class Button extends BehaveSprite with MButton {
   num swipeXDownPos;
@@ -17,7 +17,7 @@ class Button extends BehaveSprite with MButton {
     if (_enabled) return;
     super.enable();
 
-    if (Rd.TOUCH) {
+    if (Ac.TOUCH) {
       addEventListener<InputEvent>(TouchEvent.TOUCH_END, upAction);
       addEventListener<InputEvent>(TouchEvent.TOUCH_BEGIN, downAction);
       addEventListener<InputEvent>(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
@@ -44,7 +44,7 @@ class Button extends BehaveSprite with MButton {
 
     super.disable();
 
-    if (Rd.TOUCH) {
+    if (Ac.TOUCH) {
       removeEventListener<InputEvent>(TouchEvent.TOUCH_END, upAction);
       removeEventListener<InputEvent>(TouchEvent.TOUCH_BEGIN, downAction);
       removeEventListener<InputEvent>(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);

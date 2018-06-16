@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -39,7 +39,7 @@ abstract class MScroll {
 
   bool get doubleClickToZoom => _doubleClickToZoom;
 
-  bool _bounce = Rd.MOBILE ? true : false;
+  bool _bounce = Ac.MOBILE ? true : false;
 
   void set bounce(bool bounce) {
     _bounce = bounce;
@@ -47,7 +47,7 @@ abstract class MScroll {
 
   bool get bounce => _bounce;
 
-  bool _autoHide = Rd.MOBILE ? true : false;
+  bool _autoHide = Ac.MOBILE ? true : false;
 
   void set autoHideScrollbars(bool autoHide) {
     _autoHide = autoHide;

@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /// Vertical Alignment options of [BoxSprite]
 enum AlignV { TOP, CENTER, BOTTOM }

@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author nilsdoehring
@@ -108,16 +108,16 @@ class AbstractPhotoPager extends PagerSprite {
     holder.addChildAt(coming, 0);
 
     if (current != null && chunksPlaced.length > 0) {
-      Rd.JUGGLER.addTween(current, 0.3, Transition.easeInQuintic)
+      Ac.JUGGLER.addTween(current, 0.3, Transition.easeInQuintic)
         ..animate.x.to(xCurrentTarget)
         ..onComplete = () => disposeChild(current);
 
-      Rd.JUGGLER.addTween(coming, 0.3, Transition.easeInQuintic)..animate.x.to(xComingTarget);
+      Ac.JUGGLER.addTween(coming, 0.3, Transition.easeInQuintic)..animate.x.to(xComingTarget);
 
       if (pressedNext) {
-        Rd.JUGGLER.delayCall(() => cb.call(listItems), 0.55);
+        Ac.JUGGLER.delayCall(() => cb.call(listItems), 0.55);
       } else
-        Rd.JUGGLER.delayCall(() => cb.call(listItems), 0.7);
+        Ac.JUGGLER.delayCall(() => cb.call(listItems), 0.7);
     } else {
       disposeChild(current);
       coming.x = xComingTarget;
@@ -132,7 +132,7 @@ class AbstractPhotoPager extends PagerSprite {
       addChild(_tfNothingFound);
     }
 
-    Rd.JUGGLER.addTween(_tfNothingFound, 0.3)..animate.alpha.to(1);
+    Ac.JUGGLER.addTween(_tfNothingFound, 0.3)..animate.alpha.to(1);
   }
 
   Sprite pageCreate(List listItems) {

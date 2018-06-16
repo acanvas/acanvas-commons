@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class MdIcon {
   static SvgDisplayObject color(String rawSvg, int color, {int size: 24}) {

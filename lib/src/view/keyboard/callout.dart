@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class Callout extends LifecycleSprite {
   List<String> nameList = [];

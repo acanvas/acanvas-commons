@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * Dispatched when all the operations in the current <code>OperationQueue</code> have received a result.

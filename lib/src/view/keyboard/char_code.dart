@@ -14,7 +14,7 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 
 */
 
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * The <code>CharCode</code> class is an enumeration class containing constants associated to

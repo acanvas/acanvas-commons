@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class URLLoaderDataFormat {
   static const String BITMAP_DATA = "text";

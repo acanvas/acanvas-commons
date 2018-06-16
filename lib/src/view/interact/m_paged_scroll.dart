@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -54,7 +54,7 @@ abstract class MPagedScroll {
 
   num get pageScrollDistance => _pageScrollDistance;
 
-  bool _bounce = Rd.MOBILE ? true : false;
+  bool _bounce = Ac.MOBILE ? true : false;
 
   void set bounce(bool bounce) {
     _bounce = bounce;

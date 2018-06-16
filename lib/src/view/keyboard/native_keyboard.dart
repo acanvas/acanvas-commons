@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class NativeKeyboard extends BoxSprite {
   static const DEFAULT_FONT = "Roboto, Helvetica, Arial";

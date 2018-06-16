@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * Subinterface of <code>IOperation</code> that contains information about the progress of an operation.

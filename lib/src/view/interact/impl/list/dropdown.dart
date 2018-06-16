@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class ComponentDropdown extends BehaveSprite {
   static const String ROLLOUT_OPEN = "OPEN";
@@ -64,7 +64,7 @@ class ComponentDropdown extends BehaveSprite {
 
       _sprRollout.visible = true;
       _strRolloutState = ROLLOUT_OPEN;
-      Rd.JUGGLER.addTween(_sprRollout, 0.5)..animate.y.to(spanHeight);
+      Ac.JUGGLER.addTween(_sprRollout, 0.5)..animate.y.to(spanHeight);
       if (_onToggleCallback != null) {
         _onToggleCallback.call(_strRolloutState);
       }
@@ -78,7 +78,7 @@ class ComponentDropdown extends BehaveSprite {
         btnRolloutToggle.y = -1;
       }
       _strRolloutState = ROLLOUT_CLOSE;
-      Rd.JUGGLER.addTween(_sprRollout, 0)
+      Ac.JUGGLER.addTween(_sprRollout, 0)
         ..animate.y.to(-_sprRollout.height)
         ..onComplete = _onCloseRolloutComplete;
     }

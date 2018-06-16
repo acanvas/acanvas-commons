@@ -1,11 +1,11 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
  */
 
 abstract class MBehave {
-  bool _touchable = Rd.MOBILE ? true : false;
+  bool _touchable = Ac.MOBILE ? true : false;
 
   void set touchable(bool touchable) {
     _touchable = touchable;
@@ -22,11 +22,11 @@ abstract class MBehave {
   bool get inheritTouchable => _inheritTouchable;
 
   //events
-  RdSignal _submitEvent;
+  AcSignal _submitEvent;
 
-  RdSignal get submitEvent => _submitEvent;
+  AcSignal get submitEvent => _submitEvent;
 
-  void set submitEvent(RdSignal submitEvent) {
+  void set submitEvent(AcSignal submitEvent) {
     _submitEvent = submitEvent;
   }
 

@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -359,7 +359,7 @@ class ListSprite extends SpriteScrollifier with MList {
         cell.enabled = false;
       }
 
-      if (Rd.TOUCH) {
+      if (Ac.TOUCH) {
         cell.addEventListener(TouchEvent.TOUCH_BEGIN, _onCellMouseDown, useCapture: false, priority: 0);
         cell.addEventListener(TouchEvent.TOUCH_END, _onCellMouseUp, useCapture: false, priority: 0);
       } else {
@@ -457,7 +457,7 @@ class ListSprite extends SpriteScrollifier with MList {
       _mouseOffsetY = event.stageY;
     }
 
-    if (Rd.TOUCH) {
+    if (Ac.TOUCH) {
       stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false, priority: 0);
       stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
     } else {

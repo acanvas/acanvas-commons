@@ -1,11 +1,11 @@
-library rockdot_commons;
+library acanvas_commons;
 
 import 'dart:async' show Completer, Future, StreamSubscription, Timer;
 import 'dart:math' hide Point, Rectangle;
 import 'dart:html' as html;
 import 'dart:js' as js;
 
-/* Rockdot Commons depend on StageXL, especially its Event system */
+/* Acanvas Commons depend on StageXL, especially its Event system */
 import 'package:stagexl/stagexl.dart';
 /* required by Logger */
 import 'package:logging/logging.dart';
@@ -28,15 +28,15 @@ part 'src/async/operation/i_progress_operation.dart';
 part 'src/async/operation/event/operation_event.dart';
 //data
 part 'src/data/i_data_proxy.dart';
-part 'src/data/i_rd_vo.dart';
-part 'src/data/i_rd_dto.dart';
+part 'src/data/i_ac_vo.dart';
+part 'src/data/i_ac_dto.dart';
 //eventbus
 part 'src/eventbus/i_event_bus.dart';
 part 'src/eventbus/i_event_bus_aware.dart';
 part 'src/eventbus/i_event_bus_listener.dart';
 part 'src/eventbus/i_simple_event_bus.dart';
-part 'src/eventbus/impl/rd_event_bus.dart';
-part 'src/eventbus/impl/rd_signal.dart';
+part 'src/eventbus/impl/ac_event_bus.dart';
+part 'src/eventbus/impl/ac_signal.dart';
 //lang
 part 'src/lang/assert.dart';
 part 'src/lang/illegal_argument_error.dart';
@@ -53,14 +53,14 @@ part 'src/lang/util/ordered_utils.dart';
 part 'src/mirror/retain.dart';
 //util
 part 'src/util/rd.dart';
-part 'src/util/rd_font_util.dart';
-part 'src/util/rd_graphics.dart';
+part 'src/util/ac_font_util.dart';
+part 'src/util/ac_graphics.dart';
 
 //view base: box, behave, lifecycle
 part 'src/view/base/m_box.dart';
 part 'src/view/base/m_behave.dart';
 part 'src/view/base/m_lifecycle.dart';
-part 'package:rockdot_commons/src/view/base/event/lifecycle_event.dart';
+part 'package:acanvas_commons/src/view/base/event/lifecycle_event.dart';
 part 'src/view/base/impl/box_sprite.dart';
 part 'src/view/base/impl/behave_sprite.dart';
 part 'src/view/base/impl/lifecycle_sprite.dart';

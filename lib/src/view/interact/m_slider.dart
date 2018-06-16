@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -69,10 +69,10 @@ abstract class MSlider {
 
     value = value - event.deltaY * mouseWheelSensitivity;
     interactionEnd();
-    Rd.MATERIALIZE_REQUIRED = true;
+    Ac.MATERIALIZE_REQUIRED = true;
 
     if (_materializeControl != null) _materializeControl.cancel();
-    _materializeControl = new Timer(new Duration(milliseconds: 100), () => Rd.MATERIALIZE_REQUIRED = false);
+    _materializeControl = new Timer(new Duration(milliseconds: 100), () => Ac.MATERIALIZE_REQUIRED = false);
   }
 
   void interactionStart();

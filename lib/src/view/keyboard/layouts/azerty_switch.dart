@@ -14,7 +14,7 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 
 */
 
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * The <code>AzertySwitch</code> class defines a basic azerty-based keyboard layout that

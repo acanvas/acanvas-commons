@@ -14,7 +14,7 @@ This library is provided "as is" with no guarantees whatsoever. Use it at your o
 
 */
 
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * Dispatched when a key is pressed down.
@@ -270,7 +270,7 @@ class Key extends BoxSprite {
     //if (variants != null) addChild(_variantsContainer);
 
     // Now that everything is ready, listen to touch events
-    if (Rd.TOUCH) {
+    if (Ac.TOUCH) {
       addEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       addEventListener(TouchEvent.TOUCH_END, _onTouch);
       addEventListener(TouchEvent.TOUCH_MOVE, _onTouch);
@@ -306,7 +306,7 @@ class Key extends BoxSprite {
 				 */
     }
 
-    if (Rd.TOUCH) {
+    if (Ac.TOUCH) {
       removeEventListener(TouchEvent.TOUCH_BEGIN, _onTouch);
       removeEventListener(TouchEvent.TOUCH_END, _onTouch);
       removeEventListener(TouchEvent.TOUCH_MOVE, _onTouch);
@@ -324,7 +324,7 @@ class Key extends BoxSprite {
   void refresh() {
 //			if (_skin) {
 
-    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.BLUE, sprite: _skin as Sprite);
+    AcGraphics.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.BLUE, sprite: _skin as Sprite);
 //			} else {
 //				spanInternal(44, 52, false);
 //				_skin.width = 44;
@@ -556,7 +556,7 @@ class Key extends BoxSprite {
   /** @ */
   DisplayObject _buildGenericSkin() {
     // Temporarily draw into a Shape object
-    Sprite canvas = RdGraphics.rectangle(0, 0, 44, 52, color: MdColor.BLUE);
+    Sprite canvas = AcGraphics.rectangle(0, 0, 44, 52, color: MdColor.BLUE);
     return canvas;
   }
 

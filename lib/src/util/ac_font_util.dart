@@ -1,13 +1,13 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
-class RdFontUtil {
+class AcFontUtil {
   /* internals */
   List<String> _fonts = new List();
-  static final RdFontUtil _singleton = new RdFontUtil._internal();
+  static final AcFontUtil _singleton = new AcFontUtil._internal();
 
-  RdFontUtil._internal() {}
+  AcFontUtil._internal() {}
 
-  factory RdFontUtil() {
+  factory AcFontUtil() {
     return _singleton;
   }
 

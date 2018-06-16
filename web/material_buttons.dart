@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:html' as html;
-import 'package:rockdot_commons/rockdot_commons.dart';
+import 'package:acanvas_commons/acanvas_commons.dart';
 import 'package:stagexl/stagexl.dart';
 
 Stage stage;
@@ -8,13 +8,13 @@ Stage stage;
 Future main() async {
   var opts = new StageOptions();
   opts.maxPixelRatio = 1.0;
-  opts.stageScaleMode = Rd.MOBILE ? StageScaleMode.NO_SCALE : StageScaleMode.NO_SCALE;
+  opts.stageScaleMode = Ac.MOBILE ? StageScaleMode.NO_SCALE : StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
   opts.stageRenderMode = StageRenderMode.AUTO;
   opts.backgroundColor = 0xFFf9f9f9;
-  opts.renderEngine = Rd.MOBILE ? RenderEngine.WebGL : RenderEngine.Canvas2D;
-  opts.antialias = Rd.MOBILE ? false : true;
-  opts.inputEventMode = Rd.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
+  opts.renderEngine = Ac.MOBILE ? RenderEngine.WebGL : RenderEngine.Canvas2D;
+  opts.antialias = Ac.MOBILE ? false : true;
+  opts.inputEventMode = Ac.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
   opts.preventDefaultOnTouch = true;
   opts.preventDefaultOnWheel = true;
   opts.preventDefaultOnKeyboard = false;
@@ -22,9 +22,9 @@ Future main() async {
   stage = new Stage(html.querySelector('#stage') as html.CanvasElement, options: opts);
   new RenderLoop()..addStage(stage);
 
-  Rd.STAGE = stage;
-  RdFontUtil.addFont("Roboto:100,300");
-  await RdFontUtil.loadFonts();
+  Ac.STAGE = stage;
+  AcFontUtil.addFont("Roboto:100,300");
+  await AcFontUtil.loadFonts();
   start();
 }
 

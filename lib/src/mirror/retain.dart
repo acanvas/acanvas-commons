@@ -1,7 +1,7 @@
 /*
  * defines  annotation
  */
-part of rockdot_commons;
+part of acanvas_commons;
 
 const Retain retain = const Retain();
 

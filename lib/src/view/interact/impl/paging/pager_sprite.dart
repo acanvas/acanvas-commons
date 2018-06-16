@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author nilsdoehring
@@ -21,7 +21,7 @@ class PagerSprite extends BehaveSprite with MList, MPager {
     _updateControls();
   }
 
-  void setProxyVO(IRdVO vo) {
+  void setProxyVO(IAcVO vo) {
     _proxy.dataRetrieveCommandVO = vo;
     resetAndLoad();
   }

@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class LifecycleEvent extends Event {
   static const String INIT_START = "LifecycleEvent.INIT_START";

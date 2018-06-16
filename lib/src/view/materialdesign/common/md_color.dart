@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class MdColor {
   static const int TRANSPARENT = 0x00000000;

@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -14,10 +14,10 @@ class MdProgress extends Slider {
     spanSize = size;
     momentumEnabled = false;
 
-    RdGraphics.rectangle(0, 0, size, 2, color: bgColor, sprite: this);
+    AcGraphics.rectangle(0, 0, size, 2, color: bgColor, sprite: this);
 
     _progress = new Sprite();
-    RdGraphics.rectangle(0, 0, 10, 2, color: barColor, sprite: _progress);
+    AcGraphics.rectangle(0, 0, 10, 2, color: barColor, sprite: _progress);
     _progress.alpha = 0;
     addChild(_progress);
   }

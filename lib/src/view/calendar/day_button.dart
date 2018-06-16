@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 class DayButton extends Button {
   UITextField _labelTF;
@@ -8,11 +8,11 @@ class DayButton extends Button {
   DayButton(String label, int w, int h) : super() {
     mouseChildren = false;
 
-    _bgOver = RdGraphics.rectangle(0, 0, w, h, color: 0xFFFFE93F);
+    _bgOver = AcGraphics.rectangle(0, 0, w, h, color: 0xFFFFE93F);
     _bgOver.alpha = 0;
     addChild(_bgOver);
 
-    Sprite bg = RdGraphics.rectangle(0, 0, w, h, color: 0xFF000000);
+    Sprite bg = AcGraphics.rectangle(0, 0, w, h, color: 0xFF000000);
     addChild(bg);
 
     TextFormat fm = new TextFormat("Arial", 18, 0xFFFFFFFF);
@@ -33,7 +33,7 @@ class DayButton extends Button {
   void rollOverAction([InputEvent event = null]) {
     if (stage != null) {
       //ContextTool.STAGE.removeTweens(_bgOver);
-      Rd.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(1);
+      Ac.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(1);
       _labelTF.textColor = 0xFF000000;
     } else if (_bgOver != null) {
       _bgOver.alpha = 1;
@@ -43,7 +43,7 @@ class DayButton extends Button {
   @override
   void rollOutAction([InputEvent event = null]) {
     if (stage != null) {
-      Rd.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(0);
+      Ac.JUGGLER.addTween(_bgOver, 0.3)..animate.alpha.to(0);
       _labelTF.textColor = 0xFFFFFFFF;
     } else if (_bgOver != null) {
       _bgOver.alpha = 0;

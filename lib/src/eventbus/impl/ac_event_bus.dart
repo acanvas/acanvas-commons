@@ -13,20 +13,20 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * Simplified EventBus for Dart
  */
-class RdEventBus extends EventDispatcher implements IEventBus {
-  static final RdEventBus _singleton = new RdEventBus._internal();
+class AcEventBus extends EventDispatcher implements IEventBus {
+  static final AcEventBus _singleton = new AcEventBus._internal();
   Logger LOGGER;
 
-  factory RdEventBus() {
+  factory AcEventBus() {
     return _singleton;
   }
 
-  RdEventBus._internal() {
+  AcEventBus._internal() {
     // initialization logic here
     LOGGER = new Logger("DartEventBus");
   }

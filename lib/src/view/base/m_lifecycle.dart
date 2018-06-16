@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
  * @author Nils Doehring (nilsdoehring@gmail.com)
@@ -66,7 +66,7 @@ abstract class MLifecycle {
 
   void appear({double duration: APPEAR_DURATION_DEFAULT}) {
     //event appear
-    Rd.JUGGLER.delayCall(() {
+    Ac.JUGGLER.delayCall(() {
       dispatchEvent(new LifecycleEvent(LifecycleEvent.APPEAR_COMPLETE));
     }, duration);
   }

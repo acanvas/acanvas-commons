@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
 	 * Written in 2014 by Nils Döhring, Block Forest
@@ -39,7 +39,7 @@ class PagerPrevNextButton extends Button {
     if (stage != null) {
       Tween tween = new Tween(_bg, 0.2, Transition.easeInCubic);
       tween.animate.alpha.to(.7);
-      Rd.JUGGLER.add(tween);
+      Ac.JUGGLER.add(tween);
     } else if (_bg != null) {
       _bg.alpha = 0.7;
     }
@@ -52,7 +52,7 @@ class PagerPrevNextButton extends Button {
     if (stage != null) {
       Tween tween = new Tween(_bg, 0.3, Transition.easeInCubic);
       tween.animate.alpha.to(1);
-      Rd.JUGGLER.add(tween);
+      Ac.JUGGLER.add(tween);
     } else if (_bg != null) {
       _bg.alpha = 1;
     }

@@ -1,4 +1,4 @@
-part of rockdot_commons;
+part of acanvas_commons;
 
 /**
 	 * Written in 2014 by Nils Döhring, Block Forest
@@ -39,7 +39,7 @@ class PolaroidItemButton extends SelectableButton {
     _image.span(spanWidth - 6, spanHeight - 20, refresh: true);
     _image.x = ((spanWidth / 2 - _image.width / 2));
 
-    RdGraphics.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.WHITE, sprite: _bg);
+    AcGraphics.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.WHITE, sprite: _bg);
 
     pivotX = spanWidth / 2;
     pivotY = spanHeight / 2;
