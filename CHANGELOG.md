@@ -1,5 +1,10 @@
 # CHANGELOG ACANVAS_COMMONS
 
+## 0.11.0 2018-08-13
+
+- depends on Dart 2.0.0 stable
+    - sdk requirement: '>=2.0.0 <3.0.0'
+
 ## 0.10.0 2018-05-13
 
 - sdk requirement: '>=2.0.0-dev.54 <2.0.0'

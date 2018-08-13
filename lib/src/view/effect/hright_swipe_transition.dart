@@ -30,7 +30,7 @@ class HRightSwipeTransition extends BasicEffect {
     BoxSprite target = t;
     target.parent.mask = new Mask.rectangle(target.x, target.y, target.spanWidth, target.spanHeight);
     Ac.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
-      ..animate.x.to(target.stage.stageWidth)
+      ..animate.x.to(target.x + target.spanWidth)
       ..onComplete = () {
         callback.call();
         target.parent.mask = null;

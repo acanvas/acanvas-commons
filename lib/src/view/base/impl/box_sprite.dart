@@ -10,7 +10,7 @@ class BoxSprite extends Sprite3D with MBox {
     if (spanHeight > 0) this.spanHeight = spanHeight;
 
     children.where((c) => c is MBox && (c as MBox).inheritSpan).forEach((child) {
-      (child as MBox).span(spanWidth, spanHeight - 2 * padding, refresh: refresh);
+      (child as MBox).span(spanWidth, spanHeight, refresh: refresh);
     });
     children.where((c) => c is UITextField && c.inheritWidth).forEach((child) {
       child.width = spanWidth - 2 * padding;
@@ -38,7 +38,12 @@ class BoxSprite extends Sprite3D with MBox {
     }
 
     if (removeSelf && parent != null) {
+      // keep parent from calling dispose again
+      inheritDispose = false;
+      // remove this sprite from parent
       parent.removeChild(this);
+      // reactivate
+      inheritDispose = true;
     }
   }
 
@@ -91,9 +96,9 @@ class BoxSprite extends Sprite3D with MBox {
 
   @override
   void removeChild(DisplayObject child) {
-    super.removeChild(child);
     if (child is MBox && (child as MBox).inheritDispose) {
       (child as MBox).dispose();
     }
+    super.removeChild(child);
   }
 }
