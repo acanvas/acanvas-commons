@@ -95,7 +95,8 @@ class ClassUtils {
    *
    * @return the fully qualified name of the class
    */
-  static String getFullyQualifiedName(Type clazz, [bool replaceColons = false]) {
+  static String getFullyQualifiedName(Type clazz,
+      [bool replaceColons = false]) {
     String result = reflectClass(clazz).qualifiedName.toString();
     return result;
   }
@@ -125,7 +126,9 @@ class ClassUtils {
     if (startIndex == -1) {
       return fullyQualifiedName;
     } else {
-      return fullyQualifiedName.substring(startIndex + PACKAGE_CLASS_SEPARATOR.length, fullyQualifiedName.length);
+      return fullyQualifiedName.substring(
+          startIndex + PACKAGE_CLASS_SEPARATOR.length,
+          fullyQualifiedName.length);
     }
   }
 

@@ -168,7 +168,8 @@ class SoftKeyboard extends BoxSprite {
 
       for (int j = 0; j < kr.numChildren; j++) {
         Key k = kr.getChildAt(j) as Key;
-        k.addEventListener(KeyEvent.KEY_UP_PRINTABLE, _onKeyUpPrintableOrVisible);
+        k.addEventListener(
+            KeyEvent.KEY_UP_PRINTABLE, _onKeyUpPrintableOrVisible);
         k.addEventListener(KeyEvent.KEY_UP_VISIBLE, _onKeyUpPrintableOrVisible);
         k.addEventListener(KeyEvent.KEY_DOWN, _onKeyDown);
         k.addEventListener(KeyEvent.KEY_DOWN, _onKeyDown);
@@ -185,8 +186,10 @@ class SoftKeyboard extends BoxSprite {
 
       for (int j = 0; j < kr.numChildren; j++) {
         Key k = kr.getChildAt(j) as Key;
-        k.removeEventListener(KeyEvent.KEY_UP_PRINTABLE, _onKeyUpPrintableOrVisible);
-        k.removeEventListener(KeyEvent.KEY_UP_VISIBLE, _onKeyUpPrintableOrVisible);
+        k.removeEventListener(
+            KeyEvent.KEY_UP_PRINTABLE, _onKeyUpPrintableOrVisible);
+        k.removeEventListener(
+            KeyEvent.KEY_UP_VISIBLE, _onKeyUpPrintableOrVisible);
         k.removeEventListener(KeyEvent.KEY_DOWN, _onKeyDown);
         k.removeEventListener(KeyEvent.KEY_UP, _onKeyUp);
         k.removeEventListener(KeyEvent.SHOW_VARIANTS, _onShowVariants);
@@ -224,7 +227,8 @@ class SoftKeyboard extends BoxSprite {
 
     // For whatever reason, we need to manually resize the Callout otherwise in some cases
     // (when the keyboard is small for instance) the variant keys are too small.
-    _callout.span(key.height, (key.width * key.variants.length) + (key.variants.length - 1) * 5);
+    _callout.span(key.height,
+        (key.width * key.variants.length) + (key.variants.length - 1) * 5);
 
     // THIS BREAKS THE TOP ARROW !!!!!
   }
@@ -235,8 +239,11 @@ class SoftKeyboard extends BoxSprite {
     keyboard.inheritSpan = true;
 
     // Check if rows have been defined properly in the layout
-    if (layout.rows == null || !(layout.rows is List<List<Key>>) || layout.rows.length < 1) {
-      throw new StateError('SoftKeyboard error: no rows have been defined in the specified layout.');
+    if (layout.rows == null ||
+        !(layout.rows is List<List<Key>>) ||
+        layout.rows.length < 1) {
+      throw new StateError(
+          'SoftKeyboard error: no rows have been defined in the specified layout.');
     }
 
     for (int i = 0; i < layout.rows.length; i++) {
@@ -317,7 +324,8 @@ class SoftKeyboard extends BoxSprite {
     // size based on the number of rows;
     KeyRow widest = _getWidestRow(keyboard);
     num hUnit = (spanWidth - 2 * padding) / widest.relativeWidth;
-    num vUnit = (spanHeight - 2 * padding) / (rowCount + ((rowCount - 1) * currentLayout.verticalGap));
+    num vUnit = (spanHeight - 2 * padding) /
+        (rowCount + ((rowCount - 1) * currentLayout.verticalGap));
 
     Key key;
     // Loop through all rows of keys
@@ -340,7 +348,9 @@ class SoftKeyboard extends BoxSprite {
     for (int k = 0; k < rowCount; k++) {
       KeyRow r = (keyboard.getChildAt(k) as KeyRow);
       r.x = (((width - 2 * padding) - r.width) / 2 + padding).round();
-      r.y = (((key.spanHeight + currentLayout.verticalGap * vUnit) * k) + padding).round();
+      r.y =
+          (((key.spanHeight + currentLayout.verticalGap * vUnit) * k) + padding)
+              .round();
     }
 
     // Size background (if any is present)

@@ -9,9 +9,12 @@ class MdDialog extends BoxSprite {
   Flow _hbox;
 
   MdDialog(String title,
-      {int fontColor: MdColor.BLACK, this.bgColor: MdColor.WHITE, String fontName: MdText.DEFAULT_FONT})
+      {int fontColor: MdColor.BLACK,
+      this.bgColor: MdColor.WHITE,
+      String fontName: MdText.DEFAULT_FONT})
       : super() {
-    addChild(new MdShadow(type: MdShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
+    addChild(new MdShadow(
+        type: MdShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
 
     _title = new MdText(title, size: 22, color: fontColor, fontName: fontName);
     addChild(_title);

@@ -9,7 +9,8 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
 
   AbstractPolaroidPager(String labelPrev, String labelNext, String labelEmpty,
       {int buttonWidth: WIDTH_BUTTON, int DATA_PAGESIZE: 100})
-      : super(labelPrev, labelNext, labelEmpty, buttonWidth: buttonWidth, DATA_PAGESIZE: DATA_PAGESIZE) {
+      : super(labelPrev, labelNext, labelEmpty,
+            buttonWidth: buttonWidth, DATA_PAGESIZE: DATA_PAGESIZE) {
     name = "element.pager.polaroid";
   }
 
@@ -66,7 +67,9 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
 
         item.xPos = currentWidth + (new Random().nextInt(50) - 25);
         item.yPos = 180 + listItemHeight * (currentLine);
-        if (rows > 1 && currentWidth + listItemWidth > spanWidth - 80 && ++currentLine < rows) {
+        if (rows > 1 &&
+            currentWidth + listItemWidth > spanWidth - 80 &&
+            ++currentLine < rows) {
           currentWidth = (listItemWidth / 2).round();
         } else {
           currentWidth += listItemWidth;
@@ -130,8 +133,8 @@ class AbstractPolaroidPager extends AbstractPhotoPager {
         ..animate.rotation.to(0)
         ..animate.scaleX.to(2.7)
         ..animate.scaleY.to(2.7)
-        ..onStart = () => (photo.parent as DisplayObjectContainer)
-            .swapChildren(photo, photo.parent.getChildAt(photo.parent.numChildren - 1));
+        ..onStart = () => (photo.parent as DisplayObjectContainer).swapChildren(
+            photo, photo.parent.getChildAt(photo.parent.numChildren - 1));
       Ac.JUGGLER.add(tween);
     } else {
       // Is on top. Do nothing.

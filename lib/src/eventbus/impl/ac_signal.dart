@@ -15,7 +15,8 @@ class AcSignal extends Event {
 
   Function get completeCallBack => _callback;
 
-  AcSignal(String type, [this._data = null, this._callback = null]) : super(type);
+  AcSignal(String type, [this._data = null, this._callback = null])
+      : super(type);
 
   void dispatch() {
     eventBus.dispatchEvent(new AcSignal(type, _data, _callback));

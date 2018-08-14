@@ -49,7 +49,8 @@ abstract class ISimpleEventBus {
    * @param eventType the type of event to listen to
    * @param listener the event handler function
    */
-  bool addEventListener(String eventType, Function listener, [bool useWeakReference = false, Object topic = null]);
+  bool addEventListener(String eventType, Function listener,
+      [bool useWeakReference = false, Object topic = null]);
 
   /**
    * Adds a proxied event handler as a listener to the specified event type.
@@ -61,7 +62,8 @@ abstract class ISimpleEventBus {
   /**
    * Adds the given listener object as a listener to all events sent through the event bus.
    */
-  bool addListener(IEventBusListener listener, [bool useWeakReference = false, Object topic = null]);
+  bool addListener(IEventBusListener listener,
+      [bool useWeakReference = false, Object topic = null]);
 
   /**
    * Removes all event listeners, interceptors and listener interceptors from the current <code>IEventBus</code> instance.
@@ -124,7 +126,8 @@ abstract class ISimpleEventBus {
    * @param eventType
    * @param listener
    */
-  void removeEventListener(String eventType, Function listener, [Object topic = null]);
+  void removeEventListener(String eventType, Function listener,
+      [Object topic = null]);
 
   /**
    * Removes a proxied event handler as a listener from the specified event type.

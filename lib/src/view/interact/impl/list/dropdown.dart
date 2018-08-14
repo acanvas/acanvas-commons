@@ -44,7 +44,8 @@ class ComponentDropdown extends BehaveSprite {
     _sprRollout.x = btnRolloutToggle.x + spanWidth - _sprRollout.width + 43;
     _sprRollout.y = -_sprRollout.height;
 
-    this.mask = new Mask.rectangle(0, 0, _sprRollout.width + 20, _sprRollout.height + 2);
+    this.mask = new Mask.rectangle(
+        0, 0, _sprRollout.width + 20, _sprRollout.height + 2);
   }
 
   void toggleRollout([MouseEvent event = null]) {

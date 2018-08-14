@@ -10,7 +10,8 @@ class HLeftSwipeTransition extends BasicEffect {
     BoxSprite target = t;
     num iTargetXOriginal = target.x;
     //if mask
-    target.parent.mask = new Mask.rectangle(target.x, target.y, target.spanWidth, target.spanHeight);
+    target.parent.mask = new Mask.rectangle(
+        target.x, target.y, target.spanWidth, target.spanHeight);
     target.x = target.stage.stageWidth;
     target.alpha = 1;
 
@@ -25,9 +26,10 @@ class HLeftSwipeTransition extends BasicEffect {
   @override
   void runOutEffect(BoxSprite t, num duration, Function callback) {
     BoxSprite target = t;
-    target.parent.mask = new Mask.rectangle(target.x, target.y, target.spanWidth, target.spanHeight);
+    target.parent.mask = new Mask.rectangle(
+        target.x, target.y, target.spanWidth, target.spanHeight);
     Ac.JUGGLER.addTween(target, duration, Transition.easeOutQuartic)
-      ..animate.x.to(target.x-target.spanWidth)
+      ..animate.x.to(target.x - target.spanWidth)
       ..onComplete = () {
         callback.call();
         target.parent.mask = null;

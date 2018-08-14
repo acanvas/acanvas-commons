@@ -15,7 +15,8 @@ class LifecycleEvent extends Event {
 
   Object _data;
 
-  LifecycleEvent(String type, [this._data = null, bool bubbles = false]) : super(type, bubbles);
+  LifecycleEvent(String type, [this._data = null, bool bubbles = false])
+      : super(type, bubbles);
 
   Event clone() => new LifecycleEvent(type, _data, bubbles);
 }

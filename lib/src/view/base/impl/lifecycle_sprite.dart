@@ -13,7 +13,9 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
       if (spanWidth > 0) this.spanWidth = spanWidth;
       if (spanHeight > 0) this.spanHeight = spanHeight;
 
-      children.where((c) => c is MBox && (c as MBox).inheritSpan).forEach((child) {
+      children
+          .where((c) => c is MBox && (c as MBox).inheritSpan)
+          .forEach((child) {
         (child as MBox).span(spanWidth, spanHeight, refresh: refresh);
       });
 
@@ -34,7 +36,10 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   void onInitComplete() {
     initialized = true;
     children
-        .where((c) => c is MLifecycle && (c as MLifecycle).inheritInit && !(c as MLifecycle).initialized)
+        .where((c) =>
+            c is MLifecycle &&
+            (c as MLifecycle).inheritInit &&
+            !(c as MLifecycle).initialized)
         .forEach((child) {
       if ((child as MBox).inheritSpan) {
         (child as MBox).span(spanWidth, spanHeight, refresh: false);
@@ -47,7 +52,8 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
 
   Future load({Map params: null}) async {
     if (requiresLoading) {
-      throw new StateError("You cannot invoke LifecycleSprite.load() directly. Override it.");
+      throw new StateError(
+          "You cannot invoke LifecycleSprite.load() directly. Override it.");
     } else {
       onLoadComplete();
     }
@@ -65,7 +71,9 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
 
   @override
   void appear({double duration: MLifecycle.APPEAR_DURATION_DEFAULT}) {
-    children.where((c) => c is MLifecycle && (c as MLifecycle).inheritAppear).forEach((child) {
+    children
+        .where((c) => c is MLifecycle && (c as MLifecycle).inheritAppear)
+        .forEach((child) {
       (child as MLifecycle).appear(duration: duration);
     });
 
@@ -73,9 +81,14 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
   }
 
   @override
-  void disappear({double duration: MLifecycle.DISAPPEAR_DURATION_DEFAULT, bool autoDispose: false}) {
-    children.where((c) => c is MLifecycle && (c as MLifecycle).inheritDisappear).forEach((child) {
-      (child as MLifecycle).disappear(duration: duration, autoDispose: autoDispose);
+  void disappear(
+      {double duration: MLifecycle.DISAPPEAR_DURATION_DEFAULT,
+      bool autoDispose: false}) {
+    children
+        .where((c) => c is MLifecycle && (c as MLifecycle).inheritDisappear)
+        .forEach((child) {
+      (child as MLifecycle)
+          .disappear(duration: duration, autoDispose: autoDispose);
     });
     Ac.JUGGLER.delayCall(() {
       dispatchEvent(new LifecycleEvent(LifecycleEvent.DISAPPEAR_COMPLETE));
@@ -100,7 +113,10 @@ class LifecycleSprite extends BehaveSprite with MLifecycle {
       }
     }
 
-    if (child is MLifecycle && !(child as MLifecycle).initialized && (child as MLifecycle).inheritInit && initialized) {
+    if (child is MLifecycle &&
+        !(child as MLifecycle).initialized &&
+        (child as MLifecycle).inheritInit &&
+        initialized) {
       (child as MLifecycle).init();
     }
   }

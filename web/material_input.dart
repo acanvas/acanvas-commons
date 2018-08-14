@@ -12,7 +12,8 @@ Future main() async {
   opts.stageScaleMode = StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
 
-  stage = new Stage(html.querySelector('#stage') as html.CanvasElement, options: opts);
+  stage = new Stage(html.querySelector('#stage') as html.CanvasElement,
+      options: opts);
   Ac.STAGE = stage;
   new RenderLoop()..addStage(stage);
 
@@ -41,13 +42,15 @@ void start() {
   /*
    * Mandatory Input Field
    */
-  MdInput input3 = new MdInput("Type something", required: "This input requires a value.");
+  MdInput input3 =
+      new MdInput("Type something", required: "This input requires a value.");
   vbox.addChild(input3);
 
   /*
    * Mandatory Input Field with Floating Label
    */
-  MdInput input4 = new MdInput("Type something (floating)", required: "This input requires a value.", floating: true);
+  MdInput input4 = new MdInput("Type something (floating)",
+      required: "This input requires a value.", floating: true);
   vbox.addChild(input4);
 
   stage.addChild(vbox);

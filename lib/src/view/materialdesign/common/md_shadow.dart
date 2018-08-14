@@ -42,24 +42,42 @@ class MdShadow extends BoxSprite implements IMdButtonComponent {
       case RECTANGLE:
         if (shadow) {
           AcGraphics.rectangle(0, -1, spanWidth, spanHeight,
-              round: true, color: 0x11000000, sprite: target != null ? target : this, clear: true);
+              round: true,
+              color: 0x11000000,
+              sprite: target != null ? target : this,
+              clear: true);
           AcGraphics.rectangle(-1, 0, spanWidth + 2, spanHeight + 1,
-              round: true, color: 0x22000000, sprite: target != null ? target : this, clear: false);
+              round: true,
+              color: 0x22000000,
+              sprite: target != null ? target : this,
+              clear: false);
           AcGraphics.rectangle(0, 0, spanWidth, spanHeight + 2,
-              round: true, color: 0x33000000, sprite: target != null ? target : this, clear: false);
+              round: true,
+              color: 0x33000000,
+              sprite: target != null ? target : this,
+              clear: false);
         }
         AcGraphics.rectangle(0, 0, spanWidth, spanHeight,
-            round: true, color: bgColor, sprite: target != null ? target : this, clear: !shadow);
+            round: true,
+            color: bgColor,
+            sprite: target != null ? target : this,
+            clear: !shadow);
         break;
       case CIRCLE:
         if (shadow) {
           //GraphicsUtil.circle(spanWidth/2, spanWidth/2-1, spanWidth/2,   round : true, color: 0x11000000, sprite: target != null ? target : this, clear : true);
           //GraphicsUtil.circle(spanWidth/2-1, spanWidth/2, spanWidth/2+1, round : true, color: 0x22000000, sprite: target != null ? target : this, clear : false);
           AcGraphics.circle(spanWidth / 2, spanWidth / 2 + 1, spanWidth / 2 + 1,
-              round: true, color: 0x33000000, sprite: target != null ? target : this, clear: true);
+              round: true,
+              color: 0x33000000,
+              sprite: target != null ? target : this,
+              clear: true);
         }
         AcGraphics.circle(spanWidth / 2, spanWidth / 2, spanWidth / 2,
-            round: true, color: bgColor, sprite: target != null ? target : this, clear: !shadow);
+            round: true,
+            color: bgColor,
+            sprite: target != null ? target : this,
+            clear: !shadow);
         break;
     }
   }
@@ -102,7 +120,8 @@ class MdShadow extends BoxSprite implements IMdButtonComponent {
 
   void _prepareShadowAnimation() {
     if (_shadow == null) {
-      _shadow = new DropShadowFilter(_initialDistance, pi / 2, shadowColor, _blurXY, _blurXY, QUALITY);
+      _shadow = new DropShadowFilter(
+          _initialDistance, pi / 2, shadowColor, _blurXY, _blurXY, QUALITY);
       target != null ? target.filters = [_shadow] : filters = [_shadow];
     }
     _drawShapes(false);

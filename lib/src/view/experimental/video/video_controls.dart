@@ -15,28 +15,39 @@ class VideoControls extends BoxSprite {
     _defaultVideoHeight = _video.height;
     _initPreloader();
 
-    _video.addEventListener(PyroEvent.NEW_STREAM_INIT, _onNewStreamInit, false, 0, true);
+    _video.addEventListener(
+        PyroEvent.NEW_STREAM_INIT, _onNewStreamInit, false, 0, true);
     _video.addEventListener(PyroEvent.STARTED, _onVideoStarted, false, 0, true);
     _video.addEventListener(PyroEvent.STOPPED, _onVideoStopped, false, 0, true);
     _video.addEventListener(PyroEvent.PAUSED, _onVideoPaused, false, 0, true);
-    _video.addEventListener(PyroEvent.UNPAUSED, _onVideoUnPaused, false, 0, true);
+    _video.addEventListener(
+        PyroEvent.UNPAUSED, _onVideoUnPaused, false, 0, true);
     _video.addEventListener(PyroEvent.SEEKED, _onVideoSeeked, false, 0, true);
-    _video.addEventListener(PyroEvent.VOLUME_UPDATE, _onVideoVolumeUpdate, false, 0, true);
-    _video.addEventListener(PyroEvent.BUFFER_EMPTY, _onVideoBufferEmpty, false, 0, true);
-    _video.addEventListener(PyroEvent.BUFFER_FLUSH, _onVideoBufferFlush, false, 0, true);
-    _video.addEventListener(PyroEvent.BUFFER_FULL, _onVideoBufferFull, false, 0, true);
-    _video.addEventListener(PyroEvent.BUFFER_TIME_ADJUSTED, _onVideoBufferTimeAdjusted, false, 0, true);
-    _video.addEventListener(PyroEvent.METADATA_RECEIVED, _onVideoMetadataReceived, false, 0, true);
-    _video.addEventListener(PyroEvent.COMPLETED, _onVideoCompleted, false, 0, true);
+    _video.addEventListener(
+        PyroEvent.VOLUME_UPDATE, _onVideoVolumeUpdate, false, 0, true);
+    _video.addEventListener(
+        PyroEvent.BUFFER_EMPTY, _onVideoBufferEmpty, false, 0, true);
+    _video.addEventListener(
+        PyroEvent.BUFFER_FLUSH, _onVideoBufferFlush, false, 0, true);
+    _video.addEventListener(
+        PyroEvent.BUFFER_FULL, _onVideoBufferFull, false, 0, true);
+    _video.addEventListener(PyroEvent.BUFFER_TIME_ADJUSTED,
+        _onVideoBufferTimeAdjusted, false, 0, true);
+    _video.addEventListener(
+        PyroEvent.METADATA_RECEIVED, _onVideoMetadataReceived, false, 0, true);
+    _video.addEventListener(
+        PyroEvent.COMPLETED, _onVideoCompleted, false, 0, true);
     _video.addEventListener(PyroEvent.MUTED, _onVideoMuted, false, 0, true);
     _video.addEventListener(PyroEvent.UNMUTED, _onVideoUnMuted, false, 0, true);
     _video.addEventListener(PyroEvent.STARTED, _onVideoUnMuted, false, 0, true);
 
     _video.doubleClickEnabled = true;
     _video.addEventListener(MouseEvent.CLICK, _onVideoClick, false, 0, true);
-    _video.addEventListener(MouseEvent.DOUBLE_CLICK, _onVideoDoubleClick, false, 0, true);
+    _video.addEventListener(
+        MouseEvent.DOUBLE_CLICK, _onVideoDoubleClick, false, 0, true);
 
-    stage.addEventListener(KeyboardEvent.KEY_DOWN, _onKeyboardDown, false, 0, true);
+    stage.addEventListener(
+        KeyboardEvent.KEY_DOWN, _onKeyboardDown, false, 0, true);
     stage.addEventListener(Event.FULLSCREEN, _onFullscreen, false, 0, true);
   }
 
@@ -117,7 +128,8 @@ class VideoControls extends BoxSprite {
 
   void _onVideoMetadataReceived(PyroEvent event) {
 //			_log.print("_onVideoMetadataReceived");
-    _video.removeEventListener(PyroEvent.METADATA_RECEIVED, _onVideoMetadataReceived);
+    _video.removeEventListener(
+        PyroEvent.METADATA_RECEIVED, _onVideoMetadataReceived);
   }
 
   void _onVideoCompleted(PyroEvent event) {

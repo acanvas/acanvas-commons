@@ -1,7 +1,8 @@
 part of acanvas_commons;
 
 class UITextFieldInput extends UITextField {
-  UITextFieldInput(String value, TextFormat format) : super(value, format, false) {
+  UITextFieldInput(String value, TextFormat format)
+      : super(value, format, false) {
     type = TextFieldType.INPUT;
     //selectable = true;
     mouseEnabled = true;

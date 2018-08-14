@@ -72,8 +72,11 @@ class BasicEffect implements IEffect {
     target.alpha = 1;
     Rectangle rect = target.getBounds(_stage);
 
-    BitmapData output = new BitmapData((rect.width + 20).ceil(), (rect.height + 20).ceil(), 0x00000000);
-    Matrix mat = target.transformationMatrix != null ? target.transformationMatrix : new Matrix(0, 0, 0, 0, 0, 0);
+    BitmapData output = new BitmapData(
+        (rect.width + 20).ceil(), (rect.height + 20).ceil(), 0x00000000);
+    Matrix mat = target.transformationMatrix != null
+        ? target.transformationMatrix
+        : new Matrix(0, 0, 0, 0, 0, 0);
     _sprite.x = mat.tx;
     _sprite.y = mat.ty;
 
@@ -122,7 +125,8 @@ class BasicEffect implements IEffect {
     }
   }
 
-  void onComplete([Bitmap target = null, BoxSprite page = null, Function callback = null]) {
+  void onComplete(
+      [Bitmap target = null, BoxSprite page = null, Function callback = null]) {
     Ac.JUGGLER.removeTweens(target);
 
     if (target != null) {

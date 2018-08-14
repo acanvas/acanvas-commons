@@ -18,24 +18,29 @@ class MdToast extends BoxSprite {
       int fontSize: 18,
       this.hideAfterSeconds: 3})
       : super() {
-    addChild(new MdShadow(type: MdShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
+    addChild(new MdShadow(
+        type: MdShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
 
-    _title = new MdText(title, size: fontSize, color: fontColor, fontName: fontName);
+    _title =
+        new MdText(title, size: fontSize, color: fontColor, fontName: fontName);
     addChild(_title);
 
-    _progress = new MdProgress(0, 100, 300, bgColor: bgColor, barColor: fontColor);
+    _progress =
+        new MdProgress(0, 100, 300, bgColor: bgColor, barColor: fontColor);
     addChild(_progress);
     _progress.value = 0;
 
     holder.addChild(this);
     span(300, 50);
 
-    Ac.JUGGLER.addTween(this, .3, Transition.easeOutBounce)..animate.y.to(Ac.STAGE.stageHeight - this.height - 20);
+    Ac.JUGGLER.addTween(this, .3, Transition.easeOutBounce)
+      ..animate.y.to(Ac.STAGE.stageHeight - this.height - 20);
 
     if (hideAfterSeconds > 0) {
       hide();
 
-      Ac.JUGGLER.addTranslation(0, 100, hideAfterSeconds, Transition.linear, (num val) => _progress.value = val);
+      Ac.JUGGLER.addTranslation(0, 100, hideAfterSeconds, Transition.linear,
+          (num val) => _progress.value = val);
     }
   }
 

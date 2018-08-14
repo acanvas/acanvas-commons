@@ -44,20 +44,28 @@ class OperationEvent extends Event {
   //
   // --------------------------------------------------------------------
 
-  static OperationEvent createCompleteEvent(IOperation operation, [bool bubbles = false, bool cancelable = false]) {
-    return new OperationEvent(OperationEvent.COMPLETE, operation, bubbles, cancelable);
+  static OperationEvent createCompleteEvent(IOperation operation,
+      [bool bubbles = false, bool cancelable = false]) {
+    return new OperationEvent(
+        OperationEvent.COMPLETE, operation, bubbles, cancelable);
   }
 
-  static OperationEvent createErrorEvent(IOperation operation, [bool bubbles = false, bool cancelable = false]) {
-    return new OperationEvent(OperationEvent.ERROR, operation, bubbles, cancelable);
+  static OperationEvent createErrorEvent(IOperation operation,
+      [bool bubbles = false, bool cancelable = false]) {
+    return new OperationEvent(
+        OperationEvent.ERROR, operation, bubbles, cancelable);
   }
 
-  static OperationEvent createProgressEvent(IOperation operation, [bool bubbles = false, bool cancelable = false]) {
-    return new OperationEvent(OperationEvent.PROGRESS, operation, bubbles, cancelable);
+  static OperationEvent createProgressEvent(IOperation operation,
+      [bool bubbles = false, bool cancelable = false]) {
+    return new OperationEvent(
+        OperationEvent.PROGRESS, operation, bubbles, cancelable);
   }
 
-  static OperationEvent createTimeoutEvent(IOperation operation, [bool bubbles = false, bool cancelable = false]) {
-    return new OperationEvent(OperationEvent.TIMEOUT, operation, bubbles, cancelable);
+  static OperationEvent createTimeoutEvent(IOperation operation,
+      [bool bubbles = false, bool cancelable = false]) {
+    return new OperationEvent(
+        OperationEvent.TIMEOUT, operation, bubbles, cancelable);
   }
 
   // --------------------------------------------------------------------
@@ -71,7 +79,8 @@ class OperationEvent extends Event {
    * @param type The type of the current <code>OperationEvent</code>, can be either <code>OperationEvent.COMPLETE</code>, <code>OperationEvent.ERROR</code> or <code>OperationEvent.PROGRESS</code>.
    * @param operation The <code>IOperation</code> that generated the current <code>OperationEvent</code>.
    */
-  OperationEvent(String type, [IOperation operation, bool bubbles = false, bool cancelable = false])
+  OperationEvent(String type,
+      [IOperation operation, bool bubbles = false, bool cancelable = false])
       : super(type, bubbles) {
     this.operation = operation;
   }

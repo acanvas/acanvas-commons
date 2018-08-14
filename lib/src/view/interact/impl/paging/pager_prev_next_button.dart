@@ -7,7 +7,9 @@ class PagerPrevNextButton extends Button {
   Shape _bg;
   UITextField _label;
   int _color;
-  PagerPrevNextButton(String text, [int w = 0, int h = 100, int size = 24, int color = MdColor.BLUE]) : super() {
+  PagerPrevNextButton(String text,
+      [int w = 0, int h = 100, int size = 24, int color = MdColor.BLUE])
+      : super() {
     _color = color;
 
     _label = new MdText(text, size: size, color: MdColor.BLACK);

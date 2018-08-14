@@ -31,7 +31,8 @@ class Scrollbar extends Slider with MPagedScroll {
 
   //---- START DRAGGING VIA THUMB OR BACKGROUND(as thumb moves to mousedown position)
   @override
-  void interactionStart([bool preventMomentum = false, bool addMouseListeners = true]) {
+  void interactionStart(
+      [bool preventMomentum = false, bool addMouseListeners = true]) {
     if (!_interaction) {
       killPageTween();
       super.interactionStart(preventMomentum, addMouseListeners);
@@ -46,11 +47,15 @@ class Scrollbar extends Slider with MPagedScroll {
       _interaction = false;
       if (stage != null) {
         if (Ac.TOUCH) {
-          stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false);
-          stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false);
+          stage.removeEventListener(TouchEvent.TOUCH_END, _onStageMouseUp,
+              useCapture: false);
+          stage.removeEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove,
+              useCapture: false);
         } else {
-          stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false);
-          stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false);
+          stage.removeEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp,
+              useCapture: false);
+          stage.removeEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove,
+              useCapture: false);
         }
       }
 
@@ -79,9 +84,11 @@ class Scrollbar extends Slider with MPagedScroll {
 
   void snapToCurrentPage() {
     if (momentum < 0)
-      scrollToPage(currentPage - (_rawPagePos - currentPage < 0 ? 1 : 0), 0, true);
+      scrollToPage(
+          currentPage - (_rawPagePos - currentPage < 0 ? 1 : 0), 0, true);
     else if (momentum > 0)
-      scrollToPage(currentPage + (_rawPagePos - currentPage > 0 ? 1 : 0), 0, true);
+      scrollToPage(
+          currentPage + (_rawPagePos - currentPage > 0 ? 1 : 0), 0, true);
     else
       scrollToPage(currentPage);
   }
@@ -236,7 +243,9 @@ class Scrollbar extends Slider with MPagedScroll {
       _pageStepper.maximum = pageCount - 1;
       pageScrollDistance = valueMax / (pageCount < 2 ? 1 : pageCount - 1);
       _thumbSize = max(10, (spanSize / pageCount).round());
-      horizontalScrollBehavior ? thumb.width = _thumbSize : thumb.height = _thumbSize;
+      horizontalScrollBehavior
+          ? thumb.width = _thumbSize
+          : thumb.height = _thumbSize;
 //				render();
     }
   }
@@ -303,7 +312,9 @@ class Scrollbar extends Slider with MPagedScroll {
       //print("pos<maxPos $pos");
     }
     _thumbSize = thumbSize;
-    horizontalScrollBehavior ? thumb.width = _thumbSize : thumb.height = _thumbSize;
+    horizontalScrollBehavior
+        ? thumb.width = _thumbSize
+        : thumb.height = _thumbSize;
     horizontalScrollBehavior ? thumb.x = pos : thumb.y = pos;
   }
 
@@ -335,13 +346,17 @@ class Scrollbar extends Slider with MPagedScroll {
   void _pageScroll() {
     Ac.MATERIALIZE_REQUIRED = true;
     if (snapToPages) {
-      int thumbPos =
-          ((currentPage * pageScrollDistance - valueMin) / (valueMax - valueMin) * (spanSize - _thumbSize)).round();
+      int thumbPos = ((currentPage * pageScrollDistance - valueMin) /
+              (valueMax - valueMin) *
+              (spanSize - _thumbSize))
+          .round();
       if (thumbPos > (horizontalScrollBehavior ? mouseX : mouseY))
         pageUp();
-      else if (thumbPos + _thumbSize < (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
+      else if (thumbPos + _thumbSize <
+          (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
     } else {
-      if ((horizontalScrollBehavior ? thumb.x : thumb.y) > (horizontalScrollBehavior ? mouseX : mouseY))
+      if ((horizontalScrollBehavior ? thumb.x : thumb.y) >
+          (horizontalScrollBehavior ? mouseX : mouseY))
         pageUp();
       else if ((horizontalScrollBehavior ? thumb.x : thumb.y) + _thumbSize <
           (horizontalScrollBehavior ? mouseX : mouseY)) pageDown();
@@ -355,7 +370,8 @@ class Scrollbar extends Slider with MPagedScroll {
   }
 
   void _scrollTransition(num val) {
-    Translation t = new Translation(value, val, pageScrollDuration, Transition.easeOutExponential)
+    Translation t = new Translation(
+        value, val, pageScrollDuration, Transition.easeOutExponential)
       ..onUpdate = _onPageScrollUpdate
       ..onComplete = _onTweenComplete;
     Ac.JUGGLER.add(t);

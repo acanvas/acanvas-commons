@@ -4,7 +4,9 @@ class UITextField extends TextField {
   bool inheritWidth = true;
 
   UITextField(String value, TextFormat format, [bool html = true]) : super() {
-    defaultTextFormat = format != null ? format : new TextFormat("Roboto, Helvetica, Arial", 12, 0xFF000000);
+    defaultTextFormat = format != null
+        ? format
+        : new TextFormat("Roboto, Helvetica, Arial", 12, 0xFF000000);
 
     // Standardwerte für dynamische Textfelder setzen
     displayAsPassword = false;
@@ -33,7 +35,8 @@ class UITextField extends TextField {
 
   void keyDownAction(int keyCode) {
     //print(keyCode);
-    dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN, false, keyCode, KeyLocation.STANDARD, false, false, false));
+    dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN, false, keyCode,
+        KeyLocation.STANDARD, false, false, false));
   }
 
   void textInputAction(String text) {

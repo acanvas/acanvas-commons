@@ -36,13 +36,15 @@ class CompositeCommandEvent extends Event {
    * Defines the value of the type property of a <code>CompositeCommandEvent.BEFORE_EXECUTE_COMMAND</code> event object.
    * @eventType String
    */
-  static const String BEFORE_EXECUTE_COMMAND = "compositeCommandBeforeExecuteCommand";
+  static const String BEFORE_EXECUTE_COMMAND =
+      "compositeCommandBeforeExecuteCommand";
 
   /**
    * Defines the value of the type property of a <code>CompositeCommandEvent.AFTER_EXECUTE_COMMAND</code> event object.
    * @eventType String
    */
-  static const String AFTER_EXECUTE_COMMAND = "compositeCommandAfterExecuteCommand";
+  static const String AFTER_EXECUTE_COMMAND =
+      "compositeCommandAfterExecuteCommand";
 
   ICommand _command;
 
@@ -53,7 +55,8 @@ class CompositeCommandEvent extends Event {
   /**
    * Constructs a new CompositeCommandEvent
    */
-  CompositeCommandEvent(String type, [ICommand command = null, bool bubbles = false, bool cancelable = false])
+  CompositeCommandEvent(String type,
+      [ICommand command = null, bool bubbles = false, bool cancelable = false])
       : super(type, bubbles) {
     _command = command;
   }

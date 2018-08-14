@@ -13,10 +13,15 @@ class MdRadioButton extends SelectableButton {
   Sprite _bg;
   MdText _paperLabel;
 
-  MdRadioButton({int rippleColor: MdColor.GREY_DARK, this.activeColor: MdColor.GREEN, this.label: ""}) : super() {
+  MdRadioButton(
+      {int rippleColor: MdColor.GREY_DARK,
+      this.activeColor: MdColor.GREEN,
+      this.label: ""})
+      : super() {
     inheritSpan = true;
 
-    MdRipple ripple = new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
+    MdRipple ripple =
+        new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
     ripple.inheritSpan = false;
     addChild(ripple);
     ripple.span(RADIUS * 2, RADIUS * 2);

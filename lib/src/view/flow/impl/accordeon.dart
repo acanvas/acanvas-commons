@@ -41,7 +41,8 @@ class Accordeon extends Flow with MDuration {
       _timer.cancel();
     }
     addEventListener(Event.ENTER_FRAME, _onEnterFrame);
-    _timer = new Timer(new Duration(milliseconds: ((duration + 0.1) * 1000).round()),
+    _timer = new Timer(
+        new Duration(milliseconds: ((duration + 0.1) * 1000).round()),
         () => removeEventListener(Event.ENTER_FRAME, _onEnterFrame));
   }
 

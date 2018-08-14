@@ -36,7 +36,8 @@ class MdIconSet {
       '<path d="M4,8h4V4H4V8z M10,20h4v-4h-4V20z M4,20h4v-4H4V20z M4,14h4v-4H4V14z M10,14h4v-4h-4V14z M16,4v4h4V4H16z M10,8h4V4h-4V8z M16,14h4v-4h-4V14z M16,20h4v-4h-4V20z"/>';
   static const String archive =
       '<path d="M20.5,5.2l-1.4-1.7C18.9,3.2,18.5,3,18,3H6C5.5,3,5.1,3.2,4.8,3.5L3.5,5.2C3.2,5.6,3,6,3,6.5V19c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6.5C21,6,20.8,5.6,20.5,5.2z M12,17.5L6.5,12H10v-2h4v2h3.5L12,17.5z M5.1,5l0.8-1h12l0.9,1H5.1z"/>';
-  static const String arrow_back = '<path d="M20,11H7.8l5.6-5.6L12,4l-8,8l8,8l1.4-1.4L7.8,13H20V11z"/>';
+  static const String arrow_back =
+      '<path d="M20,11H7.8l5.6-5.6L12,4l-8,8l8,8l1.4-1.4L7.8,13H20V11z"/>';
   static const String arrow_drop_down = '<polygon points="7,10 12,15 17,10"/>';
   static const String arrow_drop_down_circle =
       '<path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,14l-4-4h8L12,14z"/>';
@@ -67,7 +68,8 @@ class MdIconSet {
       '<path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M4,12c0-4.4,3.6-8,8-8c1.8,0,3.5,0.6,4.9,1.7L5.7,16.9C4.6,15.5,4,13.8,4,12z M12,20c-1.8,0-3.5-0.6-4.9-1.7L18.3,7.1C19.4,8.5,20,10.2,20,12C20,16.4,16.4,20,12,20z"/>';
   static const String book =
       '<path d="M18,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V4C20,2.9,19.1,2,18,2z M6,4h5v8l-2.5-1.5L6,12V4z"/>';
-  static const String bookmark = '<path d="M17,3H7C5.9,3,5,3.9,5,5l0,16l7-3l7,3V5C19,3.9,18.1,3,17,3z"/>';
+  static const String bookmark =
+      '<path d="M17,3H7C5.9,3,5,3.9,5,5l0,16l7-3l7,3V5C19,3.9,18.1,3,17,3z"/>';
   static const String bookmark_outline =
       '<path d="M17,3H7C5.9,3,5,3.9,5,5l0,16l7-3l7,3V5C19,3.9,18.1,3,17,3z M17,18l-5-2.2L7,18V5h10V18z"/>';
   static const String bug_report =
@@ -78,7 +80,8 @@ class MdIconSet {
       '<path d="M19,8l-4,4h3c0,3.3-2.7,6-6,6c-1,0-2-0.3-2.8-0.7l-1.5,1.5C9,19.5,10.4,20,12,20c4.4,0,8-3.6,8-8h3L19,8z M6,12c0-3.3,2.7-6,6-6c1,0,2,0.3,2.8,0.7l1.5-1.5C15,4.5,13.6,4,12,4c-4.4,0-8,3.6-8,8H1l4,4l4-4H6z"/>';
   static const String cancel =
       '<path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M17,15.6L15.6,17L12,13.4L8.4,17L7,15.6l3.6-3.6L7,8.4L8.4,7l3.6,3.6L15.6,7L17,8.4L13.4,12L17,15.6z"/>';
-  static const String check = '<polygon points="9,16.2 4.8,12 3.4,13.4 9,19 21,7 19.6,5.6"/>';
+  static const String check =
+      '<polygon points="9,16.2 4.8,12 3.4,13.4 9,19 21,7 19.6,5.6"/>';
   static const String check_box =
       '<path d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M10,17l-5-5l1.4-1.4l3.6,3.6l7.6-7.6L19,8L10,17z"/>';
   static const String check_box_blank =
@@ -95,8 +98,10 @@ class MdIconSet {
       '<path d="M7.9,10.1l-1.4,1.4L11,16L21,6l-1.4-1.4L11,13.2L7.9,10.1z M20,12c0,4.4-3.6,8-8,8s-8-3.6-8-8s3.6-8,8-8c0.8,0,1.5,0.1,2.2,0.3l1.6-1.6C14.6,2.3,13.3,2,12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10H20z"/>';
   static const String check_circle_outline_blank =
       '<path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8c4.4,0,8,3.6,8,8S16.4,20,12,20z"/>';
-  static const String chevron_left = '<polygon points="15.4,7.4 14,6 8,12 14,18 15.4,16.6 10.8,12"/>';
-  static const String chevron_right = '<polygon points="10,6 8.6,7.4 13.2,12 8.6,16.6 10,18 16,12"/>';
+  static const String chevron_left =
+      '<polygon points="15.4,7.4 14,6 8,12 14,18 15.4,16.6 10.8,12"/>';
+  static const String chevron_right =
+      '<polygon points="10,6 8.6,7.4 13.2,12 8.6,16.6 10,18 16,12"/>';
   static const String class_icon =
       '<path d="M18,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V4C20,2.9,19.1,2,18,2z M6,4h5v8l-2.5-1.5L6,12V4z"/>';
   static const String clear =
@@ -135,7 +140,8 @@ class MdIconSet {
       '<path d="M14,2H6C4.9,2,4,2.9,4,4l0,16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z M16,18H8v-2h8V18z M16,14H8v-2h8V14z M13,9V3.5L18.5,9H13z"/>';
   static const String developer_mode_tv =
       '<path d="M4,5h16v2h2l0-2c0-1.1-0.9-2-2-2H4C2.9,3,2,3.9,2,5v2h2V5z M7.6,13.8L4.7,11l2.8-2.8L6.1,6.8L1.9,11l4.2,4.2L7.6,13.8z M20,17H4v-2H2v2c0,1.1,0.9,2,2,2h4v2h8v-2h4c1.1,0,2-0.9,2-2l0-2h-2V17z M22,11l-4.2-4.2l-1.4,1.4l2.8,2.8l-2.8,2.8l1.4,1.4L22,11L22,11L22,11L22,11L22,11z"/>';
-  static const String done = '<polygon points="9,16.2 4.8,12 3.4,13.4 9,19 21,7 19.6,5.6"/>';
+  static const String done =
+      '<polygon points="9,16.2 4.8,12 3.4,13.4 9,19 21,7 19.6,5.6"/>';
   static const String done_all =
       '<path d="M18,7l-1.4-1.4l-6.3,6.3l1.4,1.4L18,7z M22.2,5.6L11.7,16.2L7.5,12l-1.4,1.4l5.6,5.6l12-12L22.2,5.6z M0.4,13.4L6,19l1.4-1.4L1.8,12L0.4,13.4z"/>';
   static const String drafts =
@@ -198,8 +204,10 @@ class MdIconSet {
       '<path d="M17,12h-5v5h5V12z M16,1v2H8V1H6v2H5C3.9,3,3,3.9,3,5l0,14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5c0-1.1-0.9-2-2-2h-1V1H16z M19,19H5V8h14V19z"/>';
   static const String exit_to_app =
       '<path d="M10.1,15.6l1.4,1.4l5-5l-5-5l-1.4,1.4l2.6,2.6H3v2h9.7L10.1,15.6z M19,3H5C3.9,3,3,3.9,3,5v4h2V5h14v14H5v-4H3v4c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z"/>';
-  static const String expand_less = '<polygon points="12,8 6,14 7.4,15.4 12,10.8 16.6,15.4 18,14"/>';
-  static const String expand_more = '<polygon points="16.6,8.6 12,13.2 7.4,8.6 6,10 12,16 18,10"/>';
+  static const String expand_less =
+      '<polygon points="12,8 6,14 7.4,15.4 12,10.8 16.6,15.4 18,14"/>';
+  static const String expand_more =
+      '<polygon points="16.6,8.6 12,13.2 7.4,8.6 6,10 12,16 18,10"/>';
   static const String explore =
       '<path d="M12,10.9c-0.6,0-1.1,0.5-1.1,1.1s0.5,1.1,1.1,1.1c0.6,0,1.1-0.5,1.1-1.1S12.6,10.9,12,10.9z M12,2C6.5,2,2,6.5,2,12c0,5.5,4.5,10,10,10c5.5,0,10-4.5,10-10C22,6.5,17.5,2,12,2z M14.2,14.2L6,18l3.8-8.2L18,6L14.2,14.2z"/>';
   static const String extension =
@@ -208,13 +216,16 @@ class MdIconSet {
       '<path d="M12,21.4L10.6,20C5.4,15.4,2,12.3,2,8.5C2,5.4,4.4,3,7.5,3c1.7,0,3.4,0.8,4.5,2.1C13.1,3.8,14.8,3,16.5,3C19.6,3,22,5.4,22,8.5c0,3.8-3.4,6.9-8.6,11.5L12,21.4z"/>';
   static const String favorite_outline =
       '<path d="M16.5,3c-1.7,0-3.4,0.8-4.5,2.1C10.9,3.8,9.2,3,7.5,3C4.4,3,2,5.4,2,8.5c0,3.8,3.4,6.9,8.6,11.5l1.4,1.3l1.4-1.3c5.1-4.7,8.6-7.8,8.6-11.5C22,5.4,19.6,3,16.5,3z M12.1,18.6L12,18.6l-0.1-0.1C7.1,14.2,4,11.4,4,8.5C4,6.5,5.5,5,7.5,5c1.5,0,3,1,3.6,2.4h1.9C13.5,6,15,5,16.5,5c2,0,3.5,1.5,3.5,3.5C20,11.4,16.9,14.2,12.1,18.6z"/>';
-  static const String file_download = '<path d="M19,9h-4V3H9v6H5l7,7L19,9z M5,18v2h14v-2H5z"/>';
+  static const String file_download =
+      '<path d="M19,9h-4V3H9v6H5l7,7L19,9z M5,18v2h14v-2H5z"/>';
   static const String file_map =
       '<path d="M12,6.5c-0.8,0-1.5,0.7-1.5,1.5s0.7,1.5,1.5,1.5c0.8,0,1.5-0.7,1.5-1.5S12.8,6.5,12,6.5z M19,1H5C3.9,1,3,1.9,3,3v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V3C21,1.9,20.1,1,19,1z M12.5,17h-1c-1-4.1-4-5.8-4-9c0-2.5,2-4.5,4.5-4.5c2.5,0,4.5,2,4.5,4.5C16.5,11.2,13.5,12.9,12.5,17z"/>';
   static const String file_upload =
       '<polygon points="9,16 15,16 15,10 19,10 12,3 5,10 9,10"/><rect x="5" y="18" width="14" height="2"/>';
-  static const String filter = '<path d="M10,18h4v-2h-4V18z M3,6v2h18V6H3z M6,13h12v-2H6V13z"/>';
-  static const String flag = '<polygon points="14.4,6 14,4 5,4 5,21 7,21 7,14 12.6,14 13,16 20,16 20,6"/>';
+  static const String filter =
+      '<path d="M10,18h4v-2h-4V18z M3,6v2h18V6H3z M6,13h12v-2H6V13z"/>';
+  static const String flag =
+      '<polygon points="14.4,6 14,4 5,4 5,21 7,21 7,14 12.6,14 13,16 20,16 20,6"/>';
   static const String flip_to_back =
       '<path d="M9,7H7l0,2h2V7z M9,11H7v2h2V11z M9,3C7.9,3,7,3.9,7,5h2V3z M13,15h-2v2h2V15z M19,3v2h2C21,3.9,20.1,3,19,3z M13,3h-2v2h2V3z M9,17v-2H7C7,16.1,7.9,17,9,17z M19,13h2v-2h-2V13z M19,9h2V7h-2V9z M19,17c1.1,0,2-0.9,2-2h-2V17z M5,7H3v2h0l0,10c0,1.1,0.9,2,2,2h12v-2H5V7z M15,5h2V3h-2V5z M15,17h2v-2h-2V17z"/>';
   static const String flip_to_front =
@@ -227,14 +238,16 @@ class MdIconSet {
       '<path d="M20,6h-8l-2-2H4C2.9,4,2,4.9,2,6l0,12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V8C22,6.9,21.1,6,20,6z M20,18H4V8h16V18z"/>';
   static const String folder_shared =
       '<path d="M20,6h-8l-2-2H4C2.9,4,2,4.9,2,6l0,12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V8C22,6.9,21.1,6,20,6z M15,9c1.1,0,2,0.9,2,2c0,1.1-0.9,2-2,2c-1.1,0-2-0.9-2-2C13,9.9,13.9,9,15,9z M19,17h-8v-1c0-1.3,2.7-2,4-2c1.3,0,4,0.7,4,2V17z"/>';
-  static const String forward = '<polygon points="12,8 12,4 20,12 12,20 12,16 4,16 4,8"/>';
+  static const String forward =
+      '<polygon points="12,8 12,4 20,12 12,20 12,16 4,16 4,8"/>';
   static const String fullscreen =
       '<path d="M7,14H5v5h5v-2H7V14z M5,10h2V7h3V5H5V10z M17,17h-3v2h5v-5h-2V17z M14,5v2h3v3h2V5H14z"/>';
   static const String fullscreen_exit =
       '<path d="M5,16h3v3h2v-5H5V16z M8,8H5v2h5V5H8V8z M14,19h2v-3h3v-2h-5V19z M16,8V5h-2v5h5V8H16z"/>';
   static const String gesture =
       '<path d="M4.6,6.9C5.3,6.2,6,5.5,6.3,5.7c0.5,0.2,0,1-0.3,1.5c-0.3,0.4-2.9,3.9-2.9,6.3c0,1.3,0.5,2.3,1.3,3c0.8,0.6,1.7,0.7,2.6,0.5c1.1-0.3,1.9-1.4,3.1-2.8c1.2-1.5,2.8-3.4,4.1-3.4c1.6,0,1.6,1,1.8,1.8c-3.8,0.6-5.4,3.7-5.4,5.4c0,1.7,1.4,3.1,3.2,3.1c1.6,0,4.3-1.3,4.7-6.1H21v-2.5h-2.5c-0.2-1.6-1.1-4.2-4-4.2c-2.2,0-4.2,1.9-4.9,2.8c-0.6,0.7-2.1,2.5-2.3,2.7c-0.3,0.3-0.7,0.8-1.1,0.8c-0.4,0-0.7-0.8-0.4-1.9c0.4-1.1,1.4-2.9,1.9-3.5C8.4,8,8.9,7.2,8.9,5.9C8.9,3.7,7.3,3,6.4,3C5.1,3,4,4,3.7,4.3C3.4,4.6,3.1,4.9,2.8,5.2L4.6,6.9z M13.9,18.6c-0.3,0-0.7-0.3-0.7-0.7c0-0.6,0.7-2.2,2.9-2.8C15.7,17.8,14.6,18.6,13.9,18.6z"/>';
-  static const String get_app = '<path d="M19,9h-4V3H9v6H5l7,7L19,9z M5,18v2h14v-2H5z"/>';
+  static const String get_app =
+      '<path d="M19,9h-4V3H9v6H5l7,7L19,9z M5,18v2h14v-2H5z"/>';
   static const String google =
       '<path d="M16.3,13.4l-1.1-0.8c-0.4-0.3-0.8-0.7-0.8-1.4c0-0.7,0.5-1.3,1-1.6c1.3-1,2.6-2.1,2.6-4.3c0-2.1-1.3-3.3-2-3.9h1.7L18.9,0h-6.2C8.3,0,6.1,2.8,6.1,5.8c0,2.3,1.8,4.8,5,4.8h0.8c-0.1,0.3-0.4,0.8-0.4,1.3c0,1,0.4,1.4,0.9,2c-1.4,0.1-4,0.4-5.9,1.6c-1.8,1.1-2.3,2.6-2.3,3.7c0,2.3,2.1,4.5,6.6,4.5c5.4,0,8-3,8-5.9C18.8,15.7,17.7,14.6,16.3,13.4z M8.7,4.3c0-2.2,1.3-3.2,2.7-3.2c2.6,0,4,3.5,4,5.5c0,2.6-2.1,3.1-2.9,3.1C10,9.7,8.7,6.6,8.7,4.3z M12.3,22.3c-3.3,0-5.4-1.5-5.4-3.7c0-2.2,2-2.9,2.6-3.2c1.3-0.4,3-0.5,3.3-0.5c0.3,0,0.5,0,0.7,0c2.4,1.7,3.4,2.4,3.4,4C16.9,20.8,15,22.3,12.3,22.3z"/>';
   static const String google_plus =
@@ -249,7 +262,8 @@ class MdIconSet {
       '<path d="M14.6,8L12,10.6L9.4,8L8,9.4l2.6,2.6L8,14.6L9.4,16l2.6-2.6l2.6,2.6l1.4-1.4L13.4,12L16,9.4L14.6,8z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8s8,3.6,8,8S16.4,20,12,20z"/>';
   static const String history =
       '<path opacity="0.9" d="M13,3c-5,0-9,4-9,9H1l3.9,3.9c0,0,0,0.1,0.1,0.1l4-4H6c0-3.9,3.1-7,7-7c3.9,0,7,3.1,7,7s-3.1,7-7,7c-1.9,0-3.7-0.8-4.9-2.1l-1.4,1.4C8.3,20,10.5,21,13,21c5,0,9-4,9-9S18,3,13,3z M12,8v5l4.3,2.5l0.7-1.2l-3.5-2.1V8H12z"/>';
-  static const String home = '<polygon points="10,20 10,14 14,14 14,20 19,20 19,12 22,12 12,3 2,12 5,12 5,20"/>';
+  static const String home =
+      '<polygon points="10,20 10,14 14,14 14,20 19,20 19,12 22,12 12,3 2,12 5,12 5,20"/>';
   static const String https =
       '<path d="M18,8h-1V6c0-2.8-2.2-5-5-5C9.2,1,7,3.2,7,6v2H6c-1.1,0-2,0.9-2,2v10c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V10C20,8.9,19.1,8,18,8z M12,17c-1.1,0-2-0.9-2-2s0.9-2,2-2c1.1,0,2,0.9,2,2S13.1,17,12,17z M15.1,8H8.9V6c0-1.7,1.4-3.1,3.1-3.1c1.7,0,3.1,1.4,3.1,3.1V8z"/>';
   static const String image =
@@ -264,7 +278,8 @@ class MdIconSet {
       '<path d="M21,3H3C1.9,3,1,3.9,1,5v4h2V5h18v14H3v-4H1v4c0,1.1,0.9,2,2,2h18c1.1,0,2-0.9,2-2V5C23,3.9,22.1,3,21,3z M11,16l4-4l-4-4v3H1v2h10V16z"/>';
   static const String invert_colors =
       '<path d="M17.7,7.9L12,2.3l0,0v0L6.3,7.9c-3.1,3.1-3.1,8.2,0,11.3c1.6,1.6,3.6,2.3,5.7,2.3c2,0,4.1-0.8,5.7-2.3C20.8,16.1,20.8,11.1,17.7,7.9z M12,19.6L12,19.6c-1.6,0-3.1-0.6-4.2-1.8C6.6,16.7,6,15.2,6,13.6c0-1.6,0.6-3.1,1.8-4.2L12,5.1L12,19.6z"/>';
-  static const String keep = '<path d="M16,12V4h1V2H7v2h1v8l-2,2v2h5.2v6h1.6v-6H18v-2L16,12z"/>';
+  static const String keep =
+      '<path d="M16,12V4h1V2H7v2h1v8l-2,2v2h5.2v6h1.6v-6H18v-2L16,12z"/>';
   static const String label =
       '<path d="M17.6,5.8C17.3,5.3,16.7,5,16,5L5,5C3.9,5,3,5.9,3,7v10c0,1.1,0.9,2,2,2l11,0c0.7,0,1.3-0.3,1.6-0.8L22,12L17.6,5.8z"/>';
   static const String label_outline =
@@ -291,7 +306,8 @@ class MdIconSet {
       '<path d="M20,6H10v6H8V4h6V0H6v6H4C2.9,6,2,6.9,2,8l0,12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V8C22,6.9,21.1,6,20,6z"/>';
   static const String markunread =
       '<path d="M22,6l2-2l-2-2l-2,2l-2-2l-2,2l-2-2l-2,2l-2-2L8,4L6,2L4,4L2,2L0,4l2,2L0,8l2,2l-2,2l2,2l-2,2l2,2l-2,2l2,2l2-2l2,2l2-2l2,2l2-2l2,2l2-2l2,2l2-2l2,2l2-2l-2-2l2-2l-2-2l2-2l-2-2l2-2L22,6z M20,8l-8,5L4,8V6l8,5l8-5V8z"/>';
-  static const String menu = '<path d="M3,18h18v-2H3V18z M3,13h18v-2H3V13z M3,6v2h18V6H3z"/>';
+  static const String menu =
+      '<path d="M3,18h18v-2H3V18z M3,13h18v-2H3V13z M3,6v2h18V6H3z"/>';
   static const String more_horiz =
       '<path d="M6,10c-1.1,0-2,0.9-2,2s0.9,2,2,2c1.1,0,2-0.9,2-2S7.1,10,6,10z M18,10c-1.1,0-2,0.9-2,2s0.9,2,2,2c1.1,0,2-0.9,2-2S19.1,10,18,10z M12,10c-1.1,0-2,0.9-2,2s0.9,2,2,2c1.1,0,2-0.9,2-2S13.1,10,12,10z"/>';
   static const String more_vert =
@@ -350,12 +366,14 @@ class MdIconSet {
   static const String remove_circle_outline =
       '<path d="M7,11v2h10v-2H7z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8c4.4,0,8,3.6,8,8S16.4,20,12,20z"/>';
   static const String reorder = '<path d="M4,16h16v-2H4V16z M4,9v2h16V9H4z"/>';
-  static const String reply = '<path d="M10,9V5l-7,7l7,7v-4.1c5,0,8.5,1.6,11,5.1C20,15,17,10,10,9z"/>';
+  static const String reply =
+      '<path d="M10,9V5l-7,7l7,7v-4.1c5,0,8.5,1.6,11,5.1C20,15,17,10,10,9z"/>';
   static const String reply_all =
       '<path d="M7,8V5l-7,7l7,7v-3l-4-4L7,8z M13,9V5l-7,7l7,7v-4.1c5,0,8.5,1.6,11,5.1C23,15,20,10,13,9z"/>';
   static const String report =
       '<path d="M15.7,3H8.3L3,8.3v7.5L8.3,21h7.5l5.3-5.3V8.3L15.7,3z M12,17.3c-0.7,0-1.3-0.6-1.3-1.3c0-0.7,0.6-1.3,1.3-1.3c0.7,0,1.3,0.6,1.3,1.3C13.3,16.7,12.7,17.3,12,17.3z M13,13h-2V7h2V13z"/>';
-  static const String report_problem = '<path d="M1,21h22L12,2L1,21z M13,18h-2v-2h2V18z M13,14h-2v-4h2V14z"/>';
+  static const String report_problem =
+      '<path d="M1,21h22L12,2L1,21z M13,18h-2v-2h2V18z M13,14h-2v-4h2V14z"/>';
   static const String restore =
       '<path d="M13,3c-5,0-9,4-9,9H1l3.9,3.9c0,0,0,0.1,0.1,0.1l4-4H6c0-3.9,3.1-7,7-7c3.9,0,7,3.1,7,7s-3.1,7-7,7c-1.9,0-3.7-0.8-4.9-2.1l-1.4,1.4C8.3,20,10.5,21,13,21c5,0,9-4,9-9S18,3,13,3z M12,8v5l4.3,2.5l0.7-1.2l-3.5-2.1V8H12z"/>';
   static const String room =
@@ -374,7 +392,8 @@ class MdIconSet {
       '<path d="M15.5,14h-0.8l-0.3-0.3c1-1.1,1.6-2.6,1.6-4.2C16,5.9,13.1,3,9.5,3C5.9,3,3,5.9,3,9.5S5.9,16,9.5,16c1.6,0,3.1-0.6,4.2-1.6l0.3,0.3v0.8l5,5l1.5-1.5L15.5,14z M9.5,14C7,14,5,12,5,9.5S7,5,9.5,5C12,5,14,7,14,9.5S12,14,9.5,14z"/>';
   static const String select_all =
       '<path d="M3,5h2V3C3.9,3,3,3.9,3,5z M3,13h2v-2H3V13z M7,21h2v-2H7V21z M3,9h2V7H3V9z M13,3h-2v2h2V3z M19,3v2h2C21,3.9,20.1,3,19,3z M5,21v-2H3C3,20.1,3.9,21,5,21z M3,17h2v-2H3V17z M9,3H7v2h2V3z M11,21h2v-2h-2V21z M19,13h2v-2h-2V13z M19,21c1.1,0,2-0.9,2-2h-2V21z M19,9h2V7h-2V9z M19,17h2v-2h-2V17z M15,21h2v-2h-2V21z M15,5h2V3h-2V5z M7,17h10V7H7V17z M9,9h6v6H9V9z"/>';
-  static const String send = '<polygon points="2,21 23,12 2,3 2,10 17,12 2,14"/>';
+  static const String send =
+      '<polygon points="2,21 23,12 2,3 2,10 17,12 2,14"/>';
   static const String send_money =
       '<path d="M2,12c0-2.6,1.7-4.8,4-5.7V4.3c-3.4,0.9-6,4-6,7.7s2.6,6.8,6,7.7v-2.1C3.7,16.8,2,14.6,2,12z M24,12l-4-4v3h-7v2h7v3L24,12z M14,18c-3.3,0-6-2.7-6-6s2.7-6,6-6c1.7,0,3.2,0.7,4.2,1.8l1.4-1.4C18.2,4.9,16.2,4,14,4c-4.4,0-8,3.6-8,8s3.6,8,8,8c2.2,0,4.2-0.9,5.7-2.3l-1.4-1.4C17.2,17.3,15.7,18,14,18z"/>';
   static const String settings =
@@ -419,7 +438,8 @@ class MdIconSet {
       '<path d="M17.2,9l-4.4-6.6C12.6,2.2,12.3,2,12,2c-0.3,0-0.6,0.1-0.8,0.4L6.8,9H2c-0.6,0-1,0.4-1,1c0,0.1,0,0.2,0,0.3l2.5,9.3c0.2,0.8,1,1.5,1.9,1.5h13c0.9,0,1.7-0.6,1.9-1.5l2.5-9.3c0-0.1,0-0.2,0-0.3c0-0.6-0.4-1-1-1H17.2z M9,9l3-4.4L15,9H9z M12,17c-1.1,0-2-0.9-2-2s0.9-2,2-2c1.1,0,2,0.9,2,2S13.1,17,12,17z"/>';
   static const String shopping_cart =
       '<path d="M7,18c-1.1,0-2,0.9-2,2s0.9,2,2,2c1.1,0,2-0.9,2-2S8.1,18,7,18z M1,2v2h2l3.6,7.6L5.2,14C5.1,14.3,5,14.7,5,15c0,1.1,0.9,2,2,2h12v-2H7.4c-0.1,0-0.2-0.1-0.2-0.2c0,0,0-0.1,0-0.1L8.1,13h7.4c0.8,0,1.4-0.4,1.7-1l3.6-6.5C21,5.3,21,5.2,21,5c0-0.6-0.4-1-1-1H5.2L4.3,2H1z M17,18c-1.1,0-2,0.9-2,2s0.9,2,2,2c1.1,0,2-0.9,2-2S18.1,18,17,18z"/>';
-  static const String sort = '<path d="M3,18h6v-2H3V18z M3,6v2h18V6H3z M3,13h12v-2H3V13z"/>';
+  static const String sort =
+      '<path d="M3,18h6v-2H3V18z M3,6v2h18V6H3z M3,13h12v-2H3V13z"/>';
   static const String star =
       '<polygon points="12,17.273 18.18,21 16.545,13.971 22,9.244 14.809,8.627 12,2 9.191,8.627 2,9.244 7.455,13.971 5.82,21"/>';
   static const String star_half =
@@ -432,13 +452,16 @@ class MdIconSet {
       '<path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M16.2,18L12,15.4L7.8,18l1.1-4.8L5.2,10l4.9-0.4L12,5l1.9,4.5l4.9,0.4l-3.7,3.2L16.2,18z"/>';
   static const String store =
       '<path d="M20,4H4v2h16V4z M21,14v-2l-1-5H4l-1,5v2h1v6h10v-6h4v6h2v-6H21z M12,18H6v-4h6V18z"/>';
-  static const String subject = '<path d="M14,17H4v2h10V17z M20,9H4v2h16V9z M4,15h16v-2H4V15z M4,5v2h16V5H4z"/>';
+  static const String subject =
+      '<path d="M14,17H4v2h10V17z M20,9H4v2h16V9z M4,15h16v-2H4V15z M4,5v2h16V5H4z"/>';
   static const String swap_driving_apps =
       '<circle cx="6.5" cy="15.5" r="1.5"/><circle cx="17.5" cy="15.5" r="1.5"/><path d="M18.9,7c-0.2-0.6-0.8-1-1.4-1H16H6V4L3,7l2,2l1,1V8h11.7l1.3,4H3v9c0,0.6,0.4,1,1,1h1c0.6,0,1-0.4,1-1v-1h12v1c0,0.6,0.4,1,1,1h1c0.6,0,1-0.4,1-1v-8L18.9,7z M6.5,17C5.7,17,5,16.3,5,15.5S5.7,14,6.5,14C7.3,14,8,14.7,8,15.5S7.3,17,6.5,17z M17.5,17c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5c0.8,0,1.5,0.7,1.5,1.5S18.3,17,17.5,17z M16,0v2H8v2h8v2l3-3L16,0z"/>';
   static const String swap_driving_apps_wheel =
       '<path d="M14.4,6.1c-0.5-0.2-1.1,0-1.3,0.6L11.7,10c-1,0.1-1.7,1-1.7,2c0,1.1,0.9,2,2,2s2-0.9,2-2c0-0.5-0.2-0.9-0.4-1.2l1.4-3.4C15.1,6.9,14.9,6.3,14.4,6.1z M7,9c-0.6,0-1,0.4-1,1c0,0.6,0.4,1,1,1s1-0.4,1-1C8,9.4,7.6,9,7,9z M11,7c0-0.6-0.4-1-1-1S9,6.4,9,7c0,0.6,0.4,1,1,1S11,7.6,11,7z M17,9c-0.6,0-1,0.4-1,1c0,0.6,0.4,1,1,1s1-0.4,1-1C18,9.4,17.6,9,17,9z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M17.3,18c-1.4-1.2-3.2-2-5.3-2s-3.9,0.8-5.3,2C5.1,16.5,4,14.4,4,12c0-4.4,3.6-8,8-8s8,3.6,8,8C20,14.4,18.9,16.5,17.3,18z"/>';
-  static const String swap_horiz = '<path d="M7,11l-4,4l4,4v-3h7v-2H7V11z M21,9l-4-4v3h-7v2h7v3L21,9z"/>';
-  static const String swap_vert = '<path d="M16,17v-7h-2v7h-3l4,4l4-4H16z M9,3L5,7h3v7h2V7h3L9,3z"/>';
+  static const String swap_horiz =
+      '<path d="M7,11l-4,4l4,4v-3h7v-2H7V11z M21,9l-4-4v3h-7v2h7v3L21,9z"/>';
+  static const String swap_vert =
+      '<path d="M16,17v-7h-2v7h-3l4,4l4-4H16z M9,3L5,7h3v7h2V7h3L9,3z"/>';
   static const String swap_vert_circle =
       '<path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M6.5,9L10,5.5L13.5,9H11v4H9V9H6.5z M17.5,15L14,18.5L10.5,15H13v-4h2v4H17.5z"/>';
   static const String system_update_tv =
@@ -463,10 +486,12 @@ class MdIconSet {
       '<path d="M12.9,15.1l-2.5-2.5l0,0c1.7-1.9,3-4.2,3.7-6.5H17V4h-7V2H8v2H1v2l11.2,0c-0.7,1.9-1.7,3.8-3.2,5.4c-0.9-1-1.7-2.2-2.3-3.4h-2c0.7,1.6,1.7,3.2,3,4.6l-5.1,5L4,19l5-5l3.1,3.1L12.9,15.1z M18.5,10h-2L12,22h2l1.1-3h4.8l1.1,3h2L18.5,10z M15.9,17l1.6-4.3l1.6,4.3H15.9z"/>';
   static const String trending_down =
       '<polygon points="16,18 18.3,15.7 13.4,10.8 9.4,14.8 2,7.4 3.4,6 9.4,12 13.4,8 19.7,14.3 22,12 22,18"/>';
-  static const String trending_neutral = '<polygon points="22,12 18,8 18,11 3,11 3,13 18,13 18,16"/>';
+  static const String trending_neutral =
+      '<polygon points="22,12 18,8 18,11 3,11 3,13 18,13 18,16"/>';
   static const String trending_up =
       '<polygon points="16,6 18.3,8.3 13.4,13.2 9.4,9.2 2,16.6 3.4,18 9.4,12 13.4,16 19.7,9.7 22,12 22,6"/>';
-  static const String turned_in = '<path d="M17,3H7C5.9,3,5,3.9,5,5l0,16l7-3l7,3V5C19,3.9,18.1,3,17,3z"/>';
+  static const String turned_in =
+      '<path d="M17,3H7C5.9,3,5,3.9,5,5l0,16l7-3l7,3V5C19,3.9,18.1,3,17,3z"/>';
   static const String turned_in_not =
       '<path d="M17,3H7C5.9,3,5,3.9,5,5l0,16l7-3l7,3V5C19,3.9,18.1,3,17,3z M17,18l-5-2.2L7,18V5h10V18z"/>';
   static const String undo =
@@ -475,15 +500,20 @@ class MdIconSet {
       '<path d="M7.4,18.6L8.8,20l3.2-3.2l3.2,3.2l1.4-1.4L12,14L7.4,18.6z M16.6,5.4L15.2,4L12,7.2L8.8,4L7.4,5.4L12,10L16.6,5.4z"/>';
   static const String unfold_more =
       '<path d="M12,5.8L15.2,9l1.4-1.4L12,3L7.4,7.6L8.8,9L12,5.8z M12,18.2L8.8,15l-1.4,1.4L12,21l4.6-4.6L15.2,15L12,18.2z"/>';
-  static const String view_array = '<path d="M4,18h3V5H4V18z M18,5v13h3V5H18z M8,18h9V5H8V18z"/>';
-  static const String view_column = '<path d="M10,18h5V5h-5V18z M4,18h5V5H4V18z M16,5v13h5V5H16z"/>';
-  static const String view_headline = '<path d="M4,15h17v-2H4V15z M4,19h17v-2H4V19z M4,11h17V9H4V11z M4,5v2h17V5H4z"/>';
+  static const String view_array =
+      '<path d="M4,18h3V5H4V18z M18,5v13h3V5H18z M8,18h9V5H8V18z"/>';
+  static const String view_column =
+      '<path d="M10,18h5V5h-5V18z M4,18h5V5H4V18z M16,5v13h5V5H16z"/>';
+  static const String view_headline =
+      '<path d="M4,15h17v-2H4V15z M4,19h17v-2H4V19z M4,11h17V9H4V11z M4,5v2h17V5H4z"/>';
   static const String view_list =
       '<path d="M4,14h4v-4H4V14z M4,19h4v-4H4V19z M4,9h4V5H4V9z M9,14h12v-4H9V14z M9,19h12v-4H9V19z M9,5v4h12V5H9z"/>';
   static const String view_module =
       '<path d="M4,11h5V5H4V11z M4,18h5v-6H4V18z M10,18h5v-6h-5V18z M16,18h5v-6h-5V18z M10,11h5V5h-5V11z M16,5v6h5V5H16z"/>';
-  static const String view_quilt = '<path d="M10,18h5v-6h-5V18z M4,18h5V5H4V18z M16,18h5v-6h-5V18z M10,5v6h11V5H10z"/>';
-  static const String view_stream = '<path d="M4,18h17v-6H4V18z M4,5v6h17V5H4z"/>';
+  static const String view_quilt =
+      '<path d="M10,18h5v-6h-5V18z M4,18h5V5H4V18z M16,18h5v-6h-5V18z M10,5v6h11V5H10z"/>';
+  static const String view_stream =
+      '<path d="M4,18h17v-6H4V18z M4,5v6h17V5H4z"/>';
   static const String visibility =
       '<path d="M12,4.5C7,4.5,2.7,7.6,1,12c1.7,4.4,6,7.5,11,7.5c5,0,9.3-3.1,11-7.5C21.3,7.6,17,4.5,12,4.5z M12,17c-2.8,0-5-2.2-5-5s2.2-5,5-5c2.8,0,5,2.2,5,5S14.8,17,12,17z M12,9c-1.7,0-3,1.3-3,3s1.3,3,3,3c1.7,0,3-1.3,3-3S13.7,9,12,9z"/>';
   static const String visibility_off =
@@ -494,7 +524,8 @@ class MdIconSet {
       '<path d="M20,2H4C2.9,2,2,2.9,2,4v11c0,1.1,0.9,2,2,2h4v5l4-2l4,2v-5h4c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M20,15H4v-2h16V15z M20,10H4V4h16V10z"/>';
   static const String wallet_travel =
       '<path d="M20,6h-3V4l-2-2H9L7,4v2H4C2.9,6,2,6.9,2,8v11c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V8C22,6.9,21.1,6,20,6z M9,4h6v2H9V4z M20,19H4v-2h16V19z M20,14H4V8h3v4h2V8h6v4h2V8h3V14z"/>';
-  static const String warning = '<path d="M1,21h22L12,2L1,21z M13,18h-2v-2h2V18z M13,14h-2v-4h2V14z"/>';
+  static const String warning =
+      '<path d="M1,21h22L12,2L1,21z M13,18h-2v-2h2V18z M13,14h-2v-4h2V14z"/>';
   static const String work =
       '<path d="M20,6h-4V4l-2-2h-4L8,4v2H4C2.9,6,2,6.9,2,8l0,11c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V8C22,6.9,21.1,6,20,6z M14,6h-4V4h4V6z"/>';
   static const String chat_bubble =

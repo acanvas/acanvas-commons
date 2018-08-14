@@ -20,7 +20,8 @@ class MdWrap extends BoxSprite {
     autoRefresh = false;
     this.padding = padding;
 
-    super.addChild(new MdShadow(type: MdShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
+    super.addChild(new MdShadow(
+        type: MdShadow.RECTANGLE, bgColor: bgColor, respondToClick: false));
 
     panelSprite = new Sprite();
     super.addChild(panelSprite);
@@ -35,7 +36,8 @@ class MdWrap extends BoxSprite {
       ..flowOrientation = FlowOrientation.VERTICAL
       ..alignH = align;
 
-    _scrollManager = new SpriteScrollifier(flow, new DefaultScrollbar(), new DefaultScrollbar());
+    _scrollManager = new SpriteScrollifier(
+        flow, new DefaultScrollbar(), new DefaultScrollbar());
     super.addChild(_scrollManager);
   }
 
@@ -62,6 +64,7 @@ class MdWrap extends BoxSprite {
     flow.y = padding;
 
     super.refresh();
-    AcGraphics.rectangle(0, 0, spanWidth, MdDimensions.HEIGHT_APP_BAR, sprite: panelSprite, color: panelColor);
+    AcGraphics.rectangle(0, 0, spanWidth, MdDimensions.HEIGHT_APP_BAR,
+        sprite: panelSprite, color: panelColor);
   }
 }

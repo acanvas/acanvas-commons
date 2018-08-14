@@ -31,10 +31,25 @@ class NumPad extends Layout {
 
     // Define all rows of keys for that layout
     rows = [
-      [new Key(CharCode.DIGIT_7), new Key(CharCode.DIGIT_8), new Key(CharCode.DIGIT_9)],
-      [new Key(CharCode.DIGIT_4), new Key(CharCode.DIGIT_5), new Key(CharCode.DIGIT_6)],
-      [new Key(CharCode.DIGIT_1), new Key(CharCode.DIGIT_2), new Key(CharCode.DIGIT_3)],
-      [new Key(CharCode.DIGIT_0, null, Key.CHARACTER_KEY, null, 2.1), new Key(CharCode.PERIOD)]
+      [
+        new Key(CharCode.DIGIT_7),
+        new Key(CharCode.DIGIT_8),
+        new Key(CharCode.DIGIT_9)
+      ],
+      [
+        new Key(CharCode.DIGIT_4),
+        new Key(CharCode.DIGIT_5),
+        new Key(CharCode.DIGIT_6)
+      ],
+      [
+        new Key(CharCode.DIGIT_1),
+        new Key(CharCode.DIGIT_2),
+        new Key(CharCode.DIGIT_3)
+      ],
+      [
+        new Key(CharCode.DIGIT_0, null, Key.CHARACTER_KEY, null, 2.1),
+        new Key(CharCode.PERIOD)
+      ]
     ];
   }
 }

@@ -53,12 +53,15 @@ abstract class IProgressOperation extends IOperation {
    * @param listener the event handler function
    */
   void addProgressListener<T extends Event>(EventListener<T> listener,
-      [bool useCapture = false, int priority = 0, bool useWeakReference = false]);
+      [bool useCapture = false,
+      int priority = 0,
+      bool useWeakReference = false]);
 
   /**
    * Convenience method for removing a listener from the OperationEvent.PROGRESS event.
    *
    * @param listener the event handler function
    */
-  void removeProgressListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]);
+  void removeProgressListener<T extends Event>(EventListener<T> listener,
+      [bool useCapture = false]);
 }

@@ -2,7 +2,10 @@ part of acanvas_commons;
 
 class AcGraphics {
   static Sprite rectangle(num x, num y, num w, num h,
-      {int color: 0xFF000000, Sprite sprite: null, bool round: false, bool clear: true}) {
+      {int color: 0xFF000000,
+      Sprite sprite: null,
+      bool round: false,
+      bool clear: true}) {
     if (sprite == null) {
       sprite = new Sprite();
     } else if (clear == true) {
@@ -29,7 +32,10 @@ class AcGraphics {
   }
 
   static Sprite rectRound(num x, num y, num w, num h, num ew, num eh,
-      {int color: 0xFF000000, Sprite sprite: null, bool round: false, bool clear: true}) {
+      {int color: 0xFF000000,
+      Sprite sprite: null,
+      bool round: false,
+      bool clear: true}) {
     if (sprite == null) {
       sprite = new Sprite();
     } else if (clear == true) {
@@ -58,7 +64,10 @@ class AcGraphics {
   }
 
   static Sprite circle(num x, num y, num r,
-      {int color: 0xFF000000, Sprite sprite: null, bool round: false, bool clear: true}) {
+      {int color: 0xFF000000,
+      Sprite sprite: null,
+      bool round: false,
+      bool clear: true}) {
     if (sprite == null) {
       sprite = new Sprite();
     } else if (clear == true) {
@@ -83,7 +92,11 @@ class AcGraphics {
     return sprite;
   }
 
-  static Sprite line(num x, num y, {int color: 0xFF000000, num strength: 1, Sprite sprite: null, bool round: false}) {
+  static Sprite line(num x, num y,
+      {int color: 0xFF000000,
+      num strength: 1,
+      Sprite sprite: null,
+      bool round: false}) {
     if (sprite == null) {
       sprite = new Sprite();
     } else {
@@ -108,8 +121,8 @@ class AcGraphics {
     return sprite;
   }
 
-  static GraphicsGradient linearGraphicsGradient(
-      List<num> colors, List<num> alphas, List<num> ratios, Matrix matrix, Point p1, Point p2) {
+  static GraphicsGradient linearGraphicsGradient(List<num> colors,
+      List<num> alphas, List<num> ratios, Matrix matrix, Point p1, Point p2) {
     //Point point1 = matrix.transformPoint(p1);
     //Point point2 = matrix.transformPoint(p2);
 
@@ -122,12 +135,14 @@ class AcGraphics {
     //print("point1.x: ${point1.x} rect TLx: ${r.topLeft.x}");
 
     //GraphicsGradient g = new GraphicsGradient.linear(r.topLeft.x, r.topLeft.y, r.topRight.x, r.topRight.y);
-    GraphicsGradient g = new GraphicsGradient.linear(point1.x, point1.y, point2.x, point2.y);
+    GraphicsGradient g =
+        new GraphicsGradient.linear(point1.x, point1.y, point2.x, point2.y);
     /*
     GraphicsGradient g = new GraphicsGradient.linear(450, 0, 0, 600);
     */
     for (int i = 0; i < colors.length; i++) {
-      g.addColorStop(ratios[i] / 255, (((alphas[i] * 255).round() << 24) + colors[i]).round());
+      g.addColorStop(ratios[i] / 255,
+          (((alphas[i] * 255).round() << 24) + colors[i]).round());
     }
     return g;
   }

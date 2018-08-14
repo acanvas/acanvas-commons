@@ -71,7 +71,8 @@ class NativeKeyboard extends BoxSprite {
     //_htmlElement.value = text;
 
     _onKeyDownSubscriber = htmlElement.onKeyUp.listen((e) {
-      dispatchEvent(new KeyEvent(KeyEvent.KEY_UP_VISIBLE, e.keyCode, new String.fromCharCode(e.keyCode)));
+      dispatchEvent(new KeyEvent(KeyEvent.KEY_UP_VISIBLE, e.keyCode,
+          new String.fromCharCode(e.keyCode)));
     });
 
     html.querySelector('body').append(htmlElement);

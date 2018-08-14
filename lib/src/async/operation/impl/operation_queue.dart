@@ -28,7 +28,8 @@ part of acanvas_commons;
  * @see org.as3commons.async.operation.OperationEvent OperationEvent
  * @author Christophe Herreman
  */
-class OperationQueue extends AbstractProgressOperation implements IOperationQueue {
+class OperationQueue extends AbstractProgressOperation
+    implements IOperationQueue {
   /** A static counter of queues. */
   static int _queueCounter = 0;
 

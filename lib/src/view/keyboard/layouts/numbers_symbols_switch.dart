@@ -78,7 +78,8 @@ class numsSymbolsSwitch extends Layout {
       */
 
       [
-        new Key(CharCode.SWITCH_LAYOUT, null, Key.SYSTEM_KEY, switchKeyType.SWITCH_KEY_LABEL, 2.5, 1, switchKeyType),
+        new Key(CharCode.SWITCH_LAYOUT, null, Key.SYSTEM_KEY,
+            switchKeyType.SWITCH_KEY_LABEL, 2.5, 1, switchKeyType),
         new Key(CharCode.SPACE, null, Key.CHARACTER_KEY, '', 5),
         new Key(CharCode.RETURN, null, Key.EDITING_KEY, 'RETURN', 2.5)
       ]

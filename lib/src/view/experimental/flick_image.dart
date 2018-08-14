@@ -12,7 +12,9 @@ class ComponentFlickImage extends BoxSprite {
   Timer _flickTimer;
   bool fadeChildren;
 
-  ComponentFlickImage(List data, [int flickInterval = 0, this.fadeChildren = false]) : super() {
+  ComponentFlickImage(List data,
+      [int flickInterval = 0, this.fadeChildren = false])
+      : super() {
     _data = data;
 
     _holder = new Sprite();
@@ -25,7 +27,8 @@ class ComponentFlickImage extends BoxSprite {
     _placeItem(dobj, MIDDLE);
 
     if (flickInterval > 0) {
-      _flickTimer = new Timer.periodic(new Duration(milliseconds: flickInterval), next);
+      _flickTimer =
+          new Timer.periodic(new Duration(milliseconds: flickInterval), next);
     }
   }
 
@@ -41,7 +44,8 @@ class ComponentFlickImage extends BoxSprite {
 
         Ac.JUGGLER.addTween(child, 1)
           ..animate.x.to(child.width.toInt())
-          ..onComplete = () => Function.apply(_onTweenComplete, <dynamic>[child]);
+          ..onComplete =
+              () => Function.apply(_onTweenComplete, <dynamic>[child]);
 
         if (fadeChildren) {
           for (int i = 0; i < data.numChildren; i++) {
@@ -64,7 +68,8 @@ class ComponentFlickImage extends BoxSprite {
 
         Ac.JUGGLER.addTween(child, 1)
           ..animate.x.to(-child.width.toInt())
-          ..onComplete = () => Function.apply(_onTweenComplete, <dynamic>[child]);
+          ..onComplete =
+              () => Function.apply(_onTweenComplete, <dynamic>[child]);
 
         if (fadeChildren) {
           for (int i = 0; i < data.numChildren; i++) {

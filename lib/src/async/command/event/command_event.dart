@@ -31,7 +31,9 @@ class CommandEvent extends Event {
   /**
    * Creates a new <code>CompositeCommandEvent</code> instance.
    */
-  CommandEvent(String type, ICommand command, [bool bubbles = false, bool cancelable = false]) : super(type, bubbles) {
+  CommandEvent(String type, ICommand command,
+      [bool bubbles = false, bool cancelable = false])
+      : super(type, bubbles) {
     _command = command;
   }
 

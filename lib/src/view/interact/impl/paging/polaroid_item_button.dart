@@ -35,11 +35,13 @@ class PolaroidItemButton extends SelectableButton {
 
   @override
   void refresh() {
-    _image.mask = new Mask.rectangle(3, 3, spanWidth - 6, spanHeight - 20)..relativeToParent = true;
+    _image.mask = new Mask.rectangle(3, 3, spanWidth - 6, spanHeight - 20)
+      ..relativeToParent = true;
     _image.span(spanWidth - 6, spanHeight - 20, refresh: true);
     _image.x = ((spanWidth / 2 - _image.width / 2));
 
-    AcGraphics.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.WHITE, sprite: _bg);
+    AcGraphics.rectangle(0, 0, spanWidth, spanHeight,
+        color: MdColor.WHITE, sprite: _bg);
 
     pivotX = spanWidth / 2;
     pivotY = spanHeight / 2;

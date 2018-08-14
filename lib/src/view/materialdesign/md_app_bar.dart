@@ -11,7 +11,11 @@ class MdAppBar extends BoxSprite {
   Flow rightBox;
   MdTabs tabs;
 
-  MdAppBar({this.highlightColor: MdColor.WHITE, this.bgColor: MdColor.BLACK, this.extended: false}) : super() {
+  MdAppBar(
+      {this.highlightColor: MdColor.WHITE,
+      this.bgColor: MdColor.BLACK,
+      this.extended: false})
+      : super() {
     inheritSpan = true;
 
     leftBox = new Flow()..spacing = 20;
@@ -58,7 +62,8 @@ class MdAppBar extends BoxSprite {
     rightBox.refresh();
 
     leftBox.x = 10;
-    leftBox.y = (MdDimensions.HEIGHT_APP_BAR / 2 - (leftBox.height - 0) / 2).round();
+    leftBox.y =
+        (MdDimensions.HEIGHT_APP_BAR / 2 - (leftBox.height - 0) / 2).round();
 
     if (_headline != null) {
       num hw = spanWidth - rightBox.width - 20 - _headline.x;
@@ -71,12 +76,15 @@ class MdAppBar extends BoxSprite {
         _headline.y = MdDimensions.HEIGHT_APP_BAR + 20;
       } else {
         _headline.x = leftBox.x + leftBox.width + 20;
-        _headline.y = (MdDimensions.HEIGHT_APP_BAR / 2 - _headline.height / 2 + 0).round();
+        _headline.y =
+            (MdDimensions.HEIGHT_APP_BAR / 2 - _headline.height / 2 + 0)
+                .round();
       }
     }
 
     rightBox.x = spanWidth - rightBox.width - 20;
-    rightBox.y = (MdDimensions.HEIGHT_APP_BAR / 2 - (rightBox.height - 0) / 2).round();
+    rightBox.y =
+        (MdDimensions.HEIGHT_APP_BAR / 2 - (rightBox.height - 0) / 2).round();
 
     if (tabs != null && tabs.numChildren > 0) {
       tabs.span(spanWidth, MdDimensions.HEIGHT_BUTTON);
@@ -84,7 +92,8 @@ class MdAppBar extends BoxSprite {
       tabs.y = spanHeight - tabs.height;
     }
 
-    AcGraphics.rectangle(0, 0, spanWidth, spanHeight, sprite: this, color: bgColor);
+    AcGraphics.rectangle(0, 0, spanWidth, spanHeight,
+        sprite: this, color: bgColor);
     super.refresh();
   }
 }

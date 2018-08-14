@@ -27,8 +27,10 @@ part of acanvas_commons;
  * @see http://doc.starling-framework.org/ Starling API documentation
  */
 class KeyEvent extends Event {
-  static final String KEY_UP_PRINTABLE = "cc.cote.feathers.softkeyboard.KeyEvent.keyUpPrintable";
-  static final String KEY_UP_VISIBLE = "cc.cote.feathers.softkeyboard.KeyEvent.keyUpVisible";
+  static final String KEY_UP_PRINTABLE =
+      "cc.cote.feathers.softkeyboard.KeyEvent.keyUpPrintable";
+  static final String KEY_UP_VISIBLE =
+      "cc.cote.feathers.softkeyboard.KeyEvent.keyUpVisible";
 
   /**
    * The <code>KEY_UP</code> constant defines the value of the <code>type</code> property of a
@@ -44,7 +46,8 @@ class KeyEvent extends Event {
    *
    * @eventType cc.cote.feathers.softkeyboard.KeyEvent.keyDown
    */
-  static final String KEY_DOWN = "cc.cote.feathers.softkeyboard.KeyEvent.keyDown";
+  static final String KEY_DOWN =
+      "cc.cote.feathers.softkeyboard.KeyEvent.keyDown";
 
   /**
    * The <code>SHOW_VARIANTS</code> constant defines the value of the <code>type</code>
@@ -52,7 +55,8 @@ class KeyEvent extends Event {
    *
    * @eventType cc.cote.feathers.softkeyboard.KeyEvent.showVariants
    */
-  static final String SHOW_VARIANTS = "cc.cote.feathers.softkeyboard.KeyEvent.showVariants";
+  static final String SHOW_VARIANTS =
+      "cc.cote.feathers.softkeyboard.KeyEvent.showVariants";
 
   String _char;
   int _charCode;
@@ -65,7 +69,8 @@ class KeyEvent extends Event {
    * @param char The actual printable character associated to the key that triggered the event.
    * @param data Arbitrary data to pass along with the event
    */
-  KeyEvent(String type, int charCode, [String char = null, Map data = null]) : super(type, false /*, data*/) {
+  KeyEvent(String type, int charCode, [String char = null, Map data = null])
+      : super(type, false /*, data*/) {
     _charCode = charCode;
     _char = char;
   }

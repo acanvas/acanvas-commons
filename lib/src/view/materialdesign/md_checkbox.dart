@@ -24,7 +24,8 @@ class MdCheckbox extends SelectableButton {
       : super() {
     inheritSpan = true;
 
-    MdRipple ripple = new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
+    MdRipple ripple =
+        new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
     ripple.inheritSpan = false;
     addChild(ripple);
     ripple.span(RADIUS * 2, RADIUS * 2);
@@ -80,7 +81,11 @@ class MdCheckbox extends SelectableButton {
     _icon.scaleX = _icon.scaleY = .3;
     _icon.visible = true;
 
-    Ac.JUGGLER.addTween(_box, .15).animate..alpha.to(0)..rotation.to(.8)..scaleX.to(.3)..scaleY.to(.3);
+    Ac.JUGGLER.addTween(_box, .15).animate
+      ..alpha.to(0)
+      ..rotation.to(.8)
+      ..scaleX.to(.3)
+      ..scaleY.to(.3);
 
     Ac.JUGGLER.addTween(_icon, .1)
       ..animate.scaleX.to(1)

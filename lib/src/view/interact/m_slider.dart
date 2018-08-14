@@ -52,7 +52,8 @@ abstract class MSlider {
   void set mouseWheelEnabled(bool value) {
     _mouseWheelEnabled = value;
     if (_mouseWheelEnabled)
-      addEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel, useCapture: false, priority: 0);
+      addEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel,
+          useCapture: false, priority: 0);
     else
       removeEventListener(MouseEvent.MOUSE_WHEEL, _onMouseWheel);
   }
@@ -72,7 +73,8 @@ abstract class MSlider {
     Ac.MATERIALIZE_REQUIRED = true;
 
     if (_materializeControl != null) _materializeControl.cancel();
-    _materializeControl = new Timer(new Duration(milliseconds: 100), () => Ac.MATERIALIZE_REQUIRED = false);
+    _materializeControl = new Timer(
+        new Duration(milliseconds: 100), () => Ac.MATERIALIZE_REQUIRED = false);
   }
 
   void interactionStart();
@@ -244,10 +246,13 @@ abstract class MSlider {
 
   bool get touching => _touching;
 
-  StreamSubscription<T> addEventListener<T extends Event>(String eventType, EventListener<T> eventListener,
+  StreamSubscription<T> addEventListener<T extends Event>(
+      String eventType, EventListener<T> eventListener,
       {bool useCapture: false, int priority: 0});
 
-  void removeEventListener<T extends Event>(String eventType, EventListener<T> eventListener, {bool useCapture: false});
+  void removeEventListener<T extends Event>(
+      String eventType, EventListener<T> eventListener,
+      {bool useCapture: false});
 
   void dispatchEvent(Event event);
 }

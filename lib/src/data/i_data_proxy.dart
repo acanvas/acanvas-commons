@@ -24,7 +24,8 @@ abstract class IDataProxy {
 
   int hasChunk(int chunkIndex, int chunkSize);
 
-  void requestChunk(Function callBack, [int chunkIndex = -1, int chunkSize = -1]);
+  void requestChunk(Function callBack,
+      [int chunkIndex = -1, int chunkSize = -1]);
 
   void onData(OperationEvent event);
 }

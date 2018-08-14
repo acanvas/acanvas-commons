@@ -73,11 +73,16 @@ class Slider extends BehaveSprite with MSlider {
     Ac.JUGGLER.removeTweens(this);
 
     if (Ac.TOUCH) {
-      background.addEventListener(TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown, useCapture: false, priority: 0);
-      thumb.addEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown, useCapture: false, priority: 0);
+      background.addEventListener(
+          TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown,
+          useCapture: false, priority: 0);
+      thumb.addEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown,
+          useCapture: false, priority: 0);
     } else {
-      background.addEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown, useCapture: false, priority: 0);
-      thumb.addEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown, useCapture: false, priority: 0);
+      background.addEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown,
+          useCapture: false, priority: 0);
+      thumb.addEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown,
+          useCapture: false, priority: 0);
     }
   }
 
@@ -88,10 +93,12 @@ class Slider extends BehaveSprite with MSlider {
     Ac.JUGGLER.removeTweens(this);
 
     if (Ac.TOUCH) {
-      background.removeEventListener(TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown);
+      background.removeEventListener(
+          TouchEvent.TOUCH_BEGIN, _onBackgroundMouseDown);
       thumb.removeEventListener(TouchEvent.TOUCH_BEGIN, _onThumbMouseDown);
     } else {
-      background.removeEventListener(MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown);
+      background.removeEventListener(
+          MouseEvent.MOUSE_DOWN, _onBackgroundMouseDown);
       thumb.removeEventListener(MouseEvent.MOUSE_DOWN, _onThumbMouseDown);
     }
     super.disable();
@@ -111,13 +118,16 @@ class Slider extends BehaveSprite with MSlider {
   }
 
   void _onThumbMouseDown(InputEvent event) {
-    mouseOffset = horizontalScrollBehavior ? event.stageX - thumb.x : event.stageY - thumb.y; // - _thumbSize * 0.5;
+    mouseOffset = horizontalScrollBehavior
+        ? event.stageX - thumb.x
+        : event.stageY - thumb.y; // - _thumbSize * 0.5;
     interactionStart();
   }
 
   //---- START DRAGGING VIA THUMB OR BACKGROUND(as thumb moves to mousedown position)
 
-  void interactionStart([bool preventMomentum = false, bool addMouseListeners = true]) {
+  void interactionStart(
+      [bool preventMomentum = false, bool addMouseListeners = true]) {
     if (!interaction) {
       Ac.MATERIALIZE_REQUIRED = true;
       interaction = true;
@@ -170,7 +180,9 @@ class Slider extends BehaveSprite with MSlider {
 
   //----- SET VALUE according to MousePosition and initial Offset (on mousedown)
   void _onStageMouseMove(InputEvent event) {
-    num mousePos = (horizontalScrollBehavior ? event.stageX : event.stageY); // - _thumbSize * 0.5;
+    num mousePos = (horizontalScrollBehavior
+        ? event.stageX
+        : event.stageY); // - _thumbSize * 0.5;
     value = _convertPositionToValue(mousePos - mouseOffset);
     // event.updateAfterEvent();
   }
@@ -215,7 +227,8 @@ class Slider extends BehaveSprite with MSlider {
   //----- INTERNAL HELPERS
 
   num _convertPositionToValue(num position) {
-    num calc = valueMin + (valueMax - valueMin) * (position / (spanSize - _thumbSize));
+    num calc =
+        valueMin + (valueMax - valueMin) * (position / (spanSize - _thumbSize));
     return calc;
   }
 
@@ -227,7 +240,8 @@ class Slider extends BehaveSprite with MSlider {
     if (thumb != null) {
       num pos = 0;
       if (valueMax != 0) {
-        pos = ((value - valueMin) * ((spanSize - _thumbSize) / valueMax) + bgp).round();
+        pos = ((value - valueMin) * ((spanSize - _thumbSize) / valueMax) + bgp)
+            .round();
       }
       horizontalScrollBehavior ? thumb.x = pos : thumb.y = pos;
     }

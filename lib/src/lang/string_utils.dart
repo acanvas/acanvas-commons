@@ -25,7 +25,8 @@ part of acanvas_commons;
  */
 class StringUtils {
   /** Character code for the WINDOWS line break. */
-  static String WIN_BREAK = new String.fromCharCode(13) + new String.fromCharCode(10);
+  static String WIN_BREAK =
+      new String.fromCharCode(13) + new String.fromCharCode(10);
 
   /** Character code for the APPLE line break. */
   static String MAC_BREAK = new String.fromCharCode(13);
@@ -88,7 +89,8 @@ class StringUtils {
   /**
    * <p>A RegExp containing the characters not allowed in a filename.</p>
    */
-  static RegExp FILENAME_CHARS_NOT_ALLOWED = new RegExp(r'/|\\\\|:|\\\*|\\\?|<|>|\\||%|\"');
+  static RegExp FILENAME_CHARS_NOT_ALLOWED =
+      new RegExp(r'/|\\\\|:|\\\*|\\\?|<|>|\\||%|\"');
 
   /**
    * <p>Returns a simple Initials like string.</p>
@@ -188,7 +190,9 @@ class StringUtils {
     if (str == null) {
       return null;
     }
-    return str.replaceAll(new RegExp(r'^\s*'), '').replaceAll(new RegExp(r'\s*$'), '');
+    return str
+        .replaceAll(new RegExp(r'^\s*'), '')
+        .replaceAll(new RegExp(r'\s*$'), '');
   }
 
   /**
@@ -982,7 +986,8 @@ class StringUtils {
     if (isEmpty(str)) {
       return str;
     }
-    RegExp p = new RegExp(r'^[' + (stripChars != null ? stripChars : ' ') + ']*');
+    RegExp p =
+        new RegExp(r'^[' + (stripChars != null ? stripChars : ' ') + ']*');
     return str.replaceAll(p, '');
   }
 
@@ -1014,7 +1019,8 @@ class StringUtils {
     if (isEmpty(str)) {
       return str;
     }
-    RegExp p = new RegExp(r'[' + (stripChars != null ? stripChars : ' ') + ']*\$');
+    RegExp p =
+        new RegExp(r'[' + (stripChars != null ? stripChars : ' ') + ']*\$');
     return str.replaceAll(p, '');
   }
 
@@ -1078,7 +1084,8 @@ class StringUtils {
     }
 
     if (maxWidth < 7) {
-      throw new IllegalArgumentError("Minimum abbreviation width with offset is 7");
+      throw new IllegalArgumentError(
+          "Minimum abbreviation width with offset is 7");
     }
 
     if ((offset + (maxWidth - 3)) < str.length) {
@@ -1211,7 +1218,8 @@ class StringUtils {
       return false;
     }
 
-    return new RegExp('(' + searchStr.toUpperCase() + ')').hasMatch(str.toUpperCase());
+    return new RegExp('(' + searchStr.toUpperCase() + ')')
+        .hasMatch(str.toUpperCase());
   }
 
   /**
@@ -1829,7 +1837,10 @@ class StringUtils {
    */
   static bool endsWithIgnoreCase(String str, String end) {
     if ((str != null) && (end != null) && (str.length >= end.length)) {
-      return (str.toUpperCase().substring((str.length - end.length), str.length) == end.toUpperCase());
+      return (str
+              .toUpperCase()
+              .substring((str.length - end.length), str.length) ==
+          end.toUpperCase());
     } else {
       return false;
     }
@@ -1877,7 +1888,8 @@ class StringUtils {
    */
   static bool startsWithIgnoreCase(String str, String start) {
     if ((str != null) && (start != null) && (str.length >= start.length)) {
-      return (str.toUpperCase().substring(0, start.length) == start.toUpperCase());
+      return (str.toUpperCase().substring(0, start.length) ==
+          start.toUpperCase());
     } else {
       return false;
     }
@@ -1974,7 +1986,8 @@ class StringUtils {
   /**
    * Replaces a part of the text between 2 positions.
    */
-  static String replaceAt(String string, dynamic value, int beginIndex, int endIndex) {
+  static String replaceAt(
+      String string, dynamic value, int beginIndex, int endIndex) {
     beginIndex = max(beginIndex, 0);
     endIndex = min(endIndex, string.length);
     String firstPart = string.substring(0, beginIndex);
@@ -2099,7 +2112,9 @@ class StringUtils {
    */
   static String leftTrimForChar(String string, String char) {
     if (char.length != 1) {
-      throw new IllegalArgumentError("The Second Attribute char [" + char + "] must exactly one character.");
+      throw new IllegalArgumentError("The Second Attribute char [" +
+          char +
+          "] must exactly one character.");
     }
     return leftTrimForChars(string, char);
   }
@@ -2119,7 +2134,9 @@ class StringUtils {
    */
   static String rightTrimForChar(String string, String char) {
     if (char.length != 1) {
-      throw new IllegalArgumentError("The Second Attribute char [" + char + "] must exactly one character.");
+      throw new IllegalArgumentError("The Second Attribute char [" +
+          char +
+          "] must exactly one character.");
     }
     return rightTrimForChars(string, char);
   }
@@ -2135,7 +2152,8 @@ class StringUtils {
    * @returns -1 if not enough ocurances of needle are found
    * @returns charIndex of nth needle ocurances
    */
-  static int nthIndexOf(String haystack, int n, String needle, [int startIndex = 0]) {
+  static int nthIndexOf(String haystack, int n, String needle,
+      [int startIndex = 0]) {
     int result = startIndex;
 
     if (n >= 1) {
@@ -2177,7 +2195,8 @@ class StringUtils {
     String ca;
     String cb;
     int result;
-    bool lowerCaseBeforeUpperCase = true; // used to be a method argument, keep this
+    bool lowerCaseBeforeUpperCase =
+        true; // used to be a method argument, keep this
 
     // replace null values with empty strings
     if (a == null) a = "";
@@ -2229,7 +2248,8 @@ class StringUtils {
       }
 
       // process run of digits
-      if (StringUtils.characterIsDigit(ca) && StringUtils.characterIsDigit(cb)) {
+      if (StringUtils.characterIsDigit(ca) &&
+          StringUtils.characterIsDigit(cb)) {
         if ((result = compareRight(a.substring(ia), b.substring(ib))) != 0) {
           return result;
         }
@@ -2281,7 +2301,8 @@ class StringUtils {
       ca = a[ia];
       cb = b[ib];
 
-      if (!StringUtils.characterIsDigit(ca) && !StringUtils.characterIsDigit(cb)) {
+      if (!StringUtils.characterIsDigit(ca) &&
+          !StringUtils.characterIsDigit(cb)) {
         return bias;
       } else if (!StringUtils.characterIsDigit(ca)) {
         return -1;
@@ -2375,7 +2396,9 @@ class StringUtils {
 
     for (int i = 0; i < len; i++) {
       dynamic item = args[i];
-      str = str.split('{' + i.toString() + '}').join((item != null) ? item.toString() : "[null]");
+      str = str
+          .split('{' + i.toString() + '}')
+          .join((item != null) ? item.toString() : "[null]");
     }
 
     return str;
@@ -2397,7 +2420,8 @@ class StringUtils {
    * @param ignoreUnicode Pass "true" to ignore automatic parsing of unicode escaped characters.
    * @return Escaped string.
    */
-  static String escape(String string, [List<String> keyMap = null, bool ignoreUnicode = true]) {
+  static String escape(String string,
+      [List<String> keyMap = null, bool ignoreUnicode = true]) {
     if (string == null) {
       return string;
     }
@@ -2416,7 +2440,8 @@ class StringUtils {
       while (i < l) {
         if (string.substring(i, i + 2) == "\\u") {
           string = string.substring(0, i) +
-              new String.fromCharCode(int.parse(string.substring(i + 2, i + 6), radix: 16)) +
+              new String.fromCharCode(
+                  int.parse(string.substring(i + 2, i + 6), radix: 16)) +
               string.substring(i + 6);
         }
         i++;
@@ -2450,10 +2475,12 @@ class StringUtils {
    * @author Martin Heidegger
    * @author Simon Wacker
    */
-  static Object parseProperties(String str, [Map<String, String> properties = null]) {
+  static Object parseProperties(String str,
+      [Map<String, String> properties = null]) {
     properties = properties ?? {};
     int i;
-    List<String> lines = str.split(WIN_BREAK).join("\n").split(MAC_BREAK).join("\n").split("\n");
+    List<String> lines =
+        str.split(WIN_BREAK).join("\n").split(MAC_BREAK).join("\n").split("\n");
     int length = lines.length;
     String key;
     String value;
@@ -2466,7 +2493,9 @@ class StringUtils {
       // Trim the line
       line = trim(line);
       // Ignore Comments
-      if (line.indexOf("#") != 0 && line.indexOf("!") != 0 && line.length != 0) {
+      if (line.indexOf("#") != 0 &&
+          line.indexOf("!") != 0 &&
+          line.length != 0) {
         // Line break processing
         if (useNextLine != null) {
           key = formerKey;

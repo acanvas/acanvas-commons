@@ -71,7 +71,8 @@ abstract class MLifecycle {
     }, duration);
   }
 
-  void disappear({double duration: DISAPPEAR_DURATION_DEFAULT, bool autoDispose: false}) {
+  void disappear(
+      {double duration: DISAPPEAR_DURATION_DEFAULT, bool autoDispose: false}) {
     //event disappear
   }
 

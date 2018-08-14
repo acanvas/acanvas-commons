@@ -47,7 +47,8 @@ class AbstractOperation extends EventDispatcher implements IOperation {
    * @param timeoutInMilliseconds
    * @param autoStartTimeout
    */
-  AbstractOperation([int timeoutInMilliseconds = 0, bool autoStartTimeout = true]) {
+  AbstractOperation(
+      [int timeoutInMilliseconds = 0, bool autoStartTimeout = true]) {
     m_timeout = timeoutInMilliseconds;
     m_autoStartTimeout = autoStartTimeout;
   }
@@ -100,24 +101,33 @@ class AbstractOperation extends EventDispatcher implements IOperation {
    * @inheritDoc
    */
   void addCompleteListener<T extends Event>(EventListener<T> listener,
-      [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
-    addEventListener(OperationEvent.COMPLETE, listener, useCapture: useCapture, priority: priority);
+      [bool useCapture = false,
+      int priority = 0,
+      bool useWeakReference = false]) {
+    addEventListener(OperationEvent.COMPLETE, listener,
+        useCapture: useCapture, priority: priority);
   }
 
   /**
    * @inheritDoc
    */
   void addErrorListener<T extends Event>(EventListener<T> listener,
-      [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
-    addEventListener(OperationEvent.ERROR, listener, useCapture: useCapture, priority: priority);
+      [bool useCapture = false,
+      int priority = 0,
+      bool useWeakReference = false]) {
+    addEventListener(OperationEvent.ERROR, listener,
+        useCapture: useCapture, priority: priority);
   }
 
   /**
    * @inheritDoc
    */
   void addTimeoutListener<T extends Event>(EventListener<T> listener,
-      [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
-    addEventListener(OperationEvent.TIMEOUT, listener, useCapture: useCapture, priority: priority);
+      [bool useCapture = false,
+      int priority = 0,
+      bool useWeakReference = false]) {
+    addEventListener(OperationEvent.TIMEOUT, listener,
+        useCapture: useCapture, priority: priority);
   }
 
   // --------------------------------------------------------------------
@@ -195,21 +205,24 @@ class AbstractOperation extends EventDispatcher implements IOperation {
   /**
    * @inheritDoc
    */
-  void removeCompleteListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]) {
+  void removeCompleteListener<T extends Event>(EventListener<T> listener,
+      [bool useCapture = false]) {
     removeEventListener(OperationEvent.COMPLETE, listener);
   }
 
   /**
    * @inheritDoc
    */
-  void removeErrorListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]) {
+  void removeErrorListener<T extends Event>(EventListener<T> listener,
+      [bool useCapture = false]) {
     removeEventListener(OperationEvent.ERROR, listener);
   }
 
   /**
    * @inheritDoc
    */
-  void removeTimeoutListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]) {
+  void removeTimeoutListener<T extends Event>(EventListener<T> listener,
+      [bool useCapture = false]) {
     removeEventListener(OperationEvent.TIMEOUT, listener);
   }
 

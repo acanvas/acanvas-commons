@@ -22,7 +22,8 @@ class ListSprite extends SpriteScrollifier with MList {
   num _originX = 0;
   num _originY = 0;
 
-  ListSprite(List<Object> data, SelectableButton cell, Scrollbar hScrollbar, Scrollbar vScrollbar)
+  ListSprite(List<Object> data, SelectableButton cell, Scrollbar hScrollbar,
+      Scrollbar vScrollbar)
       : super(new BoxSprite(), hScrollbar, vScrollbar) {
     this.data = data;
     _cellFactory = cell;
@@ -74,7 +75,9 @@ class ListSprite extends SpriteScrollifier with MList {
     // Constant cell height
     if (_constantCellSize) {
       //size of a cell incl spacing
-      _cellSize = (_horizontalFlow ? _cellFactory.spanWidth : _cellFactory.spanHeight) + spacing;
+      _cellSize =
+          (_horizontalFlow ? _cellFactory.spanWidth : _cellFactory.spanHeight) +
+              spacing;
       //size of all cells
       _totalCellSize = (numDataEntries * _cellSize - spacing).round();
       //length of data - unsure if needed
@@ -108,11 +111,15 @@ class ListSprite extends SpriteScrollifier with MList {
           if (_totalCellSize < (_horizontalFlow ? spanWidth : spanHeight)) {
             // Show cell
             _horizontalFlow ? cell.x = _totalCellSize : cell.y = _totalCellSize;
-            _totalCellSize += ((_horizontalFlow ? cell.spanWidth : cell.spanHeight)).round() + spacing;
+            _totalCellSize +=
+                ((_horizontalFlow ? cell.spanWidth : cell.spanHeight)).round() +
+                    spacing;
             view.addChild(cell);
           } else {
             // Only precalculate cell height
-            _totalCellSize += ((_horizontalFlow ? cell.spanWidth : cell.spanHeight)).round() + spacing;
+            _totalCellSize +=
+                ((_horizontalFlow ? cell.spanWidth : cell.spanHeight)).round() +
+                    spacing;
             _putCellInPool(cell);
           }
           _selectedCells[i] = false;
@@ -143,7 +150,9 @@ class ListSprite extends SpriteScrollifier with MList {
         cell.data = data.elementAt(i);
 
         // Only precalculate cell height
-        _totalCellSize += ((_horizontalFlow ? cell.spanWidth : cell.spanHeight)).round() + spacing;
+        _totalCellSize +=
+            ((_horizontalFlow ? cell.spanWidth : cell.spanHeight)).round() +
+                spacing;
         _putCellInPool(cell);
         _selectedCells[i] = false;
         _cellsLoaded++;
@@ -191,13 +200,18 @@ class ListSprite extends SpriteScrollifier with MList {
         for (int i = 0; i < nr; i++) {
           cell.id = i;
           cell.data = data.elementAt(i);
-          targetPos += ((_horizontalFlow ? cell.spanWidth : cell.spanHeight) + spacing).round();
+          targetPos +=
+              ((_horizontalFlow ? cell.spanWidth : cell.spanHeight) + spacing)
+                  .round();
         }
 
         int safetyFlag = -1;
-        while ((_horizontalFlow ? _hScrollbar : _vScrollbar).value != targetPos) {
-          if (safetyFlag != (_horizontalFlow ? _hScrollbar : _vScrollbar).value) {
-            safetyFlag = (_horizontalFlow ? _hScrollbar : _vScrollbar).value.round();
+        while (
+            (_horizontalFlow ? _hScrollbar : _vScrollbar).value != targetPos) {
+          if (safetyFlag !=
+              (_horizontalFlow ? _hScrollbar : _vScrollbar).value) {
+            safetyFlag =
+                (_horizontalFlow ? _hScrollbar : _vScrollbar).value.round();
             (_horizontalFlow ? _hScrollbar : _vScrollbar).value = targetPos;
           } else {
             break;
@@ -262,8 +276,11 @@ class ListSprite extends SpriteScrollifier with MList {
     for (int i = 0; i < n; i++) {
       cell = (view.getChildAt(i) as SelectableButton);
       _horizontalFlow ? cell.x += _scrollPos : cell.y += _scrollPos;
-      if ((_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0 ||
-          (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)) cellsToPool.add(cell);
+      if ((_horizontalFlow ? cell.x : cell.y) +
+                  (_horizontalFlow ? cell.spanWidth : cell.spanHeight) <
+              0 ||
+          (_horizontalFlow ? cell.x : cell.y) >
+              (_horizontalFlow ? spanWidth : spanHeight)) cellsToPool.add(cell);
       cell.span(spanWidth, spanHeight);
     }
 
@@ -276,7 +293,9 @@ class ListSprite extends SpriteScrollifier with MList {
     // Check, if scrolling up or down
     bool firstLoop;
 
-    cell = view.numChildren != 0 ? (view.getChildAt(0) as SelectableButton) : _getEmptyCell(true);
+    cell = view.numChildren != 0
+        ? (view.getChildAt(0) as SelectableButton)
+        : _getEmptyCell(true);
     firstLoop = true;
 
     //try adding cell(s) above first cell if it is y > 0
@@ -288,15 +307,20 @@ class ListSprite extends SpriteScrollifier with MList {
       //cell.id minus 1
       cell = _getPreviousCell(cell);
       if (cell == null) break;
-      (_horizontalFlow ? cell.x : cell.y) > (_horizontalFlow ? spanWidth : spanHeight)
+      (_horizontalFlow ? cell.x : cell.y) >
+              (_horizontalFlow ? spanWidth : spanHeight)
           ? _putCellInPool(cell)
           : view.addChildAt(cell, 0);
     }
 
     //try adding cell(s) below last cell if it there is visible space underneath
-    cell = view.numChildren != 0 ? (view.getChildAt(view.numChildren - 1) as SelectableButton) : _getEmptyCell(true);
+    cell = view.numChildren != 0
+        ? (view.getChildAt(view.numChildren - 1) as SelectableButton)
+        : _getEmptyCell(true);
     firstLoop = true;
-    while (_horizontalFlow ? cell.x + cell.spanWidth < spanWidth : cell.y + cell.spanHeight < spanHeight) {
+    while (_horizontalFlow
+        ? cell.x + cell.spanWidth < spanWidth
+        : cell.y + cell.spanHeight < spanHeight) {
       if (firstLoop) {
         if (cell.parent == null) _putCellInPool(cell);
         firstLoop = false;
@@ -304,12 +328,15 @@ class ListSprite extends SpriteScrollifier with MList {
       //cell.id plus 1
       cell = _getNextCell(cell);
       if (cell == null) break;
-      (_horizontalFlow ? cell.x : cell.y) + (_horizontalFlow ? cell.spanWidth : cell.spanHeight) < 0
+      (_horizontalFlow ? cell.x : cell.y) +
+                  (_horizontalFlow ? cell.spanWidth : cell.spanHeight) <
+              0
           ? _putCellInPool(cell)
           : view.addChild(cell);
     }
 
-    if (_oldVScrollbarValue >= (_horizontalFlow ? _hScrollbar : _vScrollbar).valueMax) {
+    if (_oldVScrollbarValue >=
+        (_horizontalFlow ? _hScrollbar : _vScrollbar).valueMax) {
       _calcNextCells();
     }
   }
@@ -323,7 +350,8 @@ class ListSprite extends SpriteScrollifier with MList {
     newCell.visible = newCell.data != null;
     _selectedCells[newCell.id] == true ? newCell.select() : newCell.deselect();
 
-    num pos = ((_horizontalFlow ? oldCell.x : oldCell.y) + (_horizontalFlow ? oldCell.spanWidth : oldCell.spanHeight))
+    num pos = ((_horizontalFlow ? oldCell.x : oldCell.y) +
+                (_horizontalFlow ? oldCell.spanWidth : oldCell.spanHeight))
             .round() +
         spacing;
     _horizontalFlow ? newCell.x = pos : newCell.y = pos;
@@ -340,7 +368,8 @@ class ListSprite extends SpriteScrollifier with MList {
     newCell.visible = newCell.data != null;
     _selectedCells[newCell.id] == true ? newCell.select() : newCell.deselect();
 
-    num pos = ((_horizontalFlow ? oldCell.x : oldCell.y) - (_horizontalFlow ? newCell.spanWidth : newCell.spanHeight))
+    num pos = ((_horizontalFlow ? oldCell.x : oldCell.y) -
+                (_horizontalFlow ? newCell.spanWidth : newCell.spanHeight))
             .round() -
         spacing;
     _horizontalFlow ? newCell.x = pos : newCell.y = pos;
@@ -360,11 +389,15 @@ class ListSprite extends SpriteScrollifier with MList {
       }
 
       if (Ac.TOUCH) {
-        cell.addEventListener(TouchEvent.TOUCH_BEGIN, _onCellMouseDown, useCapture: false, priority: 0);
-        cell.addEventListener(TouchEvent.TOUCH_END, _onCellMouseUp, useCapture: false, priority: 0);
+        cell.addEventListener(TouchEvent.TOUCH_BEGIN, _onCellMouseDown,
+            useCapture: false, priority: 0);
+        cell.addEventListener(TouchEvent.TOUCH_END, _onCellMouseUp,
+            useCapture: false, priority: 0);
       } else {
-        cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown, useCapture: false, priority: 0);
-        cell.addEventListener(MouseEvent.MOUSE_UP, _onCellMouseUp, useCapture: false, priority: 0);
+        cell.addEventListener(MouseEvent.MOUSE_DOWN, _onCellMouseDown,
+            useCapture: false, priority: 0);
+        cell.addEventListener(MouseEvent.MOUSE_UP, _onCellMouseUp,
+            useCapture: false, priority: 0);
       }
 
       cell.submitCallback = _onCellSelected;
@@ -385,7 +418,8 @@ class ListSprite extends SpriteScrollifier with MList {
     if (_timer != null) {
       _timer.cancel();
     }
-    _timer = new Timer(new Duration(milliseconds: 500), _onDelayedCellMouseDown);
+    _timer =
+        new Timer(new Duration(milliseconds: 500), _onDelayedCellMouseDown);
   }
 
   void _onDelayedCellMouseDown() {
@@ -458,11 +492,15 @@ class ListSprite extends SpriteScrollifier with MList {
     }
 
     if (Ac.TOUCH) {
-      stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp, useCapture: false, priority: 0);
-      stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
+      stage.addEventListener(TouchEvent.TOUCH_END, _onStageMouseUp,
+          useCapture: false, priority: 0);
+      stage.addEventListener(TouchEvent.TOUCH_MOVE, _onStageMouseMove,
+          useCapture: false, priority: 0);
     } else {
-      stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp, useCapture: false, priority: 0);
-      stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove, useCapture: false, priority: 0);
+      stage.addEventListener(MouseEvent.MOUSE_UP, _onStageMouseUp,
+          useCapture: false, priority: 0);
+      stage.addEventListener(MouseEvent.MOUSE_MOVE, _onStageMouseMove,
+          useCapture: false, priority: 0);
     }
   }
 
@@ -470,7 +508,8 @@ class ListSprite extends SpriteScrollifier with MList {
   void _onStageMouseMove(InputEvent event) {
     super._onStageMouseMove(event);
 
-    if ((_originX - event.stageX).abs() > 3 || (_originY - event.stageY).abs() > 3) {
+    if ((_originX - event.stageX).abs() > 3 ||
+        (_originY - event.stageY).abs() > 3) {
       _cellMoved = true;
       _timer.cancel();
       //if (_mouseDownCell != null) _mouseDownCell.deselect();

@@ -69,7 +69,8 @@ class Assert {
   static void notNull(Object object, [String message = ""]) {
     if (object == null) {
       if (message == null || message.length == 0) {
-        message = "[Assertion failed] - this argument is required; it must not null";
+        message =
+            "[Assertion failed] - this argument is required; it must not null";
       }
       throw new IllegalArgumentError(message);
     }
@@ -169,7 +170,8 @@ class Assert {
   static void arrayContains(List array, dynamic item, [String message = ""]) {
     if (array.indexOf(item) == -1) {
       if (message == null || message.length == 0) {
-        message = "[Assertion failed] - this List argument does not contain the item '${item}'";
+        message =
+            "[Assertion failed] - this List argument does not contain the item '${item}'";
       }
       throw new IllegalArgumentError(message);
     }

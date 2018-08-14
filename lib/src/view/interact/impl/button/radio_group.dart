@@ -12,7 +12,10 @@ class RadioGroup extends Flow {
 
   int get selectedButtonIndex => _selectedButtonIndex;
 
-  RadioGroup({FlowOrientation flowOrientation: FlowOrientation.VERTICAL, double spacing: 0.0}) : super() {
+  RadioGroup(
+      {FlowOrientation flowOrientation: FlowOrientation.VERTICAL,
+      double spacing: 0.0})
+      : super() {
     this.flowOrientation = flowOrientation;
     this.spacing = spacing;
     inheritSpan = true;

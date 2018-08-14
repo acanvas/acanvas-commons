@@ -16,7 +16,10 @@ class MdFab extends Button {
       this.shadow: true,
       this.hover: true})
       : super() {
-    _shadow = new MdShadow(type: MdShadow.CIRCLE, bgColor: bgColor, shadowEnabled: shadow ? true : false);
+    _shadow = new MdShadow(
+        type: MdShadow.CIRCLE,
+        bgColor: bgColor,
+        shadowEnabled: shadow ? true : false);
     addChild(_shadow);
 
     _ripple = new MdRipple(type: MdRipple.CIRCLE, color: rippleColor);

@@ -8,7 +8,11 @@ class MdKeyboard extends BoxSprite {
   int textColor;
   int fontSize;
 
-  MdKeyboard({this.fontSize: 14, this.textColor: MdColor.BLACK, String fontName: DEFAULT_FONT}) : super() {
+  MdKeyboard(
+      {this.fontSize: 14,
+      this.textColor: MdColor.BLACK,
+      String fontName: DEFAULT_FONT})
+      : super() {
     _createKeyboard();
   }
 

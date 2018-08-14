@@ -3,7 +3,10 @@ part of acanvas_commons;
 class MdMenu extends ListSprite {
   bool shadow = false;
 
-  MdMenu(List data, {SelectableButton cell, this.shadow: true, int backgroundColor: MdColor.WHITE})
+  MdMenu(List data,
+      {SelectableButton cell,
+      this.shadow: true,
+      int backgroundColor: MdColor.WHITE})
       : super(
             data,
             cell != null ? cell : new MdListCell()
@@ -16,12 +19,16 @@ class MdMenu extends ListSprite {
     mouseWheelEnabled = Ac.MOBILE ? false : true;
     touchable = Ac.MOBILE ? true : false;
 
-    MdShadow _paperShadow = new MdShadow(type: MdShadow.RECTANGLE, bgColor: backgroundColor, shadowEnabled: shadow);
+    MdShadow _paperShadow = new MdShadow(
+        type: MdShadow.RECTANGLE,
+        bgColor: backgroundColor,
+        shadowEnabled: shadow);
     addChildAt(_paperShadow, 0);
 
     //TODO this leads to render everything?
     if (data.length > 0) {
-      span(MdDimensions.WIDTH_MENU, MdDimensions.HEIGHT_MENU_CELL * data.length);
+      span(
+          MdDimensions.WIDTH_MENU, MdDimensions.HEIGHT_MENU_CELL * data.length);
     }
   }
 }

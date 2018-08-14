@@ -20,13 +20,17 @@ class MdToggleButton extends SelectableButton {
   BoxSprite _holder;
 
   MdToggleButton(
-      {int rippleColor: MdColor.GREY_DARK, this.activeColor: MdColor.GREEN, this.label: "", this.labelOffset: 150})
+      {int rippleColor: MdColor.GREY_DARK,
+      this.activeColor: MdColor.GREEN,
+      this.label: "",
+      this.labelOffset: 150})
       : super() {
     inheritSpan = true;
 
     _holder = new BoxSprite();
 
-    _ripple = new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
+    _ripple =
+        new MdRipple(type: MdRipple.CIRCLE, color: rippleColor, velocity: .2);
     _ripple.inheritSpan = false;
     addChild(_ripple);
     _ripple.span(RADIUS * 2, RADIUS * 2);

@@ -26,8 +26,11 @@ class LoadURLOperation extends AbstractProgressOperation {
    * @param dataFormat Optional argument that specifies the data format of the expected data. Use the <code>flash.net.URLLoaderDataFormat</code> enumeration for this.
    * @see flash.net.URLLoaderDataFormat
    */
-  LoadURLOperation(String name, String url, [String dataFormat = null]) : super() {
-    (dataFormat != null) ? dataFormat : dataFormat = URLLoaderDataFormat.TEXT_FILE;
+  LoadURLOperation(String name, String url, [String dataFormat = null])
+      : super() {
+    (dataFormat != null)
+        ? dataFormat
+        : dataFormat = URLLoaderDataFormat.TEXT_FILE;
     createLoader(name, url, dataFormat);
   }
 

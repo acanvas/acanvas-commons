@@ -61,7 +61,8 @@ class AbstractPhotoPager extends PagerSprite {
     super.refresh();
 
     maskWidth = (spanWidth - 2 * listItemSpacer).round();
-    maskHeight = (listItemHeight + listItemSpacer) * rows - RASTER - 2 * listItemSpacer;
+    maskHeight =
+        (listItemHeight + listItemSpacer) * rows - RASTER - 2 * listItemSpacer;
 
     //_imageListMask = new Mask.rectangle(listItemSpacer, 0, maskWidth, maskHeight);
     // holder.mask = _imageListMask;
@@ -90,7 +91,8 @@ class AbstractPhotoPager extends PagerSprite {
   @override
   void setData(List data) {
     if (pressedNext == true) {
-      _pageChange(super.setData, data, -holder.width, listItemSpacer + maskWidth, 0);
+      _pageChange(
+          super.setData, data, -holder.width, listItemSpacer + maskWidth, 0);
     } else {
       _pageChange(super.setData, data, maskWidth, -maskWidth, 0);
     }
@@ -100,8 +102,10 @@ class AbstractPhotoPager extends PagerSprite {
     loaded = true;
   }
 
-  void _pageChange(Function cb, List listItems, num xCurrentTarget, num xComingInitial, num xComingTarget) {
-    DisplayObject current = holder.numChildren == 0 ? null : holder.getChildAt(0);
+  void _pageChange(Function cb, List listItems, num xCurrentTarget,
+      num xComingInitial, num xComingTarget) {
+    DisplayObject current =
+        holder.numChildren == 0 ? null : holder.getChildAt(0);
 
     Sprite coming = pageCreate(listItems);
     coming.x = xComingInitial;
@@ -112,7 +116,8 @@ class AbstractPhotoPager extends PagerSprite {
         ..animate.x.to(xCurrentTarget)
         ..onComplete = () => disposeChild(current);
 
-      Ac.JUGGLER.addTween(coming, 0.3, Transition.easeInQuintic)..animate.x.to(xComingTarget);
+      Ac.JUGGLER.addTween(coming, 0.3, Transition.easeInQuintic)
+        ..animate.x.to(xComingTarget);
 
       if (pressedNext) {
         Ac.JUGGLER.delayCall(() => cb.call(listItems), 0.55);
@@ -127,7 +132,8 @@ class AbstractPhotoPager extends PagerSprite {
 
   void _createNothingFoundInfo() {
     if (_tfNothingFound == null) {
-      _tfNothingFound = new MdText(labelEmpty, size: 11, color: MdColor.GREY_DARK);
+      _tfNothingFound =
+          new MdText(labelEmpty, size: 11, color: MdColor.GREY_DARK);
       _tfNothingFound.alpha = 0;
       addChild(_tfNothingFound);
     }
@@ -153,7 +159,9 @@ class AbstractPhotoPager extends PagerSprite {
         item = getPagerItem(listItems[i]);
 
         // --- new line
-        if (rows > 1 && currentWidth + listItemWidth > spanWidth - 2 * listItemSpacer && ++currentLine < rows) {
+        if (rows > 1 &&
+            currentWidth + listItemWidth > spanWidth - 2 * listItemSpacer &&
+            ++currentLine < rows) {
           item.x = 0;
           currentWidth = 0;
 

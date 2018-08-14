@@ -47,13 +47,15 @@ class MdTabs extends BoxSprite {
 
   void _onTabClick(Button btn, int index) {
     _activeButtonIndex = index;
-    Ac.JUGGLER.addTween(_slideBar, .3, Transition.easeOutCubic).animate..x.to(btn.x);
+    Ac.JUGGLER.addTween(_slideBar, .3, Transition.easeOutCubic).animate
+      ..x.to(btn.x);
     _slideBar.width = btn.spanWidth;
   }
 
   @override
   void refresh() {
-    AcGraphics.rectangle(0, 0, spanWidth, spanHeight, sprite: _bg, color: bgColor);
+    AcGraphics.rectangle(0, 0, spanWidth, spanHeight,
+        sprite: _bg, color: bgColor);
 
     tabBox.x = 0;
 
@@ -68,7 +70,8 @@ class MdTabs extends BoxSprite {
 
       tabBox.y = spanHeight - tabBox.height;
 
-      AcGraphics.line((tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0,
+      AcGraphics.line(
+          (tabBox.getChildAt(_activeButtonIndex) as Button).spanWidth, 0,
           strength: 2, sprite: _slideBar, color: strokeColor);
 
       _slideBar.x = tabBox.getChildAt(_activeButtonIndex).x;

@@ -24,7 +24,8 @@ part of acanvas_commons;
  * Abstract base class for <code>IProgressOperation</code> implementations.
  * @author Roland Zwaga
  */
-class AbstractProgressOperation extends AbstractOperation implements IProgressOperation {
+class AbstractProgressOperation extends AbstractOperation
+    implements IProgressOperation {
   // --------------------------------------------------------------------
   //
   // Constructor
@@ -34,7 +35,8 @@ class AbstractProgressOperation extends AbstractOperation implements IProgressOp
   /**
    * Creates a new <code>AbstractProgressOperation</code> instance.
    */
-  AbstractProgressOperation([int timeoutInMilliseconds = 0, bool autoStartTimeout = true])
+  AbstractProgressOperation(
+      [int timeoutInMilliseconds = 0, bool autoStartTimeout = true])
       : super(timeoutInMilliseconds, autoStartTimeout) {
     progress = 0;
   }
@@ -69,15 +71,20 @@ class AbstractProgressOperation extends AbstractOperation implements IProgressOp
    * @inheritDoc
    */
   void addProgressListener<T extends Event>(EventListener<T> listener,
-      [bool useCapture = false, int priority = 0, bool useWeakReference = false]) {
-    addEventListener(OperationEvent.PROGRESS, listener, useCapture: useCapture, priority: priority);
+      [bool useCapture = false,
+      int priority = 0,
+      bool useWeakReference = false]) {
+    addEventListener(OperationEvent.PROGRESS, listener,
+        useCapture: useCapture, priority: priority);
   }
 
   /**
    * @inheritDoc
    */
-  void removeProgressListener<T extends Event>(EventListener<T> listener, [bool useCapture = false]) {
-    removeEventListener(OperationEvent.PROGRESS, listener, useCapture: useCapture);
+  void removeProgressListener<T extends Event>(EventListener<T> listener,
+      [bool useCapture = false]) {
+    removeEventListener(OperationEvent.PROGRESS, listener,
+        useCapture: useCapture);
   }
 
   // --------------------------------------------------------------------

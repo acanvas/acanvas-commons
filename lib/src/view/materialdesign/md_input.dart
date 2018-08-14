@@ -60,17 +60,20 @@ class MdInput extends BehaveSprite {
       KEYBOARD_NATIVE = false;
     }
 
-    _defaultTextField = new UITextField(label, new TextFormat(fontName, fontSize, MdColor.GREY_DARK));
+    _defaultTextField = new UITextField(
+        label, new TextFormat(fontName, fontSize, MdColor.GREY_DARK));
     addChild(_defaultTextField);
 
     /* if Mandatory Textfield */
     if (required != "") {
       /* Add TextField below line explaining why it's mandatory */
-      _requiredTextField = new UITextField(required, new TextFormat(fontName, fontSize - 2, MdColor.GREY_DARK));
+      _requiredTextField = new UITextField(
+          required, new TextFormat(fontName, fontSize - 2, MdColor.GREY_DARK));
       addChild(_requiredTextField);
 
       /* Add Warning Icons: inactive=grey, active=red */
-      _requiredIconInactive = MdIcon.color(MdIconSet.warning, MdColor.GREY_DARK);
+      _requiredIconInactive =
+          MdIcon.color(MdIconSet.warning, MdColor.GREY_DARK);
       _requiredIconInactive.scaleX = .8;
       _requiredIconInactive.scaleY = .8;
       addChild(_requiredIconInactive);
@@ -92,7 +95,8 @@ class MdInput extends BehaveSprite {
     addChild(_cursorBox);
     _cursorBox.alpha = 0;
 
-    _inputTextField = new UITextFieldInput("", new TextFormat(fontName, fontSize, textColor));
+    _inputTextField =
+        new UITextFieldInput("", new TextFormat(fontName, fontSize, textColor));
     _inputTextField.displayAsPassword = password;
     _inputTextField.multiline = multiline;
     _inputTextField.height = (rows * (fontSize + 1)).round();
@@ -169,7 +173,8 @@ class MdInput extends BehaveSprite {
 
   /* User clicks into TextField */
   void mouseDownAction([InputEvent event = null]) {
-    _enterFrameListener = addEventListener(Event.ENTER_FRAME, (e) => Ac.MATERIALIZE_REQUIRED = true);
+    _enterFrameListener = addEventListener(
+        Event.ENTER_FRAME, (e) => Ac.MATERIALIZE_REQUIRED = true);
 
     /* Animate active line */
     if (_activeLine.alpha == 0) {
@@ -237,7 +242,8 @@ class MdInput extends BehaveSprite {
       _enterFrameListener = null;
     }
     if (Ac.TOUCH) {
-      Ac.STAGE.removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
+      Ac.STAGE
+          .removeEventListener(TouchEvent.TOUCH_BEGIN, stageMouseDownAction);
     } else {
       Ac.STAGE.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownAction);
     }
@@ -349,16 +355,21 @@ class MdInput extends BehaveSprite {
     if (KEYBOARD_NATIVE == false) {
       _softKeyboard = new MdKeyboard();
       _softKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
-        softKeyboardInputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
+        softKeyboardInputAction(
+            e.char != null ? e.char : new String.fromCharCode(e.charCode));
       });
       _softKeyboard.addEventListener(KeyEvent.KEY_UP, (KeyEvent e) {
         softKeyboardDownAction(e.charCode);
       });
     } else {
       _nativeKeyboard = new NativeKeyboard(_inputTextField.text, label,
-          multiline: multiline, rows: rows, fontSize: fontSize, fontName: fontName);
+          multiline: multiline,
+          rows: rows,
+          fontSize: fontSize,
+          fontName: fontName);
       _nativeKeyboard.addEventListener(KeyEvent.KEY_UP_VISIBLE, (KeyEvent e) {
-        softKeyboardInputAction(e.char != null ? e.char : new String.fromCharCode(e.charCode));
+        softKeyboardInputAction(
+            e.char != null ? e.char : new String.fromCharCode(e.charCode));
         _inputTextField.text = _nativeKeyboard.value;
       });
       addChild(_nativeKeyboard);

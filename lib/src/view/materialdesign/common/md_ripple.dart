@@ -16,7 +16,8 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
 
   Sprite holder;
 
-  MdRipple({this.color: 0xFF000000, this.type: RECTANGLE, this.velocity: 0.5}) : super() {
+  MdRipple({this.color: 0xFF000000, this.type: RECTANGLE, this.velocity: 0.5})
+      : super() {
     inheritSpan = true;
     if (Ac.TOUCH) {
       velocity = 1;
@@ -43,8 +44,10 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
     num touchX = localX > spanWidth ? spanWidth : localX; // - rect.left;
     num touchY = localY > spanHeight ? spanHeight : localY; // - rect.top;
 
-    int waveRadius =
-        (distanceFromPointToFurthestCorner(new Point(touchX, touchY), new Point(spanWidth, spanHeight)) / 1.1).round();
+    int waveRadius = (distanceFromPointToFurthestCorner(
+                new Point(touchX, touchY), new Point(spanWidth, spanHeight)) /
+            1.1)
+        .round();
 
     Sprite inner = new Sprite()
       ..graphics.circle(0, 0, waveRadius)
@@ -58,7 +61,9 @@ class MdRipple extends BoxSprite implements IMdButtonComponent {
 
     addChild(inner);
 
-    Tween tw = new Tween(inner, velocity, Transition.easeOutElastic)..animate.scaleX.to(1.2)..animate.scaleY.to(1.2);
+    Tween tw = new Tween(inner, velocity, Transition.easeOutElastic)
+      ..animate.scaleX.to(1.2)
+      ..animate.scaleY.to(1.2);
 
     Ac.JUGGLER.add(tw);
   }

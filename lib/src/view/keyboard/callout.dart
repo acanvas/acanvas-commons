@@ -7,5 +7,6 @@ class Callout extends LifecycleSprite {
 
   Callout() : super("keyboard.callout") {}
 
-  Callout.show(Sprite variantsContainer, Key key, String direction, bool arg3) : super("keyboard.callout") {}
+  Callout.show(Sprite variantsContainer, Key key, String direction, bool arg3)
+      : super("keyboard.callout") {}
 }

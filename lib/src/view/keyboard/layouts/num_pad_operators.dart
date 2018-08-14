@@ -37,8 +37,18 @@ class NumPadOperators extends Layout {
         new Key(CharCode.SLASH),
         new Key(CharCode.ASTERISK)
       ],
-      [new Key(CharCode.DIGIT_7), new Key(CharCode.DIGIT_8), new Key(CharCode.DIGIT_9), new Key(CharCode.MINUS)],
-      [new Key(CharCode.DIGIT_4), new Key(CharCode.DIGIT_5), new Key(CharCode.DIGIT_6), new Key(CharCode.PLUS)],
+      [
+        new Key(CharCode.DIGIT_7),
+        new Key(CharCode.DIGIT_8),
+        new Key(CharCode.DIGIT_9),
+        new Key(CharCode.MINUS)
+      ],
+      [
+        new Key(CharCode.DIGIT_4),
+        new Key(CharCode.DIGIT_5),
+        new Key(CharCode.DIGIT_6),
+        new Key(CharCode.PLUS)
+      ],
       [
         new Key(CharCode.DIGIT_1),
         new Key(CharCode.DIGIT_2),

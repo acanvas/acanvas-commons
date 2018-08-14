@@ -8,18 +8,21 @@ Stage stage;
 Future main() async {
   var opts = new StageOptions();
   opts.maxPixelRatio = 1.0;
-  opts.stageScaleMode = Ac.MOBILE ? StageScaleMode.NO_SCALE : StageScaleMode.NO_SCALE;
+  opts.stageScaleMode =
+      Ac.MOBILE ? StageScaleMode.NO_SCALE : StageScaleMode.NO_SCALE;
   opts.stageAlign = StageAlign.TOP_LEFT;
   opts.stageRenderMode = StageRenderMode.AUTO;
   opts.backgroundColor = 0xFFf9f9f9;
   opts.renderEngine = Ac.MOBILE ? RenderEngine.WebGL : RenderEngine.Canvas2D;
   opts.antialias = Ac.MOBILE ? false : true;
-  opts.inputEventMode = Ac.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
+  opts.inputEventMode =
+      Ac.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
   opts.preventDefaultOnTouch = true;
   opts.preventDefaultOnWheel = true;
   opts.preventDefaultOnKeyboard = false;
 
-  stage = new Stage(html.querySelector('#stage') as html.CanvasElement, options: opts);
+  stage = new Stage(html.querySelector('#stage') as html.CanvasElement,
+      options: opts);
   new RenderLoop()..addStage(stage);
 
   Ac.STAGE = stage;
@@ -105,15 +108,22 @@ void start() {
     ..spacing = 20
     ..inheritSpan = true;
 
-  MdButton plusOneButton1 = new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16);
+  MdButton plusOneButton1 =
+      new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16);
   hbox2.addChild(plusOneButton1);
 
-  MdButton plusOneButton2 =
-      new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16, fontColor: MdColor.BLUE);
+  MdButton plusOneButton2 = new MdButton("+1",
+      width: 60,
+      preset: MdButton.PRESET_GREY,
+      fontSize: 16,
+      fontColor: MdColor.BLUE);
   hbox2.addChild(plusOneButton2);
 
-  MdButton plusOneButton3 =
-      new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16, fontColor: MdColor.RED);
+  MdButton plusOneButton3 = new MdButton("+1",
+      width: 60,
+      preset: MdButton.PRESET_GREY,
+      fontSize: 16,
+      fontColor: MdColor.RED);
   hbox2.addChild(plusOneButton3);
 
   vbox.addChild(hbox2);
@@ -125,16 +135,16 @@ void start() {
     ..spacing = 20
     ..inheritSpan = true;
 
-  MdFab iconButton1 =
-      new MdFab(MdIcon.black(MdIconSet.menu), bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.BLACK, shadow: false);
+  MdFab iconButton1 = new MdFab(MdIcon.black(MdIconSet.menu),
+      bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.BLACK, shadow: false);
   hbox3.addChild(iconButton1);
 
   MdFab iconButton2 = new MdFab(MdIcon.black(MdIconSet.more_vert),
       bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.BLACK, shadow: false);
   hbox3.addChild(iconButton2);
 
-  MdFab iconButton3 =
-      new MdFab(MdIcon.black(MdIconSet.delete), bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.RED, shadow: false);
+  MdFab iconButton3 = new MdFab(MdIcon.black(MdIconSet.delete),
+      bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.RED, shadow: false);
   hbox3.addChild(iconButton3);
 
   MdFab iconButton4 = new MdFab(MdIcon.black(MdIconSet.account_box),
@@ -150,13 +160,16 @@ void start() {
     ..spacing = 20
     ..inheritSpan = true;
 
-  MdFab roundButton1 = new MdFab(MdIcon.white(MdIconSet.add), bgColor: MdColor.RED);
+  MdFab roundButton1 =
+      new MdFab(MdIcon.white(MdIconSet.add), bgColor: MdColor.RED);
   hbox4.addChild(roundButton1);
 
-  MdFab roundButton2 = new MdFab(MdIcon.white(MdIconSet.mail), bgColor: MdColor.BLUE);
+  MdFab roundButton2 =
+      new MdFab(MdIcon.white(MdIconSet.mail), bgColor: MdColor.BLUE);
   hbox4.addChild(roundButton2);
 
-  MdFab roundButton3 = new MdFab(MdIcon.white(MdIconSet.create), bgColor: MdColor.GREEN);
+  MdFab roundButton3 =
+      new MdFab(MdIcon.white(MdIconSet.create), bgColor: MdColor.GREEN);
   hbox4.addChild(roundButton3);
 
   vbox.addChild(hbox4);
@@ -176,13 +189,15 @@ void start() {
     testList.add(vo);
   }
 
-  MdMenu list1 = new MdMenu(testList, cell: new MdListCell(MdColor.GREY_DARK), shadow: false);
+  MdMenu list1 = new MdMenu(testList,
+      cell: new MdListCell(MdColor.GREY_DARK), shadow: false);
   //list.submitCallback = _onCellCommit;
   list1.touchable = true;
   hbox5.addChild(list1);
   list1.span(400, 400);
 
-  MdMenu list2 = new MdMenu(testList, cell: new MdListCell(MdColor.BLUE), shadow: true);
+  MdMenu list2 =
+      new MdMenu(testList, cell: new MdListCell(MdColor.BLUE), shadow: true);
   //list.submitCallback = _onCellCommit;
   hbox5.addChild(list2);
   list2.span(400, 400);
@@ -197,21 +212,29 @@ void start() {
   MdDialog dialog = new MdDialog("Permission");
   dialog.addContent(new MdText(
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."));
-  dialog.addButton(
-      new MdButton("DECLINE", preset: MdButton.PRESET_RED, fontColor: MdColor.GREY_DARK, width: 90, background: false));
-  dialog.addButton(
-      new MdButton("ACCEPT", preset: MdButton.PRESET_BLUE, fontColor: MdColor.BLUE, width: 90, background: false));
+  dialog.addButton(new MdButton("DECLINE",
+      preset: MdButton.PRESET_RED,
+      fontColor: MdColor.GREY_DARK,
+      width: 90,
+      background: false));
+  dialog.addButton(new MdButton("ACCEPT",
+      preset: MdButton.PRESET_BLUE,
+      fontColor: MdColor.BLUE,
+      width: 90,
+      background: false));
   dialog.span(300, 240);
   hbox6.addChild(dialog);
 
   Button card = new Button();
-  card.addChild(new MdShadow(type: MdShadow.RECTANGLE, bgColor: MdColor.WHITE, respondToClick: false));
+  card.addChild(new MdShadow(
+      type: MdShadow.RECTANGLE, bgColor: MdColor.WHITE, respondToClick: false));
   card.addChild(new MdRipple(color: MdColor.GREY_DARK));
   card.span(300, 240);
   hbox6.addChild(card);
 
   Button image = new Button();
-  image.addChild(new MdShadow(type: MdShadow.RECTANGLE, bgColor: MdColor.WHITE, respondToClick: false));
+  image.addChild(new MdShadow(
+      type: MdShadow.RECTANGLE, bgColor: MdColor.WHITE, respondToClick: false));
   image.addChild(new ImageSprite()
     ..span(300, 240, refresh: false)
     ..href = "http://lorempixel.com/300/240/nature/");

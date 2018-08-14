@@ -76,8 +76,10 @@ class MdButton extends SelectableButton {
     }
 
     if (background) {
-      _paperShadow =
-          new MdShadow(type: MdShadow.RECTANGLE, bgColor: _bgColor, shadowEnabled: shadow /*, target: this*/);
+      _paperShadow = new MdShadow(
+          type: MdShadow.RECTANGLE,
+          bgColor: _bgColor,
+          shadowEnabled: shadow /*, target: this*/);
       addChild(_paperShadow);
     }
 
@@ -90,7 +92,8 @@ class MdButton extends SelectableButton {
       addChild(icon);
     }
 
-    _label = new MdText(text.toUpperCase(), size: fontSize, color: _fontColor, fontName: fontName, weight: 300);
+    _label = new MdText(text.toUpperCase(),
+        size: fontSize, color: _fontColor, fontName: fontName, weight: 300);
     _label.width = LABEL_MAX_WIDTH;
     addChild(_label);
 

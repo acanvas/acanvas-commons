@@ -75,7 +75,11 @@ class Key extends BoxSprite {
   static final String HOVER_STATE = 'Hover';
 
   /** List of valid key states */
-  static final List<String> AVAILABLE_STATES = [UP_STATE, DOWN_STATE, HOVER_STATE];
+  static final List<String> AVAILABLE_STATES = [
+    UP_STATE,
+    DOWN_STATE,
+    HOVER_STATE
+  ];
 
   /** An identifier for regular alphanumeric character keys. */
   static final String CHARACTER_KEY = 'characterKey';
@@ -324,7 +328,8 @@ class Key extends BoxSprite {
   void refresh() {
 //			if (_skin) {
 
-    AcGraphics.rectangle(0, 0, spanWidth, spanHeight, color: MdColor.BLUE, sprite: _skin as Sprite);
+    AcGraphics.rectangle(0, 0, spanWidth, spanHeight,
+        color: MdColor.BLUE, sprite: _skin as Sprite);
 //			} else {
 //				spanInternal(44, 52, false);
 //				_skin.width = 44;
@@ -404,7 +409,8 @@ class Key extends BoxSprite {
 
       // Check if the key has variants attached to it
       if (hasVariants) {
-        _variantsTimer = new Timer(new Duration(milliseconds: keyVariantsDelay), _onShowAlternates);
+        _variantsTimer = new Timer(
+            new Duration(milliseconds: keyVariantsDelay), _onShowAlternates);
       }
     }
     /*else if (touch.phase == TouchPhase.HOVER) {
@@ -413,14 +419,17 @@ class Key extends BoxSprite {
 				changeState(HOVER_STATE);
 				
 			} */
-    else if (_state == DOWN_STATE && (e.type == TouchEvent.TOUCH_MOVE || e.type == MouseEvent.MOUSE_MOVE)) {
+    else if (_state == DOWN_STATE &&
+        (e.type == TouchEvent.TOUCH_MOVE || e.type == MouseEvent.MOUSE_MOVE)) {
       // Moving while pressing
 
       // Check if the user is staying over the original key when moving or not.
-      if (hitTestPoint(touchPosInOriginalKeySpace.y, touchPosInOriginalKeySpace.y, false)) {
+      if (hitTestPoint(
+          touchPosInOriginalKeySpace.y, touchPosInOriginalKeySpace.y, false)) {
         changeState(DOWN_STATE);
         if (hasVariants && !_variantsTimer.isActive) {
-          _variantsTimer = new Timer(new Duration(milliseconds: keyVariantsDelay), _onShowAlternates);
+          _variantsTimer = new Timer(
+              new Duration(milliseconds: keyVariantsDelay), _onShowAlternates);
         }
       } else {
         changeState(UP_STATE);
@@ -434,14 +443,16 @@ class Key extends BoxSprite {
       if (hasVariants && _variantsContainer.numChildren > 0) {
         // Loop through all alternate keys to see if we are above one
         for (Key altKey in variants) {
-          if (altKey.hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, false)) {
+          if (altKey.hitTestPoint(touchPosInOriginalKeySpace.x,
+              touchPosInOriginalKeySpace.y, false)) {
             altKey.changeState(DOWN_STATE);
           } else {
             altKey.changeState(UP_STATE);
           }
         }
       }
-    } else if (e.type == TouchEvent.TOUCH_END || e.type == MouseEvent.MOUSE_UP) {
+    } else if (e.type == TouchEvent.TOUCH_END ||
+        e.type == MouseEvent.MOUSE_UP) {
       if (variants != null || variants == true) {
         // Reset
         _variantsTimer.cancel();
@@ -449,7 +460,8 @@ class Key extends BoxSprite {
         // Loop through all alternate keys to see if we are above one of them. If it's
         // the case, trigger event for that variant key
         for (Key altK in variants) {
-          if (altK.hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, false)) {
+          if (altK.hitTestPoint(touchPosInOriginalKeySpace.x,
+              touchPosInOriginalKeySpace.y, false)) {
             _triggerEvent(altK, KeyEvent.KEY_UP);
             altK.changeState(UP_STATE);
             break;
@@ -461,7 +473,8 @@ class Key extends BoxSprite {
       }
 
       // Abort if the release is outside the original key
-      if (!hitTestPoint(touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, true)) {
+      if (!hitTestPoint(
+          touchPosInOriginalKeySpace.x, touchPosInOriginalKeySpace.y, true)) {
         return;
       }
 
@@ -607,7 +620,9 @@ class Key extends BoxSprite {
    */
   bool get isVisible {
     return ((type == CHARACTER_KEY || type == NUMERIC_KEYPAD_KEY) &&
-        !(_charCode == CharCode.ENTER || _charCode == CharCode.TAB || _charCode == CharCode.SPACE));
+        !(_charCode == CharCode.ENTER ||
+            _charCode == CharCode.TAB ||
+            _charCode == CharCode.SPACE));
   }
 
   /**
@@ -625,7 +640,8 @@ class Key extends BoxSprite {
     _isSelected = value;
 
     // Swap icon (if an appropriate one has been defined)
-    if ((_isSelected && selectedIcon != null) || (!_isSelected && icon != null)) {
+    if ((_isSelected && selectedIcon != null) ||
+        (!_isSelected && icon != null)) {
       int index = getChildIndex(_icon);
       _icon = _isSelected ? selectedIcon : icon;
       removeChildAt(index);

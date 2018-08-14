@@ -73,7 +73,8 @@ class EmailnumsSymbolsSwitch extends Layout {
         new Key(CharCode.ASTERISK),
         new Key(CharCode.APOSTROPHE),
         new Key(CharCode.PERIOD),
-        new Key(CharCode.SWITCH_LAYOUT, null, Key.SYSTEM_KEY, switchKeyType.SWITCH_KEY_LABEL, 2.5, 1, switchKeyType)
+        new Key(CharCode.SWITCH_LAYOUT, null, Key.SYSTEM_KEY,
+            switchKeyType.SWITCH_KEY_LABEL, 2.5, 1, switchKeyType)
       ]
     ];
   }

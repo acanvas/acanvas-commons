@@ -18,11 +18,13 @@ class Wrap extends BoxSprite {
       ..autoRefresh = false
       ..reflow = reflow
       ..spacing = spacing
-      ..flowOrientation = reflow ? FlowOrientation.HORIZONTAL : FlowOrientation.VERTICAL
+      ..flowOrientation =
+          reflow ? FlowOrientation.HORIZONTAL : FlowOrientation.VERTICAL
       ..alignH = align;
     super.addChild(flow);
 
-    _scrollManager = new SpriteScrollifier(flow, new DefaultScrollbar(), new DefaultScrollbar())
+    _scrollManager = new SpriteScrollifier(
+        flow, new DefaultScrollbar(), new DefaultScrollbar())
       ..maskEnabled = enableMask;
     _scrollManager.scrollOrientation = scrollOrientation;
     //_scrollManager.useNativeWidth = false;

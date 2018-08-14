@@ -107,7 +107,8 @@ class ImageSprite extends BoxSprite {
       }
     }
 
-    mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)..relativeToParent = false;
+    mask = new Mask.rectangle(0, 0, spanWidth, spanHeight)
+      ..relativeToParent = false;
   }
 
   void onIoError(Error e) {

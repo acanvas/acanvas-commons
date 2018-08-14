@@ -47,7 +47,8 @@ class Button extends BehaveSprite with MButton {
     if (Ac.TOUCH) {
       removeEventListener<InputEvent>(TouchEvent.TOUCH_END, upAction);
       removeEventListener<InputEvent>(TouchEvent.TOUCH_BEGIN, downAction);
-      removeEventListener<InputEvent>(TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
+      removeEventListener<InputEvent>(
+          TouchEvent.TOUCH_ROLL_OVER, rollOverAction);
       removeEventListener<InputEvent>(TouchEvent.TOUCH_ROLL_OUT, rollOutAction);
     } else {
       removeEventListener<InputEvent>(MouseEvent.MOUSE_UP, upAction);
@@ -73,7 +74,9 @@ class Button extends BehaveSprite with MButton {
       swipeYDownPos = event.stageY;
     }
 
-    children.where((c) => (c is MButton && (c as MButton).inheritDownAction)).forEach((child) {
+    children
+        .where((c) => (c is MButton && (c as MButton).inheritDownAction))
+        .forEach((child) {
       (child as MButton).downAction(event);
     });
 
@@ -85,7 +88,9 @@ class Button extends BehaveSprite with MButton {
   }
 
   void upAction([InputEvent event = null, bool submit = true]) {
-    children.where((c) => (c is MButton && (c as MButton).inheritUpAction)).forEach((child) {
+    children
+        .where((c) => (c is MButton && (c as MButton).inheritUpAction))
+        .forEach((child) {
       (child as MButton).upAction(event);
     });
     children.where((c) => c is IMdButtonComponent).forEach((child) {

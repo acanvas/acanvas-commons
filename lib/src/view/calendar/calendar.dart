@@ -49,7 +49,8 @@ class Calendar extends BoxSprite {
   void addItems() {
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 7; j++) {
-        DayButton btn = new DayButton(j.toString(), dayButtonWidth, dayButtonHeight);
+        DayButton btn =
+            new DayButton(j.toString(), dayButtonWidth, dayButtonHeight);
         btn.addEventListener(MouseEvent.CLICK, onDayButtonClick);
         btn.x = j * (dayButtonWidth + dayButtonGap);
         btn.y = i * (dayButtonHeight + dayButtonGap);
@@ -65,7 +66,9 @@ class Calendar extends BoxSprite {
     addChild(prevYearButton);
 
     NextPrevButton nextYearButton = new NextPrevButton("»", 30, 30);
-    nextYearButton.x = (dayButtonHolder.x + dayButtonHolder.width - nextYearButton.width).floor();
+    nextYearButton.x =
+        (dayButtonHolder.x + dayButtonHolder.width - nextYearButton.width)
+            .floor();
     nextYearButton.y = 0;
     nextYearButton.addEventListener(MouseEvent.CLICK, onNextYearButtonClick);
     addChild(nextYearButton);
@@ -105,7 +108,8 @@ class Calendar extends BoxSprite {
       case 11: // dec
         return 31;
       case 1: // feb
-        if ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0))) return 29;
+        if ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)))
+          return 29;
         return 28;
       default:
         break;
@@ -138,7 +142,8 @@ class Calendar extends BoxSprite {
       btn.tag = j + 1;
     }
 
-    if (_dateLabel != null) _dateLabel.text = monthNames[_month - 1] + " $_year";
+    if (_dateLabel != null)
+      _dateLabel.text = monthNames[_month - 1] + " $_year";
   }
 
   void setYearMonthDay(int year, int month, int day) {
